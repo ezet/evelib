@@ -22,7 +22,7 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class TransactionDto {
+    public class TransactionCollectionDto {
 
         public EveApiRowset<TransactionRow> rowset { get; set; }
 
@@ -45,7 +45,7 @@ namespace eZet.Eve.EveApi.Dto {
         public byte quantity { get; set; }
         
         [XmlAttribute()]
-        public string typeNameField { get; set; }
+        public string typeName { get; set; }
         
         [XmlAttribute()]
         public ushort typeID { get; set; }
