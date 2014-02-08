@@ -9,46 +9,39 @@ using System.Threading.Tasks;
 namespace eZet.Eve.EveApi {
     public class Character {
 
-
-        public int KeyId { get; private set; }
-
-        public string VCode { get; private set; }
-
-        public int Id { get; private set; }
-
-        public int AccountKey { get; private set; }
+        public const int AccountKey = 1000;
 
         public string Name { get; private set; }
 
-        public int CorporationId { get; private set; }
+        public int Id { get; private set; }
 
-        public string CorporationName { get; private set; }
+        public Corporation Corporation { get; private set; }
+
+        public Auth ApiKey { get; private set; }
+
+        public List<Transaction> Transactions { get; private set; }
 
 
-        private string authString;
-
-        public Character(string name, int id, string corporationName, int corporationId) {
+        public Character(string name, int id, string corporationName, int corporationId, Auth apiKey) {
             this.Name = name;
             this.Id = id;
-            this.CorporationName = corporationName;
-            this.CorporationId = corporationId;
+            this.ApiKey = apiKey;
+            Corporation = new Corporation(corporationName, corporationId, apiKey);
         }
 
-        public Character(int keyId, string keyCode, int characterId) {
-            this.KeyId = keyId;
-            this.VCode = keyCode;
-            this.Id = characterId;
-            AccountKey = 1000;
-            authString = "?keyId=" + KeyId + "&vCode=" + VCode;
-        }
 
-        public void getTransactions() {
-            long fromId = 0;
-            int rowCount = 1000;
-            string uri = "/char/WalletTransactions.xml.aspx" + authString;
+        public List<Transaction> getWalletTransactions() {
+            string uri = "/char/WalletTransactions.xml.aspx";
             var args = new Dictionary<string, object>() { { "characterId", Id }, { "accountKey", AccountKey } };
-            uri = WebHelper.createUri(uri, args);
-            WebHelper.Request(uri);
+            var xml = WebHelper.Request(uri, ApiKey, "characterId", Id, "accountKey", AccountKey);
+            var elements = XmlHelper.getRows(xml);
+
+            return Transactions;
+
+        }
+
+        public override string ToString() {
+            return String.Format("ID: {0}, Name: {1}", Id, Name);
         }
     }
 }
