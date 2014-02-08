@@ -15,7 +15,6 @@ namespace eZet.Eve.EveApi.Entity {
 
     public class Character {
 
-
         public const int AccountKey = 1000;
 
         public string Name { get; private set; }

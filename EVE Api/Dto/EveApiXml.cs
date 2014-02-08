@@ -30,9 +30,9 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class EveApiRowset {
+    public class EveApiRowset<T> {
 
-        public AccountBalanceRow row { get; set; }
+        public T row { get; set; }
 
         [XmlAttribute()]
         public string name { get; set; }
