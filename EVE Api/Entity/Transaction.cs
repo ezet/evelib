@@ -32,19 +32,6 @@ namespace eZet.Eve.EveApi.Entity {
 
         public string JournalTransactionId { get; private set; }
 
-        public Transaction(TransactionDto dto) {
-            DateTime = dto.DateTime;
-            TransactionId = dto.TransactionId;
-            Quantity = dto.Quantity;
-            Name = dto.Name;
-            Price = dto.Price;
-            ClientId = dto.ClientId;
-            ClientName = dto.ClientName;
-            StationId = dto.StationId;
-            StationName = dto.StationName;
-            TransactionType = dto.TransactionType;
-            TransactionFor = dto.TransactionFor;
-            JournalTransactionId = dto.JournalTransactionId;
-        }
+
     }
 }

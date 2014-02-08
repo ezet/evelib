@@ -49,19 +49,19 @@ namespace eZet.Eve.EveApi.Entity {
 
 
         public List<Transaction> getWalletTransactions() {
-            string uri = "/char/WalletTransactions.xml.aspx";
-            var data = WebHelper.Request(uri, ApiKey, "characterId", Id, "accountKey", AccountKey);
+            //string uri = "/char/WalletTransactions.xml.aspx";
+            //var data = WebHelper.Request(uri, ApiKey, "characterId", Id, "accountKey", AccountKey);
 
-            using (var reader = XmlReader.Create(new StringReader(data))) {
-                reader.ReadToFollowing("row");
-                XmlSerializer serializer = new XmlSerializer(typeof(TransactionDto));
-                while (reader.Name == "row") {
-                    var dto = (TransactionDto)serializer.Deserialize(reader);
-                    Transaction transaction = new Transaction(dto);
-                    Transactions.Add(transaction);
-                    reader.ReadToNextSibling("row");
-                }
-            }
+            //using (var reader = XmlReader.Create(new StringReader(data))) {
+            //    reader.ReadToFollowing("row");
+            //    XmlSerializer serializer = new XmlSerializer(typeof(TransactionDto));
+            //    while (reader.Name == "row") {
+            //        var dto = (TransactionDto)serializer.Deserialize(reader);
+            //        Transaction transaction = new Transaction(dto);
+            //        Transactions.Add(transaction);
+            //        reader.ReadToNextSibling("row");
+            //    }
+            //}
             return Transactions;
         }
 

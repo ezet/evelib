@@ -32,7 +32,8 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class EveApiRowset<T> {
 
-        public T row { get; set; }
+        [System.Xml.Serialization.XmlElementAttribute("row")]
+        public T[] row { get; set; }
 
         [XmlAttribute()]
         public string name { get; set; }

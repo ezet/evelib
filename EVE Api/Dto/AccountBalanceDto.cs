@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using eZet.Eve.EveApi.Dto;
 using System.Xml.Serialization;
 
 // 
@@ -17,13 +16,13 @@ using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto {
 
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-
-    public partial class AccountBalanceDto {
+    public class AccountBalanceDto {
 
         public EveApiRowset<AccountBalanceRow> rowset { get; set; }
 
@@ -35,7 +34,7 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class AccountBalanceRow {
+    public class AccountBalanceRow {
 
         [XmlAttribute()]
         public uint accountID { get; set; }

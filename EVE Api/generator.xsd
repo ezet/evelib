@@ -10,11 +10,20 @@
               <xs:element name="rowset">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="row">
+                    <xs:element maxOccurs="unbounded" name="row">
                       <xs:complexType>
-                        <xs:attribute name="accountID" type="xs:unsignedInt" use="required" />
-                        <xs:attribute name="accountKey" type="xs:unsignedShort" use="required" />
-                        <xs:attribute name="balance" type="xs:decimal" use="required" />
+                        <xs:attribute name="transactionDateTime" type="xs:string" use="required" />
+                        <xs:attribute name="transactionID" type="xs:unsignedInt" use="required" />
+                        <xs:attribute name="quantity" type="xs:unsignedByte" use="required" />
+                        <xs:attribute name="typeName" type="xs:string" use="required" />
+                        <xs:attribute name="typeID" type="xs:unsignedShort" use="required" />
+                        <xs:attribute name="price" type="xs:decimal" use="required" />
+                        <xs:attribute name="clientID" type="xs:unsignedInt" use="required" />
+                        <xs:attribute name="clientName" type="xs:string" use="required" />
+                        <xs:attribute name="stationID" type="xs:unsignedInt" use="required" />
+                        <xs:attribute name="stationName" type="xs:string" use="required" />
+                        <xs:attribute name="transactionType" type="xs:string" use="required" />
+                        <xs:attribute name="transactionFor" type="xs:string" use="required" />
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
