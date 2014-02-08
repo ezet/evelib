@@ -1,4 +1,5 @@
 ﻿using eZet.Eve.EveApi.Dto;
+using System.Collections.Generic;
 /// <remarks/>
 using System.Xml.Serialization;
 
@@ -12,7 +13,7 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlRootAttribute("eveapi", Namespace = "", IsNullable = false)]
 
 
-    public class EveXml<T> {
+    public class XmlResponse<T> {
 
         public string currentTime { get; set; }
 
@@ -33,7 +34,7 @@ namespace eZet.Eve.EveApi.Dto {
     public class EveApiRowset<T> {
 
         [System.Xml.Serialization.XmlElementAttribute("row")]
-        public T[] row { get; set; }
+        public List<T> row { get; set; }
 
         [XmlAttribute()]
         public string name { get; set; }
@@ -43,7 +44,6 @@ namespace eZet.Eve.EveApi.Dto {
 
         [XmlAttribute()]
         public string columns { get; set; }
-
 
     }
 }

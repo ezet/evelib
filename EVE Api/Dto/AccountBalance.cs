@@ -22,7 +22,7 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class AccountBalanceDto {
+    public class AccountBalance {
 
         public EveApiRowset<AccountBalanceRow> rowset { get; set; }
 

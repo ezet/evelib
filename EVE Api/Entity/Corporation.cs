@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace eZet.Eve.EveApi {
     public class Corporation {
 
-
         public string Name { get; private set; }
 
         public int Id { get; private set; }

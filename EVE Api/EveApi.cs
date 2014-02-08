@@ -31,7 +31,7 @@ namespace eZet.Eve.EveApi {
         static public void Main() {
             var api = new EveApi(keyId, vCode);
             var list = api.getCharacters();
-            list.First().Value.getAccountBalance();
+            var val = list.First().Value.getCharacterSheet();
             return;
         }
 

@@ -22,9 +22,9 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class TransactionCollectionDto {
+    public class TransactionCollection {
 
-        public EveApiRowset<TransactionRow> rowset { get; set; }
+        public EveApiRowset<Transaction> rowset { get; set; }
 
     }
 
@@ -34,7 +34,7 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class TransactionRow {
+    public class Transaction {
         [XmlAttribute()]
         public string transactionDateTime { get; set; }
 

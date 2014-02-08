@@ -23,13 +23,13 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class CharacterSheetDto {
+    public partial class CharacterSheet {
 
         public uint characterID { get; set; }
 
         public string name { get; set; }
 
-        public string doB { get; set; }
+        public string DoB { get; set; }
 
         public string race { get; set; }
 
@@ -57,7 +57,7 @@ namespace eZet.Eve.EveApi.Dto {
 
         public Attributes attributes { get; set; }
 
-        public EveApiRowset<CharacterSheetRow>[] rowset { get; set; }
+        public EveApiRowset<Skill>[] rowset { get; set; }
 
     }
 
@@ -69,29 +69,15 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class Implants {
 
-        public Memory memoryBonus { get; set; }
+        public Implant memoryBonus { get; set; }
 
-        public Perception perceptionBonus { get; set; }
+        public Implant perceptionBonus { get; set; }
 
-        public Willpower willpowerBonus { get; set; }
+        public Implant willpowerBonus { get; set; }
 
-        public Intelligence intelligenceBonus { get; set; }
+        public Implant intelligenceBonus { get; set; }
 
-        public Charisma charismaBonus { get; set; }
-
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class Memory {
-
-        public string augmentatorName { get; set; }
-
-        public byte augmentatorValue { get; set; }
+        public Implant charismaBonus { get; set; }
 
     }
 
@@ -101,58 +87,14 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class Perception {
-
-        public string augmentatorName { get; set; }
-
-        public byte augmentatorValue { get; set; }
-
-
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class Willpower {
-
-        public string augmentatorName { get; set; }
-
-        public byte augmentatorValue { get; set; }
-
-
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class Intelligence {
-
-        public string augmentatorName { get; set; }
-
-        public byte augmentatorValue { get; set; }
-
-
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class Charisma {
+    public class Implant {
 
         public string augmentatorName { get; set; }
 
         public byte augmentatorValue { get; set; }
 
     }
+
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
@@ -183,7 +125,7 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class CharacterSheetRow {
+    public class Skill {
 
         [XmlAttribute()]
         public ushort typeID { get; set; }

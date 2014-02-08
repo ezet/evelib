@@ -1,5 +1,4 @@
 ﻿using eZet.Eve.EveApi.Dto;
-using eZet.Eve.EveApi.Entity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,9 +26,6 @@ namespace eZet.Eve.EveApi.Entity {
 
         public AccountBalance Balance { get; private set; }
 
-
-
-
         public Character(string name, int id, string corporationName, int corporationId, Auth apiKey) {
             this.Name = name;
             this.Id = id;
@@ -37,37 +33,38 @@ namespace eZet.Eve.EveApi.Entity {
             Corporation = new Corporation(corporationName, corporationId, apiKey);
         }
 
-        public AccountBalanceDto getAccountBalance() {
+        public XmlResponse<AccountBalance> getAccountBalance() {
             string uri = "/char/AccountBalance.xml.aspx";
             var data = WebHelper.Request(uri, ApiKey, "characterId", Id);
+            XmlResponse<AccountBalance> balance;
             using (var reader = XmlReader.Create(new StringReader(data))) {
-                XmlSerializer serializer = new XmlSerializer(typeof(EveXml<AccountBalanceDto>));
-                var dto = (EveXml<AccountBalanceDto>)serializer.Deserialize(reader);
+                XmlSerializer serializer = new XmlSerializer(typeof(XmlResponse<AccountBalance>));
+                balance = (XmlResponse<AccountBalance>)serializer.Deserialize(reader);
             }
-            return new AccountBalanceDto();
+            return balance;
         }
 
 
-        public TransactionCollection getWalletTransactions() {
+        public XmlResponse<TransactionCollection> getWalletTransactions() {
             string uri = "/char/WalletTransactions.xml.aspx";
             var data = WebHelper.Request(uri, ApiKey, "characterId", Id, "accountKey", AccountKey);
-            XmlSerializer serializer = new XmlSerializer(typeof(EveXml<TransactionCollectionDto>));
-            TransactionCollection transactions;
+            XmlSerializer serializer = new XmlSerializer(typeof(XmlResponse<TransactionCollection>));
+            XmlResponse<TransactionCollection> xml;
             using (var reader = XmlReader.Create(new StringReader(data))) {
-                var xml = (EveXml<TransactionCollectionDto>)serializer.Deserialize(reader);
-                transactions = new TransactionCollection(xml);
+                xml = (XmlResponse<TransactionCollection>)serializer.Deserialize(reader);
             }
-            return transactions;
+            return xml;
         }
 
-        public void CharacterSheet() {
+        public XmlResponse<CharacterSheet> getCharacterSheet() {
             string uri = "/char/CharacterSheet.xml.aspx";
             var data = WebHelper.Request(uri, ApiKey, "characterId", Id);
+            XmlSerializer serializer = new XmlSerializer(typeof(XmlResponse<CharacterSheet>));
+            XmlResponse<CharacterSheet> xml;
             using (var reader = XmlReader.Create(new StringReader(data))) {
-                reader.ReadToFollowing("result");
-                XmlSerializer serializer = new XmlSerializer(typeof(CharacterSheetDto));
-                var dto = (CharacterSheetDto)serializer.Deserialize(reader);
+                xml = (XmlResponse<CharacterSheet>)serializer.Deserialize(reader);
             }
+            return xml;
         }
 
         public override string ToString() {
