@@ -12,7 +12,7 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlRootAttribute("eveapi", Namespace = "", IsNullable = false)]
 
 
-    public class EveApiXml<T> {
+    public class EveXml<T> {
 
         public string currentTime { get; set; }
 
