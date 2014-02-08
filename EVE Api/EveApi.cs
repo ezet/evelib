@@ -14,7 +14,11 @@ namespace eZet.Eve.EveApi {
 
         private static int keyId = 3053778;
 
+        private static int id = 977615922;
+
         private static string vCode = "Hu3uslqNc3HDP8XmMMt1Cgb56TpPqqnF2tXssniROFkIMEDLztLPD8ktx6q5WVC2";
+
+        private static string authString = "keyId=3053778&vCode=Hu3uslqNc3HDP8XmMMt1Cgb56TpPqqnF2tXssniROFkIMEDLztLPD8ktx6q5WVC2&characterId=977615922";
 
         public int CharId { get; private set; }
 
