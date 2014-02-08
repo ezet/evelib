@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eveapi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="currentTime" type="xs:string" />
+        <xs:element name="result">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="rowset">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="row">
+                      <xs:complexType>
+                        <xs:attribute name="accountID" type="xs:unsignedInt" use="required" />
+                        <xs:attribute name="accountKey" type="xs:unsignedShort" use="required" />
+                        <xs:attribute name="balance" type="xs:decimal" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="key" type="xs:string" use="required" />
+                  <xs:attribute name="columns" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="cachedUntil" type="xs:string" />
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:unsignedByte" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

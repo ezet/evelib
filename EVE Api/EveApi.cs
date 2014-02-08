@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eZet.Eve.EveApi.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,8 +16,6 @@ namespace eZet.Eve.EveApi {
 
         private static string vCode = "Hu3uslqNc3HDP8XmMMt1Cgb56TpPqqnF2tXssniROFkIMEDLztLPD8ktx6q5WVC2";
 
-        private static int charId = 0;
-
         public int CharId { get; private set; }
 
         public Character Character { get; private set; }
@@ -28,7 +27,8 @@ namespace eZet.Eve.EveApi {
         static public void Main() {
             var api = new EveApi(keyId, vCode);
             var list = api.getCharacters();
-            list.First().Value.getWalletTransactions();
+            list.First().Value.getAccountBalance();
+            return;
         }
 
         public EveApi(int keyId, string vCode) {
@@ -42,7 +42,8 @@ namespace eZet.Eve.EveApi {
 
         public Dictionary<int, Character> getCharacters() {
             var uri = "/account/Characters.xml.aspx";
-            XDocument xml = WebHelper.Request(uri, ApiKey);
+            string data = WebHelper.Request(uri, ApiKey);
+            XDocument xml = XDocument.Parse(data);
             var elements = XmlHelper.getRows(xml);
             foreach (var row in elements) {
                 string name = row.Attribute("name").Value;

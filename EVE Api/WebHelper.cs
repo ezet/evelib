@@ -14,35 +14,35 @@ namespace eZet.Eve.EveApi {
 
         private const string contentType = "application/x-www-form-urlencoded";
 
-        public static XDocument Request(string uri, params object[] args) {
+        public static string Request(string uri, params object[] args) {
             string postString = "";
             for (int i = 0; i < args.Length; i += 2) {
-                postString += args[i] + "=" + args[i+1] + "&";
+                postString += args[i] + "=" + args[i + 1] + "&";
             }
             uri = uriBase + uri;
             var request = WebRequest.Create(uri) as HttpWebRequest;
             request.Method = "POST";
             request.ContentType = contentType;
             request.ContentLength = postString.Length;
-
-            using (var writer = new StreamWriter(request.GetRequestStream())) {
-                writer.Write(postString);
-            }
-            var document = new XDocument("");
+            string data = null;
             try {
+
+                using (var writer = new StreamWriter(request.GetRequestStream())) {
+                    writer.Write(postString);
+                }
                 using (var response = (HttpWebResponse)request.GetResponse()) {
                     if (response.StatusCode == HttpStatusCode.OK) {
-                        Stream data = response.GetResponseStream();
-                        document = XDocument.Load(data);
+                        var reader = new StreamReader(response.GetResponseStream());
+                        data = reader.ReadToEnd();
                     }
                 }
             } catch (Exception e) {
                 throw;
             }
-            return document;
+            return data;
         }
 
-        public static XDocument Request(string uri, Auth apiKey, params object[] args) {
+        public static string Request(string uri, Auth apiKey, params object[] args) {
             object[] authargs = new object[args.Length + 4];
             args.CopyTo(authargs, 0);
             int length = args.Length;

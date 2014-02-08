@@ -42,15 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\AccountBalanceDto.cs" />
     <Compile Include="Auth.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="Corporation.cs" />
+    <Compile Include="Dto\CharacterSheetDto.cs" />
+    <Compile Include="Dto\EveApiXml.cs" />
+    <Compile Include="Entity\AccountBalance.cs" />
+    <Compile Include="Entity\Character.cs" />
+    <Compile Include="Entity\Corporation.cs" />
+    <Compile Include="Entity\Transaction.cs" />
     <Compile Include="EveApi.cs" />
+    <Compile Include="generator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transaction.cs" />
+    <Compile Include="Dto\TransactionDto.cs" />
     <Compile Include="WebHelper.cs" />
     <Compile Include="XmlHelper.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
