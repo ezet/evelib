@@ -23,41 +23,58 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class CharacterSheet {
+    public partial class CharacterSheet : XmlResult {
 
-        public uint characterID { get; set; }
+        [XmlElement("characterID")]
+        public long CharacterId { get; set; }
 
-        public string name { get; set; }
+        [XmlElement("name")]
+        public string Name { get; set; }
 
-        public string DoB { get; set; }
+        [XmlElement("DoB")]
+        public string DateOfBirth { get; set; }
 
-        public string race { get; set; }
+        [XmlElement("race")]
+        public string Race { get; set; }
 
-        public string bloodLine { get; set; }
+        [XmlElement("bloodLine")]
+        public string Bloodline { get; set; }
 
-        public string ancestry { get; set; }
+        [XmlElement("ancestry")]
+        public string Ancestry { get; set; }
 
-        public string gender { get; set; }
+        [XmlElement("gender")]
+        public string Gender { get; set; }
 
-        public string corporationName { get; set; }
+        [XmlElement("corporationName")]
+        public string CorporationName { get; set; }
 
-        public uint corporationID { get; set; }
+        [XmlElement("corporationID")]
+        public long CorporationId { get; set; }
 
-        public object allianceName { get; set; }
+        [XmlElement("allianceName")]
+        public object AllianceName { get; set; }
 
-        public byte allianceID { get; set; }
+        [XmlElement("allianceID")]
+        public long AllianceId { get; set; }
 
-        public string cloneName { get; set; }
+        [XmlElement("cloneName")]
+        public string CloneName { get; set; }
 
-        public uint cloneSkillPoints { get; set; }
+        [XmlElement("cloneSkillPoints")]
+        public int CloneSkillPoints { get; set; }
 
-        public decimal balance { get; set; }
+        [XmlElement("balance")]
+        public decimal Balance { get; set; }
 
-        public Implants attributeEnhancers { get; set; }
+        [XmlElement("attributeEnhancers")]
+        public Implants AttributeEnhancers { get; set; }
 
-        public Attributes attributes { get; set; }
+        [XmlElement("attributes")]
+        public Attributes Attributes { get; set; }
 
-        public EveApiRowset<Skill>[] rowset { get; set; }
+        [XmlElement("rowset")]
+        public EveApiRowset<Skill>[] Skills { get; set; }
 
     }
 
@@ -69,15 +86,20 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class Implants {
 
-        public Implant memoryBonus { get; set; }
+        [XmlElement("memoryBonus")]
+        public Implant Memory { get; set; }
 
-        public Implant perceptionBonus { get; set; }
+        [XmlElement("perceptionBonus")]
+        public Implant Perception { get; set; }
 
-        public Implant willpowerBonus { get; set; }
+        [XmlElement("willpowerBonus")]
+        public Implant Willpower { get; set; }
 
-        public Implant intelligenceBonus { get; set; }
+        [XmlElement("intelligenceBonus")]
+        public Implant Intelligence { get; set; }
 
-        public Implant charismaBonus { get; set; }
+        [XmlElement("charismaBonus")]
+        public Implant Charisma { get; set; }
 
     }
 
@@ -89,9 +111,11 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class Implant {
 
-        public string augmentatorName { get; set; }
+        [XmlElement("augmentatorName")]
+        public string Name { get; set; }
 
-        public byte augmentatorValue { get; set; }
+        [XmlElement("augmentatorValue")]
+        public int Value { get; set; }
 
     }
 
@@ -104,19 +128,22 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class Attributes {
 
-        public byte intelligence { get; set; }
+        [XmlElement("intelligence")]
+        public int Intelligence { get; set; }
 
-        public byte memory { get; set; }
+        [XmlElement("memory")]
+        public int Memory { get; set; }
 
-        public byte charisma { get; set; }
+        [XmlElement("charisma")]
+        public int Charisma { get; set; }
 
-        public byte perception { get; set; }
+        [XmlElement("perception")]
+        public int Perception { get; set; }
 
-        public byte willpower { get; set; }
-
+        [XmlElement("willlpower")]
+        public int Willpower { get; set; }
 
     }
-
 
 
     /// <remarks/>
@@ -127,53 +154,53 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class Skill {
 
-        [XmlAttribute()]
-        public ushort typeID { get; set; }
+        [XmlAttribute("typeID")]
+        public long TypeId { get; set; }
 
         [XmlIgnore()]
         public bool typeIDFieldSpecified;
 
-        [XmlAttribute()]
-        public uint skillpoints { get; set; }
+        [XmlAttribute("skillpoints")]
+        public int Skillpoints { get; set; }
 
         [XmlIgnore()]
         public bool skillpointsFieldSpecified;
 
-        [XmlAttribute()]
-        public byte level { get; set; }
+        [XmlAttribute("level")]
+        public int Level { get; set; }
 
         [XmlIgnore()]
         public bool levelFieldSpecified;
 
-        [XmlAttribute()]
-        public byte published { get; set; }
+        [XmlAttribute("published")]
+        public int Published { get; set; }
 
         [XmlIgnore()]
         public bool publishedFieldSpecified;
 
-        [XmlAttribute()]
-        public ushort certificateID { get; set; }
+        [XmlAttribute("certificateID")]
+        public long CertificateId { get; set; }
 
         [XmlIgnore()]
         public bool certificateIDFieldSpecified;
 
-        [XmlAttribute()]
-        public byte roleID { get; set; }
+        [XmlAttribute("roleID")]
+        public long RoleId { get; set; }
 
         [XmlIgnore()]
         public bool roleIDFieldSpecified;
 
-        [XmlAttribute()]
-        public string roleName { get; set; }
+        [XmlAttribute("roleName")]
+        public string RoleName { get; set; }
 
-        [XmlAttribute()]
-        public byte titleID { get; set; }
+        [XmlAttribute("titleID")]
+        public long TitleId { get; set; }
 
         [XmlIgnore()]
         public bool titleIDFieldSpecified;
 
-        [XmlAttribute()]
-        public string titleName { get; set; }
+        [XmlAttribute("titleName")]
+        public string TitleName { get; set; }
 
 
     }

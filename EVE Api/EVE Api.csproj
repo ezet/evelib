@@ -43,14 +43,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\AccountBalance.cs" />
-    <Compile Include="Auth.cs" />
+    <Compile Include="ApiKey.cs" />
+    <Compile Include="Dto\AccountStatus.cs" />
+    <Compile Include="Dto\ApiKeyInfo.cs" />
+    <Compile Include="Dto\Character.cs" />
+    <Compile Include="Dto\CharacterCollection.cs" />
     <Compile Include="Dto\CharacterSheet.cs" />
+    <Compile Include="Dto\MarketOrder.cs" />
+    <Compile Include="Dto\MarketOrderCollection.cs" />
+    <Compile Include="Dto\Transaction.cs" />
     <Compile Include="Dto\XmlResponse.cs" />
+    <Compile Include="Dto\XmlResult.cs" />
+    <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Character.cs" />
+    <Compile Include="Entity\Core.cs" />
     <Compile Include="Entity\Corporation.cs" />
-    <Compile Include="Entity\EveApiMeta.cs" />
+    <Compile Include="Entity\Map.cs" />
     <Compile Include="EveApi.cs" />
-    <Compile Include="generator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\TransactionCollection.cs" />
     <Compile Include="WebHelper.cs" />

@@ -9,15 +9,23 @@ namespace eZet.Eve.EveApi {
 
         public string Name { get; private set; }
 
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
-        public Auth ApiKey { get; private set; }
+        public ApiKey ApiKey { get; private set; }
 
-        public Corporation(string name, int id, Auth apiKey) {
+        public Corporation(ApiKey key, long id) {
+            ApiKey = key;
+            Id = id;
+            load();   
+        }
+
+        public Corporation(ApiKey key, string name, long id) {
+            this.ApiKey = key;
             this.Name = name;
             this.Id = id;
-            this.ApiKey = apiKey;
         }
+
+        private void load();
 
     }
 }

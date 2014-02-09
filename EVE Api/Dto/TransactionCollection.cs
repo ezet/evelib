@@ -22,54 +22,12 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class TransactionCollection {
+    public class TransactionCollection : XmlResult {
 
-        public EveApiRowset<Transaction> rowset { get; set; }
-
-    }
-
-     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class Transaction {
-        [XmlAttribute()]
-        public string transactionDateTime { get; set; }
-
-        [XmlAttribute()]
-        public uint transactionID { get; set; }
-        
-        [XmlAttribute()]
-        public byte quantity { get; set; }
-        
-        [XmlAttribute()]
-        public string typeName { get; set; }
-        
-        [XmlAttribute()]
-        public ushort typeID { get; set; }
-        
-        [XmlAttribute()]
-        public decimal price { get; set; }
-        
-        [XmlAttribute()]
-        public uint clientID { get; set; }
-        
-        [XmlAttribute()]
-        public string clientName { get; set; }
-        
-        [XmlAttribute()]
-        public uint stationID { get; set; }
-        
-        [XmlAttribute()]
-        public string stationName { get; set; }
-        
-        [XmlAttribute()]
-        public string transactionType { get; set; }
-        
-        [XmlAttribute()]
-        public string transactionFor { get; set; }
+        [XmlElement("rowset")]
+        public EveApiRowset<Transaction> Transactions { get; set; }
 
     }
+
+
 }

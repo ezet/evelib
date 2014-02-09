@@ -16,34 +16,18 @@ using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto {
 
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class AccountBalance : XmlResult {
+    public partial class MarketOrderCollection : XmlResult {
 
         [XmlElement("rowset")]
-        public EveApiRowset<AccountBalanceRow> Accounts { get; set; }
-
+        public EveApiRowset<MarketOrder> Orders;
     }
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class AccountBalanceRow {
 
-        [XmlAttribute("accountID")]
-        public long AccountId { get; set; }
-
-        [XmlAttribute("accountKey")]
-        public int AccountKey { get; set; }
-
-        [XmlAttribute("balance")]
-        public decimal Balance { get; set; }
-    }
 }

@@ -22,10 +22,9 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class AccountBalance : XmlResult {
+    public partial class ApiKeyInfo {
 
-        [XmlElement("rowset")]
-        public EveApiRowset<AccountBalanceRow> Accounts { get; set; }
+        public ApiKeyData key { get; set; }
 
     }
 
@@ -35,15 +34,19 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class AccountBalanceRow {
+    public partial class ApiKeyData {
 
-        [XmlAttribute("accountID")]
-        public long AccountId { get; set; }
+        [XmlElement("rowset")]
+        public EveApiRowset<Character> Characters { get; set; }
 
-        [XmlAttribute("accountKey")]
-        public int AccountKey { get; set; }
+        [XmlAttribute()]
+        public int accessMask { get; set; }
 
-        [XmlAttribute("balance")]
-        public decimal Balance { get; set; }
+        [XmlAttribute()]
+        public string type { get; set; }
+
+        [XmlAttribute()]
+        public string expires { get; set; }
+
     }
 }

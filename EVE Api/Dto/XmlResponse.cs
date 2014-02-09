@@ -1,5 +1,6 @@
 ﻿using eZet.Eve.EveApi.Dto;
 using System.Collections.Generic;
+using System.Xml;
 /// <remarks/>
 using System.Xml.Serialization;
 
@@ -13,16 +14,32 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlRootAttribute("eveapi", Namespace = "", IsNullable = false)]
 
 
-    public class XmlResponse<T> {
+    public class XmlResponse<T> where T : XmlResult {
 
-        public string currentTime { get; set; }
+        [XmlElement("currentTime")]
+        public string CurrentTime { get; set; }
 
-        public T result { get; set; }
+        [XmlElement("result")]
+        public T Result { get; set; }
 
-        public string cachedUntil { get; set; }
+        [XmlElement("cachedUntil")]
+        public string CachedUntil { get; set; }
 
-        [XmlAttribute()]
-        public byte version { get; set; }
+        [XmlAttribute("version")]
+        public int Version { get; set; }
+
+        private ApiKey apiKeyField;
+
+        [XmlIgnore]
+        public ApiKey ApiKey {
+            get {
+                return apiKeyField;
+            }
+            set {
+                apiKeyField = value;
+                Result.SetApiKey(value);
+            }
+        }
 
     }
 
@@ -33,17 +50,20 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class EveApiRowset<T> {
 
-        [System.Xml.Serialization.XmlElementAttribute("row")]
-        public List<T> row { get; set; }
+        [XmlElementAttribute("row")]
+        public List<T> RowData { get; set; }
 
-        [XmlAttribute()]
-        public string name { get; set; }
+        [XmlAnyAttribute()]
+        public XmlAttribute[] RowMeta;
 
-        [XmlAttribute()]
-        public string key { get; set; }
+        //[XmlAttribute("name")]
+        //public string Name { get; set; }
 
-        [XmlAttribute()]
-        public string columns { get; set; }
+        //[XmlAttribute("key")]
+        //public string Key { get; set; }
+
+        //[XmlAttribute("columns")]
+        //public string Columns { get; set; }
 
     }
 }

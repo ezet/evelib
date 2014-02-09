@@ -22,28 +22,17 @@ namespace eZet.Eve.EveApi.Dto {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class AccountBalance : XmlResult {
+    public partial class AccountStatus : XmlResult {
 
-        [XmlElement("rowset")]
-        public EveApiRowset<AccountBalanceRow> Accounts { get; set; }
+        
+        public string paidUntil { get; set; }
 
-    }
+        public string createDate { get; set; }
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class AccountBalanceRow {
+        public int logonCount { get; set; }
 
-        [XmlAttribute("accountID")]
-        public long AccountId { get; set; }
+        public int logonMinutes { get; set; }
 
-        [XmlAttribute("accountKey")]
-        public int AccountKey { get; set; }
 
-        [XmlAttribute("balance")]
-        public decimal Balance { get; set; }
     }
 }

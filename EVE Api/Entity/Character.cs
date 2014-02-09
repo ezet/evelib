@@ -18,22 +18,27 @@ namespace eZet.Eve.EveApi.Entity {
 
         public string Name { get; private set; }
 
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         public Corporation Corporation { get; private set; }
 
-        public Auth ApiKey { get; private set; }
+        public ApiKey ApiKey { get; private set; }
 
-        public AccountBalance Balance { get; private set; }
-
-        public Character(string name, int id, string corporationName, int corporationId, Auth apiKey) {
-            this.Name = name;
-            this.Id = id;
-            this.ApiKey = apiKey;
-            Corporation = new Corporation(corporationName, corporationId, apiKey);
+        public Character(ApiKey key, long id) {
+            ApiKey = key;
+            Id = id;
+            load();
         }
 
-        public XmlResponse<AccountBalance> getAccountBalance() {
+        public Character(ApiKey key, string name, long id, string corporationName, long corporationId) {
+            this.ApiKey = key;
+            this.Name = name;
+            this.Id = id;
+            Corporation = new Corporation(key, corporationName, corporationId);
+        }
+
+
+        public XmlResponse<AccountBalance> GetAccountBalance() {
             string uri = "/char/AccountBalance.xml.aspx";
             var data = WebHelper.Request(uri, ApiKey, "characterId", Id);
             XmlResponse<AccountBalance> balance;
@@ -45,7 +50,7 @@ namespace eZet.Eve.EveApi.Entity {
         }
 
 
-        public XmlResponse<TransactionCollection> getWalletTransactions() {
+        public XmlResponse<TransactionCollection> GetWalletTransactions() {
             string uri = "/char/WalletTransactions.xml.aspx";
             var data = WebHelper.Request(uri, ApiKey, "characterId", Id, "accountKey", AccountKey);
             XmlSerializer serializer = new XmlSerializer(typeof(XmlResponse<TransactionCollection>));
@@ -56,7 +61,7 @@ namespace eZet.Eve.EveApi.Entity {
             return xml;
         }
 
-        public XmlResponse<CharacterSheet> getCharacterSheet() {
+        public XmlResponse<CharacterSheet> GetCharacterSheet() {
             string uri = "/char/CharacterSheet.xml.aspx";
             var data = WebHelper.Request(uri, ApiKey, "characterId", Id);
             XmlSerializer serializer = new XmlSerializer(typeof(XmlResponse<CharacterSheet>));
@@ -69,6 +74,11 @@ namespace eZet.Eve.EveApi.Entity {
 
         public override string ToString() {
             return String.Format("ID: {0}, Name: {1}", Id, Name);
+        }
+
+        private void load() {
+            var response = GetCharacterSheet();
+            Corporation = new Corporation(ApiKey, response.Result.CorporationName, response.Result.CorporationId);
         }
     }
 }

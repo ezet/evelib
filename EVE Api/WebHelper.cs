@@ -42,7 +42,7 @@ namespace eZet.Eve.EveApi {
             return data;
         }
 
-        public static string Request(string uri, Auth apiKey, params object[] args) {
+        public static string Request(string uri, ApiKey apiKey, params object[] args) {
             object[] authargs = new object[args.Length + 4];
             args.CopyTo(authargs, 0);
             int length = args.Length;
