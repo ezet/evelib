@@ -1,29 +1,52 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.CodeDom;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
+using eZet.Eve.EveApi.Dto.EveApi.Core;
 
 namespace eZet.Eve.EveApi.Dto.EveApi {
 
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
-    public class XmlRowSet<T> {
+    public class XmlRowSet<T> : IXmlSerializable, IEnumerable<T> {
 
         [XmlElement("row")]
-        public List<T> Rows { get; set; }
+        private List<T> Rows { get; set; }
 
-        [XmlAnyAttribute()]
+        [XmlAnyAttribute]
         public XmlAttribute[] RowMeta;
 
-        //[XmlAttribute("name")]
-        //public string Name { get; set; }
+        public XmlRowSet() {
+            Rows = new List<T>();
+        } 
 
-        //[XmlAttribute("key")]
-        //public string Key { get; set; }
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
 
-        //[XmlAttribute("columns")]
-        //public string Columns { get; set; }
+        public void ReadXml(XmlReader reader) {
+            var serializer = new XmlSerializer(typeof(T));
+            reader.ReadToDescendant("row");
+            T row;
+            while (reader.Name == "row") {
+                row = (T)serializer.Deserialize(reader);
+                Rows.Add(row);
+                reader.ReadToFollowing("row");
+            }
+        }
 
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<T> GetEnumerator() {
+            return Rows.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return ((IEnumerable) Rows).GetEnumerator();
+        }
     }
 }

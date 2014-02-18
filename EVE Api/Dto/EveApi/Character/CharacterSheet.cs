@@ -1,9 +1,10 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi {
+namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
 
-    [System.SerializableAttribute()]
+    [Serializable()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
@@ -62,10 +63,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
 
     }
 
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+
     public class Implants {
 
         [XmlElement("memoryBonus")]
@@ -86,10 +84,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
     }
 
 
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+
     public class Implant {
 
         [XmlElement("augmentatorName")]
@@ -102,7 +97,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
 
 
 
-    [System.SerializableAttribute()]
+    [Serializable()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
@@ -127,10 +122,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
 
 
 
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+    [Serializable]
+    [XmlRoot("row")]
     public class Skill {
 
         [XmlAttribute("typeID")]

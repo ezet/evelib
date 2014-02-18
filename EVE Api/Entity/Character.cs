@@ -1,14 +1,7 @@
 ﻿using eZet.Eve.EveApi.Dto.EveApi;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+
+using eZet.Eve.EveApi.Dto.EveApi.Character;
 
 namespace eZet.Eve.EveApi.Entity {
 
@@ -37,20 +30,20 @@ namespace eZet.Eve.EveApi.Entity {
         public XmlResponse<AccountBalance> GetAccountBalance() {
             const string uri = "/char/AccountBalance.xml.aspx";
             var postString = WebHelper.GeneratePostString(ApiKey, "characterId", Id);
-            return request(uri, postString, new AccountBalance());
+            return request(uri, new AccountBalance(), postString);
         }
 
 
         public XmlResponse<TransactionCollection> GetWalletTransactions() {
             const string uri = "/char/WalletTransactions.xml.aspx";
             var postString = WebHelper.GeneratePostString(ApiKey, "characterId", Id, "accountKey", AccountKey);
-            return request(uri, postString, new TransactionCollection());
+            return request(uri, new TransactionCollection(), postString);
         }
 
         public XmlResponse<CharacterSheet> GetCharacterSheet() {
             const string uri = "/char/CharacterSheet.xml.aspx";
             var postString = WebHelper.GeneratePostString(ApiKey, "characterId", Id);
-            return request(uri, postString, new CharacterSheet());
+            return request(uri, new CharacterSheet(), postString);
         }
 
         public override string ToString() {

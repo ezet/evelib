@@ -7,30 +7,41 @@
         <xs:element name="result">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="key">
+              <xs:element name="totals">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="rowset">
+                    <xs:element name="killsYesterday" type="xs:unsignedShort" />
+                    <xs:element name="killsLastWeek" type="xs:unsignedShort" />
+                    <xs:element name="killsTotal" type="xs:unsignedInt" />
+                    <xs:element name="victoryPointsYesterday" type="xs:unsignedShort" />
+                    <xs:element name="victoryPointsLastWeek" type="xs:unsignedInt" />
+                    <xs:element name="victoryPointsTotal" type="xs:unsignedInt" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element maxOccurs="unbounded" name="rowset">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="row">
                       <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="row">
-                            <xs:complexType>
-                              <xs:attribute name="characterID" type="xs:unsignedInt" use="required" />
-                              <xs:attribute name="characterName" type="xs:string" use="required" />
-                              <xs:attribute name="corporationID" type="xs:unsignedInt" use="required" />
-                              <xs:attribute name="corporationName" type="xs:string" use="required" />
-                            </xs:complexType>
-                          </xs:element>
-                        </xs:sequence>
-                        <xs:attribute name="name" type="xs:string" use="required" />
-                        <xs:attribute name="key" type="xs:string" use="required" />
-                        <xs:attribute name="columns" type="xs:string" use="required" />
+                        <xs:attribute name="factionID" type="xs:unsignedInt" use="required" />
+                        <xs:attribute name="factionName" type="xs:string" use="required" />
+                        <xs:attribute name="pilots" type="xs:unsignedShort" use="optional" />
+                        <xs:attribute name="systemsControlled" type="xs:unsignedByte" use="optional" />
+                        <xs:attribute name="killsYesterday" type="xs:unsignedByte" use="optional" />
+                        <xs:attribute name="killsLastWeek" type="xs:unsignedShort" use="optional" />
+                        <xs:attribute name="killsTotal" type="xs:unsignedShort" use="optional" />
+                        <xs:attribute name="victoryPointsYesterday" type="xs:unsignedShort" use="optional" />
+                        <xs:attribute name="victoryPointsLastWeek" type="xs:unsignedShort" use="optional" />
+                        <xs:attribute name="victoryPointsTotal" type="xs:unsignedInt" use="optional" />
+                        <xs:attribute name="againstID" type="xs:unsignedInt" use="optional" />
+                        <xs:attribute name="againstName" type="xs:string" use="optional" />
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute name="accessMask" type="xs:unsignedInt" use="required" />
-                  <xs:attribute name="type" type="xs:string" use="required" />
-                  <xs:attribute name="expires" type="xs:string" use="required" />
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="key" type="xs:string" use="optional" />
+                  <xs:attribute name="columns" type="xs:string" use="required" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>

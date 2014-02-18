@@ -1,15 +1,10 @@
-﻿/// <remarks/>
+﻿using System;
 using System.Xml.Serialization;
 
+namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
-namespace eZet.Eve.EveApi.Dto.EveApi {
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
-
+    [Serializable]
+    [XmlRoot("row")]
     public class Transaction {
         [XmlAttribute("transactionDateTime")]
         public string TransactionDateTime { get; set; }

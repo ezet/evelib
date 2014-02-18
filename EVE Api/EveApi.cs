@@ -34,15 +34,11 @@ namespace eZet.Eve.EveApi {
 
         static public void Main() {
             var api = new EveApi(keyId, vCode);
+            var xml = api.Core.GetCertificateTree();
             //var charlist = api.Account.GetCharacterList();
             //var c = charlist.Result.Characters.Rows.First().Load();
             //var trans = c.GetWalletTransactions();
             //var sheet = c.GetCharacterSheet();
-            //var t = c.GetAccountBalance();
-            //api.EveCentral.getMarketStat();
-            //api.EveCentral.getQuicklook();
-            //api.Core.GetAllianceList();
-
             return;
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Account {
     public class AllianceData {

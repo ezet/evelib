@@ -4,8 +4,8 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EveApi.Dto.EveApi {
 
 
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.SerializableAttribute]
+    [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot("eveapi", Namespace = "", IsNullable = false)]

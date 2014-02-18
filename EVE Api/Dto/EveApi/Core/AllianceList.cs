@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Core {
@@ -8,23 +7,25 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
         [XmlElement("rowset")]
         public XmlRowSet<AllianceListData> Alliances { get; set; }
 
+        [Serializable]
+        [XmlRoot("row")]
+        public class AllianceListData : Account.AllianceData {
+
+            [XmlElement("rowset")]
+            public XmlRowSet<CorporationData> Corporations { get; set; }
+
+        }
+        [Serializable]
+        [XmlRoot("row")]
+        public class CorporationData {
+
+            [XmlAttribute("corporationID")]
+            public long CorporationId { get; set; }
+
+            [XmlAttribute("startDate")]
+            public string StartDate { get; set; }
+
+        }
     }
 
-    public class AllianceListData : Account.AllianceData {
-
-        [XmlElement("rowset")]
-        public XmlRowSet<CorporationData> Corporations { get; set; }
-
-        
-    }
-
-    public class CorporationData {
-
-        [XmlAttribute("corporationID")]
-        public long CorporationId { get; set; }
-
-        [XmlAttribute("startDate")]
-        public string StartDate { get; set; }
-        
-    }
 }

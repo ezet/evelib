@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using eZet.Eve.EveApi.Dto.EveApi;
+﻿using eZet.Eve.EveApi.Dto.EveApi;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -19,18 +18,8 @@ namespace eZet.Eve.EveApi.Entity {
             ApiKey = apiKey;
         }
 
-        protected XmlResponse<T> request<T>(string uri, string postString, T type) where T : XmlResult {
-            string data = WebHelper.Request(UriBase + uri, postString);
-            var serializer = new XmlSerializer(typeof(XmlResponse<T>));
-            XmlResponse<T> xmlResponse;
-            using (var reader = XmlReader.Create(new StringReader(data))) {
-                xmlResponse = (XmlResponse<T>)serializer.Deserialize(reader);
-            }
-            return xmlResponse;
-        }
-
-        protected XmlResponse<T> request<T>(string uri, T type) where T : XmlResult {
-            string data = WebHelper.Request(UriBase + uri, "");
+        protected XmlResponse<T> request<T>(string path, T type, string postString = "") where T : XmlResult {
+            var data = WebHelper.Request(UriBase + path, postString);
             var serializer = new XmlSerializer(typeof(XmlResponse<T>));
             XmlResponse<T> xmlResponse;
             using (var reader = XmlReader.Create(new StringReader(data))) {

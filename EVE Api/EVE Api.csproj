@@ -54,6 +54,17 @@
     <Compile Include="Dto\EveApi\Character\MarketOrderCollection.cs" />
     <Compile Include="Dto\EveApi\Character\Transaction.cs" />
     <Compile Include="Dto\EveApi\Core\AllianceList.cs" />
+    <Compile Include="Dto\EveApi\Core\CertificateTree.cs" />
+    <Compile Include="Dto\EveApi\Core\CharacterAffiliation.cs" />
+    <Compile Include="Dto\EveApi\Core\CharacterNameId.cs" />
+    <Compile Include="Dto\EveApi\Core\CharacterInfo.cs" />
+    <Compile Include="Dto\EveApi\Core\ConquerableStations.cs" />
+    <Compile Include="Dto\EveApi\Core\ErrorList.cs" />
+    <Compile Include="Dto\EveApi\Core\FactionWarfareStats.cs" />
+    <Compile Include="Dto\EveApi\Core\FactionWarfareTopList.cs" />
+    <Compile Include="Dto\EveApi\Core\RefTypes.cs" />
+    <Compile Include="Dto\EveApi\Core\SkillTree.cs" />
+    <Compile Include="Dto\EveApi\Core\TypeName.cs" />
     <Compile Include="Dto\EveApi\XmlResponse.cs" />
     <Compile Include="Dto\EveApi\XmlResult.cs" />
     <Compile Include="Dto\EveApi\XmlRowSet.cs" />

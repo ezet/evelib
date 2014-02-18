@@ -1,14 +1,8 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
+namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
-
-namespace eZet.Eve.EveApi.Dto.EveApi {
-
-
-    [System.SerializableAttribute]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
     public class AccountBalance : XmlResult {
 
         [XmlElement("rowset")]
@@ -17,10 +11,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
     }
 
 
-    [System.SerializableAttribute]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+    [Serializable]
+    [XmlRoot("row")]
     public class AccountBalanceRow {
 
         [XmlAttribute("accountID")]

@@ -1,7 +1,11 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi {
-    public partial class Character {
+namespace eZet.Eve.EveApi.Dto.EveApi.Account {
+
+    [Serializable]
+    [XmlRoot("row")]
+    public class Character {
 
         [XmlAttribute("name")]
         public string Name { get; set; }

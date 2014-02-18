@@ -1,14 +1,11 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi {
+namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
-    public partial class MarketOrder {
+    [Serializable]
+    [XmlRoot("row")]
+    public class MarketOrder {
 
         [XmlElement("orderID")]
         public long OrderId { get; set; }
