@@ -1,4 +1,4 @@
-﻿using eZet.Eve.EveApi.Dto;
+﻿using eZet.Eve.EveApi.Dto.EveApi;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,41 +9,30 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Entity {
-    public class Account {
+    public class Account : EveApiEntity {
 
-        public ApiKey ApiKey;
-
-        public Account(ApiKey apiKey) {
-            this.ApiKey = apiKey;
+        public Account(ApiKey key) : base(key) {
+            
         }
 
-
         public XmlResponse<CharacterCollection> GetCharacterList() {
-            var uri = "/account/Characters.xml.aspx";
-            string data = WebHelper.Request(uri, ApiKey);
-            XmlSerializer serializer = new XmlSerializer(typeof(XmlResponse<CharacterCollection>));
-            XmlResponse<CharacterCollection> xmlResponse;
-            using (var reader = XmlReader.Create(new StringReader(data))) {
-                xmlResponse = (XmlResponse<CharacterCollection>)serializer.Deserialize(reader);
-            }
-            xmlResponse.ApiKey = ApiKey;
-            return xmlResponse;
+            const string uri = "/account/Characters.xml.aspx";
+            var postString = WebHelper.GeneratePostString(ApiKey);
+            var response = request(uri, postString, new CharacterCollection());
+            response.ApiKey = ApiKey;
+            return response;
         }
 
         public XmlResponse<AccountStatus> GetAccountStatus() {
-            var uri = "/account/AccountStatus.xml.aspx";
-            string data = WebHelper.Request(uri, ApiKey);
-            XmlSerializer serializer = new XmlSerializer(typeof(XmlResponse<AccountStatus>));
-            XmlResponse<AccountStatus> xmlResponse;
-            using (var reader = XmlReader.Create(new StringReader(data))) {
-                xmlResponse = (XmlResponse<AccountStatus>)serializer.Deserialize(reader);
-            }
-            return xmlResponse;
+            const string uri = "/account/AccountStatus.xml.aspx";
+            var postString = WebHelper.GeneratePostString(ApiKey);
+            return request(uri, postString, new AccountStatus());
         }
 
-        public XmlResponse<AccountStatus> GetApiKeyInfo() {
-            throw new NotImplementedException();
+        public XmlResponse<ApiKeyInfo> GetApiKeyInfo() {
+            const string uri = "/account/APIKeyInfo.xml.aspx";
+            var postString = WebHelper.GeneratePostString(ApiKey);
+            return request(uri, postString, new ApiKeyInfo());
         }
-
     }
 }

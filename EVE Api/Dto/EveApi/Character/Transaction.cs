@@ -2,13 +2,13 @@
 using System.Xml.Serialization;
 
 
-namespace eZet.Eve.EveApi.Dto {
+namespace eZet.Eve.EveApi.Dto.EveApi {
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
 
     public class Transaction {
         [XmlAttribute("transactionDateTime")]

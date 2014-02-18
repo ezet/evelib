@@ -42,29 +42,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dto\AccountBalance.cs" />
+    <Compile Include="Dto\EveApi\Account\AllianceData.cs" />
+    <Compile Include="Dto\EveApi\Character\AccountBalance.cs" />
     <Compile Include="ApiKey.cs" />
-    <Compile Include="Dto\AccountStatus.cs" />
-    <Compile Include="Dto\ApiKeyInfo.cs" />
-    <Compile Include="Dto\Character.cs" />
-    <Compile Include="Dto\CharacterCollection.cs" />
-    <Compile Include="Dto\CharacterSheet.cs" />
-    <Compile Include="Dto\MarketOrder.cs" />
-    <Compile Include="Dto\MarketOrderCollection.cs" />
-    <Compile Include="Dto\Transaction.cs" />
-    <Compile Include="Dto\XmlResponse.cs" />
-    <Compile Include="Dto\XmlResult.cs" />
+    <Compile Include="Dto\EveApi\Account\AccountStatus.cs" />
+    <Compile Include="Dto\EveApi\Account\ApiKeyInfo.cs" />
+    <Compile Include="Dto\EveApi\Account\Character.cs" />
+    <Compile Include="Dto\EveApi\Account\CharacterCollection.cs" />
+    <Compile Include="Dto\EveApi\Character\CharacterSheet.cs" />
+    <Compile Include="Dto\EveApi\Character\MarketOrder.cs" />
+    <Compile Include="Dto\EveApi\Character\MarketOrderCollection.cs" />
+    <Compile Include="Dto\EveApi\Character\Transaction.cs" />
+    <Compile Include="Dto\EveApi\Core\AllianceList.cs" />
+    <Compile Include="Dto\EveApi\XmlResponse.cs" />
+    <Compile Include="Dto\EveApi\XmlResult.cs" />
+    <Compile Include="Dto\EveApi\XmlRowSet.cs" />
+    <Compile Include="Dto\EveCentral\MarketStatResponse.cs" />
+    <Compile Include="Dto\EveCentral\QuicklookResponse.cs" />
+    <Compile Include="Dto\EveCentral\XmlResponse.cs" />
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Character.cs" />
     <Compile Include="Entity\Core.cs" />
     <Compile Include="Entity\Corporation.cs" />
+    <Compile Include="Entity\EveApiEntity.cs" />
     <Compile Include="Entity\Map.cs" />
+    <Compile Include="Entity\EveCentral.cs" />
     <Compile Include="EveApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Dto\TransactionCollection.cs" />
+    <Compile Include="Dto\EveApi\Character\TransactionCollection.cs" />
     <Compile Include="WebHelper.cs" />
-    <Compile Include="XmlHelper.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

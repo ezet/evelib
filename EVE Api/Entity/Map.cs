@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace eZet.Eve.EveApi.Entity {
-    class Map {
+    public class Map {
     }
 }

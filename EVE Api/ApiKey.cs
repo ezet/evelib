@@ -13,8 +13,8 @@ namespace eZet.Eve.EveApi {
         public string VCode { get; private set; }
 
         public ApiKey(int keyId, string vCode) : this() {
-            this.KeyId = keyId;
-            this.VCode = vCode;
+            KeyId = keyId;
+            VCode = vCode;
         }
 
         public string GetAuthString() {

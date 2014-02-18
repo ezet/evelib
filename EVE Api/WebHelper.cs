@@ -10,48 +10,43 @@ using System.Xml.Linq;
 namespace eZet.Eve.EveApi {
     public static class WebHelper {
 
-        private const string uriBase = "https://api.eveonline.com";
+        private const string ContentType = "application/x-www-form-urlencoded";
 
-        private const string contentType = "application/x-www-form-urlencoded";
-
-        public static string Request(string uri, params object[] args) {
-            string postString = "";
-            for (int i = 0; i < args.Length; i += 2) {
-                postString += args[i] + "=" + args[i + 1] + "&";
-            }
-            uri = uriBase + uri;
+        public static string Request(string uri, string postString) {
             var request = WebRequest.Create(uri) as HttpWebRequest;
             request.Method = "POST";
-            request.ContentType = contentType;
+            request.ContentType = ContentType;
             request.ContentLength = postString.Length;
             string data = null;
-            try {
-
-                using (var writer = new StreamWriter(request.GetRequestStream())) {
-                    writer.Write(postString);
+            using (var writer = new StreamWriter(request.GetRequestStream())) {
+                writer.Write(postString);
+            }
+            using (var response = (HttpWebResponse)request.GetResponse()) {
+                if (response.StatusCode == HttpStatusCode.OK) {
+                    var reader = new StreamReader(response.GetResponseStream());
+                    data = reader.ReadToEnd();
                 }
-                using (var response = (HttpWebResponse)request.GetResponse()) {
-                    if (response.StatusCode == HttpStatusCode.OK) {
-                        var reader = new StreamReader(response.GetResponseStream());
-                        data = reader.ReadToEnd();
-                    }
-                }
-            } catch (Exception e) {
-                throw;
             }
             return data;
         }
 
-        public static string Request(string uri, ApiKey apiKey, params object[] args) {
-            object[] authargs = new object[args.Length + 4];
-            args.CopyTo(authargs, 0);
-            int length = args.Length;
-            authargs[length++] = "keyId";
-            authargs[length++] = apiKey.KeyId;
-            authargs[length++] = "vCode";
-            authargs[length++] = apiKey.VCode;
-            return Request(uri, authargs);
+        public static string GeneratePostString(params object[] args) {
+            var postString = "";
+            for (var i = 0; i < args.Length; i += 2) {
+                postString += args[i] + "=" + args[i + 1] + "&";
+            }
+            return postString;
         }
 
+        public static string GeneratePostString(ApiKey apiKey, params object[] args) {
+            var authArgs = new object[args.Length + 4];
+            args.CopyTo(authArgs, 0);
+            var length = args.Length;
+            authArgs[length++] = "keyId";
+            authArgs[length++] = apiKey.KeyId;
+            authArgs[length++] = "vCode";
+            authArgs[length] = apiKey.VCode;
+            return GeneratePostString(authArgs);
+        }
     }
 }

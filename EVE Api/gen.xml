@@ -1,0 +1,5 @@
+﻿<xs:schema targetNamespace="http://schemas.mycompany.com/myproduct/version/area"
+           xmlns="http://schemas.mycompany.com/myproduct/version/area"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"></xs:schema>
