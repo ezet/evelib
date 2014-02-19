@@ -12,7 +12,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
         public class CharacterData {
 
             [XmlAttribute("name")]
-            public string Name { get; set; }
+            public string CharacterName { get; set; }
 
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }

@@ -31,10 +31,12 @@ namespace eZet.Eve.EveApi {
 
         public EveCentral EveCentral { get; private set; }
 
+        public Image Image { get; private set; }
+
 
         static public void Main() {
             var api = new EveApi(keyId, vCode);
-            var xml = api.Core.GetCertificateTree();
+            var xml = api.Core.GetAllianceList();
             //var charlist = api.Account.GetCharacterList();
             //var c = charlist.Result.Characters.Rows.First().Load();
             //var trans = c.GetWalletTransactions();

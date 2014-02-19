@@ -54,6 +54,7 @@
     <Compile Include="Dto\EveApi\Character\MarketOrderCollection.cs" />
     <Compile Include="Dto\EveApi\Character\Transaction.cs" />
     <Compile Include="Dto\EveApi\Core\AllianceList.cs" />
+    <Compile Include="Dto\EveApi\Core\CallList.cs" />
     <Compile Include="Dto\EveApi\Core\CertificateTree.cs" />
     <Compile Include="Dto\EveApi\Core\CharacterAffiliation.cs" />
     <Compile Include="Dto\EveApi\Core\CharacterNameId.cs" />
@@ -63,8 +64,13 @@
     <Compile Include="Dto\EveApi\Core\FactionWarfareStats.cs" />
     <Compile Include="Dto\EveApi\Core\FactionWarfareTopList.cs" />
     <Compile Include="Dto\EveApi\Core\RefTypes.cs" />
+    <Compile Include="Dto\EveApi\Core\ServerStatus.cs" />
     <Compile Include="Dto\EveApi\Core\SkillTree.cs" />
     <Compile Include="Dto\EveApi\Core\TypeName.cs" />
+    <Compile Include="Dto\EveApi\Map\FacWarSystems.cs" />
+    <Compile Include="Dto\EveApi\Map\Jumps.cs" />
+    <Compile Include="Dto\EveApi\Map\Kills.cs" />
+    <Compile Include="Dto\EveApi\Map\Sovereignty.cs" />
     <Compile Include="Dto\EveApi\XmlResponse.cs" />
     <Compile Include="Dto\EveApi\XmlResult.cs" />
     <Compile Include="Dto\EveApi\XmlRowSet.cs" />
@@ -76,8 +82,10 @@
     <Compile Include="Entity\Core.cs" />
     <Compile Include="Entity\Corporation.cs" />
     <Compile Include="Entity\EveApiEntity.cs" />
+    <Compile Include="Entity\Image.cs" />
     <Compile Include="Entity\Map.cs" />
     <Compile Include="Entity\EveCentral.cs" />
+    <Compile Include="Entity\SovereigntyStatus.cs" />
     <Compile Include="EveApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\EveApi\Character\TransactionCollection.cs" />

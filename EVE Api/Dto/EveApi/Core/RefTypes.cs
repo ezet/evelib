@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EveApi.Dto.EveApi.Core {
     public class ReferenceTypes : XmlResult {
 
+        [XmlElement("rowset")]
         public XmlRowSet<ReferenceType> RefTypes { get; set; }
 
         [Serializable]

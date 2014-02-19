@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
 using eZet.Eve.EveApi.Dto.EveApi;
 using eZet.Eve.EveApi.Dto.EveApi.Core;
 
@@ -15,12 +13,13 @@ namespace eZet.Eve.EveApi.Entity {
         public XmlResponse<CertificateTree> GetCertificateTree() {
             const string path = "/eve/CertificateTree.xml.aspx";
             return request(path, new CertificateTree());
-
         }
 
-        public XmlResponse<CharacterAffiliation> GetCharacterAffiliation() {
+        public XmlResponse<CharacterAffiliation> GetCharacterAffiliation(params long[] list) {
             const string path = "/eve/CharacterAffiliation.xml.aspx";
-            return request(path, new CharacterAffiliation());
+            var ids = String.Join(",", list);
+            var postString = WebHelper.GeneratePostString("ids", ids);
+            return request(path, new CharacterAffiliation(), postString);
         }
 
         public XmlResponse<CharacterNameId> GetCharacterId(params string[] list) {
@@ -77,11 +76,23 @@ namespace eZet.Eve.EveApi.Entity {
 
         public XmlResponse<TypeName> GetTypeName(params long[] list) {
             const string path = "/eve/TypeName.xml.aspx";
-            //var ids = String.Join(",", list.Select(x => x.ToString(CultureInfo.InvariantCulture)).ToArray());
             var ids = String.Join(",", list);
             var postString = WebHelper.GeneratePostString("ids", ids);
             return request(path, new TypeName(), postString);
         }
+
+        public XmlResponse<ServerStatus> GetServerStatus() {
+            const string path = "/server/ServerStatus.xml.aspx";
+            return request(path, new ServerStatus());
+        }
+
+        public XmlResponse<CallList> GetCallList() {
+            // TODO Separate rowsets
+            const string path = "/api/calllist.xml.aspx";
+            return request(path, new CallList());
+        }
+
+
 
 
 

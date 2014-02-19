@@ -47,7 +47,7 @@ namespace eZet.Eve.EveApi.Entity {
         }
 
         public override string ToString() {
-            return String.Format("ID: {0}, Name: {1}", Id, Name);
+            return String.Format("ID: {0}, CharacterName: {1}", Id, Name);
         }
 
         private void load() {

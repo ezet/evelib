@@ -1,12 +1,9 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.Eve.EveApi.Dto.EveApi.Core;
 
 namespace eZet.Eve.EveApi.Dto.EveApi {
 
@@ -31,9 +28,11 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
             reader.ReadToDescendant("row");
             T row;
             while (reader.Name == "row") {
-                row = (T)serializer.Deserialize(reader);
-                Rows.Add(row);
-                reader.ReadToFollowing("row");
+                if (reader.IsStartElement()) {
+                    row = (T) serializer.Deserialize(reader);
+                    Rows.Add(row);
+                }
+                reader.ReadToNextSibling("row");
             }
         }
 
