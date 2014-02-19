@@ -1,6 +1,7 @@
 ﻿using System;
 using eZet.Eve.EveApi.Dto.EveApi;
 using eZet.Eve.EveApi.Dto.EveApi.Core;
+using CharacterInfo = eZet.Eve.EveApi.Dto.EveApi.Core.CharacterInfo;
 
 namespace eZet.Eve.EveApi.Entity {
     public class Core : EveApiEntity {

@@ -11,7 +11,7 @@ namespace eZet.Eve.EveApi.Entity {
         private const string UriBase = "http://image.eveonline.com";
 
         public void GetCharacterPortrait() {
-            const string path = "/Character";
+            const string path = "/CharacterInfo";
 
         }
 
@@ -33,7 +33,7 @@ namespace eZet.Eve.EveApi.Entity {
         }
 
         public void GetOldPortrait() {
-            const string path = "http://oldportraits.eveonline.com/Character/<characterID>_256.jpg";
+            const string path = "http://oldportraits.eveonline.com/CharacterInfo/<characterID>_256.jpg";
         }
     }
 }

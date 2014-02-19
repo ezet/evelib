@@ -35,8 +35,9 @@ namespace eZet.Eve.EveApi {
 
 
         static public void Main() {
-            var api = new EveApi(keyId, vCode);
-            var xml = api.Core.GetAllianceList();
+            var api = new EveApi(keyId, vCode, id);
+
+            var xml = api.Character.GetContactList();
             //var charlist = api.Account.GetCharacterList();
             //var c = charlist.Result.Characters.Rows.First().Load();
             //var trans = c.GetWalletTransactions();

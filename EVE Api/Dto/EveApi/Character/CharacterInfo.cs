@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Account {
+namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
     [Serializable]
     [XmlRoot("row")]
-    public class Character {
+    public class CharacterInfo {
 
         [XmlAttribute("name")]
         public string Name { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
+using eZet.Eve.EveApi.Dto.EveApi.Character;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Account {
 
@@ -10,7 +11,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Account {
     public class CharacterCollection : XmlResult {
 
         [XmlElement("rowset")]
-        public XmlRowSet<Character> Characters;
+        public XmlRowSet<Character.CharacterInfo> Characters;
 
         public override void SetApiKey(ApiKey key) {
             foreach (var character in Characters) {

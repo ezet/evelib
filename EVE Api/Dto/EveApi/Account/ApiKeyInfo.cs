@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using eZet.Eve.EveApi.Dto.EveApi.Character;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Account {
 
@@ -23,7 +24,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Account {
     public class ApiKeyData {
 
         [XmlElement("rowset")]
-        public XmlRowSet<Character> Characters { get; set; }
+        public XmlRowSet<CharacterInfo> Characters { get; set; }
 
         [XmlAttribute("accessMask")]
         public int AccessMask { get; set; }
