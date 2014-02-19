@@ -1,5 +1,6 @@
 ﻿
 using System.Xml.Serialization;
+using eZet.Eve.EveApi;
 
 namespace eZet.Eve.EveApi.Dto.EveApi {
 

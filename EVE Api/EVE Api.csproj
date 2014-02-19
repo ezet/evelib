@@ -59,6 +59,7 @@
     <Compile Include="Dto\EveApi\Character\ContractList.cs" />
     <Compile Include="Dto\EveApi\Character\FactionWarfareStats.cs" />
     <Compile Include="Dto\EveApi\Character\IndustryJobs.cs" />
+    <Compile Include="Dto\EveApi\Character\WalletJournal.cs" />
     <Compile Include="Dto\EveApi\Character\KillLog.cs" />
     <Compile Include="Dto\EveApi\Character\Locations.cs" />
     <Compile Include="Dto\EveApi\Character\MailBodies.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="Dto\EveApi\Core\ServerStatus.cs" />
     <Compile Include="Dto\EveApi\Core\SkillTree.cs" />
     <Compile Include="Dto\EveApi\Core\TypeName.cs" />
+    <Compile Include="Dto\EveApi\Corporation\MemberMedals.cs" />
+    <Compile Include="Dto\EveApi\Corporation\CorporationSheet.cs" />
+    <Compile Include="Dto\EveApi\Corporation\FactionWarfareStats.cs" />
+    <Compile Include="Dto\EveApi\Corporation\MedalList.cs" />
     <Compile Include="Dto\EveApi\Map\FacWarSystems.cs" />
     <Compile Include="Dto\EveApi\Map\Jumps.cs" />
     <Compile Include="Dto\EveApi\Map\Kills.cs" />

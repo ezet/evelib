@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using eZet.Eve.EveApi;
 using eZet.Eve.EveApi.Dto.EveApi.Character;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Account {

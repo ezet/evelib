@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Character {
+namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
     public class FactionWarfareStats : XmlResult {
 
         [XmlElement("factionID")]
@@ -13,8 +13,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlElement("enlisted")]
         public DateTime Enlisted { get; set; }
 
-        [XmlElement("currentRank")]
-        public int CurrentRank { get; set; }
+        [XmlElement("pilots")]
+        public int Pilots { get; set; }
 
         [XmlElement("highestRank")]
         public int HighestRank { get; set; }

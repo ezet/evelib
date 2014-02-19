@@ -23,8 +23,6 @@ namespace eZet.Eve.EveApi {
 
         public Character Character { get; private set; }
 
-        public Corporation Corporation { get; private set; }
-
         public Core Core { get; private set; }
 
         public Map Map { get; private set; }

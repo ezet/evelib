@@ -1,12 +1,4 @@
 ﻿using eZet.Eve.EveApi.Dto.EveApi;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 using eZet.Eve.EveApi.Dto.EveApi.Account;
 
 namespace eZet.Eve.EveApi.Entity {

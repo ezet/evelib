@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveApi.Test {
@@ -16,46 +15,47 @@ namespace eZet.Eve.EveApi.Test {
 
 
         [TestMethod]
-        public void TestAccountBalance() {
+        public void GetAccountBalance() {
             var xml = api.Character.GetAccountBalance();
             Assert.AreNotEqual(0, xml.Result.Accounts.First().AccountId);
         }
 
         [TestMethod]
-        public void TestAssetList() {
+        public void GetAssetList() {
             var xml = api.Character.GetAssetList();
             Assert.AreNotEqual(0, xml.Result.Assets.First().ItemId);
         }
 
         [TestMethod]
-        public void TestCharacterSheet() {
+        public void GetCharacterSheet() {
             var xml = api.Character.GetCharacterSheet();
             Assert.AreEqual(CharacterId, xml.Result.CharacterId);
         }
 
         [TestMethod]
-        public void TestCalendarEventAttendees() {
+        public void GetCalendarEventAttendees() {
+            var xml = api.Character.GetCalendarEventAttendees(1);
             // TODO Write test
         }
 
         [TestMethod]
-        public void TestContactList() {
+        public void GetContactList() {
             var xml = api.Character.GetContactList();
         }
 
         [TestMethod]
-        public void TestContactNotifications() {
+        public void GetContactNotifications() {
             var xml = api.Character.GetContactNotifications();
         }
 
         [TestMethod]
-        public void TestContracts() {
+        public void GetContracts() {
             var xml = api.Character.GetContracts();
         }
 
         [TestMethod]
         public void GetContractItems() {
-            var xml = api.Character.GetContractItems(0);
+            var xml = api.Character.GetContractItems(135325);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace eZet.Eve.EveApi.Test {
 
         [TestMethod]
         public void getLocations() {
-            var xml = api.Character.GetLocations(0);
+            var xml = api.Character.GetLocations(12345);
         }
 
         [TestMethod]
@@ -131,6 +131,16 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void GetUpcomingCalendarEvents() {
             var xml = api.Character.GetUpcomingCalendarEvents();
+        }
+
+        [TestMethod]
+        public void GetWalletJournal() {
+            var xml = api.Character.GetWalletJournal();
+        }
+
+        [TestMethod]
+        public void GetWalletTransactions() {
+            var xml = api.Character.GetWalletTransactions();
         }
 
 

@@ -19,8 +19,9 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("ownerName")]
             public string OwnerName { get; set; }
 
+            // TODO Convert to DateTime
             [XmlAttribute("eventDate")]
-            public DateTime EventDate { get; set; }
+            public string EventDate { get; set; }
 
             [XmlAttribute("eventTitle")]
             public string EventTitle { get; set; }
@@ -41,11 +42,9 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     }
 
             public enum EventResponse {
-            [XmlEnum]
             Accepted,
-            [XmlEnum]
             Declined,
-            [XmlEnum]
-            Tentative
+            Tentative,
+            Undecided
         }
 }

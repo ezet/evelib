@@ -7,6 +7,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlElement("rowset")]
         public XmlRowSet<Contract> Contracts { get; set; }
 
+        [Serializable]
+        [XmlRoot("row")]
         public class Contract {
             
             [XmlAttribute("contractID")]
@@ -45,20 +47,21 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("availability")]
             public AvailabilityType Availability { get; set; }
 
+            // TODO Convert to DateTime
             [XmlAttribute("dateIssued")]
-            public DateTime DateIssued { get; set; }
+            public string DateIssued { get; set; }
             
             [XmlAttribute("dateExpired")]
-            public DateTime DateExpired { get; set; }
+            public string DateExpired { get; set; }
 
             [XmlAttribute("dateAccepted")]
-            public DateTime DateAccepted { get; set; }
+            public string DateAccepted { get; set; }
 
             [XmlAttribute("numDays")]
             public int NumDays { get; set; }
 
             [XmlAttribute("dateCompleted")]
-            public DateTime DateCompleted { get; set; }
+            public string DateCompleted { get; set; }
 
             [XmlAttribute("price")]
             public decimal Price { get; set; }
