@@ -102,22 +102,34 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("completedStatus")]
             public CompletedStatusType CompletedStatus { get; set; }
 
+            // TODO DateTime
             [XmlAttribute("installTime")]
-            public DateTime InstallTime { get; set; }
+            public string InstallTime { get; set; }
 
             [XmlAttribute("beginProductionTime")]
-            public DateTime BeginProductionTime { get; set; }
+            public string BeginProductionTime { get; set; }
 
             [XmlAttribute("endProductionTime")]
-            public DateTime EndProductionTime { get; set; }
+            public string EndProductionTime { get; set; }
 
             [XmlAttribute("pauseProductionTime")]
-            public DateTime PauseProductionTime { get; set; }
+            public string PauseProductionTime { get; set; }
 
         }
 
         public enum CompletedStatusType {
-            Failed, Delivered, Aborted, GmAborted, Unanchored, Destroyed
+            [XmlEnum("0")]
+            Failed,
+            [XmlEnum("1")]
+            Delivered,
+            [XmlEnum("2")]
+            Aborted,
+            [XmlEnum("3")]
+            GmAborted,
+            [XmlEnum("4")]
+            Unanchored,
+            [XmlEnum("5")]
+            Destroyed
         }
     }
 }

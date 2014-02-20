@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<eveapi version="2">
+  <currentTime>2011-09-13 22:44:15</currentTime>
+  <result>
+    <rowset name="corporationStarbases" key="stationID" columns="stationID,ownerID,stationName,solarSystemID,dockingCostPerShipVolume,officeRentalCost,stationTypeID,reprocessingEfficiency,reprocessingStationTake,standingOwnerID">
+      <row stationID="61000368"
+        ownerID="857174087"
+        stationName="Station Name Goes Here"
+        solarSystemID="30004181"
+        dockingCostPerShipVolume="0"
+        officeRentalCost="25000000"
+        stationTypeID="21645"
+        reprocessingEfficiency="0.5"
+        reprocessingStationTake="0.025"
+        standingOwnerID="673381830" />
+      <row stationID="61000556"
+        ownerID="857174087"
+        stationName="And Another Station Name"
+        solarSystemID="30004179"
+        dockingCostPerShipVolume="0"
+        officeRentalCost="25000000"
+        stationTypeID="21644"
+        reprocessingEfficiency="0.5"
+        reprocessingStationTake="0.025"
+        standingOwnerID="673381830" />
+    </rowset>
+  </result>
+  <cachedUntil>2011-09-13 23:41:15</cachedUntil>
+</eveapi>

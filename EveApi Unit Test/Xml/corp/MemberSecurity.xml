@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<eveapi version="2">
+  <currentTime>2011-01-28 14:25:41</currentTime>
+  <result>
+    <rowset name="members" key="characterID" columns="characterID, name">
+      <row characterID="123456789" name="Tester">
+        <rowset name="roles" key="roleID" columns="roleID,roleName" />
+        <rowset name="grantableRoles" key="roleID" columns="roleID,roleName" />
+        <rowset name="rolesAtHQ" key="roleID" columns="roleID,roleName" />
+        <rowset name="grantableRolesAtHQ" key="roleID" columns="roleID,roleName" />
+        <rowset name="rolesAtBase" key="roleID" columns="roleID,roleName" />
+        <rowset name="grantableRolesAtBase" key="roleID" columns="roleID,roleName" />
+        <rowset name="rolesAtOther" key="roleID" columns="roleID,roleName" />
+        <rowset name="grantableRolesAtOther" key="roleID" columns="roleID,roleName" />
+        <rowset name="titles" key="titleID" columns="titleID,titleName">
+          <row titleID="1" titleName="Member " />
+          <row titleID="512" titleName="Gas Attendant" />
+          <row titleID="16384" titleName="General Manager" />
+        </rowset>
+      </row>
+    </rowset>
+  </result>
+  <cachedUntil>2011-01-28 15:22:41</cachedUntil>
+</eveapi>

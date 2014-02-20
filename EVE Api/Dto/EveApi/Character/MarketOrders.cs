@@ -16,50 +16,51 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlRoot("row")]
         public class MarketOrder {
 
-            [XmlElement("orderID")]
+            [XmlAttribute("orderID")]
             public long OrderId { get; set; }
 
-            [XmlElement("charID")]
+            [XmlAttribute("charID")]
             public long CharacterId { get; set; }
 
-            [XmlElement("stationID")]
+            [XmlAttribute("stationID")]
             public long StationId { get; set; }
 
-            [XmlElement("volEntered")]
+            [XmlAttribute("volEntered")]
             public int VolumeEntered { get; set; }
 
-            [XmlElement("volRemaining")]
+            [XmlAttribute("volRemaining")]
             public int VolumeRemaining { get; set; }
 
-            [XmlElement("minVolume")]
+            [XmlAttribute("minVolume")]
             public int MinVolume { get; set; }
 
-            [XmlElement("orderState")]
+            [XmlAttribute("orderState")]
             public int OrderState { get; set; }
 
-            [XmlElement("typeID")]
+            [XmlAttribute("typeID")]
             public long TypeId { get; set; }
 
-            [XmlElement("range")]
+            [XmlAttribute("range")]
             public int Range { get; set; }
 
-            [XmlElement("accountKey")]
+            [XmlAttribute("accountKey")]
             public int AccountKey { get; set; }
 
-            [XmlElement("duration")]
+            [XmlAttribute("duration")]
             public int Duration { get; set; }
 
-            [XmlElement("escrow")]
+            [XmlAttribute("escrow")]
             public decimal Escrow { get; set; }
 
-            [XmlElement("price")]
+            [XmlAttribute("price")]
             public decimal Price { get; set; }
 
-            [XmlElement("bid")]
+            [XmlAttribute("bid")]
             public int Bid { get; set; }
 
-            [XmlElement("issued")]
-            public DateTime Issued { get; set; }
+            // TODO DateTime
+            [XmlAttribute("issued")]
+            public string Issued { get; set; }
 
         }
     }

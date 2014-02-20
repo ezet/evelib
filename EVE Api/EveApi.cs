@@ -12,10 +12,10 @@ namespace eZet.Eve.EveApi {
         
         private static string vCode = "Hu3uslqNc3HDP8XmMMt1Cgb56TpPqqnF2tXssniROFkIMEDLztLPD8ktx6q5WVC2";
 
+        private static int id = 977615922;
+
         private static string authString = "keyId=3053778&vCode=Hu3uslqNc3HDP8XmMMt1Cgb56TpPqqnF2tXssniROFkIMEDLztLPD8ktx6q5WVC2&characterId=977615922";
         
-        
-        private static int id = 977615922;
 
         public int CharacterId { get; private set; }
 
@@ -40,7 +40,7 @@ namespace eZet.Eve.EveApi {
             //var c = charlist.Result.Characters.Rows.First().Load();
             //var trans = c.GetWalletTransactions();
             //var sheet = c.GetCharacterSheet();
-            return;
+            //return;
         }
 
         public EveApi() {

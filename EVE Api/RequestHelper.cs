@@ -2,11 +2,11 @@
 using System.Net;
 
 namespace eZet.Eve.EveApi {
-    public static class WebHelper {
+    public class RequestHelper : IRequestHelper {
 
         private const string ContentType = "application/x-www-form-urlencoded";
 
-        public static string Request(string uri, string postString) {
+        public string Request(string uri, string postString) {
             var request = WebRequest.Create(uri) as HttpWebRequest;
             request.Method = "POST";
             request.ContentType = ContentType;
@@ -24,7 +24,7 @@ namespace eZet.Eve.EveApi {
             return data;
         }
 
-        public static string GeneratePostString(params object[] args) {
+        public string GeneratePostString(params object[] args) {
             var postString = "";
             for (var i = 0; i < args.Length; i += 2) {
                 postString += args[i] + "=" + args[i + 1] + "&";
@@ -32,7 +32,7 @@ namespace eZet.Eve.EveApi {
             return postString;
         }
 
-        public static string GeneratePostString(ApiKey apiKey, params object[] args) {
+        public string GeneratePostString(ApiKey apiKey, params object[] args) {
             var authArgs = new object[args.Length + 4];
             args.CopyTo(authArgs, 0);
             var length = args.Length;

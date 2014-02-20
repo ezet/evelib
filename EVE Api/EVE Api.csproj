@@ -59,6 +59,7 @@
     <Compile Include="Dto\EveApi\Character\ContractList.cs" />
     <Compile Include="Dto\EveApi\Character\FactionWarfareStats.cs" />
     <Compile Include="Dto\EveApi\Character\IndustryJobs.cs" />
+    <Compile Include="Dto\EveApi\Corporation\StarbaseDetails.cs" />
     <Compile Include="Dto\EveApi\Character\WalletJournal.cs" />
     <Compile Include="Dto\EveApi\Character\KillLog.cs" />
     <Compile Include="Dto\EveApi\Character\Locations.cs" />
@@ -88,10 +89,19 @@
     <Compile Include="Dto\EveApi\Core\ServerStatus.cs" />
     <Compile Include="Dto\EveApi\Core\SkillTree.cs" />
     <Compile Include="Dto\EveApi\Core\TypeName.cs" />
+    <Compile Include="Dto\EveApi\Corporation\ContainerLog.cs" />
+    <Compile Include="Dto\EveApi\Corporation\ShareholderList.cs" />
     <Compile Include="Dto\EveApi\Corporation\MemberMedals.cs" />
     <Compile Include="Dto\EveApi\Corporation\CorporationSheet.cs" />
     <Compile Include="Dto\EveApi\Corporation\FactionWarfareStats.cs" />
     <Compile Include="Dto\EveApi\Corporation\MedalList.cs" />
+    <Compile Include="Dto\EveApi\Corporation\MemberSecurity.cs" />
+    <Compile Include="Dto\EveApi\Corporation\MemberSecurityLog.cs" />
+    <Compile Include="Dto\EveApi\Corporation\MemberTracking.cs" />
+    <Compile Include="Dto\EveApi\Corporation\OutpostList.cs" />
+    <Compile Include="Dto\EveApi\Corporation\OutpostServiceDetails.cs" />
+    <Compile Include="Dto\EveApi\Corporation\StarbaseList.cs" />
+    <Compile Include="Dto\EveApi\Corporation\Titles.cs" />
     <Compile Include="Dto\EveApi\Map\FacWarSystems.cs" />
     <Compile Include="Dto\EveApi\Map\Jumps.cs" />
     <Compile Include="Dto\EveApi\Map\Kills.cs" />
@@ -108,13 +118,16 @@
     <Compile Include="Entity\Corporation.cs" />
     <Compile Include="Entity\EveApiEntity.cs" />
     <Compile Include="Entity\Image.cs" />
+    <Compile Include="IRequestHelper.cs" />
+    <Compile Include="IXmlSerializer.cs" />
     <Compile Include="Entity\Map.cs" />
     <Compile Include="Entity\EveCentral.cs" />
     <Compile Include="Dto\EveApi\Map\SovereigntyStatus.cs" />
     <Compile Include="EveApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\EveApi\Character\WalletTransactions.cs" />
-    <Compile Include="WebHelper.cs" />
+    <Compile Include="RequestHelper.cs" />
+    <Compile Include="XmlSerializerWrapper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

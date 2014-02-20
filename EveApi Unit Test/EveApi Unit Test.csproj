@@ -53,7 +53,10 @@
   <ItemGroup>
     <Compile Include="CharacterTest.cs" />
     <Compile Include="CoreTest.cs" />
+    <Compile Include="Corporation_DeserializeTest.cs" />
     <Compile Include="MapTest.cs" />
+    <Compile Include="MockRequestHelper.cs" />
+    <Compile Include="MockSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +64,36 @@
       <Project>{aa85978c-2bf5-419f-9f8e-b70162e83f34}</Project>
       <Name>EVE Api</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Xml\char\AssetList.xml" />
+    <Content Include="Xml\char\Contracts.xml" />
+    <Content Include="Xml\corp\AccountBalance.xml" />
+    <Content Include="Xml\corp\AssetList.xml" />
+    <Content Include="Xml\corp\ContactList.xml" />
+    <Content Include="Xml\corp\ContainerLog.xml" />
+    <Content Include="Xml\corp\ContractItems.xml" />
+    <Content Include="Xml\corp\Contracts.xml" />
+    <Content Include="Xml\corp\CorporationSheet.xml" />
+    <Content Include="Xml\corp\FacWarStats.xml" />
+    <Content Include="Xml\corp\IndustryJobs.xml" />
+    <Content Include="Xml\corp\KillLog.xml" />
+    <Content Include="Xml\corp\Locations.xml" />
+    <Content Include="Xml\corp\MarketOrders.xml" />
+    <Content Include="Xml\corp\Medals.xml" />
+    <Content Include="Xml\corp\MemberMedals.xml" />
+    <Content Include="Xml\corp\MemberSecurity.xml" />
+    <Content Include="Xml\corp\MemberSecurityLog.xml" />
+    <Content Include="Xml\corp\MemberTracking.xml" />
+    <Content Include="Xml\corp\OutpostList.xml" />
+    <Content Include="Xml\corp\OutpostServiceDetail.xml" />
+    <Content Include="Xml\corp\Shareholders.xml" />
+    <Content Include="Xml\corp\Standings.xml" />
+    <Content Include="Xml\corp\StarbaseDetail.xml" />
+    <Content Include="Xml\corp\StarbaseList.xml" />
+    <Content Include="Xml\corp\Titles.xml" />
+    <Content Include="Xml\corp\WalletJournal.xml" />
+    <Content Include="Xml\corp\WalletTransactions.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

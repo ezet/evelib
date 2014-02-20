@@ -19,28 +19,28 @@ namespace eZet.Eve.EveApi.Entity {
         public XmlResponse<CharacterAffiliation> GetCharacterAffiliation(params long[] list) {
             const string path = "/eve/CharacterAffiliation.xml.aspx";
             var ids = String.Join(",", list);
-            var postString = WebHelper.GeneratePostString("ids", ids);
+            var postString = RequestHelper.GeneratePostString("ids", ids);
             return request(path, new CharacterAffiliation(), postString);
         }
 
         public XmlResponse<CharacterNameId> GetCharacterId(params string[] list) {
             const string path = "/eve/CharacterID.xml.aspx";
             var names = String.Join(",", list);
-            var postString = WebHelper.GeneratePostString("names", names);
+            var postString = RequestHelper.GeneratePostString("names", names);
             return request(path, new CharacterNameId(), postString);
         }
 
         public XmlResponse<CharacterInfo> GetCharacterInfo(long id, ApiKey key = default(ApiKey)) {
             const string path = "/eve/CharacterInfo.xml.aspx";
-            var postString = key.Equals(default(ApiKey)) ? WebHelper.GeneratePostString("characterID", id)
-                                                         : WebHelper.GeneratePostString(ApiKey, "characterID", id);
+            var postString = key.Equals(default(ApiKey)) ? RequestHelper.GeneratePostString("characterID", id)
+                                                         : RequestHelper.GeneratePostString(ApiKey, "characterID", id);
             return request(path, new CharacterInfo(), postString);
         }
 
         public XmlResponse<CharacterNameId> GetCharacterName(params long[] list) {
             const string path = "/eve/CharacterName.xml.aspx";
             var ids = String.Join(",", list);
-            var postString = WebHelper.GeneratePostString("ids", ids);
+            var postString = RequestHelper.GeneratePostString("ids", ids);
             return request(path, new CharacterNameId(), postString);
         }
 
@@ -78,7 +78,7 @@ namespace eZet.Eve.EveApi.Entity {
         public XmlResponse<TypeName> GetTypeName(params long[] list) {
             const string path = "/eve/TypeName.xml.aspx";
             var ids = String.Join(",", list);
-            var postString = WebHelper.GeneratePostString("ids", ids);
+            var postString = RequestHelper.GeneratePostString("ids", ids);
             return request(path, new TypeName(), postString);
         }
 

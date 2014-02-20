@@ -1,4 +1,5 @@
-﻿using eZet.Eve.EveApi.Dto.EveApi;
+﻿using System.Security.Cryptography.X509Certificates;
+using eZet.Eve.EveApi.Dto.EveApi;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -11,21 +12,24 @@ namespace eZet.Eve.EveApi.Entity {
         public ApiKey ApiKey { get; private set; }
 
         protected EveApiEntity() {
-            
+            Serializer = new XmlSerializerWrapper();
+            RequestHelper = new RequestHelper();
+
         }
 
-        protected EveApiEntity(ApiKey apiKey) {
+        protected EveApiEntity(ApiKey apiKey) : this() {
             ApiKey = apiKey;
         }
 
+        public IXmlSerializer Serializer { get; set; }
+
+        public IRequestHelper RequestHelper { get; set; }
+
         protected XmlResponse<T> request<T>(string path, T type, string postString = "") where T : XmlResult {
-            var data = WebHelper.Request(UriBase + path, postString);
-            var serializer = new XmlSerializer(typeof(XmlResponse<T>));
-            XmlResponse<T> xmlResponse;
-            using (var reader = XmlReader.Create(new StringReader(data))) {
-                xmlResponse = (XmlResponse<T>)serializer.Deserialize(reader);
-            }
-            return xmlResponse;
+            var data = RequestHelper.Request(UriBase + path, postString);
+            return Serializer.Deserialize<T>(data);
         }
     }
+
+
 }

@@ -18,8 +18,9 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("solarSystemID")]
             public long SolarSystemId { get; set; }
 
+            // TODO DateTime
             [XmlAttribute("killTime")]
-            public DateTime KillTime { get; set; }
+            public string KillTime { get; set; }
 
             [XmlAttribute("moonID")]
             public long MoonId { get; set; }

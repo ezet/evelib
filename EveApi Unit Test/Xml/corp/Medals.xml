@@ -1,0 +1,8 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<eveapi version="2">
+  <currentTime>2008-12-06 23:20:41</currentTime>
+  <result>
+    <rowset name="medals" key="medalID" columns="medalID,title,description,creatorID,created" />
+  </result>
+  <cachedUntil>2008-12-07 22:20:41</cachedUntil>
+</eveapi>
