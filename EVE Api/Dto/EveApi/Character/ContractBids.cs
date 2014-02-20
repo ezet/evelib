@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
@@ -24,8 +20,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("bidderID")]
             public long BidderId { get; set; }
 
+            [XmlIgnore]
+            public DateTime BidDate { get; private set; }
+
             [XmlAttribute("dateBid")]
-            public DateTime BidDate { get; set; }
+            public string BidDateAsString {
+                get { return BidDate.ToString(DateFormat); }
+                set { BidDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("amount")]
             public decimal Amount { get; set; }

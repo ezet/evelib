@@ -1,13 +1,13 @@
 ﻿using System.Xml.Serialization;
-using eZet.Eve.EveApi.Dto.EveApi;
 
-namespace eZet.Eve.EveApi.Entity {
+namespace eZet.Eve.EveApi.Dto.EveApi.Map {
     public class SovereigntyStatus : XmlResult {
 
         [XmlElement("rowset")]
         public XmlRowSet<Structure> Structures { get; set; }
 
         public class Structure {
+           // TODO Implement
 
             
         }

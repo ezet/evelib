@@ -56,7 +56,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlElement("rowset")]
             public XmlRowSet<Item> Items { get; set; }
 
-
         }
     }
 }

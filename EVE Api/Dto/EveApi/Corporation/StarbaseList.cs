@@ -27,12 +27,23 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
             [XmlAttribute("state")]
             public StarbaseState State { get; set; }
 
-            // TODO DateTime
-            [XmlAttribute("stateTimestamp")]
-            public string StateTimestamp { get; set; }
+            [XmlIgnore]
+            public DateTime StateTimestamp { get; private set; }
 
-            [XmlAttribute("onlineTimestamp")]
-            public string OnlineTimestamp { get; set; }
+            [XmlElement("stateTimestamp")]
+            public string StateTimestampAsString {
+                get { return StateTimestamp.ToString(DateFormat); }
+                set { StateTimestamp = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime OnlineTimestamp { get; private set; }
+
+            [XmlElement("onlineTimestamp")]
+            public string OnlineTimestampAsString {
+                get { return OnlineTimestamp.ToString(DateFormat); }
+                set { OnlineTimestamp = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("standingOwnerID")]
             public long StandingOwnerId { get; set; }

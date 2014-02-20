@@ -27,9 +27,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
             [XmlAttribute("issuerID")]
             public long IssuerId { get; set; }
 
-            // TODO DateTime
+            [XmlIgnore]
+            public DateTime IssuedDate { get; set; }
+
             [XmlAttribute("issued")]
-            public string Issued { get; set; }
+            public string IssuedDateAsString {
+                get { return IssuedDate.ToString(DateFormat); }
+                set { IssuedDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
         }
     }
 }

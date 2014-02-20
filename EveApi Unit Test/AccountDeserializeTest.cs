@@ -19,8 +19,6 @@ namespace eZet.Eve.EveApi.Test {
             var xml = acc.GetAccountStatus();
             Assert.AreEqual(9999, xml.Result.LogonCount);
             Assert.AreEqual(9999, xml.Result.LogonMinutes);
-            Assert.AreEqual("2004-01-01 00:00:00", xml.Result.CreationDate);
-            Assert.AreEqual("2011-01-01 00:00:00", xml.Result.PaidUntil);
         }
 
         [TestMethod]

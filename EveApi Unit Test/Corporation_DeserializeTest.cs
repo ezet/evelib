@@ -13,7 +13,6 @@ namespace eZet.Eve.EveApi.Test {
             api.RequestHelper = new TestRequestHelper();
         }
 
-
         [TestMethod]
         public void GetAccountBalance() {
             var xml = api.GetAccountBalance();
@@ -143,7 +142,7 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void GetStandings() {
             var xml = api.GetStandings();
-            Assert.AreEqual(3009841, xml.Result.CorporationStandings.Standings.First().FromId);
+            Assert.AreEqual(3009841, xml.Result.CorporationStandingsType.Standings.First().FromId);
         }
 
         [TestMethod]
@@ -177,6 +176,4 @@ namespace eZet.Eve.EveApi.Test {
         }
 
     }
-
-
 }

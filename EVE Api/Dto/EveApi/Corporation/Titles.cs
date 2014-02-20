@@ -7,10 +7,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
         [XmlElement("rowset")]
         public XmlRowSet<Title> Titles { get; set; }
 
-
-
-
-
         [Serializable]
         [XmlRoot("row")]
         public class Title {

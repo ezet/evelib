@@ -7,12 +7,23 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
         [XmlElement("state")]
         public int State { get; set; }
 
-        // TODO DateTime
+        [XmlIgnore]
+        public DateTime StateTimestamp { get; private set; }
+
         [XmlElement("stateTimestamp")]
-        public string StateTimestamp { get; set; }
+        public string StateTimestampAsString {
+            get { return StateTimestamp.ToString(DateFormat); }
+            set { StateTimestamp = DateTime.ParseExact(value, DateFormat, null); }
+        }
+
+        [XmlIgnore]
+        public DateTime OnlineTimestamp { get; private set; }
 
         [XmlElement("onlineTimestamp")]
-        public string OnlineTimestamp { get; set; }
+        public string OnlineTimestampAsString {
+            get { return OnlineTimestamp.ToString(DateFormat); }
+            set { OnlineTimestamp = DateTime.ParseExact(value, DateFormat, null); }
+        }
 
         [XmlElement("generalSettings")]
         public GeneralSetting GeneralSettings { get; set; }
@@ -38,7 +49,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
         }
 
         public class CombatSetting {
-            
+            // TODO Implement CombatSetting
         }
         
         [Serializable]

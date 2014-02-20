@@ -58,9 +58,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("bid")]
             public int Bid { get; set; }
 
-            // TODO DateTime
+            [XmlIgnore]
+            public DateTime IssuedDate { get; private set; }
+
             [XmlAttribute("issued")]
-            public string Issued { get; set; }
+            public string IssuedDateAsString {
+                get { return IssuedDate.ToString(DateFormat); }
+                set { IssuedDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
         }
     }

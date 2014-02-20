@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Core {
@@ -24,8 +23,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
 
             [XmlAttribute("description")]
             public string Description { get; set; }
-
-            
         }
 
         [Serializable]

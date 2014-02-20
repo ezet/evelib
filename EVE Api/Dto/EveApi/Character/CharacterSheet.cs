@@ -3,12 +3,11 @@ using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
-
-    [Serializable()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [Serializable]
+    [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
-    public partial class CharacterSheet : XmlResult {
+    public class CharacterSheet : XmlResult {
 
         [XmlElement("characterID")]
         public long CharacterId { get; set; }
@@ -16,8 +15,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlElement("name")]
         public string Name { get; set; }
 
+        [XmlIgnore]
+        public DateTime DateOfBirth { get; private set; }
+
         [XmlElement("DoB")]
-        public string DateOfBirth { get; set; }
+        public string DateOfBirthAsString {
+            get { return DateOfBirth.ToString(DateFormat); }
+            set { DateOfBirth = DateTime.ParseExact(value, DateFormat, null); }
+        }
 
         [XmlElement("race")]
         public string Race { get; set; }
@@ -64,6 +69,10 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     }
 
 
+    [Serializable]
+    [System.Diagnostics.DebuggerStepThroughAttribute]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [XmlType(AnonymousType = true)]
     public class Implants {
 
         [XmlElement("memoryBonus")]
@@ -84,7 +93,10 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     }
 
 
-
+    [Serializable]
+    [System.Diagnostics.DebuggerStepThroughAttribute]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [XmlType(AnonymousType = true)]
     public class Implant {
 
         [XmlElement("augmentatorName")]
@@ -96,9 +108,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     }
 
 
-
-    [Serializable()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [Serializable]
+    [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
     public class Attributes {
@@ -121,7 +132,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     }
 
 
-
     [Serializable]
     [XmlRoot("row")]
     public class Skill {
@@ -129,38 +139,20 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlAttribute("typeID")]
         public long TypeId { get; set; }
 
-        [XmlIgnore()]
-        public bool typeIDFieldSpecified;
-
         [XmlAttribute("skillpoints")]
         public int Skillpoints { get; set; }
-
-        [XmlIgnore()]
-        public bool skillpointsFieldSpecified;
 
         [XmlAttribute("level")]
         public int Level { get; set; }
 
-        [XmlIgnore()]
-        public bool levelFieldSpecified;
-
         [XmlAttribute("published")]
         public int Published { get; set; }
-
-        [XmlIgnore()]
-        public bool publishedFieldSpecified;
 
         [XmlAttribute("certificateID")]
         public long CertificateId { get; set; }
 
-        [XmlIgnore()]
-        public bool certificateIDFieldSpecified;
-
         [XmlAttribute("roleID")]
         public long RoleId { get; set; }
-
-        [XmlIgnore()]
-        public bool roleIDFieldSpecified;
 
         [XmlAttribute("roleName")]
         public string RoleName { get; set; }
@@ -168,12 +160,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlAttribute("titleID")]
         public long TitleId { get; set; }
 
-        [XmlIgnore()]
-        public bool titleIDFieldSpecified;
-
         [XmlAttribute("titleName")]
         public string TitleName { get; set; }
-
 
     }
 }

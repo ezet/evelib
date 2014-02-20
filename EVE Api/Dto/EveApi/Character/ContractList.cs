@@ -47,21 +47,44 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("availability")]
             public AvailabilityType Availability { get; set; }
 
-            // TODO Convert to DateTime
+            [XmlIgnore]
+            public DateTime DateIssued { get; private set; }
+
             [XmlAttribute("dateIssued")]
-            public string DateIssued { get; set; }
+            public string DateIssuedAsString {
+                get { return DateIssued.ToString(DateFormat); }
+                set { DateIssued = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime DateExpired { get; private set; }
             
             [XmlAttribute("dateExpired")]
-            public string DateExpired { get; set; }
+            public string DateExpiredAsString {
+                get { return DateExpired.ToString(DateFormat); }
+                set { DateExpired = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime DateAccepted { get; private set; }
 
             [XmlAttribute("dateAccepted")]
-            public string DateAccepted { get; set; }
+            public string DateAcceptedAsString {
+                get { return DateAccepted.ToString(DateFormat); }
+                set { DateAccepted = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("numDays")]
             public int NumDays { get; set; }
 
+            [XmlIgnore]
+            public DateTime DateCompleted { get; private set; }
+
             [XmlAttribute("dateCompleted")]
-            public string DateCompleted { get; set; }
+            public string DateCompletedAsString {
+                get { return DateCompleted.ToString(DateFormat); }
+                set { DateCompleted = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("price")]
             public decimal Price { get; set; }

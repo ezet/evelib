@@ -37,8 +37,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
         [XmlElement("corporation")]
         public string CorporationName { get; set; }
 
+        [XmlIgnore]
+        public DateTime CorporationDate { get; private set; }
+
         [XmlElement("corporationDate")]
-        public string CorporationDate { get; set; }
+        public string CorporationDateAsString {
+            get { return CorporationDate.ToString(DateFormat); }
+            set { CorporationDate = DateTime.ParseExact(value, DateFormat, null); }
+        }
 
         [XmlElement("allianceID")]
         public long AllianceId { get; set; }
@@ -46,8 +52,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
         [XmlElement("alliance")]
         public string AllianceName { get; set; }
 
+        [XmlIgnore]
+        public DateTime AllianceDate { get; private set; }
+
         [XmlElement("allianceDate")]
-        public string AllianceDate { get; set; }
+        public string AllianceDateAsString {
+            get { return AllianceDate.ToString(DateFormat); }
+            set { AllianceDate = DateTime.ParseExact(value, DateFormat, null); }
+        }
 
         [XmlElement("lastKnownLocation")]
         public string LastKnownLocation { get; set; }
@@ -68,8 +80,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
             [XmlAttribute("corporationID")]
             public long CorporationId { get; set; }
 
+            [XmlIgnore]
+            public DateTime StartDate { get; private set; }
+            
             [XmlAttribute("startDate")]
-            public string StartDate { get; set; }
+            public string StartDateAsString {
+                get { return StartDate.ToString(DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
         }
     }

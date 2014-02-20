@@ -23,9 +23,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Map {
             [XmlAttribute("occupyingFactionName")]
             public string OccupyingFactionName { get; set; }
 
+            public bool Contested { get; private set; }
+
             [XmlAttribute("contested")]
-            public string Contested { get; set; }
-            
+            public string ContestedAsString {
+                get { return Contested.ToString(); }
+                set { Contested = value == "True".ToLower(); }
+            }
+
         }
     }
 

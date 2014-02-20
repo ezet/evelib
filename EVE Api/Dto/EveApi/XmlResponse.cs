@@ -1,25 +1,35 @@
-﻿
+﻿using System;
 using System.Xml.Serialization;
-using eZet.Eve.EveApi;
 
 namespace eZet.Eve.EveApi.Dto.EveApi {
-
 
     [System.SerializableAttribute]
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
-    [XmlRoot("eveapi", Namespace = "", IsNullable = false)]
+    [XmlRoot("eveapi", IsNullable = false)]
     public class XmlResponse<T> where T : XmlResult {
 
+        [XmlIgnore]
+        public DateTime CurrentTime { get; private set; }
+
         [XmlElement("currentTime")]
-        public string CurrentTime { get; set; }
+        public string CurrentTimeAsString {
+            get { return CurrentTime.ToString(XmlResult.DateFormat); }
+            set { CurrentTime = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
+        }
 
         [XmlElement("result")]
         public T Result { get; set; }
 
+        [XmlIgnore]
+        public DateTime CachedUntil { get; private set; }
+
         [XmlElement("cachedUntil")]
-        public string CachedUntil { get; set; }
+        public string CachedUntilAsString {
+            get { return CachedUntil.ToString(XmlResult.DateFormat); }
+            set { CachedUntil = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
+        }
 
         [XmlAttribute("version")]
         public int Version { get; set; }

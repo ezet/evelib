@@ -49,6 +49,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
 
         }
 
+
+        // TODO Implement skilltree
         [Serializable]
         [XmlRoot("row")]
         public class RequiredSkill {

@@ -154,7 +154,7 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void GetStandings() {
             var xml = api.GetStandings();
-            Assert.AreEqual(3009841, xml.Result.CharacterStandings.Standings.First().FromId);
+            Assert.AreEqual(3009841, xml.Result.CharacterStandingsType.Standings.First().FromId);
         }
 
         [TestMethod]

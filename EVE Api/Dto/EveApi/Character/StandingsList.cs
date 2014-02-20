@@ -5,18 +5,17 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     public class StandingsList : XmlResult {
 
         [XmlElement("characterNPCStandings")]
-        public Standing CharacterStandings { get; set; }
+        public StandingType CharacterStandingsType { get; set; }
 
         [XmlElement("corporationNPCStandings")]
-        public Standing CorporationStandings { get; set; }
+        public StandingType CorporationStandingsType { get; set; }
 
 
-        public class Standing {
+        public class StandingType {
 
             [XmlElement("rowset")]
             public XmlRowSet<StandingEntry> Standings { get; set; }
         }
-
 
 
         [Serializable]

@@ -26,12 +26,23 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("endSP")]
             public int EndSp { get; set; }
 
-            // TODO DateTime
+            [XmlIgnore]
+            public DateTime StartTime { get; private set; }
+
             [XmlAttribute("startTime")]
-            public string StartTime { get; set; }
+            public string StartTimeAsString {
+                get { return StartTime.ToString(DateFormat); }
+                set { StartTime = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime EndTime { get; private set; }
 
             [XmlAttribute("endTime")]
-            public string EndTime { get; set; }
+            public string EndTimeAsString {
+                get { return EndTime.ToString(DateFormat); }
+                set { EndTime = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
         }
     }

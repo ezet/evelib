@@ -35,8 +35,5 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
             [XmlAttribute("roleName")]
             public string RoleName { get; set; }
         }
-
-
-
     }
 }

@@ -1,18 +1,31 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Account {
 
-    [System.SerializableAttribute]
+    [SerializableAttribute]
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
     public class AccountStatus : XmlResult {
 
+        [XmlIgnore]
+        public DateTime PaidUntil { get; private set; }
+
         [XmlElement("paidUntil")]
-        public string PaidUntil { get; set; }
+        public string PaidUntilAsString {
+            get { return PaidUntil.ToString(DateFormat); }
+            set { PaidUntil = DateTime.ParseExact(value, DateFormat, null); }
+        }
+
+        [XmlIgnore]
+        public DateTime CreationDate { get; private set; }
 
         [XmlElement("createDate")]
-        public string CreationDate { get; set; }
+        public string CreationDateAsString {
+            get { return CreationDate.ToString(DateFormat); }
+            set { CreationDate = DateTime.ParseExact(value, DateFormat, null); }
+        }
 
         [XmlElement("logonCount")]
         public int LogonCount { get; set; }

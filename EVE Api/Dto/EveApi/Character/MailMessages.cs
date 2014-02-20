@@ -16,9 +16,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("senderID")]
             public long SenderId { get; set; }
 
-            // TODO Convert to DateTime
+            [XmlIgnore]
+            public DateTime SentDate { get; private set; }
+
             [XmlAttribute("sentDate")]
-            public string SentDate { get; set; }
+            public string SentDateAsString {
+                get { return SentDate.ToString(DateFormat); }
+                set { SentDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("title")]
             public string Title { get; set; }

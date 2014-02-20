@@ -11,9 +11,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
         [XmlRoot("row")]
         public class LogEntry {
 
-            // TODO DateTime
+            [XmlIgnore]
+            public DateTime LogTime { get; private set; }
+
             [XmlAttribute("logTime")]
-            public string LogTime { get; set; }
+            public string LogTimeAsString {
+                get { return LogTime.ToString(DateFormat); }
+                set { LogTime = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }

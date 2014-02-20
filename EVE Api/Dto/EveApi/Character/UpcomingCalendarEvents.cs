@@ -19,9 +19,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("ownerName")]
             public string OwnerName { get; set; }
 
-            // TODO Convert to DateTime
+            [XmlIgnore]
+            public DateTime EventDate { get; private set; }
+
             [XmlAttribute("eventDate")]
-            public string EventDate { get; set; }
+            public string EventDateAsString {
+                get { return EventDate.ToString(DateFormat); }
+                set { EventDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("eventTitle")]
             public string EventTitle { get; set; }

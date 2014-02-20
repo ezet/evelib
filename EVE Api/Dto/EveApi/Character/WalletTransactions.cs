@@ -16,8 +16,15 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [Serializable]
         [XmlRoot("row")]
         public class Transaction {
+
+            [XmlIgnore]
+            public DateTime TransactionDate { get; private set; }
+
             [XmlAttribute("transactionDateTime")]
-            public string TransactionDateTime { get; set; }
+            public string TransactionDateAsString {
+                get { return TransactionDate.ToString(DateFormat); }
+                set { TransactionDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("transactionID")]
             public long TransactionId { get; set; }

@@ -17,9 +17,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
             [XmlAttribute("name")]
             public string CharacterName { get; set; }
 
-            // TODO DateTime
+            [XmlIgnore]
+            public DateTime StartDate { get; private set; }
+
             [XmlAttribute("startDateTime")]
-            public string StartDate { get; set; }
+            public string StartDateAsString {
+                get { return StartDate.ToString(DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("baseID")]
             public long BaseId { get; set; }
@@ -30,11 +35,23 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
             [XmlAttribute("title")]
             public string Title { get; set; }
 
-            [XmlAttribute("logonDateTime")]
-            public string LogonDate { get; set; }
+            [XmlIgnore]
+            public DateTime LogonDate { get; private set; }
 
+            [XmlAttribute("logonDateTime")]
+            public string LogonDateAsString {
+                get { return LogonDate.ToString(DateFormat); }
+                set { LogonDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime LogoffDate { get; private set; }
+            
             [XmlAttribute("logoffDateTime")]
-            public string LogoffDate { get; set; }
+            public string LogoffDateAsString {
+                get { return LogoffDate.ToString(DateFormat); }
+                set { LogoffDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("locationID")]
             public long LocationId { get; set; }

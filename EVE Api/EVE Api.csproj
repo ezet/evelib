@@ -42,15 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dto\EveApi\Account\AllianceData.cs" />
     <Compile Include="Dto\EveApi\Character\AccountBalance.cs" />
     <Compile Include="ApiKey.cs" />
     <Compile Include="Dto\EveApi\Account\AccountStatus.cs" />
     <Compile Include="Dto\EveApi\Account\ApiKeyInfo.cs" />
-    <Compile Include="Dto\EveApi\Account\CharacterCollection.cs" />
+    <Compile Include="Dto\EveApi\Account\CharacterList.cs" />
     <Compile Include="Dto\EveApi\Character\AssetList.cs" />
     <Compile Include="Dto\EveApi\Character\CalendarEventAttendees.cs" />
-    <Compile Include="Dto\EveApi\Character\CharacterInfo.cs" />
+    <Compile Include="Dto\EveApi\Account\CharacterInfo.cs" />
     <Compile Include="Dto\EveApi\Character\CharacterSheet.cs" />
     <Compile Include="Dto\EveApi\Character\ContactList.cs" />
     <Compile Include="Dto\EveApi\Character\ContactNotifications.cs" />

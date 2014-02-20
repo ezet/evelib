@@ -4,15 +4,33 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     public class SkillTraining : XmlResult {
 
-        // TODO DateTime
+        // TODO Convert zone
+        [XmlIgnore]
+        public DateTime CurrentTqTime { get; private set; }
+
         [XmlElement("currentTQTime")]
-        public string CurrentTqTime { get; set; }
+        public string CurrentTqTimeAsString {
+            get { return CurrentTqTime.ToString(DateFormat); }
+            set { CurrentTqTime = DateTime.ParseExact(value, DateFormat, null); }
+        }
+
+        [XmlIgnore]
+        public DateTime EndTime { get; private set; }
 
         [XmlElement("EndTime")]
-        public string EndTime { get; set; }
+        public string EndTimeAsString {
+            get { return EndTime.ToString(DateFormat); }
+            set { EndTime = DateTime.ParseExact(value, DateFormat, null); }
+        }
+
+        [XmlIgnore]
+        public DateTime StartTime { get; private set; }
 
         [XmlElement("StartTime")]
-        public string StartTime { get; set; }
+        public string StartTimeAsString {
+            get { return StartTime.ToString(DateFormat); }
+            set { StartTime = DateTime.ParseExact(value, DateFormat, null); }
+        }
 
         [XmlElement("trainingTypeID")]
         public long TypeId { get; set; }

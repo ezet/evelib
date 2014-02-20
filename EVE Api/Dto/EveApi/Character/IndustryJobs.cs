@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
@@ -102,18 +98,41 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("completedStatus")]
             public CompletedStatusType CompletedStatus { get; set; }
 
-            // TODO DateTime
+            [XmlIgnore]
+            public DateTime InstallTime { get; private set; }
+
             [XmlAttribute("installTime")]
-            public string InstallTime { get; set; }
+            public string InstallTimeAsString {
+                get { return InstallTime.ToString(DateFormat); }
+                set { InstallTime = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime BeginProductionTime { get; private set; }
 
             [XmlAttribute("beginProductionTime")]
-            public string BeginProductionTime { get; set; }
+            public string BeginProductionTimeAsString {
+                get { return BeginProductionTime.ToString(DateFormat); }
+                set { BeginProductionTime = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime EndProductionTime { get; private set; }
 
             [XmlAttribute("endProductionTime")]
-            public string EndProductionTime { get; set; }
+            public string EndProductionTimeAsString {
+                get { return EndProductionTime.ToString(DateFormat); }
+                set { EndProductionTime = DateTime.ParseExact(value, DateFormat, null); }
+            }
+
+            [XmlIgnore]
+            public DateTime PauseProductionTime { get; private set; }
 
             [XmlAttribute("pauseProductionTime")]
-            public string PauseProductionTime { get; set; }
+            public string PauseProductionTimeAsString {
+                get { return PauseProductionTime.ToString(DateFormat); }
+                set { PauseProductionTime = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
         }
 

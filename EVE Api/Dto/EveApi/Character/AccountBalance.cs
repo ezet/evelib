@@ -10,7 +10,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
     }
 
-
     [Serializable]
     [XmlRoot("row")]
     public class AccountBalanceRow {

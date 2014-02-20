@@ -22,9 +22,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
             [XmlAttribute("creatorID")]
             public long CreatorId { get; set; }
 
-            // TODO DateTime
+            [XmlIgnore]
+            public DateTime CreatedDate { get; set; }
+
             [XmlAttribute("created")]
-            public string Created { get; set; }
+            public string CreatedDateAsString {
+                get { return CreatedDate.ToString(DateFormat); }
+                set { CreatedDate = DateTime.ParseExact(value, DateFormat, null); }
+            }
         }
 
     }

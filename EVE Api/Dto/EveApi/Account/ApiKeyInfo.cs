@@ -1,12 +1,10 @@
-﻿using System.Xml.Serialization;
-using eZet.Eve.EveApi;
-using eZet.Eve.EveApi.Dto.EveApi.Character;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Account {
 
-
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [SerializableAttribute]
+    [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
     public class ApiKeyInfo : XmlResult {
@@ -33,8 +31,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Account {
         [XmlAttribute("type")]
         public string Type { get; set; }
 
+        [XmlIgnore]
+        public DateTime Expires { get; private set; }
+
         [XmlAttribute("expires")]
-        public string Expires { get; set; }
+        public string ExpiresAsString {
+            get { return Expires.ToString(XmlResult.DateFormat); }
+            set { Expires = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
+        }
 
     }
 }

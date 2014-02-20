@@ -7,6 +7,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlElement("rowset")]
         public XmlRowSet<Contact> Contacts { get; set; }
 
+
         [Serializable]
         [XmlRoot("row")]
         public class Contact {

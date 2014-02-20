@@ -10,9 +10,14 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
         [XmlElement("factionName")]
         public string FactionName { get; set; }
 
-        // TODO DateTime
+        [XmlIgnore]
+        public DateTime EnlistedDate { get; set; }
+
         [XmlElement("enlisted")]
-        public string Enlisted { get; set; }
+        public string EnlistedDateAsString {
+            get { return EnlistedDate.ToString(DateFormat); }
+            set { EnlistedDate = DateTime.ParseExact(value, DateFormat, null); }
+        }
 
         [XmlElement("pilots")]
         public int Pilots { get; set; }
@@ -37,7 +42,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
 
         [XmlElement("victoryPointsTotal")]
         public int VictoryPointsTotal { get; set; }
-
 
     }
 }

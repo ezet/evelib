@@ -10,10 +10,15 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [Serializable]
         [XmlRoot("row")]
         public class JournalEntry {
+
+            [XmlIgnore]
+            public DateTime Date { get; private set; }
             
-            // TODO Convert to DateTime
             [XmlAttribute("date")]
-            public string Date { get; set; }
+            public string DateAsString {
+                get { return Date.ToString(DateFormat); }
+                set { Date = DateTime.ParseExact(value, DateFormat, null); }
+            }
 
             [XmlAttribute("refID")]
             public long RefId { get; set; }
@@ -47,7 +52,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             
             [XmlAttribute("reason")]
             public string Reason { get; set; }
-
            
             // TODO Convert to long
             [XmlAttribute("taxReceiverID")]

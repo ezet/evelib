@@ -8,10 +8,10 @@ namespace eZet.Eve.EveApi.Entity {
             
         }
 
-        public XmlResponse<CharacterCollection> GetCharacterList() {
+        public XmlResponse<CharacterList> GetCharacterList() {
             const string uri = "/account/Characters.xml.aspx";
             var postString = RequestHelper.GeneratePostString(ApiKey);
-            var response = request(uri, new CharacterCollection(), postString);
+            var response = request(uri, new CharacterList(), postString);
             response.ApiKey = ApiKey;
             return response;
         }

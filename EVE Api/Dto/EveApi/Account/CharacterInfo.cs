@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
-using eZet.Eve.EveApi;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Character {
+namespace eZet.Eve.EveApi.Dto.EveApi.Account {
 
     [Serializable]
     [XmlRoot("row")]
@@ -23,8 +22,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlIgnore]
         public ApiKey ApiKey { get; set; }
 
-        public Eve.EveApi.Entity.Character Load() {
-            return new Eve.EveApi.Entity.Character(ApiKey, CharacterId, CorporationId);
+        public Entity.Character Load() {
+            return new Entity.Character(ApiKey, CharacterId, CorporationId);
         }
     }
 

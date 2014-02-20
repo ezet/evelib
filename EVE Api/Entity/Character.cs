@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using eZet.Eve.EveApi.Dto.EveApi;
+﻿using eZet.Eve.EveApi.Dto.EveApi;
 using eZet.Eve.EveApi.Dto.EveApi.Character;
 using System;
 
