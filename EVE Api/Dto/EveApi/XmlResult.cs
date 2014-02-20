@@ -20,7 +20,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
 
         }
 
-        protected void initXml(XmlReader reader) {
+        protected void setRoot(XmlReader reader) {
             root = XElement.Load(reader.ReadSubtree());
             list = root.Descendants();
         }

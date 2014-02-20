@@ -28,7 +28,7 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void GetContactList() {
             var xml = api.GetContactList();
-            Assert.AreEqual(797400947, xml.Result.PersonalContacts.First().ContactId);
+            Assert.AreEqual(797400947, xml.Result.CorporationContacts.First().ContactId);
         }
 
         [TestMethod]
@@ -112,7 +112,7 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void GetMemberSecurityLog() {
             var xml = api.GetMemberSecurityLog();
-            Assert.AreEqual(1234567890, xml.Result.LogEntries.First().CharacterId);
+            Assert.AreEqual(1234567890, xml.Result.RoleHistory.First().CharacterId);
         }
 
         [TestMethod]

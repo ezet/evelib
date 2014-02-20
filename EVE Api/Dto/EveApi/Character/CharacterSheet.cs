@@ -89,7 +89,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         }
 
         public void ReadXml(XmlReader reader) {
-            initXml(reader);
+            setRoot(reader);
             CharacterId = getLong("characterID");
             Name = getString("name");
             DateOfBirthAsString = getString("DoB");

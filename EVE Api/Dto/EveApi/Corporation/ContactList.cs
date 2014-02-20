@@ -3,11 +3,8 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Character {
+namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
     public class ContactList : XmlResult, IXmlSerializable {
-
-        [XmlElement("rowset")]
-        public XmlRowSet<Contact> PersonalContacts { get; set; }
 
         [XmlElement("rowset")]
         public XmlRowSet<Contact> CorporationContacts { get; set; }
@@ -45,7 +42,6 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         }
 
         public void ReadXml(XmlReader reader) {
-            PersonalContacts = deserializeRowSet(reader, new Contact());
             CorporationContacts = deserializeRowSet(reader, new Contact());
             AllianceContacts = deserializeRowSet(reader, new Contact());
         }
