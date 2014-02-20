@@ -51,11 +51,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AccountDeserializeTest.cs" />
     <Compile Include="CharacterTest.cs" />
     <Compile Include="CoreTest.cs" />
     <Compile Include="Corporation_DeserializeTest.cs" />
     <Compile Include="MapTest.cs" />
-    <Compile Include="MockRequestHelper.cs" />
+    <Compile Include="TestRequestHelper.cs" />
     <Compile Include="MockSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +67,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Xml\account\Characters.xml" />
+    <Content Include="Xml\account\AccountStatus.xml" />
+    <Content Include="Xml\account\APIKeyInfo.xml" />
     <Content Include="Xml\char\AssetList.xml" />
     <Content Include="Xml\char\Contracts.xml" />
     <Content Include="Xml\corp\AccountBalance.xml" />

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 
 namespace eZet.Eve.EveApi.Test {
-    public class MockRequestHelper : IRequestHelper {
+    public class TestRequestHelper : IRequestHelper {
         public string Request(string uri, string postString) {
             var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             var relPath = uri.Substring(uri.Remove(uri.LastIndexOf("/")).LastIndexOf("/"));
