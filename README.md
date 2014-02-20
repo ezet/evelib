@@ -1,4 +1,4 @@
 eve-api
 =======
 
-API written in .NET for Eve Online API v2.
+Wrapper for CCPs Eve Online API and eve-central.com Market API.
