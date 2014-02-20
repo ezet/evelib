@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Schema;
 using System.Xml.Serialization;
+using eZet.Eve.EveApi.Dto.EveApi.Corporation;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
-    public class CharacterSheet : XmlResult {
+
+    public class CharacterSheet : XmlResult, IXmlSerializable {
 
         [XmlElement("characterID")]
         public long CharacterId { get; set; }
@@ -64,15 +68,66 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         public Attributes Attributes { get; set; }
 
         [XmlElement("rowset")]
-        public XmlRowSet<Skill>[] Skills { get; set; }
+        public XmlRowSet<Skill> Skills { get; set; }
 
+        [XmlElement("rowset")]
+        public XmlRowSet<Certificate> Certificates { get; set; }
+
+        [XmlElement("rowset")]
+        public XmlRowSet<Role> CorporationRoles { get; set; }
+
+        [XmlElement("rowset")]
+        public XmlRowSet<Role> CorporationRolesAtHq { get; set; }
+
+        [XmlElement("rowset")]
+        public XmlRowSet<Role> CorporationRolesAtBase { get; set; }
+
+        [XmlElement("rowset")]
+        public XmlRowSet<Role> CorporationRolesAtOther { get; set; }
+
+        [XmlElement("rowset")]
+        public XmlRowSet<Title> CorporationTitles { get; set; }
+
+
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader) {
+            initXml(reader);
+            CharacterId = getLong("characterID");
+            Name = getString("name");
+            DateOfBirthAsString = getString("DoB");
+            Race = getString("race");
+            Bloodline = getString("bloodLine");
+            Ancestry = getString("ancestry");
+            Gender = getString("gender");
+            CorporationName = getString("corporationName");
+            CorporationId = getLong("corporationID");
+            AllianceName = getString("allianceName");
+            AllianceId = getLong("allianceID");
+            CloneName = getString("cloneName");
+            CloneSkillPoints = getInt("cloneSkillPoints");
+            //Balance = getDecimal("balance");
+            AttributeEnhancers = deserialize(getReader("attributeEnhancers"), new Implants());
+            Skills = deserializeRowSet(getRowSetReader("skills"), new Skill());
+            Certificates = deserializeRowSet(getRowSetReader("certificates"), new Certificate());
+            CorporationRoles = deserializeRowSet(getRowSetReader("corporationRoles"), new Role());
+            CorporationRolesAtHq = deserializeRowSet(getRowSetReader("corporationRolesAtHQ"), new Role());
+            CorporationRolesAtBase = deserializeRowSet(getRowSetReader("corporationRolesAtBase"), new Role());
+            CorporationRolesAtOther = deserializeRowSet(getRowSetReader("corporationRolesAtOther"), new Role());
+            CorporationTitles = deserializeRowSet(getRowSetReader("corporationTitles"), new Title());
+        }
+
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
+        }
     }
 
 
     [Serializable]
     [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+    [XmlRoot("attributeEnhancers")]
     public class Implants {
 
         [XmlElement("memoryBonus")]
@@ -148,8 +203,20 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlAttribute("published")]
         public int Published { get; set; }
 
+    }
+
+    [Serializable]
+    [XmlRoot("row")]
+    public class Certificate {
+
         [XmlAttribute("certificateID")]
         public long CertificateId { get; set; }
+
+    }
+
+    [Serializable]
+    [XmlRoot("row")]
+    public class Role {
 
         [XmlAttribute("roleID")]
         public long RoleId { get; set; }
@@ -157,11 +224,17 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlAttribute("roleName")]
         public string RoleName { get; set; }
 
+    }
+
+    [Serializable]
+    [XmlRoot("row")]
+    public class Title {
+
         [XmlAttribute("titleID")]
         public long TitleId { get; set; }
 
         [XmlAttribute("titleName")]
         public string TitleName { get; set; }
-
     }
+
 }

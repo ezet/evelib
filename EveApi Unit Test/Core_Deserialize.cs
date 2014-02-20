@@ -102,9 +102,8 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void TestCallList() {
             var xml = api.Core.GetCallList();
-            Assert.IsNotNull(xml.Result.CallGroups);
+            Assert.IsNotNull(xml.Result.CallGroups.RowSetMeta.Key);
+            Assert.IsNotNull(xml.Result.Calls.RowSetMeta.Key);
         }
-
-
     }
 }

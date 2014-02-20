@@ -2,12 +2,13 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Core {
-    public class CallList : XmlResult {
+    public class CallList : XmlResult, IXmlSerializable {
 
         [XmlElement("rowset")]
         public XmlRowSet<CallGroup> CallGroups { get; set; }
 
-        [XmlElement("rowset2")]
+
+        [XmlElement("rowset")]
         public XmlRowSet<Call> Calls { get; set; }
 
 
@@ -46,6 +47,18 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Core {
             
         }
 
+        public System.Xml.Schema.XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(System.Xml.XmlReader reader) {
+            CallGroups = deserializeRowSet(reader, new CallGroup());
+            Calls = deserializeRowSet(reader, new Call());
+        }
+
+        public void WriteXml(System.Xml.XmlWriter writer) {
+            throw new NotImplementedException();
+        }
     }
 
 }

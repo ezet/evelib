@@ -1,9 +1,10 @@
-﻿using System.Linq;
-using eZet.Eve.EveApi.Dto.EveApi;
+﻿using System.Xml.Serialization;
 using eZet.Eve.EveApi.Entity;
 using Character = eZet.Eve.EveApi.Entity.Character;
 
 namespace eZet.Eve.EveApi {
+
+ 
     public class EveApi {
 
         public ApiKey ApiKey { get; private set; }       
@@ -24,7 +25,10 @@ namespace eZet.Eve.EveApi {
 
 
         static public void Main() {
-  
+            var api = new EveApi();
+            var xml = api.Core.GetErrorList();
+            return;
+
         }
 
         public EveApi() {

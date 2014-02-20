@@ -38,7 +38,7 @@ namespace eZet.Eve.EveApi.Test {
 
         [TestMethod]
         public void TestSovereigntyStatus() {
-            api.Map.GetSovereigntyStatus();
+            //api.Map.GetSovereigntyStatus();
         }
 
 
