@@ -3,11 +3,12 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Character {
+namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
     public class StandingsList : XmlResult {
 
-        [XmlElement("characterNPCStandings")]
-        public StandingType CharacterStandings { get; set; }
+        [XmlElement("corporationNPCStandings")]
+        public StandingType CorporationStandings { get; set; }
+
 
         public class StandingType : XmlResult, IXmlSerializable {
 

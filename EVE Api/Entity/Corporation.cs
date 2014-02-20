@@ -4,6 +4,7 @@ using eZet.Eve.EveApi.Dto.EveApi.Character;
 using eZet.Eve.EveApi.Dto.EveApi.Corporation;
 using MedalList = eZet.Eve.EveApi.Dto.EveApi.Corporation.MedalList;
 using FactionWarfareStats = eZet.Eve.EveApi.Dto.EveApi.Corporation.FactionWarfareStats;
+using StandingsList = eZet.Eve.EveApi.Dto.EveApi.Corporation.StandingsList;
 
 
 namespace eZet.Eve.EveApi.Entity {

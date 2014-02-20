@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.Eve.EveApi.Dto.EveApi.Corporation;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
     [Serializable]
-
     public class CharacterSheet : XmlResult, IXmlSerializable {
 
         [XmlElement("characterID")]
@@ -108,7 +103,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             AllianceId = getLong("allianceID");
             CloneName = getString("cloneName");
             CloneSkillPoints = getInt("cloneSkillPoints");
-            //Balance = getDecimal("balance");
+            Balance = getDecimal("balance");
             AttributeEnhancers = deserialize(getReader("attributeEnhancers"), new Implants());
             Skills = deserializeRowSet(getRowSetReader("skills"), new Skill());
             Certificates = deserializeRowSet(getRowSetReader("certificates"), new Certificate());

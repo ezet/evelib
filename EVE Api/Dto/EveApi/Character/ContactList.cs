@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
-    public class ContactList : XmlResult {
+    public class ContactList : XmlResult, IXmlSerializable {
 
         [XmlElement("rowset")]
-        public XmlRowSet<Contact> Contacts { get; set; }
+        public XmlRowSet<Contact> PersonalContacts { get; set; }
+
+        [XmlElement("rowset")]
+        public XmlRowSet<Contact> CorporationContacts { get; set; }
+
+        [XmlElement("rowset")]
+        public XmlRowSet<Contact> AllianceContacts { get; set; }
 
 
         [Serializable]
@@ -30,6 +39,20 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
                 set { InWatchlist = (value.ToLower() == "true"); }
             }
 
+        }
+
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader) {
+            PersonalContacts = deserializeRowSet(reader, new Contact());
+            CorporationContacts = deserializeRowSet(reader, new Contact());
+            AllianceContacts = deserializeRowSet(reader, new Contact());
+        }
+
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
         }
     }
 }

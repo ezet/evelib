@@ -58,6 +58,7 @@
     <Compile Include="Dto\EveApi\Character\ContractList.cs" />
     <Compile Include="Dto\EveApi\Character\FactionWarfareStats.cs" />
     <Compile Include="Dto\EveApi\Character\IndustryJobs.cs" />
+    <Compile Include="Dto\EveApi\Corporation\StandingsList.cs" />
     <Compile Include="Dto\EveApi\Corporation\StarbaseDetails.cs" />
     <Compile Include="Dto\EveApi\Character\WalletJournal.cs" />
     <Compile Include="Dto\EveApi\Character\KillLog.cs" />

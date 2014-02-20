@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
@@ -10,7 +12,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
 
         [Serializable]
         [XmlRoot("row")]
-        public class Kill {
+        public class Kill : XmlResult, IXmlSerializable {
 
             [XmlAttribute("killID")]
             public long KillId { get; set; }
@@ -36,9 +38,21 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlElement("rowset")]
             public XmlRowSet<Attacker> Attackers { get; set; }
 
-            [XmlElement("rowset2")]
+            [XmlElement("rowset")]
             public XmlRowSet<Item> Items { get; set; }
 
+            public XmlSchema GetSchema() {
+                throw new NotImplementedException();
+            }
+
+            public void ReadXml(XmlReader reader) {
+                Attackers = deserializeRowSet(reader, new Attacker());
+                Items = deserializeRowSet(reader, new Item());
+            }
+
+            public void WriteXml(XmlWriter writer) {
+                throw new NotImplementedException();
+            }
         }
 
         [Serializable]

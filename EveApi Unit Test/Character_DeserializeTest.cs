@@ -40,7 +40,9 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void GetContactList() {
             var xml = api.GetContactList();
-            Assert.AreEqual(3010913, xml.Result.Contacts.First().ContactId);
+            Assert.AreEqual(3010913, xml.Result.PersonalContacts.First().ContactId);
+            Assert.AreEqual(797400947, xml.Result.CorporationContacts.First().ContactId);
+            Assert.AreEqual(797400947, xml.Result.AllianceContacts.First().ContactId);
         }
 
         [TestMethod]
@@ -81,6 +83,7 @@ namespace eZet.Eve.EveApi.Test {
 
         [TestMethod]
         public void GetKillLog() {
+            // TODO Something strange with RowSets here
             var xml = api.GetKillLog();
             Assert.AreEqual(63, xml.Result.Kills.First().KillId);
         }
@@ -154,7 +157,7 @@ namespace eZet.Eve.EveApi.Test {
         [TestMethod]
         public void GetStandings() {
             var xml = api.GetStandings();
-            Assert.AreEqual(3009841, xml.Result.CharacterStandingsType.Standings.First().FromId);
+            Assert.AreEqual(3009841, xml.Result.CharacterStandings.Agents.First().FromId);
         }
 
         [TestMethod]

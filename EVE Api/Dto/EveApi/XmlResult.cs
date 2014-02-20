@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -64,7 +64,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi {
         }
 
         protected decimal getDecimal(string name) {
-            return decimal.Parse(list.First(x => x.Name == name).Value);
+            return decimal.Parse(list.First(x => x.Name == name).Value, NumberStyles.AllowDecimalPoint);
         }
 
     }
