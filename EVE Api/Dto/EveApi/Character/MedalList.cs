@@ -23,8 +23,9 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("issuerID")]
             public long IssuerId { get; set; }
 
+            // TODO DateTime
             [XmlAttribute("issued")]
-            public DateTime Issued { get; set; }
+            public string Issued { get; set; }
 
             [XmlAttribute("corporationID")]
             public long CorporationId { get; set; }

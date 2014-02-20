@@ -20,8 +20,9 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("senderName")]
             public string SenderName { get; set; }
 
+            // TODO DateTime
             [XmlAttribute("sentDate")]
-            public DateTime SentDate { get; set; }
+            public string SentDate { get; set; }
 
             [XmlAttribute("messageData")]
             public string MessageData { get; set; }

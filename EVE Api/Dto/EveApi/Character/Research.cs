@@ -17,8 +17,9 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             [XmlAttribute("skillTypeID")]
             public long SkillTypeId { get; set; }
 
+            // TODO DateTime
             [XmlAttribute("researchStartDate")]
-            public DateTime StartDate { get; set; }
+            public string StartDate { get; set; }
 
             [XmlAttribute("pointsPerDay")]
             public decimal PointsPerDay { get; set; }

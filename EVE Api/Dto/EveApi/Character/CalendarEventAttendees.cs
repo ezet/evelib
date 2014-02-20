@@ -4,10 +4,13 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EveApi.Dto.EveApi.Character {
     public class CalendarEventAttendees : XmlResult {
 
+        [XmlElement("rowset")]
+        public XmlRowSet<Attendee> Attendees { get; set; }
 
+            
         [Serializable]
         [XmlRoot("row")]
-        public class Attendee {
+            public class Attendee {
             
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
@@ -16,9 +19,8 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
             public string CharacterName { get; set; }
 
             [XmlAttribute("response")]
-            public EventResponse EventResponse { get; set; }
+            public EventResponse Response { get; set; }
         }
-
 
     }
 }

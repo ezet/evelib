@@ -92,16 +92,5 @@ namespace eZet.Eve.EveApi.Entity {
             const string path = "/api/calllist.xml.aspx";
             return request(path, new CallList());
         }
-
-
-
-
-
-
-
-
-
-
-
     }
 }

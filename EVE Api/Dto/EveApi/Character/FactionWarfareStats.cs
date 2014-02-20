@@ -10,8 +10,10 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Character {
         [XmlElement("factionName")]
         public string FactionName { get; set; }
 
+
+        // TODO DateTime
         [XmlElement("enlisted")]
-        public DateTime Enlisted { get; set; }
+        public string Enlisted { get; set; }
 
         [XmlElement("currentRank")]
         public int CurrentRank { get; set; }

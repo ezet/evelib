@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<eveapi version="2">
+  <currentTime>2008-08-22 12:00:16</currentTime>
+  <result>
+    <rowset name="transactions" key="refID"
+     columns="date,refID,refTypeID,ownerName1,ownerID1,ownerName2,ownerID2,argName1,argID1,amount,balance,reason, taxReceiverID, taxAmount">
+      <row date="2008-08-22 03:36:00" refID="1578932679" refTypeID="54" ownerName1="corpslave"
+           ownerID1="150337897" ownerName2="Secure Commerce Commission" ownerID2="1000132"
+           argName1="" argID1="0" amount="-8396.99" balance="576336941.61" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-22 03:36:00" refID="1578932678" refTypeID="2" ownerName1="anonymous"
+           ownerID1="30497503" ownerName2="corpslave" ownerID2="150337897"
+           argName1="725524391" argID1="0" amount="1399498.50" balance="576345338.60" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-21 22:18:00" refID="1578164958" refTypeID="42" ownerName1="corpslave"
+           ownerID1="150337897" ownerName2="" ownerID2="0"
+           argName1="" argID1="0" amount="-152939.40" balance="574647640.10" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-21 21:42:00" refID="1578064292" refTypeID="46" ownerName1="corpslave"
+           ownerID1="150337897" ownerName2="Secure Commerce Commission" ownerID2="1000132"
+           argName1="" argID1="1" amount="-100.00" balance="576279220.79" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-21 08:35:00" refID="1576226363" refTypeID="63" ownerName1="corpslave"
+           ownerID1="150337897" ownerName2="Secure Commerce Commission" ownerID2="1000132"
+           argName1="9956913" argID1="0" amount="-20200000.00" balance="573681668.81" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-21 00:12:00" refID="1575178039" refTypeID="64" ownerName1="Secure Commerce Commission"
+           ownerID1="1000132" ownerName2="corpslave" ownerID2="150337897"
+           argName1="9956913" argID1="0" amount="5300000.00" balance="612310142.18" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-20 13:10:00" refID="1575178032" refTypeID="85" ownerName1="CONCORD"
+           ownerID1="1000125" ownerName2="anonymous" ownerID2="173993711" argName1="Jita"
+           argID1="30001660" amount="135000.00" balance="609292267.52" reason="29200:15," taxReceiverID="1734917694" taxAmount="15000.00" />
+      <row date="2008-08-20 05:19:00" refID="1572531631" refTypeID="34" ownerName1="anonymous"
+           ownerID1="30497503" ownerName2="corpslave" ownerID2="150337897"
+           argName1="" argID1="30497503" amount="911000.00" balance="611148267.52" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-20 05:19:00" refID="1572531630" refTypeID="33" ownerName1="anonymous"
+           ownerID1="30497503" ownerName2="corpslave" ownerID2="150337897"
+           argName1="" argID1="30497503" amount="945000.00" balance="610237267.52" reason="" taxReceiverID="" taxAmount="" />
+      <row date="2008-08-20 04:15:00" refID="1572401485" refTypeID="15" ownerName1="corpslave"
+           ownerID1="150337897" ownerName2="Federal Intelligence Office" ownerID2="1000121"
+           argName1="" argID1="1" amount="-504.00" balance="597984259.02" reason="" taxReceiverID="" taxAmount="" />
+    </rowset>
+  </result>
+  <cachedUntil>2008-08-22 12:15:16</cachedUntil>
+</eveapi>

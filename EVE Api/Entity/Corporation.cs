@@ -65,9 +65,9 @@ namespace eZet.Eve.EveApi.Entity {
             return request(relPath, new ContractItems(), postString);
         }
 
-        public XmlResponse<ContractBids> GetContractBids(long contractId) {
+        public XmlResponse<ContractBids> GetContractBids() {
             const string relPath = "/corp/ContractBids.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "contractID", contractId);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new ContractBids(), postString);
         }
 

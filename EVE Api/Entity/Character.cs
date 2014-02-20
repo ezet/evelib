@@ -1,4 +1,5 @@
-﻿using eZet.Eve.EveApi.Dto.EveApi;
+﻿using System.Data.Common;
+using eZet.Eve.EveApi.Dto.EveApi;
 using eZet.Eve.EveApi.Dto.EveApi.Character;
 using System;
 
@@ -88,7 +89,7 @@ namespace eZet.Eve.EveApi.Entity {
             return request(relPath, new ContractItems(), postString);
         }
 
-        public XmlResponse<ContractBids> GetContractBids() {
+        public XmlResponse<ContractBids> GetContractBids(long id) {
             const string relPath = "/char/ContractBids.xml.aspx";
             var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new ContractBids(), postString);
@@ -141,9 +142,10 @@ namespace eZet.Eve.EveApi.Entity {
             return request(relPath, new MailMessages(), postString);
         }
 
-        public XmlResponse<MarketOrders> GetMarketorders() {
+        public XmlResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
             const string relPath = "/char/MarketOrders.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
+            var postString = (orderId == 0) ? RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId)
+           : RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "orderID", orderId);
             return request(relPath, new MarketOrders(), postString);
         }
 
@@ -161,48 +163,49 @@ namespace eZet.Eve.EveApi.Entity {
 
 
 
-        public XmlResponse<NotificationTexts> GetNotificationTexts() {
+        public XmlResponse<NotificationTexts> GetNotificationTexts(params long[] ids) {
             const string relPath = "/char/NotificationTexts.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey);
+            var idList = string.Join(",", ids);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "IDs", idList);
             return request(relPath, new NotificationTexts(), postString);
         }
 
         public XmlResponse<Research> GetResearch() {
             const string relPath = "/char/Research.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new Research(), postString);
         }
 
         public XmlResponse<SkillTraining> GetSkillTraining() {
             const string relPath = "/char/SkillInTraining.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new SkillTraining(), postString);
         }
 
         public XmlResponse<SkillQueue> GetSkillQueue() {
             const string relPath = "/char/SkillQueue.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new SkillQueue(), postString);
         }
 
         public XmlResponse<StandingsList> GetStandings() {
             const string relPath = "/char/Standings.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new StandingsList(), postString);
         }
 
 
         public XmlResponse<UpcomingCalendarEvents> GetUpcomingCalendarEvents() {
             const string relPath = "/char/UpcomingCalendarEvents.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new UpcomingCalendarEvents(), postString);
         }
 
         public XmlResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
             const string relPath = "/char/WalletJournal.xml.aspx";
             var postString = fromId == 0
-                ? RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey, "rowCount", count)
-                : RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey, "rowCount", count,
+                ? RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "rowCount", count)
+                : RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "rowCount", count,
                     "fromID", fromId);
             return request(relPath, new WalletJournal(), postString);
         }
@@ -210,7 +213,7 @@ namespace eZet.Eve.EveApi.Entity {
 
         public XmlResponse<WalletTransactions> GetWalletTransactions() {
             const string relPath = "/char/WalletTransactions.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId, "accountKey", AccountKey);
+            var postString = RequestHelper.GeneratePostString(ApiKey, "characterId", CharacterId);
             return request(relPath, new WalletTransactions(), postString);
         }
 

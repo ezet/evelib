@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.Eve.EveApi.Test {
 
     [TestClass]
-    public class CoreTest {
+    public class Core_Deserialize {
 
         private readonly EveApi api = new EveApi();
 

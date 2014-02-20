@@ -1,0 +1,13 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<eveapi version="2">
+  <currentTime>2011-01-18 13:30:20</currentTime>
+  <result>
+    <rowset name="upcomingEvents" key="eventID" columns="eventID,ownerID,ownerName,eventDate,eventTitle,duration,
+importance,response,eventText">
+      <row eventID="93264" ownerID="1" ownerName="" eventDate="2011-03-26 09:00:00" eventTitle="EVE Online Fanfest 2011"
+duration="0" importance="0" response="Undecided" eventText="Join us for &lt;a href=&quot;http://fanfest.eveonline.com/&quot;&gt;
+EVE Online's Fanfest 2011&lt;/a&gt;!" />
+    </rowset>
+  </result>
+  <cachedUntil>2011-01-18 14:26:06</cachedUntil>
+</eveapi>
