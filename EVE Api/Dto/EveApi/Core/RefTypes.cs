@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Core {
+namespace eZet.Eve.EolNet.Dto.EveApi.Core {
     public class ReferenceTypes : XmlResult {
 
         [XmlElement("rowset")]

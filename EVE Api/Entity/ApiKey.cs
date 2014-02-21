@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using eZet.Eve.EveApi.Dto.EveApi;
-using eZet.Eve.EveApi.Dto.EveApi.Account;
-using eZet.Eve.EveApi.Entity;
+using System.Threading.Tasks;
+using eZet.Eve.EolNet.Dto.EveApi;
+using eZet.Eve.EolNet.Dto.EveApi.Account;
 
-namespace eZet.Eve.EveApi {
+namespace eZet.Eve.EolNet.Entity {
     public class ApiKey : BaseEntity {
+
+        protected override sealed string UriBase { get; set; }
+
+        internal ApiKey() {
+            UriBase = "https://api.eveonline.com";
+        }
 
         public long KeyId { get; private set; }
 
@@ -30,7 +36,7 @@ namespace eZet.Eve.EveApi {
                 if (_type == null)
                     load();
                 return _type;
-                }
+            }
             private set { _type = value; }
         }
 
@@ -65,6 +71,35 @@ namespace eZet.Eve.EveApi {
             const string uri = "/account/APIKeyInfo.xml.aspx";
             var postString = RequestHelper.GeneratePostString(this);
             return request(uri, new ApiKeyInfo(), postString);
+        }
+
+        public async Task<XmlResponse<ApiKeyInfo>> GetInfoAsync(IProgress<int> progress = null) {
+            var result = await Task.Run(() => GetInfo());
+            return result;
+        }
+
+        public XmlResponse<CharacterList> GetCharacterList() {
+            const string uri = "/account/Characters.xml.aspx";
+            var postString = RequestHelper.GeneratePostString(this);
+            var response = request(uri, new CharacterList(), postString);
+            response.ApiKey = this;
+            return response;
+        }
+
+        public async Task<XmlResponse<CharacterList>> GetCharacterListAsync(IProgress<int> progress = null) {
+            var result = await Task.Run(() => GetCharacterList());
+            return result;
+        }
+
+        public XmlResponse<AccountStatus> GetAccountStatus() {
+            const string uri = "/account/AccountStatus.xml.aspx";
+            var postString = RequestHelper.GeneratePostString(this);
+            return request(uri, new AccountStatus(), postString);
+        }
+
+        public async Task<XmlResponse<AccountStatus>> GetAccountStatusAsync(IProgress<int> progress = null) {
+            var result = await Task.Run(() => GetAccountStatus());
+            return result;
         }
 
         public string GetAuthString() {

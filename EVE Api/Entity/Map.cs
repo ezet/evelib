@@ -1,10 +1,15 @@
 ﻿
 using System;
-using eZet.Eve.EveApi.Dto.EveApi;
-using eZet.Eve.EveApi.Dto.EveApi.Map;
+using eZet.Eve.EolNet.Dto.EveApi;
+using eZet.Eve.EolNet.Dto.EveApi.Map;
 
-namespace eZet.Eve.EveApi.Entity {
+namespace eZet.Eve.EolNet.Entity {
     public class Map : BaseEntity {
+        protected override sealed string UriBase { get; set; }
+
+        internal Map() {
+            UriBase = "https://api.eveonline.com";
+        }
 
         public XmlResponse<FacWarSystems> GetFactionWarSystems() {
             const string path = "/map/FacWarSystems.xml.aspx";

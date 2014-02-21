@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Character {
+namespace eZet.Eve.EolNet.Dto.EveApi.Character {
     public class SkillTraining : XmlResult {
 
         // TODO Convert zone

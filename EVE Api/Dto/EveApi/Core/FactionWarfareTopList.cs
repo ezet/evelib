@@ -1,6 +1,6 @@
 ﻿
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Core {
+namespace eZet.Eve.EolNet.Dto.EveApi.Core {
     public class FactionWarfareTopList : XmlResult {
 
         // TODO Implement toplist

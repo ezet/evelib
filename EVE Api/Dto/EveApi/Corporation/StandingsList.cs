@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
+namespace eZet.Eve.EolNet.Dto.EveApi.Corporation {
     public class StandingsList : XmlResult {
 
         [XmlElement("corporationNPCStandings")]

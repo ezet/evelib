@@ -1,7 +1,8 @@
 ﻿using System.IO;
-using eZet.Eve.EveApi.Util;
+using eZet.Eve.EolNet.Entity;
+using eZet.Eve.EolNet.Util;
 
-namespace eZet.Eve.EveApi.Test {
+namespace eZet.Eve.EolNet.Test {
     public class TestRequestHelper : IRequestHelper {
         public string Request(string uri, string postString) {
 // ReSharper disable once PossibleNullReferenceException

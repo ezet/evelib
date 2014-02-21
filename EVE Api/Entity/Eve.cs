@@ -1,10 +1,19 @@
 ﻿using System;
-using eZet.Eve.EveApi.Dto.EveApi;
-using eZet.Eve.EveApi.Dto.EveApi.Core;
-using CharacterInfo = eZet.Eve.EveApi.Dto.EveApi.Core.CharacterInfo;
+using eZet.Eve.EolNet.Dto.EveApi;
+using eZet.Eve.EolNet.Dto.EveApi.Core;
+using CharacterInfo = eZet.Eve.EolNet.Dto.EveApi.Core.CharacterInfo;
 
-namespace eZet.Eve.EveApi.Entity {
-    public class Core : BaseEntity {
+namespace eZet.Eve.EolNet.Entity {
+    public class Eve : BaseEntity {
+
+        protected override sealed string UriBase { get; set; }
+
+        public ApiKey Key { get; private set; }
+
+        internal Eve() {
+            // TODO Add key handling for characterinfo
+            UriBase = "https://api.eveonline.com";
+        }
 
         public XmlResponse<AllianceList> GetAllianceList() {
             const string path = "/eve/AllianceList.xml.aspx";

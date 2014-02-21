@@ -1,15 +1,18 @@
 ﻿using System;
+using eZet.Eve.EolNet.Dto.EveApi;
+using eZet.Eve.EolNet.Dto.EveApi.Character;
 
-using eZet.Eve.EveApi.Dto.EveApi;
-using eZet.Eve.EveApi.Dto.EveApi.Character;
-
-namespace eZet.Eve.EveApi.Entity {
+namespace eZet.Eve.EolNet.Entity {
 
     public class Character : BaseEntity {
+
+        protected override sealed string UriBase { get; set; }
 
         public const int AccountKey = 1000;
 
         public long CharacterId { get; private set; }
+
+        public ApiKey Key { get; private set; }
 
         private string _name;
 
@@ -29,14 +32,17 @@ namespace eZet.Eve.EveApi.Entity {
                     load();
                 return _corporation;
             }
-            private set { _corporation = value; } }
-
-        public Character(ApiKey key, long characterId) : base(key) {
-            CharacterId = characterId;
+            private set { _corporation = value; }
         }
 
-        public Character(ApiKey key, long characterId, long corporationId) : base(key) {
+        public Character(ApiKey key, long characterId) {
+            Key = key;
             CharacterId = characterId;
+            UriBase = "https://api.eveonline.com";
+
+        }
+
+        public Character(ApiKey key, long characterId, long corporationId) : this(key, characterId) {
             Corporation = new Corporation(key, CharacterId, corporationId);
         }
 

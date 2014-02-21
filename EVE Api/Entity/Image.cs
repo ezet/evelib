@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eZet.Eve.EveApi.Entity {
+namespace eZet.Eve.EolNet.Entity {
     public class Image {
 
         private const string UriBase = "http://image.eveonline.com";

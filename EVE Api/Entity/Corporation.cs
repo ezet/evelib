@@ -1,15 +1,19 @@
 ﻿using System;
-using eZet.Eve.EveApi.Dto.EveApi;
-using eZet.Eve.EveApi.Dto.EveApi.Character;
-using eZet.Eve.EveApi.Dto.EveApi.Corporation;
-using MedalList = eZet.Eve.EveApi.Dto.EveApi.Corporation.MedalList;
-using FactionWarfareStats = eZet.Eve.EveApi.Dto.EveApi.Corporation.FactionWarfareStats;
-using StandingsList = eZet.Eve.EveApi.Dto.EveApi.Corporation.StandingsList;
-using ContactList = eZet.Eve.EveApi.Dto.EveApi.Corporation.ContactList;
+using eZet.Eve.EolNet.Dto.EveApi;
+using eZet.Eve.EolNet.Dto.EveApi.Character;
+using eZet.Eve.EolNet.Dto.EveApi.Corporation;
+using MedalList = eZet.Eve.EolNet.Dto.EveApi.Corporation.MedalList;
+using FactionWarfareStats = eZet.Eve.EolNet.Dto.EveApi.Corporation.FactionWarfareStats;
+using StandingsList = eZet.Eve.EolNet.Dto.EveApi.Corporation.StandingsList;
+using ContactList = eZet.Eve.EolNet.Dto.EveApi.Corporation.ContactList;
 
 
-namespace eZet.Eve.EveApi.Entity {
+namespace eZet.Eve.EolNet.Entity {
     public class Corporation : BaseEntity {
+
+        public ApiKey Key { get; private set; }
+
+        protected override sealed string UriBase { get; set; }
 
         private string _corporationName;
 
@@ -26,9 +30,12 @@ namespace eZet.Eve.EveApi.Entity {
 
         public long CharacterId { get; set; }
 
-        public Corporation(ApiKey key, long characterId, long corporationId) : base(key) {
+        internal Corporation(ApiKey key, long characterId, long corporationId) {
+            Key = key;
             CharacterId = characterId;
             CorporationId = corporationId;
+            UriBase = "https://api.eveonline.com";
+
         }
 
         public XmlResponse<AccountBalance> GetAccountBalance() {
@@ -43,10 +50,10 @@ namespace eZet.Eve.EveApi.Entity {
             return request(relPath, new AssetList(), postString);
         }
 
-        public XmlResponse<ContactList> GetContactList() {
+        public XmlResponse<Dto.EveApi.Corporation.ContactList> GetContactList() {
             const string relPath = "/corp/ContactList.xml.aspx";
             var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new ContactList(), postString);
+            return request(relPath, new Dto.EveApi.Corporation.ContactList(), postString);
         }
 
         public XmlResponse<ContainerLog> GetContainerLog() {
@@ -79,10 +86,10 @@ namespace eZet.Eve.EveApi.Entity {
             return request(relPath, new CorporationSheet(), postString);
         }
 
-        public XmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
+        public XmlResponse<Dto.EveApi.Corporation.FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/corp/FacWarStats.xml.aspx";
             var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new FactionWarfareStats(), postString);
+            return request(relPath, new Dto.EveApi.Corporation.FactionWarfareStats(), postString);
         }
 
         public XmlResponse<IndustryJobs> GetIndustryJobs() {
@@ -111,10 +118,10 @@ namespace eZet.Eve.EveApi.Entity {
             return request(relPath, new MarketOrders(), postString);
         }
 
-        public XmlResponse<MedalList> GetMedals() {
+        public XmlResponse<Dto.EveApi.Corporation.MedalList> GetMedals() {
             const string relPath = "/corp/Medals.xml.aspx";
             var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new MedalList(), postString);
+            return request(relPath, new Dto.EveApi.Corporation.MedalList(), postString);
         }
 
         public XmlResponse<MemberMedals> GetMemberMedals() {
@@ -163,11 +170,11 @@ namespace eZet.Eve.EveApi.Entity {
             return request(relPath, new ShareholderList(), postString);
         }
 
-        public XmlResponse<StandingsList> GetStandings() {
+        public XmlResponse<Dto.EveApi.Corporation.StandingsList> GetStandings() {
             // TODO Rowset
             const string relPath = "/corp/Standings.xml.aspx";
             var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new StandingsList(), postString);
+            return request(relPath, new Dto.EveApi.Corporation.StandingsList(), postString);
         }
 
         public XmlResponse<StarbaseDetails> GetStarbaseDetails(long id) {

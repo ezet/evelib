@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVE Api", "EVE Api\EVE Api.csproj", "{AA85978C-2BF5-419F-9F8E-B70162E83F34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EolNet", "EVE Api\EolNet.csproj", "{AA85978C-2BF5-419F-9F8E-B70162E83F34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVE MarketData Api", "..\EVE MarketData Api\EVE MarketData Api\EVE MarketData Api.csproj", "{04114D09-28BD-4F16-8368-64CDB21D916B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveApi Unit Test", "EveApi Unit Test\EveApi Unit Test.csproj", "{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EolNet Test", "EveApi Unit Test\EolNet Test.csproj", "{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

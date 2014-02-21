@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EveApi.Test {
+namespace eZet.Eve.EolNet.Test {
     /// <summary>
     /// Summary description for MapTest
     /// </summary>
@@ -9,7 +9,7 @@ namespace eZet.Eve.EveApi.Test {
     [TestClass]
     public class MapTest {
 
-        private readonly EveApi api = new EveApi();
+        private readonly EolNet api = new EolNet();
   
 
         [TestMethod]

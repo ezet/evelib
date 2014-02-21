@@ -7,8 +7,8 @@
     <ProjectGuid>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.Eve.EveApi</RootNamespace>
-    <AssemblyName>EVE Api</AssemblyName>
+    <RootNamespace>eZet.Eve.EolNet</RootNamespace>
+    <AssemblyName>EolNet</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\EveApi\Character\AccountBalance.cs" />
-    <Compile Include="ApiKey.cs" />
+    <Compile Include="Entity\ApiKey.cs" />
     <Compile Include="Dto\EveApi\Account\AccountStatus.cs" />
     <Compile Include="Dto\EveApi\Account\ApiKeyInfo.cs" />
     <Compile Include="Dto\EveApi\Account\CharacterList.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Dto\EveCentral\XmlResponse.cs" />
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Character.cs" />
-    <Compile Include="Entity\Core.cs" />
+    <Compile Include="Entity\Eve.cs" />
     <Compile Include="Entity\Corporation.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\Image.cs" />
@@ -125,7 +125,7 @@
     <Compile Include="Entity\Map.cs" />
     <Compile Include="Entity\EveCentral.cs" />
     <Compile Include="Dto\EveApi\Map\SovereigntyStatus.cs" />
-    <Compile Include="EveApi.cs" />
+    <Compile Include="EolNet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\EveApi\Character\WalletTransactions.cs" />
     <Compile Include="Util\RequestHelper.cs" />

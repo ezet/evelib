@@ -2,12 +2,16 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using eZet.Eve.EveApi.Dto.EveCentral;
+using eZet.Eve.EolNet.Dto.EveCentral;
 
-namespace eZet.Eve.EveApi.Entity {
+namespace eZet.Eve.EolNet.Entity {
     public class EveCentral : BaseEntity {
 
-        public const string UriBase = "http://api.eve-central.com";
+        protected override sealed string UriBase { get; set; }
+
+        internal EveCentral() {
+            UriBase = "http://api.eve-central.com";
+        }
 
         public MarketStatResponse getMarketStat() {
             const string uri = "/api/marketstat";

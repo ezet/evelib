@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using eZet.Eve.EveApi.Entity;
+using eZet.Eve.EolNet.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EveApi.Test {
+namespace eZet.Eve.EolNet.Test {
 
     [TestClass]
     public class AccountDeserializeTest {

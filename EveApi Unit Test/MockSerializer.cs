@@ -1,7 +1,7 @@
-﻿using eZet.Eve.EveApi.Dto.EveApi;
-using eZet.Eve.EveApi.Util;
+﻿using eZet.Eve.EolNet.Dto.EveApi;
+using eZet.Eve.EolNet.Util;
 
-namespace eZet.Eve.EveApi.Test {
+namespace eZet.Eve.EolNet.Test {
     public class MockSerializer : IXmlSerializer {
         public XmlResponse<T> Deserialize<T>(string data) where T : XmlResult {
             return new XmlResponse<T>();

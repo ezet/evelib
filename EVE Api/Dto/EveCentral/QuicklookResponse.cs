@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveCentral {
+namespace eZet.Eve.EolNet.Dto.EveCentral {
 
-    [SerializableAttribute]
+    [Serializable]
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]

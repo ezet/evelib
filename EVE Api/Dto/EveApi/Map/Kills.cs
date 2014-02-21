@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Map {
+namespace eZet.Eve.EolNet.Dto.EveApi.Map {
     public class Kills : XmlResult {
 
         [XmlElement("rowset")]

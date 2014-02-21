@@ -1,21 +1,14 @@
-﻿using eZet.Eve.EveApi.Dto.EveApi;
-using eZet.Eve.EveApi.Util;
+﻿using eZet.Eve.EolNet.Dto.EveApi;
+using eZet.Eve.EolNet.Util;
 
-namespace eZet.Eve.EveApi.Entity {
+namespace eZet.Eve.EolNet.Entity {
     public abstract class BaseEntity {
 
-        private const string UriBase = "https://api.eveonline.com";
-
-        public ApiKey Key { get; private set; }
+        protected abstract string UriBase { get; set; } 
 
         protected BaseEntity() {
             Serializer = new XmlSerializerWrapper();
             RequestHelper = new RequestHelper();
-
-        }
-
-        protected BaseEntity(ApiKey key) : this() {
-            Key = key;
         }
 
         public IXmlSerializer Serializer { get; set; }

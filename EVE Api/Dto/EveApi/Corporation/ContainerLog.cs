@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveApi.Dto.EveApi.Corporation {
+namespace eZet.Eve.EolNet.Dto.EveApi.Corporation {
     public class ContainerLog : XmlResult {
 
         [XmlElement("rowset")]

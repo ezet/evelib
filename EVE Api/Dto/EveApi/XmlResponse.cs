@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
+using eZet.Eve.EolNet.Entity;
 
-namespace eZet.Eve.EveApi.Dto.EveApi {
+namespace eZet.Eve.EolNet.Dto.EveApi {
 
-    [System.SerializableAttribute]
+    [Serializable]
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]

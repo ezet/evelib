@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using eZet.Eve.EveApi.Dto.EveApi;
+using eZet.Eve.EolNet.Dto.EveApi;
 
-namespace eZet.Eve.EveApi.Util {
+namespace eZet.Eve.EolNet.Util {
     public class XmlSerializerWrapper : IXmlSerializer {
         public XmlResponse<T> Deserialize<T>(string data) where T : XmlResult {
             var serializer = new XmlSerializer(typeof(XmlResponse<T>));

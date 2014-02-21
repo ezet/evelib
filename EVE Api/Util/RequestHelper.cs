@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using System.Net;
+using eZet.Eve.EolNet.Entity;
 
-namespace eZet.Eve.EveApi.Util {
+namespace eZet.Eve.EolNet.Util {
     public class RequestHelper : IRequestHelper {
 
         private const string ContentType = "application/x-www-form-urlencoded";
@@ -13,6 +14,7 @@ namespace eZet.Eve.EveApi.Util {
             request.Method = "POST";
             request.ContentType = ContentType;
             request.ContentLength = postString.Length;
+            request.Proxy = null;
             using (var writer = new StreamWriter(request.GetRequestStream())) {
                 writer.Write(postString);
             }
