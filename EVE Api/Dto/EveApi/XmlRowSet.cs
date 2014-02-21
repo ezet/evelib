@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EolNet.Dto.EveApi {
+namespace eZet.Eve.EoLib.Dto.EveApi {
 
     [Serializable]
     [XmlRoot("rowset")]

@@ -6,8 +6,8 @@
     <ProjectGuid>{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.Eve.EolNet.Test</RootNamespace>
-    <AssemblyName>EolNet Unit Test</AssemblyName>
+    <RootNamespace>eZet.Eve.EoLib.Test</RootNamespace>
+    <AssemblyName>EoLib Unit Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -61,9 +61,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EVE Api\EolNet.csproj">
+    <ProjectReference Include="..\EVE Api\EoLib.csproj">
       <Project>{aa85978c-2bf5-419f-9f8e-b70162e83f34}</Project>
-      <Name>EolNet</Name>
+      <Name>EoLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

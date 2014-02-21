@@ -4,9 +4,9 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using eZet.Eve.EolNet.Entity;
+using eZet.Eve.EoLib.Entity;
 
-namespace eZet.Eve.EolNet.Dto.EveApi {
+namespace eZet.Eve.EoLib.Dto.EveApi {
     public abstract class XmlResult {
 
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";

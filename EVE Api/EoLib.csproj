@@ -7,8 +7,8 @@
     <ProjectGuid>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.Eve.EolNet</RootNamespace>
-    <AssemblyName>EolNet</AssemblyName>
+    <RootNamespace>eZet.Eve.EoLib</RootNamespace>
+    <AssemblyName>EoLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -115,7 +115,7 @@
     <Compile Include="Dto\EveCentral\XmlResponse.cs" />
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Character.cs" />
-    <Compile Include="Entity\Eve.cs" />
+    <Compile Include="Entity\Core.cs" />
     <Compile Include="Entity\Corporation.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\Image.cs" />

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using eZet.Eve.EolNet.Entity;
+using eZet.Eve.EoLib.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EolNet.Test {
+namespace eZet.Eve.EoLib.Test {
     [TestClass]
     public class Character_DeserializeTest {
 

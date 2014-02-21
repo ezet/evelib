@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Xml.Serialization;
-using eZet.Eve.EolNet.Entity;
+using eZet.Eve.EoLib.Entity;
 
-namespace eZet.Eve.EolNet.Dto.EveApi {
+namespace eZet.Eve.EoLib.Dto.EveApi {
 
     [Serializable]
     [System.Diagnostics.DebuggerStepThroughAttribute]

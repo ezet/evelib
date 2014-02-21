@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EolNet.Dto.EveCentral {
+namespace eZet.Eve.EoLib.Dto.EveCentral {
 
     [Serializable]
     [System.Diagnostics.DebuggerStepThroughAttribute]

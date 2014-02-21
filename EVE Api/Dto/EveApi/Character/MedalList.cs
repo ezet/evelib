@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EolNet.Dto.EveApi.Character {
+namespace eZet.Eve.EoLib.Dto.EveApi.Character {
     public class MedalList : XmlResult {
 
         [XmlElement("rowset")]

@@ -1,6 +1,6 @@
-﻿using eZet.Eve.EolNet.Dto.EveApi;
+﻿using eZet.Eve.EoLib.Dto.EveApi;
 
-namespace eZet.Eve.EolNet.Util {
+namespace eZet.Eve.EoLib.Util {
     public interface IXmlSerializer {
 
         XmlResponse<T> Deserialize<T>(string data) where T : XmlResult;

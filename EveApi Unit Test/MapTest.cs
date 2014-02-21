@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EolNet.Test {
+namespace eZet.Eve.EoLib.Test {
     /// <summary>
     /// Summary description for MapTest
     /// </summary>

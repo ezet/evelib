@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Net;
-using eZet.Eve.EolNet.Entity;
+using eZet.Eve.EoLib.Entity;
 
-namespace eZet.Eve.EolNet.Util {
+namespace eZet.Eve.EoLib.Util {
     public class RequestHelper : IRequestHelper {
 
         private const string ContentType = "application/x-www-form-urlencoded";

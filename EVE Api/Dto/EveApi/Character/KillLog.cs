@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EolNet.Dto.EveApi.Character {
+namespace eZet.Eve.EoLib.Dto.EveApi.Character {
     public class KillLog : XmlResult {
 
         [XmlElement("rowset")]

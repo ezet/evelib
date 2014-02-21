@@ -1,7 +1,7 @@
-﻿using eZet.Eve.EolNet.Dto.EveApi;
-using eZet.Eve.EolNet.Util;
+﻿using eZet.Eve.EoLib.Dto.EveApi;
+using eZet.Eve.EoLib.Util;
 
-namespace eZet.Eve.EolNet.Entity {
+namespace eZet.Eve.EoLib.Entity {
     public abstract class BaseEntity {
 
         protected abstract string UriBase { get; set; } 

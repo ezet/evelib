@@ -1,6 +1,6 @@
-﻿using eZet.Eve.EolNet.Entity;
+﻿using eZet.Eve.EoLib.Entity;
 
-namespace eZet.Eve.EolNet.Util {
+namespace eZet.Eve.EoLib.Util {
     public interface IRequestHelper {
 
         string Request(string uri, string postString);

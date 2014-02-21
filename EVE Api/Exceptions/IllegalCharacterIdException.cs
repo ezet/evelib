@@ -1,7 +1,7 @@
 ﻿using System;
-using eZet.Eve.EolNet.Entity;
+using eZet.Eve.EoLib.Entity;
 
-namespace eZet.Eve.EolNet.Exceptions {
+namespace eZet.Eve.EoLib.Exceptions {
     public class IllegalCharacterIdException : Exception {
 
         public ApiKey Key { get; private set; }

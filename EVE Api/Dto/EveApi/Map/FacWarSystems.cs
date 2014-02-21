@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EolNet.Dto.EveApi.Map {
+namespace eZet.Eve.EoLib.Dto.EveApi.Map {
     public class FacWarSystems : XmlResult {
 
         [XmlElement("rowset")]
