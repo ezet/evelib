@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using eZet.Eve.EveApi.Dto.EveApi;
 
-namespace eZet.Eve.EveApi {
+namespace eZet.Eve.EveApi.Util {
     public class XmlSerializerWrapper : IXmlSerializer {
         public XmlResponse<T> Deserialize<T>(string data) where T : XmlResult {
             var serializer = new XmlSerializer(typeof(XmlResponse<T>));

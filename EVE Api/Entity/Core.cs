@@ -4,7 +4,7 @@ using eZet.Eve.EveApi.Dto.EveApi.Core;
 using CharacterInfo = eZet.Eve.EveApi.Dto.EveApi.Core.CharacterInfo;
 
 namespace eZet.Eve.EveApi.Entity {
-    public class Core : EveApiEntity {
+    public class Core : BaseEntity {
 
         public XmlResponse<AllianceList> GetAllianceList() {
             const string path = "/eve/AllianceList.xml.aspx";
@@ -33,7 +33,7 @@ namespace eZet.Eve.EveApi.Entity {
         public XmlResponse<CharacterInfo> GetCharacterInfo(long id, ApiKey key = default(ApiKey)) {
             const string path = "/eve/CharacterInfo.xml.aspx";
             var postString = key.Equals(default(ApiKey)) ? RequestHelper.GeneratePostString("characterID", id)
-                                                         : RequestHelper.GeneratePostString(ApiKey, "characterID", id);
+                                                         : RequestHelper.GeneratePostString(Key, "characterID", id);
             return request(path, new CharacterInfo(), postString);
         }
 

@@ -1,23 +1,26 @@
 ﻿using System.IO;
 using System.Net;
 
-namespace eZet.Eve.EveApi {
+namespace eZet.Eve.EveApi.Util {
     public class RequestHelper : IRequestHelper {
 
         private const string ContentType = "application/x-www-form-urlencoded";
 
         public string Request(string uri, string postString) {
+            var data = "";
             var request = WebRequest.Create(uri) as HttpWebRequest;
+            if (request == null) return data;
             request.Method = "POST";
             request.ContentType = ContentType;
             request.ContentLength = postString.Length;
-            string data = null;
             using (var writer = new StreamWriter(request.GetRequestStream())) {
                 writer.Write(postString);
             }
             using (var response = (HttpWebResponse)request.GetResponse()) {
-                if (response.StatusCode == HttpStatusCode.OK) {
-                    var reader = new StreamReader(response.GetResponseStream());
+                //if (response.StatusCode != HttpStatusCode.OK) return data;
+                var responseStream = response.GetResponseStream();
+                if (responseStream == null) return data;
+                using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();
                 }
             }

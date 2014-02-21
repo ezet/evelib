@@ -1,19 +1,16 @@
-﻿using System.Xml.Serialization;
-using eZet.Eve.EveApi.Entity;
+﻿using eZet.Eve.EveApi.Entity;
+using eZet.Eve.EveApi.Exceptions;
 using Character = eZet.Eve.EveApi.Entity.Character;
 
 namespace eZet.Eve.EveApi {
-
  
     public class EveApi {
 
         public ApiKey ApiKey { get; private set; }       
 
-        public int CharacterId { get; private set; }
-
-        public Account Account { get; private set; }
-
         public Character Character { get; private set; }
+        
+        public Account Account { get; private set; }
 
         public Core Core { get; private set; }
 
@@ -26,9 +23,9 @@ namespace eZet.Eve.EveApi {
 
         static public void Main() {
             var api = new EveApi();
-            var xml = api.Core.GetErrorList();
-            return;
-
+            var key = new ApiKey(123, "123");
+            var a = key.AccessMask;
+            api.Core.GetErrorList();
         }
 
         public EveApi() {
@@ -38,14 +35,31 @@ namespace eZet.Eve.EveApi {
             Image = new Image();
         }
 
-        public EveApi(int keyId, string vCode) : this() {
-            ApiKey = new ApiKey(keyId, vCode);
+        public void SelectCharacter(long characterId) {
+            verifyCharacter(ApiKey, characterId);
+            Character = new Character(ApiKey, characterId);
+        }
+
+        public EveApi(ApiKey key) {
+            ApiKey = key;
             Account = new Account(ApiKey);
         }
 
-        public EveApi(int keyId, string vCode, int characterId)
-            : this(keyId, vCode) {
-                Character = new Character(ApiKey, characterId);
+        public EveApi(ApiKey key, long characterId) : this(key) {
+            verifyCharacter(key, characterId);
+            Character = new Character(ApiKey, characterId);
+        }
+
+        public EveApi(int keyId, string vCode) : this(new ApiKey(keyId, vCode)) {
+        }
+
+        public EveApi(int keyId, string vCode, long characterId)
+            : this(new ApiKey(keyId, vCode), characterId) {
+        }
+
+        private void verifyCharacter(ApiKey key, long id) {
+            if (!key.CharacterIds.Contains(id))
+                throw new IllegalCharacterIdException("The API Key is not valid for this character.", key, id);
         }
     }
 }

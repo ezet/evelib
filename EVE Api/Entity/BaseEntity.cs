@@ -1,24 +1,21 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using eZet.Eve.EveApi.Dto.EveApi;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
+﻿using eZet.Eve.EveApi.Dto.EveApi;
+using eZet.Eve.EveApi.Util;
 
 namespace eZet.Eve.EveApi.Entity {
-    public abstract class EveApiEntity {
+    public abstract class BaseEntity {
 
         private const string UriBase = "https://api.eveonline.com";
 
-        public ApiKey ApiKey { get; private set; }
+        public ApiKey Key { get; private set; }
 
-        protected EveApiEntity() {
+        protected BaseEntity() {
             Serializer = new XmlSerializerWrapper();
             RequestHelper = new RequestHelper();
 
         }
 
-        protected EveApiEntity(ApiKey apiKey) : this() {
-            ApiKey = apiKey;
+        protected BaseEntity(ApiKey key) : this() {
+            Key = key;
         }
 
         public IXmlSerializer Serializer { get; set; }

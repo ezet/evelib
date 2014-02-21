@@ -4,7 +4,7 @@ using eZet.Eve.EveApi.Dto.EveApi;
 using eZet.Eve.EveApi.Dto.EveApi.Map;
 
 namespace eZet.Eve.EveApi.Entity {
-    public class Map : EveApiEntity {
+    public class Map : BaseEntity {
 
         public XmlResponse<FacWarSystems> GetFactionWarSystems() {
             const string path = "/map/FacWarSystems.xml.aspx";

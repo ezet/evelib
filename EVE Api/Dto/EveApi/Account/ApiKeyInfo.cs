@@ -9,7 +9,7 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Account {
     [XmlType(AnonymousType = true)]
     public class ApiKeyInfo : XmlResult {
 
-        [XmlElement("key")]
+        [XmlElement("Key")]
         public ApiKeyData Key { get; set; }
 
         public override void SetApiKey(ApiKey key) {
@@ -32,12 +32,12 @@ namespace eZet.Eve.EveApi.Dto.EveApi.Account {
         public string Type { get; set; }
 
         [XmlIgnore]
-        public DateTime Expires { get; private set; }
+        public DateTime ExpireDate { get; private set; }
 
         [XmlAttribute("expires")]
         public string ExpiresAsString {
-            get { return Expires.ToString(XmlResult.DateFormat); }
-            set { Expires = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
+            get { return ExpireDate.ToString(XmlResult.DateFormat); }
+            set { ExpireDate = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
         }
 
     }

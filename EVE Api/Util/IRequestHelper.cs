@@ -1,4 +1,4 @@
-﻿namespace eZet.Eve.EveApi {
+﻿namespace eZet.Eve.EveApi.Util {
     public interface IRequestHelper {
 
         string Request(string uri, string postString);

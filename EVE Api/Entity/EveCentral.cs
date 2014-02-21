@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using eZet.Eve.EveApi.Dto.EveCentral;
 
 namespace eZet.Eve.EveApi.Entity {
-    public class EveCentral : EveApiEntity {
+    public class EveCentral : BaseEntity {
 
         public const string UriBase = "http://api.eve-central.com";
 

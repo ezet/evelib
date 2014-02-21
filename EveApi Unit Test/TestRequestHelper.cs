@@ -1,11 +1,13 @@
 ﻿using System.IO;
+using eZet.Eve.EveApi.Util;
 
 namespace eZet.Eve.EveApi.Test {
     public class TestRequestHelper : IRequestHelper {
         public string Request(string uri, string postString) {
+// ReSharper disable once PossibleNullReferenceException
             var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            var relPath = uri.Substring(uri.Remove(uri.LastIndexOf("/")).LastIndexOf("/"));
-            relPath = relPath.Remove(relPath.LastIndexOf(".aspx")).Replace("/", "\\");
+            var relPath = uri.Substring(uri.Remove(uri.LastIndexOf("/", System.StringComparison.Ordinal)).LastIndexOf("/", System.StringComparison.Ordinal));
+            relPath = relPath.Remove(relPath.LastIndexOf(".aspx", System.StringComparison.Ordinal)).Replace("/", "\\");
             relPath = baseDir + "\\Xml" + relPath;
             string data;
             using (var reader = (File.OpenText(relPath))) {

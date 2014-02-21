@@ -117,18 +117,19 @@
     <Compile Include="Entity\Character.cs" />
     <Compile Include="Entity\Core.cs" />
     <Compile Include="Entity\Corporation.cs" />
-    <Compile Include="Entity\EveApiEntity.cs" />
+    <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\Image.cs" />
-    <Compile Include="IRequestHelper.cs" />
-    <Compile Include="IXmlSerializer.cs" />
+    <Compile Include="Exceptions\IllegalCharacterIdException.cs" />
+    <Compile Include="Util\IRequestHelper.cs" />
+    <Compile Include="Util\IXmlSerializer.cs" />
     <Compile Include="Entity\Map.cs" />
     <Compile Include="Entity\EveCentral.cs" />
     <Compile Include="Dto\EveApi\Map\SovereigntyStatus.cs" />
     <Compile Include="EveApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\EveApi\Character\WalletTransactions.cs" />
-    <Compile Include="RequestHelper.cs" />
-    <Compile Include="XmlSerializerWrapper.cs" />
+    <Compile Include="Util\RequestHelper.cs" />
+    <Compile Include="Util\XmlSerializerWrapper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
