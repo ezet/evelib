@@ -4,11 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EoLib.Test {
     [TestClass]
-    public class Character_DeserializeTest {
+    public class Character_StaticDeserializationTests {
 
         private readonly Character character;
 
-        public Character_DeserializeTest() {
+        public Character_StaticDeserializationTests() {
             character = new EoLib(new ApiKey(123123123, ""), 0).Character;
             character.RequestHelper = new TestRequestHelper();
         }

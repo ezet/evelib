@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.Eve.EoLib.Test {
 
     [TestClass]
-    public class Core_Deserialize {
+    public class Core_Tests {
 
         private readonly EoLib api = new EoLib();
 

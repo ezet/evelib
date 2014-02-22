@@ -5,11 +5,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.Eve.EoLib.Test {
 
     [TestClass]
-    public class AccountDeserializeTest {
+    public class Account_StaticDeserializationTests {
 
         private readonly Account acc;
         
-        public AccountDeserializeTest() {
+        public Account_StaticDeserializationTests() {
             var api = new EoLib(new ApiKey(0, ""));
             acc = api.Account;
             acc.RequestHelper = new TestRequestHelper();

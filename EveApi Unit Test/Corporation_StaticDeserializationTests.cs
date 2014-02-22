@@ -4,11 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EoLib.Test {
     [TestClass]
-    public class CorporationDeserializeTest {
+    public class Corporation_StaticDeserializationTests {
 
         private readonly Corporation corp;
 
-        public CorporationDeserializeTest() {
+        public Corporation_StaticDeserializationTests() {
             corp = new Corporation(new ApiKey(0, ""), 0, 0);
             corp.RequestHelper = new TestRequestHelper();
         }
