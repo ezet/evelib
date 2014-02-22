@@ -6,7 +6,7 @@ namespace eZet.Eve.EoLib.Test {
     [TestClass]
     public class Core_Deserialize {
 
-        private readonly EolNet api = new EolNet();
+        private readonly EoLib api = new EoLib();
 
         private const string CharName = "CCP Garthagk";
 
@@ -71,8 +71,7 @@ namespace eZet.Eve.EoLib.Test {
         [TestMethod]
         public void TestFactionWarfareTopList() {
             var xml = api.Core.GetFactionWarfareTopList();
-            // TODO write test
-            Assert.IsNotNull(xml.Result);
+            Assert.IsNotNull(xml.Result.Characters.KillsYesterday.First().CharacterName);
         }
 
         [TestMethod]

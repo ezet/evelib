@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class ShareholderList : XmlResult {
+    public class ShareholderList : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Shareholder> Shareholders { get; set; }

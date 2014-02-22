@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
-    public class CalendarEventAttendees : XmlResult {
+    public class CalendarEventAttendees : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Attendee> Attendees { get; set; }

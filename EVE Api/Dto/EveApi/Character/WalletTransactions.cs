@@ -8,7 +8,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
-    public class WalletTransactions : XmlResult {
+    public class WalletTransactions : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Transaction> Transactions { get; set; }

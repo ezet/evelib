@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
-    public class FactionWarfareStats : XmlResult {
+    public class FactionWarfareStats : XmlElement, IXmlSerializable {
 
         [XmlElement("totals")]
         public FactionWarfareTotals Totals { get; set; }
@@ -10,7 +12,12 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Core {
         [XmlElement("rowset")]
         public XmlRowSet<FactionWarfareEntry> Factions { get; set; }
 
- 
+        [XmlElement("rowset")]
+        public XmlRowSet<FactionWarfareEntry> FactionWars { get; set; }
+
+
+        [Serializable]
+        [XmlRoot("totals")]
         public class FactionWarfareTotals {
 
             [XmlElement("killsYesterday")]
@@ -72,6 +79,21 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Core {
 
             [XmlAttribute("againstName")]
             public string AgainstName { get; set; }
+        }
+
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader) {
+            setRoot(reader);
+            Totals = deserialize(getReader("totals"), new FactionWarfareTotals());
+            Factions = deserializeRowSet(getRowSetReader("factions"), new FactionWarfareEntry());
+            FactionWars = deserializeRowSet(getRowSetReader("factionWars"), new FactionWarfareEntry());
+        }
+
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
         }
     }
 

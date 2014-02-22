@@ -19,15 +19,12 @@ under the License.
  *
 */
 
-using eZet.Eve.EoLib.Dto.EveApi;
-using eZet.Eve.EoLib.Dto.EveApi.Account;
 using eZet.Eve.EoLib.Entity;
-using eZet.Eve.EoLib.Exceptions;
 using Character = eZet.Eve.EoLib.Entity.Character;
 
 namespace eZet.Eve.EoLib {
  
-    public class EolNet {
+    public class EoLib {
 
         private const int Key = 3035238;
 
@@ -71,19 +68,14 @@ namespace eZet.Eve.EoLib {
         public Image Image { get; private set; }
 
         static public void Main() {
-            
-            var api = new EolNet(Key, VCode);
-            XmlResponse<AccountStatus> xml;
-            xml = api.Account.GetAccountStatusAsync().Result;
-
-            api.Core.GetErrorList();
+            var api = new EoLib(Key, VCode);
         }
 
         /// <summary>
         /// Creates a new instance, only allowing access to functionaly that doesn't require a valid key.
         /// </summary>
-        public EolNet() {
-            Core = new Entity.Core();
+        public EoLib() {
+            Core = new Core();
             Map = new Map();
             EveCentral = new EveCentral();
             Image = new Image();
@@ -92,10 +84,10 @@ namespace eZet.Eve.EoLib {
         /// <summary>
         /// Creates a new instance using the given Api Key.
         /// </summary>
-        /// <param name="key">A valid API key.</param>
-         public EolNet(ApiKey key) : this() {
-            ApiKey = key;
-            Account = new Account(ApiKey);
+        /// <param name="apiKey">A valid API key.</param>
+         public EoLib(ApiKey apiKey) : this() {
+            ApiKey = apiKey;
+            Account = new Account(apiKey);
         }
 
         /// <summary>
@@ -103,9 +95,9 @@ namespace eZet.Eve.EoLib {
         /// </summary>
         /// <param name="key">A ApiKey object.</param>
         /// <param name="characterId">A valid character id for the key. Use ApiKey.Characters to get a list of valid ids.</param>
-        public EolNet(ApiKey key, long characterId) : this(key) {
+        public EoLib(ApiKey key, long characterId) : this(key) {
             verifyCharacter(key, characterId);
-            Character = new Entity.Character(ApiKey, characterId);
+            Character = new Character(ApiKey, characterId);
         }
 
         /// <summary>
@@ -113,7 +105,7 @@ namespace eZet.Eve.EoLib {
         /// </summary>
         /// <param name="keyId">The id of a valid API key.</param>
         /// <param name="vCode">The corresponding vcode of the key id.</param>
-        public EolNet(int keyId, string vCode) : this(new ApiKey(keyId, vCode)) {
+        public EoLib(int keyId, string vCode) : this(new ApiKey(keyId, vCode)) {
         }
 
         /// <summary>
@@ -122,7 +114,7 @@ namespace eZet.Eve.EoLib {
         /// <param name="keyId">The id of a valid API key.</param>
         /// <param name="vCode">The corresponding vcode of the key id.</param>
         /// <param name="characterId">A valid character id for the key.  Use ApiKey.Characters to get a list of valid ids.</param>
-        public EolNet(int keyId, string vCode, long characterId)
+        public EoLib(int keyId, string vCode, long characterId)
             : this(new ApiKey(keyId, vCode), characterId) {
         }
 
@@ -132,8 +124,8 @@ namespace eZet.Eve.EoLib {
         /// <param name="key">Key to verify against.</param>
         /// <param name="characterId">Character id to verify.</param>
         private void verifyCharacter(ApiKey key, long characterId) {
-            if (!key.Characters.Contains(characterId))
-                throw new IllegalCharacterIdException("The API Key is not valid for this character.", key, characterId);
+            //if (!key.Characters.Contains(characterId))
+            //    throw new IllegalCharacterIdException("The API Key is not valid for this character.", key, characterId);
         }
     }
 }

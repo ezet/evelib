@@ -15,7 +15,7 @@ namespace eZet.Eve.EoLib.Entity {
 
         public IRequestHelper RequestHelper { get; set; }
 
-        protected XmlResponse<T> request<T>(string path, T type, string postString = "") where T : XmlResult {
+        protected XmlResponse<T> request<T>(string path, T type, string postString = "") where T : XmlElement {
             var data = RequestHelper.Request(UriBase + path, postString);
             return Serializer.Deserialize<T>(data);
         }

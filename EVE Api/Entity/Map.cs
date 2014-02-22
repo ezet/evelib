@@ -15,9 +15,9 @@ namespace eZet.Eve.EoLib.Entity {
         /// Returns a list of contestable solarsystems and the NPC faction currently occupying them.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<FacWarSystems> GetFactionWarSystems() {
+        public XmlResponse<FactionWarfareSystems> GetFactionWarSystems() {
             const string path = "/map/FacWarSystems.xml.aspx";
-            return request(path, new FacWarSystems());
+            return request(path, new FactionWarfareSystems());
         }
 
         /// <summary>

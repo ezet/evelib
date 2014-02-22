@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using eZet.Eve.EoLib.Entity;
 
 namespace eZet.Eve.EoLib.Dto.EveApi {
-    public abstract class XmlResult {
+    public abstract class XmlElement {
 
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";
 
@@ -66,6 +66,22 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
 
         protected decimal getDecimal(string name) {
             return decimal.Parse(list.First(x => x.Name == name).Value, NumberStyles.AllowDecimalPoint);
+        }
+
+        protected string getStringAttribute(string name) {
+            return root.Attribute(name).Value;
+        }
+
+        protected long getLongAttribute(string name) {
+            return long.Parse(root.Attribute(name).Value);
+        }
+
+        protected int getIntAttribute(string name) {
+            return int.Parse(root.Attribute(name).Value);
+        }
+
+        protected bool getBoolAttribute(string name) {
+            return root.Attribute(name).Value != "0" && root.Attribute(name).Value.ToLower() != "false";
         }
 
     }

@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class ContainerLog : XmlResult {
+    public class ContainerLog : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<LogEntry> LogEntries { get; set; }

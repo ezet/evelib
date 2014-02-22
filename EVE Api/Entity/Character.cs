@@ -7,7 +7,7 @@ using FactionWarfareStats = eZet.Eve.EoLib.Dto.EveApi.Character.FactionWarfareSt
 namespace eZet.Eve.EoLib.Entity {
 
     /// <summary>
-    /// Provides access to all API calls relating to a specific character, that is, all API calls prefixed with /char in CCPs API.
+    /// Provides access to all API calls relating to a specific character, that is, URIs prefixed with /char in CCPs API.
     /// </summary>
     public class Character : BaseEntity {
 
@@ -48,7 +48,7 @@ namespace eZet.Eve.EoLib.Entity {
         private Corporation _corporation;
 
         /// <summary>
-        /// A Corporation object for this character.
+        /// The Corporation object for this character.
         /// </summary>
         public Corporation Corporation {
             get {
@@ -60,11 +60,11 @@ namespace eZet.Eve.EoLib.Entity {
         }
 
         /// <summary>
-        /// Creates a new instance using the proided key and character id.
+        /// Creates a new object using the proided key and character id.
         /// </summary>
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
-        public Character(ApiKey key, long characterId) {
+        internal Character(ApiKey key, long characterId) {
             Key = key;
             CharacterId = characterId;
             UriBase = "https://api.eveonline.com";
@@ -72,7 +72,7 @@ namespace eZet.Eve.EoLib.Entity {
         }
 
         /// <summary>
-        /// Creates a new instance using the proided key, character id and corporation id.
+        /// Creates a new object using the proided key, character id and corporation id.
         /// </summary>
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>

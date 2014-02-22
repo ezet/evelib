@@ -5,7 +5,7 @@ using eZet.Eve.EoLib.Util;
 namespace eZet.Eve.EoLib.Test {
     public class TestRequestHelper : IRequestHelper {
         public string Request(string uri, string postString) {
-// ReSharper disable once PossibleNullReferenceException
+            // ReSharper disable once PossibleNullReferenceException
             var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             var relPath = uri.Substring(uri.Remove(uri.LastIndexOf("/", System.StringComparison.Ordinal)).LastIndexOf("/", System.StringComparison.Ordinal));
             relPath = relPath.Remove(relPath.LastIndexOf(".aspx", System.StringComparison.Ordinal)).Replace("/", "\\");

@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
-    public class SkillTraining : XmlResult {
+    public class SkillTraining : XmlElement {
 
         // TODO Convert zone
         [XmlIgnore]

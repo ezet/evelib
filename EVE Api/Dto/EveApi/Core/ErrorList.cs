@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
-    public class ErrorList : XmlResult {
+    public class ErrorList : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Error> Errors { get; set; }

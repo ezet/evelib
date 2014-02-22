@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
-    public class CallList : XmlResult, IXmlSerializable {
+    public class CallList : XmlElement, IXmlSerializable {
 
         [XmlElement("rowset")]
         public XmlRowSet<CallGroup> CallGroups { get; set; }

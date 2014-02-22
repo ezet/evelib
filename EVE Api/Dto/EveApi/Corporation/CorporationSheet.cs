@@ -4,7 +4,7 @@ using System.IO.Ports;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class CorporationSheet : XmlResult {
+    public class CorporationSheet : XmlElement {
 
         [XmlElement("corporationID")]
         public long CorporationId { get; set; }

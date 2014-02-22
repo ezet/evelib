@@ -4,6 +4,10 @@ using eZet.Eve.EoLib.Dto.EveApi.Core;
 using CharacterInfo = eZet.Eve.EoLib.Dto.EveApi.Core.CharacterInfo;
 
 namespace eZet.Eve.EoLib.Entity {
+
+    /// <summary>
+    /// Provides access to API calls that do not require a valid API key or character id. That is, all URIs prefixed with /eve, /server and /api.
+    /// </summary>
     public class Core : BaseEntity {
 
         /// <summary>
@@ -11,6 +15,9 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         protected override sealed string UriBase { get; set; }
 
+        /// <summary>
+        /// Creates a new object.
+        /// </summary>
         internal Core() {
             UriBase = "https://api.eveonline.com";
         }
@@ -21,9 +28,9 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="extended">Optional; If true, includes corporations.</param>
         /// <returns></returns>
         public XmlResponse<AllianceList> GetAllianceList(bool extended = false) {
-            const string path = "/eve/AllianceList.xml.aspx";
+            const string relPath = "/eve/AllianceList.xml.aspx";
             var postString = extended ? "version=2" : "version=1";
-            return request(path, new AllianceList(), postString);
+            return request(relPath, new AllianceList(), postString);
         }
 
         /// <summary>
@@ -31,8 +38,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<CertificateTree> GetCertificateTree() {
-            const string path = "/eve/CertificateTree.xml.aspx";
-            return request(path, new CertificateTree());
+            const string relPath = "/eve/CertificateTree.xml.aspx";
+            return request(relPath, new CertificateTree());
         }
 
         /// <summary>
@@ -41,10 +48,10 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="list">A list of character ids.</param>
         /// <returns></returns>
         public XmlResponse<CharacterAffiliation> GetCharacterAffiliation(params long[] list) {
-            const string path = "/eve/CharacterAffiliation.xml.aspx";
+            const string relPath = "/eve/CharacterAffiliation.xml.aspx";
             var ids = String.Join(",", list);
             var postString = RequestHelper.GeneratePostString("ids", ids);
-            return request(path, new CharacterAffiliation(), postString);
+            return request(relPath, new CharacterAffiliation(), postString);
         }
 
         /// <summary>
@@ -53,10 +60,10 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="list">A list of ids.</param>
         /// <returns></returns>
         public XmlResponse<CharacterNameId> GetCharacterId(params string[] list) {
-            const string path = "/eve/CharacterID.xml.aspx";
+            const string relPath = "/eve/CharacterID.xml.aspx";
             var names = String.Join(",", list);
             var postString = RequestHelper.GeneratePostString("names", names);
-            return request(path, new CharacterNameId(), postString);
+            return request(relPath, new CharacterNameId(), postString);
         }
 
         /// <summary>
@@ -65,9 +72,9 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="id">The character id.</param>
         /// <returns></returns>
         public XmlResponse<CharacterInfo> GetCharacterInfo(long id) {
-            const string path = "/eve/CharacterInfo.xml.aspx";
+            const string relPath = "/eve/CharacterInfo.xml.aspx";
             var postString = RequestHelper.GeneratePostString("characterID", id);
-            return request(path, new CharacterInfo(), postString);
+            return request(relPath, new CharacterInfo(), postString);
         }
 
         /// <summary>
@@ -80,10 +87,10 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="list">List of ownerIDs (characterID, agentID, corporationID, allianceID, or factionID) and typeIDs to query.</param>
         /// <returns></returns>
         public XmlResponse<CharacterNameId> GetCharacterName(params long[] list) {
-            const string path = "/eve/CharacterName.xml.aspx";
+            const string relPath = "/eve/CharacterName.xml.aspx";
             var ids = String.Join(",", list);
             var postString = RequestHelper.GeneratePostString("ids", ids);
-            return request(path, new CharacterNameId(), postString);
+            return request(relPath, new CharacterNameId(), postString);
         }
 
         /// <summary>
@@ -91,8 +98,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<ConquerableStations> GetConquerableStations() {
-            const string path = "/eve/ConquerableStationList.xml.aspx";
-            return request(path, new ConquerableStations());
+            const string relPath = "/eve/ConquerableStationList.xml.aspx";
+            return request(relPath, new ConquerableStations());
         }
 
         /// <summary>
@@ -104,8 +111,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<ErrorList> GetErrorList() {
-            const string path = "/eve/ErrorList.xml.aspx";
-            return request(path, new ErrorList());
+            const string relPath = "/eve/ErrorList.xml.aspx";
+            return request(relPath, new ErrorList());
         }
 
         /// <summary>
@@ -113,18 +120,17 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
-            // TODO Separate Factions and FactionWars
-            const string path = "/eve/FacWarStats.xml.aspx";
-            return request(path, new FactionWarfareStats());
+            const string relPath = "/eve/FacWarStats.xml.aspx";
+            return request(relPath, new FactionWarfareStats());
         }
 
         /// <summary>
         /// Returns Factional Warfare Top 100 Stats
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<FactionWarfareTopList> GetFactionWarfareTopList() {
-            // TODO Find a way to separate rowsets
-            throw new NotImplementedException();
+        public XmlResponse<FactionWarTopStats> GetFactionWarfareTopList() {
+            const string relPath = "/eve/FacWarTopStats.xml.aspx";
+            return request(relPath, new FactionWarTopStats());
         }
 
         /// <summary>
@@ -132,8 +138,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<ReferenceTypes> GetReferenceTypes() {
-            const string path = "/eve/RefTypes.xml.aspx";
-            return request(path, new ReferenceTypes());
+            const string relPath = "/eve/RefTypes.xml.aspx";
+            return request(relPath, new ReferenceTypes());
         }
 
         /// <summary>
@@ -141,8 +147,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<SkillTree> GetSkillTree() {
-            // TODO Separate rowsets
-            throw new NotImplementedException();
+            const string relPath = "/eve/SkillTree.xml.aspx";
+            return request(relPath, new SkillTree());
         }
 
         /// <summary>
@@ -151,10 +157,10 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="list">A list of type ids.</param>
         /// <returns></returns>
         public XmlResponse<TypeName> GetTypeName(params long[] list) {
-            const string path = "/eve/TypeName.xml.aspx";
+            const string relPath = "/eve/TypeName.xml.aspx";
             var ids = String.Join(",", list);
             var postString = RequestHelper.GeneratePostString("ids", ids);
-            return request(path, new TypeName(), postString);
+            return request(relPath, new TypeName(), postString);
         }
 
         /// <summary>
@@ -162,8 +168,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<ServerStatus> GetServerStatus() {
-            const string path = "/server/ServerStatus.xml.aspx";
-            return request(path, new ServerStatus());
+            const string relPath = "/server/ServerStatus.xml.aspx";
+            return request(relPath, new ServerStatus());
         }
 
         /// <summary>
@@ -172,8 +178,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<CallList> GetCallList() {
             // TODO Separate rowsets
-            const string path = "/api/calllist.xml.aspx";
-            return request(path, new CallList());
+            const string relPath = "/api/calllist.xml.aspx";
+            return request(relPath, new CallList());
         }
     }
 }

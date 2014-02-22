@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
-    public class SkillQueue : XmlResult {
+    public class SkillQueue : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Skill> Queue { get; set; }

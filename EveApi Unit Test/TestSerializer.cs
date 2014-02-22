@@ -2,8 +2,8 @@
 using eZet.Eve.EoLib.Util;
 
 namespace eZet.Eve.EoLib.Test {
-    public class MockSerializer : IXmlSerializer {
-        public XmlResponse<T> Deserialize<T>(string data) where T : XmlResult {
+    public class TestSerializer : IXmlSerializer {
+        public XmlResponse<T> Deserialize<T>(string data) where T : XmlElement {
             return new XmlResponse<T>();
         }
     }

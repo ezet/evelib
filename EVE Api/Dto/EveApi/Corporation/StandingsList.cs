@@ -4,13 +4,13 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class StandingsList : XmlResult {
+    public class StandingsList : XmlElement {
 
         [XmlElement("corporationNPCStandings")]
         public StandingType CorporationStandings { get; set; }
 
 
-        public class StandingType : XmlResult, IXmlSerializable {
+        public class StandingType : XmlElement, IXmlSerializable {
 
             [XmlElement("rowset")]
             public XmlRowSet<StandingEntry> Agents { get; set; }

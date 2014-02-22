@@ -9,15 +9,15 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot("eveapi", IsNullable = false)]
-    public class XmlResponse<T> where T : XmlResult {
+    public class XmlResponse<T> where T : XmlElement {
 
         [XmlIgnore]
         public DateTime CurrentTime { get; private set; }
 
         [XmlElement("currentTime")]
         public string CurrentTimeAsString {
-            get { return CurrentTime.ToString(XmlResult.DateFormat); }
-            set { CurrentTime = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
+            get { return CurrentTime.ToString(XmlElement.DateFormat); }
+            set { CurrentTime = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
         }
 
         [XmlElement("result")]
@@ -28,8 +28,8 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
 
         [XmlElement("cachedUntil")]
         public string CachedUntilAsString {
-            get { return CachedUntil.ToString(XmlResult.DateFormat); }
-            set { CachedUntil = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
+            get { return CachedUntil.ToString(XmlElement.DateFormat); }
+            set { CachedUntil = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
         }
 
         [XmlAttribute("version")]

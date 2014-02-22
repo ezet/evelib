@@ -2,7 +2,6 @@
 using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Dto.EveApi.Character;
 using eZet.Eve.EoLib.Dto.EveApi.Corporation;
-using MedalList = eZet.Eve.EoLib.Dto.EveApi.Corporation.MedalList;
 using FactionWarfareStats = eZet.Eve.EoLib.Dto.EveApi.Corporation.FactionWarfareStats;
 using StandingsList = eZet.Eve.EoLib.Dto.EveApi.Corporation.StandingsList;
 using ContactList = eZet.Eve.EoLib.Dto.EveApi.Corporation.ContactList;
@@ -53,7 +52,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="key"></param>
         /// <param name="characterId"></param>
         /// <param name="corporationId"></param>
-        internal Corporation(ApiKey key, long characterId, long corporationId) {
+        public Corporation(ApiKey key, long characterId, long corporationId) {
             Key = key;
             CharacterId = characterId;
             CorporationId = corporationId;

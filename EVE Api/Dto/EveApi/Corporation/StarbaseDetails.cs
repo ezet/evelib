@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class StarbaseDetails : XmlResult {
+    public class StarbaseDetails : XmlElement {
 
         [XmlElement("state")]
         public int State { get; set; }

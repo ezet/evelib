@@ -4,14 +4,14 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class TitleList : XmlResult {
+    public class TitleList : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Title> Titles { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
-        public class Title : XmlResult, IXmlSerializable {
+        public class Title : XmlElement, IXmlSerializable {
             [XmlAttribute("titleID")]
             public long TitleId { get; set; }
 

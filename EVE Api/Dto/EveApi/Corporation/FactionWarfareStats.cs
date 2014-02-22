@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class FactionWarfareStats : XmlResult {
+    public class FactionWarfareStats : XmlElement {
 
         [XmlElement("factionID")]
         public long FactionId { get; set; }

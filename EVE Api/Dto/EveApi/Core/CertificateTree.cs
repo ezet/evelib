@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
-    public class CertificateTree : XmlResult {
+    public class CertificateTree : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<CertificateCategory> Categories { get; set; }

@@ -7,7 +7,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
-    public class MarketOrders : XmlResult {
+    public class MarketOrders : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<MarketOrder> Orders { get; set; }

@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
 
-    public class TypeName : XmlResult {
+    public class TypeName : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<TypeData> Types { get; set; }

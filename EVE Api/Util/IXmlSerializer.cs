@@ -3,7 +3,7 @@
 namespace eZet.Eve.EoLib.Util {
     public interface IXmlSerializer {
 
-        XmlResponse<T> Deserialize<T>(string data) where T : XmlResult;
+        XmlResponse<T> Deserialize<T>(string data) where T : XmlElement;
 
 
     }

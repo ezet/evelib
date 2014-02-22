@@ -7,7 +7,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
-    public class AccountStatus : XmlResult {
+    public class AccountStatus : XmlElement {
 
         [XmlIgnore]
         public DateTime PaidUntil { get; private set; }

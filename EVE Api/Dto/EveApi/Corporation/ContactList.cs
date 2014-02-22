@@ -4,7 +4,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class ContactList : XmlResult, IXmlSerializable {
+    public class ContactList : XmlElement, IXmlSerializable {
 
         [XmlElement("rowset")]
         public XmlRowSet<Contact> CorporationContacts { get; set; }

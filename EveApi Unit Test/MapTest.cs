@@ -9,7 +9,7 @@ namespace eZet.Eve.EoLib.Test {
     [TestClass]
     public class MapTest {
 
-        private readonly EolNet api = new EolNet();
+        private readonly EoLib api = new EoLib();
   
 
         [TestMethod]

@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Map {
-    public class FacWarSystems : XmlResult {
+    public class FactionWarfareSystems : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<SolarSystem> SolarSystems { get; set; }
@@ -23,6 +23,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Map {
             [XmlAttribute("occupyingFactionName")]
             public string OccupyingFactionName { get; set; }
 
+            [XmlIgnore]
             public bool Contested { get; private set; }
 
             [XmlAttribute("contested")]

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
-    public class ServerStatus : XmlResult {
+    public class ServerStatus : XmlElement {
 
         [XmlElement("serverOpen")]
         public string ServerOpen { get; set; }

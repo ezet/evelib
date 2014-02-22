@@ -28,7 +28,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
             var serializer = new XmlSerializer(typeof(T));
             if (reader.IsStartElement()) {
                 RowSetMeta.Name = reader.GetAttribute("name");
-                RowSetMeta.Key = reader.GetAttribute("Key");
+                RowSetMeta.Key = reader.GetAttribute("key");
                 RowSetMeta.Columns = reader.GetAttribute("columns");
                 reader.ReadToDescendant("row");
                 while (reader.Name == "row") {
@@ -55,13 +55,10 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
 
         public class RowSetAttributes {
 
-            [XmlAttribute("name")]
             public string Name { get; set; }
 
-            [XmlAttribute("Key")]
             public string Key { get; set; }
 
-            [XmlAttribute("coloumns")]
             public string Columns { get; set; }
             
         }

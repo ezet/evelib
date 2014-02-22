@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
 
-    public class AccountBalance : XmlResult {
+    public class AccountBalance : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<AccountBalanceRow> Accounts { get; set; }

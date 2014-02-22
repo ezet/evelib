@@ -8,7 +8,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
-    public class CharacterList : XmlResult {
+    public class CharacterList : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<CharacterInfo> Characters;

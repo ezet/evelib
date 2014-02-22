@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
 
     [Serializable]
-    public class CharacterSheet : XmlResult, IXmlSerializable {
+    public class CharacterSheet : XmlElement, IXmlSerializable {
 
         [XmlElement("characterID")]
         public long CharacterId { get; set; }

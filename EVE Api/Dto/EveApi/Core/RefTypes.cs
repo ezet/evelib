@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
-    public class ReferenceTypes : XmlResult {
+    public class ReferenceTypes : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<ReferenceType> RefTypes { get; set; }

@@ -57,7 +57,7 @@
     <Compile Include="Corporation_DeserializeTest.cs" />
     <Compile Include="MapTest.cs" />
     <Compile Include="TestRequestHelper.cs" />
-    <Compile Include="MockSerializer.cs" />
+    <Compile Include="TestSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +76,7 @@
     <Content Include="Xml\char\CharacterSheet.xml" />
     <Content Include="Xml\char\ContactList.xml" />
     <Content Include="Xml\char\ContactNotifications.xml" />
+    <Content Include="Xml\char\ContractBids.xml" />
     <Content Include="Xml\char\ContractItems.xml" />
     <Content Include="Xml\char\Contracts.xml" />
     <Content Include="Xml\char\FacWarStats.xml" />
@@ -100,6 +101,7 @@
     <Content Include="Xml\corp\AssetList.xml" />
     <Content Include="Xml\corp\ContactList.xml" />
     <Content Include="Xml\corp\ContainerLog.xml" />
+    <Content Include="Xml\corp\ContractBids.xml" />
     <Content Include="Xml\corp\ContractItems.xml" />
     <Content Include="Xml\corp\Contracts.xml" />
     <Content Include="Xml\corp\CorporationSheet.xml" />
@@ -123,6 +125,10 @@
     <Content Include="Xml\corp\WalletJournal.xml" />
     <Content Include="Xml\corp\WalletTransactions.xml" />
     <Content Include="Xml\eve\AllianceList.xml" />
+    <Content Include="Xml\eve\CallList.xml" />
+    <Content Include="Xml\eve\FacWarStats.xml" />
+    <Content Include="Xml\eve\FacWarTopStats.xml" />
+    <Content Include="Xml\eve\SkillTree.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

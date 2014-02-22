@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
-    public class CharacterInfo : XmlResult {
+    public class CharacterInfo : XmlElement {
 
         [XmlElement("characterID")]
         public long CharacterId { get; set; }

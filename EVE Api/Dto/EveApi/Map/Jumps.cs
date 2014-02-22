@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Map {
-    public class Jumps : XmlResult {
+    public class Jumps : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<SolarSystem> SolarSystems { get; set; }

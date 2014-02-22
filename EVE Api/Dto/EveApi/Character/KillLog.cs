@@ -4,15 +4,14 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
-    public class KillLog : XmlResult {
+    public class KillLog : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Kill> Kills { get; set; }
 
-
         [Serializable]
         [XmlRoot("row")]
-        public class Kill : XmlResult, IXmlSerializable {
+        public class Kill : XmlElement, IXmlSerializable {
 
             [XmlAttribute("killID")]
             public long KillId { get; set; }
@@ -46,8 +45,14 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
             }
 
             public void ReadXml(XmlReader reader) {
-                Attackers = deserializeRowSet(reader, new Attacker());
-                Items = deserializeRowSet(reader, new Item());
+                setRoot(reader);
+                KillId = getLongAttribute("killID");
+                SolarSystemId = getLongAttribute("solarSystemID");
+                KillTimeAsString = getStringAttribute("killTime");
+                MoonId = getLongAttribute("moonID");
+                Victim = deserialize(getReader("victim"), new Victim());
+                Attackers = deserializeRowSet(getRowSetReader("attackers"), new Attacker());
+                Items = deserializeRowSet(getRowSetReader("items"), new Item());
             }
 
             public void WriteXml(XmlWriter writer) {
@@ -56,7 +61,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
         }
 
         [Serializable]
-        [XmlRoot("row")]
+        [XmlRoot("victim")]
         public class Victim {
 
             [XmlAttribute("characterID")]

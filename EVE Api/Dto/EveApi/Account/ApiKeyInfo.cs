@@ -8,9 +8,9 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
     [System.Diagnostics.DebuggerStepThroughAttribute]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
-    public class ApiKeyInfo : XmlResult {
+    public class ApiKeyInfo : XmlElement {
 
-        [XmlElement("Key")]
+        [XmlElement("key")]
         public ApiKeyData Key { get; set; }
 
         public override void SetApiKey(ApiKey key) {
@@ -18,7 +18,6 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
                 character.ApiKey = key;
             }
         }
-
     }
 
     public class ApiKeyData {
@@ -36,9 +35,9 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
         public DateTime ExpireDate { get; private set; }
 
         [XmlAttribute("expires")]
-        public string ExpiresAsString {
-            get { return ExpireDate.ToString(XmlResult.DateFormat); }
-            set { ExpireDate = DateTime.ParseExact(value, XmlResult.DateFormat, null); }
+        public string ExpireDateAsString {
+            get { return ExpireDate.ToString(XmlElement.DateFormat); }
+            set { ExpireDate = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
         }
 
     }

@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
-    public class OutpostServiceDetails : XmlResult {
+    public class OutpostServiceDetails : XmlElement {
 
         [XmlElement("rowset")]
         public XmlRowSet<Service> Services { get; set; }

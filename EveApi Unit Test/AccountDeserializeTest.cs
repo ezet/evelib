@@ -10,8 +10,10 @@ namespace eZet.Eve.EoLib.Test {
         private readonly Account acc;
         
         public AccountDeserializeTest() {
-            acc = new Account(default(ApiKey));
+            var api = new EoLib(new ApiKey(0, ""));
+            acc = api.Account;
             acc.RequestHelper = new TestRequestHelper();
+            acc.Key.RequestHelper = new TestRequestHelper();
         }
 
         [TestMethod]

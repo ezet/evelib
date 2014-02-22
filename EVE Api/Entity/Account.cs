@@ -16,13 +16,14 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         public ApiKey Key { get; private set; }
 
+
         /// <summary>
-        /// Creates a new instance using the given key.
+        /// Creates a new object using the given key.
         /// </summary>
         /// <param name="key">A key used for API requests.</param>
-        internal Account(ApiKey key) {
-            UriBase = "https://api.eveonline.com";
+        public Account(ApiKey key) {
             Key = key;
+            UriBase = "https://api.eveonline.com";
         }
 
         /// <summary>
@@ -88,6 +89,5 @@ namespace eZet.Eve.EoLib.Entity {
             var result = await Task.Run(() => GetCharacterList());
             return result;
         }
-
     }
 }
