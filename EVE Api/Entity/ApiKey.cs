@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Dto.EveApi.Account;
@@ -112,6 +110,14 @@ namespace eZet.Eve.EoLib.Entity {
         public async Task<XmlResponse<CharacterList>> GetCharacterListAsync(IProgress<int> progress = null) {
             var result = await Task.Run(() => GetCharacterList());
             return result;
+        }
+
+        protected bool HasAccess(int mask) {
+            return true;
+        }
+
+        protected void RequireAccess(int mask) {
+            
         }
 
         private void lazyLoad() {

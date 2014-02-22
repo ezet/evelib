@@ -126,6 +126,7 @@
     <Content Include="Xml\corp\WalletTransactions.xml" />
     <Content Include="Xml\eve\AllianceList.xml" />
     <Content Include="Xml\eve\CallList.xml" />
+    <Content Include="Xml\eve\CharacterInfo.xml" />
     <Content Include="Xml\eve\FacWarStats.xml" />
     <Content Include="Xml\eve\FacWarTopStats.xml" />
     <Content Include="Xml\eve\SkillTree.xml" />

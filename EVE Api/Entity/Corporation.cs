@@ -23,23 +23,17 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         public ApiKey Key { get; private set; }
 
-
-        private string _corporationName;
+        /// <summary>
+        /// The corporation ID.
+        /// </summary>
+        public long CorporationId { get; private set; }
 
         /// <summary>
         /// The corporation name.
         /// </summary>
-        public string CorporationName {
-            get {
-                if (_corporationName == null)
-                    load();
-                return _corporationName;
-            }
-            private set { _corporationName = value; }
-        }
+        public string CorporationName { get; private set; }
 
 
-        public long CorporationId { get; private set; }
 
 
         /// <summary>
@@ -330,11 +324,5 @@ namespace eZet.Eve.EoLib.Entity {
                 ? request(new WalletTransactions(), relPath, Key, "rowCount", count)
                 : request(new WalletTransactions(), relPath, Key, "rowCount", count, "fromID", fromId);
         }
-
-        private void load() {
-
-
-        }
-
     }
 }

@@ -10,7 +10,7 @@ namespace eZet.Eve.EoLib.Test {
         private readonly Corporation corp;
 
         public Corporation_StaticDeserializationTests() {
-            corp = new Corporation(new ApiKey(0, ""), 0, 0);
+            corp = new Corporation(new CorporationKey(0, ""), 0, "");
             corp.Requester = new TestRequester();
         }
 

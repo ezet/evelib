@@ -39,17 +39,6 @@ namespace eZet.Eve.EoLib {
         private const string CorpCode = "Zw1DpOUDPYrv49iGTVkDHoRburv2rAAYEbret9B5IVfcVjVDR4DE2bo7p1RMZQMU";
 
         /// <summary>
-        /// Gets the ApiKey for this instance
-        /// </summary>
-        public ApiKey ApiKey { get; private set; }       
-
-        /// <summary>
-        /// Gets the current Character for this instance
-        /// </summary>
-        public Character Character { get; private set; }
-        
- 
-        /// <summary>
         /// Gets the Core for this instance
         /// </summary>
         public Core Core { get; private set; }
@@ -71,7 +60,16 @@ namespace eZet.Eve.EoLib {
         /// </summary>
         public Image Image { get; private set; }
 
-        static public void Main() {
+        public static CharacterKey GetCharacterKey(long keyId, string vCode) {
+            return new CharacterKey(keyId, vCode);
+        }
+
+        public static CorporationKey GetCorporationKey(long keyId, string vCode) {
+            return new CorporationKey(keyId, vCode);
+        }
+
+
+        public static void Main() {
             var corp = new CorporationKey(CorpId, CorpCode);
             var mira = new CharacterKey(MiraId, MiraCode);
             var corpinfo = corp.GetApiKeyInfo();

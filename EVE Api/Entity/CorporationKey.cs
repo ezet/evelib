@@ -18,9 +18,7 @@ namespace eZet.Eve.EoLib.Entity {
         }
         public CorporationKey(long keyId, string vCode)
             : base(keyId, vCode) {
-
         }
-
 
 
         protected override void load(XmlResponse<ApiKeyInfo> info) {

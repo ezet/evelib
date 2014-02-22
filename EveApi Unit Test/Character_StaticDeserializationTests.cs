@@ -10,8 +10,14 @@ namespace eZet.Eve.EoLib.Test {
         private readonly Character character;
 
         public Character_StaticDeserializationTests() {
-            character = new EoLib(new ApiKey(123123123, ""), 0).Character;
+            character = new Character(new CharacterKey(0, ""), 0, "");
             character.Requester = new TestRequester();
+        }
+
+        [TestMethod]
+        public void GetCharacterInfo() {
+            var xml = character.GetCharacterInfo();
+            Assert.AreEqual(99999999, xml.Result.CharacterId);
         }
 
         [TestMethod]

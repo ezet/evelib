@@ -12,14 +12,14 @@ namespace eZet.Eve.EoLib.Entity {
     public class Character : BaseEntity {
 
         /// <summary>
-        /// The base URI for all requests by this entity
-        /// </summary>
-        protected override sealed string UriBase { get; set; }
-
-        /// <summary>
         /// The Wallet identifier. For characters this is always 1000.
         /// </summary>
         public const int AccountKey = 1000;
+
+        /// <summary>
+        /// The base URI for all requests by this entity
+        /// </summary>
+        protected override sealed string UriBase { get; set; }
 
         /// <summary>
         /// The API key used for this character.
@@ -31,19 +31,10 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         public long CharacterId { get; private set; }
 
-        private string _name;
-
         /// <summary>
         /// The name of this character.
         /// </summary>
-        public string CharacterName {
-            get {
-                if (_name == null)
-                    load();
-                return _name;
-            }
-            private set { _name = value; }
-        }
+        public string CharacterName { get; private set; }
 
         /// <summary>
         /// Creates a new object using the proided key and character id.
@@ -51,12 +42,11 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
         /// <param name="characterName"></param>
-        internal Character(ApiKey key, long characterId, string characterName) {
+        public Character(ApiKey key, long characterId, string characterName) {
             Key = key;
             CharacterId = characterId;
             CharacterName = characterName;
             UriBase = "https://api.eveonline.com";
-
         }
 
         
@@ -349,11 +339,6 @@ namespace eZet.Eve.EoLib.Entity {
             return fromId == 0
                 ? request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count)
                 : request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
-        }
-
-        private void load() {
-            var response = GetCharacterSheet();
-            CharacterName = response.Result.Name;
         }
     }
 }
