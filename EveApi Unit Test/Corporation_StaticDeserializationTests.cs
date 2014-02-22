@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using eZet.Eve.EoLib.Entity;
+using eZet.Eve.EoLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EoLib.Test {
@@ -10,7 +11,7 @@ namespace eZet.Eve.EoLib.Test {
 
         public Corporation_StaticDeserializationTests() {
             corp = new Corporation(new ApiKey(0, ""), 0, 0);
-            corp.RequestHelper = new TestRequestHelper();
+            corp.Requester = new TestRequester();
         }
 
         [TestMethod]

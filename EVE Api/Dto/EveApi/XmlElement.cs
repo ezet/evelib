@@ -7,46 +7,67 @@ using System.Xml.Serialization;
 using eZet.Eve.EoLib.Entity;
 
 namespace eZet.Eve.EoLib.Dto.EveApi {
+
+    /// <summary>
+    /// Provides utility methods for XML element classes.
+    /// </summary>
     public abstract class XmlElement {
 
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";
-
-        private bool firstRead = true;
 
         protected IEnumerable<XElement> list { get; set; }
 
         protected XElement root { get; set; }
 
-        public virtual void SetApiKey(ApiKey key) {
-
-        }
-
+        /// <summary>
+        /// Sets and initializes the xml document for pasing using xml to linq.
+        /// </summary>
+        /// <param name="reader"></param>
         protected void setRoot(XmlReader reader) {
             root = XElement.Load(reader.ReadSubtree());
             list = root.Descendants();
         }
 
+        /// <summary>
+        /// Deserializes an XML rowset using .NETs XmlSerializer.
+        /// </summary>
+        /// <typeparam name="T">KeyType used for deserialization.</typeparam>
+        /// <param name="reader">A reader containing the rowset to deserialize.</param>
+        /// <param name="type">An instance of the type.</param>
+        /// <returns></returns>
         protected virtual XmlRowSet<T> deserializeRowSet<T>(XmlReader reader, T type) {
-            if (firstRead) {
-                reader.ReadToDescendant("rowset");
-                firstRead = false;
-            }
-            else {
-                reader.ReadToNextSibling("rowset");
-            }
+            reader.ReadToDescendant("rowset");
             var serializer = new XmlSerializer(typeof(XmlRowSet<T>));
             return (XmlRowSet<T>)serializer.Deserialize(reader);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="reader"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         protected virtual T deserialize<T>(XmlReader reader, T type) {
             var serializer = new XmlSerializer(typeof(T));
             return (T)serializer.Deserialize(reader);
         }
 
+        /// <summary>
+        /// Gets a XML reader for a regular element for use with reflected XML serialization.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         protected XmlReader getReader(string name) {
             return list.First(x => x.Name == name).CreateReader();
         }
 
+        /// <summary>
+        /// Gets a XML reader for a rowset element for use with reflected XML serialization.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         protected XmlReader getRowSetReader(string name) {
             var rowset = list.Where(x => x.Name == "rowset").First(r => r.Attribute("name").Value == name);
             return rowset.CreateReader();
@@ -65,7 +86,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
         }
 
         protected decimal getDecimal(string name) {
-            return decimal.Parse(list.First(x => x.Name == name).Value, NumberStyles.AllowDecimalPoint);
+            return decimal.Parse(list.First(x => x.Name == name).Value, CultureInfo.InvariantCulture);
         }
 
         protected string getStringAttribute(string name) {

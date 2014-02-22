@@ -34,20 +34,6 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
 
         [XmlAttribute("version")]
         public int Version { get; set; }
-
-        private ApiKey apiKeyField;
-
-        [XmlIgnore]
-        public ApiKey ApiKey {
-            get {
-                return apiKeyField;
-            }
-            set {
-                apiKeyField = value;
-                Result.SetApiKey(value);
-            }
-        }
-
     }
 
 

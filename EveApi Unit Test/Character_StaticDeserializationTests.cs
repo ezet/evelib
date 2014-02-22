@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using eZet.Eve.EoLib.Entity;
+using eZet.Eve.EoLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EoLib.Test {
@@ -10,7 +11,7 @@ namespace eZet.Eve.EoLib.Test {
 
         public Character_StaticDeserializationTests() {
             character = new EoLib(new ApiKey(123123123, ""), 0).Character;
-            character.RequestHelper = new TestRequestHelper();
+            character.Requester = new TestRequester();
         }
 
         [TestMethod]

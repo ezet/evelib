@@ -42,8 +42,9 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
         }
 
         public void ReadXml(XmlReader reader) {
-            CorporationContacts = deserializeRowSet(reader, new Contact());
-            AllianceContacts = deserializeRowSet(reader, new Contact());
+            setRoot(reader);
+            CorporationContacts = deserializeRowSet(getRowSetReader("corporateContactList"), new Contact());
+            AllianceContacts = deserializeRowSet(getRowSetReader("allianceContactList"), new Contact());
         }
 
         public void WriteXml(XmlWriter writer) {

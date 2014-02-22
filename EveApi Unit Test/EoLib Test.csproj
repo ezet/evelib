@@ -51,14 +51,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Account_StaticDeserializationTests.cs" />
     <Compile Include="Character_StaticDeserializationTests.cs" />
     <Compile Include="Core_Tests.cs" />
     <Compile Include="Corporation_StaticDeserializationTests.cs" />
     <Compile Include="Map_Tests.cs" />
-    <Compile Include="Mocks\TestRequestHelper.cs" />
+    <Compile Include="Mocks\TestRequester.cs" />
     <Compile Include="Mocks\TestSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EoLib_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EVE Api\EoLib.csproj">

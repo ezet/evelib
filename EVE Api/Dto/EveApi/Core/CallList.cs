@@ -52,8 +52,9 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Core {
         }
 
         public void ReadXml(System.Xml.XmlReader reader) {
-            CallGroups = deserializeRowSet(reader, new CallGroup());
-            Calls = deserializeRowSet(reader, new Call());
+            setRoot(reader);
+            CallGroups = deserializeRowSet(getRowSetReader("callGroups"), new CallGroup());
+            Calls = deserializeRowSet(getRowSetReader("calls"), new Call());
         }
 
         public void WriteXml(System.Xml.XmlWriter writer) {

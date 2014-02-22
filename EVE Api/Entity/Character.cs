@@ -36,7 +36,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The name of this character.
         /// </summary>
-        public string Name {
+        public string CharacterName {
             get {
                 if (_name == null)
                     load();
@@ -45,51 +45,28 @@ namespace eZet.Eve.EoLib.Entity {
             private set { _name = value; }
         }
 
-        private Corporation _corporation;
-
-        /// <summary>
-        /// The Corporation object for this character.
-        /// </summary>
-        public Corporation Corporation {
-            get {
-                if (_corporation == null)
-                    load();
-                return _corporation;
-            }
-            private set { _corporation = value; }
-        }
-
         /// <summary>
         /// Creates a new object using the proided key and character id.
         /// </summary>
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
-        internal Character(ApiKey key, long characterId) {
+        /// <param name="characterName"></param>
+        internal Character(ApiKey key, long characterId, string characterName) {
             Key = key;
             CharacterId = characterId;
+            CharacterName = characterName;
             UriBase = "https://api.eveonline.com";
 
         }
 
-        /// <summary>
-        /// Creates a new object using the proided key, character id and corporation id.
-        /// </summary>
-        /// <param name="key">A valid key.</param>
-        /// <param name="characterId">A character id exposed by the provided key.</param>
-        /// <param name="corporationId">The corporation id of the characters current corporation.</param>
-        internal Character(ApiKey key, long characterId, long corporationId)
-            : this(key, characterId) {
-            Corporation = new Corporation(key, CharacterId, corporationId);
-        }
-
+        
         /// <summary>
         /// Returns general information about the character.
         /// </summary>
         /// <returns></returns>
         public XmlResponse<CharacterInfo> GetCharacterInfo() {
-            const string path = "/eve/CharacterInfo.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterID", CharacterId);
-            return request(path, new CharacterInfo(), postString);
+            const string relPath = "/eve/CharacterInfo.xml.aspx";
+            return request(new CharacterInfo(), relPath, Key, "characterID", CharacterId);
         }
 
         /// <summary>
@@ -98,8 +75,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<AccountBalance> GetAccountBalance() {
             const string relPath = "/char/AccountBalance.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new AccountBalance(), postString);
+            return request(new AccountBalance(), relPath, Key, "characterID", CharacterId);
         }
 
         /// <summary>
@@ -108,8 +84,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<AssetList> GetAssetList() {
             const string relPath = "/char/AssetList.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new AssetList(), postString);
+            return request(new AssetList(), relPath, Key, "characterID", CharacterId);
         }
 
         /// <summary>
@@ -123,8 +98,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<CalendarEventAttendees> GetCalendarEventAttendees(long eventId) {
             const string relPath = "/char/CalendarEventAttendees.xml.aspx";
-            var postString = RequestHelper.GeneratePostString("EventIds", eventId);
-            return request(relPath, new CalendarEventAttendees(), postString);
+            return request(new CalendarEventAttendees(), relPath, Key, "characterID", CharacterId, "EventIDs", eventId);
         }
 
         /// <summary>
@@ -133,8 +107,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<CharacterSheet> GetCharacterSheet() {
             const string relPath = "/char/CharacterSheet.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new CharacterSheet(), postString);
+            return request(new CharacterSheet(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -145,8 +118,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<ContactList> GetContactList() {
             const string relPath = "/char/ContactList.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new ContactList(), postString);
+            return request(new ContactList(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -155,8 +127,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<ContactNotifications> GetContactNotifications() {
             const string relPath = "/char/ContactNotifications.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new ContactNotifications(), postString);
+            return request(new ContactNotifications(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -165,8 +136,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<ContractList> GetContracts() {
             const string relPath = "/char/Contracts.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new ContractList(), postString);
+            return request(new ContractList(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -176,8 +146,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<ContractItems> GetContractItems(long contractId) {
             const string relPath = "/char/ContractItems.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "contractID", contractId);
-            return request(relPath, new ContractItems(), postString);
+            return request(new ContractItems(), relPath, Key, "characterId", CharacterId, "contractID", contractId);
         }
 
         /// <summary>
@@ -186,8 +155,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<ContractBids> GetContractBids() {
             const string relPath = "/char/ContractBids.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new ContractBids(), postString);
+            return request(new ContractBids(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -196,8 +164,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/char/FacWarStats.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new FactionWarfareStats(), postString);
+            return request(new FactionWarfareStats(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -206,8 +173,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<IndustryJobs> GetIndustryJobs() {
             const string relPath = "/char/IndustryJobs.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new IndustryJobs(), postString);
+            return request(new IndustryJobs(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -220,9 +186,9 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<KillLog> GetKillLog(long killId = 0) {
             // TODO Add walking
             const string relPath = "/char/KillLog.xml.aspx";
-            var postString = killId != 0 ? RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "beforeKillID", killId)
-                : RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new KillLog(), postString);
+            return killId != 0
+                ? request(new KillLog(), relPath, Key, "characterId", CharacterId, "beforeKillId", killId)
+                : request(new KillLog(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -235,8 +201,7 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<Locations> GetLocations(params long[] list) {
             const string relPath = "/char/Locations.xml.aspx";
             var ids = String.Join(",", list);
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "IDs", ids);
-            return request(relPath, new Locations(), postString);
+            return request(new Locations(), relPath, Key, "characterId", CharacterId, "IDs", ids);
 
         }
 
@@ -250,8 +215,7 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<MailBodies> GetMailBodies(params long[] list) {
             const string relPath = "/char/MailBodies.xml.aspx";
             var ids = String.Join(",", list);
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "IDs", ids);
-            return request(relPath, new MailBodies(), postString);
+            return request(new MailBodies(), relPath, Key, "characterId", CharacterId, "IDs", ids);
         }
 
         /// <summary>
@@ -260,8 +224,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<MailingLists> GetMailingLists() {
             const string relPath = "/char/mailinglists.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new MailingLists(), postString);
+            return request(new MailingLists(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -270,8 +233,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<MailMessages> GetMailMessages() {
             const string relPath = "/char/MailMessages.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new MailMessages(), postString);
+            return request(new MailMessages(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -281,9 +243,9 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
             const string relPath = "/char/MarketOrders.xml.aspx";
-            var postString = (orderId == 0) ? RequestHelper.GeneratePostString(Key, "characterId", CharacterId)
-           : RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "orderID", orderId);
-            return request(relPath, new MarketOrders(), postString);
+            return orderId == 0
+                ? request(new MarketOrders(), relPath, Key, "characterId", CharacterId)
+                : request(new MarketOrders(), relPath, Key, "characterId", CharacterId, "orderID", orderId);
         }
 
         /// <summary>
@@ -292,8 +254,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<MedalList> GetMedals() {
             const string relPath = "/char/Medals.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new MedalList(), postString);
+            return request(new MedalList(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -302,8 +263,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<NotificationList> GetNotifications() {
             const string relPath = "/char/Notifications.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new NotificationList(), postString);
+            return request(new NotificationList(), relPath, Key, "characterId", CharacterId);
         }
 
 
@@ -315,8 +275,7 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<NotificationTexts> GetNotificationTexts(params long[] ids) {
             const string relPath = "/char/NotificationTexts.xml.aspx";
             var idList = string.Join(",", ids);
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "IDs", idList);
-            return request(relPath, new NotificationTexts(), postString);
+            return request(new NotificationTexts(), relPath, Key, "characterId", CharacterId, "IDs", idList);
         }
 
         /// <summary>
@@ -325,8 +284,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<Research> GetResearch() {
             const string relPath = "/char/Research.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new Research(), postString);
+            return request(new Research(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -335,8 +293,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<SkillTraining> GetSkillTraining() {
             const string relPath = "/char/SkillInTraining.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new SkillTraining(), postString);
+            return request(new SkillTraining(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -345,8 +302,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<SkillQueue> GetSkillQueue() {
             const string relPath = "/char/SkillQueue.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new SkillQueue(), postString);
+            return request(new SkillQueue(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -355,8 +311,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<StandingsList> GetStandings() {
             const string relPath = "/char/Standings.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new StandingsList(), postString);
+            return request(new StandingsList(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -365,8 +320,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<UpcomingCalendarEvents> GetUpcomingCalendarEvents() {
             const string relPath = "/char/UpcomingCalendarEvents.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(Key, "characterId", CharacterId);
-            return request(relPath, new UpcomingCalendarEvents(), postString);
+            return request(new UpcomingCalendarEvents(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -378,10 +332,9 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
             // TODO add walking
             const string relPath = "/char/WalletJournal.xml.aspx";
-            var postString = fromId == 0
-                ? RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "rowCount", count)
-                : RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
-            return request(relPath, new WalletJournal(), postString);
+            return fromId == 0
+                ? request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount, count")
+                : request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount, count", "fromID", fromId);
         }
 
         /// <summary>
@@ -393,16 +346,14 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<WalletTransactions> GetWalletTransactions(int count = 1000, long fromId = 0) {
             // TODO add walking
             const string relPath = "/char/WalletTransactions.xml.aspx";
-            var postString = fromId == 0
-                ? RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "rowCount", count)
-                : RequestHelper.GeneratePostString(Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
-            return request(relPath, new WalletTransactions(), postString);
+            return fromId == 0
+                ? request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count)
+                : request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
         }
 
         private void load() {
             var response = GetCharacterSheet();
-            Name = response.Result.Name;
-            Corporation = new Corporation(Key, CharacterId, response.Result.CorporationId);
+            CharacterName = response.Result.Name;
         }
     }
 }

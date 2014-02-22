@@ -9,7 +9,6 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
         [XmlElement("corporationNPCStandings")]
         public StandingType CorporationStandings { get; set; }
 
-
         public class StandingType : XmlElement, IXmlSerializable {
 
             [XmlElement("rowset")]
@@ -26,9 +25,10 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Corporation {
             }
 
             public void ReadXml(XmlReader reader) {
-                Agents = deserializeRowSet(reader, new StandingEntry());
-                Corporations = deserializeRowSet(reader, new StandingEntry());
-                Factions = deserializeRowSet(reader, new StandingEntry());
+                setRoot(reader);
+                Agents = deserializeRowSet(getRowSetReader("agents"), new StandingEntry());
+                Corporations = deserializeRowSet(getRowSetReader("NPCCorporations"), new StandingEntry());
+                Factions = deserializeRowSet(getRowSetReader("factions"), new StandingEntry());
             }
 
             public void WriteXml(XmlWriter writer) {

@@ -6,7 +6,12 @@ using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Dto.EveApi.Account;
 
 namespace eZet.Eve.EoLib.Entity {
-    public class ApiKey : BaseEntity {
+
+    public enum ApiKeyType {
+        Character, Corporation
+    }
+
+    public abstract class ApiKey : BaseEntity {
 
         /// <summary>
         /// The base URI for all requests by this entity
@@ -16,12 +21,12 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The Key ID for this key.
         /// </summary>
-        public long KeyId { get; private set; }
+        public long KeyId { get; protected set; }
 
         /// <summary>
         /// The VCode for this key.
         /// </summary>
-        public string VCode { get; private set; }
+        public string VCode { get; protected set; }
 
         private int _accessMask;
 
@@ -31,24 +36,24 @@ namespace eZet.Eve.EoLib.Entity {
         public int AccessMask {
             get {
                 if (_accessMask == default(int))
-                    load();
+                    lazyLoad();
                 return _accessMask;
             }
-            private set { _accessMask = value; }
+            protected set { _accessMask = value; }
         }
 
-        private string _type;
+        private ApiKeyType? _type;
 
         /// <summary>
         /// The type of key, possible values are character or corporation.
         /// </summary>
-        public string Type {
+        public ApiKeyType? KeyType {
             get {
-                if (_type == null)
-                    load();
+                if (_type != null)
+                    lazyLoad();
                 return _type;
             }
-            private set { _type = value; }
+            protected set { _type = value; }
         }
 
         private DateTime _expireTime;
@@ -59,24 +64,10 @@ namespace eZet.Eve.EoLib.Entity {
         public DateTime ExpireDate {
             get {
                 if (_expireTime == default(DateTime))
-                    load();
+                    lazyLoad();
                 return _expireTime;
             }
-            private set { _expireTime = value; }
-        }
-
-        private ReadOnlyCollection<long> _characters;
-
-        /// <summary>
-        /// A list of valid character ids for this key.
-        /// </summary>
-        public ReadOnlyCollection<long> Characters {
-            get {
-                if (_characters == null)
-                    load();
-                return _characters;
-            }
-            private set { _characters = value; }
+            protected set { _expireTime = value; }
         }
 
         /// <summary>
@@ -84,31 +75,54 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
-        public ApiKey(long keyId, string vCode) {
+        protected ApiKey(long keyId, string vCode) {
+            UriBase = "https://api.eveonline.com";
             KeyId = keyId;
             VCode = vCode;
-            UriBase = "https://api.eveonline.com";
         }
 
-        internal XmlResponse<ApiKeyInfo> GetInfo() {
+        internal XmlResponse<ApiKeyInfo> GetApiKeyInfo() {
             const int mask = 0;
             const string uri = "/account/APIKeyInfo.xml.aspx";
-            var postString = RequestHelper.GeneratePostString(this);
-            return request(uri, new ApiKeyInfo(), postString);
+            return request(new ApiKeyInfo(), uri, this);
         }
 
-        internal async Task<XmlResponse<ApiKeyInfo>> GetInfoAsync(IProgress<int> progress = null) {
-            var result = await Task.Run(() => GetInfo());
+        internal async Task<XmlResponse<ApiKeyInfo>> GetApiKeyGetInfoAsync(IProgress<int> progress = null) {
+            var result = await Task.Run(() => GetApiKeyInfo());
             return result;
         }
 
-        private void load() {
-            var info = GetInfo();
+
+        /// <summary>
+        /// Returns a list of all characters on an account.
+        /// </summary>
+        /// <returns></returns>
+        public XmlResponse<CharacterList> GetCharacterList() {
+            const int mask = 0;
+            const string uri = "/account/Characters.xml.aspx";
+            var response = request(new CharacterList(), uri, this);
+            return response;
+        }
+
+        /// <summary>
+        /// Returns a list of all characters on an account.
+        /// </summary>
+        /// <param name="progress"></param>
+        /// <returns></returns>
+        public async Task<XmlResponse<CharacterList>> GetCharacterListAsync(IProgress<int> progress = null) {
+            var result = await Task.Run(() => GetCharacterList());
+            return result;
+        }
+
+        private void lazyLoad() {
+            var info = GetApiKeyInfo();
+            load(info);
+        }
+
+        protected virtual void load(XmlResponse<ApiKeyInfo> info) {
             AccessMask = info.Result.Key.AccessMask;
-            Type = info.Result.Key.Type;
+            KeyType =  (ApiKeyType)Enum.Parse(typeof(ApiKeyType), info.Result.Key.Type);
             ExpireDate = info.Result.Key.ExpireDate;
-            var list = info.Result.Key.Characters.Select(c => c.CharacterId).ToList();
-            Characters = list.AsReadOnly();
         }
     }
 }

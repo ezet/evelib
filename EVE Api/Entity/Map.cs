@@ -17,7 +17,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<FactionWarfareSystems> GetFactionWarSystems() {
             const string path = "/map/FacWarSystems.xml.aspx";
-            return request(path, new FactionWarfareSystems());
+            return request(new FactionWarfareSystems(), path);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<Jumps> GetJumps() {
             const string path = "/map/Jumps.xml.aspx";
-            return request(path, new Jumps());
+            return request(new Jumps(), path);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<Kills> GetKills() {
             const string path = "/map/Kills.xml.aspx";
-            return request(path, new Kills());
+            return request(new Kills(), path);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         public XmlResponse<Sovereignty> GetSovereignty() {
             const string path = "/map/Sovereignty.xml.aspx";
-            return request(path, new Sovereignty());
+            return request(new Sovereignty(), path);
         }
 
         /// <summary>

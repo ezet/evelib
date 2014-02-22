@@ -45,9 +45,10 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
         }
 
         public void ReadXml(XmlReader reader) {
-            PersonalContacts = deserializeRowSet(reader, new Contact());
-            CorporationContacts = deserializeRowSet(reader, new Contact());
-            AllianceContacts = deserializeRowSet(reader, new Contact());
+            setRoot(reader);
+            PersonalContacts = deserializeRowSet(getRowSetReader("contactList"), new Contact());
+            CorporationContacts = deserializeRowSet(getRowSetReader("corporateContactList"), new Contact());
+            AllianceContacts = deserializeRowSet(getRowSetReader("allianceContactList"), new Contact());
         }
 
         public void WriteXml(XmlWriter writer) {

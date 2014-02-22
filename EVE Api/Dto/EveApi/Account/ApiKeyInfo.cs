@@ -13,11 +13,6 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
         [XmlElement("key")]
         public ApiKeyData Key { get; set; }
 
-        public override void SetApiKey(ApiKey key) {
-            foreach (var character in Key.Characters) {
-                character.ApiKey = key;
-            }
-        }
     }
 
     public class ApiKeyData {
@@ -37,7 +32,9 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
         [XmlAttribute("expires")]
         public string ExpireDateAsString {
             get { return ExpireDate.ToString(XmlElement.DateFormat); }
-            set { ExpireDate = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
+            set {
+                ExpireDate = value == "" ? DateTime.MinValue : DateTime.ParseExact(value, XmlElement.DateFormat, null);
+            }
         }
 
     }

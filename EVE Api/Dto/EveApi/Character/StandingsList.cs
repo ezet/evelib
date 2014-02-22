@@ -25,9 +25,10 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
             }
 
             public void ReadXml(XmlReader reader) {
-                Agents = deserializeRowSet(reader, new StandingEntry());
-                Corporations = deserializeRowSet(reader, new StandingEntry());
-                Factions = deserializeRowSet(reader, new StandingEntry());
+                setRoot(reader);
+                Agents = deserializeRowSet(getRowSetReader("agents"), new StandingEntry());
+                Corporations = deserializeRowSet(getRowSetReader("NPCCorporations"), new StandingEntry());
+                Factions = deserializeRowSet(getRowSetReader("factions"), new StandingEntry());
             }
 
             public void WriteXml(XmlWriter writer) {

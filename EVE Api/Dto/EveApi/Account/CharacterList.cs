@@ -13,11 +13,6 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Account {
         [XmlElement("rowset")]
         public XmlRowSet<CharacterInfo> Characters;
 
-        public override void SetApiKey(ApiKey key) {
-            foreach (var character in Characters) {
-                character.ApiKey = key;
-            }
-        }
     }
  
 }

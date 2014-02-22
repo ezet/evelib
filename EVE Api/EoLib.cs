@@ -30,6 +30,14 @@ namespace eZet.Eve.EoLib {
 
         private const string VCode = "ubXVyyqDzjCRIcFbFxbTyS4I9B8n3ncQepGwDkz6EmVkoG2k9lTHhObiIxYgC8eQ";
 
+        private const int MiraId = 3120814;
+
+        private const string MiraCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
+
+        private const int CorpId = 3120830;
+
+        private const string CorpCode = "Zw1DpOUDPYrv49iGTVkDHoRburv2rAAYEbret9B5IVfcVjVDR4DE2bo7p1RMZQMU";
+
         /// <summary>
         /// Gets the ApiKey for this instance
         /// </summary>
@@ -40,11 +48,7 @@ namespace eZet.Eve.EoLib {
         /// </summary>
         public Character Character { get; private set; }
         
-        /// <summary>
-        /// Gets the Account for this instance
-        /// </summary>
-        public Account Account { get; private set; }
-
+ 
         /// <summary>
         /// Gets the Core for this instance
         /// </summary>
@@ -68,7 +72,11 @@ namespace eZet.Eve.EoLib {
         public Image Image { get; private set; }
 
         static public void Main() {
-            var api = new EoLib(Key, VCode);
+            var corp = new CorporationKey(CorpId, CorpCode);
+            var mira = new CharacterKey(MiraId, MiraCode);
+            var corpinfo = corp.GetApiKeyInfo();
+            var mirainfo = mira.GetApiKeyInfo();
+            return;
         }
 
         /// <summary>
@@ -79,43 +87,6 @@ namespace eZet.Eve.EoLib {
             Map = new Map();
             EveCentral = new EveCentral();
             Image = new Image();
-        }
-
-        /// <summary>
-        /// Creates a new instance using the given Api Key.
-        /// </summary>
-        /// <param name="apiKey">A valid API key.</param>
-         public EoLib(ApiKey apiKey) : this() {
-            ApiKey = apiKey;
-            Account = new Account(apiKey);
-        }
-
-        /// <summary>
-        /// Creates a new instance using the given key and character id.
-        /// </summary>
-        /// <param name="key">A ApiKey object.</param>
-        /// <param name="characterId">A valid character id for the key. Use ApiKey.Characters to get a list of valid ids.</param>
-        public EoLib(ApiKey key, long characterId) : this(key) {
-            verifyCharacter(key, characterId);
-            Character = new Character(ApiKey, characterId);
-        }
-
-        /// <summary>
-        /// Creates a new instance using the provided key information.
-        /// </summary>
-        /// <param name="keyId">The id of a valid API key.</param>
-        /// <param name="vCode">The corresponding vcode of the key id.</param>
-        public EoLib(int keyId, string vCode) : this(new ApiKey(keyId, vCode)) {
-        }
-
-        /// <summary>
-        /// Creates a new instance using the provided key information and character id.
-        /// </summary>
-        /// <param name="keyId">The id of a valid API key.</param>
-        /// <param name="vCode">The corresponding vcode of the key id.</param>
-        /// <param name="characterId">A valid character id for the key.  Use ApiKey.Characters to get a list of valid ids.</param>
-        public EoLib(int keyId, string vCode, long characterId)
-            : this(new ApiKey(keyId, vCode), characterId) {
         }
 
         /// <summary>

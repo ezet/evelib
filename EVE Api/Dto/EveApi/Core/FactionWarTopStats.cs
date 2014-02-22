@@ -37,12 +37,13 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Core {
             }
 
             public void ReadXml(XmlReader reader) {
-                KillsYesterday = deserializeRowSet(reader, new CharacterEntry());
-                KillsLastWeek = deserializeRowSet(reader, new CharacterEntry());
-                KillsTotal = deserializeRowSet(reader, new CharacterEntry());
-                VictoryPointsYesterday = deserializeRowSet(reader, new CharacterEntry());
-                VictoryPointsLastWeek = deserializeRowSet(reader, new CharacterEntry());
-                VictoryPointsTotal = deserializeRowSet(reader, new CharacterEntry());
+                setRoot(reader);
+                KillsYesterday = deserializeRowSet(getRowSetReader("KillsYesterday"), new CharacterEntry());
+                KillsLastWeek = deserializeRowSet(getRowSetReader("KillsLastWeek"), new CharacterEntry());
+                KillsTotal = deserializeRowSet(getRowSetReader("KillsTotal"), new CharacterEntry());
+                VictoryPointsYesterday = deserializeRowSet(getRowSetReader("VictoryPointsYesterday"), new CharacterEntry());
+                VictoryPointsLastWeek = deserializeRowSet(getRowSetReader("VictoryPointsLastWeek"), new CharacterEntry());
+                VictoryPointsTotal = deserializeRowSet(getRowSetReader("VictoryPointsTotal"), new CharacterEntry());
             }
 
             public void WriteXml(XmlWriter writer) {
@@ -76,12 +77,12 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Core {
             }
 
             public void ReadXml(XmlReader reader) {
-                KillsYesterday = deserializeRowSet(reader, new CorporationEntry());
-                KillsLastWeek= deserializeRowSet(reader, new CorporationEntry());
-                KillsTotal = deserializeRowSet(reader, new CorporationEntry());
-                VictoryPointsYesterday = deserializeRowSet(reader, new CorporationEntry());
-                VictoryPointsLastWeek = deserializeRowSet(reader, new CorporationEntry());
-                VictoryPointsTotal = deserializeRowSet(reader, new CorporationEntry());
+                KillsYesterday = deserializeRowSet(getRowSetReader("KillsYesterday"), new CorporationEntry());
+                KillsLastWeek = deserializeRowSet(getRowSetReader("KillsLastWeek"), new CorporationEntry());
+                KillsTotal = deserializeRowSet(getRowSetReader("KillsTotal"), new CorporationEntry());
+                VictoryPointsYesterday = deserializeRowSet(getRowSetReader("VictoryPointsYesterday"), new CorporationEntry());
+                VictoryPointsLastWeek = deserializeRowSet(getRowSetReader("VictoryPointsLastWeek"), new CorporationEntry());
+                VictoryPointsTotal = deserializeRowSet(getRowSetReader("VictoryPointsTotal"), new CorporationEntry());
             }
 
             public void WriteXml(XmlWriter writer) {

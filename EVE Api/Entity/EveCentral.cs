@@ -20,7 +20,7 @@ namespace eZet.Eve.EoLib.Entity {
         public MarketStatResponse getMarketStat() {
             const string uri = "/api/marketstat";
             var postString = "typeid=34&typeid=35&regionlimit=10000002";
-            string data = RequestHelper.Request(UriBase + uri, postString);
+            string data = Requester.Request(UriBase + uri, postString);
             var serializer = new XmlSerializer(typeof(MarketStatResponse));
             MarketStatResponse xmlResponse;
             using (var reader = XmlReader.Create(new StringReader(data))) {
@@ -37,7 +37,7 @@ namespace eZet.Eve.EoLib.Entity {
         public QuicklookResponse getQuicklook() {
             const string uri = "/api/quicklook";
             var postString = "typeid=34";
-            string data = RequestHelper.Request(UriBase + uri, postString);
+            string data = Requester.Request(UriBase + uri, postString);
             var serializer = new XmlSerializer(typeof(QuicklookResponse));
             QuicklookResponse xmlResponse;
             using (var reader = XmlReader.Create(new StringReader(data))) {
