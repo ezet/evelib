@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Dto.EveApi.Character;
 using eZet.Eve.EoLib.Dto.EveApi.Core;
 using FactionWarfareStats = eZet.Eve.EoLib.Dto.EveApi.Character.FactionWarfareStats;
+
+[assembly: InternalsVisibleTo("EoLib.Tests")]
+
 
 namespace eZet.Eve.EoLib.Entity {
 
@@ -42,7 +46,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
         /// <param name="characterName"></param>
-        public Character(ApiKey key, long characterId, string characterName) {
+        internal Character(ApiKey key, long characterId, string characterName) {
             Key = key;
             CharacterId = characterId;
             CharacterName = characterName;
@@ -323,8 +327,8 @@ namespace eZet.Eve.EoLib.Entity {
             // TODO add walking
             const string relPath = "/char/WalletJournal.xml.aspx";
             return fromId == 0
-                ? request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount, count")
-                : request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount, count", "fromID", fromId);
+                ? request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount", count)
+                : request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
         }
 
         /// <summary>

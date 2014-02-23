@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Dto.EveApi.Character;
 using eZet.Eve.EoLib.Dto.EveApi.Corporation;
 using FactionWarfareStats = eZet.Eve.EoLib.Dto.EveApi.Corporation.FactionWarfareStats;
 using StandingsList = eZet.Eve.EoLib.Dto.EveApi.Corporation.StandingsList;
 using ContactList = eZet.Eve.EoLib.Dto.EveApi.Corporation.ContactList;
+
+[assembly: InternalsVisibleTo("EoLib.Tests")]
+
 
 namespace eZet.Eve.EoLib.Entity {
 
@@ -33,16 +37,13 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         public string CorporationName { get; private set; }
 
-
-
-
         /// <summary>
         /// Created a new instance
         /// </summary>
         /// <param name="key"></param>
         /// <param name="corporationId"></param>
         /// <param name="corporationName"></param>
-        public Corporation(ApiKey key, long corporationId, string corporationName) {
+        internal Corporation(ApiKey key, long corporationId, string corporationName) {
             Key = key;
             CorporationId = corporationId;
             CorporationName = corporationName;
@@ -308,8 +309,8 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
             const string relPath = "/corp/WalletJournal.xml.aspx";
             return fromId == 0
-                         ? request(new WalletJournal(), relPath, Key, "rowCount, count")
-                         : request(new WalletJournal(), relPath, Key, "rowCount, count", "fromID", fromId);
+                         ? request(new WalletJournal(), relPath, Key, "rowCount", count)
+                         : request(new WalletJournal(), relPath, Key, "rowCount", count, "fromID", fromId);
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
+using eZet.Eve.EoLib.Dto.EveApi.Core;
 using eZet.Eve.EoLib.Entity;
 
 namespace eZet.Eve.EoLib.Dto.EveApi {
@@ -34,6 +35,19 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
 
         [XmlAttribute("version")]
         public int Version { get; set; }
+
+        [XmlElement("error")]
+        public Error Error { get; set; }
+    }
+
+    public class Error {
+        
+        [XmlAttribute("code")]
+        public int ErrorCode { get; set; }
+
+        [XmlText]
+        public string ErrorText { get; set; }
+        
     }
 
 

@@ -20,7 +20,6 @@ under the License.
 */
 
 using eZet.Eve.EoLib.Entity;
-using Character = eZet.Eve.EoLib.Entity.Character;
 
 namespace eZet.Eve.EoLib {
  

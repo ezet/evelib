@@ -48,42 +48,42 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
             public AvailabilityType Availability { get; set; }
 
             [XmlIgnore]
-            public DateTime DateIssued { get; private set; }
+            public DateTime? DateIssued { get; private set; }
 
             [XmlAttribute("dateIssued")]
             public string DateIssuedAsString {
-                get { return DateIssued.ToString(DateFormat); }
-                set { DateIssued = DateTime.ParseExact(value, DateFormat, null); }
+                get { return DateIssued.HasValue ? ((DateTime)DateIssued).ToString(DateFormat) : ""; }
+                set { DateIssued = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlIgnore]
-            public DateTime DateExpired { get; private set; }
+            public DateTime? DateExpired { get; private set; }
             
             [XmlAttribute("dateExpired")]
             public string DateExpiredAsString {
-                get { return DateExpired.ToString(DateFormat); }
-                set { DateExpired = DateTime.ParseExact(value, DateFormat, null); }
+                get { return DateExpired.HasValue ? ((DateTime)DateExpired).ToString(DateFormat) : ""; }
+                set { DateExpired = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlIgnore]
-            public DateTime DateAccepted { get; private set; }
+            public DateTime? DateAccepted { get; private set; }
 
             [XmlAttribute("dateAccepted")]
             public string DateAcceptedAsString {
-                get { return DateAccepted.ToString(DateFormat); }
-                set { DateAccepted = DateTime.ParseExact(value, DateFormat, null); }
+                get { return DateAccepted.HasValue ? ((DateTime)DateAccepted).ToString(DateFormat) : ""; }
+                set { DateAccepted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlAttribute("numDays")]
             public int NumDays { get; set; }
 
             [XmlIgnore]
-            public DateTime DateCompleted { get; private set; }
+            public DateTime? DateCompleted { get; private set; }
 
             [XmlAttribute("dateCompleted")]
             public string DateCompletedAsString {
-                get { return DateCompleted.ToString(DateFormat); }
-                set { DateCompleted = DateTime.ParseExact(value, DateFormat, null); }
+                get { return DateCompleted.HasValue ? ((DateTime)DateCompleted).ToString(DateFormat) : ""; }
+                set { DateCompleted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlAttribute("price")]

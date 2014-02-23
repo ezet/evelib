@@ -6,7 +6,7 @@ using eZet.Eve.EoLib.Dto.EveApi.Account;
 namespace eZet.Eve.EoLib.Entity {
 
     public enum ApiKeyType {
-        Character, Corporation
+        Account, Character, Corporation
     }
 
     public abstract class ApiKey : BaseEntity {
@@ -47,7 +47,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         public ApiKeyType? KeyType {
             get {
-                if (_type != null)
+                if (_type == null)
                     lazyLoad();
                 return _type;
             }
@@ -120,12 +120,9 @@ namespace eZet.Eve.EoLib.Entity {
             
         }
 
-        private void lazyLoad() {
-            var info = GetApiKeyInfo();
-            load(info);
-        }
+        protected abstract void lazyLoad();
 
-        protected virtual void load(XmlResponse<ApiKeyInfo> info) {
+        protected void load(XmlResponse<ApiKeyInfo> info) {
             AccessMask = info.Result.Key.AccessMask;
             KeyType =  (ApiKeyType)Enum.Parse(typeof(ApiKeyType), info.Result.Key.Type);
             ExpireDate = info.Result.Key.ExpireDate;

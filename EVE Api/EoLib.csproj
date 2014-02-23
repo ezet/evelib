@@ -121,6 +121,7 @@
     <Compile Include="Entity\CorporationKey.cs" />
     <Compile Include="Entity\Image.cs" />
     <Compile Include="Exceptions\IllegalCharacterIdException.cs" />
+    <Compile Include="Exceptions\InvalidKeyTypeException.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Util\IRequester.cs" />
     <Compile Include="Util\IXmlSerializer.cs" />

@@ -48,14 +48,10 @@ namespace eZet.Eve.EoLib.Entity {
             return result;
         }
 
-        protected override void load(XmlResponse<ApiKeyInfo> info ) {
-            base.load(info);
+        protected override void lazyLoad() {
+            var info = GetApiKeyInfo();
             var list = info.Result.Key.Characters.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList();
             Characters = list.AsReadOnly();
-        }
-
-        private void lazyLoad() {
-            var info = GetApiKeyInfo();
             load(info);
         }
     }

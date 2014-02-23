@@ -4,6 +4,7 @@ using eZet.Eve.EoLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EoLib.Test {
+
     [TestClass]
     public class Corporation_StaticDeserializationTests {
 
@@ -45,7 +46,7 @@ namespace eZet.Eve.EoLib.Test {
         }
 
         [TestMethod]
-        public void GetGontractItems() {
+        public void GetContractItems() {
             var xml = corp.GetContractItems(0);
             Assert.AreEqual(600515136, xml.Result.Items.First().RecordId);
         }

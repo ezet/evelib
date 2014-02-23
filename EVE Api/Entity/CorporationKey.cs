@@ -20,15 +20,10 @@ namespace eZet.Eve.EoLib.Entity {
             : base(keyId, vCode) {
         }
 
-
-        protected override void load(XmlResponse<ApiKeyInfo> info) {
-            base.load(info);
-            Corporation = new Corporation(this, info.Result.Key.Characters.First().CorporationId, info.Result.Key.Characters.First().CorporationName);
-        }
-
-        private void lazyLoad() {
+        protected override void lazyLoad() {
             var info = GetApiKeyInfo();
             load(info);
+            Corporation = new Corporation(this, info.Result.Key.Characters.First().CorporationId, info.Result.Key.Characters.First().CorporationName);
         }
     }
 }
