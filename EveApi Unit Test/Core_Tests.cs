@@ -14,95 +14,100 @@ namespace eZet.Eve.EoLib.Test {
 
 
         [TestMethod]
-        public void TestAllianceList() {
+        public void GetAllianceList_ValidRequest_HasResult() {
             var xml = api.Core.GetAllianceList();
-            Assert.IsNotNull(xml.Result.Alliances.First().AllianceName);
+            Assert.IsNotNull(xml.Result.Alliances.First());
         }
 
+        /// <summary>
+        /// Currently disabled by CCP
+        /// </summary>
         [TestMethod]
-        public void TestCertificateTree() {
+        public void GetCertificateTree_ValidRequest_HasResult() {
             var xml = api.Core.GetCertificateTree();
-            Assert.IsNotNull(xml.Result);
+            Assert.IsNotNull(xml.Result.Categories.First());
+        }
+
+        /// <summary>
+        /// Not yet implemented by CCP
+        /// </summary>
+        [TestMethod]
+        public void GetCharacterAffiliation_ValidRequest_HasResult() {
+            var xml = api.Core.GetCharacterAffiliation(CharId);
+            Assert.IsNotNull(xml.Result.Characters.First());
         }
 
         [TestMethod]
-        public void TestCharacterAffiliation() {
-            // TODO Not implemented by CCP yet
-            //var xml = api.Core.GetCharacterAffiliation(CharId);
-            //Assert.IsNotNull(xml.Result.Characters.First().CharacterName);
-        }
-
-        [TestMethod]
-        public void TestCharacterId() {
+        public void GetCharacterId_ValidName_IdIsEqual() {
             var xml = api.Core.GetCharacterId(CharName);
             Assert.AreEqual(CharId, xml.Result.Characters.First().CharacterId);
         }
 
         [TestMethod]
-        public void TestCharacterInfo() {
+        public void GetCharacterInfo_ValidId_IdIsEqual() {
             var xml = api.Core.GetCharacterInfo(CharId);
             Assert.AreEqual(CharId, xml.Result.CharacterId);
         }
 
         [TestMethod]
-        public void TestCharacterName() {
+        public void GetCharacterName_ValidId_NameIsEqual() {
             var xml = api.Core.GetCharacterName(CharId);
             Assert.AreEqual(CharName, xml.Result.Characters.First().CharacterName);
         }
 
         [TestMethod]
-        public void TestConquerableStations() {
+        public void GetConquerableStations_ValidRequest_HasResult() {
             var xml = api.Core.GetConquerableStations();
             Assert.IsNotNull(xml.Result.Stations.First().StationName);
         }
 
         [TestMethod]
-        public void TestErrorList() {
+        public void GetErrorList_ValidRequest_HasResult() {
             var xml = api.Core.GetErrorList();
             Assert.IsNotNull(xml.Result.Errors.First().ErrorText);
         }
 
         [TestMethod]
-        public void TestFactionWarfareStats() {
+        public void GetFactionWarfareStats_ValidRequest_HasResult() {
             var xml = api.Core.GetFactionWarfareStats();
             Assert.IsNotNull(xml.Result.Factions.First().FactionName);
         }
 
         [TestMethod]
-        public void TestFactionWarfareTopList() {
+        public void GetFactionWarfareTopList_ValidRequest_HasResult() {
             var xml = api.Core.GetFactionWarfareTopList();
             Assert.IsNotNull(xml.Result.Characters.KillsYesterday.First().CharacterName);
         }
 
         [TestMethod]
-        public void TestReferenceTypes() {
+        public void GetReferenceTypes_ValidRequest_HasResult() {
             var xml = api.Core.GetReferenceTypes();
             Assert.IsNotNull(xml.Result.RefTypes.First().RefTypeName);
         }
 
         [TestMethod]
-        public void TestSkillTree() {
+        public void GetSkillTree_ValidRequest_HasResult() {
             var xml = api.Core.GetSkillTree();
-            Assert.IsNotNull(xml.Result.Groups);
+            Assert.IsNotNull(xml.Result.Groups.First());
         }
 
         [TestMethod]
-        public void TestTypeName() {
+        public void GetTypeName_ValidId_HasResult() {
             var xml = api.Core.GetTypeName(12345);
             Assert.AreEqual("200mm Railgun I Blueprint", xml.Result.Types.First().TypeName);
         }
 
         [TestMethod]
-        public void TestServerStatus() {
+        public void GetServerStatus_ValidRequest_HasResult() {
             var xml = api.Core.GetServerStatus();
             Assert.IsNotNull(xml.Result.ServerOpen);
         }
 
         [TestMethod]
-        public void TestCallList() {
+        public void GetCallList_ValidRequest_HasResult() {
             var xml = api.Core.GetCallList();
-            Assert.IsNotNull(xml.Result.CallGroups.RowSetMeta.Key);
-            Assert.IsNotNull(xml.Result.Calls.RowSetMeta.Key);
+            Assert.IsNotNull(xml.Result.CallGroups.First());
+            Assert.IsNotNull(xml.Result.Calls.First());
         }
     }
 }
