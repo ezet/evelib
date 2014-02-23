@@ -326,10 +326,13 @@ namespace eZet.Eve.EoLib.Entity {
         public XmlResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
             // TODO add walking
             const string relPath = "/char/WalletJournal.xml.aspx";
-            return fromId == 0
+            var result = fromId == 0
                 ? request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount", count)
                 : request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
+            result.Result.CharWalker = GetWalletJournal;
+            return result;
         }
+
 
         /// <summary>
         /// Returns market transactions for the character.
@@ -338,11 +341,12 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
         public XmlResponse<WalletTransactions> GetWalletTransactions(int count = 1000, long fromId = 0) {
-            // TODO add walking
             const string relPath = "/char/WalletTransactions.xml.aspx";
-            return fromId == 0
+            var result = fromId == 0
                 ? request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count)
                 : request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
+            result.Result.CharWalker = GetWalletTransactions;
+            return result;
         }
     }
 }

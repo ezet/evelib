@@ -178,14 +178,17 @@ namespace eZet.Eve.EoLib.Test {
 
         [TestMethod]
         public void GetWalletJournal_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetWalletJournal();
+            var res = validKey.Corporation.GetWalletJournal(1001, 5);
             Assert.IsNotNull(res.Result);
+            var older = res.Result.GetOlder(50);
+
         }
 
         [TestMethod]
         public void GetWalletTransactions_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetWalletTransactions();
+            var res = validKey.Corporation.GetWalletTransactions(50);
             Assert.IsNotNull(res.Result);
+            res = res.Result.GetOlder(50);
         }
     }
 }

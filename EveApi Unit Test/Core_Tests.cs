@@ -12,7 +12,6 @@ namespace eZet.Eve.EoLib.Test {
 
         private const long CharId = 797400947;
 
-
         [TestMethod]
         public void GetAllianceList_ValidRequest_HasResult() {
             var xml = api.Core.GetAllianceList();

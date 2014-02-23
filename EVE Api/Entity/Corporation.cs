@@ -9,7 +9,6 @@ using ContactList = eZet.Eve.EoLib.Dto.EveApi.Corporation.ContactList;
 
 [assembly: InternalsVisibleTo("EoLib.Tests")]
 
-
 namespace eZet.Eve.EoLib.Entity {
 
     /// <summary>
@@ -205,7 +204,6 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<MemberSecurity> GetMemberSecurity() {
-            // TODO Rowsets
             const string relPath = "/corp/MemberSecurity.xml.aspx";
             return request(new MemberSecurity(), relPath, Key);
         }
@@ -256,7 +254,6 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<ShareholderList> GetShareholders() {
-            // TODO RowSet
             const string relPath = "/corp/Shareholders.xml.aspx";
             return request(new ShareholderList(), relPath, Key);
         }
@@ -266,7 +263,6 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<StandingsList> GetStandings() {
-            // TODO Rowset
             const string relPath = "/corp/Standings.xml.aspx";
             return request(new StandingsList(), relPath, Key);
         }
@@ -303,27 +299,35 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// Returns a list of journal transactions for the corporation.
         /// </summary>
+        /// <param name="division">Optional; Wallet Division used for request. Default is Master Wallet.</param>
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public XmlResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
+        public XmlResponse<WalletJournal> GetWalletJournal(int division = 1000, int count = 50, long fromId = 0) {
             const string relPath = "/corp/WalletJournal.xml.aspx";
-            return fromId == 0
-                         ? request(new WalletJournal(), relPath, Key, "rowCount", count)
-                         : request(new WalletJournal(), relPath, Key, "rowCount", count, "fromID", fromId);
+            var result = fromId == 0
+                ? request(new WalletJournal(), relPath, Key, "accountKey", division, "rowCount", count)
+                : request(new WalletJournal(), relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
+            result.Result.CorpWalker = GetWalletJournal;
+            result.Result.Division = division;
+            return result;
         }
 
         /// <summary>
         /// Returns market transactions for the corporation.
         /// </summary>
+        /// <param name="division">Optional; Wallet Division used for request. Default is Master Wallet.</param>
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public XmlResponse<WalletTransactions> GetWalletTransactions(int count = 1000, long fromId = 0) {
+        public XmlResponse<WalletTransactions> GetWalletTransactions(int division = 1000, int count = 1000, long fromId = 0) {
             const string relPath = "/corp/WalletTransactions.xml.aspx";
-            return fromId == 0
-                ? request(new WalletTransactions(), relPath, Key, "rowCount", count)
-                : request(new WalletTransactions(), relPath, Key, "rowCount", count, "fromID", fromId);
+            var result = fromId == 0
+                 ? request(new WalletTransactions(), relPath, Key, "accountKey", division, "rowCount", count)
+                 : request(new WalletTransactions(), relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
+            result.Result.CorpWalker = GetWalletTransactions;
+            result.Result.Division = division;
+            return result;
         }
     }
 }

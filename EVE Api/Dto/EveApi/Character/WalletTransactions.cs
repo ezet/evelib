@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
-
 
     [Serializable]
     [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -10,12 +10,28 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
     [XmlType(AnonymousType = true)]
     public class WalletTransactions : XmlElement {
 
+        internal delegate XmlResponse<WalletTransactions> CorpWalletTransactionWalker(int division = 1000, int count = 1000, long fromId = 0);
+
+        internal CorpWalletTransactionWalker CorpWalker;
+
+        internal delegate XmlResponse<WalletTransactions> CharWalletTransactionWalker(int count = 1000, long fromId = 0);
+
+        internal CharWalletTransactionWalker CharWalker;
+
+        internal int Division;
+
         [XmlElement("rowset")]
         public XmlRowSet<Transaction> Transactions { get; set; }
+
+        public XmlResponse<WalletTransactions> GetOlder(int count = 1000) {
+            var lastId = Transactions.OrderBy(t => t.TransactionId).First().TransactionId;
+            return CharWalker != null ? CharWalker.Invoke(count, lastId) : CorpWalker.Invoke(Division, count, lastId);
+        }
 
         [Serializable]
         [XmlRoot("row")]
         public class Transaction {
+
 
             [XmlIgnore]
             public DateTime TransactionDate { get; private set; }
@@ -54,7 +70,7 @@ namespace eZet.Eve.EoLib.Dto.EveApi.Character {
             public string StationName { get; set; }
 
             [XmlAttribute("transactionType")]
-            public string TransactioType { get; set; }
+            public string TransactionType { get; set; }
 
             [XmlAttribute("transactionFor")]
             public string TransactionFor { get; set; }
