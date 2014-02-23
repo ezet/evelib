@@ -13,32 +13,37 @@ namespace eZet.Eve.EoLib.Test {
   
 
         [TestMethod]
-        public void TestFacWarSystems() {
-            var xml = api.Map.GetFactionWarSystems();
-            Assert.IsNotNull(xml.Result.SolarSystems.First().SolarSystemName);
+        public void TestFacWarSystems_ValidRequest_HasResult() {
+            var res = api.Map.GetFactionWarSystems();
+            Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 
         [TestMethod]
-        public void TestJumps() {
-            var xml = api.Map.GetJumps();
-            Assert.AreNotEqual(0, xml.Result.SolarSystems.First().SolarSystemId);
+        public void TestJumps_ValidRequest_HasResult() {
+            var res = api.Map.GetJumps();
+            Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
-        public void TestKills() {
-            var xml = api.Map.GetKills();
-            Assert.AreNotEqual(0, xml.Result.SolarSystems.First().SolarSystemId);
+        public void TestKills_ValidRequest_HasResult() {
+            var res = api.Map.GetKills();
+            Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
-        public void TestSovereignty() {
-            var xml = api.Map.GetSovereignty();
-            Assert.IsNotNull(xml.Result.SolarSystems.First().SolarSystemName);
+        public void TestSovereignty_ValidRequest_HasResult() {
+            var res = api.Map.GetSovereignty();
+            Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 
+        /// <summary>
+        /// Disabled by CCP
+        /// </summary>
         [TestMethod]
-        public void TestSovereigntyStatus() {
-            //api.Map.GetSovereigntyStatus();
+        public void TestSovereigntyStatus_ValidRequest_HasResult() {
+            Assert.Fail();
+            //var res = api.Map.GetSovereigntyStatus();
+
         }
 
 

@@ -173,7 +173,6 @@ namespace eZet.Eve.EoLib.Entity {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<CallList> GetCallList() {
-            // TODO Separate rowsets
             const string relPath = "/api/calllist.xml.aspx";
             return request(new CallList(), relPath);
         }

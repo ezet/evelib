@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
     <Compile Include="Dto\EveApi\Character\AccountBalance.cs" />
     <Compile Include="Entity\ApiKey.cs" />
     <Compile Include="Dto\EveApi\Account\AccountStatus.cs" />

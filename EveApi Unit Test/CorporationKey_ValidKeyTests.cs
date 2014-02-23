@@ -138,7 +138,7 @@ namespace eZet.Eve.EoLib.Test {
         }
 
         [TestMethod]
-        public void GetOutpostServiceDetail_InvalidId_HasError() {
+        public void GetOutpostServiceDetails_InvalidId_HasError() {
             var res = validKey.Corporation.GetOutpostServiceDetails(0);
             Assert.IsNotNull(res.Error);
             // BUG Returns http 200 and empty Result on invalid ID

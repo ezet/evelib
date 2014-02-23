@@ -10,6 +10,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The base url for all requests
         /// </summary>
+        /// TODO Convert to URI
         protected abstract string UriBase { get; set; }
 
         protected BaseEntity() {
