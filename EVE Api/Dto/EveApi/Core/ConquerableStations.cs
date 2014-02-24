@@ -2,6 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Core {
+
+    [Serializable]
+    [XmlRoot("result", IsNullable = false)]
     public class ConquerableStations : XmlElement {
 
         [XmlElement("rowset")]

@@ -5,9 +5,7 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+    [XmlRoot("result", IsNullable = false)]
     public class WalletTransactions : XmlElement {
 
         internal delegate XmlResponse<WalletTransactions> CorpWalletTransactionWalker(int division = 1000, int count = 1000, long fromId = 0);

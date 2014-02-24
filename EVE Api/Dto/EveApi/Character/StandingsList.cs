@@ -4,6 +4,9 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
+
+    [Serializable]
+    [XmlRoot("result", IsNullable = false)]
     public class StandingsList : XmlElement {
 
         [XmlElement("characterNPCStandings")]

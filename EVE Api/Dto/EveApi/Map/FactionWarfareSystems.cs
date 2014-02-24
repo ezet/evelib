@@ -2,6 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Map {
+
+    [Serializable]
+    [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareSystems : XmlElement {
 
         [XmlElement("rowset")]

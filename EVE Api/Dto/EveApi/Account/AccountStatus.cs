@@ -4,9 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EoLib.Dto.EveApi.Account {
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+    [XmlRoot("result", IsNullable = false)]
     public class AccountStatus : XmlElement {
 
         [XmlIgnore]

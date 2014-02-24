@@ -1,6 +1,10 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Map {
+
+    [Serializable]
+    [XmlRoot("result", IsNullable = false)]
     public class SovereigntyStatus : XmlElement {
 
         [XmlElement("rowset")]

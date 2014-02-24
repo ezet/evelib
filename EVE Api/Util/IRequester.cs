@@ -19,7 +19,7 @@ namespace eZet.Eve.EoLib.Util {
         ///// <returns></returns>
         //string Request(Uri uri, DateTime cachedUntil);
 
-         XmlResponse<T> Request<T>(T type, Uri uri) where T : XmlElement;
+         XmlResponse<T> Request<T>(T type, Uri uri) where T : new();
 
 
 

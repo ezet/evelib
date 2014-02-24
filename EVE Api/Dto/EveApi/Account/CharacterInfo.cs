@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EoLib.Dto.EveApi.Account {
 
     [Serializable]
-    [XmlRoot("row")]
+    [XmlRoot("row", IsNullable = false)]
     public class CharacterInfo {
 
         [XmlAttribute("characterName")]

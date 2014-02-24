@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using eZet.Eve.EoLib.Dto.EveApi;
-using eZet.Eve.EoLib.Entity;
 using eZet.Eve.EoLib.Util;
 
 namespace eZet.Eve.EoLib.Test.Mocks {

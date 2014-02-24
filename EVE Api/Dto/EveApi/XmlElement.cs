@@ -4,7 +4,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using eZet.Eve.EoLib.Entity;
 
 namespace eZet.Eve.EoLib.Dto.EveApi {
 

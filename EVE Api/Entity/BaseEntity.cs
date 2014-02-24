@@ -40,7 +40,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="relPath">A relative path to the resource to be requested.</param>
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
-        protected XmlResponse<T> request<T>(T type, string relPath, params object[] args) where T : XmlElement {
+        protected XmlResponse<T> request<T>(T type, string relPath, params object[] args) where T : new() {
             var uri = new Uri(UriBase, relPath + generatePostString(null, args));
             return Requester.Request(type, uri);
         }
@@ -53,7 +53,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="relPath">A relative path to the resource to be requested.</param>
         /// <param name="key">An API Key to be used with this request.</param>
         /// <returns></returns>
-        protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key) where T : XmlElement {
+        protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key) where T : new() {
             var uri = new Uri(UriBase, relPath + generatePostString(key));
             return Requester.Request(type, uri);
         }
@@ -67,7 +67,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="key">An API Key to be used with this request.</param>
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
-        protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key, params object[] args) where T : XmlElement {
+        protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key, params object[] args) where T : new() {
             var uri = new Uri(UriBase, relPath + generatePostString(key, args));
             return Requester.Request(type, uri);
         }

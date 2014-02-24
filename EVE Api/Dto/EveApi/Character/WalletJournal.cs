@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Serialization;
-using eZet.Eve.EoLib.Dto.EveApi.Corporation;
 
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
+
+    [Serializable]
+    [XmlRoot("result", IsNullable = false)]
     public class WalletJournal : XmlElement {
 
         internal delegate XmlResponse<WalletJournal> CharWalletJournalWalker(int count, long fromId);

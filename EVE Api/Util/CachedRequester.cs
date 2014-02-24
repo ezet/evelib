@@ -19,13 +19,13 @@ namespace eZet.Eve.EoLib.Util {
             Serializer = new XmlSerializerWrapper();
         }
 
-        public XmlResponse<T> Request<T>(T type, Uri uri) where T : XmlElement {
+        public XmlResponse<T> Request<T>(T type, Uri uri) where T : new() {
             var filePath = resolveFile(uri);
             DateTime cachedUntil;
             var fromCache = cache.TryGetValue(filePath, out cachedUntil) && cachedUntil > DateTime.UtcNow;
             var data = webRequest(uri, fromCache);
             var xml = Serializer.Deserialize<T>(data);
-            //cache.AddOrUpdate(filePath, xml.CachedUntil, (key, val) => xml.CachedUntil);
+            cache.AddOrUpdate(filePath, xml.CachedUntil, (key, val) => xml.CachedUntil);
             return xml;
         }
 

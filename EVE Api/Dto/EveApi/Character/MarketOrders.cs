@@ -4,9 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EoLib.Dto.EveApi.Character {
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlType(AnonymousType = true)]
+    [XmlRoot("result", IsNullable = false)]
     public class MarketOrders : XmlElement {
 
         [XmlElement("rowset")]

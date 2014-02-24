@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EoLib.Dto.EveApi.Account {
 
     [Serializable]
-    [XmlType(AnonymousType = true)]
+    [XmlRoot("result", IsNullable = false)]
     public class ApiKeyInfo : XmlElement {
 
         [XmlElement("key")]
