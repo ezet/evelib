@@ -1,22 +1,28 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
+using System.Net.Cache;
 
 namespace eZet.Eve.EoLib.Util {
-    public class BasicRequester : IRequester {
+    public class WebRequester : BaseRequester {
 
         private const string ContentType = "application/x-www-form-urlencoded";
 
-        public string Request(string uri, params object[] args) {
-            var postString = generatePostString(args);
-            var data = "error";
-            var request = WebRequest.Create(uri) as HttpWebRequest;
-            if (request == null) return data;
+        public WebRequester(ICacheHandler cache) : base(cache) {
+        }
+
+        public override string Request(Uri uri) {
+            string data;
+            var query = uri.Query.Substring(1);
+            if (Cache.TryGet(uri, out data))
+                return data;
+            var request = WebRequest.CreateHttp(uri.GetLeftPart(UriPartial.Path));
             request.Method = "POST";
             request.ContentType = ContentType;
-            request.ContentLength = postString.Length;
+            request.ContentLength = query.Length;
             request.Proxy = null;
             using (var writer = new StreamWriter(request.GetRequestStream())) {
-                writer.Write(postString);
+                writer.Write(query);
             }
             try {
                 using (var response = (HttpWebResponse) request.GetResponse()) {
@@ -42,16 +48,11 @@ namespace eZet.Eve.EoLib.Util {
                 }
                         // TODO deal with http 500
             }
+            Cache.Store(uri, data);
             return data;
         }
 
-        private string generatePostString(params object[] args) {
-            var postString = "";
-            for (var i = 0; i < args.Length; i += 2) {
-                postString += args[i] + "=" + args[i + 1] + "&";
-            }
-            return postString;
-        }
+
 
     }
 }

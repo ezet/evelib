@@ -13,13 +13,13 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The base URI for all requests by this entity
         /// </summary>
-        protected override sealed string UriBase { get; set; }
+        protected override sealed Uri UriBase { get; set; }
 
         /// <summary>
         /// Creates a new object.
         /// </summary>
         internal Core() {
-            UriBase = "https://api.eveonline.com";
+            UriBase = new Uri("https://api.eveonline.com");
         }
 
         /// <summary>

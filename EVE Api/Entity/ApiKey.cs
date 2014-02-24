@@ -14,7 +14,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The base URI for all requests by this entity
         /// </summary>
-        protected override sealed string UriBase { get; set; }
+        protected override sealed Uri UriBase { get; set; }
 
         /// <summary>
         /// The Key ID for this key.
@@ -74,7 +74,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
         protected ApiKey(long keyId, string vCode) {
-            UriBase = "https://api.eveonline.com";
+            UriBase = new Uri("https://api.eveonline.com");
             KeyId = keyId;
             VCode = vCode;
         }

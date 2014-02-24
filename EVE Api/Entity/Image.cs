@@ -152,7 +152,7 @@ namespace eZet.Eve.EoLib.Entity {
         public string requestImage(string relPath, long id, int size, string extension) {
             var fileName = id + "_" + size + extension;
             var uri = new Uri(baseUri, relPath + "\\" + fileName);
-            var file = Configuration.CacheDir + "\\" + fileName;
+            var file = Configuration.FileDir + "\\" + fileName;
             ImageRequester.RequestImage(uri, file);
             return file;
         }

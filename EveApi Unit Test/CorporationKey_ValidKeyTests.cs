@@ -181,7 +181,6 @@ namespace eZet.Eve.EoLib.Test {
             var res = validKey.Corporation.GetWalletJournal(1001, 5);
             Assert.IsNotNull(res.Result);
             var older = res.Result.GetOlder(50);
-
         }
 
         [TestMethod]

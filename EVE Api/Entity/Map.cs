@@ -5,10 +5,10 @@ using eZet.Eve.EoLib.Dto.EveApi.Map;
 
 namespace eZet.Eve.EoLib.Entity {
     public class Map : BaseEntity {
-        protected override sealed string UriBase { get; set; }
+        protected override sealed Uri UriBase { get; set; }
 
         internal Map() {
-            UriBase = "https://api.eveonline.com";
+            UriBase = new Uri("https://api.eveonline.com");
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using eZet.Eve.EoLib.Dto.EveApi;
+﻿using System;
+using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Util;
 
 namespace eZet.Eve.EoLib.Entity {
@@ -11,11 +12,11 @@ namespace eZet.Eve.EoLib.Entity {
         /// The base url for all requests
         /// </summary>
         /// TODO Convert to URI
-        protected abstract string UriBase { get; set; }
+        protected abstract Uri UriBase { get; set; }
 
         protected BaseEntity() {
             Serializer = new XmlSerializerWrapper();
-            Requester = new BasicRequester();
+            Requester = new WebRequester(new FileCacheHandler());
         }
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The requester this entity uses to perform requests.
         /// </summary>
-        public IRequester Requester { get; set; }
+        public BaseRequester Requester { get; private set; }
 
         /// <summary>
         /// Performs a request on the requester, using the provided arguments.
@@ -37,7 +38,8 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relPath, params object[] args) where T : XmlElement {
-            var data = Requester.Request(UriBase + relPath, args);
+            var uri = new Uri(UriBase, relPath + generatePostString(null, args));
+            var data = Requester.Request(uri);
             return Serializer.Deserialize<T>(data);
         }
 
@@ -49,8 +51,9 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="relPath">A relative path to the resource to be requested.</param>
         /// <param name="key">An API Key to be used with this request.</param>
         /// <returns></returns>
-        protected XmlResponse<T> request<T>( T type, string relPath, ApiKey key) where T : XmlElement {
-            var data = Requester.Request(UriBase + relPath, generatePostArgs(key, new object[0]));
+        protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key) where T : XmlElement {
+            var uri = new Uri(UriBase, relPath + generatePostString(key));
+            var data = Requester.Request(uri);
             return Serializer.Deserialize<T>(data);
         }
 
@@ -64,21 +67,19 @@ namespace eZet.Eve.EoLib.Entity {
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key, params object[] args) where T : XmlElement {
-            var data = Requester.Request(UriBase + relPath, generatePostArgs(key, args));
+            var uri = new Uri(UriBase, relPath + generatePostString(key, args));
+            var data = Requester.Request(uri);
             return Serializer.Deserialize<T>(data);
         }
 
-        private object[] generatePostArgs(ApiKey apiKey, params object[] args) {
-            var newArgs = new object[args.Length + 4];
-            args.CopyTo(newArgs, 0);
-            var length = args.Length;
-            newArgs[length++] = "keyId";
-            newArgs[length++] = apiKey.KeyId;
-            newArgs[length++] = "vCode";
-            newArgs[length] = apiKey.VCode;
-            return newArgs;
+        private string generatePostString(ApiKey key = null, params object[] args) {
+            var postString = "?";
+            if (key != null)
+                postString = "?keyID=" + key.KeyId + "&vCode=" + key.VCode + "&";
+            for (var i = 0; i < args.Length; i += 2) {
+                postString += args[i] + "=" + args[i + 1] + "&";
+            }
+            return postString;
         }
     }
-
-
 }

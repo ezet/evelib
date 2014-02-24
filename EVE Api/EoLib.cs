@@ -67,7 +67,6 @@ namespace eZet.Eve.EoLib {
             return new CorporationKey(keyId, vCode);
         }
 
-
         public static void Main() {
             var corp = new CorporationKey(CorpId, CorpCode);
             var mira = new CharacterKey(MiraId, MiraCode);
