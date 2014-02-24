@@ -14,28 +14,20 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
         [XmlElement("currentTime")]
         public string CurrentTimeAsString {
             get { return CurrentTime.ToString(XmlElement.DateFormat); }
-            set {
-                CurrentTime = DateTime.ParseExact(value, XmlElement.DateFormat, null);
-            }
+            set { CurrentTime = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
         }
-
-        [XmlIgnore]
-        public DateTime CachedUntil { get; private set; }
-
-        [XmlElement("cachedUnt2il")]
-        public string CachedUntilAsString {
-            get { return CachedUntil.ToString(XmlElement.DateFormat); }
-            set {
-                CachedUntil = DateTime.ParseExact(value, XmlElement.DateFormat, null);
-            }
-        }
-
-        [XmlElement("cachedUntil")]
-        public string time { get; set; }
 
         [XmlElement("result")]
         public T Result { get; set; }
 
+        //[XmlIgnore]
+        public DateTime CachedUntil { get; set; }
+
+        [XmlElement("cachedUntil")]
+        public string CachedUntilAsString {
+            get { return CachedUntil.ToString(XmlElement.DateFormat); }
+            set { CachedUntil = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
+        }
 
         [XmlAttribute("version")]
         public int Version { get; set; }
@@ -53,6 +45,4 @@ namespace eZet.Eve.EoLib.Dto.EveApi {
         public string ErrorText { get; set; }
         
     }
-
-
 }

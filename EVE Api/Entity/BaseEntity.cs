@@ -27,7 +27,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The requester this entity uses to perform requests.
         /// </summary>
-        public IRequester Requester { get; private set; }
+        public IRequester Requester { get; set; }
 
 
         public ICacheHandler Cache { get; private set; }

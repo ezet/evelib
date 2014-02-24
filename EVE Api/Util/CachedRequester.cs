@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
-using System.Runtime.Remoting.Messaging;
 using eZet.Eve.EoLib.Dto.EveApi;
 
 namespace eZet.Eve.EoLib.Util {
