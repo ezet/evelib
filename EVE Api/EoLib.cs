@@ -71,8 +71,9 @@ namespace eZet.Eve.EoLib {
             var corp = new CorporationKey(CorpId, CorpCode);
             var mira = new CharacterKey(MiraId, MiraCode);
             var corpinfo = corp.GetApiKeyInfo();
-            var mirainfo = mira.GetApiKeyInfo();
-            var res = corp.Corporation.GetWalletTransactions(50);
+            corpinfo = corp.GetApiKeyInfo();
+            //var mirainfo = mira.GetApiKeyInfo();
+            //var res = corp.Corporation.GetWalletTransactions(50);
             return;
         }
 

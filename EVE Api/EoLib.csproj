@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -124,7 +125,6 @@
     <Compile Include="Exceptions\IllegalCharacterIdException.cs" />
     <Compile Include="Exceptions\InvalidKeyTypeException.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Util\BaseRequester.cs" />
     <Compile Include="Util\FileCacheHandler.cs" />
     <Compile Include="Util\ICacheHandler.cs" />
     <Compile Include="Util\IRequester.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="EoLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\EveApi\Character\WalletTransactions.cs" />
-    <Compile Include="Util\WebRequester.cs" />
+    <Compile Include="Util\CachedRequester.cs" />
     <Compile Include="Util\XmlSerializerWrapper.cs" />
   </ItemGroup>
   <ItemGroup />

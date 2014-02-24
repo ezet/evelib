@@ -16,7 +16,7 @@ namespace eZet.Eve.EoLib.Entity {
 
         protected BaseEntity() {
             Serializer = new XmlSerializerWrapper();
-            Requester = new WebRequester(new FileCacheHandler());
+            Requester = new CachedRequester();
         }
 
         /// <summary>
@@ -27,7 +27,10 @@ namespace eZet.Eve.EoLib.Entity {
         /// <summary>
         /// The requester this entity uses to perform requests.
         /// </summary>
-        public BaseRequester Requester { get; private set; }
+        public IRequester Requester { get; private set; }
+
+
+        public ICacheHandler Cache { get; private set; }
 
         /// <summary>
         /// Performs a request on the requester, using the provided arguments.
@@ -39,8 +42,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relPath, params object[] args) where T : XmlElement {
             var uri = new Uri(UriBase, relPath + generatePostString(null, args));
-            var data = Requester.Request(uri);
-            return Serializer.Deserialize<T>(data);
+            return Requester.Request(type, uri);
         }
 
         /// <summary>
@@ -53,8 +55,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key) where T : XmlElement {
             var uri = new Uri(UriBase, relPath + generatePostString(key));
-            var data = Requester.Request(uri);
-            return Serializer.Deserialize<T>(data);
+            return Requester.Request(type, uri);
         }
 
         /// <summary>
@@ -68,8 +69,7 @@ namespace eZet.Eve.EoLib.Entity {
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relPath, ApiKey key, params object[] args) where T : XmlElement {
             var uri = new Uri(UriBase, relPath + generatePostString(key, args));
-            var data = Requester.Request(uri);
-            return Serializer.Deserialize<T>(data);
+            return Requester.Request(type, uri);
         }
 
         private string generatePostString(ApiKey key = null, params object[] args) {
