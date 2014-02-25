@@ -9,7 +9,7 @@ namespace eZet.Eve.EoLib.Entity {
         Account, Character, Corporation
     }
 
-    public abstract class ApiKey : BaseEntity {
+    public abstract class ApiKey : EveApiEntity {
 
         /// <summary>
         /// The base URI for all requests by this entity

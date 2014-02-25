@@ -4,11 +4,11 @@ using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Util;
 
 namespace eZet.Eve.EoLib.Test.Mocks {
-    public class TestRequester : IRequester {
+    public class TestRequestHandler : EveApiRequestHandler {
 
         private readonly IXmlSerializer serializer = new XmlSerializerWrapper();
 
-        public XmlResponse<T>Request<T>(T t, Uri uri) where T : XmlElement {
+        public XmlResponse<T>Request<T>(T t, Uri uri) where T : new() {
             // ReSharper disable once PossibleNullReferenceException
             var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             var path = uri.PathAndQuery;

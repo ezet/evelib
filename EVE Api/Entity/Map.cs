@@ -4,7 +4,7 @@ using eZet.Eve.EoLib.Dto.EveApi;
 using eZet.Eve.EoLib.Dto.EveApi.Map;
 
 namespace eZet.Eve.EoLib.Entity {
-    public class Map : BaseEntity {
+    public class Map : EveApiEntity {
         protected override sealed Uri UriBase { get; set; }
 
         internal Map() {

@@ -1,45 +1,54 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Cache;
 using eZet.Eve.EoLib.Dto.EveApi;
 
 namespace eZet.Eve.EoLib.Util {
-    public class CachedRequester : IRequester {
+    public class IeCachedRequestHandler : EveApiRequestHandler {
 
         private const string ContentType = "application/x-www-form-urlencoded";
 
-        public IXmlSerializer Serializer { get; private set; }
-
-        private readonly ConcurrentDictionary<string, DateTime> cache = new ConcurrentDictionary<string, DateTime>();
-
-        public CachedRequester() {
-            Serializer = new XmlSerializerWrapper();
+        public IeCachedRequestHandler(IXmlSerializer serializer)
+            : base(serializer) {
         }
 
-        public XmlResponse<T> Request<T>(T type, Uri uri) where T : new() {
-            var filePath = resolveFile(uri);
+        public override XmlResponse<T> Request<T>(T type, Uri uri) {
             DateTime cachedUntil;
-            var fromCache = cache.TryGetValue(filePath, out cachedUntil) && cachedUntil > DateTime.UtcNow;
+            var fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
             var data = webRequest(uri, fromCache);
             var xml = Serializer.Deserialize<T>(data);
-            cache.AddOrUpdate(filePath, xml.CachedUntil, (key, val) => xml.CachedUntil);
+            CacheExpirationRegister.AddOrUpdate(uri, xml.CachedUntil);
+            SaveCacheState();
             return xml;
         }
 
-        private string webRequest(Uri uri, bool fromCache) {
+        public override void SaveCacheState() {
+            try {
+                File.WriteAllLines(Configuration.AppDataPath + Path.DirectorySeparatorChar +
+                                   Configuration.CacheFileName,
+                    CacheExpirationRegister.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
+            }
+            catch (DirectoryNotFoundException e) {
+                Directory.CreateDirectory(Configuration.AppDataPath);
+                SaveCacheState();
+            }
+        }
+
+        private static string webRequest(Uri uri, bool fromCache) {
             var data = "";
             var request = WebRequest.CreateHttp(uri);
             request.ContentType = ContentType;
+
             if (fromCache)
                 request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheIfAvailable);
+            else 
+                request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Reload);
             request.Proxy = null;
 
-            //using (var writer = new StreamWriter(request.GetRequestStream())) {
-            //    writer.Write(query);
-            //}
             try {
                 using (var response = (HttpWebResponse)request.GetResponse()) {
                     if (response.StatusCode.ToString() == "0") {
@@ -66,12 +75,5 @@ namespace eZet.Eve.EoLib.Util {
 
             return data;
         }
-
-        private static string resolveFile(Uri uri) {
-            return uri.PathAndQuery.Replace("/", "").Replace(".aspx", "");
-        }
-
-
-
     }
 }

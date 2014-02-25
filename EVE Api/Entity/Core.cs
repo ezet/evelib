@@ -8,7 +8,7 @@ namespace eZet.Eve.EoLib.Entity {
     /// <summary>
     /// Provides access to API calls that do not require a valid API key or character id. That is, all URIs prefixed with /eve, /server and /api.
     /// </summary>
-    public class Core : BaseEntity {
+    public class Core : EveApiEntity {
 
         /// <summary>
         /// The base URI for all requests by this entity

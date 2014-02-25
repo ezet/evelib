@@ -12,7 +12,7 @@ namespace eZet.Eve.EoLib.Test {
 
         public Corporation_StaticDeserializationTests() {
             corp = new Corporation(new CorporationKey(0, ""), 0, "");
-            corp.Requester = new TestRequester();
+            corp.RequestHandler = new TestRequestHandler();
         }
 
         [TestMethod]

@@ -13,7 +13,7 @@ namespace eZet.Eve.EoLib.Entity {
     /// <summary>
     /// Provides access to all API calls relating to a specific character, that is, URIs prefixed with /char in CCPs API.
     /// </summary>
-    public class Character : BaseEntity {
+    public class Character : EveApiEntity {
 
         /// <summary>
         /// The Wallet identifier. For characters this is always 1000.

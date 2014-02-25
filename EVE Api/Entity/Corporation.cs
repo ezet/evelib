@@ -14,7 +14,7 @@ namespace eZet.Eve.EoLib.Entity {
     /// <summary>
     /// Provides access to all API calls relating to a specific corporation, that is, all API calls prefixed with /corp in CCPs API.
     /// </summary>
-    public class Corporation : BaseEntity {
+    public class Corporation : EveApiEntity {
 
         /// <summary>
         /// The base URI for all requests by this entity

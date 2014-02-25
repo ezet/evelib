@@ -5,7 +5,9 @@ namespace eZet.Eve.EoLib.Util {
 
         bool TryGet(Uri uri, out string data);
 
-        void Store(Uri uri, string data);
+        void Add(Uri uri, string data);
+
+        void SaveState();
 
     }
 }

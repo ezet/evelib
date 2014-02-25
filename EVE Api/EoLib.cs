@@ -68,13 +68,22 @@ namespace eZet.Eve.EoLib {
         }
 
         public static void Main() {
+            var api = new EoLib();
             var corp = new CorporationKey(CorpId, CorpCode);
             var mira = new CharacterKey(MiraId, MiraCode);
             var corpinfo = corp.GetApiKeyInfo();
             corpinfo = corp.GetApiKeyInfo();
-            //var mirainfo = mira.GetApiKeyInfo();
+            var mirainfo = mira.GetApiKeyInfo();
             //var res = corp.Corporation.GetWalletTransactions(50);
             return;
+        }
+
+        public static void SaveCacheState() {
+            
+        }
+
+        public static void CleanCacheFile() {
+            
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace eZet.Eve.EoLib.Test {
 
         public Character_StaticDeserializationTests() {
             character = new Character(new CharacterKey(0, ""), 0, "");
-            character.Requester = new TestRequester();
+            character.RequestHandler = new TestRequestHandler();
         }
 
         [TestMethod]
