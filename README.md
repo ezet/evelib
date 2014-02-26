@@ -4,21 +4,21 @@ Eve Online Library.NET
 Eve Online Library.NET is an open source C# wrapper for CCPs Eve Online API and other popular Eve Online APIs.
 
 ## Features
-- Easy to use.
-- XML configuration through app.config.
-- Access to all popular APIs through one library.
-- Adheres to C# and .NET conventions.
-- Provides caching for CCP API requests.
-- Modular and open source; you can easily change the caching, serialization or any other part of the library.
+* Easy to use.
+* XML configuration through app.config.
+* Access to all popular APIs through one library.
+* Adheres to C# and .NET conventions.
+* Provides caching for CCP API requests.
+* Modular and open source; you can easily change the caching, serialization or any other part of the library.
 
 ## CCP API
 The library exposes all CCPs Eve API functions through an easy to use API, using C# programming and naming conventions. It uses a structure similar to how the API URIs are structured. See [APIv2] (http://wiki.eve-id.net/APIv2_Page_Index) for a reference. The basic structure is as follows:
-- `CharacterKey` and `CorporationKey` exposes requests prefixed with /account/.
-- `Character` exposes all requests prefixed with /char/.
-- `Corporation` exposes all requests  prefixed with /corp/.
-- `Map` exposes all requests prefixed with /map/.
-- `Image` exposes all requests to image.eveonline.com.
-- `Core` exposes all other API requests.
+* `CharacterKey` and `CorporationKey` exposes requests prefixed with /account/.
+* `Character` exposes all requests prefixed with /char/.
+* `Corporation` exposes all requests  prefixed with /corp/.
+* `Map` exposes all requests prefixed with /map/.
+* `Image` exposes all requests to image.eveonline.com.
+* `Core` exposes all other API requests.
 
 #### Requests 
 Map, Image and Core does not require any state, and are accessible through any EoLib instance, eg:
