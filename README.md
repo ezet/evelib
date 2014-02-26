@@ -3,7 +3,7 @@ Eve Online Library.NET
 
 Eve Online Library.NET is an open source C# wrapper for CCPs Eve Online API and other popular Eve Online APIs.
 
-## Features
+### Features
 * Easy to use.
 * XML configuration through app.config.
 * Access to all popular APIs through one library.
