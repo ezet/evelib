@@ -10,6 +10,7 @@ Eve Online Library.NET is an open source C# wrapper for CCPs Eve Online API and 
 * Adheres to C# and .NET conventions.
 * Provides caching for CCP API requests.
 * Modular and open source; you can easily change the caching, serialization or any other part of the library.
+* A fairly comprehensive set of unit tests, including static xml tests for calls requiring authentication.
 
 ## CCP API
 The library exposes all CCPs Eve API functions through an easy to use API, using C# programming and naming conventions. It uses a structure similar to how the API URIs are structured. See [APIv2] (http://wiki.eve-id.net/APIv2_Page_Index) for a reference. The basic structure is as follows:
