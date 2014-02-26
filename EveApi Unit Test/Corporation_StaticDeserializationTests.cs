@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using eZet.Eve.EoLib.Entity;
+using eZet.Eve.EoLib.Entity.EveApi;
 using eZet.Eve.EoLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

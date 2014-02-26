@@ -1,0 +1,17 @@
+﻿using eZet.Eve.EoLib.Entity.EveApi;
+
+namespace eZet.Eve.EoLib.Exception {
+    public class IllegalCharacterIdException : System.Exception {
+
+        public ApiKey Key { get; private set; }
+
+        public long CharacterId { get; private set; }
+
+        public IllegalCharacterIdException(string message, ApiKey key, long characterId ) : base(message) {
+            Key = key;
+            CharacterId = characterId;
+        }
+
+
+    }
+}

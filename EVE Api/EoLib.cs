@@ -19,7 +19,8 @@ under the License.
  *
 */
 
-using eZet.Eve.EoLib.Entity;
+using eZet.Eve.EoLib.Entity.EveApi;
+using eZet.Eve.EoLib.Entity.EveCentral;
 
 namespace eZet.Eve.EoLib {
  
@@ -53,11 +54,31 @@ namespace eZet.Eve.EoLib {
         /// </summary>
         public EveCentral EveCentral { get; private set; }
 
-
         /// <summary>
         /// Gets the Image for this instance
         /// </summary>
         public Image Image { get; private set; }
+
+        public static EoLib Create() {
+            return new EoLib(new Core(), new Map(), new Image(), new EveCentral());
+        }
+    
+        public static void Main() {
+            var api = EoLib.Create();
+            var corp = new CorporationKey(CorpId, CorpCode);
+            var mira = new CharacterKey(MiraId, MiraCode);
+            var corpinfo = corp.GetApiKeyInfo();
+            corpinfo = corp.GetApiKeyInfo();
+            var mirainfo = mira.GetApiKeyInfo();
+            //var res = corp.Corporation.GetWalletTransactions(50);
+            return;
+        }
+        private EoLib(Core core, Map map, Image image, EveCentral evec) {
+            Core = core;
+            Map = map;
+            Image = image;
+            EveCentral = evec;
+        }
 
         public static CharacterKey GetCharacterKey(long keyId, string vCode) {
             return new CharacterKey(keyId, vCode);
@@ -67,33 +88,12 @@ namespace eZet.Eve.EoLib {
             return new CorporationKey(keyId, vCode);
         }
 
-        public static void Main() {
-            var api = new EoLib();
-            var corp = new CorporationKey(CorpId, CorpCode);
-            var mira = new CharacterKey(MiraId, MiraCode);
-            var corpinfo = corp.GetApiKeyInfo();
-            corpinfo = corp.GetApiKeyInfo();
-            var mirainfo = mira.GetApiKeyInfo();
-            //var res = corp.Corporation.GetWalletTransactions(50);
-            return;
-        }
-
         public static void SaveCacheState() {
-            
+
         }
 
         public static void CleanCacheFile() {
-            
-        }
 
-        /// <summary>
-        /// Creates a new instance, only allowing access to functionaly that doesn't require a valid key.
-        /// </summary>
-        public EoLib() {
-            Core = new Core();
-            Map = new Map();
-            EveCentral = new EveCentral();
-            Image = new Image();
         }
 
         /// <summary>

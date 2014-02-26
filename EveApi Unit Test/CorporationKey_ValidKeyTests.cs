@@ -1,4 +1,5 @@
 ﻿using eZet.Eve.EoLib.Entity;
+using eZet.Eve.EoLib.Entity.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EoLib.Test {

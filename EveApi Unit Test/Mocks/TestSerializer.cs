@@ -1,5 +1,6 @@
-﻿using eZet.Eve.EoLib.Dto.EveApi;
+﻿using eZet.Eve.EoLib.Model.EveApi;
 using eZet.Eve.EoLib.Util;
+using eZet.Eve.EoLib.Util.EveApi;
 
 namespace eZet.Eve.EoLib.Test.Mocks {
     public class TestSerializer : IXmlSerializer {

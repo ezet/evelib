@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
-using eZet.Eve.EoLib.Dto.EveApi;
+using eZet.Eve.EoLib.Model.EveApi;
 using eZet.Eve.EoLib.Util;
+using eZet.Eve.EoLib.Util.EveApi;
 
 namespace eZet.Eve.EoLib.Test.Mocks {
-    public class TestRequestHandler : EveApiRequestHandler {
+    public class TestRequestHandler : BaseRequestHandler {
 
         private readonly IXmlSerializer serializer = new XmlSerializerWrapper();
 
