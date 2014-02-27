@@ -1,8 +1,8 @@
 ﻿using System;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Model.EveApi.Core;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Core;
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
 
     /// <summary>
     /// Provides access to API calls that do not require a valid API key or character id. That is, all URIs prefixed with /eve, /server and /api.

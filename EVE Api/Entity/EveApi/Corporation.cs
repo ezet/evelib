@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Model.EveApi.Character;
-using eZet.Eve.EoLib.Model.EveApi.Corporation;
-using ContactList = eZet.Eve.EoLib.Model.EveApi.Corporation.ContactList;
-using FactionWarfareStats = eZet.Eve.EoLib.Model.EveApi.Corporation.FactionWarfareStats;
-using StandingsList = eZet.Eve.EoLib.Model.EveApi.Corporation.StandingsList;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Character;
+using eZet.Eve.EveLib.Model.EveApi.Corporation;
 
-[assembly: InternalsVisibleTo("EoLib.Tests")]
+[assembly: InternalsVisibleTo("EveLib.Tests")]
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
 
     /// <summary>
     /// Provides access to all API calls relating to a specific corporation, that is, all API calls prefixed with /corp in CCPs API.
@@ -67,9 +64,9 @@ namespace eZet.Eve.EoLib.Entity.EveApi {
         /// Returns the corporation and the alliance contact lists. This is accessible by any character in any corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ContactList> GetContactList() {
+        public XmlResponse<Model.EveApi.Corporation.ContactList> GetContactList() {
             const string relPath = "/corp/ContactList.xml.aspx";
-            return request(new ContactList(), relPath, Key);
+            return request(new Model.EveApi.Corporation.ContactList(), relPath, Key);
         }
 
         /// <summary>
@@ -122,9 +119,9 @@ namespace eZet.Eve.EoLib.Entity.EveApi {
         /// If the corporation is enlisted in Factional Warfare, this will return the faction warfare statistics.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
+        public XmlResponse<Model.EveApi.Corporation.FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/corp/FacWarStats.xml.aspx";
-            return request(new FactionWarfareStats(), relPath, Key);
+            return request(new Model.EveApi.Corporation.FactionWarfareStats(), relPath, Key);
         }
 
         /// <summary>
@@ -257,9 +254,9 @@ namespace eZet.Eve.EoLib.Entity.EveApi {
         /// Returns the standings from NPC corporations and factions as well as agents.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<StandingsList> GetStandings() {
+        public XmlResponse<Model.EveApi.Corporation.StandingsList> GetStandings() {
             const string relPath = "/corp/Standings.xml.aspx";
-            return request(new StandingsList(), relPath, Key);
+            return request(new Model.EveApi.Corporation.StandingsList(), relPath, Key);
         }
 
         /// <summary>

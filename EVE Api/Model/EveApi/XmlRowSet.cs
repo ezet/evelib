@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EoLib.Model.EveApi {
+namespace eZet.Eve.EveLib.Model.EveApi {
 
     [Serializable]
     [XmlRoot("rowset")]
@@ -26,18 +26,17 @@ namespace eZet.Eve.EoLib.Model.EveApi {
 
         public void ReadXml(XmlReader reader) {
             var serializer = new XmlSerializer(typeof(T));
-            if (reader.IsStartElement()) {
-                RowSetMeta.Name = reader.GetAttribute("name");
-                RowSetMeta.Key = reader.GetAttribute("key");
-                RowSetMeta.Columns = reader.GetAttribute("columns");
-                reader.ReadToDescendant("row");
-                while (reader.Name == "row") {
-                    if (reader.IsStartElement()) {
-                        var row = (T) serializer.Deserialize(reader);
-                        Rows.Add(row);
-                    }
-                    reader.ReadToNextSibling("row");
+            if (!reader.IsStartElement()) return;
+            RowSetMeta.Name = reader.GetAttribute("name");
+            RowSetMeta.Key = reader.GetAttribute("key");
+            RowSetMeta.Columns = reader.GetAttribute("columns");
+            reader.ReadToDescendant("row");
+            while (reader.Name == "row") {
+                if (reader.IsStartElement()) {
+                    var row = (T) serializer.Deserialize(reader);
+                    Rows.Add(row);
                 }
+                reader.ReadToNextSibling("row");
             }
         }
 

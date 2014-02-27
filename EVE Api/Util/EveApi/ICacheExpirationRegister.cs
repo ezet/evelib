@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace eZet.Eve.EoLib.Util.EveApi {
+namespace eZet.Eve.EveLib.Util.EveApi {
 
     /// <summary>
     /// Interface for CacheExpiratoinRegisters

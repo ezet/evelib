@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using eZet.Eve.EoLib.Entity;
-using eZet.Eve.EoLib.Entity.EveApi;
+using eZet.Eve.EveLib.Entity;
+using eZet.Eve.EveLib.Entity.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
 
     [TestClass]
     public class CharacterKey_ValidKeyTests {
@@ -12,7 +12,7 @@ namespace eZet.Eve.EoLib.Test {
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private readonly CharacterKey validKey = EoLib.GetCharacterKey(KeyId, VCode);
+        private readonly CharacterKey validKey = EveLib.GetCharacterKey(KeyId, VCode);
 
         [TestMethod]
         public void Characters_NoExceptions() {
@@ -46,7 +46,7 @@ namespace eZet.Eve.EoLib.Test {
         [TestMethod]
         public void GetCalendarEventAttendees_InvalidId_HasError() {
             var res = validKey.Characters[0].GetCalendarEventAttendees(0);
-            Assert.IsNotNull(res.Error);
+            Assert.IsNotNull(res.Error, "Returns http 200 and empty result instead of 403 with error.");
             // BUG Returns http 200 and empty rowset on invalid ID
             // TODO Add valid ID test
             // TODO Add error handling
@@ -77,9 +77,9 @@ namespace eZet.Eve.EoLib.Test {
         }
 
         [TestMethod]
-        public void GetContractItems() {
+        public void GetContractItems_InvalidRequest_HasError() {
             var res = validKey.Characters[0].GetContractItems(0);
-            Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.Error, "Returns HTTP 500 instead of HTTP 403 with error.");
             // BUG Returns http 500 on invalid id
             // TODO Add error handling
             // TODO Add valid ID test

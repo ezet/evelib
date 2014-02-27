@@ -1,8 +1,8 @@
-﻿using eZet.Eve.EoLib.Entity;
-using eZet.Eve.EoLib.Entity.EveApi;
+﻿using eZet.Eve.EveLib.Entity;
+using eZet.Eve.EveLib.Entity.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
 
     [TestClass]
     public class CorporationKey_ValidKeyTests {
@@ -51,7 +51,7 @@ namespace eZet.Eve.EoLib.Test {
         [TestMethod]
         public void GetContractItems_InvalidId_HasError() {
             var res = validKey.Corporation.GetContractItems(0);
-            Assert.IsNotNull(res.Error);
+            Assert.IsNotNull(res.Error, "API returns statuscode 500 instead of 403 with error code.");
             // BUG Returns http 500 on invalid id
             // TODO Add valid ID test
         }
@@ -141,7 +141,7 @@ namespace eZet.Eve.EoLib.Test {
         [TestMethod]
         public void GetOutpostServiceDetails_InvalidId_HasError() {
             var res = validKey.Corporation.GetOutpostServiceDetails(0);
-            Assert.IsNotNull(res.Error);
+            Assert.IsNotNull(res.Error, "Returns http 200 and an empty result instead of error.");
             // BUG Returns http 200 and empty Result on invalid ID
             // TODO Add valid ID test
         }
@@ -181,14 +181,14 @@ namespace eZet.Eve.EoLib.Test {
         public void GetWalletJournal_ValidRequest_HasResult() {
             var res = validKey.Corporation.GetWalletJournal(1001, 5);
             Assert.IsNotNull(res.Result);
-            var older = res.Result.GetOlder(50);
+            //var older = res.Result.GetOlder(50);
         }
 
         [TestMethod]
         public void GetWalletTransactions_ValidRequest_HasResult() {
             var res = validKey.Corporation.GetWalletTransactions(50);
             Assert.IsNotNull(res.Result);
-            res = res.Result.GetOlder(50);
+            //res = res.Result.GetOlder(50);
         }
     }
 }

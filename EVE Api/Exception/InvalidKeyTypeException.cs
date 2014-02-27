@@ -1,4 +1,4 @@
-﻿namespace eZet.Eve.EoLib.Exception {
+﻿namespace eZet.Eve.EveLib.Exception {
     class InvalidKeyTypeException {
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System.Linq;
-using eZet.Eve.EoLib.Entity;
-using eZet.Eve.EoLib.Entity.EveApi;
-using eZet.Eve.EoLib.Test.Mocks;
+using eZet.Eve.EveLib.Entity;
+using eZet.Eve.EveLib.Entity.EveApi;
+using eZet.Eve.EveLib.Test.Mocks;
+using eZet.Eve.EveLib.Util.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
     [TestClass]
     public class Character_StaticDeserializationTests {
 
@@ -12,7 +13,7 @@ namespace eZet.Eve.EoLib.Test {
 
         public Character_StaticDeserializationTests() {
             character = new Character(new CharacterKey(0, ""), 0, "");
-            character.RequestHandler = new TestRequestHandler();
+            character.RequestHandler = new TestRequestHandler(new XmlSerializerWrapper());
         }
 
         [TestMethod]

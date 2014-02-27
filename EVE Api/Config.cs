@@ -3,7 +3,10 @@ using System.Configuration;
 using System.Globalization;
 using System.IO;
 
-namespace eZet.Eve.EoLib {
+namespace eZet.Eve.EveLib {
+    /// <summary>
+    /// Provides configuration and constants for the library.
+    /// </summary>
     public static class Config {
 
         public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);

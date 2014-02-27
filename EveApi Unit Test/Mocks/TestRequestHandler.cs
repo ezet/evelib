@@ -1,15 +1,18 @@
 ﻿using System;
 using System.IO;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Util;
-using eZet.Eve.EoLib.Util.EveApi;
+using eZet.Eve.EveLib.Util;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Util.EveApi;
 
-namespace eZet.Eve.EoLib.Test.Mocks {
+namespace eZet.Eve.EveLib.Test.Mocks {
     public class TestRequestHandler : BaseRequestHandler {
 
         private readonly IXmlSerializer serializer = new XmlSerializerWrapper();
 
-        public XmlResponse<T>Request<T>(T t, Uri uri) where T : new() {
+        public TestRequestHandler(IXmlSerializer serializer) : base(serializer) {
+        }
+
+        public override XmlResponse<T>Request<T>(T t, Uri uri) {
             // ReSharper disable once PossibleNullReferenceException
             var baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             var path = uri.PathAndQuery;

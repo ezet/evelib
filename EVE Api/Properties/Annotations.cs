@@ -9,7 +9,7 @@
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable InconsistentNaming
 
-namespace eZet.Eve.EoLib.Annotations
+namespace eZet.Eve.EveLib.Properties
 {
   /// <summary>
   /// Indicates that the value of the marked element could be <c>null</c> sometimes,

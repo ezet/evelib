@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Web.Configuration;
-using eZet.Eve.EoLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi;
 
-namespace eZet.Eve.EoLib.Util.EveApi {
+namespace eZet.Eve.EveLib.Util.EveApi {
     /// <summary>
     /// Provides basic properties and methods for Eve Api RequestHandler objects.
     /// </summary>
@@ -77,8 +75,8 @@ namespace eZet.Eve.EoLib.Util.EveApi {
                 try {
                     var data =
                         File.ReadAllLines(Config.ExpirationRegister);
-                    for (var i = 0; i < data.Length; ++i) {
-                        var split = data[i].Split(',');
+                    foreach (string t in data) {
+                        var split = t.Split(',');
                         _cacheExpirationRegister.Restore(split[0],
                             DateTime.Parse(split[1], CultureInfo.InvariantCulture));
                     }

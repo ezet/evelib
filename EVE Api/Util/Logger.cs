@@ -1,7 +1,7 @@
 ﻿
 using System.Diagnostics;
 
-namespace eZet.Eve.EoLib.Util {
+namespace eZet.Eve.EveLib.Util {
     public static class Logger {
 
         public static void Log(string message) {

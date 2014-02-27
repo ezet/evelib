@@ -1,10 +1,11 @@
 ﻿using System.Linq;
-using eZet.Eve.EoLib.Entity;
-using eZet.Eve.EoLib.Entity.EveApi;
-using eZet.Eve.EoLib.Test.Mocks;
+using eZet.Eve.EveLib.Entity;
+using eZet.Eve.EveLib.Entity.EveApi;
+using eZet.Eve.EveLib.Test.Mocks;
+using eZet.Eve.EveLib.Util.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
 
     [TestClass]
     public class Corporation_StaticDeserializationTests {
@@ -13,7 +14,7 @@ namespace eZet.Eve.EoLib.Test {
 
         public Corporation_StaticDeserializationTests() {
             corp = new Corporation(new CorporationKey(0, ""), 0, "");
-            corp.RequestHandler = new TestRequestHandler();
+            corp.RequestHandler = new TestRequestHandler(new XmlSerializerWrapper());
         }
 
         [TestMethod]

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
     /// <summary>
     /// Summary description for MapTest
     /// </summary>
@@ -9,7 +9,7 @@ namespace eZet.Eve.EoLib.Test {
     [TestClass]
     public class Map_Tests {
 
-        private readonly EoLib api = new EoLib();
+        private readonly EveLib api = EveLib.Create();
   
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace eZet.Eve.EoLib.Test {
         /// </summary>
         [TestMethod]
         public void TestSovereigntyStatus_ValidRequest_HasResult() {
-            Assert.Fail();
+            Assert.Fail("Disabled by CCP.");
             //var res = api.Map.GetSovereigntyStatus();
 
         }

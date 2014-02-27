@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
     public class Image {
 
         public enum CharacterPortraitSize {

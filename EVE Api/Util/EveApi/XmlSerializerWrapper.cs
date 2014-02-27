@@ -1,14 +1,14 @@
 ﻿using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using eZet.Eve.EoLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi;
 
-namespace eZet.Eve.EoLib.Util.EveApi {
+namespace eZet.Eve.EveLib.Util.EveApi {
 
     /// <summary>
     /// A simple wrapper for .NET XmlSerializer.
     /// </summary>
-    public class XmlSerializerWrapper : IXmlSerializer {
+    public sealed class XmlSerializerWrapper : IXmlSerializer {
 
         /// <summary>
         /// Deserializes Eve API xml using the .NET XmlSerializer.

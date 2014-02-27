@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EoLib.Model.EveApi.Account {
+namespace eZet.Eve.EveLib.Model.EveApi.Account {
 
     [Serializable]
     [XmlRoot("result", IsNullable = false)]

@@ -1,8 +1,8 @@
 ﻿using System;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Util.EveApi;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Util.EveApi;
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
     public abstract class BaseEntity {
 
         /// <summary>

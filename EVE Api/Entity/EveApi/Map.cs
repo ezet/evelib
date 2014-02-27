@@ -1,8 +1,8 @@
 ﻿using System;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Model.EveApi.Map;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Map;
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
     public class Map : BaseEntity {
 
         internal Map() {

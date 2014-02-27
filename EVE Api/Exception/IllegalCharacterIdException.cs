@@ -1,6 +1,7 @@
-﻿using eZet.Eve.EoLib.Entity.EveApi;
+﻿using eZet.Eve.EveLib.Entity.EveApi;
 
-namespace eZet.Eve.EoLib.Exception {
+namespace eZet.Eve.EveLib.Exception {
+
     public class IllegalCharacterIdException : System.Exception {
 
         public ApiKey Key { get; private set; }

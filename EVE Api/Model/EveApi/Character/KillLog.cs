@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EoLib.Model.EveApi.Character {
+namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
     [Serializable]
     [XmlRoot("result", IsNullable = false)]

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
     public class CorporationKey : ApiKey {
 
         private Corporation _corporation;

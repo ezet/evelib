@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EoLib.Model.EveApi {
+namespace eZet.Eve.EveLib.Model.EveApi {
 
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
@@ -14,8 +14,8 @@ namespace eZet.Eve.EoLib.Model.EveApi {
 
         [XmlElement("currentTime")]
         public string CurrentTimeAsString {
-            get { return CurrentTime.ToString(XmlElement.DateFormat); }
-            set { CurrentTime = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
+            get { return CurrentTime.ToString(DateFormat); }
+            set { CurrentTime = DateTime.ParseExact(value, DateFormat, null); }
         }
 
         //[XmlIgnore]
@@ -27,8 +27,8 @@ namespace eZet.Eve.EoLib.Model.EveApi {
 
         [XmlElement("cachedUntil")]
         public string CachedUntilAsString {
-            get { return CachedUntil.ToString(XmlElement.DateFormat); }
-            set { CachedUntil = DateTime.ParseExact(value, XmlElement.DateFormat, null); }
+            get { return CachedUntil.ToString(DateFormat); }
+            set { CachedUntil = DateTime.ParseExact(value, DateFormat, null); }
         }
 
         [XmlAttribute("version")]
@@ -47,8 +47,7 @@ namespace eZet.Eve.EoLib.Model.EveApi {
             CurrentTimeAsString = getString("currentTime");
             CachedUntilAsString = getString("cachedUntil");
             Result = deserialize(getReader("result"), new T());
-
-            //throw new NotImplementedException();
+            Error = deserialize(getReader("error"), new Error());
         }
 
         public void WriteXml(XmlWriter writer) {
@@ -56,6 +55,8 @@ namespace eZet.Eve.EoLib.Model.EveApi {
         }
     }
 
+    [Serializable]
+    [XmlRoot("error", IsNullable = false)]
     public class Error {
         
         [XmlAttribute("code")]

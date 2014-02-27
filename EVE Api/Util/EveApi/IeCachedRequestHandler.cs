@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
-using eZet.Eve.EoLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi;
 
-namespace eZet.Eve.EoLib.Util.EveApi {
+namespace eZet.Eve.EveLib.Util.EveApi {
 
     /// <summary>
     /// Handles requests to the Eve API. Caching is accomplished by using the native HttpWebRequest caching (IE Cache).

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eZet.Eve.EoLib.Entity.EveCentral {
+namespace eZet.Eve.EveLib.Entity.EveCentral {
     public class EveCentral {
 
         protected Uri UriBase { get; set; }

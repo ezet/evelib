@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EoLib.Model.EveApi {
+namespace eZet.Eve.EveLib.Model.EveApi {
 
     /// <summary>
     /// Provides utility methods for XML element classes.
@@ -19,7 +19,7 @@ namespace eZet.Eve.EoLib.Model.EveApi {
         protected XElement root { get; set; }
 
         /// <summary>
-        /// Sets and initializes the xml document for pasing using xml to linq.
+        /// Sets and initializes the xml document for parsing using linq to xml.
         /// </summary>
         /// <param name="reader"></param>
         protected void setRoot(XmlReader reader) {
@@ -35,6 +35,7 @@ namespace eZet.Eve.EoLib.Model.EveApi {
         /// <param name="type">An instance of the type.</param>
         /// <returns></returns>
         protected virtual XmlRowSet<T> deserializeRowSet<T>(XmlReader reader, T type) {
+            if (reader == null) return default(XmlRowSet<T>);
             reader.ReadToDescendant("rowset");
             var serializer = new XmlSerializer(typeof(XmlRowSet<T>));
             return (XmlRowSet<T>)serializer.Deserialize(reader);
@@ -49,6 +50,7 @@ namespace eZet.Eve.EoLib.Model.EveApi {
         /// <param name="type"></param>
         /// <returns></returns>
         protected virtual T deserialize<T>(XmlReader reader, T type) {
+            if (reader == null) return default(T);
             var serializer = new XmlSerializer(typeof(T));
             return (T)serializer.Deserialize(reader);
         }
@@ -59,7 +61,8 @@ namespace eZet.Eve.EoLib.Model.EveApi {
         /// <param name="name"></param>
         /// <returns></returns>
         protected XmlReader getReader(string name) {
-            return list.First(x => x.Name == name).CreateReader();
+            var el = list.FirstOrDefault(x => x.Name == name);
+            return el != null ? el.CreateReader() : null;
         }
 
         /// <summary>
@@ -68,8 +71,8 @@ namespace eZet.Eve.EoLib.Model.EveApi {
         /// <param name="name"></param>
         /// <returns></returns>
         protected XmlReader getRowSetReader(string name) {
-            var rowset = list.Where(x => x.Name == "rowset").First(r => r.Attribute("name").Value == name);
-            return rowset.CreateReader();
+            var rowset = list.Where(x => x.Name == "rowset").FirstOrDefault(r => r.Attribute("name").Value == name);
+            return rowset != null ? rowset.CreateReader() : null;
         }
 
         protected long getLong(string name) {

@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
 
     [TestClass]
     public class Core_Tests {
 
-        private readonly EoLib api = new EoLib();
+        private readonly EveLib api = EveLib.Create();
 
         private const string CharName = "CCP Garthagk";
 
@@ -24,7 +24,7 @@ namespace eZet.Eve.EoLib.Test {
         [TestMethod]
         public void GetCertificateTree_ValidRequest_HasResult() {
             var xml = api.Core.GetCertificateTree();
-            Assert.IsNotNull(xml.Result.Categories.First());
+            Assert.IsNotNull(xml.Result);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace eZet.Eve.EoLib.Test {
         [TestMethod]
         public void GetCharacterAffiliation_ValidRequest_HasResult() {
             var xml = api.Core.GetCharacterAffiliation(CharId);
-            Assert.IsNotNull(xml.Result.Characters.First());
+            Assert.IsNotNull(xml.Result.Characters.First(), "Not implemented by CCP yet.");
         }
 
         [TestMethod]

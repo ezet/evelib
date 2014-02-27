@@ -1,13 +1,17 @@
 ﻿using System;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Model.EveApi.Account;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Account;
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
 
     public enum ApiKeyType {
         Account, Character, Corporation
     }
 
+
+    /// <summary>
+    /// Base class for Key entities, providing common properties and methods.
+    /// </summary>
     public abstract class ApiKey : BaseEntity {
 
         /// <summary>
@@ -74,7 +78,7 @@ namespace eZet.Eve.EoLib.Entity.EveApi {
         }
 
         internal XmlResponse<ApiKeyInfo> GetApiKeyInfo() {
-            const int mask = 0;
+            //const int mask = 0;
             const string uri = "/account/APIKeyInfo.xml.aspx";
             return request(new ApiKeyInfo(), uri, this);
         }
@@ -84,7 +88,7 @@ namespace eZet.Eve.EoLib.Entity.EveApi {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<CharacterList> GetCharacterList() {
-            const int mask = 0;
+            //const int mask = 0;
             const string uri = "/account/Characters.xml.aspx";
             var response = request(new CharacterList(), uri, this);
             return response;

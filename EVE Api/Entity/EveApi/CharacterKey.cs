@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Model.EveApi.Account;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Account;
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
     public class CharacterKey : ApiKey {
 
         private ReadOnlyCollection<Character> _characters;
@@ -30,7 +30,7 @@ namespace eZet.Eve.EoLib.Entity.EveApi {
         /// </summary>
         /// <returns></returns>
         public XmlResponse<AccountStatus> GetAccountStatus() {
-            const int mask = 33554432;
+            //const int mask = 33554432;
             const string uri = "/account/AccountStatus.xml.aspx";
             return request(new AccountStatus(), uri, this);
         }

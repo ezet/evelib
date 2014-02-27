@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
-using eZet.Eve.EoLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi;
 
-namespace eZet.Eve.EoLib.Util.EveApi {
+namespace eZet.Eve.EveLib.Util.EveApi {
     public class WebClientRequestHandler : BaseRequestHandler {
 
         public WebClientRequestHandler(IXmlSerializer serializer) : base(serializer) {
@@ -17,8 +17,6 @@ namespace eZet.Eve.EoLib.Util.EveApi {
             var client = new WebClient();
 
             var data = client.DownloadString(uri);
-
-
 
             throw new NotImplementedException();
         }

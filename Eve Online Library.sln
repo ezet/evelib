@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EoLib", "EVE Api\EoLib.csproj", "{AA85978C-2BF5-419F-9F8E-B70162E83F34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib", "EVE Api\EveLib.csproj", "{AA85978C-2BF5-419F-9F8E-B70162E83F34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVE MarketData Api", "..\EVE MarketData Api\EVE MarketData Api\EVE MarketData Api.csproj", "{04114D09-28BD-4F16-8368-64CDB21D916B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EoLib Test", "EveApi Unit Test\EoLib Test.csproj", "{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib Test", "EveApi Unit Test\EveLib Test.csproj", "{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EoLib.Model.EveCentral {
+namespace eZet.Eve.EveLib.Model.EveCentral {
 
     [Serializable]
     [System.Diagnostics.DebuggerStepThroughAttribute]

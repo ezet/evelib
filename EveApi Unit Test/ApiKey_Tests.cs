@@ -1,8 +1,8 @@
-﻿using eZet.Eve.EoLib.Entity;
-using eZet.Eve.EoLib.Entity.EveApi;
+﻿using eZet.Eve.EveLib.Entity;
+using eZet.Eve.EveLib.Entity.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
 
     [TestClass]
     class ApiKey_Tests {
@@ -11,7 +11,7 @@ namespace eZet.Eve.EoLib.Test {
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private readonly ApiKey validKey = EoLib.GetCharacterKey(KeyId, VCode);
+        private readonly ApiKey validKey = EveLib.GetCharacterKey(KeyId, VCode);
 
 
         [TestMethod]

@@ -1,8 +1,8 @@
-﻿using eZet.Eve.EoLib.Entity;
-using eZet.Eve.EoLib.Entity.EveApi;
+﻿using eZet.Eve.EveLib.Entity;
+using eZet.Eve.EveLib.Entity.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace eZet.Eve.EoLib.Test {
+namespace eZet.Eve.EveLib.Test {
     [TestClass]
     public class Image_Tests {
 

@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-namespace eZet.Eve.EoLib.Util.EveApi {
+namespace eZet.Eve.EveLib.Util.EveApi {
     public class HashedCacheExpirationRegister : ICacheExpirationRegister  {
 
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();

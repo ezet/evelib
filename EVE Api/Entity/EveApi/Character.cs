@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using eZet.Eve.EoLib.Model.EveApi;
-using eZet.Eve.EoLib.Model.EveApi.Character;
-using eZet.Eve.EoLib.Model.EveApi.Core;
-using FactionWarfareStats = eZet.Eve.EoLib.Model.EveApi.Character.FactionWarfareStats;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Character;
+using eZet.Eve.EveLib.Model.EveApi.Core;
 
-[assembly: InternalsVisibleTo("EoLib.Tests")]
+[assembly: InternalsVisibleTo("EveLib.Tests")]
 
 
-namespace eZet.Eve.EoLib.Entity.EveApi {
+namespace eZet.Eve.EveLib.Entity.EveApi {
 
     /// <summary>
     /// Provides access to all API calls relating to a specific character, that is, URIs prefixed with /char in CCPs API.
@@ -151,9 +150,9 @@ namespace eZet.Eve.EoLib.Entity.EveApi {
         /// If the character is enlisted in Factional Warfare, this will return statistics regarding factional warfare for this character.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
+        public XmlResponse<Model.EveApi.Character.FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/char/FacWarStats.xml.aspx";
-            return request(new FactionWarfareStats(), relPath, Key, "characterId", CharacterId);
+            return request(new Model.EveApi.Character.FactionWarfareStats(), relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
