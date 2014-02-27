@@ -24,13 +24,13 @@ The library exposes all CCPs Eve API functions through an easy to use API, using
 #### Requests 
 Map, Image and Core does not require any state, and are accessible through any EoLib instance, eg:
 
-    var lib = new EoLib();
-    var data =lib.Core.GetStuffFromApi();
+    var lib = EveLib.Create();
+    var data = lib.Core.GetStuffFromApi();
 	
 Character and Corporation require a valid Eve Online API Key, which consist of a key id and a vertification code.
 To access these, you need to create a new `CharacterKey` or `CorporationKey`. An example using id '123' and vcode 'qwerty':
 
-    var key = EoLib.GetCharacterKey(123, qwerty);
+    var key = EveLib.GetCharacterKey(123, "qwerty");
 
 Using this key, you can access all /account/ calls (note: Only `CharacterKey` provides `GetAccountInfo()`):
 
@@ -41,7 +41,7 @@ To get access to Character objects, simply access key.Characters, which lazily l
     var character = key.Characters.First();
     var data = character.GetCharacterSheet();
 
-You can also use LINQ to find a specific character, eg:
+You can also use LINQ and lambdas to find a specific character, eg:
 
     var character = key.Characters.First(c => c.CharacterId == 12345);
     var peter = key.Characters.First(c => c.CharacterName == "Peter");
@@ -53,7 +53,7 @@ All API calls return results in the form of `XmlResponse<T>` objects, where `T` 
 
 Every XML response has a Version, CachedUntil, Result and Error property. Result is of type T, and contains all request specific data. Error is null unless the API returned an error, in which case it provides access to the error code and description. A later version will possibly use exceptions instead.
 
-    var data = api.Core.GetServerStatus();
+    var data = lib.Core.GetServerStatus();
     if (data.Result.Error != null) {
         // handle the error
         Logger.Log(data.Result.Error.Code + data.Result.Error.Description);
