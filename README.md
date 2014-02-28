@@ -22,7 +22,7 @@ The library exposes all CCPs Eve API functions through an easy to use API, using
 * `Core` exposes all other API requests.
 
 #### Requests 
-Map, Image and Core does not require any state, and are accessible through any EoLib instance, eg:
+Map, Image and Core does not require any state, and are accessible through any EveLib instance, eg:
 
     var lib = EveLib.Create();
     var data = lib.Core.GetStuffFromApi();
@@ -41,7 +41,7 @@ To get access to Character objects, simply access key.Characters, which lazily l
     var character = key.Characters.First();
     var data = character.GetCharacterSheet();
 
-You can also use LINQ and lambdas to find a specific character, eg:
+You can also use LINQ and predicates to find a specific character, eg:
 
     var character = key.Characters.First(c => c.CharacterId == 12345);
     var peter = key.Characters.First(c => c.CharacterName == "Peter");
