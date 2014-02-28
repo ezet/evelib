@@ -1,5 +1,6 @@
 ﻿using System;
 using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Util;
 using eZet.Eve.EveLib.Util.EveApi;
 
 namespace eZet.Eve.EveLib.Entity.EveApi {
@@ -30,7 +31,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relUri, params object[] args) where T : new() {
             var uri = new Uri(BaseUri, relUri + generateQueryString(null, args));
-            return RequestHandler.Request(type, uri);
+            return RequestHandler.Request<XmlResponse<T>>(uri);
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relUri, ApiKey key) where T : new() {
             var uri = new Uri(BaseUri, relUri + generateQueryString(key));
-            return RequestHandler.Request(type, uri);
+            return RequestHandler.Request<XmlResponse<T>>(uri);
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         protected XmlResponse<T> request<T>(T type, string relUri, ApiKey key, params object[] args) where T : new() {
             var uri = new Uri(BaseUri, relUri + generateQueryString(key, args));
-            return RequestHandler.Request(type, uri);
+            return RequestHandler.Request<XmlResponse<T>>(uri);
         }
 
         /// <summary>

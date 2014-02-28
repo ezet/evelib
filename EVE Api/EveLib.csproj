@@ -128,12 +128,12 @@
     <Compile Include="Exception\IllegalCharacterIdException.cs" />
     <Compile Include="Exception\InvalidKeyTypeException.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Util\EveApi\IRequestHandler.cs" />
+    <Compile Include="Util\IRequestHandler.cs" />
     <Compile Include="Util\EveApi\WebClientRequestHandler.cs" />
     <Compile Include="Util\EveApi\ICache.cs" />
     <Compile Include="Util\EveApi\BaseRequestHandler.cs" />
     <Compile Include="Util\EveApi\ICacheExpirationRegister.cs" />
-    <Compile Include="Util\EveApi\IXmlSerializer.cs" />
+    <Compile Include="Util\IXmlSerializer.cs" />
     <Compile Include="Entity\EveApi\Map.cs" />
     <Compile Include="Entity\EveCentral\EveCentral.cs" />
     <Compile Include="Model\EveApi\Map\SovereigntyStatus.cs" />
@@ -141,9 +141,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\EveApi\Character\WalletTransactions.cs" />
     <Compile Include="Util\EveApi\IeCachedRequestHandler.cs" />
+    <Compile Include="Util\EveCentral\RequestHandler.cs" />
     <Compile Include="Util\Logger.cs" />
     <Compile Include="Util\EveApi\HashedCacheExpirationRegister.cs" />
-    <Compile Include="Util\EveApi\XmlSerializerWrapper.cs" />
+    <Compile Include="Util\XmlSerializerWrapper.cs" />
     <Compile Include="Util\HttpRequestHelper.cs" />
   </ItemGroup>
   <ItemGroup>

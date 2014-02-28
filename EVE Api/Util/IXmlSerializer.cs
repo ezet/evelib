@@ -1,6 +1,4 @@
-﻿using eZet.Eve.EveLib.Model.EveApi;
-
-namespace eZet.Eve.EveLib.Util.EveApi {
+﻿namespace eZet.Eve.EveLib.Util {
 
     /// <summary>
     /// Provides serialization methods for Eve API xml and objects.
@@ -13,7 +11,7 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         /// <typeparam name="T">Parameter type for XmlResponse.</typeparam>
         /// <param name="data">String of XML to deserialize.</param>
         /// <returns></returns>
-        XmlResponse<T> Deserialize<T>(string data) where T : new();
+        T Deserialize<T>(string data);
 
     }
 }

@@ -2,6 +2,7 @@
 using eZet.Eve.EveLib.Entity;
 using eZet.Eve.EveLib.Entity.EveApi;
 using eZet.Eve.EveLib.Test.Mocks;
+using eZet.Eve.EveLib.Util;
 using eZet.Eve.EveLib.Util.EveApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

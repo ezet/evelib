@@ -8,7 +8,7 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         public WebClientRequestHandler(IXmlSerializer serializer) : base(serializer) {
         }
 
-        public override XmlResponse<T> Request<T>(T type, Uri uri) {
+        public override T Request<T>(Uri uri) {
             DateTime cachedUntil;
             if (CacheExpirationRegister.TryGetValue(uri, out cachedUntil)) {
                 

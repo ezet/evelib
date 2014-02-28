@@ -47,8 +47,12 @@ namespace eZet.Eve.EveLib {
         public EveCentral EveCentral { get; private set; }
 
         public static void Main(string[] args) {
-            var lib = EveLib.Create().EveCentral;
-            var res = lib.GetQuicklook(new EveCentralOptions());
+            var lib = Create().EveCentral;
+            var opt = new EveCentralOptions();
+            opt.Types.Add(34);
+            opt.Regions.Add(10000002);
+
+            var res = lib.GetQuicklook(opt);
             var result = res.Result;
 
 

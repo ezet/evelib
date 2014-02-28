@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using eZet.Eve.EveLib.Model.EveApi;
 
-namespace eZet.Eve.EveLib.Util.EveApi {
+namespace eZet.Eve.EveLib.Util {
 
     /// <summary>
     /// A simple wrapper for .NET XmlSerializer.
@@ -16,11 +15,11 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         /// <typeparam name="T">An xml result type</typeparam>
         /// <param name="data">An XML string</param>
         /// <returns></returns>
-        XmlResponse<T> IXmlSerializer.Deserialize<T>(string data) {
-            var serializer = new XmlSerializer(typeof(XmlResponse<T>));
-            XmlResponse<T> xmlResponse;
+        T IXmlSerializer.Deserialize<T>(string data) {
+            var serializer = new XmlSerializer(typeof(T));
+            T xmlResponse;
             using (var reader = XmlReader.Create(new StringReader(data))) {
-                xmlResponse = (XmlResponse<T>)serializer.Deserialize(reader);
+                xmlResponse = (T)serializer.Deserialize(reader);
             }
             return xmlResponse;
         }

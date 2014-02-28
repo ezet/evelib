@@ -14,7 +14,10 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
 
         public int System { get; set; }
 
-        public EveCentralOptions() {
+        public EveCentralOptions(int hourLimit = 0, int minQuality = 0, int system = 0) {
+            HourLimit = hourLimit;
+            MinQuality = minQuality;
+            System = system;
             Types = new List<long>();
             Regions = new List<long>();
         }
@@ -24,7 +27,7 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
         }
 
         internal string RegionQuery(string paramName) {
-            return Regions.Count == 0 ? "" : Types.Aggregate("", (current, region) => current + (paramName + "=" + region + "&"));
+            return Regions.Count == 0 ? "" : Regions.Aggregate("", (current, region) => current + (paramName + "=" + region + "&"));
         }
 
         internal string HourQuery(string paramName) {

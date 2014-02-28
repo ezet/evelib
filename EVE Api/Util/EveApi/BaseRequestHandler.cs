@@ -36,7 +36,7 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         /// <summary>
         /// A serializer for deserializing objects.
         /// </summary>
-        public IXmlSerializer Serializer { get; private set; }
+        public IXmlSerializer Serializer { get;  set; }
 
 
         protected BaseRequestHandler(IXmlSerializer serializer) {
@@ -47,10 +47,9 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         /// Performs a request using the specified URI.
         /// </summary>
         /// <typeparam name="T">Type of XmlResponse.</typeparam>
-        /// <param name="type">An object of the type to return in the response.</param>
         /// <param name="uri">The uri to request.</param>
         /// <returns></returns>
-        public abstract XmlResponse<T> Request<T>(T type, Uri uri) where T : new();
+        public abstract T Request<T>(Uri uri);
         
         /// <summary>
         /// Stores the CacheExpirationRegister to disk.

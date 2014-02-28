@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Cache;
 using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Account;
 
 namespace eZet.Eve.EveLib.Util.EveApi {
 
@@ -22,17 +23,22 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         /// Performs a request to the specified URI and returns an XmlResponse of specified type.
         /// </summary>
         /// <typeparam name="T">The type parameter for the xml response.</typeparam>
-        /// <param name="type">An object of the xml response parameter type.</param>
         /// <param name="uri">The URI to request.</param>
         /// <returns></returns>
-        public override XmlResponse<T> Request<T>(T type, Uri uri) {
+        public override T Request<T>(Uri uri) {
             DateTime cachedUntil;
             var fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
             var data = webRequest(uri, fromCache);
             var xml = Serializer.Deserialize<T>(data);
-            CacheExpirationRegister.AddOrUpdate(uri, xml.CachedUntil);
+            register(uri, xml);
             SaveCacheState();
             return xml;
+        }
+
+        private void register(Uri uri, dynamic xml) {
+            //if (o.GetType().Is) throw new System.Exception("Should never occur.");
+            // TODO type check
+            CacheExpirationRegister.AddOrUpdate(uri, xml.CachedUntil);
         }
 
         /// <summary>
