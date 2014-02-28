@@ -6,7 +6,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
     public class Map : BaseEntity {
 
         internal Map() {
-            UriBase = new Uri("https://api.eveonline.com");
+            BaseUri = new Uri("https://api.eveonline.com");
         }
 
         /// <summary>

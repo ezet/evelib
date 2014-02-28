@@ -4,7 +4,6 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EveLib.Model.EveCentral {
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class XmlResponse {

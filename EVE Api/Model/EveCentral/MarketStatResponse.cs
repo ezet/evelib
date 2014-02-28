@@ -1,24 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveCentral {
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class MarketStatResponse : XmlResponse {
 
-        [XmlElement("marketstat")]
-        public MarketStatsResult Result { get; set; }
+        [XmlArray("marketstat"), XmlArrayItem("type")]
+        public List<MarketStatItem> Result { get; set; }
 
-    }
-
-    public class MarketStatsResult {
-        
-        [XmlElement("type")]
-        public MarketStatItem[] Items { get; set; }
     }
 
     public class MarketStatItem {

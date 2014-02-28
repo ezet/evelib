@@ -72,7 +72,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
         protected ApiKey(long keyId, string vCode) {
-            UriBase = new Uri("https://api.eveonline.com");
+            BaseUri = new Uri("https://api.eveonline.com");
             KeyId = keyId;
             VCode = vCode;
         }

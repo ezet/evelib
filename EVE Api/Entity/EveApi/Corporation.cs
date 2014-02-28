@@ -38,7 +38,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             Key = key;
             CorporationId = corporationId;
             CorporationName = corporationName;
-            UriBase = new Uri("https://api.eveonline.com");
+            BaseUri = new Uri("https://api.eveonline.com");
 
         }
 

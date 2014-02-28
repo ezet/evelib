@@ -13,7 +13,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Creates a new object.
         /// </summary>
         internal Core() {
-            UriBase = new Uri("https://api.eveonline.com");
+            BaseUri = new Uri("https://api.eveonline.com");
         }
 
         /// <summary>

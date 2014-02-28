@@ -5,8 +5,6 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EveLib.Model.EveCentral {
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class QuicklookResponse : XmlResponse {
@@ -24,27 +22,20 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
         [XmlElement("itemname")]
         public string TypeName { get; set; }
 
-        [XmlElement("regions")]
-        public string Regions { get; set; }
-
         [XmlElement("hours")]
         public int Hours { get; set; }
 
         [XmlElement("minqty")]
         public int MinQuantity { get; set; }
 
-        [XmlElement("sell_orders")]
-        public QuicklookData SellOrders { get; set; }
+        [XmlArray("regions"), XmlArrayItem("region")]
+        public List<string> Regions { get; set; }
 
-        [XmlElement("buy_orders")]
-        public QuicklookData BuyOrders { get; set; }
+        [XmlArray("sell_orders"), XmlArrayItem("order")]
+        public List<QuicklookOrder> SellOrders { get; set; }
 
-    }
-
-    public class QuicklookData {
-
-        [XmlElement("order")]
-        public List<QuicklookOrder> Orders { get; set; }
+        [XmlArray("buy_orders"), XmlArrayItem("order")]
+        public List<QuicklookOrder> BuyOrders { get; set; }
 
     }
 

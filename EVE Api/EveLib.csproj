@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>eZet.Eve.EveLib</RootNamespace>
     <AssemblyName>EveLib</AssemblyName>
@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Entity\EveCentral\EveCentralOptions.cs" />
     <Compile Include="Exception\InvalidRequestException.cs" />
     <Compile Include="Model\EveApi\Character\AccountBalance.cs" />
     <Compile Include="Entity\EveApi\ApiKey.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Util\Logger.cs" />
     <Compile Include="Util\EveApi\HashedCacheExpirationRegister.cs" />
     <Compile Include="Util\EveApi\XmlSerializerWrapper.cs" />
+    <Compile Include="Util\HttpRequestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

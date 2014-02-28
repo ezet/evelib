@@ -44,7 +44,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             Key = key;
             CharacterId = characterId;
             CharacterName = characterName;
-            UriBase = new Uri("https://api.eveonline.com");
+            BaseUri = new Uri("https://api.eveonline.com");
         }
 
         

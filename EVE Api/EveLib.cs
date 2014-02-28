@@ -26,13 +26,10 @@ namespace eZet.Eve.EveLib {
  
     public class EveLib {
 
- 
-
         /// <summary>
         /// Gets the Core for this instance
         /// </summary>
         public Core Core { get; private set; }
-
 
         /// <summary>
         /// Gets the Map for this instance
@@ -40,14 +37,22 @@ namespace eZet.Eve.EveLib {
         public Map Map { get; private set; }
 
         /// <summary>
+        /// Gets the Image for this instance
+        /// </summary>
+        public Image Image { get; private set; }
+
+        /// <summary>
         /// Gets the EveCentral for this instance
         /// </summary>
         public EveCentral EveCentral { get; private set; }
 
-        /// <summary>
-        /// Gets the Image for this instance
-        /// </summary>
-        public Image Image { get; private set; }
+        public static void Main(string[] args) {
+            var lib = EveLib.Create().EveCentral;
+            var res = lib.GetQuicklook(new EveCentralOptions());
+            var result = res.Result;
+
+
+        }
 
         public static EveLib Create() {
             return new EveLib(new Core(), new Map(), new Image(), new EveCentral());
