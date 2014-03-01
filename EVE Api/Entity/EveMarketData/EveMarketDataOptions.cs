@@ -28,7 +28,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
     }
 
 
-    public class MarketDataOptions {
+    public class EveMarketDataOptions {
 
         public List<long> Items { get; set; }
 
@@ -46,7 +46,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
 
         public DateTime DateLimit { get; set; }
 
-        public MarketDataOptions() {
+        public EveMarketDataOptions() {
             Items = new List<long>();
             ItemGroups = new List<long>();
             Regions = new List<long>();

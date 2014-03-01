@@ -39,7 +39,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// <param name="options">Valid options: Items, Marketgroups, Regions, Date, RowLimit</param>
         /// <param name="type"></param>
         /// <returns>A list of any orders that were recently updated.</returns>
-        public XmlResponse<RecentUploads> GetRecentUploads(MarketDataOptions options, UploadType type) {
+        public XmlResponse<RecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
             var relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -55,7 +55,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// </summary>
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <returns>A best guess price of one or multiple items.</returns>
-        public XmlResponse<ItemHistory> GetItemHistory(MarketDataOptions options) {
+        public XmlResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
             var relUri = "/api/item_history2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var regions = String.Join(",", options.Regions);
@@ -70,7 +70,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// <param name="type"></param>
         /// <param name="minmax"></param>
         /// <returns>All orders on the market.</returns>
-        public XmlResponse<ItemPrices> GetItemPrice(MarketDataOptions options, OrderType type, MinMax minmax) {
+        public XmlResponse<ItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type, MinMax minmax) {
             var relUri = "/api/item_prices2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -88,7 +88,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
-        public XmlResponse<ItemOrders> GetItemOrders(MarketDataOptions options, OrderType type) {
+        public XmlResponse<ItemOrders> GetItemOrders(EveMarketDataOptions options, OrderType type) {
             var relUri = "/api/item_orders2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -105,7 +105,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// </summary>
         /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
         /// <returns>The daily station rank in a region and order statistics for stations</returns>
-        public XmlResponse<StationRank> GetStationRank(MarketDataOptions options) {
+        public XmlResponse<StationRank> GetStationRank(EveMarketDataOptions options) {
             var relUri = "/api/station_rank2." + Format.ToString().ToLower();
             var regions = String.Join(",", options.Regions);
             var solarsystems = String.Join(",", options.Solarsystems);

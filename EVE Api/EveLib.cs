@@ -51,7 +51,7 @@ namespace eZet.Eve.EveLib {
 
         public static void Main(string[] args) {
             var lib = Create().EveMarketData;
-            var opt = new MarketDataOptions {DayLimit = 1};
+            var opt = new EveMarketDataOptions {DayLimit = 1};
             var res = lib.GetRecentUploads(opt, UploadType.Orders);
 
             var result = res.Result;

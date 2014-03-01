@@ -23,7 +23,7 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
         public string TypeName { get; set; }
 
         [XmlElement("hours")]
-        public int Hours { get; set; }
+        public int HourLimit { get; set; }
 
         [XmlElement("minqty")]
         public int MinQuantity { get; set; }

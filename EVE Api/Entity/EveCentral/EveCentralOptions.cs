@@ -9,15 +9,12 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
         
         public int HourLimit { get; set; }
 
-        public int MinQuality { get; set; }
+        public int MinQuantity { get; set; }
 
 
         public int System { get; set; }
 
-        public EveCentralOptions(int hourLimit = 0, int minQuality = 0, int system = 0) {
-            HourLimit = hourLimit;
-            MinQuality = minQuality;
-            System = system;
+        public EveCentralOptions() {
             Types = new List<long>();
             Regions = new List<long>();
         }
@@ -34,8 +31,8 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
             return HourLimit == 0 ? "" : paramName + "=" + HourLimit + "&";
         }
 
-        internal string QualityQuery(string paramName) {
-            return MinQuality == 0 ? "" : paramName + "=" + MinQuality + "&";
+        internal string MinQuantityQuery(string paramName) {
+            return MinQuantity == 0 ? "" : paramName + "=" + MinQuantity + "&";
         }
 
         internal string SystemQuery(string paramName) {

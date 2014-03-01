@@ -47,7 +47,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Entity\EveCentral\EveCentralOptions.cs" />
     <Compile Include="Entity\EveMarketData\EveMarketData.cs" />
-    <Compile Include="Entity\EveMarketData\MarketDataOptions.cs" />
+    <Compile Include="Entity\EveMarketData\EveMarketDataOptions.cs" />
     <Compile Include="Exception\InvalidRequestException.cs" />
     <Compile Include="Model\EveApi\Character\AccountBalance.cs" />
     <Compile Include="Entity\EveApi\ApiKey.cs" />

@@ -18,10 +18,11 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
         /// <summary>
         /// Returns aggregate statistics for the items specified.
         /// </summary>
+        /// <param name="options">Valid options; Types, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public MarketStatResponse GetMarketStat(EveCentralOptions options) {
             const string relUri = "/api/marketstat";
-            var queryString = options.TypeQuery("typeid") + options.HourQuery("hours") + options.QualityQuery("minQ") +
+            var queryString = options.TypeQuery("typeid") + options.HourQuery("hours") + options.MinQuantityQuery("minQ") +
                              options.RegionQuery("regionlimit") + options.SystemQuery("usesystem");
             return request<MarketStatResponse>(relUri, queryString);
         }
@@ -29,21 +30,34 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
         /// <summary>
         /// Returns all of the available market orders, including prices, stations, order IDs, volumes, etc.
         /// </summary>
+        /// <param name="options">Valid options; Types, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public QuicklookResponse GetQuicklook(EveCentralOptions options) {
             const string relUri = "/api/quicklook";
-            var queryString = options.TypeQuery("typeid") + options.HourQuery("sethours") + options.QualityQuery("setminQ") +
+            var queryString = options.TypeQuery("typeid") + options.HourQuery("sethours") + options.MinQuantityQuery("setminQ") +
                       options.RegionQuery("regionlimit") + options.SystemQuery("usesystem");
             return request<QuicklookResponse>(relUri, queryString);
         }
 
-        public QuicklookResponse GetQuicklookPath(long start, long end, long typeId, int hourLimit = 0, int qualityLimit = 0) {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startSystem">SystemID or System name</param>
+        /// <param name="endSystem">SystemID or System name</param>
+        /// <param name="typeId">Type ID</param>
+        /// <param name="options">Optional; Valid options: HourLimit, MinQuantity.</param>
+        /// <returns></returns>
+        public QuicklookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId,
+            EveCentralOptions options = null) {
             var relUri = "/api/quicklook/onpath";
-            relUri += "/from/" + start + "/to/" + end + "/fortype/" + typeId;
-            var queryString = "?";
-            queryString += hourLimit == 0 ? "" : "sethours=" + hourLimit + "&";
-            queryString += qualityLimit == 0 ? "" : "setminQ=" + qualityLimit;
+            relUri += "/from/" + startSystem + "/to/" + endSystem + "/fortype/" + typeId;
+            var queryString = "";
+            if (options != null) {
+                queryString = options.HourQuery("sethours");
+                queryString += options.MinQuantityQuery("setminQ");
+            }
             return request<QuicklookResponse>(relUri, queryString);
+
         }
 
         public void GetHistory() {
