@@ -130,8 +130,8 @@
     <Compile Include="Exception\IllegalCharacterIdException.cs" />
     <Compile Include="Exception\InvalidKeyTypeException.cs" />
     <Compile Include="Model\EveMarketData\ItemHistory.cs" />
-    <Compile Include="Model\EveMarketData\ItemOrder.cs" />
-    <Compile Include="Model\EveMarketData\ItemPrice.cs" />
+    <Compile Include="Model\EveMarketData\ItemOrders.cs" />
+    <Compile Include="Model\EveMarketData\ItemPrices.cs" />
     <Compile Include="Model\EveMarketData\RecentUploads.cs" />
     <Compile Include="Model\EveMarketData\XmlResponse.cs" />
     <Compile Include="Model\EveMarketData\XmlRowSet.cs" />

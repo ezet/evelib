@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Xml.Serialization;
+using eZet.Eve.EveLib.Entity.EveMarketData;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
 
     [Serializable]
     [XmlType(AnonymousType = true)]
-    public class ItemOrder {
+    public class ItemOrders {
 
         [XmlElement("rowset")]
-        public XmlRowSet<ItemOrderEntry> RecentUploads { get; set; }
+        public XmlRowSet<ItemOrderEntry> Orders { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class ItemOrderEntry {
 
             [XmlAttribute("buysell")]
-            public string OrderType { get; set; }
+            public OrderType OrderType { get; set; }
 
             [XmlAttribute("typeID")]
             public long TypeId { get; set; }
 
+
+            [XmlAttribute("stationID")]
+            public long StationId { get; set; }
+            
+            [XmlAttribute("solarsystemID")]
+            public long SolarSystemId { get; set; }
+
             [XmlAttribute("regionID")]
-            public long RegionID { get; set; }
+            public long RegionId { get; set; }
 
             [XmlAttribute("price")]
             public decimal Price { get; set; }
@@ -42,13 +50,13 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
             public int Range { get; set; }
 
             [XmlAttribute("issued")]
-            public string Issued { get; set; }
+            public string IssuedDate { get; set; }
 
             [XmlAttribute("expires")]
-            public string Expires { get; set; }
+            public string ExpiresDate { get; set; }
 
             [XmlAttribute("created")]
-            public string Created { get; set; }
+            public string CreatedDate { get; set; }
         }
 
     }

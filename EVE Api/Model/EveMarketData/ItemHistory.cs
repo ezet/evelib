@@ -8,11 +8,11 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
     public class ItemHistory {
 
         [XmlElement("rowset")]
-        public XmlRowSet<ItemHistory> RecentUploads { get; set; }
+        public XmlRowSet<ItemHistoryEntry> History { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
-        public class XmlItemHistoryEntry {
+        public class ItemHistoryEntry {
 
             [XmlAttribute("typeID")]
             public long TypeId { get; set; }

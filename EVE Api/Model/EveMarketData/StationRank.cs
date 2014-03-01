@@ -8,7 +8,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
     public class StationRank {
 
         [XmlElement("rowset")]
-        public XmlRowSet<StationRankEntry> RecentUploads { get; set; }
+        public XmlRowSet<StationRankEntry> Stations { get; set; }
 
         [Serializable]
         [XmlRoot("row")]

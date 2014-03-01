@@ -1,16 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Entity.EveMarketData {
 
 
-
     public enum UploadType {
-        Orders, History, Both
+        [XmlEnum("o")]
+        Orders,
+        [XmlEnum("h")]
+        History,
+        [XmlEnum("b")]
+        Both
     }
 
     public enum OrderType {
-        Sell, Buy, Both
+        [XmlEnum("s")]
+        Sell,
+        [XmlEnum("b")]
+        Buy,
+        [XmlEnum("a")]
+        Both
     }
 
     public enum MinMax {

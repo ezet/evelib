@@ -70,7 +70,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// <param name="type"></param>
         /// <param name="minmax"></param>
         /// <returns>All orders on the market.</returns>
-        public XmlResponse<ItemPrice> GetItemPrice(MarketDataOptions options, OrderType type, MinMax minmax) {
+        public XmlResponse<ItemPrices> GetItemPrice(MarketDataOptions options, OrderType type, MinMax minmax) {
             var relUri = "/api/item_prices2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -79,7 +79,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
             var stations = String.Join(",", options.Stations);
             var postString = generatePostString("char_name", Name, "type_ids", items, "marketgroup_ids", groups, "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type), "minmax", minmax.ToString().ToLower());
-            return request<ItemPrice>(relUri, postString);
+            return request<ItemPrices>(relUri, postString);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
-        public XmlResponse<ItemOrder> GetItemOrders(MarketDataOptions options, OrderType type) {
+        public XmlResponse<ItemOrders> GetItemOrders(MarketDataOptions options, OrderType type) {
             var relUri = "/api/item_orders2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -97,7 +97,7 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
             var stations = String.Join(",", options.Stations);
             var postString = generatePostString("char_name", Name, "type_ids", items, "marketgroup_ids", groups, "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type));
-            return request<ItemOrder>(relUri, postString);
+            return request<ItemOrders>(relUri, postString);
         }
 
         /// <summary>
