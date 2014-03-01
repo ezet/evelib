@@ -18,7 +18,6 @@ namespace eZet.Eve.EveLib.Model.EveApi {
             set { CurrentTime = DateTime.ParseExact(value, DateFormat, null); }
         }
 
-        //[XmlIgnore]
         [XmlElement("result")]
         public T Result { get; set; }
 

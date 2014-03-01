@@ -21,6 +21,7 @@ under the License.
 
 using eZet.Eve.EveLib.Entity.EveApi;
 using eZet.Eve.EveLib.Entity.EveCentral;
+using eZet.Eve.EveLib.Entity.EveMarketData;
 
 namespace eZet.Eve.EveLib {
  
@@ -46,27 +47,27 @@ namespace eZet.Eve.EveLib {
         /// </summary>
         public EveCentral EveCentral { get; private set; }
 
+        public EveMarketData EveMarketData { get; private set; }
+
         public static void Main(string[] args) {
-            var lib = Create().EveCentral;
-            var opt = new EveCentralOptions();
-            opt.Types.Add(34);
-            opt.Regions.Add(10000002);
+            var lib = Create().EveMarketData;
+            var opt = new MarketDataOptions {DayLimit = 1};
+            var res = lib.GetRecentUploads(opt, UploadType.Orders);
 
-            var res = lib.GetQuicklook(opt);
             var result = res.Result;
-
-
         }
 
         public static EveLib Create() {
-            return new EveLib(new Core(), new Map(), new Image(), new EveCentral());
+            return new EveLib(new Core(), new Map(), new Image(), new EveCentral(), new EveMarketData());
         }
     
-        private EveLib(Core core, Map map, Image image, EveCentral evec) {
+        private EveLib(Core core, Map map, Image image, EveCentral evec, EveMarketData emd) {
             Core = core;
             Map = map;
             Image = image;
             EveCentral = evec;
+            EveMarketData = emd;
+
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using eZet.Eve.EveLib.Properties;
 
 namespace eZet.Eve.EveLib.Util {
     /// <summary>
@@ -7,13 +6,15 @@ namespace eZet.Eve.EveLib.Util {
     /// </summary>
     public interface IRequestHandler {
 
+        /// <summary>
+        /// A serializer used to serialize/deserialize T objects in the Request method.
+        /// </summary>
         IXmlSerializer Serializer { get; set; }
 
         /// <summary>
-        /// Performs a request using the specified URI.
+        /// Performs a request on the uri, deserializes the response to type T, and returns it.
         /// </summary>
         /// <typeparam name="T">Type of response.</typeparam>
-        /// <param name="type">An object of the response type.</param>
         /// <param name="uri">The uri to request.</param>
         /// <returns></returns>
         T Request<T>(Uri uri);

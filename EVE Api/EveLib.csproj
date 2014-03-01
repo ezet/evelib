@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Entity\EveCentral\EveCentralOptions.cs" />
+    <Compile Include="Entity\EveMarketData\EveMarketData.cs" />
+    <Compile Include="Entity\EveMarketData\MarketDataOptions.cs" />
     <Compile Include="Exception\InvalidRequestException.cs" />
     <Compile Include="Model\EveApi\Character\AccountBalance.cs" />
     <Compile Include="Entity\EveApi\ApiKey.cs" />
@@ -127,6 +129,13 @@
     <Compile Include="Entity\EveApi\Image.cs" />
     <Compile Include="Exception\IllegalCharacterIdException.cs" />
     <Compile Include="Exception\InvalidKeyTypeException.cs" />
+    <Compile Include="Model\EveMarketData\ItemHistory.cs" />
+    <Compile Include="Model\EveMarketData\ItemOrder.cs" />
+    <Compile Include="Model\EveMarketData\ItemPrice.cs" />
+    <Compile Include="Model\EveMarketData\RecentUploads.cs" />
+    <Compile Include="Model\EveMarketData\XmlResponse.cs" />
+    <Compile Include="Model\EveMarketData\XmlRowSet.cs" />
+    <Compile Include="Model\EveMarketData\StationRank.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Util\IRequestHandler.cs" />
     <Compile Include="Util\EveApi\WebClientRequestHandler.cs" />

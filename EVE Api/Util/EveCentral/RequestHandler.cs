@@ -5,8 +5,8 @@ namespace eZet.Eve.EveLib.Util.EveCentral {
 
         public IXmlSerializer Serializer { get; set; }
 
-        public RequestHandler() {
-            Serializer = new XmlSerializerWrapper();
+        public RequestHandler(IXmlSerializer serializer) {
+            Serializer = serializer;
         }
 
         T IRequestHandler.Request<T>(Uri uri) {

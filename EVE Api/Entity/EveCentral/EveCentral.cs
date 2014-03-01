@@ -1,7 +1,6 @@
 ﻿using System;
 using eZet.Eve.EveLib.Model.EveCentral;
 using eZet.Eve.EveLib.Util;
-using eZet.Eve.EveLib.Util.EveApi;
 using eZet.Eve.EveLib.Util.EveCentral;
 
 namespace eZet.Eve.EveLib.Entity.EveCentral {
@@ -13,7 +12,7 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
 
         internal EveCentral() {
             BaseUri = new Uri("http://api.eve-central.com");
-            RequestHandler = new RequestHandler();
+            RequestHandler = new RequestHandler(new XmlSerializerWrapper());
         }
 
         /// <summary>
