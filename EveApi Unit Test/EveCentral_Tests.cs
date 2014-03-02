@@ -8,7 +8,9 @@ namespace eZet.Eve.EveLib.Test {
 
         private readonly EveCentral api;
 
-        private readonly EveCentralOptions options;
+        private readonly EveCentralOptions validOptions;
+
+        private readonly EveCentralOptions invalidOptions;
 
         private const long RegionId = 10000002;
         private const long TypeId = 34;
@@ -17,14 +19,15 @@ namespace eZet.Eve.EveLib.Test {
 
         public EveCentral_Tests() {
             api = EveLib.Create().EveCentral;
-            options = new EveCentralOptions { HourLimit = HourLimit, MinQuantity = MinQty};
-            options.Types.Add(TypeId);
-            options.Regions.Add(RegionId);
+            validOptions = new EveCentralOptions { HourLimit = HourLimit, MinQuantity = MinQty};
+            validOptions.Types.Add(TypeId);
+            validOptions.Regions.Add(RegionId);
+            invalidOptions = new EveCentralOptions();
         }
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            var res = api.GetMarketStat(options);
+            var res = api.GetMarketStat(validOptions);
             var entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.All.Average);
@@ -37,8 +40,13 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
+        public void GetMarketStat_InvalidRequest_Exception() {
+            var res = api.GetMarketStat(invalidOptions);
+        }
+
+        [TestMethod]
         public void GetQuicklook_ValidRequest_ValidReseponse() {
-            var res = api.GetQuicklook(options);
+            var res = api.GetQuicklook(validOptions);
             var entry = res.Result;
             var order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
@@ -59,7 +67,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklookPath_ValidRequest_ValidResponse() {
-            var res = api.GetQuicklookPath("Jita", "Amarr", 34, options);
+            var res = api.GetQuicklookPath("Jita", "Amarr", 34, validOptions);
             var entry = res.Result;
             var order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);

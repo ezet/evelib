@@ -3,19 +3,17 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Account;
 
 namespace eZet.Eve.EveLib.Util.EveApi {
 
     /// <summary>
     /// Handles requests to the Eve API. Caching is accomplished by using the native HttpWebRequest caching (IE Cache).
     /// </summary>
-    public class IeCachedRequestHandler : BaseRequestHandler {
+    public class CachedRequestHandler : BaseRequestHandler {
 
         private const string ContentType = "application/x-www-form-urlencoded";
 
-        public IeCachedRequestHandler(IXmlSerializer serializer)
+        public CachedRequestHandler(IXmlSerializer serializer)
             : base(serializer) {
         }
 

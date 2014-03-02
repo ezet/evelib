@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
+using eZet.Eve.EveLib.Exception;
 using eZet.Eve.EveLib.Model.EveMarketData;
 using eZet.Eve.EveLib.Util;
-using eZet.Eve.EveLib.Util.EveCentral;
 
 namespace eZet.Eve.EveLib.Entity.EveMarketData {
 
@@ -44,23 +45,10 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
             var regions = String.Join(",", options.Regions);
-            var date = options.DateLimit.ToString("yyyy-mm-dd HH:mm:ss");
+            var date = options.GetAgeLimit();
             var postString = generatePostString("char_name", Name, "type_ids", items, "region_ids", regions, "marketgroup_ids", groups,
-                "date", date, "limit", options.RowLimit, "upload_type", options.UploadTypeToString(type), "date", date);
+                "limit", options.RowLimit, "upload_type", options.UploadTypeToString(type), "date", date);
             return request<RecentUploads>(relUri, postString);
-        }
-
-        /// <summary>
-        /// Returns a best guess price of one or multiple items.
-        /// </summary>
-        /// <param name="options">Valid options: Items, Regions, DayLimit</param>
-        /// <returns>A best guess price of one or multiple items.</returns>
-        public XmlResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
-            var relUri = "/api/item_history2." + Format.ToString().ToLower();
-            var items = String.Join(",", options.Items);
-            var regions = String.Join(",", options.Regions);
-            var postString = generatePostString("char_name", Name, "type_ids", items, "region_ids", regions, "days", options.DayLimit);
-            return request<ItemHistory>(relUri, postString);
         }
 
         /// <summary>
@@ -101,6 +89,22 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         }
 
         /// <summary>
+        /// Returns a best guess price of one or multiple items.
+        /// </summary>
+        /// <param name="options">Valid options: Items, Regions, DayLimit</param>
+        /// <returns>A best guess price of one or multiple items.</returns>
+        public XmlResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
+            var relUri = "/api/item_history2." + Format.ToString().ToLower();
+            var items = String.Join(",", options.Items);
+            var regions = String.Join(",", options.Regions);
+            if (items == "" | regions == "") {
+                throw new ArgumentException("You must specify the following: Items, Regions.", "options");
+            }
+            var postString = generatePostString("char_name", Name, "type_ids", items, "region_ids", regions);
+            return request<ItemHistory>(relUri, postString);
+        }
+
+        /// <summary>
         /// Returns the daily station rank in a region and order statistics for stations.
         /// </summary>
         /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
@@ -110,7 +114,11 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
             var regions = String.Join(",", options.Regions);
             var solarsystems = String.Join(",", options.Solarsystems);
             var stations = String.Join(",", options.Stations);
-            var postString = generatePostString("char_name", Name, "region_ids", regions, "solarsystem_ids", solarsystems, "station_ids", stations, "days", options.DayLimit);
+            string days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
+            if (regions + solarsystems + stations == "") {
+                throw new ArgumentException("You must specify atleast one of the following: Station, Solarsystem, Region.", "options");
+            }
+            var postString = generatePostString("char_name", Name, "region_ids", regions, "solarsystem_ids", solarsystems, "station_ids", stations, "days", days);
             return request<StationRank>(relUri, postString);
         }
 
@@ -127,5 +135,6 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
             }
             return postString;
         }
+
     }
 }

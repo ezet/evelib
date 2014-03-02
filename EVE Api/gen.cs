@@ -22,49 +22,27 @@ using System.Xml.Serialization;
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-public partial class eveapi {
+public partial class evec_api {
     
-    private string currentTimeField;
+    private evec_apiQuicklook quicklookField;
     
-    private eveapiResult resultField;
+    private decimal versionField;
     
-    private string cachedUntilField;
-    
-    private byte versionField;
+    private string methodField;
     
     /// <remarks/>
-    public string currentTime {
+    public evec_apiQuicklook quicklook {
         get {
-            return this.currentTimeField;
+            return this.quicklookField;
         }
         set {
-            this.currentTimeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public eveapiResult result {
-        get {
-            return this.resultField;
-        }
-        set {
-            this.resultField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string cachedUntil {
-        get {
-            return this.cachedUntilField;
-        }
-        set {
-            this.cachedUntilField = value;
+            this.quicklookField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte version {
+    public decimal version {
         get {
             return this.versionField;
         }
@@ -72,38 +50,15 @@ public partial class eveapi {
             this.versionField = value;
         }
     }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class eveapiResult {
-    
-    private eveapiResultTotals totalsField;
-    
-    private eveapiResultRowset[] rowsetField;
     
     /// <remarks/>
-    public eveapiResultTotals totals {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string method {
         get {
-            return this.totalsField;
+            return this.methodField;
         }
         set {
-            this.totalsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("rowset")]
-    public eveapiResultRowset[] rowset {
-        get {
-            return this.rowsetField;
-        }
-        set {
-            this.rowsetField = value;
+            this.methodField = value;
         }
     }
 }
@@ -114,138 +69,91 @@ public partial class eveapiResult {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class eveapiResultTotals {
+public partial class evec_apiQuicklook {
     
-    private ushort killsYesterdayField;
+    private byte itemField;
     
-    private ushort killsLastWeekField;
+    private string itemnameField;
     
-    private uint killsTotalField;
+    private evec_apiQuicklookRegions regionsField;
     
-    private ushort victoryPointsYesterdayField;
+    private ushort hoursField;
     
-    private uint victoryPointsLastWeekField;
+    private ushort minqtyField;
     
-    private uint victoryPointsTotalField;
+    private evec_apiQuicklookOrder[] sell_ordersField;
+    
+    private evec_apiQuicklookOrder1[] buy_ordersField;
     
     /// <remarks/>
-    public ushort killsYesterday {
+    public byte item {
         get {
-            return this.killsYesterdayField;
+            return this.itemField;
         }
         set {
-            this.killsYesterdayField = value;
+            this.itemField = value;
         }
     }
     
     /// <remarks/>
-    public ushort killsLastWeek {
+    public string itemname {
         get {
-            return this.killsLastWeekField;
+            return this.itemnameField;
         }
         set {
-            this.killsLastWeekField = value;
+            this.itemnameField = value;
         }
     }
     
     /// <remarks/>
-    public uint killsTotal {
+    public evec_apiQuicklookRegions regions {
         get {
-            return this.killsTotalField;
+            return this.regionsField;
         }
         set {
-            this.killsTotalField = value;
+            this.regionsField = value;
         }
     }
     
     /// <remarks/>
-    public ushort victoryPointsYesterday {
+    public ushort hours {
         get {
-            return this.victoryPointsYesterdayField;
+            return this.hoursField;
         }
         set {
-            this.victoryPointsYesterdayField = value;
+            this.hoursField = value;
         }
     }
     
     /// <remarks/>
-    public uint victoryPointsLastWeek {
+    public ushort minqty {
         get {
-            return this.victoryPointsLastWeekField;
+            return this.minqtyField;
         }
         set {
-            this.victoryPointsLastWeekField = value;
+            this.minqtyField = value;
         }
     }
     
     /// <remarks/>
-    public uint victoryPointsTotal {
+    [System.Xml.Serialization.XmlArrayItemAttribute("order", IsNullable=false)]
+    public evec_apiQuicklookOrder[] sell_orders {
         get {
-            return this.victoryPointsTotalField;
+            return this.sell_ordersField;
         }
         set {
-            this.victoryPointsTotalField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class eveapiResultRowset {
-    
-    private eveapiResultRowsetRow[] rowField;
-    
-    private string nameField;
-    
-    private string keyField;
-    
-    private string columnsField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("row")]
-    public eveapiResultRowsetRow[] row {
-        get {
-            return this.rowField;
-        }
-        set {
-            this.rowField = value;
+            this.sell_ordersField = value;
         }
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name {
+    [System.Xml.Serialization.XmlArrayItemAttribute("order", IsNullable=false)]
+    public evec_apiQuicklookOrder1[] buy_orders {
         get {
-            return this.nameField;
+            return this.buy_ordersField;
         }
         set {
-            this.nameField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string key {
-        get {
-            return this.keyField;
-        }
-        set {
-            this.keyField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string columns {
-        get {
-            return this.columnsField;
-        }
-        set {
-            this.columnsField = value;
+            this.buy_ordersField = value;
         }
     }
 }
@@ -256,278 +164,303 @@ public partial class eveapiResultRowset {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class eveapiResultRowsetRow {
+public partial class evec_apiQuicklookRegions {
     
-    private uint factionIDField;
-    
-    private string factionNameField;
-    
-    private ushort pilotsField;
-    
-    private bool pilotsFieldSpecified;
-    
-    private byte systemsControlledField;
-    
-    private bool systemsControlledFieldSpecified;
-    
-    private byte killsYesterdayField;
-    
-    private bool killsYesterdayFieldSpecified;
-    
-    private ushort killsLastWeekField;
-    
-    private bool killsLastWeekFieldSpecified;
-    
-    private ushort killsTotalField;
-    
-    private bool killsTotalFieldSpecified;
-    
-    private ushort victoryPointsYesterdayField;
-    
-    private bool victoryPointsYesterdayFieldSpecified;
-    
-    private ushort victoryPointsLastWeekField;
-    
-    private bool victoryPointsLastWeekFieldSpecified;
-    
-    private uint victoryPointsTotalField;
-    
-    private bool victoryPointsTotalFieldSpecified;
-    
-    private uint againstIDField;
-    
-    private bool againstIDFieldSpecified;
-    
-    private string againstNameField;
+    private string regionField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public uint factionID {
+    public string region {
         get {
-            return this.factionIDField;
+            return this.regionField;
         }
         set {
-            this.factionIDField = value;
+            this.regionField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public partial class evec_apiQuicklookOrder {
+    
+    private uint regionField;
+    
+    private uint stationField;
+    
+    private string station_nameField;
+    
+    private decimal securityField;
+    
+    private ushort rangeField;
+    
+    private decimal priceField;
+    
+    private uint vol_remainField;
+    
+    private byte min_volumeField;
+    
+    private System.DateTime expiresField;
+    
+    private string reported_timeField;
+    
+    private uint idField;
+    
+    /// <remarks/>
+    public uint region {
+        get {
+            return this.regionField;
+        }
+        set {
+            this.regionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public uint station {
+        get {
+            return this.stationField;
+        }
+        set {
+            this.stationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string station_name {
+        get {
+            return this.station_nameField;
+        }
+        set {
+            this.station_nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public decimal security {
+        get {
+            return this.securityField;
+        }
+        set {
+            this.securityField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public ushort range {
+        get {
+            return this.rangeField;
+        }
+        set {
+            this.rangeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public decimal price {
+        get {
+            return this.priceField;
+        }
+        set {
+            this.priceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public uint vol_remain {
+        get {
+            return this.vol_remainField;
+        }
+        set {
+            this.vol_remainField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public byte min_volume {
+        get {
+            return this.min_volumeField;
+        }
+        set {
+            this.min_volumeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+    public System.DateTime expires {
+        get {
+            return this.expiresField;
+        }
+        set {
+            this.expiresField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string reported_time {
+        get {
+            return this.reported_timeField;
+        }
+        set {
+            this.reported_timeField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string factionName {
+    public uint id {
         get {
-            return this.factionNameField;
+            return this.idField;
         }
         set {
-            this.factionNameField = value;
+            this.idField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public partial class evec_apiQuicklookOrder1 {
+    
+    private uint regionField;
+    
+    private uint stationField;
+    
+    private string station_nameField;
+    
+    private decimal securityField;
+    
+    private short rangeField;
+    
+    private decimal priceField;
+    
+    private uint vol_remainField;
+    
+    private uint min_volumeField;
+    
+    private System.DateTime expiresField;
+    
+    private string reported_timeField;
+    
+    private uint idField;
+    
+    /// <remarks/>
+    public uint region {
+        get {
+            return this.regionField;
+        }
+        set {
+            this.regionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public uint station {
+        get {
+            return this.stationField;
+        }
+        set {
+            this.stationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string station_name {
+        get {
+            return this.station_nameField;
+        }
+        set {
+            this.station_nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public decimal security {
+        get {
+            return this.securityField;
+        }
+        set {
+            this.securityField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public short range {
+        get {
+            return this.rangeField;
+        }
+        set {
+            this.rangeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public decimal price {
+        get {
+            return this.priceField;
+        }
+        set {
+            this.priceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public uint vol_remain {
+        get {
+            return this.vol_remainField;
+        }
+        set {
+            this.vol_remainField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public uint min_volume {
+        get {
+            return this.min_volumeField;
+        }
+        set {
+            this.min_volumeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+    public System.DateTime expires {
+        get {
+            return this.expiresField;
+        }
+        set {
+            this.expiresField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string reported_time {
+        get {
+            return this.reported_timeField;
+        }
+        set {
+            this.reported_timeField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort pilots {
+    public uint id {
         get {
-            return this.pilotsField;
+            return this.idField;
         }
         set {
-            this.pilotsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool pilotsSpecified {
-        get {
-            return this.pilotsFieldSpecified;
-        }
-        set {
-            this.pilotsFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte systemsControlled {
-        get {
-            return this.systemsControlledField;
-        }
-        set {
-            this.systemsControlledField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool systemsControlledSpecified {
-        get {
-            return this.systemsControlledFieldSpecified;
-        }
-        set {
-            this.systemsControlledFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public byte killsYesterday {
-        get {
-            return this.killsYesterdayField;
-        }
-        set {
-            this.killsYesterdayField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool killsYesterdaySpecified {
-        get {
-            return this.killsYesterdayFieldSpecified;
-        }
-        set {
-            this.killsYesterdayFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort killsLastWeek {
-        get {
-            return this.killsLastWeekField;
-        }
-        set {
-            this.killsLastWeekField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool killsLastWeekSpecified {
-        get {
-            return this.killsLastWeekFieldSpecified;
-        }
-        set {
-            this.killsLastWeekFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort killsTotal {
-        get {
-            return this.killsTotalField;
-        }
-        set {
-            this.killsTotalField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool killsTotalSpecified {
-        get {
-            return this.killsTotalFieldSpecified;
-        }
-        set {
-            this.killsTotalFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort victoryPointsYesterday {
-        get {
-            return this.victoryPointsYesterdayField;
-        }
-        set {
-            this.victoryPointsYesterdayField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool victoryPointsYesterdaySpecified {
-        get {
-            return this.victoryPointsYesterdayFieldSpecified;
-        }
-        set {
-            this.victoryPointsYesterdayFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort victoryPointsLastWeek {
-        get {
-            return this.victoryPointsLastWeekField;
-        }
-        set {
-            this.victoryPointsLastWeekField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool victoryPointsLastWeekSpecified {
-        get {
-            return this.victoryPointsLastWeekFieldSpecified;
-        }
-        set {
-            this.victoryPointsLastWeekFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public uint victoryPointsTotal {
-        get {
-            return this.victoryPointsTotalField;
-        }
-        set {
-            this.victoryPointsTotalField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool victoryPointsTotalSpecified {
-        get {
-            return this.victoryPointsTotalFieldSpecified;
-        }
-        set {
-            this.victoryPointsTotalFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public uint againstID {
-        get {
-            return this.againstIDField;
-        }
-        set {
-            this.againstIDField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool againstIDSpecified {
-        get {
-            return this.againstIDFieldSpecified;
-        }
-        set {
-            this.againstIDFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string againstName {
-        get {
-            return this.againstNameField;
-        }
-        set {
-            this.againstNameField = value;
+            this.idField = value;
         }
     }
 }

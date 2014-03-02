@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace eZet.Eve.EveLib.Entity.EveCentral {
     public class EveCentralOptions {
-        public IList<long> Types { get; set; }
+        public ICollection<long> Types { get; set; }
 
-        public IList<long> Regions { get; set; }
+        public ICollection<long> Regions { get; set; }
         
         public int HourLimit { get; set; }
 

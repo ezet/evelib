@@ -11,7 +11,7 @@ namespace eZet.Eve.EveLib.Model.EveApi {
     [XmlRoot("rowset")]
     public class XmlRowSet<T> : IXmlSerializable, IEnumerable<T> {
 
-        private List<T> Rows { get; set; }
+        private IList<T> Rows { get; set; }
 
         public RowSetAttributes RowSetMeta { get; private set; }
 

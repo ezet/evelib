@@ -45,10 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Dto\Xml\EveCentral\MarketStatXml.cs" />
+    <Compile Include="Dto\Xml\EveCentral\QuicklookXml.cs" />
     <Compile Include="Entity\EveCentral\EveCentralOptions.cs" />
     <Compile Include="Entity\EveMarketData\EveMarketData.cs" />
     <Compile Include="Entity\EveMarketData\EveMarketDataOptions.cs" />
+    <Compile Include="Exception\EveApi\InvalidRequestException.cs" />
     <Compile Include="Exception\InvalidRequestException.cs" />
+    <Compile Include="Mapper\EveCentralXmlMapper.cs" />
     <Compile Include="Model\EveApi\Character\AccountBalance.cs" />
     <Compile Include="Entity\EveApi\ApiKey.cs" />
     <Compile Include="Model\EveApi\Account\AccountStatus.cs" />
@@ -127,8 +131,8 @@
     <Compile Include="Entity\EveApi\CorporationKey.cs" />
     <Compile Include="Entity\EveApi\BaseEntity.cs" />
     <Compile Include="Entity\EveApi\Image.cs" />
-    <Compile Include="Exception\IllegalCharacterIdException.cs" />
-    <Compile Include="Exception\InvalidKeyTypeException.cs" />
+    <Compile Include="Exception\EveApi\IllegalCharacterIdException.cs" />
+    <Compile Include="Exception\EveApi\InvalidKeyTypeException.cs" />
     <Compile Include="Model\EveMarketData\ItemHistory.cs" />
     <Compile Include="Model\EveMarketData\ItemOrders.cs" />
     <Compile Include="Model\EveMarketData\ItemPrices.cs" />
@@ -149,8 +153,8 @@
     <Compile Include="EveLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\EveApi\Character\WalletTransactions.cs" />
-    <Compile Include="Util\EveApi\IeCachedRequestHandler.cs" />
-    <Compile Include="Util\EveCentral\RequestHandler.cs" />
+    <Compile Include="Util\EveApi\CachedRequestHandler.cs" />
+    <Compile Include="Util\RequestHandler.cs" />
     <Compile Include="Util\Logger.cs" />
     <Compile Include="Util\EveApi\HashedCacheExpirationRegister.cs" />
     <Compile Include="Util\XmlSerializerWrapper.cs" />
@@ -159,6 +163,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

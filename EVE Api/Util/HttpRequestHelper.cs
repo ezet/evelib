@@ -6,11 +6,10 @@ using System.Net;
 namespace eZet.Eve.EveLib.Util {
     public static class HttpRequestHelper {
 
-        private const string ContentType = "application/x-www-form-urlencoded";
+        public const string ContentTypeForm = "application/x-www-form-urlencoded";
 
         public static HttpWebRequest CreateRequest(Uri uri) {
             var request = WebRequest.CreateHttp(uri);
-            //request.ContentType = ContentType;
             request.Proxy = null;
             return request;
         }

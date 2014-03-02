@@ -67,9 +67,9 @@
     <Compile Include="CorporationKey_ValidKeyTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EVE Api\EveLib.csproj">
+    <ProjectReference Include="..\EVE Api\Eve Library.csproj">
       <Project>{aa85978c-2bf5-419f-9f8e-b70162e83f34}</Project>
-      <Name>EveLib</Name>
+      <Name>Eve Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

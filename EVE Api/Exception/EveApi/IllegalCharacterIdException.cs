@@ -1,6 +1,6 @@
 ﻿using eZet.Eve.EveLib.Entity.EveApi;
 
-namespace eZet.Eve.EveLib.Exception {
+namespace eZet.Eve.EveLib.Exception.EveApi {
 
     public class IllegalCharacterIdException : System.Exception {
 

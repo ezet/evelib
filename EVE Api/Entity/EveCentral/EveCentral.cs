@@ -1,7 +1,6 @@
 ﻿using System;
 using eZet.Eve.EveLib.Model.EveCentral;
 using eZet.Eve.EveLib.Util;
-using eZet.Eve.EveLib.Util.EveCentral;
 
 namespace eZet.Eve.EveLib.Entity.EveCentral {
     public class EveCentral {

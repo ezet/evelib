@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveCentral {
@@ -29,13 +30,13 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
         public int MinQuantity { get; set; }
 
         [XmlArray("regions"), XmlArrayItem("region")]
-        public List<string> Regions { get; set; }
+        public Collection<string> Regions { get; set; }
 
         [XmlArray("sell_orders"), XmlArrayItem("order")]
-        public List<QuicklookOrder> SellOrders { get; set; }
+        public Collection<QuicklookOrder> SellOrders { get; set; }
 
         [XmlArray("buy_orders"), XmlArrayItem("order")]
-        public List<QuicklookOrder> BuyOrders { get; set; }
+        public Collection<QuicklookOrder> BuyOrders { get; set; }
 
     }
 

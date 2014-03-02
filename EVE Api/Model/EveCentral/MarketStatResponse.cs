@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveCentral {
@@ -10,7 +10,7 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
     public class MarketStatResponse : XmlResponse {
 
         [XmlArray("marketstat"), XmlArrayItem("type")]
-        public List<MarketStatItem> Result { get; set; }
+        public Collection<MarketStatItem> Result { get; set; }
 
     }
 

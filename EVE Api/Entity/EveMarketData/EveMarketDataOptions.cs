@@ -30,21 +30,24 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
 
     public class EveMarketDataOptions {
 
-        public List<long> Items { get; set; }
+        public ICollection<long> Items { get; set; }
 
-        public List<long> ItemGroups { get; set; }
+        public ICollection<long> ItemGroups { get; set; }
 
-        public List<long> Regions { get; set; }
+        public ICollection<long> Regions { get; set; }
 
-        public List<long> Solarsystems { get; set; }
+        public ICollection<long> Solarsystems { get; set; }
 
-        public List<long> Stations { get; set; }
+        public ICollection<long> Stations { get; set; }
 
         public int RowLimit { get; set; }
 
-        public int DayLimit { get; set; }
+        public TimeSpan? AgeSpan { get; set; }
 
-        public DateTime DateLimit { get; set; }
+        public string GetAgeLimit() {
+            AgeSpan = AgeSpan ?? TimeSpan.FromDays(30);
+            return DateTime.UtcNow.Subtract((TimeSpan)AgeSpan).ToString("yyyy-MM-dd HH:mm:ss");
+        }
 
         public EveMarketDataOptions() {
             Items = new List<long>();
@@ -53,8 +56,6 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
             Solarsystems = new List<long>();
             Stations = new List<long>();
             RowLimit = 10000;
-            DayLimit = 30;
-            DateLimit = DateTime.MinValue;
         }
 
         public string UploadTypeToString(UploadType type) {

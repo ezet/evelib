@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using eZet.Eve.EveLib.Entity.EveMarketData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,22 +9,26 @@ namespace eZet.Eve.EveLib.Test {
 
         private readonly EveMarketData api;
 
-        private readonly EveMarketDataOptions options;
+        private readonly EveMarketDataOptions validOptions;
+
+        private readonly EveMarketDataOptions invalidOptions;
 
         private const long RegionId = 10000002;
+        
         private const long TypeId = 34;
 
         public EveMarketData_Tests() {
             api = EveLib.Create().EveMarketData;
-            options = new EveMarketDataOptions();
-            options.Items.Add(TypeId);
-            options.Regions.Add(RegionId);
-            options.DayLimit = 1;
+            validOptions = new EveMarketDataOptions();
+            validOptions.Items.Add(TypeId);
+            validOptions.Regions.Add(RegionId);
+            validOptions.AgeSpan = TimeSpan.FromDays(5);
+            invalidOptions = new EveMarketDataOptions();
         }
 
         [TestMethod]
         public void GetRecentUploads_ValidRequest_ValidResponse() {
-            var res = api.GetRecentUploads(options, UploadType.Orders);
+            var res = api.GetRecentUploads(validOptions, UploadType.Orders);
             var entry = res.Result.Uploads.First();
             Assert.AreEqual(UploadType.Orders, entry.UploadType);
             Assert.AreEqual(TypeId, res.Result.Uploads.First().TypeId);
@@ -33,22 +38,13 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetItemHistory_ValidRequest_ValidResponse() {
-            var res = api.GetItemHistory(options);
-            var entry = res.Result.History.First();
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual(RegionId, entry.RegionId);
-            Assert.AreNotEqual(0, entry.AvgPrice);
-            Assert.AreNotEqual(0, entry.MaxPrice);
-            Assert.AreNotEqual(0, entry.MinPrice);
-            Assert.AreNotEqual(0, entry.Orders);
-            Assert.AreNotEqual(0, entry.Volume);
-            Assert.AreNotEqual("", entry.Date);
+        public void GetRecentUploads_NoOptions_NoException() {
+            var res = api.GetRecentUploads(invalidOptions, UploadType.Orders);
         }
 
         [TestMethod]
         public void GetItemPrice_ValidRequest_ValidResponse() {
-            var res = api.GetItemPrice(options, OrderType.Buy, MinMax.Min);
+            var res = api.GetItemPrice(validOptions, OrderType.Buy, MinMax.Min);
             var entry = res.Result.Prices.First();
             Assert.AreEqual(OrderType.Buy, entry.OrderType);
             Assert.AreEqual(TypeId, entry.TypeId);
@@ -59,8 +55,13 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
+        public void GetItemPrice_NoOptions_NoException() {
+            var res = api.GetItemPrice(invalidOptions, OrderType.Buy, MinMax.Min);
+        }
+
+        [TestMethod]
         public void GetItemOrders_ValidRequest_ValidResponse() {
-            var res = api.GetItemOrders(options, OrderType.Buy);
+            var res = api.GetItemOrders(validOptions, OrderType.Buy);
             var entry = res.Result.Orders.First();
             Assert.AreEqual(OrderType.Buy, entry.OrderType);
             Assert.AreNotEqual(0, entry.OrderId);
@@ -77,9 +78,35 @@ namespace eZet.Eve.EveLib.Test {
             Assert.AreNotEqual("", entry.CreatedDate);
         }
 
+
+        [TestMethod]
+        public void GetItemOrders_NoOptions_NoException() {
+            var res = api.GetItemOrders(invalidOptions, OrderType.Buy);
+        }
+
+        [TestMethod]
+        public void GetItemHistory_ValidRequest_ValidResponse() {
+            var res = api.GetItemHistory(validOptions);
+            var entry = res.Result.History.First();
+            Assert.AreEqual(TypeId, entry.TypeId);
+            Assert.AreEqual(RegionId, entry.RegionId);
+            Assert.AreNotEqual(0, entry.AvgPrice);
+            Assert.AreNotEqual(0, entry.MaxPrice);
+            Assert.AreNotEqual(0, entry.MinPrice);
+            Assert.AreNotEqual(0, entry.Orders);
+            Assert.AreNotEqual(0, entry.Volume);
+            Assert.AreNotEqual("", entry.Date);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetItemHistory_InvalidRequest_ArgumentException() {
+            var res = api.GetItemHistory(invalidOptions);
+        }
+
         [TestMethod]
         public void GetStationRank_ValidRequest_ValidResult() {
-            var res = api.GetStationRank(options);
+            var res = api.GetStationRank(validOptions);
             var entry = res.Result.Stations.First();
             Assert.AreNotEqual(0, entry.StationId);
             Assert.AreNotEqual("", entry.Date);
@@ -91,6 +118,12 @@ namespace eZet.Eve.EveLib.Test {
             //Assert.AreNotEqual(0, entry.BuyTotal);
             //Assert.AreNotEqual(0, entry.AvgSellPrice);
             //Assert.AreNotEqual(0, entry.AvgBuyPrice);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetStationRank_InvalidRequest_ArgumentException() {
+            var res = api.GetStationRank(invalidOptions);
         }
 
     }

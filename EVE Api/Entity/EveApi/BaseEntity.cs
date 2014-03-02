@@ -13,7 +13,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
 
         protected BaseEntity() {
             BaseUri = new Uri("https://api.eveonline.com");
-            RequestHandler = new IeCachedRequestHandler(new XmlSerializerWrapper());
+            RequestHandler = new CachedRequestHandler(new XmlSerializerWrapper());
         }
 
         /// <summary>
