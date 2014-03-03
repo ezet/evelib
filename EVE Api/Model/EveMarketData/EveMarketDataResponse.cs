@@ -5,7 +5,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "emd", Namespace = "", IsNullable = false)]
-    public class XmlResponse<T> {
+    public class EveMarketDataResponse<T> {
 
         [XmlElement("currentTime")]
         public string CurrentTime { get; set; }

@@ -9,7 +9,7 @@ namespace eZet.Eve.EveLib.Util {
         /// <summary>
         /// A serializer used to serialize/deserialize T objects in the Request method.
         /// </summary>
-        IXmlSerializer Serializer { get; set; }
+        ISerializer Serializer { get; set; }
 
         /// <summary>
         /// Performs a request on the uri, deserializes the response to type T, and returns it.

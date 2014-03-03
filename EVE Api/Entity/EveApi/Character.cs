@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using eZet.Eve.EveLib.Model.EveApi;
 using eZet.Eve.EveLib.Model.EveApi.Character;
@@ -47,14 +48,14 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             BaseUri = new Uri("https://api.eveonline.com");
         }
 
-        
+
         /// <summary>
         /// Returns general information about the character.
         /// </summary>
         /// <returns></returns>
         public XmlResponse<CharacterInfo> GetCharacterInfo() {
             const string relPath = "/eve/CharacterInfo.xml.aspx";
-            return request(new CharacterInfo(), relPath, Key, "characterID", CharacterId);
+            return request<CharacterInfo>(relPath, Key, "characterID", CharacterId);
         }
 
         /// <summary>
@@ -63,7 +64,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<AccountBalance> GetAccountBalance() {
             const string relPath = "/char/AccountBalance.xml.aspx";
-            return request(new AccountBalance(), relPath, Key, "characterID", CharacterId);
+            return request<AccountBalance>(relPath, Key, "characterID", CharacterId);
         }
 
         /// <summary>
@@ -72,7 +73,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<AssetList> GetAssetList() {
             const string relPath = "/char/AssetList.xml.aspx";
-            return request(new AssetList(), relPath, Key, "characterID", CharacterId);
+            return request<AssetList>(relPath, Key, "characterID", CharacterId);
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<CalendarEventAttendees> GetCalendarEventAttendees(long eventId) {
             const string relPath = "/char/CalendarEventAttendees.xml.aspx";
-            return request(new CalendarEventAttendees(), relPath, Key, "characterID", CharacterId, "EventIDs", eventId);
+            return request<CalendarEventAttendees>(relPath, Key, "characterID", CharacterId, "EventIDs", eventId);
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<CharacterSheet> GetCharacterSheet() {
             const string relPath = "/char/CharacterSheet.xml.aspx";
-            return request(new CharacterSheet(), relPath, Key, "characterId", CharacterId);
+            return request<CharacterSheet>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContactList> GetContactList() {
             const string relPath = "/char/ContactList.xml.aspx";
-            return request(new ContactList(), relPath, Key, "characterId", CharacterId);
+            return request<ContactList>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContactNotifications> GetContactNotifications() {
             const string relPath = "/char/ContactNotifications.xml.aspx";
-            return request(new ContactNotifications(), relPath, Key, "characterId", CharacterId);
+            return request<ContactNotifications>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContractList> GetContracts() {
             const string relPath = "/char/Contracts.xml.aspx";
-            return request(new ContractList(), relPath, Key, "characterId", CharacterId);
+            return request<ContractList>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -134,7 +135,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContractItems> GetContractItems(long contractId) {
             const string relPath = "/char/ContractItems.xml.aspx";
-            return request(new ContractItems(), relPath, Key, "characterId", CharacterId, "contractID", contractId);
+            return request<ContractItems>(relPath, Key, "characterId", CharacterId, "contractID", contractId);
         }
 
         /// <summary>
@@ -143,7 +144,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContractBids> GetContractBids() {
             const string relPath = "/char/ContractBids.xml.aspx";
-            return request(new ContractBids(), relPath, Key, "characterId", CharacterId);
+            return request<ContractBids>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -152,7 +153,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<Model.EveApi.Character.FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/char/FacWarStats.xml.aspx";
-            return request(new Model.EveApi.Character.FactionWarfareStats(), relPath, Key, "characterId", CharacterId);
+            return request<Model.EveApi.Character.FactionWarfareStats>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -161,7 +162,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<IndustryJobs> GetIndustryJobs() {
             const string relPath = "/char/IndustryJobs.xml.aspx";
-            return request(new IndustryJobs(), relPath, Key, "characterId", CharacterId);
+            return request<IndustryJobs>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -175,8 +176,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             // TODO Add walking
             const string relPath = "/char/KillLog.xml.aspx";
             return killId != 0
-                ? request(new KillLog(), relPath, Key, "characterId", CharacterId, "beforeKillId", killId)
-                : request(new KillLog(), relPath, Key, "characterId", CharacterId);
+                ? request<KillLog>(relPath, Key, "characterId", CharacterId, "beforeKillId", killId)
+                : request<KillLog>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -187,9 +188,10 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
         public XmlResponse<Locations> GetLocations(params long[] list) {
+            Contract.Requires(list != null);
             const string relPath = "/char/Locations.xml.aspx";
             var ids = String.Join(",", list);
-            return request(new Locations(), relPath, Key, "characterId", CharacterId, "IDs", ids);
+            return request<Locations>(relPath, Key, "characterId", CharacterId, "IDs", ids);
 
         }
 
@@ -201,9 +203,10 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="list">A list of message ids from GetMailMessages.</param>
         /// <returns></returns>
         public XmlResponse<MailBodies> GetMailBodies(params long[] list) {
+            Contract.Requires(list != null);
             const string relPath = "/char/MailBodies.xml.aspx";
             var ids = String.Join(",", list);
-            return request(new MailBodies(), relPath, Key, "characterId", CharacterId, "IDs", ids);
+            return request<MailBodies>(relPath, Key, "characterId", CharacterId, "IDs", ids);
         }
 
         /// <summary>
@@ -212,7 +215,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<MailingLists> GetMailingLists() {
             const string relPath = "/char/mailinglists.xml.aspx";
-            return request(new MailingLists(), relPath, Key, "characterId", CharacterId);
+            return request<MailingLists>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -221,7 +224,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<MailMessages> GetMailMessages() {
             const string relPath = "/char/MailMessages.xml.aspx";
-            return request(new MailMessages(), relPath, Key, "characterId", CharacterId);
+            return request<MailMessages>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -232,8 +235,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
             const string relPath = "/char/MarketOrders.xml.aspx";
             return orderId == 0
-                ? request(new MarketOrders(), relPath, Key, "characterId", CharacterId)
-                : request(new MarketOrders(), relPath, Key, "characterId", CharacterId, "orderID", orderId);
+                ? request<MarketOrders>(relPath, Key, "characterId", CharacterId)
+                : request<MarketOrders>(relPath, Key, "characterId", CharacterId, "orderID", orderId);
         }
 
         /// <summary>
@@ -242,7 +245,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<MedalList> GetMedals() {
             const string relPath = "/char/Medals.xml.aspx";
-            return request(new MedalList(), relPath, Key, "characterId", CharacterId);
+            return request<MedalList>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -251,7 +254,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<NotificationList> GetNotifications() {
             const string relPath = "/char/Notifications.xml.aspx";
-            return request(new NotificationList(), relPath, Key, "characterId", CharacterId);
+            return request<NotificationList>(relPath, Key, "characterId", CharacterId);
         }
 
 
@@ -261,9 +264,10 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="ids">A list of notification ids obtained from GetNotifications.</param>
         /// <returns></returns>
         public XmlResponse<NotificationTexts> GetNotificationTexts(params long[] ids) {
+            Contract.Requires(ids != null);
             const string relPath = "/char/NotificationTexts.xml.aspx";
             var idList = string.Join(",", ids);
-            return request(new NotificationTexts(), relPath, Key, "characterId", CharacterId, "IDs", idList);
+            return request<NotificationTexts>(relPath, Key, "characterId", CharacterId, "IDs", idList);
         }
 
         /// <summary>
@@ -272,7 +276,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<Research> GetResearch() {
             const string relPath = "/char/Research.xml.aspx";
-            return request(new Research(), relPath, Key, "characterId", CharacterId);
+            return request<Research>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -281,7 +285,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<SkillTraining> GetSkillTraining() {
             const string relPath = "/char/SkillInTraining.xml.aspx";
-            return request(new SkillTraining(), relPath, Key, "characterId", CharacterId);
+            return request<SkillTraining>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -290,7 +294,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<SkillQueue> GetSkillQueue() {
             const string relPath = "/char/SkillQueue.xml.aspx";
-            return request(new SkillQueue(), relPath, Key, "characterId", CharacterId);
+            return request<SkillQueue>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -299,7 +303,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<StandingsList> GetStandings() {
             const string relPath = "/char/Standings.xml.aspx";
-            return request(new StandingsList(), relPath, Key, "characterId", CharacterId);
+            return request<StandingsList>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -308,7 +312,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<UpcomingCalendarEvents> GetUpcomingCalendarEvents() {
             const string relPath = "/char/UpcomingCalendarEvents.xml.aspx";
-            return request(new UpcomingCalendarEvents(), relPath, Key, "characterId", CharacterId);
+            return request<UpcomingCalendarEvents>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
@@ -321,8 +325,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             // TODO add walking
             const string relPath = "/char/WalletJournal.xml.aspx";
             var result = fromId == 0
-                ? request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount", count)
-                : request(new WalletJournal(), relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
+                ? request<WalletJournal>(relPath, Key, "characterId", CharacterId, "rowCount", count)
+                : request<WalletJournal>(relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
             result.Result.CharWalker = GetWalletJournal;
             return result;
         }
@@ -337,8 +341,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<WalletTransactions> GetWalletTransactions(int count = 1000, long fromId = 0) {
             const string relPath = "/char/WalletTransactions.xml.aspx";
             var result = fromId == 0
-                ? request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count)
-                : request(new WalletTransactions(), relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
+                ? request<WalletTransactions>(relPath, Key, "characterId", CharacterId, "rowCount", count)
+                : request<WalletTransactions>(relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
             result.Result.CharWalker = GetWalletTransactions;
             return result;
         }

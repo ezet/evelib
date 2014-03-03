@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
@@ -23,6 +24,7 @@ namespace eZet.Eve.EveLib.Model.EveApi {
         /// </summary>
         /// <param name="reader"></param>
         protected void setRoot(XmlReader reader) {
+            Contract.Requires(reader != null);
             root = XElement.Load(reader.ReadSubtree());
             list = root.Descendants();
         }

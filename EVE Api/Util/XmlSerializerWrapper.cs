@@ -7,7 +7,7 @@ namespace eZet.Eve.EveLib.Util {
     /// <summary>
     /// A simple wrapper for .NET XmlSerializer.
     /// </summary>
-    public sealed class XmlSerializerWrapper : IXmlSerializer {
+    public sealed class XmlSerializerWrapper : ISerializer {
 
         /// <summary>
         /// Deserializes Eve API xml using the .NET XmlSerializer.
@@ -15,7 +15,7 @@ namespace eZet.Eve.EveLib.Util {
         /// <typeparam name="T">An xml result type</typeparam>
         /// <param name="data">An XML string</param>
         /// <returns></returns>
-        T IXmlSerializer.Deserialize<T>(string data) {
+        T ISerializer.Deserialize<T>(string data) {
             var serializer = new XmlSerializer(typeof(T));
             T xmlResponse;
             using (var reader = XmlReader.Create(new StringReader(data))) {

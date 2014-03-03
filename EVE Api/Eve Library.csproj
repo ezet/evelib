@@ -11,6 +11,7 @@
     <AssemblyName>EveLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,40 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,6 +86,7 @@
     <Compile Include="Entity\EveMarketData\EveMarketData.cs" />
     <Compile Include="Entity\EveMarketData\EveMarketDataOptions.cs" />
     <Compile Include="Exception\EveApi\InvalidRequestException.cs" />
+    <Compile Include="Exception\EveLibException.cs" />
     <Compile Include="Exception\InvalidRequestException.cs" />
     <Compile Include="Mapper\EveCentralXmlMapper.cs" />
     <Compile Include="Model\EveApi\Character\AccountBalance.cs" />
@@ -137,7 +173,7 @@
     <Compile Include="Model\EveMarketData\ItemOrders.cs" />
     <Compile Include="Model\EveMarketData\ItemPrices.cs" />
     <Compile Include="Model\EveMarketData\RecentUploads.cs" />
-    <Compile Include="Model\EveMarketData\XmlResponse.cs" />
+    <Compile Include="Model\EveMarketData\EveMarketDataResponse.cs" />
     <Compile Include="Model\EveMarketData\XmlRowSet.cs" />
     <Compile Include="Model\EveMarketData\StationRank.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -146,7 +182,7 @@
     <Compile Include="Util\EveApi\ICache.cs" />
     <Compile Include="Util\EveApi\BaseRequestHandler.cs" />
     <Compile Include="Util\EveApi\ICacheExpirationRegister.cs" />
-    <Compile Include="Util\IXmlSerializer.cs" />
+    <Compile Include="Util\ISerializer.cs" />
     <Compile Include="Entity\EveApi\Map.cs" />
     <Compile Include="Entity\EveCentral\EveCentral.cs" />
     <Compile Include="Model\EveApi\Map\SovereigntyStatus.cs" />

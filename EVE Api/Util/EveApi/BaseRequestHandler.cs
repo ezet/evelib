@@ -36,10 +36,10 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         /// <summary>
         /// A serializer for deserializing objects.
         /// </summary>
-        public IXmlSerializer Serializer { get;  set; }
+        public ISerializer Serializer { get;  set; }
 
 
-        protected BaseRequestHandler(IXmlSerializer serializer) {
+        protected BaseRequestHandler(ISerializer serializer) {
             Serializer = serializer;
         }
 

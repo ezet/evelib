@@ -13,7 +13,7 @@ namespace eZet.Eve.EveLib.Util.EveApi {
 
         private const string ContentType = "application/x-www-form-urlencoded";
 
-        public CachedRequestHandler(IXmlSerializer serializer)
+        public CachedRequestHandler(ISerializer serializer)
             : base(serializer) {
         }
 

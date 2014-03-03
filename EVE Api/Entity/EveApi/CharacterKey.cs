@@ -32,7 +32,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<AccountStatus> GetAccountStatus() {
             //const int mask = 33554432;
             const string uri = "/account/AccountStatus.xml.aspx";
-            return request(new AccountStatus(), uri, this);
+            return request<AccountStatus>(uri, this);
         }
 
         protected override void lazyLoad() {

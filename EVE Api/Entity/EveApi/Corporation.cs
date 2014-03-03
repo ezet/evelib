@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using eZet.Eve.EveLib.Model.EveApi;
 using eZet.Eve.EveLib.Model.EveApi.Character;
@@ -48,7 +49,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<AccountBalance> GetAccountBalance() {
             const string relPath = "/corp/AccountBalance.xml.aspx";
-            return request(new AccountBalance(), relPath, Key);
+            return request<AccountBalance>(relPath, Key);
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<AssetList> GetAssetList() {
             const string relPath = "/corp/AssetList.xml.aspx";
-            return request(new AssetList(), relPath, Key);
+            return request<AssetList>(relPath, Key);
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<Model.EveApi.Corporation.ContactList> GetContactList() {
             const string relPath = "/corp/ContactList.xml.aspx";
-            return request(new Model.EveApi.Corporation.ContactList(), relPath, Key);
+            return request<Model.EveApi.Corporation.ContactList>(relPath, Key);
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContainerLog> GetContainerLog() {
             const string relPath = "/corp/ContainerLog.xml.aspx";
-            return request(new ContainerLog(), relPath, Key);
+            return request<ContainerLog>(relPath, Key);
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContractList> GetContracts() {
             const string relPath = "/corp/Contracts.xml.aspx";
-            return request(new ContractList(), relPath, Key);
+            return request<ContractList>(relPath, Key);
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContractItems> GetContractItems(long contractId) {
             const string relPath = "/corp/ContractItems.xml.aspx";
-            return request(new ContractItems(), relPath, Key, "contractID", contractId);
+            return request<ContractItems>(relPath, Key, "contractID", contractId);
         }
 
         /// <summary>
@@ -103,7 +104,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ContractBids> GetContractBids() {
             const string relPath = "/corp/ContractBids.xml.aspx";
-            return request(new ContractBids(), relPath, Key);
+            return request<ContractBids>(relPath, Key);
         }
 
         /// <summary>
@@ -112,7 +113,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<CorporationSheet> GetCorporationSheet() {
             const string relPath = "/corp/CorporationSheet.xml.aspx";
-            return request(new CorporationSheet(), relPath, Key);
+            return request<CorporationSheet>(relPath, Key);
         }
 
         /// <summary>
@@ -121,7 +122,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<Model.EveApi.Corporation.FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/corp/FacWarStats.xml.aspx";
-            return request(new Model.EveApi.Corporation.FactionWarfareStats(), relPath, Key);
+            return request<Model.EveApi.Corporation.FactionWarfareStats>(relPath, Key);
         }
 
         /// <summary>
@@ -130,7 +131,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<IndustryJobs> GetIndustryJobs() {
             const string relPath = "/corp/IndustryJobs.xml.aspx";
-            return request(new IndustryJobs(), relPath, Key);
+            return request<IndustryJobs>(relPath, Key);
         }
 
         /// <summary>
@@ -144,8 +145,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             // TODO Add walking
             const string relPath = "/corp/Killlog.xml.aspx";
             return killId == 0
-                ? request(new KillLog(), relPath, Key)
-                : request(new KillLog(), relPath, Key, "beforeKillID", killId);
+                ? request<KillLog>(relPath, Key)
+                : request<KillLog>(relPath, Key, "beforeKillID", killId);
         }
 
         /// <summary>
@@ -156,9 +157,10 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
         public XmlResponse<Locations> GetLocations(params long[] list) {
+            Contract.Requires(list != null);
             const string relPath = "/corp/Locations.xml.aspx";
             var ids = String.Join(",", list);
-            return request(new Locations(), relPath, Key, "IDs", ids);
+            return request<Locations>(relPath, Key, "IDs", ids);
         }
 
         /// <summary>
@@ -169,8 +171,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
             const string relPath = "/corp/MarketOrders.xml.aspx";
             return orderId == 0
-                ? request(new MarketOrders(), relPath, Key)
-                : request(new MarketOrders(), relPath, Key, "orderID", orderId);
+                ? request<MarketOrders>(relPath, Key)
+                : request<MarketOrders>(relPath, Key, "orderID", orderId);
         }
 
         /// <summary>
@@ -179,7 +181,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<Model.EveApi.Corporation.MedalList> GetMedals() {
             const string relPath = "/corp/Medals.xml.aspx";
-            return request(new Model.EveApi.Corporation.MedalList(), relPath, Key);
+            return request<Model.EveApi.Corporation.MedalList>(relPath, Key);
         }
 
         /// <summary>
@@ -188,7 +190,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<MemberMedals> GetMemberMedals() {
             const string relPath = "/corp/MemberMedals.xml.aspx";
-            return request(new MemberMedals(), relPath, Key);
+            return request<MemberMedals>(relPath, Key);
         }
 
         /// <summary>
@@ -197,7 +199,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<MemberSecurity> GetMemberSecurity() {
             const string relPath = "/corp/MemberSecurity.xml.aspx";
-            return request(new MemberSecurity(), relPath, Key);
+            return request<MemberSecurity>(relPath, Key);
         }
 
         /// <summary>
@@ -206,7 +208,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<MemberSecurityLog> GetMemberSecurityLog() {
             const string relPath = "/corp/MemberSecurityLog.xml.aspx";
-            return request(new MemberSecurityLog(), relPath, Key);
+            return request<MemberSecurityLog>(relPath, Key);
         }
 
         /// <summary>
@@ -217,8 +219,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<MemberTracking> GetMemberTracking(bool extended = false) {
             const string relPath = "/corp/MemberTracking.xml.aspx";
             return extended
-                ? request(new MemberTracking(), relPath, Key, "extended", 1)
-                : request(new MemberTracking(), relPath, Key);
+                ? request<MemberTracking>(relPath, Key, "extended", 1)
+                : request<MemberTracking>(relPath, Key);
         }
 
         /// <summary>
@@ -228,7 +230,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<OutpostList> GetOutpostList() {
             // TODO Link to OutpostServiceDetails
             const string relPath = "/corp/OutpostList.xml.aspx";
-            return request(new OutpostList(), relPath, Key);
+            return request<OutpostList>(relPath, Key);
         }
 
         /// <summary>
@@ -238,7 +240,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<OutpostServiceDetails> GetOutpostServiceDetails(long itemId) {
             const string relPath = "/corp/OutpostServiceDetail.xml.aspx";
-            return request(new OutpostServiceDetails(), relPath, Key, "itemID", itemId);
+            return request<OutpostServiceDetails>(relPath, Key, "itemID", itemId);
         }
 
         /// <summary>
@@ -247,7 +249,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<ShareholderList> GetShareholders() {
             const string relPath = "/corp/Shareholders.xml.aspx";
-            return request(new ShareholderList(), relPath, Key);
+            return request<ShareholderList>(relPath, Key);
         }
 
         /// <summary>
@@ -256,7 +258,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<Model.EveApi.Corporation.StandingsList> GetStandings() {
             const string relPath = "/corp/Standings.xml.aspx";
-            return request(new Model.EveApi.Corporation.StandingsList(), relPath, Key);
+            return request<Model.EveApi.Corporation.StandingsList>(relPath, Key);
         }
 
         /// <summary>
@@ -267,7 +269,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<StarbaseDetails> GetStarbaseDetails(long itemId) {
             // TODO CombatSettings
             const string relPath = "/corp/StarbaseDetail.xml.aspx";
-            return request(new StarbaseDetails(), relPath, Key, "itemID", itemId);
+            return request<StarbaseDetails>(relPath, Key, "itemID", itemId);
         }
 
         /// <summary>
@@ -276,7 +278,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<StarbaseList> GetStarbaseList() {
             const string relPath = "/corp/StarbaseList.xml.aspx";
-            return request(new StarbaseList(), relPath, Key);
+            return request<StarbaseList>(relPath, Key);
         }
 
         /// <summary>
@@ -285,7 +287,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <returns></returns>
         public XmlResponse<TitleList> GetTitles() {
             const string relPath = "/corp/Titles.xml.aspx";
-            return request(new TitleList(), relPath, Key);
+            return request<TitleList>(relPath, Key);
         }
 
         /// <summary>
@@ -298,8 +300,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<WalletJournal> GetWalletJournal(int division = 1000, int count = 50, long fromId = 0) {
             const string relPath = "/corp/WalletJournal.xml.aspx";
             var result = fromId == 0
-                ? request(new WalletJournal(), relPath, Key, "accountKey", division, "rowCount", count)
-                : request(new WalletJournal(), relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
+                ? request<WalletJournal>(relPath, Key, "accountKey", division, "rowCount", count)
+                : request<WalletJournal>(relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
             result.Result.CorpWalker = GetWalletJournal;
             result.Result.Division = division;
             return result;
@@ -315,8 +317,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<WalletTransactions> GetWalletTransactions(int division = 1000, int count = 1000, long fromId = 0) {
             const string relPath = "/corp/WalletTransactions.xml.aspx";
             var result = fromId == 0
-                 ? request(new WalletTransactions(), relPath, Key, "accountKey", division, "rowCount", count)
-                 : request(new WalletTransactions(), relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
+                 ? request<WalletTransactions>(relPath, Key, "accountKey", division, "rowCount", count)
+                 : request<WalletTransactions>(relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
             result.Result.CorpWalker = GetWalletTransactions;
             result.Result.Division = division;
             return result;

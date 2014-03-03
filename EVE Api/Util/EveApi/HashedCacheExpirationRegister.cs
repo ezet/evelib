@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Security.Cryptography;
 
 namespace eZet.Eve.EveLib.Util.EveApi {
@@ -26,6 +27,7 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         }
 
         private static string resolve(Uri uri) {
+            Contract.Requires(uri != null);
             var file = uri.PathAndQuery.Replace("/", "");
             var hash = Sha1.ComputeHash(System.Text.Encoding.Unicode.GetBytes(file));
             return BitConverter.ToString(hash).Replace("-", "");

@@ -6,9 +6,9 @@ using eZet.Eve.EveLib.Util.EveApi;
 namespace eZet.Eve.EveLib.Test.Mocks {
     public class TestRequestHandler : BaseRequestHandler {
 
-        private readonly IXmlSerializer serializer = new XmlSerializerWrapper();
+        private readonly ISerializer serializer = new XmlSerializerWrapper();
 
-        public TestRequestHandler(IXmlSerializer serializer) : base(serializer) {
+        public TestRequestHandler(ISerializer serializer) : base(serializer) {
         }
 
         public override T Request<T>(Uri uri) {

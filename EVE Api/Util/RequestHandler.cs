@@ -5,9 +5,9 @@ using eZet.Eve.EveLib.Exception;
 namespace eZet.Eve.EveLib.Util {
     public class RequestHandler : IRequestHandler {
 
-        public IXmlSerializer Serializer { get; set; }
+        public ISerializer Serializer { get; set; }
 
-        public RequestHandler(IXmlSerializer serializer) {
+        public RequestHandler(ISerializer serializer) {
             Serializer = serializer;
         }
 
@@ -16,7 +16,7 @@ namespace eZet.Eve.EveLib.Util {
                 var data = HttpRequestHelper.Request(uri);
                 return Serializer.Deserialize<T>(data);
             } catch (WebException e) {
-                throw new InvalidRequestException("An invalid request caused a Web Exception.");
+                throw new InvalidRequestException("An invalid request caused a Web Exception.", e);
             }
         }
     }

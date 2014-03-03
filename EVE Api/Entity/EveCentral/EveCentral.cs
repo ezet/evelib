@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using eZet.Eve.EveLib.Model.EveCentral;
 using eZet.Eve.EveLib.Util;
 
@@ -20,6 +21,8 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
         /// <param name="options">Valid options; Types, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public MarketStatResponse GetMarketStat(EveCentralOptions options) {
+            Contract.Requires(options != null, "Options cannot be null");
+            Contract.Requires(options.Types.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/api/marketstat";
             var queryString = options.TypeQuery("typeid") + options.HourQuery("hours") + options.MinQuantityQuery("minQ") +
                              options.RegionQuery("regionlimit") + options.SystemQuery("usesystem");
@@ -32,6 +35,8 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
         /// <param name="options">Valid options; Types, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public QuicklookResponse GetQuicklook(EveCentralOptions options) {
+            Contract.Requires(options != null, "Options cannot be null");
+            Contract.Requires(options.Types.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/api/quicklook";
             var queryString = options.TypeQuery("typeid") + options.HourQuery("sethours") + options.MinQuantityQuery("setminQ") +
                       options.RegionQuery("regionlimit") + options.SystemQuery("usesystem");
@@ -47,16 +52,29 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
         /// <param name="options">Optional; Valid options: HourLimit, MinQuantity.</param>
         /// <returns></returns>
         public QuicklookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId,
-            EveCentralOptions options = null) {
+            EveCentralOptions options) {
+            Contract.Requires(options != null, "Options cannot be null.");
+            Contract.Requires(startSystem != null, "Start system cannot be null.");
+            Contract.Requires(endSystem != null, "End system cannot be null.");
             var relUri = "/api/quicklook/onpath";
             relUri += "/from/" + startSystem + "/to/" + endSystem + "/fortype/" + typeId;
             var queryString = "";
-            if (options != null) {
-                queryString = options.HourQuery("sethours");
-                queryString += options.MinQuantityQuery("setminQ");
-            }
+            queryString = options.HourQuery("sethours");
+            queryString += options.MinQuantityQuery("setminQ");
             return request<QuicklookResponse>(relUri, queryString);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startSystem">SystemID or System name</param>
+        /// <param name="endSystem">SystemID or System name</param>
+        /// <param name="typeId">Type ID</param>
+        /// <returns></returns>
+        public QuicklookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId) {
+            Contract.Requires(startSystem != null, "Start system cannot be null.");
+            Contract.Requires(endSystem != null, "End system cannot be null.");
+            return GetQuicklookPath(startSystem, endSystem, typeId, new EveCentralOptions());
         }
 
         public void GetHistory() {

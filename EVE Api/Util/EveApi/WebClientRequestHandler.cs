@@ -5,7 +5,7 @@ using eZet.Eve.EveLib.Model.EveApi;
 namespace eZet.Eve.EveLib.Util.EveApi {
     public class WebClientRequestHandler : BaseRequestHandler {
 
-        public WebClientRequestHandler(IXmlSerializer serializer) : base(serializer) {
+        public WebClientRequestHandler(ISerializer serializer) : base(serializer) {
         }
 
         public override T Request<T>(Uri uri) {

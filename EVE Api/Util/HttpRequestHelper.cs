@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net;
 
@@ -20,6 +21,7 @@ namespace eZet.Eve.EveLib.Util {
         }
 
         public static HttpWebResponse GetResponse(HttpWebRequest request) {
+            Contract.Requires(request != null);
             HttpWebResponse response;
             try {
                 response = request.GetResponse() as HttpWebResponse;
@@ -33,6 +35,7 @@ namespace eZet.Eve.EveLib.Util {
 
 
         public static string GetContent(WebRequest request) {
+            Contract.Requires(request != null);
             var data = "";
             try {
                 using (var response = (HttpWebResponse)request.GetResponse()) {

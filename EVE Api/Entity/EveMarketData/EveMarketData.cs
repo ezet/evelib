@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Diagnostics.Contracts;
 using eZet.Eve.EveLib.Exception;
 using eZet.Eve.EveLib.Model.EveMarketData;
 using eZet.Eve.EveLib.Util;
@@ -7,9 +7,8 @@ using eZet.Eve.EveLib.Util;
 namespace eZet.Eve.EveLib.Entity.EveMarketData {
 
     public enum Format {
-        Xml,
         Json,
-        Text
+        Xml,
     }
 
     /// <summary>
@@ -34,13 +33,19 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
             RequestHandler = new RequestHandler(new XmlSerializerWrapper());
         }
 
+        public void SetMode(Format format) {
+            Format = format;
+        }
+
         /// <summary>
         /// Returns a list of any orders that were recently updated.
         /// </summary>
         /// <param name="options">Valid options: Items, Marketgroups, Regions, Date, RowLimit</param>
         /// <param name="type"></param>
         /// <returns>A list of any orders that were recently updated.</returns>
-        public XmlResponse<RecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
+        /// <exception cref="InvalidRequestException">The request was invalid.</exception>
+        public EveMarketDataResponse<RecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
+            Contract.Requires(options != null, "Options cannot be null.");
             var relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -58,7 +63,8 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// <param name="type"></param>
         /// <param name="minmax"></param>
         /// <returns>All orders on the market.</returns>
-        public XmlResponse<ItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type, MinMax minmax) {
+        public EveMarketDataResponse<ItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type, MinMax minmax) {
+            Contract.Requires(options != null, "Options cannot be null.");
             var relUri = "/api/item_prices2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -76,7 +82,8 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
-        public XmlResponse<ItemOrders> GetItemOrders(EveMarketDataOptions options, OrderType type) {
+        public EveMarketDataResponse<ItemOrders> GetItemOrders(EveMarketDataOptions options, OrderType type) {
+            Contract.Requires(options != null, "Options cannot be null.");
             var relUri = "/api/item_orders2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var groups = String.Join(",", options.ItemGroups);
@@ -93,13 +100,13 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// </summary>
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <returns>A best guess price of one or multiple items.</returns>
-        public XmlResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
+        public EveMarketDataResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
+            Contract.Requires(options != null, "Options cannot be null.");
+            Contract.Requires(options.Items.Count != 0, "You must specify atleast one type.");
+            Contract.Requires(options.Regions.Count != 0, "You must specify atleast one region.");
             var relUri = "/api/item_history2." + Format.ToString().ToLower();
             var items = String.Join(",", options.Items);
             var regions = String.Join(",", options.Regions);
-            if (items == "" | regions == "") {
-                throw new ArgumentException("You must specify the following: Items, Regions.", "options");
-            }
             var postString = generatePostString("char_name", Name, "type_ids", items, "region_ids", regions);
             return request<ItemHistory>(relUri, postString);
         }
@@ -109,25 +116,26 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
         /// </summary>
         /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
         /// <returns>The daily station rank in a region and order statistics for stations</returns>
-        public XmlResponse<StationRank> GetStationRank(EveMarketDataOptions options) {
+        public EveMarketDataResponse<StationRank> GetStationRank(EveMarketDataOptions options) {
+            Contract.Requires(options != null, "Options cannot be null.");
+            Contract.Requires(options.Regions.Count != 0 || options.Solarsystems.Count != 0 || options.Stations.Count != 0,
+                "You must specify atleast one of the following: Station, Solarsystem, Region.");
             var relUri = "/api/station_rank2." + Format.ToString().ToLower();
             var regions = String.Join(",", options.Regions);
             var solarsystems = String.Join(",", options.Solarsystems);
             var stations = String.Join(",", options.Stations);
-            string days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
-            if (regions + solarsystems + stations == "") {
-                throw new ArgumentException("You must specify atleast one of the following: Station, Solarsystem, Region.", "options");
-            }
+            var days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
             var postString = generatePostString("char_name", Name, "region_ids", regions, "solarsystem_ids", solarsystems, "station_ids", stations, "days", days);
             return request<StationRank>(relUri, postString);
         }
 
-        private XmlResponse<T> request<T>(string relUri, string queryString) {
+        private EveMarketDataResponse<T> request<T>(string relUri, string queryString) {
             var uri = new Uri(BaseUri, relUri + "?" + queryString);
-            return RequestHandler.Request<XmlResponse<T>>(uri);
+            return RequestHandler.Request<EveMarketDataResponse<T>>(uri);
         }
 
         private string generatePostString(params object[] args) {
+            Contract.Requires(args != null);
             var postString = "";
             for (var i = 0; i < args.Length; i += 2) {
                 if (args[i + 1] != null && (args[i + 1]).ToString() != "")

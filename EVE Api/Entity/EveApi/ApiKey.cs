@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using eZet.Eve.EveLib.Model.EveApi;
 using eZet.Eve.EveLib.Model.EveApi.Account;
 
@@ -80,7 +81,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         internal XmlResponse<ApiKeyInfo> GetApiKeyInfo() {
             //const int mask = 0;
             const string uri = "/account/APIKeyInfo.xml.aspx";
-            return request(new ApiKeyInfo(), uri, this);
+            return request<ApiKeyInfo>(uri, this);
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public XmlResponse<CharacterList> GetCharacterList() {
             //const int mask = 0;
             const string uri = "/account/Characters.xml.aspx";
-            var response = request(new CharacterList(), uri, this);
+            var response = request<CharacterList>(uri, this);
             return response;
         }
 
@@ -105,6 +106,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         protected abstract void lazyLoad();
 
         protected void load(XmlResponse<ApiKeyInfo> info) {
+            Contract.Requires(info != null);
             AccessMask = info.Result.Key.AccessMask;
             KeyType =  (ApiKeyType)Enum.Parse(typeof(ApiKeyType), info.Result.Key.Type);
             ExpireDate = info.Result.Key.ExpireDate;

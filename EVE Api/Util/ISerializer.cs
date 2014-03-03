@@ -3,7 +3,7 @@
     /// <summary>
     /// Provides serialization methods for Eve API xml and objects.
     /// </summary>
-    public interface IXmlSerializer {
+    public interface ISerializer {
 
         /// <summary>
         /// Deserializes Eve API xml.
