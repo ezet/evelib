@@ -13,7 +13,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of contestable solarsystems and the NPC faction currently occupying them.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<FactionWarfareSystems> GetFactionWarSystems() {
+        public EveApiResponse<FactionWarfareSystems> GetFactionWarSystems() {
             const string path = "/map/FacWarSystems.xml.aspx";
             return request<FactionWarfareSystems>(path);
         }
@@ -22,7 +22,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns all possible stargate jumps.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<Jumps> GetJumps() {
+        public EveApiResponse<Jumps> GetJumps() {
             const string path = "/map/Jumps.xml.aspx";
             return request<Jumps>(path);
         }
@@ -31,7 +31,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the number of kills in solarsystems within the last hour. Only solar system where kills have been made are listed.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<Kills> GetKills() {
+        public EveApiResponse<Kills> GetKills() {
             const string path = "/map/Kills.xml.aspx";
             return request<Kills>(path);
         }
@@ -40,7 +40,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of solarsystems and what faction or alliance controls them.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<Sovereignty> GetSovereignty() {
+        public EveApiResponse<Sovereignty> GetSovereignty() {
             const string path = "/map/Sovereignty.xml.aspx";
             return request<Sovereignty>(path);
         }

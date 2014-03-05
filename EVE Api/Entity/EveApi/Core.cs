@@ -22,7 +22,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="extended">Optional; If true, includes corporations.</param>
         /// <returns></returns>
-        public XmlResponse<AllianceList> GetAllianceList(bool extended = false) {
+        public EveApiResponse<AllianceList> GetAllianceList(bool extended = false) {
             const string relPath = "/eve/AllianceList.xml.aspx";
             return extended
                 ? request<AllianceList>(relPath)
@@ -33,7 +33,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of certificates in eve.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<CertificateTree> GetCertificateTree() {
+        public EveApiResponse<CertificateTree> GetCertificateTree() {
             const string relPath = "/eve/CertificateTree.xml.aspx";
             return request<CertificateTree>(relPath);
         }
@@ -43,7 +43,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="list">A list of character ids.</param>
         /// <returns></returns>
-        public XmlResponse<CharacterAffiliation> GetCharacterAffiliation(params long[] list) {
+        public EveApiResponse<CharacterAffiliation> GetCharacterAffiliation(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/CharacterAffiliation.xml.aspx";
             var ids = String.Join(",", list);
@@ -55,7 +55,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="list">A list of ids.</param>
         /// <returns></returns>
-        public XmlResponse<CharacterNameId> GetCharacterId(params string[] list) {
+        public EveApiResponse<CharacterNameId> GetCharacterId(params string[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/CharacterID.xml.aspx";
             var names = String.Join(",", list);
@@ -67,7 +67,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="id">The character id.</param>
         /// <returns></returns>
-        public XmlResponse<CharacterInfo> GetCharacterInfo(long id) {
+        public EveApiResponse<CharacterInfo> GetCharacterInfo(long id) {
             const string relPath = "/eve/CharacterInfo.xml.aspx";
             return request<CharacterInfo>(relPath, "characterID", id);
         }
@@ -81,7 +81,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="list">List of ownerIDs (characterID, agentID, corporationID, allianceID, or factionID) and typeIDs to query.</param>
         /// <returns></returns>
-        public XmlResponse<CharacterNameId> GetCharacterName(params long[] list) {
+        public EveApiResponse<CharacterNameId> GetCharacterName(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/CharacterName.xml.aspx";
             var ids = String.Join(",", list);
@@ -92,7 +92,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of conquerable stations
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ConquerableStations> GetConquerableStations() {
+        public EveApiResponse<ConquerableStations> GetConquerableStations() {
             const string relPath = "/eve/ConquerableStationList.xml.aspx";
             return request<ConquerableStations>(relPath);
         }
@@ -105,7 +105,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// 9xx - miscellaneous
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ErrorList> GetErrorList() {
+        public EveApiResponse<ErrorList> GetErrorList() {
             const string relPath = "/eve/ErrorList.xml.aspx";
             return request<ErrorList>(relPath);
         }
@@ -114,7 +114,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns global stats on the factions in factional warfare
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
+        public EveApiResponse<FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/eve/FacWarStats.xml.aspx";
             return request<FactionWarfareStats>(relPath);
         }
@@ -123,7 +123,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns Factional Warfare Top 100 Stats
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<FactionWarTopStats> GetFactionWarfareTopList() {
+        public EveApiResponse<FactionWarTopStats> GetFactionWarfareTopList() {
             const string relPath = "/eve/FacWarTopStats.xml.aspx";
             return request<FactionWarTopStats>(relPath);
         }
@@ -132,7 +132,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the transaction types used in GetWalletJournal calls.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ReferenceTypes> GetReferenceTypes() {
+        public EveApiResponse<ReferenceTypes> GetReferenceTypes() {
             const string relPath = "/eve/RefTypes.xml.aspx";
             return request<ReferenceTypes>(relPath);
         }
@@ -141,7 +141,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the current in-game skills (including unpublished skills).
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<SkillTree> GetSkillTree() {
+        public EveApiResponse<SkillTree> GetSkillTree() {
             const string relPath = "/eve/SkillTree.xml.aspx";
             return request<SkillTree>(relPath);
         }
@@ -151,7 +151,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="list">A list of type ids.</param>
         /// <returns></returns>
-        public XmlResponse<TypeName> GetTypeName(params long[] list) {
+        public EveApiResponse<TypeName> GetTypeName(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/TypeName.xml.aspx";
             var ids = String.Join(",", list);
@@ -162,7 +162,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns current Tranquility status and number of players online.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ServerStatus> GetServerStatus() {
+        public EveApiResponse<ServerStatus> GetServerStatus() {
             const string relPath = "/server/ServerStatus.xml.aspx";
             return request<ServerStatus>(relPath);
         }
@@ -171,7 +171,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the mask and groupings for calls under the new Customizable API Keys authentication method.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<CallList> GetCallList() {
+        public EveApiResponse<CallList> GetCallList() {
             const string relPath = "/api/calllist.xml.aspx";
             return request<CallList>(relPath);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using eZet.Eve.EveLib.Entity;
 using eZet.Eve.EveLib.Entity.EveApi;
+using eZet.Eve.EveLib.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
@@ -44,9 +45,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetCalendarEventAttendees_InvalidId_HasError() {
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetCalendarEventAttendees_InvalidId_InvalidRequestException() {
             var res = validKey.Characters[0].GetCalendarEventAttendees(0);
-            Assert.IsNotNull(res.Error, "Returns http 200 and empty result instead of 403 with error.");
             // BUG Returns http 200 and empty rowset on invalid ID
             // TODO Add valid ID test
             // TODO Add error handling
@@ -77,9 +78,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetContractItems_InvalidRequest_HasError() {
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetContractItems_InvalidRequest_InvalidRequestException() {
             var res = validKey.Characters[0].GetContractItems(0);
-            Assert.IsNotNull(res.Error, "Returns HTTP 500 instead of HTTP 403 with error.");
             // BUG Returns http 500 on invalid id
             // TODO Add error handling
             // TODO Add valid ID test
@@ -92,9 +93,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetFactionWarfareStats_InvalidRequest_HasError() {
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetFactionWarfareStats_InvalidRequest_InvalidRequestException() {
             var res = validKey.Characters[0].GetFactionWarfareStats();
-            Assert.IsNotNull(res.Error);
         }
 
         [TestMethod]
@@ -111,9 +112,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetLocations_InvalidId_HasError() {
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetLocations_InvalidId_InvalidRequestException() {
             var res = validKey.Characters[0].GetLocations(0);
-            Assert.IsNotNull(res.Error);
         }
 
         [TestMethod]

@@ -8,11 +8,11 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
     [XmlRoot("result", IsNullable = false)]
     public class WalletTransactions : XmlElement {
 
-        internal delegate XmlResponse<WalletTransactions> CorpWalletTransactionWalker(int division = 1000, int count = 1000, long fromId = 0);
+        internal delegate EveApiResponse<WalletTransactions> CorpWalletTransactionWalker(int division = 1000, int count = 1000, long fromId = 0);
 
         internal CorpWalletTransactionWalker CorpWalker;
 
-        internal delegate XmlResponse<WalletTransactions> CharWalletTransactionWalker(int count = 1000, long fromId = 0);
+        internal delegate EveApiResponse<WalletTransactions> CharWalletTransactionWalker(int count = 1000, long fromId = 0);
 
         internal CharWalletTransactionWalker CharWalker;
 
@@ -21,7 +21,7 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         [XmlElement("rowset")]
         public XmlRowSet<Transaction> Transactions { get; set; }
 
-        public XmlResponse<WalletTransactions> GetOlder(int count = 1000) {
+        public EveApiResponse<WalletTransactions> GetOlder(int count = 1000) {
             var lastId = Transactions.OrderBy(t => t.TransactionId).First().TransactionId;
             return CharWalker != null ? CharWalker.Invoke(count, lastId) : CorpWalker.Invoke(Division, count, lastId);
         }

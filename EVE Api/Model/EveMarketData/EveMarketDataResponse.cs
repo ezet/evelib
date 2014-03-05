@@ -1,10 +1,8 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
-    [Serializable]
-    [XmlType(AnonymousType = true)]
-    [XmlRoot(ElementName = "emd", Namespace = "", IsNullable = false)]
+    
+    [XmlRoot("emd", Namespace = "", IsNullable = false)]
     public class EveMarketDataResponse<T> {
 
         [XmlElement("currentTime")]
@@ -15,5 +13,6 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
 
         [XmlElement("result")]
         public T Result { get; set; }
+
     }
 }

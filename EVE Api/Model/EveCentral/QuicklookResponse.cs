@@ -7,7 +7,7 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
-    public class QuicklookResponse : XmlResponse {
+    public class QuicklookResponse : EveCentralResponse {
 
         [XmlElement("quicklook")]
         public QuicklookResult Result { get; set; }

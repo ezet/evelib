@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
+using eZet.Eve.EveLib.Exception;
+using eZet.Eve.EveLib.Model.EveApi;
 
 namespace eZet.Eve.EveLib.Util.EveApi {
 
@@ -18,7 +20,7 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         }
 
         /// <summary>
-        /// Performs a request to the specified URI and returns an XmlResponse of specified type.
+        /// Performs a request to the specified URI and returns an EveApiResponse of specified type.
         /// </summary>
         /// <typeparam name="T">The type parameter for the xml response.</typeparam>
         /// <param name="uri">The URI to request.</param>
@@ -26,7 +28,28 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         public override T Request<T>(Uri uri) {
             DateTime cachedUntil;
             var fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
-            var data = webRequest(uri, fromCache);
+            var data = "";
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.ContentType = ContentType;
+            request.CachePolicy = fromCache
+                ? new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheIfAvailable)
+                : new HttpRequestCachePolicy(HttpRequestCacheLevel.Reload);
+            request.Proxy = null;
+            try {
+                data = HttpRequestHelper.GetContent(request);
+            } catch (WebException e) {
+                var response = (HttpWebResponse)e.Response;
+                Debug.WriteLine("From cache: " + response.IsFromCache);
+                if (response.StatusCode != HttpStatusCode.BadRequest)
+                    throw new InvalidRequestException("Request caused a WebException.", e);
+                var responseStream = response.GetResponseStream();
+                if (responseStream == null) throw new InvalidRequestException("Request caused a WebException.", e);
+                using (var reader = new StreamReader(responseStream)) {
+                    data = reader.ReadToEnd();
+                    var error = Serializer.Deserialize<EveApiError>(data);
+                    throw new InvalidRequestException(error.Error.ErrorCode, error.Error.ErrorText, e);
+                }
+            }
             var xml = Serializer.Deserialize<T>(data);
             register(uri, xml);
             SaveCacheState();
@@ -37,47 +60,6 @@ namespace eZet.Eve.EveLib.Util.EveApi {
             //if (o.GetType().Is) throw new System.Exception("Should never occur.");
             // TODO type check
             CacheExpirationRegister.AddOrUpdate(uri, xml.CachedUntil);
-        }
-
-        /// <summary>
-        /// Performs a web request.
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="fromCache"></param>
-        /// <returns></returns>
-        private static string webRequest(Uri uri, bool fromCache) {
-            var data = "";
-            var request = WebRequest.CreateHttp(uri);
-            request.ContentType = ContentType;
-
-            request.CachePolicy = fromCache ? new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheIfAvailable) : new HttpRequestCachePolicy(HttpRequestCacheLevel.Reload);
-            request.Proxy = null;
-
-            try {
-                using (var response = (HttpWebResponse)request.GetResponse()) {
-                    if (response.StatusCode.ToString() == "0") {
-                        // TODO deal with http 0
-                    }
-                    Debug.WriteLine(response.IsFromCache);
-                    var responseStream = response.GetResponseStream();
-                    if (responseStream == null) return data;
-                    using (var reader = new StreamReader(responseStream)) {
-                        data = reader.ReadToEnd();
-                    }
-                }
-            } catch (WebException e) {
-                var response = (HttpWebResponse)e.Response;
-                Debug.WriteLine(response.IsFromCache);
-                if (response.StatusCode != HttpStatusCode.BadRequest) throw;
-                var responseStream = response.GetResponseStream();
-                if (responseStream == null) return data;
-                using (var reader = new StreamReader(responseStream)) {
-                    data = reader.ReadToEnd();
-                }
-                // TODO deal with http 500
-            }
-
-            return data;
         }
     }
 }

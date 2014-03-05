@@ -1,5 +1,5 @@
-﻿using eZet.Eve.EveLib.Entity;
-using eZet.Eve.EveLib.Entity.EveApi;
+﻿using eZet.Eve.EveLib.Entity.EveApi;
+using eZet.Eve.EveLib.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
@@ -49,9 +49,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetContractItems_InvalidId_HasError() {
-            var res = validKey.Corporation.GetContractItems(0);
-            Assert.IsNotNull(res.Error, "API returns statuscode 500 instead of 403 with error code.");
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetContractItems_InvalidId_InvalidRequestException() {
+            validKey.Corporation.GetContractItems(0);
             // BUG Returns http 500 on invalid id
             // TODO Add valid ID test
         }
@@ -72,9 +72,9 @@ namespace eZet.Eve.EveLib.Test {
         /// Test using character that has not participated in factional warfare
         /// </summary>
         [TestMethod]
-        public void GetFactionalWarfareStats_InvalidRequest_HasError() {
-            var res = validKey.Corporation.GetFactionWarfareStats();
-            Assert.IsNotNull(res.Error);
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetFactionalWarfareStats_InvalidRequest_InvalidRequestException() {
+            validKey.Corporation.GetFactionWarfareStats();
         }
 
         [TestMethod]
@@ -91,9 +91,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetLocations_InvalidId_HasError() {
-            var res = validKey.Corporation.GetLocations(0);
-            Assert.IsNotNull(res.Error);
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetLocations_InvalidId_InvalidRequestException() {
+            validKey.Corporation.GetLocations(0);
         }
 
         [TestMethod]
@@ -139,9 +139,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetOutpostServiceDetails_InvalidId_HasError() {
-            var res = validKey.Corporation.GetOutpostServiceDetails(0);
-            Assert.IsNotNull(res.Error, "Returns http 200 and an empty result instead of error.");
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetOutpostServiceDetails_InvalidId_InvalidRequestException() {
+            validKey.Corporation.GetOutpostServiceDetails(0);
             // BUG Returns http 200 and empty Result on invalid ID
             // TODO Add valid ID test
         }
@@ -159,9 +159,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetStarbaseDetails_InvalidId_HasError() {
-            var res = validKey.Corporation.GetStarbaseDetails(0);
-            Assert.IsNotNull(res.Error);
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void GetStarbaseDetails_InvalidId_InvalidRequestException() {
+            validKey.Corporation.GetStarbaseDetails(0);
             // TODO Add valid ID test
         }
 

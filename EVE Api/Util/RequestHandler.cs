@@ -11,7 +11,7 @@ namespace eZet.Eve.EveLib.Util {
             Serializer = serializer;
         }
 
-        T IRequestHandler.Request<T>(Uri uri) {
+        public T Request<T>(Uri uri) {
             try {
                 var data = HttpRequestHelper.Request(uri);
                 return Serializer.Deserialize<T>(data);

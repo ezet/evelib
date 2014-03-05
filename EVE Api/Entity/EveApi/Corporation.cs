@@ -47,7 +47,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the ISK balance of a corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<AccountBalance> GetAccountBalance() {
+        public EveApiResponse<AccountBalance> GetAccountBalance() {
             const string relPath = "/corp/AccountBalance.xml.aspx";
             return request<AccountBalance>(relPath, Key);
         }
@@ -56,7 +56,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of assets owned by a corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<AssetList> GetAssetList() {
+        public EveApiResponse<AssetList> GetAssetList() {
             const string relPath = "/corp/AssetList.xml.aspx";
             return request<AssetList>(relPath, Key);
         }
@@ -65,7 +65,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the corporation and the alliance contact lists. This is accessible by any character in any corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<Model.EveApi.Corporation.ContactList> GetContactList() {
+        public EveApiResponse<Model.EveApi.Corporation.ContactList> GetContactList() {
             const string relPath = "/corp/ContactList.xml.aspx";
             return request<Model.EveApi.Corporation.ContactList>(relPath, Key);
         }
@@ -74,7 +74,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Shows corporation container audit log.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ContainerLog> GetContainerLog() {
+        public EveApiResponse<ContainerLog> GetContainerLog() {
             const string relPath = "/corp/ContainerLog.xml.aspx";
             return request<ContainerLog>(relPath, Key);
         }
@@ -83,7 +83,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Lists the contracts for the corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ContractList> GetContracts() {
+        public EveApiResponse<ContractList> GetContracts() {
             const string relPath = "/corp/Contracts.xml.aspx";
             return request<ContractList>(relPath, Key);
         }
@@ -93,7 +93,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="contractId">A contract itemId.</param>
         /// <returns></returns>
-        public XmlResponse<ContractItems> GetContractItems(long contractId) {
+        public EveApiResponse<ContractItems> GetContractItems(long contractId) {
             const string relPath = "/corp/ContractItems.xml.aspx";
             return request<ContractItems>(relPath, Key, "contractID", contractId);
         }
@@ -102,7 +102,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Lists the latest bids that have been made to any recent auctions.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ContractBids> GetContractBids() {
+        public EveApiResponse<ContractBids> GetContractBids() {
             const string relPath = "/corp/ContractBids.xml.aspx";
             return request<ContractBids>(relPath, Key);
         }
@@ -111,7 +111,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns attributes relating to a specific corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<CorporationSheet> GetCorporationSheet() {
+        public EveApiResponse<CorporationSheet> GetCorporationSheet() {
             const string relPath = "/corp/CorporationSheet.xml.aspx";
             return request<CorporationSheet>(relPath, Key);
         }
@@ -120,7 +120,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// If the corporation is enlisted in Factional Warfare, this will return the faction warfare statistics.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<Model.EveApi.Corporation.FactionWarfareStats> GetFactionWarfareStats() {
+        public EveApiResponse<Model.EveApi.Corporation.FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/corp/FacWarStats.xml.aspx";
             return request<Model.EveApi.Corporation.FactionWarfareStats>(relPath, Key);
         }
@@ -129,7 +129,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the corporation industry jobs.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<IndustryJobs> GetIndustryJobs() {
+        public EveApiResponse<IndustryJobs> GetIndustryJobs() {
             const string relPath = "/corp/IndustryJobs.xml.aspx";
             return request<IndustryJobs>(relPath, Key);
         }
@@ -141,7 +141,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="killId">Optional; if present, return the most recent kills before the specified killID.</param>
         /// <returns></returns>
-        public XmlResponse<KillLog> GetKillLog(long killId = 0) {
+        public EveApiResponse<KillLog> GetKillLog(long killId = 0) {
             // TODO Add walking
             const string relPath = "/corp/Killlog.xml.aspx";
             return killId == 0
@@ -156,7 +156,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
-        public XmlResponse<Locations> GetLocations(params long[] list) {
+        public EveApiResponse<Locations> GetLocations(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/corp/Locations.xml.aspx";
             var ids = String.Join(",", list);
@@ -168,7 +168,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="orderId">Optional; market order ID to fetch an order that is no longer open.</param>
         /// <returns></returns>
-        public XmlResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
+        public EveApiResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
             const string relPath = "/corp/MarketOrders.xml.aspx";
             return orderId == 0
                 ? request<MarketOrders>(relPath, Key)
@@ -179,7 +179,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of medals created by this corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<Model.EveApi.Corporation.MedalList> GetMedals() {
+        public EveApiResponse<Model.EveApi.Corporation.MedalList> GetMedals() {
             const string relPath = "/corp/Medals.xml.aspx";
             return request<Model.EveApi.Corporation.MedalList>(relPath, Key);
         }
@@ -188,7 +188,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of medals issued to members.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<MemberMedals> GetMemberMedals() {
+        public EveApiResponse<MemberMedals> GetMemberMedals() {
             const string relPath = "/corp/MemberMedals.xml.aspx";
             return request<MemberMedals>(relPath, Key);
         }
@@ -197,7 +197,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the security roles of members in a corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<MemberSecurity> GetMemberSecurity() {
+        public EveApiResponse<MemberSecurity> GetMemberSecurity() {
             const string relPath = "/corp/MemberSecurity.xml.aspx";
             return request<MemberSecurity>(relPath, Key);
         }
@@ -206,7 +206,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns info about corporation role changes for members and who did it.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<MemberSecurityLog> GetMemberSecurityLog() {
+        public EveApiResponse<MemberSecurityLog> GetMemberSecurityLog() {
             const string relPath = "/corp/MemberSecurityLog.xml.aspx";
             return request<MemberSecurityLog>(relPath, Key);
         }
@@ -216,7 +216,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="extended">Optional; true for extended version</param>
         /// <returns></returns>
-        public XmlResponse<MemberTracking> GetMemberTracking(bool extended = false) {
+        public EveApiResponse<MemberTracking> GetMemberTracking(bool extended = false) {
             const string relPath = "/corp/MemberTracking.xml.aspx";
             return extended
                 ? request<MemberTracking>(relPath, Key, "extended", 1)
@@ -227,7 +227,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns information about the corporation's outposts.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<OutpostList> GetOutpostList() {
+        public EveApiResponse<OutpostList> GetOutpostList() {
             // TODO Link to OutpostServiceDetails
             const string relPath = "/corp/OutpostList.xml.aspx";
             return request<OutpostList>(relPath, Key);
@@ -238,7 +238,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="itemId">Item ID of an outpost listed in OutpostList API call.</param>
         /// <returns></returns>
-        public XmlResponse<OutpostServiceDetails> GetOutpostServiceDetails(long itemId) {
+        public EveApiResponse<OutpostServiceDetails> GetOutpostServiceDetails(long itemId) {
             const string relPath = "/corp/OutpostServiceDetail.xml.aspx";
             return request<OutpostServiceDetails>(relPath, Key, "itemID", itemId);
         }
@@ -247,7 +247,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the character and corporation share holders of a corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<ShareholderList> GetShareholders() {
+        public EveApiResponse<ShareholderList> GetShareholders() {
             const string relPath = "/corp/Shareholders.xml.aspx";
             return request<ShareholderList>(relPath, Key);
         }
@@ -256,7 +256,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the standings from NPC corporations and factions as well as agents.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<Model.EveApi.Corporation.StandingsList> GetStandings() {
+        public EveApiResponse<Model.EveApi.Corporation.StandingsList> GetStandings() {
             const string relPath = "/corp/Standings.xml.aspx";
             return request<Model.EveApi.Corporation.StandingsList>(relPath, Key);
         }
@@ -266,7 +266,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// </summary>
         /// <param name="itemId">itemId of a starbase from StarbaseList</param>
         /// <returns></returns>
-        public XmlResponse<StarbaseDetails> GetStarbaseDetails(long itemId) {
+        public EveApiResponse<StarbaseDetails> GetStarbaseDetails(long itemId) {
             // TODO CombatSettings
             const string relPath = "/corp/StarbaseDetail.xml.aspx";
             return request<StarbaseDetails>(relPath, Key, "itemID", itemId);
@@ -276,7 +276,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the list and states of POS'es.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<StarbaseList> GetStarbaseList() {
+        public EveApiResponse<StarbaseList> GetStarbaseList() {
             const string relPath = "/corp/StarbaseList.xml.aspx";
             return request<StarbaseList>(relPath, Key);
         }
@@ -285,7 +285,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns the titles in the corporation.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<TitleList> GetTitles() {
+        public EveApiResponse<TitleList> GetTitles() {
             const string relPath = "/corp/Titles.xml.aspx";
             return request<TitleList>(relPath, Key);
         }
@@ -297,7 +297,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public XmlResponse<WalletJournal> GetWalletJournal(int division = 1000, int count = 50, long fromId = 0) {
+        public EveApiResponse<WalletJournal> GetWalletJournal(int division = 1000, int count = 50, long fromId = 0) {
             const string relPath = "/corp/WalletJournal.xml.aspx";
             var result = fromId == 0
                 ? request<WalletJournal>(relPath, Key, "accountKey", division, "rowCount", count)
@@ -314,7 +314,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public XmlResponse<WalletTransactions> GetWalletTransactions(int division = 1000, int count = 1000, long fromId = 0) {
+        public EveApiResponse<WalletTransactions> GetWalletTransactions(int division = 1000, int count = 1000, long fromId = 0) {
             const string relPath = "/corp/WalletTransactions.xml.aspx";
             var result = fromId == 0
                  ? request<WalletTransactions>(relPath, Key, "accountKey", division, "rowCount", count)

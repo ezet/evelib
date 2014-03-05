@@ -71,6 +71,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -80,15 +82,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Dto\Xml\EveCentral\MarketStatXml.cs" />
-    <Compile Include="Dto\Xml\EveCentral\QuicklookXml.cs" />
     <Compile Include="Entity\EveCentral\EveCentralOptions.cs" />
     <Compile Include="Entity\EveMarketData\EveMarketData.cs" />
     <Compile Include="Entity\EveMarketData\EveMarketDataOptions.cs" />
-    <Compile Include="Exception\EveApi\InvalidRequestException.cs" />
-    <Compile Include="Exception\EveLibException.cs" />
     <Compile Include="Exception\InvalidRequestException.cs" />
-    <Compile Include="Mapper\EveCentralXmlMapper.cs" />
+    <Compile Include="Exception\EveLibException.cs" />
     <Compile Include="Model\EveApi\Character\AccountBalance.cs" />
     <Compile Include="Entity\EveApi\ApiKey.cs" />
     <Compile Include="Model\EveApi\Account\AccountStatus.cs" />
@@ -150,16 +148,17 @@
     <Compile Include="Model\EveApi\Corporation\OutpostServiceDetails.cs" />
     <Compile Include="Model\EveApi\Corporation\StarbaseList.cs" />
     <Compile Include="Model\EveApi\Corporation\Titles.cs" />
+    <Compile Include="Model\EveApi\EveApiError.cs" />
     <Compile Include="Model\EveApi\Map\FactionWarfareSystems.cs" />
     <Compile Include="Model\EveApi\Map\Jumps.cs" />
     <Compile Include="Model\EveApi\Map\Kills.cs" />
     <Compile Include="Model\EveApi\Map\Sovereignty.cs" />
-    <Compile Include="Model\EveApi\XmlResponse.cs" />
+    <Compile Include="Model\EveApi\EveApiResponse.cs" />
     <Compile Include="Model\EveApi\XmlElement.cs" />
     <Compile Include="Model\EveApi\XmlRowSet.cs" />
     <Compile Include="Model\EveCentral\MarketStatResponse.cs" />
     <Compile Include="Model\EveCentral\QuicklookResponse.cs" />
-    <Compile Include="Model\EveCentral\XmlResponse.cs" />
+    <Compile Include="Model\EveCentral\EveCentralResponse.cs" />
     <Compile Include="Entity\EveApi\Character.cs" />
     <Compile Include="Entity\EveApi\CharacterKey.cs" />
     <Compile Include="Entity\EveApi\Core.cs" />
@@ -193,6 +192,7 @@
     <Compile Include="Util\RequestHandler.cs" />
     <Compile Include="Util\Logger.cs" />
     <Compile Include="Util\EveApi\HashedCacheExpirationRegister.cs" />
+    <Compile Include="Util\DataSerializerWrapper.cs" />
     <Compile Include="Util\XmlSerializerWrapper.cs" />
     <Compile Include="Util\HttpRequestHelper.cs" />
   </ItemGroup>

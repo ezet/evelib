@@ -29,7 +29,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// In the case of game time code accounts it will also look for available offers of time codes.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<AccountStatus> GetAccountStatus() {
+        public EveApiResponse<AccountStatus> GetAccountStatus() {
             //const int mask = 33554432;
             const string uri = "/account/AccountStatus.xml.aspx";
             return request<AccountStatus>(uri, this);

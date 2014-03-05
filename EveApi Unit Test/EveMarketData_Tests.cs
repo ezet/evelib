@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using eZet.Eve.EveLib.Entity.EveMarketData;
+using eZet.Eve.EveLib.Model.EveApi.Character;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
@@ -99,8 +100,8 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetItemHistory_InvalidRequest_ArgumentException() {
+        [ExpectedException(typeof(System.Diagnostics.Contracts.Contract))]
+        public void GetItemHistory_InvalidArgument_ContractException() {
             var res = api.GetItemHistory(invalidOptions);
         }
 

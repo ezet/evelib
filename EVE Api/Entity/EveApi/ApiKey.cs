@@ -78,7 +78,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             VCode = vCode;
         }
 
-        internal XmlResponse<ApiKeyInfo> GetApiKeyInfo() {
+        internal EveApiResponse<ApiKeyInfo> GetApiKeyInfo() {
             //const int mask = 0;
             const string uri = "/account/APIKeyInfo.xml.aspx";
             return request<ApiKeyInfo>(uri, this);
@@ -88,7 +88,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// Returns a list of all characters on an account.
         /// </summary>
         /// <returns></returns>
-        public XmlResponse<CharacterList> GetCharacterList() {
+        public EveApiResponse<CharacterList> GetCharacterList() {
             //const int mask = 0;
             const string uri = "/account/Characters.xml.aspx";
             var response = request<CharacterList>(uri, this);
@@ -105,7 +105,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
 
         protected abstract void lazyLoad();
 
-        protected void load(XmlResponse<ApiKeyInfo> info) {
+        protected void load(EveApiResponse<ApiKeyInfo> info) {
             Contract.Requires(info != null);
             AccessMask = info.Result.Key.AccessMask;
             KeyType =  (ApiKeyType)Enum.Parse(typeof(ApiKeyType), info.Result.Key.Type);

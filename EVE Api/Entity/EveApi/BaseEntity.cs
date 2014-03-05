@@ -29,11 +29,11 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="relUri">A relative path to the resource to be requested.</param>
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
-        protected XmlResponse<T> request<T>(string relUri, params object[] args) where T : new() {
+        protected EveApiResponse<T> request<T>(string relUri, params object[] args) where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
             var uri = new Uri(BaseUri, relUri + generateQueryString(null, args));
-            return RequestHandler.Request<XmlResponse<T>>(uri);
+            return RequestHandler.Request<EveApiResponse<T>>(uri);
         }
 
         /// <summary>
@@ -43,10 +43,10 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="relUri">A relative path to the resource to be requested.</param>
         /// <param name="key">An API Key to be used with this request.</param>
         /// <returns></returns>
-        protected XmlResponse<T> request<T>(string relUri, ApiKey key) where T : new() {
+        protected EveApiResponse<T> request<T>(string relUri, ApiKey key) where T : new() {
             Contract.Requires(BaseUri != null);
             var uri = new Uri(BaseUri, relUri + generateQueryString(key));
-            return RequestHandler.Request<XmlResponse<T>>(uri);
+            return RequestHandler.Request<EveApiResponse<T>>(uri);
         }
 
         /// <summary>
@@ -57,11 +57,11 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         /// <param name="key">An API Key to be used with this request.</param>
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
-        protected XmlResponse<T> request<T>(string relUri, ApiKey key, params object[] args) where T : new() {
+        protected EveApiResponse<T> request<T>(string relUri, ApiKey key, params object[] args) where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
             var uri = new Uri(BaseUri, relUri + generateQueryString(key, args));
-            return RequestHandler.Request<XmlResponse<T>>(uri);
+            return RequestHandler.Request<EveApiResponse<T>>(uri);
         }
 
         /// <summary>

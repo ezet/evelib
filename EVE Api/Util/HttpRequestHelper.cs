@@ -22,14 +22,7 @@ namespace eZet.Eve.EveLib.Util {
 
         public static HttpWebResponse GetResponse(HttpWebRequest request) {
             Contract.Requires(request != null);
-            HttpWebResponse response;
-            try {
-                response = request.GetResponse() as HttpWebResponse;
-            } catch (WebException e) {
-                response = (HttpWebResponse)e.Response;
-                Debug.WriteLine(response.IsFromCache);
-                if (response.StatusCode != HttpStatusCode.BadRequest) throw;
-            }
+            var response = request.GetResponse() as HttpWebResponse;
             return response;
         }
 
@@ -37,24 +30,14 @@ namespace eZet.Eve.EveLib.Util {
         public static string GetContent(WebRequest request) {
             Contract.Requires(request != null);
             var data = "";
-            try {
-                using (var response = (HttpWebResponse)request.GetResponse()) {
-                    var responseStream = response.GetResponseStream();
-                    if (responseStream == null) return data;
-                    using (var reader = new StreamReader(responseStream)) {
-                        data = reader.ReadToEnd();
-                    }
-                }
-            } catch (WebException e) {
-                var response = (HttpWebResponse)e.Response;
-                Debug.WriteLine(response.IsFromCache);
-                if (response.StatusCode != HttpStatusCode.BadRequest) throw;
+            using (var response = (HttpWebResponse)request.GetResponse()) {
                 var responseStream = response.GetResponseStream();
                 if (responseStream == null) return data;
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();
                 }
             }
+
             return data;
         }
     }

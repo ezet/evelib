@@ -18,7 +18,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
         public XmlRowSet() {
             Rows = new List<T>();
             RowSetMeta = new RowSetAttributes();
-        } 
+        }
 
         public XmlSchema GetSchema() {
             throw new NotImplementedException();
@@ -33,7 +33,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
             reader.ReadToDescendant("row");
             while (reader.Name == "row") {
                 if (reader.IsStartElement()) {
-                    var row = (T) serializer.Deserialize(reader);
+                    var row = (T)serializer.Deserialize(reader);
                     Rows.Add(row);
                 }
                 reader.ReadToNextSibling("row");
@@ -49,7 +49,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
-            return ((IEnumerable) Rows).GetEnumerator();
+            return ((IEnumerable)Rows).GetEnumerator();
         }
 
         public class RowSetAttributes {
@@ -59,7 +59,10 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
             public string Key { get; set; }
 
             public string Columns { get; set; }
-            
+
         }
+
+
     }
+
 }

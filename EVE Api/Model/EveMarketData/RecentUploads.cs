@@ -1,17 +1,13 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using eZet.Eve.EveLib.Entity.EveMarketData;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
 
-    [Serializable]
-    [XmlType(AnonymousType = true)]
     public class RecentUploads {
 
         [XmlElement("rowset")]
         public XmlRowSet<RecentUploadsEntry> Uploads { get; set; }
 
-        [Serializable]
         [XmlRoot("row")]
         public class RecentUploadsEntry {
 

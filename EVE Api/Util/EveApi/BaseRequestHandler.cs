@@ -46,7 +46,7 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         /// <summary>
         /// Performs a request using the specified URI.
         /// </summary>
-        /// <typeparam name="T">Type of XmlResponse.</typeparam>
+        /// <typeparam name="T">Type of EveApiResponse.</typeparam>
         /// <param name="uri">The uri to request.</param>
         /// <returns></returns>
         public abstract T Request<T>(Uri uri);

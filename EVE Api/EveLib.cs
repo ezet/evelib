@@ -22,6 +22,7 @@ under the License.
 using eZet.Eve.EveLib.Entity.EveApi;
 using eZet.Eve.EveLib.Entity.EveCentral;
 using eZet.Eve.EveLib.Entity.EveMarketData;
+using eZet.Eve.EveLib.Util;
 
 namespace eZet.Eve.EveLib {
  
@@ -50,6 +51,12 @@ namespace eZet.Eve.EveLib {
         public EveMarketData EveMarketData { get; private set; }
 
         public static void Main(string[] args) {
+            var api = EveLib.Create().EveMarketData;
+            api.SetMode(Format.Json);
+            api.RequestHandler.Serializer = new DataSerializerWrapper();
+            var options = new EveMarketDataOptions();
+            options.Items.Add(34);
+            var res = api.GetRecentUploads(options, UploadType.Orders);
 
         }
 
