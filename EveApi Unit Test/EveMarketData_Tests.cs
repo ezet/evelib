@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using eZet.Eve.EveLib.Entity.EveMarketData;
 using eZet.Eve.EveLib.Model.EveMarketData;
@@ -76,7 +75,6 @@ namespace eZet.Eve.EveLib.Test {
             Assert.AreNotEqual("", entry.CreatedDate);
         }
 
-
         [TestMethod]
         public void GetItemOrders_NoOptions_NoException() {
             EveMarketDataResponse<ItemOrders> res = api.GetItemOrders(invalidOptions, OrderType.Buy);
@@ -97,31 +95,26 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (Contract))]
+        [ExpectedException(typeof(System.Exception), AllowDerivedTypes = true)]
         public void GetItemHistory_InvalidArgument_ContractException() {
             EveMarketDataResponse<ItemHistory> res = api.GetItemHistory(invalidOptions);
         }
 
         [TestMethod]
-        public void GetStationRank_ValidRequest_ValidResult() {
+        public void GetStationRank_ValidRequest_ValidResponse() {
             EveMarketDataResponse<StationRank> res = api.GetStationRank(validOptions);
             StationRank.StationRankEntry entry = res.Result.Stations.First();
             Assert.AreNotEqual(0, entry.StationId);
             Assert.AreNotEqual("", entry.Date);
             Assert.AreNotEqual(0, entry.RankByOrders);
             Assert.AreNotEqual(0, entry.RankByPrice);
-            //Assert.AreNotEqual(0, entry.SellOrders);
-            //Assert.AreNotEqual(0, entry.BuyOrders);
-            //Assert.AreNotEqual(0, entry.SellTotal);
-            //Assert.AreNotEqual(0, entry.BuyTotal);
-            //Assert.AreNotEqual(0, entry.AvgSellPrice);
-            //Assert.AreNotEqual(0, entry.AvgBuyPrice);
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentException))]
-        public void GetStationRank_InvalidRequest_ArgumentException() {
+        [ExpectedException(typeof(System.Exception), AllowDerivedTypes = true)]
+        public void GetStationRank_InvalidArgument_ContractException() {
             EveMarketDataResponse<StationRank> res = api.GetStationRank(invalidOptions);
         }
+
     }
 }

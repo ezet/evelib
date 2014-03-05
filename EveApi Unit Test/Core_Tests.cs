@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using eZet.Eve.EveLib.Exception;
 using eZet.Eve.EveLib.Model.EveApi;
 using eZet.Eve.EveLib.Model.EveApi.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,6 +31,7 @@ namespace eZet.Eve.EveLib.Test {
         ///     Not yet implemented by CCP
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(InvalidRequestException), "Not implemented by CCP yet.")]
         public void GetCharacterAffiliation_ValidRequest_HasResult() {
             EveApiResponse<CharacterAffiliation> xml = api.Core.GetCharacterAffiliation(CharId);
             Assert.IsNotNull(xml.Result.Characters.First(), "Not implemented by CCP yet.");

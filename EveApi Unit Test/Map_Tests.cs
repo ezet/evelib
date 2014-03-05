@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using eZet.Eve.EveLib.Exception;
 using eZet.Eve.EveLib.Model.EveApi;
 using eZet.Eve.EveLib.Model.EveApi.Map;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

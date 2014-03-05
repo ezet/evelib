@@ -16,8 +16,12 @@ namespace eZet.Eve.EveLib.Util {
                 return Serializer.Deserialize<T>(data);
             }
             catch (WebException e) {
-                throw new InvalidRequestException("An invalid request caused a Web Exception.", e);
+                throw new InvalidRequestException("A request caused a WebException.", e);
             }
+            catch (InvalidOperationException e) {
+                throw new InvalidRequestException("A request caused an InvalidOperationException.", e);
+            }
+
         }
     }
 }

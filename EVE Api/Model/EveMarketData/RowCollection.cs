@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -8,23 +7,12 @@ using System.Xml.Serialization;
 namespace eZet.Eve.EveLib.Model.EveMarketData {
     [Serializable]
     [XmlRoot("rowset")]
-    public class XmlRowSet<T> : IXmlSerializable, IEnumerable<T> {
-        public XmlRowSet() {
-            Rows = new List<T>();
+    public class RowCollection<T> : Collection<T>, IXmlSerializable {
+        public RowCollection() {
             RowSetMeta = new RowSetAttributes();
         }
 
-        private List<T> Rows { get; set; }
-
         public RowSetAttributes RowSetMeta { get; private set; }
-
-        public IEnumerator<T> GetEnumerator() {
-            return Rows.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            return ((IEnumerable) Rows).GetEnumerator();
-        }
 
         public XmlSchema GetSchema() {
             throw new NotImplementedException();
@@ -40,7 +28,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
             while (reader.Name == "row") {
                 if (reader.IsStartElement()) {
                     var row = (T) serializer.Deserialize(reader);
-                    Rows.Add(row);
+                    Items.Add(row);
                 }
                 reader.ReadToNextSibling("row");
             }

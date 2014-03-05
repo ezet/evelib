@@ -7,7 +7,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
     [XmlType(AnonymousType = true)]
     public class ItemPrices {
         [XmlElement("rowset")]
-        public XmlRowSet<ItemPriceEntry> Prices { get; set; }
+        public RowCollection<ItemPriceEntry> Prices { get; set; }
 
         [Serializable]
         [XmlRoot("row")]

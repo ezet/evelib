@@ -4,7 +4,7 @@ using eZet.Eve.EveLib.Entity.EveMarketData;
 namespace eZet.Eve.EveLib.Model.EveMarketData {
     public class RecentUploads {
         [XmlElement("rowset")]
-        public XmlRowSet<RecentUploadsEntry> Uploads { get; set; }
+        public RowCollection<RecentUploadsEntry> Uploads { get; set; }
 
         [XmlRoot("row")]
         public class RecentUploadsEntry {

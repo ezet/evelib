@@ -37,7 +37,8 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetMarketStat_InvalidRequest_Exception() {
+        [ExpectedException(typeof(System.Exception), AllowDerivedTypes = true)]
+        public void GetMarketStat_InvalidArgument_ContractException() {
             MarketStatResponse res = api.GetMarketStat(invalidOptions);
         }
 

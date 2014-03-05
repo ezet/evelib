@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace eZet.Eve.EveLib.Entity.EveMarketData {
     public enum UploadType {
-        [XmlEnum("o")] Orders,
-        [XmlEnum("h")] History,
-        [XmlEnum("b")] Both
+        [XmlEnum("o")] Orders = 'o',
+        [XmlEnum("h")] History = 'h',
+        [XmlEnum("b")] Both = 'b'
     }
 
+    [DataContract]
+    [JsonConverter(typeof (StringEnumConverter))]
     public enum OrderType {
-        [XmlEnum("s")] Sell,
-        [XmlEnum("b")] Buy,
-        [XmlEnum("a")] Both
+        [XmlEnum("s"), EnumMember(Value = "s")] Sell = 's',
+        [XmlEnum("b"), EnumMember(Value = "b")] Buy = 'b',
+        [XmlEnum("a"), EnumMember(Value = "a")] Both = 'a'
     }
 
     public enum MinMax {
@@ -74,6 +79,5 @@ namespace eZet.Eve.EveLib.Entity.EveMarketData {
                     throw new NotImplementedException();
             }
         }
-
     }
 }

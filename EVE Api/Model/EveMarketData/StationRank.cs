@@ -6,7 +6,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
     [XmlType(AnonymousType = true)]
     public class StationRank {
         [XmlElement("rowset")]
-        public XmlRowSet<StationRankEntry> Stations { get; set; }
+        public RowCollection<StationRankEntry> Stations { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
