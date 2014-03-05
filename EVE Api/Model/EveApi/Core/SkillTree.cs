@@ -4,36 +4,38 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Core {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTree : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<SkillGroup> Groups { get; set; }
 
         [Serializable]
+        [XmlRoot("requiredAttributes")]
+        public class RequiredAttribute {
+            [XmlElement("primaryAttribute")]
+            public string PrimaryAttribute { get; set; }
+
+            [XmlElement("secondaryAttribute")]
+            public string SecondaryAttribute { get; set; }
+        }
+
+        [Serializable]
         [XmlRoot("row")]
-        public class SkillGroup {
+        public class RequiredSkill {
+            [XmlAttribute("skillLevel")]
+            public int SkillLevel { get; set; }
 
-            [XmlAttribute("groupID")]
-            public int GroupId { get; set; }
-
-            [XmlAttribute("groupName")]
-            public string CorporationName { get; set; }
-
-            [XmlElement("rowset")]
-            public XmlRowSet<Skill> Skills { get; set; }
-
+            [XmlAttribute("typeID")]
+            public long TypeId { get; set; }
         }
 
         [Serializable]
         [XmlRoot("row")]
         public class Skill : XmlElement, IXmlSerializable {
-
             [XmlAttribute("groupID")]
             public long GroupId { get; set; }
-            
+
             [XmlAttribute("published")]
             public bool Published { get; set; }
 
@@ -82,41 +84,25 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
 
         [Serializable]
         [XmlRoot("row")]
-        public class RequiredSkill {
-            
-            [XmlAttribute("skillLevel")]
-            public int SkillLevel { get; set; }
-
-            [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
-            
-        }
-
-        [Serializable]
-        [XmlRoot("requiredAttributes")]
-        public class RequiredAttribute {
-            
-            [XmlElement("primaryAttribute")]
-            public string PrimaryAttribute { get; set; }
-
-            [XmlElement("secondaryAttribute")]
-            public string SecondaryAttribute { get; set; }
-            
-        }
-
-        [Serializable]
-        [XmlRoot("row")]
         public class SkillBonus {
-
             [XmlAttribute("bonusType")]
             public string BonusType { get; set; }
 
             [XmlAttribute("bonusValue")]
             public string BonusValue { get; set; }
-            
+        }
+
+        [Serializable]
+        [XmlRoot("row")]
+        public class SkillGroup {
+            [XmlAttribute("groupID")]
+            public int GroupId { get; set; }
+
+            [XmlAttribute("groupName")]
+            public string CorporationName { get; set; }
+
+            [XmlElement("rowset")]
+            public XmlRowSet<Skill> Skills { get; set; }
         }
     }
-
-
-
 }

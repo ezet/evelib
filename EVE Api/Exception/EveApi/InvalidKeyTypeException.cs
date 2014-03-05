@@ -1,4 +1,4 @@
 ﻿namespace eZet.Eve.EveLib.Exception.EveApi {
-    class InvalidKeyTypeException {
+    internal class InvalidKeyTypeException {
     }
 }

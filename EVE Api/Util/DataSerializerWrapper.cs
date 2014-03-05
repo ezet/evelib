@@ -3,29 +3,21 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
 namespace eZet.Eve.EveLib.Util {
-
     /// <summary>
-    /// A simple wrapper for .NET XmlSerializer.
+    ///     A simple wrapper for .NET XmlSerializer.
     /// </summary>
     public sealed class DataSerializerWrapper : ISerializer {
-
-        [DataContract]
-        public class Emd<T> {
-            [DataMember]
-            public T emd { get; set; }
-        }
-
         /// <summary>
-        /// Deserializes Eve API xml using the .NET XmlSerializer.
+        ///     Deserializes Eve API xml using the .NET XmlSerializer.
         /// </summary>
         /// <typeparam name="T">An xml result type</typeparam>
         /// <param name="data">An XML string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
-            var serializer = new DataContractJsonSerializer(typeof(Emd<T>));
+            var serializer = new DataContractJsonSerializer(typeof (Emd<T>));
             Emd<T> result;
-            using (var stream = generateStreamFromString(data)) {
-                result = (Emd<T>)serializer.ReadObject(stream);
+            using (Stream stream = generateStreamFromString(data)) {
+                result = (Emd<T>) serializer.ReadObject(stream);
             }
             return result.emd;
         }
@@ -37,6 +29,12 @@ namespace eZet.Eve.EveLib.Util {
             writer.Flush();
             stream.Position = 0;
             return stream;
+        }
+
+        [DataContract]
+        public class Emd<T> {
+            [DataMember]
+            public T emd { get; set; }
         }
     }
 }

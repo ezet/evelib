@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContractItems : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<ContractItem> Items { get; set; }
 
@@ -14,7 +12,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         [Serializable]
         [XmlRoot("row")]
         public class ContractItem {
-            
             [XmlAttribute("recordID")]
             public long RecordId { get; set; }
 
@@ -32,7 +29,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("included")]
             public bool Included { get; set; }
-
         }
     }
 }

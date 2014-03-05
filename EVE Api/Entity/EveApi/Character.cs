@@ -4,39 +4,22 @@ using System.Runtime.CompilerServices;
 using eZet.Eve.EveLib.Model.EveApi;
 using eZet.Eve.EveLib.Model.EveApi.Character;
 using eZet.Eve.EveLib.Model.EveApi.Core;
+using FactionWarfareStats = eZet.Eve.EveLib.Model.EveApi.Character.FactionWarfareStats;
 
 [assembly: InternalsVisibleTo("EveLib.Tests")]
 
-
 namespace eZet.Eve.EveLib.Entity.EveApi {
-
     /// <summary>
-    /// Provides access to all API calls relating to a specific character, that is, URIs prefixed with /char in CCPs API.
+    ///     Provides access to all API calls relating to a specific character, that is, URIs prefixed with /char in CCPs API.
     /// </summary>
     public class Character : BaseEntity {
-
         /// <summary>
-        /// The Wallet identifier. For characters this is always 1000.
+        ///     The Wallet identifier. For characters this is always 1000.
         /// </summary>
         public const int AccountKey = 1000;
 
         /// <summary>
-        /// The API key used for this character.
-        /// </summary>
-        public ApiKey Key { get; private set; }
-
-        /// <summary>
-        /// The id of this character.
-        /// </summary>
-        public long CharacterId { get; private set; }
-
-        /// <summary>
-        /// The name of this character.
-        /// </summary>
-        public string CharacterName { get; private set; }
-
-        /// <summary>
-        /// Creates a new object using the proided key and character id.
+        ///     Creates a new object using the proided key and character id.
         /// </summary>
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
@@ -48,9 +31,24 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             BaseUri = new Uri("https://api.eveonline.com");
         }
 
+        /// <summary>
+        ///     The API key used for this character.
+        /// </summary>
+        public ApiKey Key { get; private set; }
 
         /// <summary>
-        /// Returns general information about the character.
+        ///     The id of this character.
+        /// </summary>
+        public long CharacterId { get; private set; }
+
+        /// <summary>
+        ///     The name of this character.
+        /// </summary>
+        public string CharacterName { get; private set; }
+
+
+        /// <summary>
+        ///     Returns general information about the character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<CharacterInfo> GetCharacterInfo() {
@@ -59,7 +57,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the ISK balance of a character.
+        ///     Returns the ISK balance of a character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<AccountBalance> GetAccountBalance() {
@@ -68,7 +66,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of assets owned by a character.
+        ///     Returns a list of assets owned by a character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<AssetList> GetAssetList() {
@@ -77,11 +75,12 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of all invited attendees for a given event.
-        /// <para> </para>
-        /// NOTE: A call to Upcoming Calendar Events must be made prior to calling this API. Otherwise you will receive an error: 
-        /// <para> </para>
-        /// 216: Calendar Event List not populated with upcoming events. You cannot request any random eventID.
+        ///     Returns a list of all invited attendees for a given event.
+        ///     <para> </para>
+        ///     NOTE: A call to Upcoming Calendar Events must be made prior to calling this API. Otherwise you will receive an
+        ///     error:
+        ///     <para> </para>
+        ///     216: Calendar Event List not populated with upcoming events. You cannot request any random eventID.
         /// </summary>
         /// <param name="eventId">The id of the event.</param>
         /// <returns></returns>
@@ -91,7 +90,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns attributes relating to a specific character.
+        ///     Returns attributes relating to a specific character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<CharacterSheet> GetCharacterSheet() {
@@ -100,9 +99,10 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the character's contact and watch lists, incl. agents and respective standings set by the character. Also includes that character's corporation and/or alliance contacts.
-        /// <para></para>
-        /// See the Standings API for standings towards the character from agents and NPC entities.
+        ///     Returns the character's contact and watch lists, incl. agents and respective standings set by the character. Also
+        ///     includes that character's corporation and/or alliance contacts.
+        ///     <para></para>
+        ///     See the Standings API for standings towards the character from agents and NPC entities.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<ContactList> GetContactList() {
@@ -111,7 +111,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Lists the notifications received about having been added to someone's contact list.
+        ///     Lists the notifications received about having been added to someone's contact list.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<ContactNotifications> GetContactNotifications() {
@@ -120,7 +120,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Lists the personal contracts for a character.
+        ///     Lists the personal contracts for a character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<ContractList> GetContracts() {
@@ -129,7 +129,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Lists items that a specified contract contains.
+        ///     Lists items that a specified contract contains.
         /// </summary>
         /// <param name="contractId">A contract id.</param>
         /// <returns></returns>
@@ -139,7 +139,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Lists the latest bids that have been made to any recent auctions.
+        ///     Lists the latest bids that have been made to any recent auctions.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<ContractBids> GetContractBids() {
@@ -148,16 +148,17 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// If the character is enlisted in Factional Warfare, this will return statistics regarding factional warfare for this character.
+        ///     If the character is enlisted in Factional Warfare, this will return statistics regarding factional warfare for this
+        ///     character.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<Model.EveApi.Character.FactionWarfareStats> GetFactionWarfareStats() {
+        public EveApiResponse<FactionWarfareStats> GetFactionWarfareStats() {
             const string relPath = "/char/FacWarStats.xml.aspx";
-            return request<Model.EveApi.Character.FactionWarfareStats>(relPath, Key, "characterId", CharacterId);
+            return request<FactionWarfareStats>(relPath, Key, "characterId", CharacterId);
         }
 
         /// <summary>
-        /// Returns the characters industry jobs.
+        ///     Returns the characters industry jobs.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<IndustryJobs> GetIndustryJobs() {
@@ -166,9 +167,9 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of kills where this character received the final blow and losses of this character. 
-        /// <para></para>
-        /// Returns the 25 most recent kills. You can scroll back with the killId parameter.
+        ///     Returns a list of kills where this character received the final blow and losses of this character.
+        ///     <para></para>
+        ///     Returns the 25 most recent kills. You can scroll back with the killId parameter.
         /// </summary>
         /// <param name="killId">Optional; if present, return the most recent kills before the specified killID.</param>
         /// <returns></returns>
@@ -181,36 +182,37 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Call will return the items name (or its type name if no user defined name exists) as well as their x,y,z coordinates.
-        /// <para></para>
-        /// Coordinates should all be 0 for valid locations located inside of stations.
+        ///     Call will return the items name (or its type name if no user defined name exists) as well as their x,y,z
+        ///     coordinates.
+        ///     <para></para>
+        ///     Coordinates should all be 0 for valid locations located inside of stations.
         /// </summary>
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
         public EveApiResponse<Locations> GetLocations(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/char/Locations.xml.aspx";
-            var ids = String.Join(",", list);
+            string ids = String.Join(",", list);
             return request<Locations>(relPath, Key, "characterId", CharacterId, "IDs", ids);
-
         }
 
         /// <summary>
-        /// Returns the bodies of headers that have already been fetched with the MailMessages call. 
-        /// <para></para>
-        /// It will also return a list of missing IDs that could not be accessed. Bodies cannot be accessed if you have not called for their headers recently.
+        ///     Returns the bodies of headers that have already been fetched with the MailMessages call.
+        ///     <para></para>
+        ///     It will also return a list of missing IDs that could not be accessed. Bodies cannot be accessed if you have not
+        ///     called for their headers recently.
         /// </summary>
         /// <param name="list">A list of message ids from GetMailMessages.</param>
         /// <returns></returns>
         public EveApiResponse<MailBodies> GetMailBodies(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/char/MailBodies.xml.aspx";
-            var ids = String.Join(",", list);
+            string ids = String.Join(",", list);
             return request<MailBodies>(relPath, Key, "characterId", CharacterId, "IDs", ids);
         }
 
         /// <summary>
-        /// Returns an XML document listing all mailing lists the character is currently a member of.
+        ///     Returns an XML document listing all mailing lists the character is currently a member of.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<MailingLists> GetMailingLists() {
@@ -219,7 +221,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the message headers for mail.
+        ///     Returns the message headers for mail.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<MailMessages> GetMailMessages() {
@@ -228,7 +230,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of market orders for your character.
+        ///     Returns a list of market orders for your character.
         /// </summary>
         /// <param name="orderId">Optional; market order ID to fetch an order that is no longer open.</param>
         /// <returns></returns>
@@ -240,7 +242,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of medals the character has.
+        ///     Returns a list of medals the character has.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<MedalList> GetMedals() {
@@ -249,7 +251,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the message headers for notifications.
+        ///     Returns the message headers for notifications.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<NotificationList> GetNotifications() {
@@ -259,19 +261,19 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
 
 
         /// <summary>
-        /// Returns the message bodies for notifications. Headers need to be requested with GetNotifications first.
+        ///     Returns the message bodies for notifications. Headers need to be requested with GetNotifications first.
         /// </summary>
         /// <param name="ids">A list of notification ids obtained from GetNotifications.</param>
         /// <returns></returns>
         public EveApiResponse<NotificationTexts> GetNotificationTexts(params long[] ids) {
             Contract.Requires(ids != null);
             const string relPath = "/char/NotificationTexts.xml.aspx";
-            var idList = string.Join(",", ids);
+            string idList = string.Join(",", ids);
             return request<NotificationTexts>(relPath, Key, "characterId", CharacterId, "IDs", idList);
         }
 
         /// <summary>
-        /// Returns information about agents character is doing research with.
+        ///     Returns information about agents character is doing research with.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<Research> GetResearch() {
@@ -280,7 +282,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the skill the character is currently training.
+        ///     Returns the skill the character is currently training.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<SkillTraining> GetSkillTraining() {
@@ -289,7 +291,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the skill queue of the character.
+        ///     Returns the skill queue of the character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<SkillQueue> GetSkillQueue() {
@@ -298,7 +300,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the standings towards a character from agents, NPC corporations and factions.
+        ///     Returns the standings towards a character from agents, NPC corporations and factions.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<StandingsList> GetStandings() {
@@ -307,7 +309,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of all upcoming calendar events for a given character.
+        ///     Returns a list of all upcoming calendar events for a given character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<UpcomingCalendarEvents> GetUpcomingCalendarEvents() {
@@ -316,7 +318,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of journal transactions for the character.
+        ///     Returns a list of journal transactions for the character.
         /// </summary>
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
@@ -324,7 +326,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         public EveApiResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
             // TODO add walking
             const string relPath = "/char/WalletJournal.xml.aspx";
-            var result = fromId == 0
+            EveApiResponse<WalletJournal> result = fromId == 0
                 ? request<WalletJournal>(relPath, Key, "characterId", CharacterId, "rowCount", count)
                 : request<WalletJournal>(relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
             result.Result.CharWalker = GetWalletJournal;
@@ -333,16 +335,17 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
 
 
         /// <summary>
-        /// Returns market transactions for the character.
+        ///     Returns market transactions for the character.
         /// </summary>
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
         public EveApiResponse<WalletTransactions> GetWalletTransactions(int count = 1000, long fromId = 0) {
             const string relPath = "/char/WalletTransactions.xml.aspx";
-            var result = fromId == 0
+            EveApiResponse<WalletTransactions> result = fromId == 0
                 ? request<WalletTransactions>(relPath, Key, "characterId", CharacterId, "rowCount", count)
-                : request<WalletTransactions>(relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
+                : request<WalletTransactions>(relPath, Key, "characterId", CharacterId, "rowCount", count, "fromID",
+                    fromId);
             result.Result.CharWalker = GetWalletTransactions;
             return result;
         }

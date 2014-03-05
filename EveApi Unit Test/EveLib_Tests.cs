@@ -1,12 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
-
-
-
     [TestClass]
     public class EveLib_Tests {
-
         private const int Key = 3035238;
 
         private const string VCode = "ubXVyyqDzjCRIcFbFxbTyS4I9B8n3ncQepGwDkz6EmVkoG2k9lTHhObiIxYgC8eQ";
@@ -21,10 +17,6 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void TestMethod1() {
-  
-
-
-
         }
     }
 }

@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Research : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<ResearchEntry> Entries { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class ResearchEntry {
-            
             [XmlAttribute("agentID")]
             public long AgentId { get; set; }
 

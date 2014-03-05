@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContractBids : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Bid> Bids { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class Bid {
-
             [XmlAttribute("bidID")]
             public long BidId { get; set; }
 
@@ -34,7 +31,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("amount")]
             public decimal Amount { get; set; }
-
         }
     }
 }

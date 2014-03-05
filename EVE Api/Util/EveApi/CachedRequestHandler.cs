@@ -7,12 +7,10 @@ using eZet.Eve.EveLib.Exception;
 using eZet.Eve.EveLib.Model.EveApi;
 
 namespace eZet.Eve.EveLib.Util.EveApi {
-
     /// <summary>
-    /// Handles requests to the Eve API. Caching is accomplished by using the native HttpWebRequest caching (IE Cache).
+    ///     Handles requests to the Eve API. Caching is accomplished by using the native HttpWebRequest caching (IE Cache).
     /// </summary>
     public class CachedRequestHandler : BaseRequestHandler {
-
         private const string ContentType = "application/x-www-form-urlencoded";
 
         public CachedRequestHandler(ISerializer serializer)
@@ -20,16 +18,16 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         }
 
         /// <summary>
-        /// Performs a request to the specified URI and returns an EveApiResponse of specified type.
+        ///     Performs a request to the specified URI and returns an EveApiResponse of specified type.
         /// </summary>
         /// <typeparam name="T">The type parameter for the xml response.</typeparam>
         /// <param name="uri">The URI to request.</param>
         /// <returns></returns>
         public override T Request<T>(Uri uri) {
             DateTime cachedUntil;
-            var fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
-            var data = "";
-            var request = HttpRequestHelper.CreateRequest(uri);
+            bool fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
+            string data = "";
+            HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.ContentType = ContentType;
             request.CachePolicy = fromCache
                 ? new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheIfAvailable)
@@ -37,12 +35,13 @@ namespace eZet.Eve.EveLib.Util.EveApi {
             request.Proxy = null;
             try {
                 data = HttpRequestHelper.GetContent(request);
-            } catch (WebException e) {
-                var response = (HttpWebResponse)e.Response;
+            }
+            catch (WebException e) {
+                var response = (HttpWebResponse) e.Response;
                 Debug.WriteLine("From cache: " + response.IsFromCache);
                 if (response.StatusCode != HttpStatusCode.BadRequest)
                     throw new InvalidRequestException("Request caused a WebException.", e);
-                var responseStream = response.GetResponseStream();
+                Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new InvalidRequestException("Request caused a WebException.", e);
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();

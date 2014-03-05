@@ -1,22 +1,19 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using eZet.Eve.EveLib.Entity.EveMarketData;
-using eZet.Eve.EveLib.Model.EveApi.Character;
+using eZet.Eve.EveLib.Model.EveMarketData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
     public class EveMarketData_Tests {
-
-        private readonly EveMarketData api;
-
-        private readonly EveMarketDataOptions validOptions;
-
-        private readonly EveMarketDataOptions invalidOptions;
-
         private const long RegionId = 10000002;
-        
+
         private const long TypeId = 34;
+        private readonly EveMarketData api;
+        private readonly EveMarketDataOptions invalidOptions;
+        private readonly EveMarketDataOptions validOptions;
 
         public EveMarketData_Tests() {
             api = EveLib.Create().EveMarketData;
@@ -29,8 +26,8 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetRecentUploads_ValidRequest_ValidResponse() {
-            var res = api.GetRecentUploads(validOptions, UploadType.Orders);
-            var entry = res.Result.Uploads.First();
+            EveMarketDataResponse<RecentUploads> res = api.GetRecentUploads(validOptions, UploadType.Orders);
+            RecentUploads.RecentUploadsEntry entry = res.Result.Uploads.First();
             Assert.AreEqual(UploadType.Orders, entry.UploadType);
             Assert.AreEqual(TypeId, res.Result.Uploads.First().TypeId);
             Assert.AreEqual(RegionId, res.Result.Uploads.First().RegionId);
@@ -40,13 +37,13 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetRecentUploads_NoOptions_NoException() {
-            var res = api.GetRecentUploads(invalidOptions, UploadType.Orders);
+            EveMarketDataResponse<RecentUploads> res = api.GetRecentUploads(invalidOptions, UploadType.Orders);
         }
 
         [TestMethod]
         public void GetItemPrice_ValidRequest_ValidResponse() {
-            var res = api.GetItemPrice(validOptions, OrderType.Buy, MinMax.Min);
-            var entry = res.Result.Prices.First();
+            EveMarketDataResponse<ItemPrices> res = api.GetItemPrice(validOptions, OrderType.Buy, MinMax.Min);
+            ItemPrices.ItemPriceEntry entry = res.Result.Prices.First();
             Assert.AreEqual(OrderType.Buy, entry.OrderType);
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual(RegionId, entry.RegionId);
@@ -57,13 +54,13 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetItemPrice_NoOptions_NoException() {
-            var res = api.GetItemPrice(invalidOptions, OrderType.Buy, MinMax.Min);
+            EveMarketDataResponse<ItemPrices> res = api.GetItemPrice(invalidOptions, OrderType.Buy, MinMax.Min);
         }
 
         [TestMethod]
         public void GetItemOrders_ValidRequest_ValidResponse() {
-            var res = api.GetItemOrders(validOptions, OrderType.Buy);
-            var entry = res.Result.Orders.First();
+            EveMarketDataResponse<ItemOrders> res = api.GetItemOrders(validOptions, OrderType.Buy);
+            ItemOrders.ItemOrderEntry entry = res.Result.Orders.First();
             Assert.AreEqual(OrderType.Buy, entry.OrderType);
             Assert.AreNotEqual(0, entry.OrderId);
             Assert.AreEqual(TypeId, entry.TypeId);
@@ -82,13 +79,13 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetItemOrders_NoOptions_NoException() {
-            var res = api.GetItemOrders(invalidOptions, OrderType.Buy);
+            EveMarketDataResponse<ItemOrders> res = api.GetItemOrders(invalidOptions, OrderType.Buy);
         }
 
         [TestMethod]
         public void GetItemHistory_ValidRequest_ValidResponse() {
-            var res = api.GetItemHistory(validOptions);
-            var entry = res.Result.History.First();
+            EveMarketDataResponse<ItemHistory> res = api.GetItemHistory(validOptions);
+            ItemHistory.ItemHistoryEntry entry = res.Result.History.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual(RegionId, entry.RegionId);
             Assert.AreNotEqual(0, entry.AvgPrice);
@@ -100,15 +97,15 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Diagnostics.Contracts.Contract))]
+        [ExpectedException(typeof (Contract))]
         public void GetItemHistory_InvalidArgument_ContractException() {
-            var res = api.GetItemHistory(invalidOptions);
+            EveMarketDataResponse<ItemHistory> res = api.GetItemHistory(invalidOptions);
         }
 
         [TestMethod]
         public void GetStationRank_ValidRequest_ValidResult() {
-            var res = api.GetStationRank(validOptions);
-            var entry = res.Result.Stations.First();
+            EveMarketDataResponse<StationRank> res = api.GetStationRank(validOptions);
+            StationRank.StationRankEntry entry = res.Result.Stations.First();
             Assert.AreNotEqual(0, entry.StationId);
             Assert.AreNotEqual("", entry.Date);
             Assert.AreNotEqual(0, entry.RankByOrders);
@@ -122,10 +119,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof (ArgumentException))]
         public void GetStationRank_InvalidRequest_ArgumentException() {
-            var res = api.GetStationRank(invalidOptions);
+            EveMarketDataResponse<StationRank> res = api.GetStationRank(invalidOptions);
         }
-
     }
 }

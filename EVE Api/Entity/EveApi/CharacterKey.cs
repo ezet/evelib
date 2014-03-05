@@ -1,15 +1,18 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using eZet.Eve.EveLib.Model.EveApi;
 using eZet.Eve.EveLib.Model.EveApi.Account;
 
 namespace eZet.Eve.EveLib.Entity.EveApi {
     public class CharacterKey : ApiKey {
-
         private ReadOnlyCollection<Character> _characters;
 
+        public CharacterKey(long keyId, string vCode) : base(keyId, vCode) {
+        }
+
         /// <summary>
-        /// A list of valid character ids for this key.
+        ///     A list of valid character ids for this key.
         /// </summary>
         public ReadOnlyCollection<Character> Characters {
             get {
@@ -20,13 +23,11 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
             private set { _characters = value; }
         }
 
-        public CharacterKey(long keyId, string vCode) : base(keyId, vCode) {
-        }
-
         /// <summary>
-        /// Returns basic account information including when the subscription lapses, total play time in minutes, total times logged on and date of account creation.
-        /// <para></para>
-        /// In the case of game time code accounts it will also look for available offers of time codes.
+        ///     Returns basic account information including when the subscription lapses, total play time in minutes, total times
+        ///     logged on and date of account creation.
+        ///     <para></para>
+        ///     In the case of game time code accounts it will also look for available offers of time codes.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<AccountStatus> GetAccountStatus() {
@@ -36,8 +37,9 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         protected override void lazyLoad() {
-            var info = GetApiKeyInfo();
-            var list = info.Result.Key.Characters.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList();
+            EveApiResponse<ApiKeyInfo> info = GetApiKeyInfo();
+            List<Character> list =
+                info.Result.Key.Characters.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList();
             Characters = list.AsReadOnly();
             load(info);
         }

@@ -1,12 +1,16 @@
 ﻿using eZet.Eve.EveLib.Entity.EveApi;
 using eZet.Eve.EveLib.Exception;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Character;
+using eZet.Eve.EveLib.Model.EveApi.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ContactList = eZet.Eve.EveLib.Model.EveApi.Corporation.ContactList;
+using MedalList = eZet.Eve.EveLib.Model.EveApi.Corporation.MedalList;
+using StandingsList = eZet.Eve.EveLib.Model.EveApi.Corporation.StandingsList;
 
 namespace eZet.Eve.EveLib.Test {
-
     [TestClass]
     public class CorporationKey_ValidKeyTests {
-        
         private const int CorpId = 3120830;
 
         private const string CorpCode = "Zw1DpOUDPYrv49iGTVkDHoRburv2rAAYEbret9B5IVfcVjVDR4DE2bo7p1RMZQMU";
@@ -20,36 +24,36 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetAccountBalance_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetAccountBalance();
+            EveApiResponse<AccountBalance> res = validKey.Corporation.GetAccountBalance();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetAssetList_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetAssetList();
+            EveApiResponse<AssetList> res = validKey.Corporation.GetAssetList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContactList_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetContactList();
+            EveApiResponse<ContactList> res = validKey.Corporation.GetContactList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContainerLog_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetContainerLog();
+            EveApiResponse<ContainerLog> res = validKey.Corporation.GetContainerLog();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContracts_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetContracts();
+            EveApiResponse<ContractList> res = validKey.Corporation.GetContracts();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
+        [ExpectedException(typeof (InvalidRequestException))]
         public void GetContractItems_InvalidId_InvalidRequestException() {
             validKey.Corporation.GetContractItems(0);
             // BUG Returns http 500 on invalid id
@@ -58,88 +62,88 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetContractBids_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetContractBids();
+            EveApiResponse<ContractBids> res = validKey.Corporation.GetContractBids();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetCorporationSheet_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetCorporationSheet();
+            EveApiResponse<CorporationSheet> res = validKey.Corporation.GetCorporationSheet();
             Assert.IsNotNull(res.Result);
         }
 
         /// <summary>
-        /// Test using character that has not participated in factional warfare
+        ///     Test using character that has not participated in factional warfare
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
+        [ExpectedException(typeof (InvalidRequestException))]
         public void GetFactionalWarfareStats_InvalidRequest_InvalidRequestException() {
             validKey.Corporation.GetFactionWarfareStats();
         }
 
         [TestMethod]
         public void GetIndustryJobs_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetIndustryJobs();
+            EveApiResponse<IndustryJobs> res = validKey.Corporation.GetIndustryJobs();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetKillLog_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetKillLog();
+            EveApiResponse<KillLog> res = validKey.Corporation.GetKillLog();
             Assert.IsNotNull(res.Result);
             // TODO Test this further
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
+        [ExpectedException(typeof (InvalidRequestException))]
         public void GetLocations_InvalidId_InvalidRequestException() {
             validKey.Corporation.GetLocations(0);
         }
 
         [TestMethod]
         public void GetMarketOrders_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetMarketOrders();
+            EveApiResponse<MarketOrders> res = validKey.Corporation.GetMarketOrders();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMedals_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetMedals();
+            EveApiResponse<MedalList> res = validKey.Corporation.GetMedals();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberMedals_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetMemberMedals();
+            EveApiResponse<MemberMedals> res = validKey.Corporation.GetMemberMedals();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberSecurity_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetMemberSecurity();
+            EveApiResponse<MemberSecurity> res = validKey.Corporation.GetMemberSecurity();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberSecurityLog_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetMemberSecurityLog();
+            EveApiResponse<MemberSecurityLog> res = validKey.Corporation.GetMemberSecurityLog();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberTracking_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetMemberTracking(true);
+            EveApiResponse<MemberTracking> res = validKey.Corporation.GetMemberTracking(true);
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetOutpostList_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetOutpostList();
+            EveApiResponse<OutpostList> res = validKey.Corporation.GetOutpostList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
+        [ExpectedException(typeof (InvalidRequestException))]
         public void GetOutpostServiceDetails_InvalidId_InvalidRequestException() {
             validKey.Corporation.GetOutpostServiceDetails(0);
             // BUG Returns http 200 and empty Result on invalid ID
@@ -148,18 +152,18 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetShareholders_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetShareholders();
+            EveApiResponse<ShareholderList> res = validKey.Corporation.GetShareholders();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetStandings_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetStandings();
+            EveApiResponse<StandingsList> res = validKey.Corporation.GetStandings();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
+        [ExpectedException(typeof (InvalidRequestException))]
         public void GetStarbaseDetails_InvalidId_InvalidRequestException() {
             validKey.Corporation.GetStarbaseDetails(0);
             // TODO Add valid ID test
@@ -167,26 +171,26 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetStarbaseList_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetStarbaseList();
+            EveApiResponse<StarbaseList> res = validKey.Corporation.GetStarbaseList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetTitles_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetTitles();
+            EveApiResponse<TitleList> res = validKey.Corporation.GetTitles();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetWalletJournal_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetWalletJournal(1001, 5);
+            EveApiResponse<WalletJournal> res = validKey.Corporation.GetWalletJournal(1001, 5);
             Assert.IsNotNull(res.Result);
             //var older = res.Result.GetOlder(50);
         }
 
         [TestMethod]
         public void GetWalletTransactions_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetWalletTransactions(50);
+            EveApiResponse<WalletTransactions> res = validKey.Corporation.GetWalletTransactions(50);
             Assert.IsNotNull(res.Result);
             //res = res.Result.GetOlder(50);
         }

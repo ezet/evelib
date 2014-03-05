@@ -4,18 +4,15 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberSecurityLog : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<LogEntry> RoleHistory { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class LogEntry : XmlElement, IXmlSerializable {
-
             [XmlIgnore]
             public DateTime ChangeTime { get; private set; }
 
@@ -66,6 +63,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
                 throw new NotImplementedException();
             }
         }
-
     }
 }

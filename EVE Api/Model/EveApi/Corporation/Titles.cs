@@ -4,13 +4,24 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class TitleList : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Title> Titles { get; set; }
+
+        [Serializable]
+        [XmlRoot("row")]
+        public class Role {
+            [XmlAttribute("roleID")]
+            public long RoleId { get; set; }
+
+            [XmlAttribute("roleName")]
+            public string RoleName { get; set; }
+
+            [XmlAttribute("roleDescription")]
+            public string RoleDescription { get; set; }
+        }
 
         [Serializable]
         [XmlRoot("row")]
@@ -66,20 +77,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
             public void WriteXml(XmlWriter writer) {
                 throw new NotImplementedException();
             }
-        }
-
-        [Serializable]
-        [XmlRoot("row")]
-        public class Role {
-            
-            [XmlAttribute("roleID")]
-            public long RoleId { get; set; }
-
-            [XmlAttribute("roleName")]
-            public string RoleName { get; set; }
-
-            [XmlAttribute("roleDescription")]
-            public string RoleDescription { get; set; }
         }
     }
 }

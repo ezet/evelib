@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberTracking : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Member> Members { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class Member {
-            
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
 
@@ -49,7 +46,7 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
 
             [XmlIgnore]
             public DateTime LogoffDate { get; private set; }
-            
+
             [XmlAttribute("logoffDateTime")]
             public string LogoffDateAsString {
                 get { return LogoffDate.ToString(DateFormat); }

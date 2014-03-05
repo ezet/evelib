@@ -3,10 +3,15 @@ using System.Linq;
 
 namespace eZet.Eve.EveLib.Entity.EveCentral {
     public class EveCentralOptions {
-        public ICollection<long> Types { get; set; }
+        public EveCentralOptions() {
+            Types = new List<long>();
+            Regions = new List<long>();
+        }
 
-        public ICollection<long> Regions { get; set; }
-        
+        public ICollection<long> Types { get; private set; }
+
+        public ICollection<long> Regions { get; private set; }
+
         public int HourLimit { get; set; }
 
         public int MinQuantity { get; set; }
@@ -14,17 +19,16 @@ namespace eZet.Eve.EveLib.Entity.EveCentral {
 
         public int System { get; set; }
 
-        public EveCentralOptions() {
-            Types = new List<long>();
-            Regions = new List<long>();
-        }
-
         internal string TypeQuery(string paramName) {
-            return Types.Count == 0 ? "" : Types.Aggregate("", (current, type) => current + (paramName + "=" + type + "&"));
+            return Types.Count == 0
+                ? ""
+                : Types.Aggregate("", (current, type) => current + (paramName + "=" + type + "&"));
         }
 
         internal string RegionQuery(string paramName) {
-            return Regions.Count == 0 ? "" : Regions.Aggregate("", (current, region) => current + (paramName + "=" + region + "&"));
+            return Regions.Count == 0
+                ? ""
+                : Regions.Aggregate("", (current, region) => current + (paramName + "=" + region + "&"));
         }
 
         internal string HourQuery(string paramName) {

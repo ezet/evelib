@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MailBodies : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Message> Messages { get; set; }
 
@@ -16,13 +14,11 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         [Serializable]
         [XmlRoot("row")]
         public class Message {
-            
             [XmlAttribute("messageID")]
             public long MessageId { get; set; }
 
             [XmlText]
             public string MessageData { get; set; }
-
         }
     }
 }

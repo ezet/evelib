@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillQueue : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Skill> Queue { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class Skill {
-            
             [XmlAttribute("queuePosition")]
             public int QueuePosition { get; set; }
 
@@ -46,7 +43,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
                 get { return EndTime.ToString(DateFormat); }
                 set { EndTime = DateTime.ParseExact(value, DateFormat, null); }
             }
-
         }
     }
 }

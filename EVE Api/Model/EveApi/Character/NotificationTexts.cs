@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class NotificationTexts : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Notification> Notifications { get; set; }
 
@@ -17,7 +15,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         [Serializable]
         [XmlRoot("row")]
         public class Notification {
-            
             [XmlAttribute("notificationID")]
             public long NotificationId { get; set; }
 

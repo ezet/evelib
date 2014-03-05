@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ShareholderList : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Shareholder> Shareholders { get; set; }
 
@@ -14,7 +12,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
         [Serializable]
         [XmlRoot("row")]
         public class Shareholder {
-            
             [XmlAttribute("shareholderID")]
             public long ShareholderId { get; set; }
 
@@ -29,7 +26,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
 
             [XmlAttribute("shareholderCorporationName")]
             public string ShareholderCorporationName { get; set; }
-
         }
     }
 }

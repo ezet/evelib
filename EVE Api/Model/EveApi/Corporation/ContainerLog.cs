@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContainerLog : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<LogEntry> LogEntries { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class LogEntry {
-
             [XmlIgnore]
             public DateTime LogTime { get; private set; }
 
@@ -48,13 +45,13 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
             public string PasswordType { get; set; }
 
             /// <summary>
-            /// Can be empty string
+            ///     Can be empty string
             /// </summary>
             [XmlAttribute("typeID")]
             public string TypeId { get; set; }
 
             /// <summary>
-            /// Can be empty string
+            ///     Can be empty string
             /// </summary>
             [XmlAttribute("quantity")]
             public string Quantity { get; set; }
@@ -64,7 +61,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
 
             [XmlAttribute("newConfiguration")]
             public string NewConfiguration { get; set; }
-            
         }
     }
 }

@@ -3,15 +3,9 @@ using System.Linq;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletJournal : XmlElement {
-
-        internal delegate EveApiResponse<WalletJournal> CharWalletJournalWalker(int count, long fromId);
-
-        internal delegate EveApiResponse<WalletJournal> CorpWalletJournalWalker(int division, int count, long fromId);
-
         internal CharWalletJournalWalker CharWalker;
 
         internal CorpWalletJournalWalker CorpWalker;
@@ -23,17 +17,20 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         public XmlRowSet<JournalEntry> Journal { get; set; }
 
         public EveApiResponse<WalletJournal> GetOlder(int count = 1000) {
-            var lastId = Journal.OrderBy(t => t.RefId).First().RefId;
+            long lastId = Journal.OrderBy(t => t.RefId).First().RefId;
             return CharWalker != null ? CharWalker.Invoke(count, lastId) : CorpWalker.Invoke(Division, count, lastId);
         }
+
+        internal delegate EveApiResponse<WalletJournal> CharWalletJournalWalker(int count, long fromId);
+
+        internal delegate EveApiResponse<WalletJournal> CorpWalletJournalWalker(int division, int count, long fromId);
 
         [Serializable]
         [XmlRoot("row")]
         public class JournalEntry {
-
             [XmlIgnore]
             public DateTime Date { get; private set; }
-            
+
             [XmlAttribute("date")]
             public string DateAsString {
                 get { return Date.ToString(DateFormat); }
@@ -69,10 +66,10 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("balance")]
             public decimal BalanceAfter { get; set; }
-            
+
             [XmlAttribute("reason")]
             public string Reason { get; set; }
-           
+
             // TODO Convert to long
             [XmlAttribute("taxReceiverID")]
             public string TaxReceiverId { get; set; }
@@ -80,8 +77,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
             // TODO Convert to decimal
             [XmlAttribute("taxAmount")]
             public string TaxAmount { get; set; }
-
         }
-
     }
 }

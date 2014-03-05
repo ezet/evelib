@@ -6,24 +6,23 @@ using eZet.Eve.EveLib.Util.EveApi;
 
 namespace eZet.Eve.EveLib.Entity.EveApi {
     public abstract class BaseEntity {
-
-        /// <summary>
-        /// The base url for entity requests
-        /// </summary>
-        protected Uri BaseUri { get; set; }
-
         protected BaseEntity() {
             BaseUri = new Uri("https://api.eveonline.com");
             RequestHandler = new CachedRequestHandler(new XmlSerializerWrapper());
         }
 
         /// <summary>
-        /// The requester this entity uses to perform requests.
+        ///     The base url for entity requests
+        /// </summary>
+        protected Uri BaseUri { get; set; }
+
+        /// <summary>
+        ///     The requester this entity uses to perform requests.
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        /// Performs a request on the requester, using the provided arguments.
+        ///     Performs a request on the requester, using the provided arguments.
         /// </summary>
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
@@ -37,7 +36,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Performs a request on the requester, using the provided arguments.
+        ///     Performs a request on the requester, using the provided arguments.
         /// </summary>
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
@@ -50,7 +49,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Performs a request on the requester, using the provided arguments.
+        ///     Performs a request on the requester, using the provided arguments.
         /// </summary>
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
@@ -65,17 +64,17 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Generates a query string from the Api key and supplied arguments
+        ///     Generates a query string from the Api key and supplied arguments
         /// </summary>
         /// <param name="key">Optional; api key to generate query from</param>
         /// <param name="args">Optional; arguments to generate query from</param>
         /// <returns></returns>
         protected string generateQueryString(ApiKey key = null, params object[] args) {
             Contract.Requires(args != null);
-            var queryString = "?";
+            string queryString = "?";
             if (key != null)
                 queryString = "?keyID=" + key.KeyId + "&vCode=" + key.VCode + "&";
-            for (var i = 0; i < args.Length; i += 2) {
+            for (int i = 0; i < args.Length; i += 2) {
                 queryString += args[i] + "=" + args[i + 1] + "&";
             }
             return queryString;

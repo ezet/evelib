@@ -3,18 +3,15 @@ using System.Xml.Serialization;
 using eZet.Eve.EveLib.Entity.EveMarketData;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
-
     [Serializable]
     [XmlType(AnonymousType = true)]
     public class ItemOrders {
-
         [XmlElement("rowset")]
         public XmlRowSet<ItemOrderEntry> Orders { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class ItemOrderEntry {
-
             [XmlAttribute("buysell")]
             public OrderType OrderType { get; set; }
 
@@ -24,7 +21,7 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
 
             [XmlAttribute("stationID")]
             public long StationId { get; set; }
-            
+
             [XmlAttribute("solarsystemID")]
             public long SolarSystemId { get; set; }
 
@@ -58,6 +55,5 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
             [XmlAttribute("created")]
             public string CreatedDate { get; set; }
         }
-
     }
 }

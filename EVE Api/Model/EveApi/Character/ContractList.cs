@@ -2,10 +2,26 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContractList : XmlElement {
+        public enum AvailabilityType {
+            Public,
+            Private
+        }
+
+        public enum ContractStatus {
+            Outstanding,
+            Deleted,
+            Completed,
+            Failed,
+            CompletedByIssuer,
+            CompletedByContractor,
+            Cancelled,
+            Rejected,
+            Reversed,
+            InProgress
+        }
 
         [XmlElement("rowset")]
         public XmlRowSet<Contract> Contracts { get; set; }
@@ -13,7 +29,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         [Serializable]
         [XmlRoot("row")]
         public class Contract {
-            
             [XmlAttribute("contractID")]
             public long ContractId { get; set; }
 
@@ -55,17 +70,17 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("dateIssued")]
             public string DateIssuedAsString {
-                get { return DateIssued.HasValue ? ((DateTime)DateIssued).ToString(DateFormat) : ""; }
-                set { DateIssued = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
+                get { return DateIssued.HasValue ? ((DateTime) DateIssued).ToString(DateFormat) : ""; }
+                set { DateIssued = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
             }
 
             [XmlIgnore]
             public DateTime? DateExpired { get; private set; }
-            
+
             [XmlAttribute("dateExpired")]
             public string DateExpiredAsString {
-                get { return DateExpired.HasValue ? ((DateTime)DateExpired).ToString(DateFormat) : ""; }
-                set { DateExpired = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
+                get { return DateExpired.HasValue ? ((DateTime) DateExpired).ToString(DateFormat) : ""; }
+                set { DateExpired = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
             }
 
             [XmlIgnore]
@@ -73,8 +88,8 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("dateAccepted")]
             public string DateAcceptedAsString {
-                get { return DateAccepted.HasValue ? ((DateTime)DateAccepted).ToString(DateFormat) : ""; }
-                set { DateAccepted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
+                get { return DateAccepted.HasValue ? ((DateTime) DateAccepted).ToString(DateFormat) : ""; }
+                set { DateAccepted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
             }
 
             [XmlAttribute("numDays")]
@@ -85,8 +100,8 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("dateCompleted")]
             public string DateCompletedAsString {
-                get { return DateCompleted.HasValue ? ((DateTime)DateCompleted).ToString(DateFormat) : ""; }
-                set { DateCompleted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?)null; }
+                get { return DateCompleted.HasValue ? ((DateTime) DateCompleted).ToString(DateFormat) : ""; }
+                set { DateCompleted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
             }
 
             [XmlAttribute("price")]
@@ -103,23 +118,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("volume")]
             public double Volume { get; set; }
-        }
-
-        public enum ContractStatus {
-            Outstanding,
-            Deleted,
-            Completed,
-            Failed,
-            CompletedByIssuer,
-            CompletedByContractor,
-            Cancelled,
-            Rejected,
-            Reversed,
-            InProgress
-        }
-
-        public enum AvailabilityType {
-            Public, Private
         }
     }
 }

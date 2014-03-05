@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class StarbaseDetails : XmlElement {
-
         [XmlElement("state")]
         public int State { get; set; }
 
@@ -35,8 +33,21 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
         public XmlRowSet<FuelEntry> Fuel { get; set; }
 
 
+        public class CombatSetting {
+            // TODO Implement CombatSetting
+        }
+
+        [Serializable]
+        [XmlRoot("row")]
+        public class FuelEntry {
+            [XmlAttribute("typeID")]
+            public long TypeId { get; set; }
+
+            [XmlAttribute("quantity")]
+            public int Quantity { get; set; }
+        }
+
         public class GeneralSetting {
-            
             [XmlElement("usageFlags")]
             public int UsageFlags { get; set; }
 
@@ -48,22 +59,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
 
             [XmlElement("allowAllianceMembers")]
             public bool AllowAllianceMembers { get; set; }
-
-        }
-
-        public class CombatSetting {
-            // TODO Implement CombatSetting
-        }
-        
-        [Serializable]
-        [XmlRoot("row")]
-        public class FuelEntry {
-            
-            [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
-
-            [XmlAttribute("quantity")]
-            public int Quantity { get; set; }
         }
     }
 }

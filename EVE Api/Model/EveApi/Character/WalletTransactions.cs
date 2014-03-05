@@ -3,18 +3,11 @@ using System.Linq;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletTransactions : XmlElement {
-
-        internal delegate EveApiResponse<WalletTransactions> CorpWalletTransactionWalker(int division = 1000, int count = 1000, long fromId = 0);
-
-        internal CorpWalletTransactionWalker CorpWalker;
-
-        internal delegate EveApiResponse<WalletTransactions> CharWalletTransactionWalker(int count = 1000, long fromId = 0);
-
         internal CharWalletTransactionWalker CharWalker;
+        internal CorpWalletTransactionWalker CorpWalker;
 
         internal int Division;
 
@@ -22,15 +15,19 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         public XmlRowSet<Transaction> Transactions { get; set; }
 
         public EveApiResponse<WalletTransactions> GetOlder(int count = 1000) {
-            var lastId = Transactions.OrderBy(t => t.TransactionId).First().TransactionId;
+            long lastId = Transactions.OrderBy(t => t.TransactionId).First().TransactionId;
             return CharWalker != null ? CharWalker.Invoke(count, lastId) : CorpWalker.Invoke(Division, count, lastId);
         }
+
+        internal delegate EveApiResponse<WalletTransactions> CharWalletTransactionWalker(
+            int count = 1000, long fromId = 0);
+
+        internal delegate EveApiResponse<WalletTransactions> CorpWalletTransactionWalker(
+            int division = 1000, int count = 1000, long fromId = 0);
 
         [Serializable]
         [XmlRoot("row")]
         public class Transaction {
-
-
             [XmlIgnore]
             public DateTime TransactionDate { get; private set; }
 
@@ -72,10 +69,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("transactionFor")]
             public string TransactionFor { get; set; }
-
         }
-
     }
-
-
 }

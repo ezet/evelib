@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CorporationSheet : XmlElement {
-
         [XmlElement("corporationID")]
         public long CorporationId { get; set; }
 
@@ -61,17 +59,14 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
         [Serializable]
         [XmlRoot("row")]
         public class Division {
-            
             [XmlAttribute("accountKey")]
             public int AccountKey { get; set; }
 
             [XmlAttribute("description")]
             public string Description { get; set; }
-
         }
 
         public class LogoData {
-
             [XmlElement("graphicID")]
             public int GraphicId { get; set; }
 
@@ -92,8 +87,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
 
             [XmlElement("color3")]
             public int Color3 { get; set; }
-
         }
-
     }
 }

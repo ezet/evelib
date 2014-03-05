@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Core {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class AllianceList : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<AllianceData> Alliances { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class AllianceData {
-
             [XmlAttribute("name")]
             public string AllianceName { get; set; }
 
@@ -40,13 +37,11 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
 
             [XmlElement("rowset")]
             public XmlRowSet<CorporationData> Corporations { get; set; }
-
         }
 
         [Serializable]
         [XmlRoot("row")]
         public class CorporationData {
-
             [XmlAttribute("corporationID")]
             public long CorporationId { get; set; }
 
@@ -58,7 +53,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
                 get { return StartDate.ToString(DateFormat); }
                 set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
             }
-
         }
     }
 }

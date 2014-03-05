@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class StarbaseList : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Starbase> Starbases { get; set; }
 
@@ -14,7 +12,14 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
         [Serializable]
         [XmlRoot("row")]
         public class Starbase {
-            
+            public enum StarbaseState {
+                [XmlEnum("0")] Unanchored,
+                [XmlEnum("1")] Anchored,
+                [XmlEnum("2")] Onlining,
+                [XmlEnum("3")] Reinforced,
+                [XmlEnum("4")] Online
+            }
+
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }
 
@@ -50,20 +55,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
 
             [XmlAttribute("standingOwnerID")]
             public long StandingOwnerId { get; set; }
-
-            public enum StarbaseState {
-                [XmlEnum("0")]
-                Unanchored,
-                [XmlEnum("1")]
-                Anchored,
-                [XmlEnum("2")]
-                Onlining,
-                [XmlEnum("3")]
-                Reinforced,
-                [XmlEnum("4")]
-                Online
-            }
-
         }
     }
 }

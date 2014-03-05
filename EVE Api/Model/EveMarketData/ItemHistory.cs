@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
-
     [Serializable]
     [XmlType(AnonymousType = true)]
     public class ItemHistory {
-
         [XmlElement("rowset")]
         public XmlRowSet<ItemHistoryEntry> History { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class ItemHistoryEntry {
-
             [XmlAttribute("typeID")]
             public long TypeId { get; set; }
 

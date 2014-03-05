@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberMedals : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Medal> Medals { get; set; }
 
@@ -14,10 +12,9 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
         [Serializable]
         [XmlRoot("row")]
         public class Medal {
-            
             [XmlAttribute("medalID")]
             public long MedalId { get; set; }
-            
+
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
 

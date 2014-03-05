@@ -2,18 +2,14 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Account {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ApiKeyInfo : XmlElement {
-
         [XmlElement("key")]
         public ApiKeyData Key { get; set; }
-
     }
 
     public class ApiKeyData {
-
         [XmlElement("rowset")]
         public XmlRowSet<CharacterInfo> Characters { get; set; }
 
@@ -33,6 +29,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Account {
                 ExpireDate = value == "" ? DateTime.MinValue : DateTime.ParseExact(value, XmlElement.DateFormat, null);
             }
         }
-
     }
 }

@@ -1,8 +1,10 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
+
 <eveapi version="2">
   <currentTime>2008-05-25 20:23:34</currentTime>
   <result>
-    <rowset name="jobs" key="jobID" columns="jobID,assemblyLineID,containerID,
+    <rowset name="jobs" key="jobID"
+            columns="jobID,assemblyLineID,containerID,
             installedItemID,installedItemLocationID,installedItemQuantity,
             installedItemProductivityLevel,installedItemMaterialLevel,
             installedItemLicensedProductionRunsRemaining,outputLocationID,

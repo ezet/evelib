@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Map {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareSystems : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<SolarSystem> SolarSystems { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
-
             [XmlAttribute("solarSystemID")]
             public long SolarSystemId { get; set; }
 
@@ -34,9 +31,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Map {
                 get { return Contested.ToString(); }
                 set { Contested = value == "True".ToLower(); }
             }
-
         }
     }
-
-
 }

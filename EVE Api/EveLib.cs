@@ -22,59 +22,56 @@ under the License.
 using eZet.Eve.EveLib.Entity.EveApi;
 using eZet.Eve.EveLib.Entity.EveCentral;
 using eZet.Eve.EveLib.Entity.EveMarketData;
+using eZet.Eve.EveLib.Model.EveMarketData;
 using eZet.Eve.EveLib.Util;
 
 namespace eZet.Eve.EveLib {
- 
     public class EveLib {
-
-        /// <summary>
-        /// Gets the Core for this instance
-        /// </summary>
-        public Core Core { get; private set; }
-
-        /// <summary>
-        /// Gets the Map for this instance
-        /// </summary>
-        public Map Map { get; private set; }
-
-        /// <summary>
-        /// Gets the Image for this instance
-        /// </summary>
-        public Image Image { get; private set; }
-
-        /// <summary>
-        /// Gets the EveCentral for this instance
-        /// </summary>
-        public EveCentral EveCentral { get; private set; }
-
-        public EveMarketData EveMarketData { get; private set; }
-
-        public static void Main(string[] args) {
-            var api = EveLib.Create().EveMarketData;
-            api.SetMode(Format.Json);
-            api.RequestHandler.Serializer = new DataSerializerWrapper();
-            var options = new EveMarketDataOptions();
-            options.Items.Add(34);
-            var res = api.GetRecentUploads(options, UploadType.Orders);
-
-        }
-
-        public static EveLib Create() {
-            return new EveLib(new Core(), new Map(), new Image(), new EveCentral(), new EveMarketData());
-        }
-    
         private EveLib(Core core, Map map, Image image, EveCentral evec, EveMarketData emd) {
             Core = core;
             Map = map;
             Image = image;
             EveCentral = evec;
             EveMarketData = emd;
-
         }
 
         /// <summary>
-        /// Creates and returns a new CharacterKey.
+        ///     Gets the Core for this instance
+        /// </summary>
+        public Core Core { get; private set; }
+
+        /// <summary>
+        ///     Gets the Map for this instance
+        /// </summary>
+        public Map Map { get; private set; }
+
+        /// <summary>
+        ///     Gets the Image for this instance
+        /// </summary>
+        public Image Image { get; private set; }
+
+        /// <summary>
+        ///     Gets the EveCentral for this instance
+        /// </summary>
+        public EveCentral EveCentral { get; private set; }
+
+        public EveMarketData EveMarketData { get; private set; }
+
+        public static void Main(string[] args) {
+            EveMarketData api = Create().EveMarketData;
+            api.SetMode(Format.Json);
+            api.RequestHandler.Serializer = new DataSerializerWrapper();
+            var options = new EveMarketDataOptions();
+            options.Items.Add(34);
+            EveMarketDataResponse<RecentUploads> res = api.GetRecentUploads(options, UploadType.Orders);
+        }
+
+        public static EveLib Create() {
+            return new EveLib(new Core(), new Map(), new Image(), new EveCentral(), new EveMarketData());
+        }
+
+        /// <summary>
+        ///     Creates and returns a new CharacterKey.
         /// </summary>
         /// <param name="keyId">Eve API key id.</param>
         /// <param name="vCode">Eve API verfication code.</param>
@@ -85,7 +82,7 @@ namespace eZet.Eve.EveLib {
 
 
         /// <summary>
-        /// Creates and returns a new CorporationKey.
+        ///     Creates and returns a new CorporationKey.
         /// </summary>
         /// <param name="keyId">Eve API key id.</param>
         /// <param name="vCode">Eve Api verification code.</param>
@@ -93,6 +90,5 @@ namespace eZet.Eve.EveLib {
         public static CorporationKey GetCorporationKey(long keyId, string vCode) {
             return new CorporationKey(keyId, vCode);
         }
-
     }
 }

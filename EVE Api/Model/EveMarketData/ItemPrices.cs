@@ -3,18 +3,15 @@ using System.Xml.Serialization;
 using eZet.Eve.EveLib.Entity.EveMarketData;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
-
     [Serializable]
     [XmlType(AnonymousType = true)]
     public class ItemPrices {
-
         [XmlElement("rowset")]
         public XmlRowSet<ItemPriceEntry> Prices { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class ItemPriceEntry {
-
             [XmlAttribute("buysell")]
             public OrderType OrderType { get; set; }
 

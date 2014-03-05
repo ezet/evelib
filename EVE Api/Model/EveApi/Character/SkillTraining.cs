@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTraining : XmlElement {
-
         // TODO Convert zone
         [XmlIgnore]
         public DateTime CurrentTqTime { get; private set; }
@@ -49,6 +47,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
         [XmlElement("skillInTraining")]
         public bool IsTraining { get; set; }
-
     }
 }

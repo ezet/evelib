@@ -4,10 +4,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace eZet.Eve.EveLib.Util.EveApi {
-    public class HashedCacheExpirationRegister : ICacheExpirationRegister  {
-
+    public class HashedCacheExpirationRegister : ICacheExpirationRegister {
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 
         private readonly ConcurrentDictionary<string, DateTime> register = new ConcurrentDictionary<string, DateTime>();
@@ -17,20 +17,13 @@ namespace eZet.Eve.EveLib.Util.EveApi {
         }
 
         public virtual void AddOrUpdate(Uri uri, DateTime cachedUntil) {
-           var key = resolve(uri);
-           register.AddOrUpdate(key, cachedUntil, (k, v) => cachedUntil);
+            string key = resolve(uri);
+            register.AddOrUpdate(key, cachedUntil, (k, v) => cachedUntil);
         }
 
         public virtual bool TryGetValue(Uri uri, out DateTime value) {
-            var key = resolve(uri);
+            string key = resolve(uri);
             return register.TryGetValue(key, out value);
-        }
-
-        private static string resolve(Uri uri) {
-            Contract.Requires(uri != null);
-            var file = uri.PathAndQuery.Replace("/", "");
-            var hash = Sha1.ComputeHash(System.Text.Encoding.Unicode.GetBytes(file));
-            return BitConverter.ToString(hash).Replace("-", "");
         }
 
         public IEnumerator<KeyValuePair<string, DateTime>> GetEnumerator() {
@@ -39,6 +32,13 @@ namespace eZet.Eve.EveLib.Util.EveApi {
 
         IEnumerator IEnumerable.GetEnumerator() {
             return ((IEnumerable) register).GetEnumerator();
+        }
+
+        private static string resolve(Uri uri) {
+            Contract.Requires(uri != null);
+            string file = uri.PathAndQuery.Replace("/", "");
+            byte[] hash = Sha1.ComputeHash(Encoding.Unicode.GetBytes(file));
+            return BitConverter.ToString(hash).Replace("-", "");
         }
     }
 }

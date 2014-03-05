@@ -4,13 +4,12 @@ using eZet.Eve.EveLib.Model.EveApi.Map;
 
 namespace eZet.Eve.EveLib.Entity.EveApi {
     public class Map : BaseEntity {
-
         internal Map() {
             BaseUri = new Uri("https://api.eveonline.com");
         }
 
         /// <summary>
-        /// Returns a list of contestable solarsystems and the NPC faction currently occupying them.
+        ///     Returns a list of contestable solarsystems and the NPC faction currently occupying them.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<FactionWarfareSystems> GetFactionWarSystems() {
@@ -19,7 +18,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns all possible stargate jumps.
+        ///     Returns all possible stargate jumps.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<Jumps> GetJumps() {
@@ -28,7 +27,8 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns the number of kills in solarsystems within the last hour. Only solar system where kills have been made are listed.
+        ///     Returns the number of kills in solarsystems within the last hour. Only solar system where kills have been made are
+        ///     listed.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<Kills> GetKills() {
@@ -37,7 +37,7 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of solarsystems and what faction or alliance controls them.
+        ///     Returns a list of solarsystems and what faction or alliance controls them.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<Sovereignty> GetSovereignty() {
@@ -46,14 +46,11 @@ namespace eZet.Eve.EveLib.Entity.EveApi {
         }
 
         /// <summary>
-        /// Returns a list of all sovereignty structures in EVE.
+        ///     Returns a list of all sovereignty structures in EVE.
         /// </summary>
         public void GetSovereigntyStatus() {
             throw new NotImplementedException();
             // Temporarily disabled by CCP
         }
-
-
-
     }
 }

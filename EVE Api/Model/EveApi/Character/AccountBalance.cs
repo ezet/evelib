@@ -2,20 +2,16 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class AccountBalance : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<AccountBalanceRow> Accounts { get; set; }
-
     }
 
     [Serializable]
     [XmlRoot("row")]
     public class AccountBalanceRow {
-
         [XmlAttribute("accountID")]
         public long AccountId { get; set; }
 

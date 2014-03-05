@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Core {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterInfo : XmlElement {
-
         [XmlElement("characterID")]
         public long CharacterId { get; set; }
 
@@ -76,7 +74,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
         [Serializable]
         [XmlRoot("row")]
         public class Employment {
-
             [XmlAttribute("recordID")]
             public long RecordId { get; set; }
 
@@ -85,14 +82,12 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
 
             [XmlIgnore]
             public DateTime StartDate { get; private set; }
-            
+
             [XmlAttribute("startDate")]
             public string StartDateAsString {
                 get { return StartDate.ToString(DateFormat); }
                 set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
             }
-
         }
     }
-
 }

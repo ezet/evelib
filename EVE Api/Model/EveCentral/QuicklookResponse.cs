@@ -3,19 +3,15 @@ using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveCentral {
-
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class QuicklookResponse : EveCentralResponse {
-
         [XmlElement("quicklook")]
         public QuicklookResult Result { get; set; }
-
     }
 
     public class QuicklookResult {
-
         [XmlElement("item")]
         public long TypeId { get; set; }
 
@@ -36,7 +32,6 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
 
         [XmlArray("buy_orders"), XmlArrayItem("order")]
         public Collection<QuicklookOrder> BuyOrders { get; set; }
-
     }
 
     public class QuicklookOrder {
@@ -73,5 +68,4 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
         [XmlElement("reported_time")]
         public string ReportedTime { get; set; }
     }
-
 }

@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class UpcomingCalendarEvents : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Event> Events { get; set; }
 
@@ -45,14 +43,13 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlAttribute("response")]
             public EventResponse Response { get; set; }
-
         }
     }
 
-            public enum EventResponse {
-            Accepted,
-            Declined,
-            Tentative,
-            Undecided
-        }
+    public enum EventResponse {
+        Accepted,
+        Declined,
+        Tentative,
+        Undecided
+    }
 }

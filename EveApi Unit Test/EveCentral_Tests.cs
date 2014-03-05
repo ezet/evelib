@@ -1,25 +1,22 @@
 ﻿using System.Linq;
 using eZet.Eve.EveLib.Entity.EveCentral;
+using eZet.Eve.EveLib.Model.EveCentral;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
     public class EveCentral_Tests {
-
-        private readonly EveCentral api;
-
-        private readonly EveCentralOptions validOptions;
-
-        private readonly EveCentralOptions invalidOptions;
-
         private const long RegionId = 10000002;
         private const long TypeId = 34;
         private const int HourLimit = 5;
         private const int MinQty = 5;
+        private readonly EveCentral api;
+        private readonly EveCentralOptions invalidOptions;
+        private readonly EveCentralOptions validOptions;
 
         public EveCentral_Tests() {
             api = EveLib.Create().EveCentral;
-            validOptions = new EveCentralOptions { HourLimit = HourLimit, MinQuantity = MinQty};
+            validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
             validOptions.Types.Add(TypeId);
             validOptions.Regions.Add(RegionId);
             invalidOptions = new EveCentralOptions();
@@ -27,8 +24,8 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            var res = api.GetMarketStat(validOptions);
-            var entry = res.Result.First();
+            MarketStatResponse res = api.GetMarketStat(validOptions);
+            MarketStatItem entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.All.Average);
             Assert.AreNotEqual(0, entry.All.Volume);
@@ -41,14 +38,14 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetMarketStat_InvalidRequest_Exception() {
-            var res = api.GetMarketStat(invalidOptions);
+            MarketStatResponse res = api.GetMarketStat(invalidOptions);
         }
 
         [TestMethod]
         public void GetQuicklook_ValidRequest_ValidReseponse() {
-            var res = api.GetQuicklook(validOptions);
-            var entry = res.Result;
-            var order = entry.BuyOrders.First();
+            QuicklookResponse res = api.GetQuicklook(validOptions);
+            QuicklookResult entry = res.Result;
+            QuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual("Tritanium", entry.TypeName);
             Assert.AreEqual(HourLimit, entry.HourLimit);
@@ -67,9 +64,9 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklookPath_ValidRequest_ValidResponse() {
-            var res = api.GetQuicklookPath("Jita", "Amarr", 34, validOptions);
-            var entry = res.Result;
-            var order = entry.BuyOrders.First();
+            QuicklookResponse res = api.GetQuicklookPath("Jita", "Amarr", 34, validOptions);
+            QuicklookResult entry = res.Result;
+            QuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual("Tritanium", entry.TypeName);
             Assert.AreEqual(HourLimit, entry.HourLimit);

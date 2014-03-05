@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Core {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterAffiliation : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<CharacterAffiliationData> Characters { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class CharacterAffiliationData {
-
             [XmlAttribute("characterName")]
             public string CharacterName { get; set; }
 
@@ -37,8 +34,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
 
             [XmlAttribute("factionID")]
             public long FactionId { get; set; }
-
         }
     }
-
 }

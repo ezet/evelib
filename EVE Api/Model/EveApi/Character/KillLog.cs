@@ -4,18 +4,77 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class KillLog : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Kill> Kills { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
-        public class Kill : XmlElement, IXmlSerializable {
+        public class Attacker {
+            [XmlAttribute("characterID")]
+            public long CharacterId { get; set; }
 
+            [XmlAttribute("characterName")]
+            public string CharacterName { get; set; }
+
+            [XmlAttribute("corporationID")]
+            public long CorporationId { get; set; }
+
+            [XmlAttribute("corporationName")]
+            public string CorporationName { get; set; }
+
+            [XmlAttribute("allianceID")]
+            public long AllianceId { get; set; }
+
+            [XmlAttribute("allianceName")]
+            public string AllianceName { get; set; }
+
+            [XmlAttribute("factionID")]
+            public long FactionId { get; set; }
+
+            [XmlAttribute("factionName")]
+            public string FactionName { get; set; }
+
+            [XmlAttribute("damageDone")]
+            public int DamageDone { get; set; }
+
+            [XmlAttribute("finalBlow")]
+            public bool FinalBlow { get; set; }
+
+            [XmlAttribute("securityStatus")]
+            public float SecurityStatus { get; set; }
+
+            [XmlAttribute("weaponTypeID")]
+            public long WeaponTypeId { get; set; }
+        }
+
+        [Serializable]
+        [XmlRoot("row")]
+        public class Item {
+            [XmlAttribute("flag")]
+            public int FLag { get; set; }
+
+            [XmlAttribute("tqyDropped")]
+            public int QtyDropped { get; set; }
+
+            [XmlAttribute("qtyDestroyed")]
+            public int QtyDestroyed { get; set; }
+
+            [XmlAttribute("typeID")]
+            public long TypeId { get; set; }
+
+            [XmlAttribute("singleton")]
+            public int Singleton { get; set; }
+
+            [XmlElement("rowset")]
+            public XmlRowSet<Item> Items { get; set; }
+        }
+
+        [Serializable]
+        [XmlRoot("row")]
+        public class Kill : XmlElement, IXmlSerializable {
             [XmlAttribute("killID")]
             public long KillId { get; set; }
 
@@ -66,7 +125,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
         [Serializable]
         [XmlRoot("victim")]
         public class Victim {
-
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
 
@@ -97,72 +155,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
             [XmlAttribute("damageTaken")]
             public int DamageTaken { get; set; }
         }
-
-        [Serializable]
-        [XmlRoot("row")]
-        public class Attacker {
-
-            [XmlAttribute("characterID")]
-            public long CharacterId { get; set; }
-
-            [XmlAttribute("characterName")]
-            public string CharacterName { get; set; }
-
-            [XmlAttribute("corporationID")]
-            public long CorporationId { get; set; }
-
-            [XmlAttribute("corporationName")]
-            public string CorporationName { get; set; }
-
-            [XmlAttribute("allianceID")]
-            public long AllianceId { get; set; }
-
-            [XmlAttribute("allianceName")]
-            public string AllianceName { get; set; }
-
-            [XmlAttribute("factionID")]
-            public long FactionId { get; set; }
-
-            [XmlAttribute("factionName")]
-            public string FactionName { get; set; }
-
-            [XmlAttribute("damageDone")]
-            public int DamageDone { get; set; }
-
-            [XmlAttribute("finalBlow")]
-            public bool FinalBlow { get; set; }
-
-            [XmlAttribute("securityStatus")]
-            public float SecurityStatus { get; set; }
-
-            [XmlAttribute("weaponTypeID")]
-            public long WeaponTypeId { get; set; }
-
-        }
-
-        [Serializable]
-        [XmlRoot("row")]
-        public class Item {
-
-            [XmlAttribute("flag")]
-            public int FLag { get; set; }
-
-            [XmlAttribute("tqyDropped")]
-            public int QtyDropped { get; set; }
-
-            [XmlAttribute("qtyDestroyed")]
-            public int QtyDestroyed { get; set; }
-
-            [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
-
-            [XmlAttribute("singleton")]
-            public int Singleton { get; set; }
-
-            [XmlElement("rowset")]
-            public XmlRowSet<Item> Items { get; set; }
-
-        }
-
     }
 }

@@ -1,12 +1,11 @@
-﻿using eZet.Eve.EveLib.Entity;
-using eZet.Eve.EveLib.Entity.EveApi;
+﻿using eZet.Eve.EveLib.Entity.EveApi;
+using eZet.Eve.EveLib.Model.EveApi;
+using eZet.Eve.EveLib.Model.EveApi.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
-
     [TestClass]
-    class ApiKey_Tests {
-
+    internal class ApiKey_Tests {
         private const int KeyId = 3120814;
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
@@ -16,12 +15,12 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetApiKeyInfo_NoExceptions() {
-            var res = validKey.GetApiKeyInfo();
+            EveApiResponse<ApiKeyInfo> res = validKey.GetApiKeyInfo();
         }
 
         [TestMethod]
         public void GetCharacterList_NoExceptions() {
-            var res = validKey.GetCharacterList();
+            EveApiResponse<CharacterList> res = validKey.GetCharacterList();
         }
 
         [TestMethod]

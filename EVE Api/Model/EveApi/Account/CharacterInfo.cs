@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Account {
-
     [Serializable]
     [XmlRoot("row", IsNullable = false)]
     public class CharacterInfo {
-
         [XmlAttribute("characterName")]
         public string CharacterName { get; set; }
 
@@ -18,7 +16,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Account {
 
         [XmlAttribute("corporationID")]
         public long CorporationId { get; set; }
- 
     }
-
 }

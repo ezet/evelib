@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MedalList : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Medal> Medals { get; set; }
 
@@ -34,6 +32,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
                 set { CreatedDate = DateTime.ParseExact(value, DateFormat, null); }
             }
         }
-
     }
 }

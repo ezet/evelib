@@ -5,7 +5,6 @@ namespace eZet.Eve.EveLib.Model.EveApi {
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
     public class EveApiError : XmlElement {
-
         [XmlIgnore]
         public DateTime CurrentTime { get; private set; }
 
@@ -31,13 +30,11 @@ namespace eZet.Eve.EveLib.Model.EveApi {
         public int Version { get; set; }
 
         public class ErrorData {
-
             [XmlAttribute("code")]
             public int ErrorCode { get; set; }
 
             [XmlText]
             public string ErrorText { get; set; }
         }
-
     }
 }

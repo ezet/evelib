@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class AssetList : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Asset> Assets { get; set; }
-        
+
         [Serializable]
         [XmlRoot("row")]
         public class Asset {
-
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }
 
@@ -34,13 +31,11 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlElement("rowset")]
             public XmlRowSet<Item> Items { get; set; }
-
         }
 
         [Serializable]
         [XmlRoot("row")]
         public class Item {
-
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }
 
@@ -58,7 +53,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
             [XmlElement("rowset")]
             public XmlRowSet<Item> Items { get; set; }
-
         }
     }
 }

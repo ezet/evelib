@@ -2,15 +2,12 @@
 using eZet.Eve.EveLib.Entity.EveMarketData;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
-
     public class RecentUploads {
-
         [XmlElement("rowset")]
         public XmlRowSet<RecentUploadsEntry> Uploads { get; set; }
 
         [XmlRoot("row")]
         public class RecentUploadsEntry {
-
             [XmlAttribute("upload_type")]
             public UploadType UploadType { get; set; }
 
@@ -23,6 +20,5 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
             [XmlAttribute("updated")]
             public string Updated { get; set; }
         }
-
     }
 }

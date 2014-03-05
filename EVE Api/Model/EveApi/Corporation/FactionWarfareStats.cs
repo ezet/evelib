@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareStats : XmlElement {
-
         [XmlElement("factionID")]
         public long FactionId { get; set; }
 
@@ -45,6 +43,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
 
         [XmlElement("victoryPointsTotal")]
         public int VictoryPointsTotal { get; set; }
-
     }
 }

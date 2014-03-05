@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi {
-
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
     public class EveApiResponse<T> : XmlElement {
-
         [XmlIgnore]
         public DateTime CurrentTime { get; private set; }
 
@@ -30,8 +28,5 @@ namespace eZet.Eve.EveLib.Model.EveApi {
 
         [XmlAttribute("version")]
         public int Version { get; set; }
-
     }
-
-
 }

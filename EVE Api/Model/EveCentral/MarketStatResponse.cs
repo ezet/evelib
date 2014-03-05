@@ -3,19 +3,15 @@ using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveCentral {
-
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class MarketStatResponse : EveCentralResponse {
-
         [XmlArray("marketstat"), XmlArrayItem("type")]
         public Collection<MarketStatItem> Result { get; set; }
-
     }
 
     public class MarketStatItem {
-
         [XmlAttribute("id")]
         public long TypeId { get; set; }
 
@@ -27,11 +23,9 @@ namespace eZet.Eve.EveLib.Model.EveCentral {
 
         [XmlElement("all")]
         public MarketStatOrderData All { get; set; }
-
     }
 
     public class MarketStatOrderData {
-        
         [XmlElement("volume")]
         public long Volume { get; set; }
 

@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MarketOrders : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<MarketOrder> Orders { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class MarketOrder {
-
             [XmlAttribute("orderID")]
             public long OrderId { get; set; }
 
@@ -64,7 +61,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
                 get { return IssuedDate.ToString(DateFormat); }
                 set { IssuedDate = DateTime.ParseExact(value, DateFormat, null); }
             }
-
         }
     }
 }

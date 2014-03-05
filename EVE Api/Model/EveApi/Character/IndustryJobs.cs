@@ -2,18 +2,24 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class IndustryJobs : XmlElement {
-        
+        public enum CompletedStatusType {
+            [XmlEnum("0")] Failed,
+            [XmlEnum("1")] Delivered,
+            [XmlEnum("2")] Aborted,
+            [XmlEnum("3")] GmAborted,
+            [XmlEnum("4")] Unanchored,
+            [XmlEnum("5")] Destroyed
+        }
+
         [XmlElement("rowset")]
         public XmlRowSet<IndustryJob> Jobs { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class IndustryJob {
-            
             [XmlAttribute("jobID")]
             public long JobId { get; set; }
 
@@ -136,22 +142,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
                 get { return PauseProductionTime.ToString(DateFormat); }
                 set { PauseProductionTime = DateTime.ParseExact(value, DateFormat, null); }
             }
-
-        }
-
-        public enum CompletedStatusType {
-            [XmlEnum("0")]
-            Failed,
-            [XmlEnum("1")]
-            Delivered,
-            [XmlEnum("2")]
-            Aborted,
-            [XmlEnum("3")]
-            GmAborted,
-            [XmlEnum("4")]
-            Unanchored,
-            [XmlEnum("5")]
-            Destroyed
         }
     }
 }

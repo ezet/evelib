@@ -4,11 +4,9 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Core {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareStats : XmlElement, IXmlSerializable {
-
         [XmlElement("totals")]
         public FactionWarfareTotals Totals { get; set; }
 
@@ -19,34 +17,24 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
         public XmlRowSet<FactionWarfareEntry> FactionWars { get; set; }
 
 
-        [Serializable]
-        [XmlRoot("totals")]
-        public class FactionWarfareTotals {
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
 
-            [XmlElement("killsYesterday")]
-            public int KillsYesterday { get; set; }
+        public void ReadXml(XmlReader reader) {
+            setRoot(reader);
+            Totals = deserialize(getReader("totals"), new FactionWarfareTotals());
+            Factions = deserializeRowSet(getRowSetReader("factions"), new FactionWarfareEntry());
+            FactionWars = deserializeRowSet(getRowSetReader("factionWars"), new FactionWarfareEntry());
+        }
 
-            [XmlElement("killsLastWeek")]
-            public int KillsLastWeek { get; set; }
-
-            [XmlElement("killsTotal")]
-            public int KillsTotal { get; set; }
-
-            [XmlElement("vicoryPointsYesterday")]
-            public int VictoryPointsYesterday { get; set; }
-
-            [XmlElement("victoryPointsLastWeek")]
-            public int VictoryPointsLastWeek { get; set; }
-
-            [XmlElement("victoryPointsTotal")]
-            public int VictoryPointsTotal { get; set; }
-
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
         }
 
         [Serializable]
         [XmlRoot("row")]
         public class FactionWarfareEntry {
-
             [XmlAttribute("factionID")]
             public long FactionId { get; set; }
 
@@ -84,21 +72,26 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
             public string AgainstName { get; set; }
         }
 
-        public XmlSchema GetSchema() {
-            throw new NotImplementedException();
-        }
+        [Serializable]
+        [XmlRoot("totals")]
+        public class FactionWarfareTotals {
+            [XmlElement("killsYesterday")]
+            public int KillsYesterday { get; set; }
 
-        public void ReadXml(XmlReader reader) {
-            setRoot(reader);
-            Totals = deserialize(getReader("totals"), new FactionWarfareTotals());
-            Factions = deserializeRowSet(getRowSetReader("factions"), new FactionWarfareEntry());
-            FactionWars = deserializeRowSet(getRowSetReader("factionWars"), new FactionWarfareEntry());
-        }
+            [XmlElement("killsLastWeek")]
+            public int KillsLastWeek { get; set; }
 
-        public void WriteXml(XmlWriter writer) {
-            throw new NotImplementedException();
+            [XmlElement("killsTotal")]
+            public int KillsTotal { get; set; }
+
+            [XmlElement("vicoryPointsYesterday")]
+            public int VictoryPointsYesterday { get; set; }
+
+            [XmlElement("victoryPointsLastWeek")]
+            public int VictoryPointsLastWeek { get; set; }
+
+            [XmlElement("victoryPointsTotal")]
+            public int VictoryPointsTotal { get; set; }
         }
     }
-
-
 }

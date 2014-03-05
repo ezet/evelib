@@ -1,14 +1,14 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterSheet : XmlElement, IXmlSerializable {
-
         [XmlElement("characterID")]
         public long CharacterId { get; set; }
 
@@ -122,10 +122,9 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
+    [DebuggerStepThrough]
     [XmlRoot("attributeEnhancers")]
     public class Implants {
-
         [XmlElement("memoryBonus")]
         public Implant Memory { get; set; }
 
@@ -140,31 +139,27 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
         [XmlElement("charismaBonus")]
         public Implant Charisma { get; set; }
-
     }
 
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [DebuggerStepThrough]
+    [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     public class Implant {
-
         [XmlElement("augmentatorName")]
         public string Name { get; set; }
 
         [XmlElement("augmentatorValue")]
         public int Value { get; set; }
-
     }
 
 
     [Serializable]
-    [System.Diagnostics.DebuggerStepThroughAttribute]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [DebuggerStepThrough]
+    [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     public class Attributes {
-
         [XmlElement("intelligence")]
         public int Intelligence { get; set; }
 
@@ -179,14 +174,12 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
         [XmlElement("willlpower")]
         public int Willpower { get; set; }
-
     }
 
 
     [Serializable]
     [XmlRoot("row")]
     public class Skill {
-
         [XmlAttribute("typeID")]
         public long TypeId { get; set; }
 
@@ -198,39 +191,32 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
 
         [XmlAttribute("published")]
         public int Published { get; set; }
-
     }
 
     [Serializable]
     [XmlRoot("row")]
     public class Certificate {
-
         [XmlAttribute("certificateID")]
         public long CertificateId { get; set; }
-
     }
 
     [Serializable]
     [XmlRoot("row")]
     public class Role {
-
         [XmlAttribute("roleID")]
         public long RoleId { get; set; }
 
         [XmlAttribute("roleName")]
         public string RoleName { get; set; }
-
     }
 
     [Serializable]
     [XmlRoot("row")]
     public class Title {
-
         [XmlAttribute("titleID")]
         public long TitleId { get; set; }
 
         [XmlAttribute("titleName")]
         public string TitleName { get; set; }
     }
-
 }

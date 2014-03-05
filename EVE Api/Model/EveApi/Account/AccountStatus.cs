@@ -2,11 +2,9 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Account {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class AccountStatus : XmlElement {
-
         [XmlIgnore]
         public DateTime PaidUntil { get; private set; }
 
@@ -30,7 +28,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Account {
 
         [XmlElement("logonMinutes")]
         public int LogonMinutes { get; set; }
-
-
     }
 }

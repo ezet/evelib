@@ -1,4 +1,5 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
+
 <eveapi version="2">
   <currentTime>2010-06-17 18:15:01</currentTime>
   <result>
@@ -8,7 +9,8 @@
                 corporationName="Center for Advanced Studies" allianceID="0"
                 allianceName="" factionID="0" factionName=""
                 damageTaken="6378" shipTypeID="12003" />
-        <rowset name="attackers" columns="characterID,characterName,corporationID,corporationName,allianceID,allianceName,
+        <rowset name="attackers"
+                columns="characterID,characterName,corporationID,corporationName,allianceID,allianceName,
                 factionID,factionName,securityStatus,damageDone,finalBlow,weaponTypeID,shipTypeID">
           <row characterID="0" characterName="" corporationID="1000127" corporationName="Guristas"
                allianceID="0" allianceName="" factionID="0" factionName="" securityStatus="0"
@@ -24,7 +26,8 @@
                 corporationName="Center for Advanced Studies" allianceID="0"
                 allianceName="" factionID="0" factionName=""
                 damageTaken="455" shipTypeID="606" />
-        <rowset name="attackers" columns="characterID,characterName,corporationID,corporationName,allianceID,allianceName,
+        <rowset name="attackers"
+                columns="characterID,characterName,corporationID,corporationName,allianceID,allianceName,
                 factionID,factionName,securityStatus,damageDone,finalBlow,weaponTypeID,shipTypeID">
           <row characterID="0" characterName="" corporationID="1000127" corporationName="Guristas"
                allianceID="0" allianceName="" factionID="0" factionName="" securityStatus="0"

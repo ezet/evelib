@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContactList : XmlElement, IXmlSerializable {
-
         [XmlElement("rowset")]
         public XmlRowSet<Contact> CorporationContacts { get; set; }
 
@@ -16,10 +15,23 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
         public XmlRowSet<Contact> AllianceContacts { get; set; }
 
 
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader) {
+            setRoot(reader);
+            CorporationContacts = deserializeRowSet(getRowSetReader("corporateContactList"), new Contact());
+            AllianceContacts = deserializeRowSet(getRowSetReader("allianceContactList"), new Contact());
+        }
+
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
+        }
+
         [Serializable]
         [XmlRoot("row")]
         public class Contact {
-            
             [XmlAttribute("contactID")]
             public long ContactId { get; set; }
 
@@ -35,23 +47,11 @@ namespace eZet.Eve.EveLib.Model.EveApi.Corporation {
             [XmlAttribute("inWatchlist")]
             public string InWatchlistAsString {
                 get { return InWatchlist.ToString(); }
-                set { InWatchlist = (value.ToLower() == "true"); }
+                set {
+                    Contract.Requires(value != null);
+                    InWatchlist = (value.ToLower() == "true");
+                }
             }
-
-        }
-
-        public XmlSchema GetSchema() {
-            throw new NotImplementedException();
-        }
-
-        public void ReadXml(XmlReader reader) {
-            setRoot(reader);
-            CorporationContacts = deserializeRowSet(getRowSetReader("corporateContactList"), new Contact());
-            AllianceContacts = deserializeRowSet(getRowSetReader("allianceContactList"), new Contact());
-        }
-
-        public void WriteXml(XmlWriter writer) {
-            throw new NotImplementedException();
         }
     }
 }

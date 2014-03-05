@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveMarketData {
-
     [Serializable]
     [XmlType(AnonymousType = true)]
     public class StationRank {
-
         [XmlElement("rowset")]
         public XmlRowSet<StationRankEntry> Stations { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class StationRankEntry {
-
             [XmlAttribute("stationID")]
             public long StationId { get; set; }
 
@@ -43,7 +40,6 @@ namespace eZet.Eve.EveLib.Model.EveMarketData {
 
             [XmlAttribute("priceAvgBuy")]
             public decimal AvgBuyPrice { get; set; }
-
         }
     }
 }

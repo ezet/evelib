@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Core {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CallList : XmlElement, IXmlSerializable {
-
         [XmlElement("rowset")]
         public XmlRowSet<CallGroup> CallGroups { get; set; }
 
@@ -15,24 +15,23 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
         public XmlRowSet<Call> Calls { get; set; }
 
 
-        [Serializable]
-        [XmlRoot("row")]
-        public class CallGroup {
-            
-            [XmlAttribute("groupID")]
-            public long GroupId { get; set; }
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
 
-            [XmlAttribute("name")]
-            public string GroupName { get; set; }
+        public void ReadXml(XmlReader reader) {
+            setRoot(reader);
+            CallGroups = deserializeRowSet(getRowSetReader("callGroups"), new CallGroup());
+            Calls = deserializeRowSet(getRowSetReader("calls"), new Call());
+        }
 
-            [XmlAttribute("description")]
-            public string Description { get; set; }
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
         }
 
         [Serializable]
         [XmlRoot("row")]
         public class Call {
-
             [XmlAttribute("accessMask")]
             public int AccessMask { get; set; }
 
@@ -47,22 +46,19 @@ namespace eZet.Eve.EveLib.Model.EveApi.Core {
 
             [XmlAttribute("description")]
             public string Description { get; set; }
-            
         }
 
-        public System.Xml.Schema.XmlSchema GetSchema() {
-            throw new NotImplementedException();
-        }
+        [Serializable]
+        [XmlRoot("row")]
+        public class CallGroup {
+            [XmlAttribute("groupID")]
+            public long GroupId { get; set; }
 
-        public void ReadXml(System.Xml.XmlReader reader) {
-            setRoot(reader);
-            CallGroups = deserializeRowSet(getRowSetReader("callGroups"), new CallGroup());
-            Calls = deserializeRowSet(getRowSetReader("calls"), new Call());
-        }
+            [XmlAttribute("name")]
+            public string GroupName { get; set; }
 
-        public void WriteXml(System.Xml.XmlWriter writer) {
-            throw new NotImplementedException();
+            [XmlAttribute("description")]
+            public string Description { get; set; }
         }
     }
-
 }

@@ -2,19 +2,16 @@
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CalendarEventAttendees : XmlElement {
-
         [XmlElement("rowset")]
         public XmlRowSet<Attendee> Attendees { get; set; }
 
-            
+
         [Serializable]
         [XmlRoot("row")]
-            public class Attendee {
-            
+        public class Attendee {
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
 
@@ -24,6 +21,5 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
             [XmlAttribute("response")]
             public EventResponse Response { get; set; }
         }
-
     }
 }

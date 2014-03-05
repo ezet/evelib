@@ -4,16 +4,27 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.Eve.EveLib.Model.EveApi.Character {
-
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class StandingsList : XmlElement {
-
         [XmlElement("characterNPCStandings")]
         public StandingType CharacterStandings { get; set; }
 
-        public class StandingType : XmlElement, IXmlSerializable {
 
+        [Serializable]
+        [XmlRoot("row")]
+        public class StandingEntry {
+            [XmlAttribute("fromID")]
+            public long FromId { get; set; }
+
+            [XmlAttribute("fromName")]
+            public string FromName { get; set; }
+
+            [XmlAttribute("standing")]
+            public float Standing { get; set; }
+        }
+
+        public class StandingType : XmlElement, IXmlSerializable {
             [XmlElement("rowset")]
             public XmlRowSet<StandingEntry> Agents { get; set; }
 
@@ -37,21 +48,6 @@ namespace eZet.Eve.EveLib.Model.EveApi.Character {
             public void WriteXml(XmlWriter writer) {
                 throw new NotImplementedException();
             }
-        }
-
-
-        [Serializable]
-        [XmlRoot("row")]
-        public class StandingEntry {
-
-            [XmlAttribute("fromID")]
-            public long FromId { get; set; }
-
-            [XmlAttribute("fromName")]
-            public string FromName { get; set; }
-
-            [XmlAttribute("standing")]
-            public float Standing { get; set; }
         }
     }
 }
