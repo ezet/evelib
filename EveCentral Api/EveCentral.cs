@@ -58,8 +58,7 @@ namespace eZet.EveLib.EveCentralApi {
             Contract.Requires(endSystem != null, "End system cannot be null.");
             string relUri = "/api/quicklook/onpath";
             relUri += "/from/" + startSystem + "/to/" + endSystem + "/fortype/" + typeId;
-            string queryString = "";
-            queryString = options.HourQuery("sethours");
+            string queryString = options.HourQuery("sethours");
             queryString += options.MinQuantityQuery("setminQ");
             return request<QuicklookResponse>(relUri, queryString);
         }

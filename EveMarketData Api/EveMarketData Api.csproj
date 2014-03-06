@@ -39,8 +39,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +53,7 @@
     <Compile Include="JsonConverter\ItemOrdersJsonConverter.cs" />
     <Compile Include="JsonConverter\ItemPricesJsonConverter.cs" />
     <Compile Include="JsonConverter\RowCollectionConverter.cs" />
+    <Compile Include="JsonSerializer.cs" />
     <Compile Include="Model\EveMarketDataResponse.cs" />
     <Compile Include="Model\ItemHistory.cs" />
     <Compile Include="Model\ItemOrders.cs" />
@@ -75,6 +74,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

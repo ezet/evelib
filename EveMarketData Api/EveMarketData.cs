@@ -51,7 +51,7 @@ namespace eZet.EveLib.EveMarketDataApi {
             string groups = String.Join(",", options.ItemGroups);
             string regions = String.Join(",", options.Regions);
             string date = options.GetAgeLimit();
-            string postString = generatePostString("char_name", Name, "type_ids", items, "region_ids", regions,
+            string postString = generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions,
                 "marketgroup_ids", groups,
                 "limit", options.RowLimit, "upload_type", options.UploadTypeToString(type), "date", date);
             return request<RecentUploads>(relUri, postString);
@@ -78,7 +78,7 @@ namespace eZet.EveLib.EveMarketDataApi {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            string postString = generatePostString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
+            string postString = generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
                 "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type),
                 "minmax", minmax.ToString().ToLower());
@@ -104,7 +104,7 @@ namespace eZet.EveLib.EveMarketDataApi {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            string postString = generatePostString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
+            string postString = generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
                 "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type));
             return request<ItemOrders>(relUri, postString);
@@ -122,7 +122,7 @@ namespace eZet.EveLib.EveMarketDataApi {
             string relUri = "/api/item_history2." + Format.ToString().ToLower();
             string items = String.Join(",", options.Items);
             string regions = String.Join(",", options.Regions);
-            string postString = generatePostString("char_name", Name, "type_ids", items, "region_ids", regions);
+            string postString = generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions);
             return request<ItemHistory>(relUri, postString);
         }
 
@@ -141,9 +141,25 @@ namespace eZet.EveLib.EveMarketDataApi {
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
             string days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
-            string postString = generatePostString("char_name", Name, "region_ids", regions, "solarsystem_ids",
+            string postString = generateQueryString("char_name", Name, "region_ids", regions, "solarsystem_ids",
                 solarsystems, "station_ids", stations, "days", days);
             return request<StationRank>(relUri, postString);
+        }
+        
+        /// <summary>
+        /// Returns a url to a list of ingame item links. Reqiured use of the ingame browser.
+        /// </summary>
+        /// <param name="options">Valid options: Items, ItemGroups</param>
+        /// <returns></returns>
+        public Uri GetScannerUri(EveMarketDataOptions options) {
+            // TODO Add support for return url and loop
+            Contract.Requires(options != null, "Options cannot be null.");
+            Contract.Requires(options.Items.Count != 0 || options.ItemGroups.Count != 0);
+            string relUri = "/update_market.php?step=Custom&";
+            string items = String.Join(",", options.Items);
+            string groups = String.Join(",", options.ItemGroups);
+            var query = generateQueryString("type_id", items, "marketgroup_id", groups);
+            return new Uri("http://eve-marketdata.com" + relUri + query);
         }
 
         private EveMarketDataResponse<T> request<T>(string relUri, string queryString) {
@@ -151,7 +167,7 @@ namespace eZet.EveLib.EveMarketDataApi {
             return RequestHandler.Request<EveMarketDataResponse<T>>(uri);
         }
 
-        private string generatePostString(params object[] args) {
+        private string generateQueryString(params object[] args) {
             Contract.Requires(args != null);
             Contract.Requires(args.Length%2 == 0);
             string postString = "";

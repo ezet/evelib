@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineApi.Util {
         public override T Request<T>(Uri uri) {
             DateTime cachedUntil;
             bool fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
-            string data = "";
+            string data;
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.ContentType = ContentType;
             request.CachePolicy = fromCache
