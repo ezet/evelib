@@ -65,7 +65,7 @@ namespace eZet.EveLib {
             options.Items.Add(34);
             options.Regions.Add(10000002);
             options.AgeSpan = TimeSpan.FromDays(2);
-            var res = api.GetStationRank(options);
+            var res = api.GetRecentUploads(options, UploadType.Orders);
         }
 
         public static EveLib Create() {

@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using eZet.EveLib.EveCentralLib;
+using eZet.EveLib.EveCentralLib.Model;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -12,7 +15,7 @@ namespace eZet.Eve.EveLib.Test {
         private readonly EveCentralOptions validOptions;
 
         public EveCentral_Tests() {
-            api = eZet.EveLib.Create().EveCentral;
+            api = new EveCentral();
             validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
             validOptions.Types.Add(TypeId);
             validOptions.Regions.Add(RegionId);

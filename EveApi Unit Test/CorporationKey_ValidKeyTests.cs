@@ -1,4 +1,8 @@
 ﻿using eZet.EveLib.Common.Exception;
+using eZet.EveLib.EveOnlineLib;
+using eZet.EveLib.EveOnlineLib.Model;
+using eZet.EveLib.EveOnlineLib.Model.Character;
+using eZet.EveLib.EveOnlineLib.Model.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
@@ -29,13 +33,13 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetContactList_ValidRequest_HasResult() {
-            EveApiResponse<Model.EveApi.Corporation.ContactList> res = validKey.Corporation.GetContactList();
+            var res = validKey.Corporation.GetContactList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContainerLog_ValidRequest_HasResult() {
-            EveApiResponse<ContainerLog> res = validKey.Corporation.GetContainerLog();
+            var res = validKey.Corporation.GetContainerLog();
             Assert.IsNotNull(res.Result);
         }
 
@@ -61,7 +65,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetCorporationSheet_ValidRequest_HasResult() {
-            EveApiResponse<CorporationSheet> res = validKey.Corporation.GetCorporationSheet();
+            var res = validKey.Corporation.GetCorporationSheet();
             Assert.IsNotNull(res.Result);
         }
 
@@ -101,7 +105,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetMedals_ValidRequest_HasResult() {
-            EveApiResponse<Model.EveApi.Corporation.MedalList> res = validKey.Corporation.GetMedals();
+            var res = validKey.Corporation.GetMedals();
             Assert.IsNotNull(res.Result);
         }
 
@@ -151,7 +155,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetStandings_ValidRequest_HasResult() {
-            EveApiResponse<Model.EveApi.Corporation.StandingsList> res = validKey.Corporation.GetStandings();
+            var res = validKey.Corporation.GetStandings();
             Assert.IsNotNull(res.Result);
         }
 

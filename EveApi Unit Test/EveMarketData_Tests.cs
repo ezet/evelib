@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using eZet.EveLib.EveMarketDataLib;
+using eZet.EveLib.EveMarketDataLib.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
@@ -12,7 +15,7 @@ namespace eZet.Eve.EveLib.Test {
         private readonly EveMarketDataOptions validOptions;
 
         public EveMarketData_Tests() {
-            api = eZet.EveLib.Create().EveMarketData;
+            api = new EveMarketData();
             validOptions = new EveMarketDataOptions();
             validOptions.Items.Add(TypeId);
             validOptions.Regions.Add(RegionId);

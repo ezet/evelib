@@ -172,6 +172,10 @@
       <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
       <Name>EveOnline Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EVE Api\Eve Library Common.csproj">
+      <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
+      <Name>Eve Library Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eve Central Library\EveCentral Library.csproj">
       <Project>{fcd48e90-6605-4bc1-b761-0b37df390990}</Project>
       <Name>EveCentral Library</Name>

@@ -1,4 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using eZet.EveLib.EveOnlineLib;
+using eZet.EveLib.EveOnlineLib.Model;
+using eZet.EveLib.EveOnlineLib.Model.Map;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
     /// <summary>
@@ -6,30 +10,30 @@ namespace eZet.Eve.EveLib.Test {
     /// </summary>
     [TestClass]
     public class Map_Tests {
-        private readonly eZet.EveLib api = eZet.EveLib.Create();
+        private readonly Map api = new Map();
 
 
         [TestMethod]
         public void TestFacWarSystems_ValidRequest_HasResult() {
-            EveApiResponse<FactionWarfareSystems> res = api.Map.GetFactionWarSystems();
+            EveApiResponse<FactionWarfareSystems> res = api.GetFactionWarSystems();
             Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestJumps_ValidRequest_HasResult() {
-            EveApiResponse<Jumps> res = api.Map.GetJumps();
+            EveApiResponse<Jumps> res = api.GetJumps();
             Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestKills_ValidRequest_HasResult() {
-            EveApiResponse<Kills> res = api.Map.GetKills();
+            EveApiResponse<Kills> res = api.GetKills();
             Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestSovereignty_ValidRequest_HasResult() {
-            EveApiResponse<Sovereignty> res = api.Map.GetSovereignty();
+            EveApiResponse<Sovereignty> res = api.GetSovereignty();
             Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 
@@ -39,7 +43,7 @@ namespace eZet.Eve.EveLib.Test {
         [TestMethod]
         public void TestSovereigntyStatus_ValidRequest_HasResult() {
             Assert.Fail("Disabled by CCP.");
-            //var res = api.Map.GetSovereigntyStatus();
+            //var res = api.GetSovereigntyStatus();
         }
     }
 }
