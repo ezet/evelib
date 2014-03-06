@@ -19,21 +19,12 @@ under the License.
  *
 */
 
-using System;
-using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveCentralApi;
-using eZet.EveLib.EveMarketDataApi;
-using eZet.EveLib.EveMarketDataApi.Model;
-using eZet.EveLib.EveOnlineApi;
-
-namespace eZet.EveLib {
+namespace eZet.EveLib.EveOnlineApi {
     public class EveLib {
-        private EveLib(Misc misc, Map map, Image image, EveCentral evec, EveMarketData emd) {
+        private EveLib(Misc misc, Map map, Image image) {
             Misc = misc;
             Map = map;
             Image = image;
-            EveCentral = evec;
-            EveMarketData = emd;
         }
 
         /// <summary>
@@ -51,25 +42,8 @@ namespace eZet.EveLib {
         /// </summary>
         public Image Image { get; private set; }
 
-        /// <summary>
-        ///     Gets the EveCentral for this instance
-        /// </summary>
-        public EveCentral EveCentral { get; private set; }
-
-        public EveMarketData EveMarketData { get; private set; }
-
-        public static void Main(string[] args) {
-            EveMarketData api = Create().EveMarketData;
-            api.RequestHandler.Serializer = new JsonSerializer();
-            var options = new EveMarketDataOptions();
-            options.Items.Add(34);
-            options.Regions.Add(10000002);
-            options.AgeSpan = TimeSpan.FromDays(2);
-            EveMarketDataResponse<RecentUploads> res = api.GetRecentUploads(options, UploadType.Orders);
-        }
-
         public static EveLib Create() {
-            return new EveLib(new Misc(), new Map(), new Image(), new EveCentral(), new EveMarketData());
+            return new EveLib(new Misc(), new Map(), new Image());
         }
 
         /// <summary>

@@ -4,13 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A4DB2055-77AF-44A6-BD23-FC7CA9AAE79C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{185E2271-BBA1-4071-AC46-BF47153BDB7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib</RootNamespace>
-    <AssemblyName>EveLib</AssemblyName>
+    <RootNamespace>eZet.EveLib.EveMarketDataApi</RootNamespace>
+    <AssemblyName>EveMarketDataApi</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,12 +31,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,28 +46,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EveLib.cs" />
+    <Compile Include="EveMarketData.cs" />
+    <Compile Include="EveMarketDataOptions.cs" />
+    <Compile Include="JsonConverter\RecentUploadsJsonConverter.cs" />
+    <Compile Include="JsonConverter\RowSetCollectionJsonConverter.cs" />
+    <Compile Include="JsonConverter\StationRankJsonConverter.cs" />
+    <Compile Include="JsonConverter\ItemHistoryJsonConverter.cs" />
+    <Compile Include="JsonConverter\ItemOrdersJsonConverter.cs" />
+    <Compile Include="JsonConverter\ItemPricesJsonConverter.cs" />
+    <Compile Include="JsonConverter\RowCollectionConverter.cs" />
+    <Compile Include="Model\EveMarketDataResponse.cs" />
+    <Compile Include="Model\ItemHistory.cs" />
+    <Compile Include="Model\ItemOrders.cs" />
+    <Compile Include="Model\ItemPrices.cs" />
+    <Compile Include="Model\RecentUploads.cs" />
+    <Compile Include="Model\RowCollection.cs" />
+    <Compile Include="Model\StationRank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eve Library Core\Eve Library Core.csproj">
       <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
       <Name>Eve Library Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EveCentral Api\EveCentral Api.csproj">
-      <Project>{fcd48e90-6605-4bc1-b761-0b37df390990}</Project>
-      <Name>EveCentral Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveMarketData Api\EveMarketData Api.csproj">
-      <Project>{185e2271-bba1-4071-ac46-bf47153bdb7a}</Project>
-      <Name>EveMarketData Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveOnline Api\EveOnline Api.csproj">
-      <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
-      <Name>EveOnline Api</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
