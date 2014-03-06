@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Common.Util {
     /// <summary>
-    /// JSON serializer
+    ///     JSON serializer
     /// </summary>
     public sealed class JsonSerializer : ISerializer {
         /// <summary>

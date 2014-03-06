@@ -21,7 +21,6 @@ namespace eZet.EveLib.Common.Util {
             catch (InvalidOperationException e) {
                 throw new InvalidRequestException("A request caused an InvalidOperationException.", e);
             }
-
         }
     }
 }

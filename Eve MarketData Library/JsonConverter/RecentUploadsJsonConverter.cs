@@ -9,11 +9,13 @@ namespace eZet.EveLib.EveMarketDataLib.JsonConverter {
             throw new NotImplementedException();
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer) {
             var result = new RecentUploads();
-            var json = JObject.Load(reader);
+            JObject json = JObject.Load(reader);
             serializer.Converters.Add(new RowSetCollectionJsonConverter<RecentUploads.RecentUploadsEntry>());
-            result.Uploads = serializer.Deserialize<RowCollection<RecentUploads.RecentUploadsEntry>>(json["rowset"].CreateReader());
+            result.Uploads =
+                serializer.Deserialize<RowCollection<RecentUploads.RecentUploadsEntry>>(json["rowset"].CreateReader());
 
             return result;
         }

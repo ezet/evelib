@@ -4,11 +4,9 @@ using eZet.EveLib.EveMarketDataLib.JsonConverter;
 using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveMarketDataLib.Model {
-
     [DataContract]
-    [JsonConverter(typeof(ItemPricesJsonConverter))]
+    [JsonConverter(typeof (ItemPricesJsonConverter))]
     public class ItemPrices {
-
         [XmlElement("rowset")]
         [DataMember(Name = "result")]
         public RowCollection<ItemPriceEntry> Prices { get; set; }

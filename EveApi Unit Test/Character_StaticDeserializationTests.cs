@@ -3,10 +3,10 @@ using eZet.Eve.EveLib.Test.Mocks;
 using eZet.EveLib.Common.Util;
 using eZet.EveLib.EveOnlineLib;
 using eZet.EveLib.EveOnlineLib.Model;
-using eZet.EveLib.EveOnlineLib.Model.Account;
 using eZet.EveLib.EveOnlineLib.Model.Character;
+using eZet.EveLib.EveOnlineLib.Model.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CharacterInfo = eZet.EveLib.EveOnlineLib.Model.Core.CharacterInfo;
+using FactionWarfareStats = eZet.EveLib.EveOnlineLib.Model.Character.FactionWarfareStats;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]

@@ -15,24 +15,24 @@ namespace eZet.EveLib.EveMarketDataLib {
     ///     Only XML format is currently supported. The JSON api from marketdata is inconsistent.
     /// </summary>
     public class EveMarketData {
-        public EveMarketData() {
-            Format = Format.Xml;
+        public EveMarketData()
+            : this(Format.Json) {
+        }
+
+        public EveMarketData(Format format) {
+            Format = format;
             Name = "demo";
             BaseUri = new Uri("http://api.eve-marketdata.com");
-            RequestHandler = new RequestHandler(new XmlSerializerWrapper());
+            setRequester(format);
         }
 
         public Uri BaseUri { get; set; }
 
+        public Format Format { get; private set; }
+
         public string Name { get; set; }
 
-        public Format Format { get; set; }
-
         public IRequestHandler RequestHandler { get; set; }
-
-        public void SetMode(Format format) {
-            Format = format;
-        }
 
         /// <summary>
         ///     Returns a list of any orders that were recently updated.
@@ -140,7 +140,7 @@ namespace eZet.EveLib.EveMarketDataLib {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            string days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
+            string days = "" + (int)options.AgeSpan.GetValueOrDefault().TotalDays;
             string postString = generatePostString("char_name", Name, "region_ids", regions, "solarsystem_ids",
                 solarsystems, "station_ids", stations, "days", days);
             return request<StationRank>(relUri, postString);
@@ -153,7 +153,7 @@ namespace eZet.EveLib.EveMarketDataLib {
 
         private string generatePostString(params object[] args) {
             Contract.Requires(args != null);
-            Contract.Requires(args.Length%2 == 0);
+            Contract.Requires(args.Length % 2 == 0);
             string postString = "";
             for (int i = 0; i < args.Length; i += 2) {
                 if (args[i + 1] != null && (args[i + 1]).ToString() != "")
@@ -161,5 +161,12 @@ namespace eZet.EveLib.EveMarketDataLib {
             }
             return postString;
         }
+
+        private void setRequester(Format format) {
+            if (format == Format.Xml)
+                RequestHandler = new RequestHandler(new XmlSerializerWrapper());
+            else RequestHandler = new RequestHandler(new JsonSerializer());
+        }
     }
+
 }

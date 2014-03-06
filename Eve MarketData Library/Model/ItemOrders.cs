@@ -4,11 +4,9 @@ using eZet.EveLib.EveMarketDataLib.JsonConverter;
 using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveMarketDataLib.Model {
-
-    [JsonConverter(typeof(ItemOrderJsonConverter))]
+    [JsonConverter(typeof (ItemOrderJsonConverter))]
     [DataContract]
     public class ItemOrders {
-
         [XmlElement("rowset")]
         [DataMember(Name = "result")]
         public RowCollection<ItemOrderEntry> Orders { get; set; }

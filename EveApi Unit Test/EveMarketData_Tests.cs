@@ -95,12 +95,12 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Exception), AllowDerivedTypes = true)]
+        [ExpectedException(typeof (Exception), AllowDerivedTypes = true)]
         public void GetItemHistory_InvalidArgument_ContractException() {
             EveMarketDataResponse<ItemHistory> res = api.GetItemHistory(invalidOptions);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetStationRank_ValidRequest_ValidResponse() {
             EveMarketDataResponse<StationRank> res = api.GetStationRank(validOptions);
             StationRank.StationRankEntry entry = res.Result.Stations.First();
@@ -111,10 +111,9 @@ namespace eZet.Eve.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Exception), AllowDerivedTypes = true)]
+        [ExpectedException(typeof (Exception), AllowDerivedTypes = true)]
         public void GetStationRank_InvalidArgument_ContractException() {
             EveMarketDataResponse<StationRank> res = api.GetStationRank(invalidOptions);
         }
-
     }
 }

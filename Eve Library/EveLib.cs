@@ -23,6 +23,7 @@ using System;
 using eZet.EveLib.Common.Util;
 using eZet.EveLib.EveCentralLib;
 using eZet.EveLib.EveMarketDataLib;
+using eZet.EveLib.EveMarketDataLib.Model;
 using eZet.EveLib.EveOnlineLib;
 
 namespace eZet.EveLib {
@@ -65,7 +66,7 @@ namespace eZet.EveLib {
             options.Items.Add(34);
             options.Regions.Add(10000002);
             options.AgeSpan = TimeSpan.FromDays(2);
-            var res = api.GetRecentUploads(options, UploadType.Orders);
+            EveMarketDataResponse<RecentUploads> res = api.GetRecentUploads(options, UploadType.Orders);
         }
 
         public static EveLib Create() {

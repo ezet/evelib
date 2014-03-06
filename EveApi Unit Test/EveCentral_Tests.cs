@@ -11,7 +11,6 @@ namespace eZet.Eve.EveLib.Test {
         private const int HourLimit = 5;
         private const int MinQty = 5;
         private readonly EveCentral api;
-        private readonly EveCentralOptions invalidOptions;
         private readonly EveCentralOptions validOptions;
 
         public EveCentral_Tests() {
@@ -19,7 +18,6 @@ namespace eZet.Eve.EveLib.Test {
             validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
             validOptions.Types.Add(TypeId);
             validOptions.Regions.Add(RegionId);
-            invalidOptions = new EveCentralOptions();
         }
 
         [TestMethod]
@@ -34,12 +32,6 @@ namespace eZet.Eve.EveLib.Test {
             Assert.AreNotEqual(0, entry.All.StdDev);
             Assert.AreNotEqual(0, entry.All.Median);
             Assert.AreNotEqual(0, entry.All.Percentile);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(System.Exception), AllowDerivedTypes = true)]
-        public void GetMarketStat_InvalidArgument_ContractException() {
-            MarketStatResponse res = api.GetMarketStat(invalidOptions);
         }
 
         [TestMethod]

@@ -14,7 +14,7 @@ namespace eZet.EveLib.EveOnlineLib {
         /// <summary>
         ///     The base url for entity requests
         /// </summary>
-        protected Uri BaseUri { get; set; }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         ///     The requester this entity uses to perform requests.

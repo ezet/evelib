@@ -4,11 +4,9 @@ using eZet.EveLib.EveMarketDataLib.JsonConverter;
 using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveMarketDataLib.Model {
-
     [DataContract]
-    [JsonConverter(typeof(StationRankJsonConverter))]
+    [JsonConverter(typeof (StationRankJsonConverter))]
     public class StationRank {
-
         [DataMember(Name = "result")]
         [XmlElement("rowset")]
         public RowCollection<StationRankEntry> Stations { get; set; }
@@ -16,7 +14,6 @@ namespace eZet.EveLib.EveMarketDataLib.Model {
         [DataContract]
         [XmlRoot("row")]
         public class StationRankEntry {
-
             [DataMember(Name = "stationID")]
             [XmlAttribute("stationID")]
             public long StationId { get; set; }

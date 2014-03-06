@@ -4,11 +4,9 @@ using eZet.EveLib.EveMarketDataLib.JsonConverter;
 using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveMarketDataLib.Model {
-
     [DataContract]
-    [JsonConverter(typeof(RecentUploadsJsonConverter))]
+    [JsonConverter(typeof (RecentUploadsJsonConverter))]
     public class RecentUploads {
-
         [DataMember(Name = "rowset")]
         [XmlElement("rowset")]
         public RowCollection<RecentUploadsEntry> Uploads { get; set; }

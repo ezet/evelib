@@ -10,7 +10,7 @@ namespace eZet.EveLib.EveMarketDataLib.Model {
         public string CurrentTime { get; set; }
 
         [XmlAttribute("version")]
-        [DataMember(Name= "version")]
+        [DataMember(Name = "version")]
         public int Version { get; set; }
 
         [XmlElement("result")]

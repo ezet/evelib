@@ -6,9 +6,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace eZet.EveLib.EveMarketDataLib {
-
     [DataContract]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof (StringEnumConverter))]
     public enum UploadType {
         [XmlEnum("o"), EnumMember(Value = "o")] Orders,
         [XmlEnum("h"), EnumMember(Value = "h")] History,

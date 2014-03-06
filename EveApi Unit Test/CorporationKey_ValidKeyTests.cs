@@ -4,6 +4,9 @@ using eZet.EveLib.EveOnlineLib.Model;
 using eZet.EveLib.EveOnlineLib.Model.Character;
 using eZet.EveLib.EveOnlineLib.Model.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ContactList = eZet.EveLib.EveOnlineLib.Model.Corporation.ContactList;
+using MedalList = eZet.EveLib.EveOnlineLib.Model.Corporation.MedalList;
+using StandingsList = eZet.EveLib.EveOnlineLib.Model.Corporation.StandingsList;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -33,13 +36,13 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetContactList_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetContactList();
+            EveApiResponse<ContactList> res = validKey.Corporation.GetContactList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContainerLog_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetContainerLog();
+            EveApiResponse<ContainerLog> res = validKey.Corporation.GetContainerLog();
             Assert.IsNotNull(res.Result);
         }
 
@@ -65,7 +68,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetCorporationSheet_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetCorporationSheet();
+            EveApiResponse<CorporationSheet> res = validKey.Corporation.GetCorporationSheet();
             Assert.IsNotNull(res.Result);
         }
 
@@ -105,7 +108,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetMedals_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetMedals();
+            EveApiResponse<MedalList> res = validKey.Corporation.GetMedals();
             Assert.IsNotNull(res.Result);
         }
 
@@ -155,7 +158,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetStandings_ValidRequest_HasResult() {
-            var res = validKey.Corporation.GetStandings();
+            EveApiResponse<StandingsList> res = validKey.Corporation.GetStandings();
             Assert.IsNotNull(res.Result);
         }
 

@@ -5,9 +5,8 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveMarketDataLib.Model {
     [DataContract]
-    [JsonConverter(typeof(ItemHistoryJsonConverter))]
+    [JsonConverter(typeof (ItemHistoryJsonConverter))]
     public class ItemHistory {
-
         [DataMember(Name = "result")]
         [XmlElement("rowset")]
         public RowCollection<ItemHistoryEntry> History { get; set; }

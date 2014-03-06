@@ -5,6 +5,7 @@ using eZet.EveLib.EveOnlineLib.Model;
 using eZet.EveLib.EveOnlineLib.Model.Account;
 using eZet.EveLib.EveOnlineLib.Model.Character;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CharacterInfo = eZet.EveLib.EveOnlineLib.Model.Core.CharacterInfo;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -28,7 +29,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetCharacterInfo_ValidRequest_HasResult() {
-            var res = validKey.Characters[0].GetCharacterInfo();
+            EveApiResponse<CharacterInfo> res = validKey.Characters[0].GetCharacterInfo();
             Assert.IsNotNull(res.Result);
         }
 

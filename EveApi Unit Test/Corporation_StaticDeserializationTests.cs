@@ -6,7 +6,10 @@ using eZet.EveLib.EveOnlineLib.Model;
 using eZet.EveLib.EveOnlineLib.Model.Character;
 using eZet.EveLib.EveOnlineLib.Model.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ContactList = eZet.EveLib.EveOnlineLib.Model.Character.ContactList;
+using ContactList = eZet.EveLib.EveOnlineLib.Model.Corporation.ContactList;
+using FactionWarfareStats = eZet.EveLib.EveOnlineLib.Model.Corporation.FactionWarfareStats;
+using MedalList = eZet.EveLib.EveOnlineLib.Model.Corporation.MedalList;
+using StandingsList = eZet.EveLib.EveOnlineLib.Model.Corporation.StandingsList;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -32,7 +35,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetContactList() {
-            var xml = corp.GetContactList();
+            EveApiResponse<ContactList> xml = corp.GetContactList();
             Assert.AreEqual(797400947, xml.Result.CorporationContacts.First().ContactId);
         }
 
@@ -68,7 +71,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetFactionalWarfareStats() {
-            var xml = corp.GetFactionWarfareStats();
+            EveApiResponse<FactionWarfareStats> xml = corp.GetFactionWarfareStats();
             Assert.AreEqual(500001, xml.Result.FactionId);
         }
 
@@ -98,7 +101,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetMedals() {
-            var xml = corp.GetMedals();
+            EveApiResponse<MedalList> xml = corp.GetMedals();
             Assert.AreEqual(123123, xml.Result.Medals.First().MedalId);
         }
 
@@ -146,7 +149,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetStandings() {
-            var xml = corp.GetStandings();
+            EveApiResponse<StandingsList> xml = corp.GetStandings();
             Assert.AreEqual(3009841, xml.Result.CorporationStandings.Agents.First().FromId);
         }
 

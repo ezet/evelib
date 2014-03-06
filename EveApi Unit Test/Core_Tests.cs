@@ -32,7 +32,7 @@ namespace eZet.Eve.EveLib.Test {
         ///     Not yet implemented by CCP
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException), "Not implemented by CCP yet.")]
+        [ExpectedException(typeof (InvalidRequestException), "Not implemented by CCP yet.")]
         public void GetCharacterAffiliation_ValidRequest_HasResult() {
             EveApiResponse<CharacterAffiliation> xml = api.GetCharacterAffiliation(CharId);
             Assert.IsNotNull(xml.Result.Characters.First(), "Not implemented by CCP yet.");
