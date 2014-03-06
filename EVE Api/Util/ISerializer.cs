@@ -1,4 +1,4 @@
-﻿namespace eZet.Eve.EveLib.Util {
+﻿namespace eZet.EveLib.Common.Util {
     /// <summary>
     ///     Provides serialization methods for Eve API xml and objects.
     /// </summary>

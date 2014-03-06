@@ -1,12 +1,5 @@
-﻿using eZet.Eve.EveLib.Entity.EveApi;
-using eZet.Eve.EveLib.Exception;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Character;
-using eZet.Eve.EveLib.Model.EveApi.Corporation;
+﻿using eZet.EveLib.Common.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ContactList = eZet.Eve.EveLib.Model.EveApi.Corporation.ContactList;
-using MedalList = eZet.Eve.EveLib.Model.EveApi.Corporation.MedalList;
-using StandingsList = eZet.Eve.EveLib.Model.EveApi.Corporation.StandingsList;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -36,7 +29,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetContactList_ValidRequest_HasResult() {
-            EveApiResponse<ContactList> res = validKey.Corporation.GetContactList();
+            EveApiResponse<Model.EveApi.Corporation.ContactList> res = validKey.Corporation.GetContactList();
             Assert.IsNotNull(res.Result);
         }
 
@@ -108,7 +101,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetMedals_ValidRequest_HasResult() {
-            EveApiResponse<MedalList> res = validKey.Corporation.GetMedals();
+            EveApiResponse<Model.EveApi.Corporation.MedalList> res = validKey.Corporation.GetMedals();
             Assert.IsNotNull(res.Result);
         }
 
@@ -158,7 +151,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetStandings_ValidRequest_HasResult() {
-            EveApiResponse<StandingsList> res = validKey.Corporation.GetStandings();
+            EveApiResponse<Model.EveApi.Corporation.StandingsList> res = validKey.Corporation.GetStandings();
             Assert.IsNotNull(res.Result);
         }
 

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using eZet.Eve.EveLib.Exception;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Map;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
     /// <summary>
@@ -10,7 +6,7 @@ namespace eZet.Eve.EveLib.Test {
     /// </summary>
     [TestClass]
     public class Map_Tests {
-        private readonly EveLib api = EveLib.Create();
+        private readonly eZet.EveLib api = eZet.EveLib.Create();
 
 
         [TestMethod]

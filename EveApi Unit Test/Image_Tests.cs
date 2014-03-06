@@ -1,5 +1,4 @@
-﻿using eZet.Eve.EveLib.Entity.EveApi;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]

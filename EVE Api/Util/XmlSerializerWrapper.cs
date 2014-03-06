@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace eZet.Eve.EveLib.Util {
+namespace eZet.EveLib.Common.Util {
     /// <summary>
     ///     A simple wrapper for .NET XmlSerializer.
     /// </summary>

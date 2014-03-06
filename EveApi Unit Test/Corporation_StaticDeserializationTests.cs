@@ -1,15 +1,6 @@
-﻿using System.Linq;
-using eZet.Eve.EveLib.Entity.EveApi;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Character;
-using eZet.Eve.EveLib.Model.EveApi.Corporation;
-using eZet.Eve.EveLib.Test.Mocks;
-using eZet.Eve.EveLib.Util;
+﻿using eZet.Eve.EveLib.Test.Mocks;
+using eZet.EveLib.Common.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ContactList = eZet.Eve.EveLib.Model.EveApi.Corporation.ContactList;
-using FactionWarfareStats = eZet.Eve.EveLib.Model.EveApi.Corporation.FactionWarfareStats;
-using MedalList = eZet.Eve.EveLib.Model.EveApi.Corporation.MedalList;
-using StandingsList = eZet.Eve.EveLib.Model.EveApi.Corporation.StandingsList;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -35,7 +26,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetContactList() {
-            EveApiResponse<ContactList> xml = corp.GetContactList();
+            EveApiResponse<Model.EveApi.Corporation.ContactList> xml = corp.GetContactList();
             Assert.AreEqual(797400947, xml.Result.CorporationContacts.First().ContactId);
         }
 
@@ -71,7 +62,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetFactionalWarfareStats() {
-            EveApiResponse<FactionWarfareStats> xml = corp.GetFactionWarfareStats();
+            EveApiResponse<Model.EveApi.Corporation.FactionWarfareStats> xml = corp.GetFactionWarfareStats();
             Assert.AreEqual(500001, xml.Result.FactionId);
         }
 
@@ -101,7 +92,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetMedals() {
-            EveApiResponse<MedalList> xml = corp.GetMedals();
+            EveApiResponse<Model.EveApi.Corporation.MedalList> xml = corp.GetMedals();
             Assert.AreEqual(123123, xml.Result.Medals.First().MedalId);
         }
 
@@ -149,7 +140,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetStandings() {
-            EveApiResponse<StandingsList> xml = corp.GetStandings();
+            EveApiResponse<Model.EveApi.Corporation.StandingsList> xml = corp.GetStandings();
             Assert.AreEqual(3009841, xml.Result.CorporationStandings.Agents.First().FromId);
         }
 

@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Globalization;
 using System.IO;
 
-namespace eZet.Eve.EveLib {
+namespace eZet.EveLib.Common {
     /// <summary>
     ///     Provides configuration and constants for the library.
     /// </summary>

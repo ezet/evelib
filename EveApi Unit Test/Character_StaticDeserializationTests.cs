@@ -1,12 +1,6 @@
-﻿using System.Linq;
-using eZet.Eve.EveLib.Entity.EveApi;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Character;
-using eZet.Eve.EveLib.Model.EveApi.Core;
-using eZet.Eve.EveLib.Test.Mocks;
-using eZet.Eve.EveLib.Util;
+﻿using eZet.Eve.EveLib.Test.Mocks;
+using eZet.EveLib.Common.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FactionWarfareStats = eZet.Eve.EveLib.Model.EveApi.Character.FactionWarfareStats;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -82,7 +76,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetFactionWarfareStats() {
-            EveApiResponse<FactionWarfareStats> xml = character.GetFactionWarfareStats();
+            EveApiResponse<Model.EveApi.Character.FactionWarfareStats> xml = character.GetFactionWarfareStats();
             Assert.AreEqual(500001, xml.Result.FactionId);
         }
 

@@ -1,4 +1,4 @@
-﻿using eZet.Eve.EveLib.Util;
+﻿using eZet.EveLib.Common.Util;
 
 namespace eZet.Eve.EveLib.Test.Mocks {
     public class TestSerializer : ISerializer {

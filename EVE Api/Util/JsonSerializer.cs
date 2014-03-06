@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace eZet.Eve.EveLib.Util {
+namespace eZet.EveLib.Common.Util {
     /// <summary>
     /// JSON serializer
     /// </summary>

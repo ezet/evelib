@@ -1,4 +1,4 @@
-﻿namespace eZet.Eve.EveLib.Exception {
+﻿namespace eZet.EveLib.Common.Exception {
     public class InvalidRequestException : EveLibException {
         public InvalidRequestException(string message)
             : base(message) {

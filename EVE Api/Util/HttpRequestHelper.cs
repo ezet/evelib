@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net;
 
-namespace eZet.Eve.EveLib.Util {
+namespace eZet.EveLib.Common.Util {
     public static class HttpRequestHelper {
         public const string ContentTypeForm = "application/x-www-form-urlencoded";
 

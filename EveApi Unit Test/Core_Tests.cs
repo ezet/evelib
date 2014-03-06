@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using eZet.Eve.EveLib.Exception;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Core;
+﻿using eZet.EveLib.Common.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
@@ -10,7 +7,7 @@ namespace eZet.Eve.EveLib.Test {
         private const string CharName = "CCP Garthagk";
 
         private const long CharId = 797400947;
-        private readonly EveLib api = EveLib.Create();
+        private readonly eZet.EveLib api = eZet.EveLib.Create();
 
         [TestMethod]
         public void GetAllianceList_ValidRequest_HasResult() {

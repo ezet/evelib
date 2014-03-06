@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eZet.Eve.EveLib.Util {
+namespace eZet.EveLib.Common.Util {
     /// <summary>
     ///     Interface for performing requests against the Eve API.
     /// </summary>

@@ -1,7 +1,4 @@
-﻿using eZet.Eve.EveLib.Entity.EveApi;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Account;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -10,7 +7,7 @@ namespace eZet.Eve.EveLib.Test {
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private readonly ApiKey validKey = EveLib.GetCharacterKey(KeyId, VCode);
+        private readonly ApiKey validKey = eZet.EveLib.GetCharacterKey(KeyId, VCode);
 
 
         [TestMethod]

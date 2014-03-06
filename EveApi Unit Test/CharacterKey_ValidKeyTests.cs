@@ -1,11 +1,5 @@
-﻿using System.Linq;
-using eZet.Eve.EveLib.Entity.EveApi;
-using eZet.Eve.EveLib.Exception;
-using eZet.Eve.EveLib.Model.EveApi;
-using eZet.Eve.EveLib.Model.EveApi.Account;
-using eZet.Eve.EveLib.Model.EveApi.Character;
+﻿using eZet.EveLib.Common.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CharacterInfo = eZet.Eve.EveLib.Model.EveApi.Core.CharacterInfo;
 
 namespace eZet.Eve.EveLib.Test {
     [TestClass]
@@ -14,7 +8,7 @@ namespace eZet.Eve.EveLib.Test {
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private readonly CharacterKey validKey = EveLib.GetCharacterKey(KeyId, VCode);
+        private readonly CharacterKey validKey = eZet.EveLib.GetCharacterKey(KeyId, VCode);
 
         [TestMethod]
         public void Characters_NoExceptions() {
@@ -29,7 +23,7 @@ namespace eZet.Eve.EveLib.Test {
 
         [TestMethod]
         public void GetCharacterInfo_ValidRequest_HasResult() {
-            EveApiResponse<CharacterInfo> res = validKey.Characters[0].GetCharacterInfo();
+            EveApiResponse<Model.EveApi.Core.CharacterInfo> res = validKey.Characters[0].GetCharacterInfo();
             Assert.IsNotNull(res.Result);
         }
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
-using eZet.Eve.EveLib.Exception;
+using eZet.EveLib.Common.Exception;
 
-namespace eZet.Eve.EveLib.Util {
+namespace eZet.EveLib.Common.Util {
     public class RequestHandler : IRequestHandler {
         public RequestHandler(ISerializer serializer) {
             Serializer = serializer;
