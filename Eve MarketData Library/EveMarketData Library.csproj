@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="EveMarketData.cs" />
     <Compile Include="EveMarketDataOptions.cs" />
+    <Compile Include="JsonConverter\StationRankJsonConverter.cs" />
     <Compile Include="JsonConverter\ItemHistoryJsonConverter.cs" />
     <Compile Include="JsonConverter\ItemOrdersJsonConverter.cs" />
     <Compile Include="JsonConverter\ItemPricesJsonConverter.cs" />

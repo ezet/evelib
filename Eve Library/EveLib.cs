@@ -19,6 +19,7 @@ under the License.
  *
 */
 
+using System;
 using eZet.EveLib.Common.Util;
 using eZet.EveLib.EveCentralLib;
 using eZet.EveLib.EveMarketDataLib;
@@ -63,7 +64,8 @@ namespace eZet.EveLib {
             var options = new EveMarketDataOptions();
             options.Items.Add(34);
             options.Regions.Add(10000002);
-            var res = api.GetItemPrice(options, OrderType.Both, MinMax.Max);
+            options.AgeSpan = TimeSpan.FromDays(2);
+            var res = api.GetStationRank(options);
         }
 
         public static EveLib Create() {
