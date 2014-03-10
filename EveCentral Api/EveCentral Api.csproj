@@ -7,8 +7,8 @@
     <ProjectGuid>{FCD48E90-6605-4BC1-B761-0B37DF390990}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.EveCentralApi</RootNamespace>
-    <AssemblyName>EveCentralApi</AssemblyName>
+    <RootNamespace>eZet.EveLib.EveCentral</RootNamespace>
+    <AssemblyName>EveCentral</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

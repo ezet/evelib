@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineApi.Model {
+namespace eZet.EveLib.EveOnline.Model {
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
     public class EveApiError : XmlElement {

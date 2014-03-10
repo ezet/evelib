@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using eZet.EveLib.EveMarketDataApi.JsonConverter;
+using eZet.EveLib.EveMarketData.JsonConverter;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.EveMarketDataApi.Model {
+namespace eZet.EveLib.EveMarketData.Model {
     [JsonConverter(typeof (ItemOrderJsonConverter))]
     [DataContract]
     public class ItemOrders {

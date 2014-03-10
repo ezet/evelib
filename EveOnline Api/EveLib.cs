@@ -19,7 +19,7 @@ under the License.
  *
 */
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     public class EveLib {
         private EveLib(Misc misc, Map map, Image image) {
             Misc = misc;

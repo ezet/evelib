@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveCentralApi.Model;
+using eZet.EveLib.EveCentral.Model;
 
-namespace eZet.EveLib.EveCentralApi {
+namespace eZet.EveLib.EveCentral {
     public class EveCentral {
         public EveCentral() {
             BaseUri = new Uri("http://api.eve-central.com");

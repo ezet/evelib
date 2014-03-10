@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace eZet.EveLib.EveMarketDataApi {
+namespace eZet.EveLib.EveMarketData {
     [DataContract]
     [JsonConverter(typeof (StringEnumConverter))]
     public enum UploadType {
@@ -37,15 +38,15 @@ namespace eZet.EveLib.EveMarketDataApi {
             RowLimit = 10000;
         }
 
-        public ICollection<long> Items { get; private set; }
+        public ICollection<long> Items { get; set; }
 
-        public ICollection<long> ItemGroups { get; private set; }
+        public ICollection<long> ItemGroups { get; set; }
 
-        public ICollection<long> Regions { get; private set; }
+        public ICollection<long> Regions { get; set; }
 
-        public ICollection<long> Solarsystems { get; private set; }
+        public ICollection<long> Solarsystems { get; set; }
 
-        public ICollection<long> Stations { get; private set; }
+        public ICollection<long> Stations { get; set; }
 
         public int RowLimit { get; set; }
 

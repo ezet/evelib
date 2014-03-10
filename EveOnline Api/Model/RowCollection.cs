@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineApi.Model {
+namespace eZet.EveLib.EveOnline.Model {
     [Serializable]
     [XmlRoot("rowset")]
     public class RowCollection<T> : IXmlSerializable, IEnumerable<T> {

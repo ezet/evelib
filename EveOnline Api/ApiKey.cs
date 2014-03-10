@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Account;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Account;
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     public enum ApiKeyType {
         Account,
         Character,

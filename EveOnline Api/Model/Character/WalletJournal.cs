@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineApi.Model.Character {
+namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletJournal : XmlElement {

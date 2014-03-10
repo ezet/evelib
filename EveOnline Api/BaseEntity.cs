@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Util;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Util;
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     public abstract class BaseEntity {
         protected BaseEntity() {
             BaseUri = new Uri("https://api.eveonline.com");

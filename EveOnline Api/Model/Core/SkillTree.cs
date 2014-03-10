@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineApi.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Core {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTree : XmlElement {

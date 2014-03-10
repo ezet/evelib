@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineApi.Model {
+namespace eZet.EveLib.EveOnline.Model {
     /// <summary>
     ///     Provides utility methods for XML element classes.
     /// </summary>

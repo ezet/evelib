@@ -2,7 +2,7 @@
 using System.Net;
 using eZet.EveLib.Core;
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     public class Image {
         public enum AllianceLogoSize {
             X30 = 30,

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace eZet.EveLib.EveCentralApi {
+namespace eZet.EveLib.EveCentral {
     public class EveCentralOptions {
         public EveCentralOptions() {
             Types = new List<long>();

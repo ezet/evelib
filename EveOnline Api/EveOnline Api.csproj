@@ -7,8 +7,8 @@
     <ProjectGuid>{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.EveOnlineApi</RootNamespace>
-    <AssemblyName>EveOnlineApi</AssemblyName>
+    <RootNamespace>eZet.EveLib.EveOnline</RootNamespace>
+    <AssemblyName>EveOnline</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

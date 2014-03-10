@@ -1,4 +1,4 @@
-﻿using eZet.EveLib.EveOnlineApi;
+﻿using eZet.EveLib.EveOnline;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

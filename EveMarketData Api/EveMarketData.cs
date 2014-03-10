@@ -2,9 +2,9 @@
 using System.Diagnostics.Contracts;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveMarketDataApi.Model;
+using eZet.EveLib.EveMarketData.Model;
 
-namespace eZet.EveLib.EveMarketDataApi {
+namespace eZet.EveLib.EveMarketData {
     public enum Format {
         Json,
         Xml,

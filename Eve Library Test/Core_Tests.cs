@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using eZet.EveLib.Core.Exception;
-using eZet.EveLib.EveOnlineApi;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Core;
+using eZet.EveLib.EveOnline;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

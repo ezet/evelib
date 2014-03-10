@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Account;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Account;
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     public class CharacterKey : ApiKey {
         private ReadOnlyCollection<Character> _characters;
 

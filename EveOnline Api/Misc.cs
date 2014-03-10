@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Core;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Core;
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     /// <summary>
     ///     Provides access to API calls that do not require a valid API key or character id. That is, all URIs prefixed with
     ///     /eve, /server and /api.

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using eZet.EveLib.Core.Util;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.Core.Util {
+namespace eZet.EveLib.EveMarketData {
     /// <summary>
     ///     JSON serializer
     /// </summary>

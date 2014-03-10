@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineApi.Model.Map {
+namespace eZet.EveLib.EveOnline.Model.Map {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareSystems : XmlElement {

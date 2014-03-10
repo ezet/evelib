@@ -6,7 +6,7 @@ using System.Diagnostics.Contracts;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace eZet.EveLib.EveOnlineApi.Util {
+namespace eZet.EveLib.EveOnline.Util {
     public class HashedCacheExpirationRegister : ICacheExpirationRegister {
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 

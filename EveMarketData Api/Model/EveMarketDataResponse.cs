@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveMarketDataApi.Model {
+namespace eZet.EveLib.EveMarketData.Model {
     [XmlRoot("emd", Namespace = "", IsNullable = false)]
     [DataContract]
     public class EveMarketDataResponse<T> {

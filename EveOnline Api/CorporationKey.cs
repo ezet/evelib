@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Account;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Account;
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     public class CorporationKey : ApiKey {
         private Corporation _corporation;
 

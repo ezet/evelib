@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveOnlineApi;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Character;
-using eZet.EveLib.EveOnlineApi.Model.Core;
+using eZet.EveLib.EveOnline;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Character;
+using eZet.EveLib.EveOnline.Model.Core;
 using eZet.EveLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FactionWarfareStats = eZet.EveLib.EveOnlineApi.Model.Character.FactionWarfareStats;
+using FactionWarfareStats = eZet.EveLib.EveOnline.Model.Character.FactionWarfareStats;
 
 namespace eZet.EveLib.Test {
     [TestClass]

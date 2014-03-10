@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using eZet.EveLib.Core.Exception;
-using eZet.EveLib.EveOnlineApi;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Account;
-using eZet.EveLib.EveOnlineApi.Model.Character;
+using eZet.EveLib.EveOnline;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Account;
+using eZet.EveLib.EveOnline.Model.Character;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CharacterInfo = eZet.EveLib.EveOnlineApi.Model.Core.CharacterInfo;
+using CharacterInfo = eZet.EveLib.EveOnline.Model.Core.CharacterInfo;
 
 namespace eZet.EveLib.Test {
     [TestClass]

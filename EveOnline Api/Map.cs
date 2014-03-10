@@ -1,8 +1,8 @@
 ﻿using System;
-using eZet.EveLib.EveOnlineApi.Model;
-using eZet.EveLib.EveOnlineApi.Model.Map;
+using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.EveOnline.Model.Map;
 
-namespace eZet.EveLib.EveOnlineApi {
+namespace eZet.EveLib.EveOnline {
     public class Map : BaseEntity {
         public Map() {
             BaseUri = new Uri("https://api.eveonline.com");
