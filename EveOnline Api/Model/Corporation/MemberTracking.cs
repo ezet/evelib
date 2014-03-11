@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class MemberTracking : XmlElement {
+    public class MemberTracking {
         [XmlElement("rowset")]
         public RowCollection<Member> Members { get; set; }
 
@@ -22,8 +22,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
             [XmlAttribute("startDateTime")]
             public string StartDateAsString {
-                get { return StartDate.ToString(DateFormat); }
-                set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return StartDate.ToString(XmlHelper.DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("baseID")]
@@ -40,8 +40,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
             [XmlAttribute("logonDateTime")]
             public string LogonDateAsString {
-                get { return LogonDate.ToString(DateFormat); }
-                set { LogonDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return LogonDate.ToString(XmlHelper.DateFormat); }
+                set { LogonDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlIgnore]
@@ -49,8 +49,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
             [XmlAttribute("logoffDateTime")]
             public string LogoffDateAsString {
-                get { return LogoffDate.ToString(DateFormat); }
-                set { LogoffDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return LogoffDate.ToString(XmlHelper.DateFormat); }
+                set { LogoffDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("locationID")]

@@ -12,13 +12,20 @@ namespace eZet.EveLib.EveMarketData {
 
     /// <summary>
     ///     C# API for the API supplied by api.eve-marketdata.com.
-    ///     Only XML format is currently supported. The JSON api from marketdata is inconsistent.
     /// </summary>
     public class EveMarketData {
+
+        /// <summary>
+        /// Creates a new object using the default format, JSON.
+        /// </summary>
         public EveMarketData()
             : this(Format.Json) {
         }
 
+        /// <summary>
+        /// Creates a new object using the specified format.
+        /// </summary>
+        /// <param name="format"></param>
         public EveMarketData(Format format) {
             Format = format;
             Name = "demo";
@@ -26,12 +33,25 @@ namespace eZet.EveLib.EveMarketData {
             setRequester(format);
         }
 
+        /// <summary>
+        /// Gets or sets the base URI for Eve Market Data.
+        /// </summary>
         public Uri BaseUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the request format.
+        /// </summary>
 
         public Format Format { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the name supplied to marketdata in the query string. Use your ingame name if you want evemarketdata to be able to contact you in case of problems.
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the RequestHandler.
+        /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>

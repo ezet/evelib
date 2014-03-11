@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class CorporationSheet : XmlElement {
+    public class CorporationSheet {
         [XmlElement("corporationID")]
         public long CorporationId { get; set; }
 

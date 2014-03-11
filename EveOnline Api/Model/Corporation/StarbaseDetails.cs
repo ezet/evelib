@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class StarbaseDetails : XmlElement {
+    public class StarbaseDetails {
         [XmlElement("state")]
         public int State { get; set; }
 
@@ -13,8 +13,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
         [XmlElement("stateTimestamp")]
         public string StateTimestampAsString {
-            get { return StateTimestamp.ToString(DateFormat); }
-            set { StateTimestamp = DateTime.ParseExact(value, DateFormat, null); }
+            get { return StateTimestamp.ToString(XmlHelper.DateFormat); }
+            set { StateTimestamp = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlIgnore]
@@ -22,8 +22,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
         [XmlElement("onlineTimestamp")]
         public string OnlineTimestampAsString {
-            get { return OnlineTimestamp.ToString(DateFormat); }
-            set { OnlineTimestamp = DateTime.ParseExact(value, DateFormat, null); }
+            get { return OnlineTimestamp.ToString(XmlHelper.DateFormat); }
+            set { OnlineTimestamp = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("generalSettings")]

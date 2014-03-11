@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class StandingsList : XmlElement {
+    public class StandingsList {
         [XmlElement("corporationNPCStandings")]
         public StandingType CorporationStandings { get; set; }
 
@@ -24,7 +24,7 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
             public float Standing { get; set; }
         }
 
-        public class StandingType : XmlElement, IXmlSerializable {
+        public class StandingType : IXmlSerializable {
             [XmlElement("rowset")]
             public RowCollection<StandingEntry> Agents { get; set; }
 
@@ -39,10 +39,10 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
             }
 
             public void ReadXml(XmlReader reader) {
-                setRoot(reader);
-                Agents = deserializeRowSet(getRowSetReader("agents"), new StandingEntry());
-                Corporations = deserializeRowSet(getRowSetReader("NPCCorporations"), new StandingEntry());
-                Factions = deserializeRowSet(getRowSetReader("factions"), new StandingEntry());
+                var xml = new XmlHelper(reader);
+                Agents = xml.deserializeRowSet<StandingEntry>("agents");
+                Corporations = xml.deserializeRowSet<StandingEntry>("NPCCorporations");
+                Factions = xml.deserializeRowSet<StandingEntry>("factions");
             }
 
             public void WriteXml(XmlWriter writer) {

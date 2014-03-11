@@ -5,6 +5,9 @@ using eZet.EveLib.EveOnline.Model;
 using eZet.EveLib.EveOnline.Util;
 
 namespace eZet.EveLib.EveOnline {
+    /// <summary>
+    /// Provides base properties and methods for Eve Online API classes.
+    /// </summary>
     public abstract class BaseEntity {
         protected BaseEntity() {
             BaseUri = new Uri("https://api.eveonline.com");
@@ -12,12 +15,12 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     The base url for entity requests
+        ///     Gets or sets the base url for entity requests
         /// </summary>
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        ///     The requester this entity uses to perform requests.
+        ///     Gets or sets the requester this entity uses to perform requests.
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 

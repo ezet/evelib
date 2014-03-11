@@ -11,8 +11,7 @@ namespace eZet.EveLib.EveMarketData {
         /// <summary>
         ///     Deserializes JSON using JSON.NET
         /// </summary>
-        /// <typeparam name="T">An xml result type</typeparam>
-        /// <param name="data">An XML string</param>
+        /// <param name="data">A JSON string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
             var dict = JsonConvert.DeserializeObject<Dictionary<string, T>>(data);

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class KillLog : XmlElement {
+    public class KillLog {
         [XmlElement("rowset")]
         public RowCollection<Kill> Kills { get; set; }
 
@@ -74,7 +74,7 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
         [Serializable]
         [XmlRoot("row")]
-        public class Kill : XmlElement, IXmlSerializable {
+        public class Kill : IXmlSerializable {
             [XmlAttribute("killID")]
             public long KillId { get; set; }
 
@@ -86,8 +86,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("killTime")]
             public string KillTimeAsString {
-                get { return KillTime.ToString(DateFormat); }
-                set { KillTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return KillTime.ToString(XmlHelper.DateFormat); }
+                set { KillTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("moonID")]
@@ -107,14 +107,14 @@ namespace eZet.EveLib.EveOnline.Model.Character {
             }
 
             public void ReadXml(XmlReader reader) {
-                setRoot(reader);
-                KillId = getLongAttribute("killID");
-                SolarSystemId = getLongAttribute("solarSystemID");
-                KillTimeAsString = getStringAttribute("killTime");
-                MoonId = getLongAttribute("moonID");
-                Victim = deserialize(getReader("victim"), new Victim());
-                Attackers = deserializeRowSet(getRowSetReader("attackers"), new Attacker());
-                Items = deserializeRowSet(getRowSetReader("items"), new Item());
+                var xml = new XmlHelper(reader);
+                KillId = xml.getLongAttribute("killID");
+                SolarSystemId = xml.getLongAttribute("solarSystemID");
+                KillTimeAsString = xml.getStringAttribute("killTime");
+                MoonId = xml.getLongAttribute("moonID");
+                Victim = xml.deserialize<Victim>("victim");
+                Attackers = xml.deserializeRowSet<Attacker>("attackers");
+                Items = xml.deserializeRowSet<Item>("items");
             }
 
             public void WriteXml(XmlWriter writer) {

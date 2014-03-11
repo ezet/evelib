@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class CharacterInfo : XmlElement {
+    public class CharacterInfo {
         [XmlElement("characterID")]
         public long CharacterId { get; set; }
 
@@ -43,8 +43,8 @@ namespace eZet.EveLib.EveOnline.Model.Core {
 
         [XmlElement("corporationDate")]
         public string CorporationDateAsString {
-            get { return CorporationDate.ToString(DateFormat); }
-            set { CorporationDate = DateTime.ParseExact(value, DateFormat, null); }
+            get { return CorporationDate.ToString(XmlHelper.DateFormat); }
+            set { CorporationDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("allianceID")]
@@ -58,8 +58,8 @@ namespace eZet.EveLib.EveOnline.Model.Core {
 
         [XmlElement("allianceDate")]
         public string AllianceDateAsString {
-            get { return AllianceDate.ToString(DateFormat); }
-            set { AllianceDate = DateTime.ParseExact(value, DateFormat, null); }
+            get { return AllianceDate.ToString(XmlHelper.DateFormat); }
+            set { AllianceDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("lastKnownLocation")]
@@ -85,8 +85,8 @@ namespace eZet.EveLib.EveOnline.Model.Core {
 
             [XmlAttribute("startDate")]
             public string StartDateAsString {
-                get { return StartDate.ToString(DateFormat); }
-                set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return StartDate.ToString(XmlHelper.DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
         }
     }

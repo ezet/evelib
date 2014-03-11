@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Core;
+using eZet.EveLib.EveOnline.Model.Misc;
 
 namespace eZet.EveLib.EveOnline {
     /// <summary>
-    ///     Provides access to API calls that do not require a valid API key or character id. That is, all URIs prefixed with
-    ///     /eve, /server and /api.
+    ///     Provides access to API calls that do not require a valid API key or character/corporation ID, and are not covered by Image or Map.
     /// </summary>
     public class Misc : BaseEntity {
         /// <summary>

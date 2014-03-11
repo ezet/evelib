@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class MemberMedals : XmlElement {
+    public class MemberMedals {
         [XmlElement("rowset")]
         public RowCollection<Medal> Medals { get; set; }
 
@@ -32,8 +32,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
             [XmlAttribute("issued")]
             public string IssuedDateAsString {
-                get { return IssuedDate.ToString(DateFormat); }
-                set { IssuedDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return IssuedDate.ToString(XmlHelper.DateFormat); }
+                set { IssuedDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
         }
     }

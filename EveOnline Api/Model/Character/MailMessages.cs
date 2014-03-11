@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class MailMessages : XmlElement {
+    public class MailMessages {
         [XmlElement("rowset")]
         public RowCollection<Message> Messages { get; set; }
 
@@ -22,8 +22,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("sentDate")]
             public string SentDateAsString {
-                get { return SentDate.ToString(DateFormat); }
-                set { SentDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return SentDate.ToString(XmlHelper.DateFormat); }
+                set { SentDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("title")]

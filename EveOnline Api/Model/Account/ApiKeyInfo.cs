@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Account {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class ApiKeyInfo : XmlElement {
+    public class ApiKeyInfo {
         [XmlElement("key")]
         public ApiKeyData Key { get; set; }
     }
@@ -24,9 +24,9 @@ namespace eZet.EveLib.EveOnline.Model.Account {
 
         [XmlAttribute("expires")]
         public string ExpireDateAsString {
-            get { return ExpireDate.ToString(XmlElement.DateFormat); }
+            get { return ExpireDate.ToString(XmlHelper.DateFormat); }
             set {
-                ExpireDate = value == "" ? DateTime.MinValue : DateTime.ParseExact(value, XmlElement.DateFormat, null);
+                ExpireDate = value == "" ? DateTime.MinValue : DateTime.ParseExact(value, XmlHelper.DateFormat, null);
             }
         }
     }

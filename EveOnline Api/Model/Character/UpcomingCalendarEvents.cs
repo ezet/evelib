@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class UpcomingCalendarEvents : XmlElement {
+    public class UpcomingCalendarEvents {
         [XmlElement("rowset")]
         public RowCollection<Event> Events { get; set; }
 
@@ -25,8 +25,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("eventDate")]
             public string EventDateAsString {
-                get { return EventDate.ToString(DateFormat); }
-                set { EventDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return EventDate.ToString(XmlHelper.DateFormat); }
+                set { EventDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("eventTitle")]

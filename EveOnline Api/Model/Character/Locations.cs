@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class Locations : XmlElement {
+    public class Locations {
         [XmlElement("rowset")]
         public RowCollection<Location> Items { get; set; }
 

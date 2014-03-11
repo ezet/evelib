@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class WalletJournal : XmlElement {
+    public class WalletJournal {
         internal CharWalletJournalWalker CharWalker;
 
         internal CorpWalletJournalWalker CorpWalker;
@@ -33,8 +33,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("date")]
             public string DateAsString {
-                get { return Date.ToString(DateFormat); }
-                set { Date = DateTime.ParseExact(value, DateFormat, null); }
+                get { return Date.ToString(XmlHelper.DateFormat); }
+                set { Date = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("refID")]

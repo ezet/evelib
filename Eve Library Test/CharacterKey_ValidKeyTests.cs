@@ -5,7 +5,7 @@ using eZet.EveLib.EveOnline.Model;
 using eZet.EveLib.EveOnline.Model.Account;
 using eZet.EveLib.EveOnline.Model.Character;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CharacterInfo = eZet.EveLib.EveOnline.Model.Core.CharacterInfo;
+using CharacterInfo = eZet.EveLib.EveOnline.Model.Misc.CharacterInfo;
 
 namespace eZet.EveLib.Test {
     [TestClass]

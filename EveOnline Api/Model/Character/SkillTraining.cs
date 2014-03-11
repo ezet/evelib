@@ -4,15 +4,15 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class SkillTraining : XmlElement {
+    public class SkillTraining {
         // TODO Convert zone
         [XmlIgnore]
         public DateTime CurrentTqTime { get; private set; }
 
         [XmlElement("currentTQTime")]
         public string CurrentTqTimeAsString {
-            get { return CurrentTqTime.ToString(DateFormat); }
-            set { CurrentTqTime = DateTime.ParseExact(value, DateFormat, null); }
+            get { return CurrentTqTime.ToString(XmlHelper.DateFormat); }
+            set { CurrentTqTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlIgnore]
@@ -20,8 +20,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
         [XmlElement("EndTime")]
         public string EndTimeAsString {
-            get { return EndTime.ToString(DateFormat); }
-            set { EndTime = DateTime.ParseExact(value, DateFormat, null); }
+            get { return EndTime.ToString(XmlHelper.DateFormat); }
+            set { EndTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlIgnore]
@@ -29,8 +29,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
         [XmlElement("StartTime")]
         public string StartTimeAsString {
-            get { return StartTime.ToString(DateFormat); }
-            set { StartTime = DateTime.ParseExact(value, DateFormat, null); }
+            get { return StartTime.ToString(XmlHelper.DateFormat); }
+            set { StartTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("trainingTypeID")]

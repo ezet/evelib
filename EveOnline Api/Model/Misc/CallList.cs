@@ -3,10 +3,10 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class CallList : XmlElement, IXmlSerializable {
+    public class CallList : IXmlSerializable {
         [XmlElement("rowset")]
         public RowCollection<CallGroup> CallGroups { get; set; }
 
@@ -20,9 +20,9 @@ namespace eZet.EveLib.EveOnline.Model.Core {
         }
 
         public void ReadXml(XmlReader reader) {
-            setRoot(reader);
-            CallGroups = deserializeRowSet(getRowSetReader("callGroups"), new CallGroup());
-            Calls = deserializeRowSet(getRowSetReader("calls"), new Call());
+            var xml = new XmlHelper(reader);
+            CallGroups = xml.deserializeRowSet<CallGroup>("callGroups");
+            Calls = xml.deserializeRowSet<Call>("calls");
         }
 
         public void WriteXml(XmlWriter writer) {

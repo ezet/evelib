@@ -4,14 +4,14 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Account {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class AccountStatus : XmlElement {
+    public class AccountStatus {
         [XmlIgnore]
         public DateTime PaidUntil { get; private set; }
 
         [XmlElement("paidUntil")]
         public string PaidUntilAsString {
-            get { return PaidUntil.ToString(DateFormat); }
-            set { PaidUntil = DateTime.ParseExact(value, DateFormat, null); }
+            get { return PaidUntil.ToString(XmlHelper.DateFormat); }
+            set { PaidUntil = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlIgnore]
@@ -19,8 +19,8 @@ namespace eZet.EveLib.EveOnline.Model.Account {
 
         [XmlElement("createDate")]
         public string CreationDateAsString {
-            get { return CreationDate.ToString(DateFormat); }
-            set { CreationDate = DateTime.ParseExact(value, DateFormat, null); }
+            get { return CreationDate.ToString(XmlHelper.DateFormat); }
+            set { CreationDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("logonCount")]

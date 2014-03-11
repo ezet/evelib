@@ -4,14 +4,14 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model {
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
-    public class EveApiError : XmlElement {
+    public class EveApiError {
         [XmlIgnore]
         public DateTime CurrentTime { get; private set; }
 
         [XmlElement("currentTime")]
         public string CurrentTimeAsString {
-            get { return CurrentTime.ToString(DateFormat); }
-            set { CurrentTime = DateTime.ParseExact(value, DateFormat, null); }
+            get { return CurrentTime.ToString(XmlHelper.DateFormat); }
+            set { CurrentTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("error")]
@@ -22,8 +22,8 @@ namespace eZet.EveLib.EveOnline.Model {
 
         [XmlElement("cachedUntil")]
         public string CachedUntilAsString {
-            get { return CachedUntil.ToString(DateFormat); }
-            set { CachedUntil = DateTime.ParseExact(value, DateFormat, null); }
+            get { return CachedUntil.ToString(XmlHelper.DateFormat); }
+            set { CachedUntil = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlAttribute("version")]

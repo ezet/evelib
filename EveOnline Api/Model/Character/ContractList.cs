@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class ContractList : XmlElement {
+    public class ContractList {
         public enum AvailabilityType {
             Public,
             Private
@@ -70,8 +70,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("dateIssued")]
             public string DateIssuedAsString {
-                get { return DateIssued.HasValue ? ((DateTime) DateIssued).ToString(DateFormat) : ""; }
-                set { DateIssued = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
+                get { return DateIssued.HasValue ? ((DateTime)DateIssued).ToString(XmlHelper.DateFormat) : ""; }
+                set { DateIssued = value != "" ? DateTime.ParseExact(value, XmlHelper.DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlIgnore]
@@ -79,8 +79,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("dateExpired")]
             public string DateExpiredAsString {
-                get { return DateExpired.HasValue ? ((DateTime) DateExpired).ToString(DateFormat) : ""; }
-                set { DateExpired = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
+                get { return DateExpired.HasValue ? ((DateTime)DateExpired).ToString(XmlHelper.DateFormat) : ""; }
+                set { DateExpired = value != "" ? DateTime.ParseExact(value, XmlHelper.DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlIgnore]
@@ -88,8 +88,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("dateAccepted")]
             public string DateAcceptedAsString {
-                get { return DateAccepted.HasValue ? ((DateTime) DateAccepted).ToString(DateFormat) : ""; }
-                set { DateAccepted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
+                get { return DateAccepted.HasValue ? ((DateTime)DateAccepted).ToString(XmlHelper.DateFormat) : ""; }
+                set { DateAccepted = value != "" ? DateTime.ParseExact(value, XmlHelper.DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlAttribute("numDays")]
@@ -100,8 +100,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("dateCompleted")]
             public string DateCompletedAsString {
-                get { return DateCompleted.HasValue ? ((DateTime) DateCompleted).ToString(DateFormat) : ""; }
-                set { DateCompleted = value != "" ? DateTime.ParseExact(value, DateFormat, null) : (DateTime?) null; }
+                get { return DateCompleted.HasValue ? ((DateTime)DateCompleted).ToString(XmlHelper.DateFormat) : ""; }
+                set { DateCompleted = value != "" ? DateTime.ParseExact(value, XmlHelper.DateFormat, null) : (DateTime?)null; }
             }
 
             [XmlAttribute("price")]

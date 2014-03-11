@@ -3,6 +3,9 @@ using System.Net;
 using eZet.EveLib.Core;
 
 namespace eZet.EveLib.EveOnline {
+    /// <summary>
+    /// Provides access to all image related requests.
+    /// </summary>
     public class Image {
         public enum AllianceLogoSize {
             X30 = 30,
@@ -43,16 +46,20 @@ namespace eZet.EveLib.EveOnline {
             X64 = 64,
         }
 
-        private readonly Uri baseUri = new Uri("http://image.eveonline.com");
+        /// <summary>
+        /// Gets or sets the base URI.
+        /// </summary>
+        public Uri BaseUri { get; set; }
 
         public Image() {
+            BaseUri = new Uri("http://image.eveonline.com");
             ImageRequester = new ImageRequester();
         }
 
         public IImageRequester ImageRequester { get; private set; }
 
         /// <summary>
-        ///     Returns the string path to the image file
+        ///     Saves the image to disk , and returns the path to the image.
         /// </summary>
         public string GetCharacterPortrait(long characterId, CharacterPortraitSize size) {
             const string relUri = "/Character";
@@ -61,7 +68,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the character portrait data
+        ///     Returns the character portrait data.
         /// </summary>
         public byte[] GetCharacterPortraitData(long characterId, CharacterPortraitSize size) {
             const string relUri = "/Character";
@@ -70,7 +77,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the corporation logo path
+        ///     Saves the image to disk , and returns the path to the image.
         /// </summary>
         public string GetCorporationLogo(long corporationId, CorporationLogoSize size) {
             const string relUri = "/Corporation";
@@ -79,7 +86,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the corporation logo
+        ///     Returns the corporation logo data.
         /// </summary>
         public byte[] GetCorporationLogoData(long corporationId, CorporationLogoSize size) {
             const string relUri = "/Corporation";
@@ -88,7 +95,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the alliance logo path
+        ///     Saves the image to disk , and returns the path to the image.
         /// </summary>
         public string GetAllianceLogo(long allianceId, AllianceLogoSize size) {
             const string relUri = "/Alliance";
@@ -97,7 +104,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the alliance logo
+        ///     Returns the alliance logo.
         /// </summary>
         public byte[] GetAllianceLogoData(long allianceId, AllianceLogoSize size) {
             const string relUri = "/Alliance";
@@ -106,7 +113,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the type icon path
+        ///     Saves the image to disk , and returns the path to the image.
         /// </summary>
         public string GetTypeIcon(long typeId, TypeIconSize size) {
             const string relUri = "/InventoryType";
@@ -115,7 +122,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the type icon
+        ///     Returns the type icon.
         /// </summary>
         public byte[] GetTypeIconData(long typeId, TypeIconSize size) {
             const string relUri = "/InventoryType";
@@ -124,7 +131,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the render image path
+        ///     Saves the image to disk , and returns the path to the image.
         /// </summary>
         public string GetRender(long typeId, RenderSize size) {
             const string relUri = "/Render";
@@ -133,7 +140,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     Returns the render image
+        ///     Returns the render image.
         /// </summary>
         public byte[] GetRenderData(long typeId, RenderSize size) {
             const string relUri = "/Render";
@@ -141,16 +148,16 @@ namespace eZet.EveLib.EveOnline {
             return requestImageData(relUri, typeId, (int) size, ext);
         }
 
-        public byte[] requestImageData(string relPath, long id, int size, string extension) {
+        private byte[] requestImageData(string relPath, long id, int size, string extension) {
             string fileName = id + "_" + size + extension;
-            var uri = new Uri(baseUri, relPath + Config.Separator + fileName);
+            var uri = new Uri(BaseUri, relPath + Config.Separator + fileName);
             byte[] data = ImageRequester.RequestImageData(uri);
             return data;
         }
 
-        public string requestImage(string relPath, long id, int size, string extension) {
+        private string requestImage(string relPath, long id, int size, string extension) {
             string fileName = id + "_" + size + extension;
-            var uri = new Uri(baseUri, relPath + Config.Separator + fileName);
+            var uri = new Uri(BaseUri, relPath + Config.Separator + fileName);
             string file = Config.ImagePath + Config.Separator + fileName;
             ImageRequester.RequestImage(uri, file);
             return file;

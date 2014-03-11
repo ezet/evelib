@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class IndustryJobs : XmlElement {
+    public class IndustryJobs  {
         public enum CompletedStatusType {
             [XmlEnum("0")] Failed,
             [XmlEnum("1")] Delivered,
@@ -112,8 +112,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("installTime")]
             public string InstallTimeAsString {
-                get { return InstallTime.ToString(DateFormat); }
-                set { InstallTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return InstallTime.ToString(XmlHelper.DateFormat); }
+                set { InstallTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlIgnore]
@@ -121,8 +121,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("beginProductionTime")]
             public string BeginProductionTimeAsString {
-                get { return BeginProductionTime.ToString(DateFormat); }
-                set { BeginProductionTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return BeginProductionTime.ToString(XmlHelper.DateFormat); }
+                set { BeginProductionTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlIgnore]
@@ -130,8 +130,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("endProductionTime")]
             public string EndProductionTimeAsString {
-                get { return EndProductionTime.ToString(DateFormat); }
-                set { EndProductionTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return EndProductionTime.ToString(XmlHelper.DateFormat); }
+                set { EndProductionTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlIgnore]
@@ -139,8 +139,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("pauseProductionTime")]
             public string PauseProductionTimeAsString {
-                get { return PauseProductionTime.ToString(DateFormat); }
-                set { PauseProductionTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return PauseProductionTime.ToString(XmlHelper.DateFormat); }
+                set { PauseProductionTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
         }
     }

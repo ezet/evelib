@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using eZet.EveLib.EveOnline.Model;
 using eZet.EveLib.EveOnline.Model.Character;
-using eZet.EveLib.EveOnline.Model.Core;
+using eZet.EveLib.EveOnline.Model.Misc;
 using FactionWarfareStats = eZet.EveLib.EveOnline.Model.Character.FactionWarfareStats;
 
 [assembly: InternalsVisibleTo("EveLib.Test")]
@@ -32,17 +32,17 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     The API key used for this character.
+        ///     Gets the API key used for this character.
         /// </summary>
         public ApiKey Key { get; private set; }
 
         /// <summary>
-        ///     The id of this character.
+        ///     Gets the id of this character.
         /// </summary>
         public long CharacterId { get; private set; }
 
         /// <summary>
-        ///     The name of this character.
+        ///     Gets the name of this character.
         /// </summary>
         public string CharacterName { get; private set; }
 
@@ -324,7 +324,6 @@ namespace eZet.EveLib.EveOnline {
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
         public EveApiResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
-            // TODO add walking
             const string relPath = "/char/WalletJournal.xml.aspx";
             EveApiResponse<WalletJournal> result = fromId == 0
                 ? request<WalletJournal>(relPath, Key, "characterId", CharacterId, "rowCount", count)

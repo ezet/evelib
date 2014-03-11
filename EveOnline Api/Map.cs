@@ -3,6 +3,10 @@ using eZet.EveLib.EveOnline.Model;
 using eZet.EveLib.EveOnline.Model.Map;
 
 namespace eZet.EveLib.EveOnline {
+
+    /// <summary>
+    /// Provides access to Map related requests.
+    /// </summary>
     public class Map : BaseEntity {
         public Map() {
             BaseUri = new Uri("https://api.eveonline.com");

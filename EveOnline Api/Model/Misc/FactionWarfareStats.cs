@@ -3,10 +3,10 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class FactionWarfareStats : XmlElement, IXmlSerializable {
+    public class FactionWarfareStats : IXmlSerializable {
         [XmlElement("totals")]
         public FactionWarfareTotals Totals { get; set; }
 
@@ -22,10 +22,10 @@ namespace eZet.EveLib.EveOnline.Model.Core {
         }
 
         public void ReadXml(XmlReader reader) {
-            setRoot(reader);
-            Totals = deserialize(getReader("totals"), new FactionWarfareTotals());
-            Factions = deserializeRowSet(getRowSetReader("factions"), new FactionWarfareEntry());
-            FactionWars = deserializeRowSet(getRowSetReader("factionWars"), new FactionWarfareEntry());
+            var xml = new XmlHelper(reader);
+            Totals = xml.deserialize<FactionWarfareTotals>("totals");
+            Factions = xml.deserializeRowSet<FactionWarfareEntry>("factions");
+            FactionWars = xml.deserializeRowSet<FactionWarfareEntry>("factionWars");
         }
 
         public void WriteXml(XmlWriter writer) {

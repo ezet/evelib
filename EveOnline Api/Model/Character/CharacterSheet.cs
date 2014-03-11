@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class CharacterSheet : XmlElement, IXmlSerializable {
+    public class CharacterSheet : IXmlSerializable {
         [XmlElement("characterID")]
         public long CharacterId { get; set; }
 
@@ -20,8 +20,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
         [XmlElement("DoB")]
         public string DateOfBirthAsString {
-            get { return DateOfBirth.ToString(DateFormat); }
-            set { DateOfBirth = DateTime.ParseExact(value, DateFormat, null); }
+            get { return DateOfBirth.ToString(XmlHelper.DateFormat); }
+            set { DateOfBirth = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("race")]
@@ -90,29 +90,29 @@ namespace eZet.EveLib.EveOnline.Model.Character {
         }
 
         public void ReadXml(XmlReader reader) {
-            setRoot(reader);
-            CharacterId = getLong("characterID");
-            Name = getString("name");
-            DateOfBirthAsString = getString("DoB");
-            Race = getString("race");
-            Bloodline = getString("bloodLine");
-            Ancestry = getString("ancestry");
-            Gender = getString("gender");
-            CorporationName = getString("corporationName");
-            CorporationId = getLong("corporationID");
-            AllianceName = getString("allianceName");
-            AllianceId = getLong("allianceID");
-            CloneName = getString("cloneName");
-            CloneSkillPoints = getInt("cloneSkillPoints");
-            Balance = getDecimal("balance");
-            AttributeEnhancers = deserialize(getReader("attributeEnhancers"), new Implants());
-            Skills = deserializeRowSet(getRowSetReader("skills"), new Skill());
-            Certificates = deserializeRowSet(getRowSetReader("certificates"), new Certificate());
-            CorporationRoles = deserializeRowSet(getRowSetReader("corporationRoles"), new Role());
-            CorporationRolesAtHq = deserializeRowSet(getRowSetReader("corporationRolesAtHQ"), new Role());
-            CorporationRolesAtBase = deserializeRowSet(getRowSetReader("corporationRolesAtBase"), new Role());
-            CorporationRolesAtOther = deserializeRowSet(getRowSetReader("corporationRolesAtOther"), new Role());
-            CorporationTitles = deserializeRowSet(getRowSetReader("corporationTitles"), new Title());
+            var xml = new XmlHelper(reader);
+            CharacterId = xml.getLong("characterID");
+            Name = xml.getString("name");
+            DateOfBirthAsString = xml.getString("DoB");
+            Race = xml.getString("race");
+            Bloodline = xml.getString("bloodLine");
+            Ancestry = xml.getString("ancestry");
+            Gender = xml.getString("gender");
+            CorporationName = xml.getString("corporationName");
+            CorporationId = xml.getLong("corporationID");
+            AllianceName = xml.getString("allianceName");
+            AllianceId = xml.getLong("allianceID");
+            CloneName = xml.getString("cloneName");
+            CloneSkillPoints = xml.getInt("cloneSkillPoints");
+            Balance = xml.getDecimal("balance");
+            AttributeEnhancers = xml.deserialize<Implants>("attributeEnhancers");
+            Skills = xml.deserializeRowSet<Skill>("skills");
+            Certificates = xml.deserializeRowSet<Certificate>("certificates");
+            CorporationRoles = xml.deserializeRowSet<Role>("corporationRoles");
+            CorporationRolesAtHq = xml.deserializeRowSet<Role>("corporationRolesAtHQ");
+            CorporationRolesAtBase = xml.deserializeRowSet<Role>("corporationRolesAtBase");
+            CorporationRolesAtOther = xml.deserializeRowSet<Role>("corporationRolesAtOther");
+            CorporationTitles = xml.deserializeRowSet<Title>("corporationTitles");
         }
 
         public void WriteXml(XmlWriter writer) {

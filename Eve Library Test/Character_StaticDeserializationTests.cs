@@ -3,7 +3,7 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveOnline;
 using eZet.EveLib.EveOnline.Model;
 using eZet.EveLib.EveOnline.Model.Character;
-using eZet.EveLib.EveOnline.Model.Core;
+using eZet.EveLib.EveOnline.Model.Misc;
 using eZet.EveLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FactionWarfareStats = eZet.EveLib.EveOnline.Model.Character.FactionWarfareStats;

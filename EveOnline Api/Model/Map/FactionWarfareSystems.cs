@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Map {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class FactionWarfareSystems : XmlElement {
+    public class FactionWarfareSystems {
         [XmlElement("rowset")]
         public RowCollection<SolarSystem> SolarSystems { get; set; }
 

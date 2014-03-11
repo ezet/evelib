@@ -3,13 +3,24 @@ using eZet.EveLib.EveOnline.Model;
 using eZet.EveLib.EveOnline.Model.Account;
 
 namespace eZet.EveLib.EveOnline {
+    /// <summary>
+    /// Provides access to Corporation objects and related API calls.
+    /// </summary>
     public class CorporationKey : ApiKey {
         private Corporation _corporation;
 
+        /// <summary>
+        /// Creates a new key using the provided key id and vcode.
+        /// </summary>
+        /// <param name="keyId"></param>
+        /// <param name="vCode"></param>
         public CorporationKey(long keyId, string vCode)
             : base(keyId, vCode) {
         }
 
+        /// <summary>
+        /// Gets the Corporation this key provides access to.
+        /// </summary>
         public Corporation Corporation {
             get {
                 if (_corporation == null)

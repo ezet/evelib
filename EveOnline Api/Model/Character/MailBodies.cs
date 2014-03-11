@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class MailBodies : XmlElement {
+    public class MailBodies {
         [XmlElement("rowset")]
         public RowCollection<Message> Messages { get; set; }
 

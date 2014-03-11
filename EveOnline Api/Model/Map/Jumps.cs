@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Map {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class Jumps : XmlElement {
+    public class Jumps {
         [XmlElement("rowset")]
         public RowCollection<SolarSystem> SolarSystems { get; set; }
 

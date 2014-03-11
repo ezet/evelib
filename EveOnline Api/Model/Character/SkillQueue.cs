@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class SkillQueue : XmlElement {
+    public class SkillQueue {
         [XmlElement("rowset")]
         public RowCollection<Skill> Queue { get; set; }
 
@@ -31,8 +31,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("startTime")]
             public string StartTimeAsString {
-                get { return StartTime.ToString(DateFormat); }
-                set { StartTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return StartTime.ToString(XmlHelper.DateFormat); }
+                set { StartTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlIgnore]
@@ -40,8 +40,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("endTime")]
             public string EndTimeAsString {
-                get { return EndTime.ToString(DateFormat); }
-                set { EndTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return EndTime.ToString(XmlHelper.DateFormat); }
+                set { EndTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
         }
     }

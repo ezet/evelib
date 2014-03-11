@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class ContactList : XmlElement, IXmlSerializable {
+    public class ContactList : IXmlSerializable {
         [XmlElement("rowset")]
         public RowCollection<Contact> CorporationContacts { get; set; }
 
@@ -20,9 +20,9 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
         }
 
         public void ReadXml(XmlReader reader) {
-            setRoot(reader);
-            CorporationContacts = deserializeRowSet(getRowSetReader("corporateContactList"), new Contact());
-            AllianceContacts = deserializeRowSet(getRowSetReader("allianceContactList"), new Contact());
+            var xml = new XmlHelper(reader);
+            CorporationContacts = xml.deserializeRowSet<Contact>("corporateContactList");
+            AllianceContacts = xml.deserializeRowSet<Contact>("allianceContactList");
         }
 
         public void WriteXml(XmlWriter writer) {

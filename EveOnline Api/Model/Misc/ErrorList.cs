@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class ErrorList : XmlElement {
+    public class ErrorList {
         [XmlElement("rowset")]
         public RowCollection<Error> Errors { get; set; }
 

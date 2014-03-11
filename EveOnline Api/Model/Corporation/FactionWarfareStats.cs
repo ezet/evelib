@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class FactionWarfareStats : XmlElement {
+    public class FactionWarfareStats {
         [XmlElement("factionID")]
         public long FactionId { get; set; }
 
@@ -16,8 +16,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
         [XmlElement("enlisted")]
         public string EnlistedDateAsString {
-            get { return EnlistedDate.ToString(DateFormat); }
-            set { EnlistedDate = DateTime.ParseExact(value, DateFormat, null); }
+            get { return EnlistedDate.ToString(XmlHelper.DateFormat); }
+            set { EnlistedDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         [XmlElement("pilots")]

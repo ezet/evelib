@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class ContainerLog : XmlElement {
+    public class ContainerLog {
         [XmlElement("rowset")]
         public RowCollection<LogEntry> LogEntries { get; set; }
 
@@ -16,8 +16,8 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
             [XmlAttribute("logTime")]
             public string LogTimeAsString {
-                get { return LogTime.ToString(DateFormat); }
-                set { LogTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return LogTime.ToString(XmlHelper.DateFormat); }
+                set { LogTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("itemID")]

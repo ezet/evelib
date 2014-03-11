@@ -5,14 +5,23 @@ using eZet.EveLib.EveOnline.Model;
 using eZet.EveLib.EveOnline.Model.Account;
 
 namespace eZet.EveLib.EveOnline {
+
+    /// <summary>
+    /// Provides access to Character objects and related API calls.
+    /// </summary>
     public class CharacterKey : ApiKey {
         private ReadOnlyCollection<Character> _characters;
 
+        /// <summary>
+        /// Creates a new key using the specified key id and vcode.
+        /// </summary>
+        /// <param name="keyId"></param>
+        /// <param name="vCode"></param>
         public CharacterKey(long keyId, string vCode) : base(keyId, vCode) {
         }
 
         /// <summary>
-        ///     A list of valid character ids for this key.
+        ///     Gets a list of Characters this key has access to.
         /// </summary>
         public ReadOnlyCollection<Character> Characters {
             get {

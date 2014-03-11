@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class ShareholderList : XmlElement {
+    public class ShareholderList {
         [XmlElement("rowset")]
         public RowCollection<Shareholder> Shareholders { get; set; }
 

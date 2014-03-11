@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class Research : XmlElement {
+    public class Research {
         [XmlElement("rowset")]
         public RowCollection<ResearchEntry> Entries { get; set; }
 
@@ -22,8 +22,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("researchStartDate")]
             public string StartDateAsString {
-                get { return StartDate.ToString(DateFormat); }
-                set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return StartDate.ToString(XmlHelper.DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("pointsPerDay")]

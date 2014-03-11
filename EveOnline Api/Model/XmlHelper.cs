@@ -10,7 +10,7 @@ namespace eZet.EveLib.EveOnline.Model {
     /// <summary>
     ///     Provides utility methods for XML element classes.
     /// </summary>
-    public abstract class XmlElement {
+    public class XmlHelper {
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";
 
         protected IEnumerable<XElement> list { get; set; }
@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveOnline.Model {
         ///     Sets and initializes the xml document for parsing using linq to xml.
         /// </summary>
         /// <param name="reader"></param>
-        protected void setRoot(XmlReader reader) {
+        public XmlHelper(XmlReader reader) {
             Contract.Requires(reader != null);
             root = XElement.Load(reader.ReadSubtree());
             list = root.Descendants();
@@ -31,10 +31,10 @@ namespace eZet.EveLib.EveOnline.Model {
         ///     Deserializes an XML rowset using .NETs XmlSerializer.
         /// </summary>
         /// <typeparam name="T">KeyType used for deserialization.</typeparam>
-        /// <param name="reader">A reader containing the rowset to deserialize.</param>
-        /// <param name="type">An instance of the type.</param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        protected virtual RowCollection<T> deserializeRowSet<T>(XmlReader reader, T type) {
+        public virtual RowCollection<T> deserializeRowSet<T>(string name) {
+            var reader = getRowSetReader(name);
             if (reader == null) return default(RowCollection<T>);
             reader.ReadToDescendant("rowset");
             var serializer = new XmlSerializer(typeof (RowCollection<T>));
@@ -45,10 +45,10 @@ namespace eZet.EveLib.EveOnline.Model {
         /// <summary>
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="reader"></param>
-        /// <param name="type"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        protected virtual T deserialize<T>(XmlReader reader, T type) {
+        public T deserialize<T>(string name) {
+            var reader = getReader(name);
             if (reader == null) return default(T);
             var serializer = new XmlSerializer(typeof (T));
             return (T) serializer.Deserialize(reader);
@@ -59,7 +59,7 @@ namespace eZet.EveLib.EveOnline.Model {
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        protected XmlReader getReader(string name) {
+        public XmlReader getReader(string name) {
             XElement el = list.FirstOrDefault(x => x.Name == name);
             return el != null ? el.CreateReader() : null;
         }
@@ -69,40 +69,40 @@ namespace eZet.EveLib.EveOnline.Model {
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        protected XmlReader getRowSetReader(string name) {
+        public XmlReader getRowSetReader(string name) {
             XElement rowset = list.Where(x => x.Name == "rowset").FirstOrDefault(r => r.Attribute("name").Value == name);
             return rowset != null ? rowset.CreateReader() : null;
         }
 
-        protected long getLong(string name) {
+        public long getLong(string name) {
             return long.Parse(list.First(x => x.Name == name).Value);
         }
 
-        protected string getString(string name) {
+        public string getString(string name) {
             return list.First(x => x.Name == name).Value;
         }
 
-        protected int getInt(string name) {
+        public int getInt(string name) {
             return int.Parse(list.First(x => x.Name == name).Value);
         }
 
-        protected decimal getDecimal(string name) {
+        public decimal getDecimal(string name) {
             return decimal.Parse(list.First(x => x.Name == name).Value, CultureInfo.InvariantCulture);
         }
 
-        protected string getStringAttribute(string name) {
+        public string getStringAttribute(string name) {
             return root.Attribute(name).Value;
         }
 
-        protected long getLongAttribute(string name) {
+        public long getLongAttribute(string name) {
             return long.Parse(root.Attribute(name).Value);
         }
 
-        protected int getIntAttribute(string name) {
+        public int getIntAttribute(string name) {
             return int.Parse(root.Attribute(name).Value);
         }
 
-        protected bool getBoolAttribute(string name) {
+        public bool getBoolAttribute(string name) {
             return root.Attribute(name).Value != "0" && root.Attribute(name).Value.ToLower() != "false";
         }
     }

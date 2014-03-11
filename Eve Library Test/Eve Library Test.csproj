@@ -90,7 +90,7 @@
     <Compile Include="ApiKey_Tests.cs" />
     <Compile Include="CharacterKey_ValidKeyTests.cs" />
     <Compile Include="Character_StaticDeserializationTests.cs" />
-    <Compile Include="Core_Tests.cs" />
+    <Compile Include="Misc_Tests.cs" />
     <Compile Include="Corporation_StaticDeserializationTests.cs" />
     <Compile Include="EveCentral_Tests.cs" />
     <Compile Include="EveMarketData_Tests.cs" />

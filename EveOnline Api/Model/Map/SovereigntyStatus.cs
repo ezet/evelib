@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Map {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class SovereigntyStatus : XmlElement {
+    public class SovereigntyStatus {
         [XmlElement("rowset")]
         public RowCollection<Structure> Structures { get; set; }
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class AllianceList : XmlElement {
+    public class AllianceList {
         [XmlElement("rowset")]
         public RowCollection<AllianceData> Alliances { get; set; }
 
@@ -31,8 +31,8 @@ namespace eZet.EveLib.EveOnline.Model.Core {
 
             [XmlAttribute("startDate")]
             public string StartDateAsString {
-                get { return StartDate.ToString(DateFormat); }
-                set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return StartDate.ToString(XmlHelper.DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlElement("rowset")]
@@ -50,8 +50,8 @@ namespace eZet.EveLib.EveOnline.Model.Core {
 
             [XmlAttribute("startDate")]
             public string StartDateAsString {
-                get { return StartDate.ToString(DateFormat); }
-                set { StartDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return StartDate.ToString(XmlHelper.DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
         }
     }

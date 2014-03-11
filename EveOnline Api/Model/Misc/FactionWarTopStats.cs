@@ -3,10 +3,10 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class FactionWarTopStats : XmlElement {
+    public class FactionWarTopStats {
         [XmlElement("characters")]
         public CharacterStats Characters { get; set; }
 
@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveOnline.Model.Core {
             public int Kills { get; set; }
         }
 
-        public class CharacterStats : XmlElement, IXmlSerializable {
+        public class CharacterStats : IXmlSerializable {
             [XmlElement("rowset")]
             public RowCollection<CharacterEntry> KillsYesterday { get; set; }
 
@@ -50,14 +50,13 @@ namespace eZet.EveLib.EveOnline.Model.Core {
             }
 
             public void ReadXml(XmlReader reader) {
-                setRoot(reader);
-                KillsYesterday = deserializeRowSet(getRowSetReader("KillsYesterday"), new CharacterEntry());
-                KillsLastWeek = deserializeRowSet(getRowSetReader("KillsLastWeek"), new CharacterEntry());
-                KillsTotal = deserializeRowSet(getRowSetReader("KillsTotal"), new CharacterEntry());
-                VictoryPointsYesterday = deserializeRowSet(getRowSetReader("VictoryPointsYesterday"),
-                    new CharacterEntry());
-                VictoryPointsLastWeek = deserializeRowSet(getRowSetReader("VictoryPointsLastWeek"), new CharacterEntry());
-                VictoryPointsTotal = deserializeRowSet(getRowSetReader("VictoryPointsTotal"), new CharacterEntry());
+                var xml = new XmlHelper(reader);
+                KillsYesterday = xml.deserializeRowSet<CharacterEntry>("KillsYesterday");
+                KillsLastWeek = xml.deserializeRowSet<CharacterEntry>("KillsLastWeek");
+                KillsTotal = xml.deserializeRowSet<CharacterEntry>("KillsTotal");
+                VictoryPointsYesterday = xml.deserializeRowSet<CharacterEntry>("VictoryPointsYesterday");
+                VictoryPointsLastWeek = xml.deserializeRowSet<CharacterEntry>("VictoryPointsLastWeek");
+                VictoryPointsTotal = xml.deserializeRowSet<CharacterEntry>("VictoryPointsTotal");
             }
 
             public void WriteXml(XmlWriter writer) {
@@ -78,7 +77,7 @@ namespace eZet.EveLib.EveOnline.Model.Core {
             public string Kills { get; set; }
         }
 
-        public class CorporationStats : XmlElement, IXmlSerializable {
+        public class CorporationStats : IXmlSerializable {
             [XmlElement("rowset")]
             public RowCollection<CorporationEntry> KillsYesterday { get; set; }
 
@@ -102,14 +101,13 @@ namespace eZet.EveLib.EveOnline.Model.Core {
             }
 
             public void ReadXml(XmlReader reader) {
-                KillsYesterday = deserializeRowSet(getRowSetReader("KillsYesterday"), new CorporationEntry());
-                KillsLastWeek = deserializeRowSet(getRowSetReader("KillsLastWeek"), new CorporationEntry());
-                KillsTotal = deserializeRowSet(getRowSetReader("KillsTotal"), new CorporationEntry());
-                VictoryPointsYesterday = deserializeRowSet(getRowSetReader("VictoryPointsYesterday"),
-                    new CorporationEntry());
-                VictoryPointsLastWeek = deserializeRowSet(getRowSetReader("VictoryPointsLastWeek"),
-                    new CorporationEntry());
-                VictoryPointsTotal = deserializeRowSet(getRowSetReader("VictoryPointsTotal"), new CorporationEntry());
+                var xml = new XmlHelper(reader);
+                KillsYesterday = xml.deserializeRowSet<CorporationEntry>("KillsYesterday");
+                KillsLastWeek = xml.deserializeRowSet<CorporationEntry>("KillsLastWeek");
+                KillsTotal = xml.deserializeRowSet<CorporationEntry>("KillsTotal");
+                VictoryPointsYesterday = xml.deserializeRowSet<CorporationEntry>("VictoryPointsYesterday");
+                VictoryPointsLastWeek = xml.deserializeRowSet<CorporationEntry>("VictoryPointsLastWeek");
+                VictoryPointsTotal = xml.deserializeRowSet<CorporationEntry>("VictoryPointsTotal");
             }
 
             public void WriteXml(XmlWriter writer) {

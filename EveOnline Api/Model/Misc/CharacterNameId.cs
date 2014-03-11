@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class CharacterNameId : XmlElement {
+    public class CharacterNameId {
         [XmlElement("rowset")]
         public RowCollection<CharacterData> Characters { get; set; }
 

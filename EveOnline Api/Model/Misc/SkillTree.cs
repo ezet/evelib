@@ -3,10 +3,10 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnline.Model.Core {
+namespace eZet.EveLib.EveOnline.Model.Misc {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class SkillTree : XmlElement {
+    public class SkillTree {
         [XmlElement("rowset")]
         public RowCollection<SkillGroup> Groups { get; set; }
 
@@ -32,7 +32,7 @@ namespace eZet.EveLib.EveOnline.Model.Core {
 
         [Serializable]
         [XmlRoot("row")]
-        public class Skill : XmlElement, IXmlSerializable {
+        public class Skill : IXmlSerializable {
             [XmlAttribute("groupID")]
             public long GroupId { get; set; }
 
@@ -65,16 +65,16 @@ namespace eZet.EveLib.EveOnline.Model.Core {
             }
 
             public void ReadXml(XmlReader reader) {
-                setRoot(reader);
-                GroupId = getLongAttribute("groupID");
-                Published = getBoolAttribute("published");
-                TypeId = getLongAttribute("typeID");
-                TypeName = getStringAttribute("typeName");
-                Description = getString("description");
-                Rank = getInt("rank");
-                RequiredSkills = deserializeRowSet(getRowSetReader("requiredSkills"), new RequiredSkill());
-                RequiredAttributes = deserialize(getReader("requiredAttributes"), new RequiredAttribute());
-                SkillBonuses = deserializeRowSet(getRowSetReader("skillBonusCollection"), new SkillBonus());
+                var xml = new XmlHelper(reader);
+                GroupId = xml.getLongAttribute("groupID");
+                Published = xml.getBoolAttribute("published");
+                TypeId = xml.getLongAttribute("typeID");
+                TypeName = xml.getStringAttribute("typeName");
+                Description = xml.getString("description");
+                Rank = xml.getInt("rank");
+                RequiredSkills = xml.deserializeRowSet<RequiredSkill>("requiredSkills");
+                RequiredAttributes = xml.deserialize<RequiredAttribute>("requiredAttributes");
+                SkillBonuses = xml.deserializeRowSet<SkillBonus>("skillBonusCollection");
             }
 
             public void WriteXml(XmlWriter writer) {

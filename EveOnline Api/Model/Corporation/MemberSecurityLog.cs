@@ -6,20 +6,20 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class MemberSecurityLog : XmlElement {
+    public class MemberSecurityLog {
         [XmlElement("rowset")]
         public RowCollection<LogEntry> RoleHistory { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
-        public class LogEntry : XmlElement, IXmlSerializable {
+        public class LogEntry : IXmlSerializable {
             [XmlIgnore]
             public DateTime ChangeTime { get; private set; }
 
             [XmlAttribute("changeTime")]
             public string ChangeTimeAsString {
-                get { return ChangeTime.ToString(DateFormat); }
-                set { ChangeTime = DateTime.ParseExact(value, DateFormat, null); }
+                get { return ChangeTime.ToString(XmlHelper.DateFormat); }
+                set { ChangeTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("characterID")]
@@ -48,15 +48,15 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
             }
 
             public void ReadXml(XmlReader reader) {
-                setRoot(reader);
-                ChangeTimeAsString = getStringAttribute("changeTime");
-                CharacterId = getLongAttribute("characterID");
-                CharacterName = getStringAttribute("characterName");
-                IssuerId = getLongAttribute("issuerID");
-                IssuerName = getStringAttribute("issuerName");
-                RoleLocationType = getStringAttribute("roleLocationType");
-                OldRoles = deserializeRowSet(getRowSetReader("oldRoles"), new MemberSecurity.Role());
-                NewRoles = deserializeRowSet(getRowSetReader("newRoles"), new MemberSecurity.Role());
+                var xml = new XmlHelper(reader);
+                ChangeTimeAsString = xml.getStringAttribute("changeTime");
+                CharacterId = xml.getLongAttribute("characterID");
+                CharacterName = xml.getStringAttribute("characterName");
+                IssuerId = xml.getLongAttribute("issuerID");
+                IssuerName = xml.getStringAttribute("issuerName");
+                RoleLocationType = xml.getStringAttribute("roleLocationType");
+                OldRoles = xml.deserializeRowSet<MemberSecurity.Role>("oldRoles");
+                NewRoles = xml.deserializeRowSet<MemberSecurity.Role>("newRoles");
             }
 
             public void WriteXml(XmlWriter writer) {

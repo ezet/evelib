@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class ContractBids : XmlElement {
+    public class ContractBids {
         [XmlElement("rowset")]
         public RowCollection<Bid> Bids { get; set; }
 
@@ -25,8 +25,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
 
             [XmlAttribute("dateBid")]
             public string BidDateAsString {
-                get { return BidDate.ToString(DateFormat); }
-                set { BidDate = DateTime.ParseExact(value, DateFormat, null); }
+                get { return BidDate.ToString(XmlHelper.DateFormat); }
+                set { BidDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
             [XmlAttribute("amount")]

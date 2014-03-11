@@ -30,17 +30,17 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     The Key ID for this key.
+        ///     Gets the key ID for this key.
         /// </summary>
         public long KeyId { get; protected set; }
 
         /// <summary>
-        ///     The VCode for this key.
+        ///     Gets the VCode for this key.
         /// </summary>
         public string VCode { get; protected set; }
 
         /// <summary>
-        ///     The CAK access mask of this key.
+        ///     Gets the CAK access mask of this key.
         /// </summary>
         public int AccessMask {
             get {
@@ -52,7 +52,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     The type of key, possible values are character or corporation.
+        ///     Gets the type of this key.
         /// </summary>
         public ApiKeyType? KeyType {
             get {
@@ -64,7 +64,7 @@ namespace eZet.EveLib.EveOnline {
         }
 
         /// <summary>
-        ///     The expiration date of this key.
+        ///     Gets the expiration date of this key.
         /// </summary>
         public DateTime ExpireDate {
             get {
@@ -75,6 +75,10 @@ namespace eZet.EveLib.EveOnline {
             protected set { _expireTime = value; }
         }
 
+        /// <summary>
+        /// Returns api key info. All of this information is already available as properties on this object.
+        /// </summary>
+        /// <returns></returns>
         public EveApiResponse<ApiKeyInfo> GetApiKeyInfo() {
             //const int mask = 0;
             const string uri = "/account/APIKeyInfo.xml.aspx";

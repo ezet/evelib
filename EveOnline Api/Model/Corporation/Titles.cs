@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Corporation {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class TitleList : XmlElement {
+    public class TitleList {
         [XmlElement("rowset")]
         public RowCollection<Title> Titles { get; set; }
 
@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
 
         [Serializable]
         [XmlRoot("row")]
-        public class Title : XmlElement, IXmlSerializable {
+        public class Title : IXmlSerializable {
             [XmlAttribute("titleID")]
             public long TitleId { get; set; }
 
@@ -61,17 +61,17 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
             }
 
             public void ReadXml(XmlReader reader) {
-                setRoot(reader);
-                TitleId = long.Parse(root.Attribute("titleID").Value);
-                TitleName = root.Attribute("titleName").Value;
-                Roles = deserializeRowSet(getRowSetReader("roles"), new Role());
-                GrantableRoles = deserializeRowSet(getRowSetReader("grantableRoles"), new Role());
-                RolesAtHq = deserializeRowSet(getRowSetReader("rolesAtHQ"), new Role());
-                GrantableRolesAtHq = deserializeRowSet(getRowSetReader("grantableRolesAtHQ"), new Role());
-                RolesAtBase = deserializeRowSet(getRowSetReader("rolesAtBase"), new Role());
-                GrantableRolesAtBase = deserializeRowSet(getRowSetReader("grantableRolesAtBase"), new Role());
-                RolesAtOther = deserializeRowSet(getRowSetReader("rolesAtOther"), new Role());
-                GrantableRolesAtOther = deserializeRowSet(getRowSetReader("grantableRolesAtOther"), new Role());
+                var xml = new XmlHelper(reader);
+                TitleId = xml.getLongAttribute("titleID");
+                TitleName = xml.getStringAttribute("titleName");
+                Roles = xml.deserializeRowSet<Role>("roles");
+                GrantableRoles = xml.deserializeRowSet<Role>("grantableRoles");
+                RolesAtHq = xml.deserializeRowSet<Role>("rolesAtHQ");
+                GrantableRolesAtHq = xml.deserializeRowSet<Role>("grantableRolesAtHQ");
+                RolesAtBase = xml.deserializeRowSet<Role>("rolesAtBase");
+                GrantableRolesAtBase = xml.deserializeRowSet<Role>("grantableRolesAtBase");
+                RolesAtOther = xml.deserializeRowSet<Role>("rolesAtOther");
+                GrantableRolesAtOther = xml.deserializeRowSet<Role>("grantableRolesAtOther");
             }
 
             public void WriteXml(XmlWriter writer) {

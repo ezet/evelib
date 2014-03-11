@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace eZet.EveLib.EveOnline.Model.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
-    public class CalendarEventAttendees : XmlElement {
+    public class CalendarEventAttendees {
         [XmlElement("rowset")]
         public RowCollection<Attendee> Attendees { get; set; }
 

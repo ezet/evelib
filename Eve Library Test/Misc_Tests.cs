@@ -2,12 +2,12 @@
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.EveOnline;
 using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Core;
+using eZet.EveLib.EveOnline.Model.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
     [TestClass]
-    public class Core_Tests {
+    public class Misc_Tests {
         private const string CharName = "CCP Garthagk";
 
         private const long CharId = 797400947;
