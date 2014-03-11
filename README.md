@@ -22,7 +22,7 @@ The library uses Code Contracts, see [code contracts] (http://research.microsoft
 The library is currently not threaded in any way. There's not really room for effective parallelization in the requests, so the only use would be for offloading eg. a GUI thread. This responsibility should be left to the client code.
 
 #### Caching
-The CCP API library uses the default HttpWebRequest cache (IE Cache) by default, adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
+The EveOnline API module uses the default HttpWebRequest cache (IE Cache), adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
 
 EveOnline API
 -
@@ -35,25 +35,24 @@ This library exposes all of CCPs Eve API calls through an easy to use API, using
 * `Misc` exposes all other API requests.
 
 #### Requests 
-Map, Image and Misc does not require any state, and can be accessed like this:
+Map, Image and Misc does not require any state, and can be accessed by creating a new object:
 
     var mapApi = new Map();
     EveApiResponse<Kills> result = map.GetKills();
-    
 
 Character and Corporation require a valid Eve Online API Key, which consist of a key id and a vertification code.
-To access these, you need to create a new `CharacterKey` or `CorporationKey`. An example using id '123' and vcode 'qwerty':
+To access these, you need to create a new `CharacterKey` or `CorporationKey` respectively. An example using id '123' and vcode 'qwerty':
 
     var key = new CharacterKey(123, "qwerty");
 
-Using this key, you can access all /account/ calls (note: Only `CharacterKey` provides `GetAccountInfo()`):
+Using this key, you can access all /account/* calls (note: Only `CharacterKey` provides `GetAccountInfo()`):
 
     EveApiResponse<ApiKeyInfo> result = key.GetApiKeyInfo();
 	
-To get access to Character objects, simply access `key.Characters`, which lazily loads a list of Character objects for all characters this key has access to. You can then pick the character you want, and access the API through it.
+To get access to Character objects, simply get `key.Characters`, which lazily loads a list of Character objects for all characters this key has access to. You can then pick the character you want, and access the API through it.
 
     Character character = key.Characters.First();
-    EveApiResponse<CharacterSheet> data = character.GetCharacterSheet();
+    EveApiResponse<CharacterSheet> result = character.GetCharacterSheet();
 
 You can also use LINQ and predicates to find a specific character, eg:
 
@@ -93,6 +92,6 @@ This module provides access to all calls on the EveCentral api. All api calls ca
 
 EveMarketData API
 -
-This module provides access to all calls on the EveMarketData api. All api calls can be made through any `EveMarketData` object. Most parameters for requests can be set and passed in a `EveMarketDataOptions` object. It is very similar to the EveCentral module.
+This module provides access to all calls on the EveMarketData api. All api calls can be made through any `EveMarketData` object. Most parameters for requests can be set and passed in a `EveMarketDataOptions` object. This module also supports both JSON and XML mode, where JSON is the default. You can specify which format you want in the EveMarketData constructor. It is otherwise very similar to the EveCentral module.
 
 
