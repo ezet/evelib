@@ -92,6 +92,7 @@ This module provides access to all calls on the EveCentral api. All api calls ca
 
 EveMarketData API
 -
+Requires Newtonsoft.Json.dll.
 This module provides access to all calls on the EveMarketData api. All api calls can be made through any `EveMarketData` object. Most parameters for requests can be set and passed in a `EveMarketDataOptions` object. This module also supports both JSON and XML mode, where JSON is the default. You can specify which format you want in the EveMarketData constructor. It is otherwise very similar to the EveCentral module.
 
 
