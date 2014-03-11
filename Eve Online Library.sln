@@ -10,19 +10,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{18AE4A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveCentral Api", "EveCentral Api\EveCentral Api.csproj", "{FCD48E90-6605-4BC1-B761-0B37DF390990}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.Core", "EveLib.Core\EveLib.Core.csproj", "{AA85978C-2BF5-419F-9F8E-B70162E83F34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveMarketData Api", "EveMarketData Api\EveMarketData Api.csproj", "{185E2271-BBA1-4071-AC46-BF47153BDB7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveCentral", "EveLib.EveCentral\EveLib.EveCentral.csproj", "{FCD48E90-6605-4BC1-B761-0B37DF390990}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveOnline Api", "EveOnline Api\EveOnline Api.csproj", "{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{185E2271-BBA1-4071-AC46-BF47153BDB7A} = {185E2271-BBA1-4071-AC46-BF47153BDB7A}
-		{FCD48E90-6605-4BC1-B761-0B37DF390990} = {FCD48E90-6605-4BC1-B761-0B37DF390990}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveMarketData", "EveLib.EveMarketData\EveLib.EveMarketData.csproj", "{185E2271-BBA1-4071-AC46-BF47153BDB7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eve Library Core", "Eve Library Core\Eve Library Core.csproj", "{AA85978C-2BF5-419F-9F8E-B70162E83F34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveOnline", "EveLib.EveOnline\EveLib.EveOnline.csproj", "{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eve Library Test", "Eve Library Test\Eve Library Test.csproj", "{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.Test", "EveLib.Tests\EveLib.Test.csproj", "{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib", "EveLib\EveLib.csproj", "{17953800-9E17-4893-AD6B-BC7BAA6029D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +28,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCD48E90-6605-4BC1-B761-0B37DF390990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FCD48E90-6605-4BC1-B761-0B37DF390990}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCD48E90-6605-4BC1-B761-0B37DF390990}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,14 +44,14 @@ Global
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA85978C-2BF5-419F-9F8E-B70162E83F34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17953800-9E17-4893-AD6B-BC7BAA6029D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17953800-9E17-4893-AD6B-BC7BAA6029D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17953800-9E17-4893-AD6B-BC7BAA6029D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17953800-9E17-4893-AD6B-BC7BAA6029D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
