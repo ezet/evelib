@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net;
@@ -20,6 +21,7 @@ namespace eZet.EveLib.Core.Util {
 
         public static HttpWebResponse GetResponse(HttpWebRequest request) {
             Contract.Requires(request != null);
+            Debug.WriteLine("Request: " + request.RequestUri);
             var response = request.GetResponse() as HttpWebResponse;
             return response;
         }
@@ -35,7 +37,6 @@ namespace eZet.EveLib.Core.Util {
                     data = reader.ReadToEnd();
                 }
             }
-
             return data;
         }
     }

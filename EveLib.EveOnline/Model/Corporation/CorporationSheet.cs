@@ -38,7 +38,10 @@ namespace eZet.EveLib.EveOnline.Model.Corporation {
         [XmlElement("allianceName")]
         public string AllianceName { get; set; }
 
-        [XmlElement("taxRage")]
+        [XmlElement("factionID")]
+        public string FactionId { get; set; }
+
+        [XmlElement("taxRate")]
         public string TaxRate { get; set; }
 
         [XmlElement("memberCount")]

@@ -14,6 +14,9 @@ namespace eZet.EveLib.EveOnline.Model.Character {
             [XmlAttribute("messageID")]
             public long MessageId { get; set; }
 
+            [XmlAttribute("senderName")]
+            public string SenderName { get; set; }
+
             [XmlAttribute("senderID")]
             public long SenderId { get; set; }
 

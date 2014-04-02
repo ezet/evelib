@@ -36,7 +36,7 @@ namespace eZet.EveLib.EveOnline.Util {
             request.Proxy = null;
             try {
                 using (var response = HttpRequestHelper.GetResponse(request)) {
-                    //Debug.WriteLine("From cache: " + response.IsFromCache);
+                    Debug.WriteLine("From cache: " + response.IsFromCache);
                     Stream responseStream = response.GetResponseStream();
                     if (responseStream != null) {
                         using (var reader = new StreamReader(responseStream)) {

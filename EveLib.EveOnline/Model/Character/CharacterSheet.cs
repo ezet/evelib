@@ -48,6 +48,9 @@ namespace eZet.EveLib.EveOnline.Model.Character {
         [XmlElement("allianceID")]
         public long AllianceId { get; set; }
 
+        [XmlElement("factionID")]
+        public object FactionId { get; set; }
+        
         [XmlElement("cloneName")]
         public string CloneName { get; set; }
 
