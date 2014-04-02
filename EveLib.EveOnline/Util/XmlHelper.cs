@@ -37,8 +37,8 @@ namespace eZet.EveLib.EveOnline.Model {
             XmlReader reader = getRowSetReader(name);
             if (reader == null) return default(RowCollection<T>);
             reader.ReadToDescendant("rowset");
-            var serializer = new XmlSerializer(typeof (RowCollection<T>));
-            return (RowCollection<T>) serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof(RowCollection<T>));
+            return (RowCollection<T>)serializer.Deserialize(reader);
         }
 
 
@@ -50,8 +50,8 @@ namespace eZet.EveLib.EveOnline.Model {
         public T deserialize<T>(string name) {
             XmlReader reader = getReader(name);
             if (reader == null) return default(T);
-            var serializer = new XmlSerializer(typeof (T));
-            return (T) serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof(T));
+            return (T)serializer.Deserialize(reader);
         }
 
         /// <summary>
@@ -75,35 +75,39 @@ namespace eZet.EveLib.EveOnline.Model {
         }
 
         public long getLong(string name) {
-            return long.Parse(list.First(x => x.Name == name).Value);
+            var val = list.FirstOrDefault(x => x.Name == name);
+            return val != null ? long.Parse(val.Value) : 0;
         }
 
         public string getString(string name) {
-            return list.First(x => x.Name == name).Value;
+            var val = list.SingleOrDefault(x => x.Name == name);
+            return val != null ? val.Value : "";
         }
 
         public int getInt(string name) {
-            return int.Parse(list.First(x => x.Name == name).Value);
+            var val = list.FirstOrDefault(x => x.Name == name);
+            return val != null ? int.Parse(val.Value) : 0;
         }
 
         public decimal getDecimal(string name) {
-            return decimal.Parse(list.First(x => x.Name == name).Value, CultureInfo.InvariantCulture);
+            var val = list.FirstOrDefault(x => x.Name == name);
+            return val != null ? decimal.Parse(list.First(x => x.Name == name).Value, CultureInfo.InvariantCulture) : 0;
         }
 
         public string getStringAttribute(string name) {
-            return root.Attribute(name).Value;
+            return root.Attribute(name) != null ? root.Attribute(name).Value : "";
         }
 
         public long getLongAttribute(string name) {
-            return long.Parse(root.Attribute(name).Value);
+            return root.Attribute(name) != null ? long.Parse(root.Attribute(name).Value) : 0;
         }
 
         public int getIntAttribute(string name) {
-            return int.Parse(root.Attribute(name).Value);
+            return root.Attribute(name) != null ? int.Parse(root.Attribute(name).Value) : 0;
         }
 
-        public bool getBoolAttribute(string name) {
-            return root.Attribute(name).Value != "0" && root.Attribute(name).Value.ToLower() != "false";
+        public bool? getBoolAttribute(string name) {
+            return root.Attribute(name) != null ? root.Attribute(name).Value != "0" && root.Attribute(name).Value.ToLower() != "false" : default(bool?);
         }
     }
 }

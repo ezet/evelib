@@ -67,7 +67,7 @@ namespace eZet.EveLib.EveOnline.Model.Misc {
             public void ReadXml(XmlReader reader) {
                 var xml = new XmlHelper(reader);
                 GroupId = xml.getLongAttribute("groupID");
-                Published = xml.getBoolAttribute("published");
+                Published = xml.getBoolAttribute("published") ?? false;
                 TypeId = xml.getLongAttribute("typeID");
                 TypeName = xml.getStringAttribute("typeName");
                 Description = xml.getString("description");
