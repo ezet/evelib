@@ -161,6 +161,7 @@
     <Compile Include="Model\Misc\ErrorList.cs" />
     <Compile Include="Model\Misc\FactionWarfareStats.cs" />
     <Compile Include="Model\Misc\FactionWarTopStats.cs" />
+    <Compile Include="Model\Misc\OwnerCollection.cs" />
     <Compile Include="Model\Misc\RefTypes.cs" />
     <Compile Include="Model\Misc\ServerStatus.cs" />
     <Compile Include="Model\Misc\SkillTree.cs" />

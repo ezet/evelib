@@ -179,8 +179,21 @@ namespace eZet.EveLib.EveOnline {
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<CallList> GetCallList() {
-            const string relPath = "/api/calllist.xml.aspx";
+            const string relPath = "/api/CallList.xml.aspx";
             return request<CallList>(relPath);
         }
+
+        /// <summary>
+        ///     Returns the owner name, id and group for an object.
+        /// </summary>
+        /// <param name="list">A list of names or IDs</param>
+        /// <returns></returns>
+        public EveApiResponse<OwnerCollection> GetOwner(params object[] list) {
+            // TODO verify that input is string or integer
+            const string relpath = "/eve/OwnerID.xml.aspx";
+            string names = String.Join(",", list);
+            return request<OwnerCollection>(relpath, "names", names);
+        }
+
     }
 }

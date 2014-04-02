@@ -110,5 +110,11 @@ namespace eZet.EveLib.Test {
             Assert.IsNotNull(xml.Result.CallGroups.First());
             Assert.IsNotNull(xml.Result.Calls.First());
         }
+
+        [TestMethod]
+        public void GetOwner_ValidRequest_HasResult() {
+            EveApiResponse<OwnerCollection> xml = api.GetOwner("test");
+            Assert.IsNotNull(xml.Result.Owners.First());
+        }
     }
 }
