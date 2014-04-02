@@ -84,7 +84,7 @@ namespace eZet.EveLib.EveMarketData {
         /// <param name="minmax"></param>
         /// <returns>All orders on the market.</returns>
         public EveMarketDataResponse<ItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type,
-            MinMax minmax) {
+            MinMax minmax = default(MinMax)) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(options.Stations != null);
             Contract.Requires(options.Items != null);
@@ -97,10 +97,11 @@ namespace eZet.EveLib.EveMarketData {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
+            var minmaxval = minmax == MinMax.None ? "" : minmax.ToString();
             string postString = generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
                 "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type),
-                "minmax", minmax.ToString().ToLower());
+                "minmax", minmaxval);
             return request<ItemPrices>(relUri, postString);
         }
 
@@ -141,7 +142,8 @@ namespace eZet.EveLib.EveMarketData {
             string relUri = "/api/item_history2." + Format.ToString().ToLower();
             string items = String.Join(",", options.Items);
             string regions = String.Join(",", options.Regions);
-            string postString = generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions);
+            string days = "" + (int)options.AgeSpan.GetValueOrDefault().TotalDays;
+            string postString = generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions, "days", days);
             return request<ItemHistory>(relUri, postString);
         }
 
@@ -153,7 +155,7 @@ namespace eZet.EveLib.EveMarketData {
         public EveMarketDataResponse<StationRank> GetStationRank(EveMarketDataOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(
-                options.Regions.Count != 0 || options.Solarsystems.Count != 0 || options.Stations.Count != 0,
+                options.Regions.Count != 0 ^ options.Solarsystems.Count != 0 ^ options.Stations.Count != 0,
                 "You must specify atleast one of the following: Station, Solarsystem, Region.");
             string relUri = "/api/station_rank2." + Format.ToString().ToLower();
             string regions = String.Join(",", options.Regions);

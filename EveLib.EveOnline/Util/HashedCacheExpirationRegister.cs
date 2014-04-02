@@ -36,7 +36,7 @@ namespace eZet.EveLib.EveOnline.Util {
 
         private static string resolve(Uri uri) {
             Contract.Requires(uri != null);
-            string file = uri.PathAndQuery.Replace("/", "");
+            string file = uri.PathAndQuery;
             byte[] hash = Sha1.ComputeHash(Encoding.Unicode.GetBytes(file));
             return BitConverter.ToString(hash).Replace("-", "");
         }

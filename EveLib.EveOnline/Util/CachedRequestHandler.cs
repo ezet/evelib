@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnline.Util {
         public override T Request<T>(Uri uri) {
             DateTime cachedUntil;
             bool fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
-            string data;
+            string data = "";
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.ContentType = ContentType;
             request.CachePolicy = fromCache
@@ -35,10 +35,20 @@ namespace eZet.EveLib.EveOnline.Util {
                 : new HttpRequestCachePolicy(HttpRequestCacheLevel.Reload);
             request.Proxy = null;
             try {
-                data = HttpRequestHelper.GetContent(request);
-            }
-            catch (WebException e) {
-                var response = (HttpWebResponse) e.Response;
+                using (var response = HttpRequestHelper.GetResponse(request)) {
+                    //Debug.WriteLine("From cache: " + response.IsFromCache);
+                    Stream responseStream = response.GetResponseStream();
+                    if (responseStream != null) {
+                        using (var reader = new StreamReader(responseStream)) {
+                            data = reader.ReadToEnd();
+                            Debug.Write(data);
+                        }
+                    }
+                }
+                //data = HttpRequestHelper.GetContent(request);
+            } catch (WebException e) {
+                var response = (HttpWebResponse)e.Response;
+                if (response == null) throw;
                 Debug.WriteLine("From cache: " + response.IsFromCache);
                 if (response.StatusCode != HttpStatusCode.BadRequest)
                     throw new InvalidRequestException("Request caused a WebException.", e);

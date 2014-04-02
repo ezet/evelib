@@ -29,6 +29,7 @@ namespace eZet.EveLib.EveMarketData {
     }
 
     public enum MinMax {
+        None,
         Min,
         Max
     }

@@ -15,7 +15,8 @@ namespace eZet.EveLib.EveOnline.Model.Character {
         public RowCollection<Transaction> Transactions { get; set; }
 
         public EveApiResponse<WalletTransactions> GetOlder(int count = 1000) {
-            long lastId = Transactions.OrderBy(t => t.TransactionId).First().TransactionId;
+            var transaction = Transactions.OrderBy(t => t.TransactionId).FirstOrDefault();
+            long lastId = transaction != null ? transaction.TransactionId : 0;
             return CharWalker != null ? CharWalker.Invoke(count, lastId) : CorpWalker.Invoke(Division, count, lastId);
         }
 
@@ -52,7 +53,7 @@ namespace eZet.EveLib.EveOnline.Model.Character {
             [XmlAttribute("price")]
             public decimal Price { get; set; }
 
-            [XmlAttribute("cliendID")]
+            [XmlAttribute("clientID")]
             public long ClientId { get; set; }
 
             [XmlAttribute("clientName")]
@@ -65,10 +66,12 @@ namespace eZet.EveLib.EveOnline.Model.Character {
             public string StationName { get; set; }
 
             [XmlAttribute("transactionType")]
-            public string TransactionType { get; set; }
+            public OrderType TransactionType { get; set; }
 
             [XmlAttribute("transactionFor")]
             public string TransactionFor { get; set; }
+
+
         }
     }
 }

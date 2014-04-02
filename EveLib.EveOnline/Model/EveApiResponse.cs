@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.EveOnline.Model {
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
-    public class EveApiResponse<T> {
+    public class EveApiResponse<T> : IXmlSerializable {
         [XmlIgnore]
         public DateTime CurrentTime { get; private set; }
 
@@ -28,5 +30,21 @@ namespace eZet.EveLib.EveOnline.Model {
 
         [XmlAttribute("version")]
         public int Version { get; set; }
+
+        public XmlSchema GetSchema() {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader) {
+            var xml = new XmlHelper(reader);
+            CurrentTimeAsString = xml.getString("currentTime");
+            Result = xml.deserialize<T>("result");
+            Version = xml.getIntAttribute("version");
+            CachedUntilAsString = xml.getString("cachedUntil");
+        }
+
+        public void WriteXml(XmlWriter writer) {
+            throw new NotImplementedException();
+        }
     }
 }
