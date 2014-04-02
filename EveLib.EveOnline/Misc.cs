@@ -188,8 +188,7 @@ namespace eZet.EveLib.EveOnline {
         /// </summary>
         /// <param name="list">A list of names or IDs</param>
         /// <returns></returns>
-        public EveApiResponse<OwnerCollection> GetOwner(params object[] list) {
-            // TODO verify that input is string or integer
+        public EveApiResponse<OwnerCollection> GetOwnerId(params string[] list) {
             const string relpath = "/eve/OwnerID.xml.aspx";
             string names = String.Join(",", list);
             return request<OwnerCollection>(relpath, "names", names);

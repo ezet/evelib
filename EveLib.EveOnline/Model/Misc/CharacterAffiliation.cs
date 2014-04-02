@@ -11,17 +11,17 @@ namespace eZet.EveLib.EveOnline.Model.Misc {
         [Serializable]
         [XmlRoot("row")]
         public class CharacterAffiliationData {
+            [XmlAttribute("characterID")]
+            public long CharacterId { get; set; }
+ 
             [XmlAttribute("characterName")]
             public string CharacterName { get; set; }
 
-            [XmlAttribute("characterID")]
-            public long CharacterId { get; set; }
+            [XmlAttribute("corporationID")]
+            public long CorporationId { get; set; }
 
             [XmlAttribute("corporationName")]
             public string CorporationName { get; set; }
-
-            [XmlAttribute("corporationID")]
-            public long CorporationId { get; set; }
 
             [XmlAttribute("allianceName")]
             public string AllianceName { get; set; }

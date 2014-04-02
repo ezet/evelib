@@ -32,10 +32,9 @@ namespace eZet.EveLib.Test {
         ///     Not yet implemented by CCP
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException), "Not implemented by CCP yet.")]
         public void GetCharacterAffiliation_ValidRequest_HasResult() {
             EveApiResponse<CharacterAffiliation> xml = api.GetCharacterAffiliation(CharId);
-            Assert.IsNotNull(xml.Result.Characters.First(), "Not implemented by CCP yet.");
+            Assert.IsNotNull(xml.Result.Characters.First());
         }
 
         [TestMethod]
@@ -113,8 +112,9 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetOwner_ValidRequest_HasResult() {
-            EveApiResponse<OwnerCollection> xml = api.GetOwner("test");
+            EveApiResponse<OwnerCollection> xml = api.GetOwnerId(CharName);
             Assert.IsNotNull(xml.Result.Owners.First());
+            Assert.AreEqual(CharId, xml.Result.Owners.First().OwnerId);
         }
     }
 }
