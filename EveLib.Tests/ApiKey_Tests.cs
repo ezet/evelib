@@ -10,24 +10,30 @@ namespace eZet.EveLib.Test {
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private readonly ApiKey validKey = new CharacterKey(KeyId, VCode);
+        private readonly ApiKey _validKey = new ApiKey(KeyId, VCode);
 
 
         [TestMethod]
         public void GetApiKeyInfo_NoExceptions() {
-            EveApiResponse<ApiKeyInfo> res = validKey.GetApiKeyInfo();
+            EveApiResponse<ApiKeyInfo> res = _validKey.GetApiKeyInfo();
         }
 
         [TestMethod]
         public void GetCharacterList_NoExceptions() {
-            EveApiResponse<CharacterList> res = validKey.GetCharacterList();
+            EveApiResponse<CharacterList> res = _validKey.GetCharacterList();
         }
 
         [TestMethod]
         public void Properties_LazyLoaded() {
-            Assert.AreEqual(ApiKeyType.Character, validKey.KeyType);
-            Assert.IsNotNull(validKey.ExpireDate);
-            Assert.AreEqual(268435455, validKey.AccessMask);
+            Assert.AreEqual(ApiKeyType.Character, _validKey.KeyType);
+            Assert.IsNotNull(_validKey.ExpireDate);
+            Assert.AreEqual(268435455, _validKey.AccessMask);
+        }
+
+        [TestMethod]
+        public void IsValidKey_InvalidKey_NoExceptions() {
+            var key = new ApiKey(0, "invalid");
+            Assert.AreEqual(false, key.IsValidKey());
         }
     }
 }

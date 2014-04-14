@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Linq.Expressions;
+using System.Net;
+using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 
@@ -13,7 +16,7 @@ namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Base class for Key entities, providing common properties and methods.
     /// </summary>
-    public abstract class ApiKey : BaseEntity {
+    public class ApiKey : BaseEntity {
         private int _accessMask;
         private DateTime _expireTime;
         private ApiKeyType? _type;
@@ -23,7 +26,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
-        protected ApiKey(long keyId, string vCode) {
+        public ApiKey(long keyId, string vCode) {
             BaseUri = new Uri("https://api.eveonline.com");
             KeyId = keyId;
             VCode = vCode;
@@ -96,19 +99,29 @@ namespace eZet.EveLib.Modules {
             return response;
         }
 
-        protected bool HasAccess(int mask) {
+        public bool IsValidKey() {
+            try {
+                lazyLoad();
+            } catch (InvalidRequestException e) {
+                if (e.InnerException.GetType() == typeof(WebException)) {
+                    if (((HttpWebResponse) ((WebException) e.InnerException).Response).StatusCode ==
+                        HttpStatusCode.Forbidden) {
+                        return false;
+                    }
+                }
+                throw;
+            }
             return true;
         }
 
-        protected void RequireAccess(int mask) {
+        protected virtual void lazyLoad() {
+            load(GetApiKeyInfo());
         }
-
-        protected abstract void lazyLoad();
 
         protected void load(EveApiResponse<ApiKeyInfo> info) {
             Contract.Requires(info != null);
             AccessMask = info.Result.Key.AccessMask;
-            KeyType = (ApiKeyType) Enum.Parse(typeof (ApiKeyType), info.Result.Key.Type);
+            KeyType = (ApiKeyType)Enum.Parse(typeof(ApiKeyType), info.Result.Key.Type);
             ExpireDate = info.Result.Key.ExpireDate;
         }
     }
