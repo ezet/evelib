@@ -1,9 +1,9 @@
 ﻿using System;
-using eZet.EveLib.EveMarketData.Model;
+using eZet.EveLib.Modules.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace eZet.EveLib.EveMarketData.JsonConverter {
+namespace eZet.EveLib.Modules.JsonConverter {
     public class RowSetCollectionJsonConverter<T> : Newtonsoft.Json.JsonConverter {
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer) {
             throw new NotImplementedException();
@@ -11,7 +11,7 @@ namespace eZet.EveLib.EveMarketData.JsonConverter {
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             Newtonsoft.Json.JsonSerializer serializer) {
-            var result = new RowCollection<T>();
+            var result = new EveMarketDataRowCollection<T>();
             JObject json = JObject.Load(reader);
             foreach (JToken row in json["row"]) {
                 result.Add(serializer.Deserialize<T>(row.CreateReader()));
@@ -20,7 +20,7 @@ namespace eZet.EveLib.EveMarketData.JsonConverter {
         }
 
         public override bool CanConvert(Type objectType) {
-            return objectType == typeof (RowCollection<T>);
+            return objectType == typeof (EveMarketDataRowCollection<T>);
         }
     }
 }

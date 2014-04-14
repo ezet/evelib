@@ -90,6 +90,7 @@
     <Compile Include="ApiKey_Tests.cs" />
     <Compile Include="CharacterKey_ValidKeyTests.cs" />
     <Compile Include="Character_StaticDeserializationTests.cs" />
+    <Compile Include="Element43_Tests.cs" />
     <Compile Include="Misc_Tests.cs" />
     <Compile Include="Corporation_StaticDeserializationTests.cs" />
     <Compile Include="EveCentral_Tests.cs" />
@@ -171,6 +172,10 @@
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
       <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
       <Name>EveLib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.Element43\EveLib.Element43.csproj">
+      <Project>{91c78379-3d32-4131-8cd7-c1e8876d0933}</Project>
+      <Name>EveLib.Element43</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveLib.EveCentral\EveLib.EveCentral.csproj">
       <Project>{fcd48e90-6605-4bc1-b761-0b37df390990}</Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using eZet.EveLib.Core;
 using eZet.EveLib.Core.Util;
 
-namespace eZet.EveLib.EveOnline.Util {
+namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Provides basic properties and methods for Eve Api RequestHandler objects.
     /// </summary>

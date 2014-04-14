@@ -3,7 +3,7 @@ using System.Linq;
 using eZet.EveLib.Core.Util;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.EveMarketData {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     JSON serializer
     /// </summary>

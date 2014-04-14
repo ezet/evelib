@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eZet.EveLib.EveOnline.Util {
+namespace eZet.EveLib.Modules.Util {
     public interface ICache {
         bool TryGet(Uri uri, out string data);
 

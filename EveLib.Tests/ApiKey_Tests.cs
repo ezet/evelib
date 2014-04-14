@@ -1,6 +1,6 @@
-﻿using eZet.EveLib.EveOnline;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Account;
+﻿using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

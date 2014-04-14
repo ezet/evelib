@@ -1,9 +1,9 @@
 ﻿using System;
-using eZet.EveLib.EveMarketData.Model;
+using eZet.EveLib.Modules.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace eZet.EveLib.EveMarketData.JsonConverter {
+namespace eZet.EveLib.Modules.JsonConverter {
     public class RecentUploadsJsonConverter : Newtonsoft.Json.JsonConverter {
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer) {
             throw new NotImplementedException();
@@ -15,7 +15,7 @@ namespace eZet.EveLib.EveMarketData.JsonConverter {
             JObject json = JObject.Load(reader);
             serializer.Converters.Add(new RowSetCollectionJsonConverter<RecentUploads.RecentUploadsEntry>());
             result.Uploads =
-                serializer.Deserialize<RowCollection<RecentUploads.RecentUploadsEntry>>(json["rowset"].CreateReader());
+                serializer.Deserialize<EveMarketDataRowCollection<RecentUploads.RecentUploadsEntry>>(json["rowset"].CreateReader());
 
             return result;
         }

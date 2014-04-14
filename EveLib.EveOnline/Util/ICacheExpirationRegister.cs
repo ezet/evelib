@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace eZet.EveLib.EveOnline.Util {
+namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Interface for CacheExpiratoinRegisters
     /// </summary>

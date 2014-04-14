@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Character;
-using eZet.EveLib.EveOnline.Model.Corporation;
-using ContactList = eZet.EveLib.EveOnline.Model.Corporation.ContactList;
-using FactionWarfareStats = eZet.EveLib.EveOnline.Model.Corporation.FactionWarfareStats;
-using MedalList = eZet.EveLib.EveOnline.Model.Corporation.MedalList;
-using StandingsList = eZet.EveLib.EveOnline.Model.Corporation.StandingsList;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Character;
+using eZet.EveLib.Modules.Models.Corporation;
+using ContactList = eZet.EveLib.Modules.Models.Corporation.ContactList;
+using FactionWarfareStats = eZet.EveLib.Modules.Models.Corporation.FactionWarfareStats;
+using MedalList = eZet.EveLib.Modules.Models.Corporation.MedalList;
+using StandingsList = eZet.EveLib.Modules.Models.Corporation.StandingsList;
 
 [assembly: InternalsVisibleTo("EveLib.Test")]
 
-namespace eZet.EveLib.EveOnline {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to all API calls relating to a specific corporation, that is, all API calls prefixed with /corp in
     ///     CCPs API.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveOnline.Util;
+using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Test.Mocks {
     public class TestRequestHandler : RequestHandlerBase {

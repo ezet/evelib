@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Cache;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveOnline.Model;
+using eZet.EveLib.Modules.Models;
 
-namespace eZet.EveLib.EveOnline.Util {
+namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Handles requests to the Eve API. Caching is accomplished by using the native HttpWebRequest caching (IE Cache).
     /// </summary>

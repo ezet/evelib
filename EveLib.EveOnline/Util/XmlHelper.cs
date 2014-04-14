@@ -5,8 +5,9 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using eZet.EveLib.Modules.Models;
 
-namespace eZet.EveLib.EveOnline.Model {
+namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Provides utility methods for XML element classes.
     /// </summary>
@@ -33,12 +34,12 @@ namespace eZet.EveLib.EveOnline.Model {
         /// <typeparam name="T">KeyType used for deserialization.</typeparam>
         /// <param name="name"></param>
         /// <returns></returns>
-        public virtual RowCollection<T> deserializeRowSet<T>(string name) {
+        public virtual EveOnlineRowCollection<T> deserializeRowSet<T>(string name) {
             XmlReader reader = getRowSetReader(name);
-            if (reader == null) return default(RowCollection<T>);
+            if (reader == null) return default(EveOnlineRowCollection<T>);
             reader.ReadToDescendant("rowset");
-            var serializer = new XmlSerializer(typeof(RowCollection<T>));
-            return (RowCollection<T>)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof(EveOnlineRowCollection<T>));
+            return (EveOnlineRowCollection<T>)serializer.Deserialize(reader);
         }
 
 

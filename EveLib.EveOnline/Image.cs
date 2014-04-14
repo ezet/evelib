@@ -2,7 +2,7 @@
 using System.Net;
 using eZet.EveLib.Core;
 
-namespace eZet.EveLib.EveOnline {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to all image related requests.
     /// </summary>

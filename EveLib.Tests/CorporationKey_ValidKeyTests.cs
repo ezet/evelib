@@ -1,12 +1,12 @@
 ﻿using eZet.EveLib.Core.Exception;
-using eZet.EveLib.EveOnline;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Character;
-using eZet.EveLib.EveOnline.Model.Corporation;
+using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Character;
+using eZet.EveLib.Modules.Models.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ContactList = eZet.EveLib.EveOnline.Model.Corporation.ContactList;
-using MedalList = eZet.EveLib.EveOnline.Model.Corporation.MedalList;
-using StandingsList = eZet.EveLib.EveOnline.Model.Corporation.StandingsList;
+using ContactList = eZet.EveLib.Modules.Models.Corporation.ContactList;
+using MedalList = eZet.EveLib.Modules.Models.Corporation.MedalList;
+using StandingsList = eZet.EveLib.Modules.Models.Corporation.StandingsList;
 
 namespace eZet.EveLib.Test {
     [TestClass]

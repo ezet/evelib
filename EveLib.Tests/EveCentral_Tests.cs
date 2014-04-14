@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using eZet.EveLib.EveCentral;
-using eZet.EveLib.EveCentral.Model;
+using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -10,11 +10,11 @@ namespace eZet.EveLib.Test {
         private const long TypeId = 34;
         private const int HourLimit = 5;
         private const int MinQty = 5;
-        private readonly EveCentral.EveCentral api;
+        private readonly EveCentral api;
         private readonly EveCentralOptions validOptions;
 
         public EveCentral_Tests() {
-            api = new EveCentral.EveCentral();
+            api = new EveCentral();
             validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
             validOptions.Items.Add(TypeId);
             validOptions.Regions.Add(RegionId);
@@ -22,8 +22,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            MarketStatResponse res = api.GetMarketStat(validOptions);
-            MarketStatItem entry = res.Result.First();
+            EveCentralMarketStatResponse res = api.GetMarketStat(validOptions);
+            EveCentralMarketStatItem entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.All.Average);
             Assert.AreNotEqual(0, entry.All.Volume);

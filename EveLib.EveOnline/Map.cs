@@ -1,8 +1,8 @@
 ﻿using System;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Map;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Map;
 
-namespace eZet.EveLib.EveOnline {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to Map related requests.
     /// </summary>

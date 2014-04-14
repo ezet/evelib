@@ -2,7 +2,7 @@
 using System.Net;
 using eZet.EveLib.Core.Util;
 
-namespace eZet.EveLib.EveOnline.Util {
+namespace eZet.EveLib.Modules.Util {
     public class WebClientRequestHandler : RequestHandlerBase {
         public WebClientRequestHandler(ISerializer serializer) : base(serializer) {
         }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
-using eZet.EveLib.EveMarketData;
-using eZet.EveLib.EveMarketData.Model;
+using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OrderType = eZet.EveLib.Modules.OrderType;
 
 namespace eZet.EveLib.Test {
     [TestClass]
@@ -10,12 +11,12 @@ namespace eZet.EveLib.Test {
         private const long RegionId = 10000002;
 
         private const long TypeId = 34;
-        private readonly EveMarketData.EveMarketData api;
+        private readonly EveMarketData api;
         private readonly EveMarketDataOptions invalidOptions;
         private readonly EveMarketDataOptions validOptions;
 
         public EveMarketData_Tests() {
-            api = new EveMarketData.EveMarketData();
+            api = new EveMarketData();
             validOptions = new EveMarketDataOptions();
             validOptions.Items.Add(TypeId);
             validOptions.Regions.Add(RegionId);

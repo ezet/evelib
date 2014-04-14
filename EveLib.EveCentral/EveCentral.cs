@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveCentral.Model;
+using eZet.EveLib.Modules.Models;
 
-namespace eZet.EveLib.EveCentral {
+namespace eZet.EveLib.Modules {
     public class EveCentral {
         /// <summary>
         ///     Creates a new EveCentral object, with a default base uri and request handler.
@@ -28,14 +28,14 @@ namespace eZet.EveLib.EveCentral {
         /// </summary>
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
-        public MarketStatResponse GetMarketStat(EveCentralOptions options) {
+        public EveCentralMarketStatResponse GetMarketStat(EveCentralOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/api/marketstat";
             string queryString = options.GetItemQuery("typeid") + options.GetHourQuery("hours") +
                                  options.GetMinQuantityQuery("minQ") +
                                  options.GetRegionQuery("regionlimit") + options.GetSystemQuery("usesystem");
-            return request<MarketStatResponse>(relUri, queryString);
+            return request<EveCentralMarketStatResponse>(relUri, queryString);
         }
 
         /// <summary>

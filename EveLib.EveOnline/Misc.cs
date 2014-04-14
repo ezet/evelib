@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Misc;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Misc;
 
-namespace eZet.EveLib.EveOnline {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to API calls that do not require a valid API key or character/corporation ID, and are not covered
     ///     by Image or Map.

@@ -7,7 +7,7 @@
     <ProjectGuid>{185E2271-BBA1-4071-AC46-BF47153BDB7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.EveMarketData</RootNamespace>
+    <RootNamespace>eZet.EveLib.Modules</RootNamespace>
     <AssemblyName>EveLib.EveMarketData</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -123,13 +123,13 @@
     <Compile Include="JsonConverter\ItemPricesJsonConverter.cs" />
     <Compile Include="JsonConverter\RowCollectionConverter.cs" />
     <Compile Include="JsonSerializer.cs" />
-    <Compile Include="Model\EveMarketDataResponse.cs" />
-    <Compile Include="Model\ItemHistory.cs" />
-    <Compile Include="Model\ItemOrders.cs" />
-    <Compile Include="Model\ItemPrices.cs" />
-    <Compile Include="Model\RecentUploads.cs" />
-    <Compile Include="Model\RowCollection.cs" />
-    <Compile Include="Model\StationRank.cs" />
+    <Compile Include="Models\EveMarketDataResponse.cs" />
+    <Compile Include="Models\ItemHistory.cs" />
+    <Compile Include="Models\ItemOrders.cs" />
+    <Compile Include="Models\ItemPrices.cs" />
+    <Compile Include="Models\RecentUploads.cs" />
+    <Compile Include="Models\EveMarketDataRowCollection.cs" />
+    <Compile Include="Models\StationRank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

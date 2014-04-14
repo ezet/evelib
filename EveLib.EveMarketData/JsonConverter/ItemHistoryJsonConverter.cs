@@ -1,8 +1,8 @@
 ﻿using System;
-using eZet.EveLib.EveMarketData.Model;
+using eZet.EveLib.Modules.Models;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.EveMarketData.JsonConverter {
+namespace eZet.EveLib.Modules.JsonConverter {
     public class ItemHistoryJsonConverter : Newtonsoft.Json.JsonConverter {
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer) {
             throw new NotImplementedException();
@@ -12,7 +12,7 @@ namespace eZet.EveLib.EveMarketData.JsonConverter {
             Newtonsoft.Json.JsonSerializer serializer) {
             var result = new ItemHistory();
             serializer.Converters.Add(new RowCollectionJsonConverter<ItemHistory.ItemHistoryEntry>());
-            result.History = serializer.Deserialize<RowCollection<ItemHistory.ItemHistoryEntry>>(reader);
+            result.History = serializer.Deserialize<EveMarketDataRowCollection<ItemHistory.ItemHistoryEntry>>(reader);
             return result;
         }
 

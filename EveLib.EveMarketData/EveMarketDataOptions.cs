@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace eZet.EveLib.EveMarketData {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Used to specify upload type in requests.
     /// </summary>

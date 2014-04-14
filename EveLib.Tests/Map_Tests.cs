@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using eZet.EveLib.EveOnline;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Map;
+using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Map;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

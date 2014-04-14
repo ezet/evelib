@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Account;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Account;
 
-namespace eZet.EveLib.EveOnline {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to Corporation objects and related API calls.
     /// </summary>

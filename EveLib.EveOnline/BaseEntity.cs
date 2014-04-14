@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Util;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Util;
 
-namespace eZet.EveLib.EveOnline {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides base properties and methods for Eve Online API classes.
     /// </summary>

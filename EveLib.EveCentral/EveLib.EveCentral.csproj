@@ -7,7 +7,7 @@
     <ProjectGuid>{FCD48E90-6605-4BC1-B761-0B37DF390990}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.EveCentral</RootNamespace>
+    <RootNamespace>eZet.EveLib.Modules</RootNamespace>
     <AssemblyName>EveLib.EveCentral</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -111,9 +111,9 @@
   <ItemGroup>
     <Compile Include="EveCentral.cs" />
     <Compile Include="EveCentralOptions.cs" />
-    <Compile Include="Model\EveCentralResponse.cs" />
-    <Compile Include="Model\MarketStatResponse.cs" />
-    <Compile Include="Model\QuicklookResponse.cs" />
+    <Compile Include="Models\EveCentralResponse.cs" />
+    <Compile Include="Models\EveCentralMarketStatResponse.cs" />
+    <Compile Include="Models\QuicklookResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

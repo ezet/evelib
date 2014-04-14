@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
-using eZet.EveLib.EveOnline.Model;
-using eZet.EveLib.EveOnline.Model.Character;
-using eZet.EveLib.EveOnline.Model.Misc;
-using FactionWarfareStats = eZet.EveLib.EveOnline.Model.Character.FactionWarfareStats;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Character;
+using eZet.EveLib.Modules.Models.Misc;
+using FactionWarfareStats = eZet.EveLib.Modules.Models.Character.FactionWarfareStats;
 
 [assembly: InternalsVisibleTo("EveLib.Test")]
 
-namespace eZet.EveLib.EveOnline {
+namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to all API calls relating to a specific character, that is, URIs prefixed with /char in CCPs API.
     /// </summary>
