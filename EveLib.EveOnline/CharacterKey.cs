@@ -16,7 +16,8 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
-        public CharacterKey(long keyId, string vCode) : base(keyId, vCode) {
+        public CharacterKey(long keyId, string vCode)
+            : base(keyId, vCode) {
         }
 
         /// <summary>
@@ -45,11 +46,12 @@ namespace eZet.EveLib.Modules {
         }
 
         protected override void lazyLoad() {
-            EveApiResponse<ApiKeyInfo> info = GetApiKeyInfo();
-            List<Character> list =
-                info.Result.Key.Characters.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList();
-            Characters = list.AsReadOnly();
-            load(info);
+            if (IsValidKey) {
+                List<Character> list =
+                    Data.Result.Key.Characters.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList();
+                Characters = list.AsReadOnly();
+                load(Data);
+            }
         }
     }
 }

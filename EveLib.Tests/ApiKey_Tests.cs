@@ -33,7 +33,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void IsValidKey_InvalidKey_NoExceptions() {
             var key = new ApiKey(0, "invalid");
-            Assert.AreEqual(false, key.IsValidKey());
+            Assert.AreEqual(false, key.IsValidKey);
         }
     }
 }

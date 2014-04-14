@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using System.Linq.Expressions;
 using System.Net;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Modules.Models;
@@ -20,6 +19,9 @@ namespace eZet.EveLib.Modules {
         private int _accessMask;
         private DateTime _expireTime;
         private ApiKeyType? _type;
+        private bool? _isValidKey;
+
+        protected EveApiResponse<ApiKeyInfo> Data;
 
         /// <summary>
         ///     Creates a new instance using the provided key id and vcode.
@@ -41,6 +43,14 @@ namespace eZet.EveLib.Modules {
         ///     Gets the VCode for this key.
         /// </summary>
         public string VCode { get; protected set; }
+
+        public bool IsValidKey {
+            get {
+                if (_isValidKey == null)
+                    _isValidKey = isValidKey();
+                return _isValidKey.Value;
+            }
+        }
 
         /// <summary>
         ///     Gets the CAK access mask of this key.
@@ -99,15 +109,16 @@ namespace eZet.EveLib.Modules {
             return response;
         }
 
-        public bool IsValidKey() {
+        private bool isValidKey() {
             try {
-                lazyLoad();
+                Data = GetApiKeyInfo();
             } catch (InvalidRequestException e) {
                 if (e.InnerException.GetType() == typeof(WebException)) {
-                    if (((HttpWebResponse) ((WebException) e.InnerException).Response).StatusCode ==
+                    if (((HttpWebResponse)((WebException)e.InnerException).Response).StatusCode ==
                         HttpStatusCode.Forbidden) {
                         return false;
                     }
+                    throw;
                 }
                 throw;
             }
@@ -115,7 +126,8 @@ namespace eZet.EveLib.Modules {
         }
 
         protected virtual void lazyLoad() {
-            load(GetApiKeyInfo());
+            if (IsValidKey)
+                load(Data);
         }
 
         protected void load(EveApiResponse<ApiKeyInfo> info) {

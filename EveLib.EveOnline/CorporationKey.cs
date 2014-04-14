@@ -31,10 +31,11 @@ namespace eZet.EveLib.Modules {
         }
 
         protected override void lazyLoad() {
-            EveApiResponse<ApiKeyInfo> info = GetApiKeyInfo();
-            load(info);
-            Corporation = new Corporation(this, info.Result.Key.Characters.First().CorporationId,
-                info.Result.Key.Characters.First().CorporationName);
+            if (IsValidKey) {
+                load(Data);
+                Corporation = new Corporation(this, Data.Result.Key.Characters.First().CorporationId,
+                    Data.Result.Key.Characters.First().CorporationName);
+            }
         }
     }
 }
