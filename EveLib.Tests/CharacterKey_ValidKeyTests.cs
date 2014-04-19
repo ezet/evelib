@@ -46,12 +46,8 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
-        public void GetCalendarEventAttendees_InvalidId_InvalidRequestException() {
-            EveApiResponse<CalendarEventAttendees> res = validKey.Characters[0].GetCalendarEventAttendees(0);
-            // BUG Returns http 200 and empty rowset on invalid ID
-            // TODO Add valid ID test
-            // TODO Add error handling
+        public void GetCalendarEventAttendees_InvalidId_NoException() {
+            EveApiResponse<CalendarEventAttendees> res = validKey.Characters[0].GetCalendarEventAttendees(1);
         }
 
         [TestMethod]
@@ -82,9 +78,6 @@ namespace eZet.EveLib.Test {
         [ExpectedException(typeof (InvalidRequestException))]
         public void GetContractItems_InvalidRequest_InvalidRequestException() {
             EveApiResponse<ContractItems> res = validKey.Characters[0].GetContractItems(0);
-            // BUG Returns http 500 on invalid id
-            // TODO Add error handling
-            // TODO Add valid ID test
         }
 
         [TestMethod]

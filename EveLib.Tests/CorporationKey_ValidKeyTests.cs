@@ -56,8 +56,7 @@ namespace eZet.EveLib.Test {
         [ExpectedException(typeof (InvalidRequestException))]
         public void GetContractItems_InvalidId_InvalidRequestException() {
             _validKey.Corporation.GetContractItems(0);
-            // BUG Returns http 500 on invalid id
-            // TODO Add valid ID test
+            // Returns http 500 on invalid id
         }
 
         [TestMethod]
@@ -143,11 +142,9 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
-        public void GetOutpostServiceDetails_InvalidId_InvalidRequestException() {
+        public void GetOutpostServiceDetails_InvalidId_NoException() {
             _validKey.Corporation.GetOutpostServiceDetails(0);
-            // BUG Returns http 200 and empty Result on invalid ID
-            // TODO Add valid ID test
+            // Returns http 200 and empty Result on invalid ID
         }
 
         [TestMethod]

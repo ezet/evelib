@@ -11,7 +11,7 @@ namespace eZet.EveLib.Modules {
     public abstract class BaseEntity {
         protected BaseEntity() {
             BaseUri = new Uri("https://api.eveonline.com");
-            RequestHandler = new CachedRequestHandler(new XmlSerializerWrapper());
+            RequestHandler = new DefaultCachedRequestHandler(new XmlSerializerWrapper());
         }
 
         /// <summary>

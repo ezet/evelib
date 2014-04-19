@@ -15,7 +15,7 @@ namespace eZet.EveLib.Test {
 
         public Character_StaticDeserializationTests() {
             character = new Character(new CharacterKey(0, ""), 0, "");
-            character.RequestHandler = new TestRequestHandler(new XmlSerializerWrapper());
+            character.RequestHandler = new MockRequestHandler(new XmlSerializerWrapper());
         }
 
         [TestMethod]

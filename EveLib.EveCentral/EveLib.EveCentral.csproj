@@ -113,7 +113,7 @@
     <Compile Include="EveCentralOptions.cs" />
     <Compile Include="Models\EveCentralResponse.cs" />
     <Compile Include="Models\EveCentralMarketStatResponse.cs" />
-    <Compile Include="Models\QuicklookResponse.cs" />
+    <Compile Include="Models\EveCentralQuickLookResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

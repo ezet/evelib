@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net;
 
@@ -10,27 +9,36 @@ namespace eZet.EveLib.Core.Util {
 
         public static HttpWebRequest CreateRequest(Uri uri) {
             HttpWebRequest request = WebRequest.CreateHttp(uri);
-            request.Proxy = null;
             return request;
         }
 
         public static string Request(Uri uri) {
             HttpWebRequest request = CreateRequest(uri);
-            return GetContent(request);
+            return GetResponseContent(request);
         }
 
         public static HttpWebResponse GetResponse(HttpWebRequest request) {
-            Contract.Requires(request != null);
-            Debug.WriteLine("Request: " + request.RequestUri);
-            var response = request.GetResponse() as HttpWebResponse;
+            Debug.WriteLine("Requesting: " + request.RequestUri);
+            HttpWebResponse response;
+            try {
+                response = request.GetResponse() as HttpWebResponse;
+                if (response != null) {
+                    Debug.WriteLine("Reponse status: " + response.StatusCode + ", " + response.StatusDescription);
+                    Debug.WriteLine("From cache: " + response.IsFromCache);
+                }
+            } catch (WebException e) {
+                response = (HttpWebResponse)e.Response;
+                if (response == null) throw;
+                Debug.WriteLine("Reponse status: " + response.StatusCode + ", " + response.StatusDescription);
+                Debug.WriteLine("From cache: " + response.IsFromCache);
+                throw;
+            }
             return response;
         }
 
-
-        public static string GetContent(WebRequest request) {
-            Contract.Requires(request != null);
+        public static string GetResponseContent(HttpWebRequest request) {
             string data = "";
-            using (var response = (HttpWebResponse) request.GetResponse()) {
+            using (var response = GetResponse(request)) {
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) return data;
                 using (var reader = new StreamReader(responseStream)) {

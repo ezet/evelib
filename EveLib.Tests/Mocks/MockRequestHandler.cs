@@ -4,10 +4,10 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Test.Mocks {
-    public class TestRequestHandler : RequestHandlerBase {
-        private readonly ISerializer serializer = new XmlSerializerWrapper();
+    public class MockRequestHandler : CachedRequestHandler {
+        private readonly ISerializer _serializer = new XmlSerializerWrapper();
 
-        public TestRequestHandler(ISerializer serializer) : base(serializer) {
+        public MockRequestHandler(ISerializer serializer) : base(serializer) {
         }
 
         public override T Request<T>(Uri uri) {
@@ -23,7 +23,7 @@ namespace eZet.EveLib.Test.Mocks {
             using (StreamReader reader = (File.OpenText(relPath))) {
                 data = reader.ReadToEnd();
             }
-            return serializer.Deserialize<T>(data);
+            return _serializer.Deserialize<T>(data);
         }
     }
 }

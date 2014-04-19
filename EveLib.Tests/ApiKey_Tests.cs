@@ -30,6 +30,9 @@ namespace eZet.EveLib.Test {
             Assert.AreEqual(268435455, _validKey.AccessMask);
         }
 
+        /// <summary>
+        /// Returns 403 Forbidden with error content on invalid key requests
+        /// </summary>
         [TestMethod]
         public void IsValidKey_InvalidKey_NoExceptions() {
             var key = new ApiKey(0, "invalid");

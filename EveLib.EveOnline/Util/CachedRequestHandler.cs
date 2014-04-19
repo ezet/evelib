@@ -1,75 +1,88 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-using System.Net;
-using System.Net.Cache;
-using eZet.EveLib.Core.Exception;
+using System.Linq;
+using eZet.EveLib.Core;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules.Util {
     /// <summary>
-    ///     Handles requests to the Eve API. Caching is accomplished by using the native HttpWebRequest caching (IE Cache).
+    ///     Provides basic properties and methods for Eve Api RequestHandler objects.
     /// </summary>
-    public class CachedRequestHandler : RequestHandlerBase {
-        private const string ContentType = "application/x-www-form-urlencoded";
+    public abstract class CachedRequestHandler : IRequestHandler {
+        /// <summary>
+        ///     A lock for the Cache
+        /// </summary>
+        private static readonly object CacheLock = new object();
 
-        public CachedRequestHandler(ISerializer serializer)
-            : base(serializer) {
+
+        /// <summary>
+        ///     Backing field for CacheExpirationRegister.
+        /// </summary>
+        private static ICacheExpirationRegister _cacheExpirationRegister;
+
+        protected CachedRequestHandler(ISerializer serializer) {
+            Serializer = serializer;
         }
 
         /// <summary>
-        ///     Performs a request to the specified URI and returns an EveApiResponse of specified type.
+        ///     A register for cached until values.
         /// </summary>
-        /// <typeparam name="T">The type parameter for the xml response.</typeparam>
-        /// <param name="uri">The URI to request.</param>
-        /// <returns></returns>
-        public override T Request<T>(Uri uri) {
-            DateTime cachedUntil;
-            bool fromCache = CacheExpirationRegister.TryGetValue(uri, out cachedUntil) && DateTime.UtcNow < cachedUntil;
-            string data = "";
-            HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
-            request.ContentType = ContentType;
-            request.CachePolicy = fromCache
-                ? new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheIfAvailable)
-                : new HttpRequestCachePolicy(HttpRequestCacheLevel.Reload);
-            request.Proxy = null;
-            try {
-                using (var response = HttpRequestHelper.GetResponse(request)) {
-                    Debug.WriteLine("From cache: " + response.IsFromCache);
-                    Stream responseStream = response.GetResponseStream();
-                    if (responseStream != null) {
-                        using (var reader = new StreamReader(responseStream)) {
-                            data = reader.ReadToEnd();
-                            Debug.Write(data);
-                        }
-                    }
-                }
-                //data = HttpRequestHelper.GetContent(request);
-            } catch (WebException e) {
-                var response = (HttpWebResponse)e.Response;
-                if (response == null) throw;
-                Debug.WriteLine("From cache: " + response.IsFromCache);
-                if (response.StatusCode != HttpStatusCode.BadRequest)
-                    throw new InvalidRequestException("Request caused a WebException.", e);
-                Stream responseStream = response.GetResponseStream();
-                if (responseStream == null) throw new InvalidRequestException("Request caused a WebException.", e);
-                using (var reader = new StreamReader(responseStream)) {
-                    data = reader.ReadToEnd();
-                    var error = Serializer.Deserialize<EveApiError>(data);
-                    throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e);
-                }
+        protected static ICacheExpirationRegister CacheExpirationRegister {
+            get {
+                if (_cacheExpirationRegister == null)
+                    load();
+                return _cacheExpirationRegister;
             }
-            var xml = Serializer.Deserialize<T>(data);
-            register(uri, xml);
-            SaveCacheState();
-            return xml;
+            set { _cacheExpirationRegister = value; }
         }
 
-        private void register(Uri uri, dynamic xml) {
-            //if (o.GetType().Is) throw new System.Exception("Should never occur.");
-            // TODO type check
-            CacheExpirationRegister.AddOrUpdate(uri, xml.CachedUntil);
+        /// <summary>
+        ///     A serializer for deserializing objects.
+        /// </summary>
+        public ISerializer Serializer { get; set; }
+
+
+        /// <summary>
+        ///     Performs a request using the specified URI.
+        /// </summary>
+        /// <typeparam name="T">Type of EveApiResponse.</typeparam>
+        /// <param name="uri">The uri to request.</param>
+        /// <returns></returns>
+        public abstract T Request<T>(Uri uri);
+
+        /// <summary>
+        ///     Stores the CacheExpirationRegister to disk.
+        /// </summary>
+        public virtual void SaveCacheState() {
+            try {
+                File.WriteAllLines(Config.ExpirationRegister,
+                    CacheExpirationRegister.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
+            } catch (DirectoryNotFoundException) {
+                Directory.CreateDirectory(Config.CachePath);
+                SaveCacheState();
+            }
+        }
+
+        /// <summary>
+        ///     Loads the CacheExpirationRegister from disk.
+        /// </summary>
+        private static void load() {
+            lock (CacheLock) {
+                if (_cacheExpirationRegister != null) return;
+                _cacheExpirationRegister = new HashedCacheExpirationRegister();
+                try {
+                    string[] data =
+                        File.ReadAllLines(Config.ExpirationRegister);
+                    foreach (string t in data) {
+                        string[] split = t.Split(',');
+                        _cacheExpirationRegister.Restore(split[0],
+                            DateTime.Parse(split[1], CultureInfo.InvariantCulture));
+                    }
+                } catch (DirectoryNotFoundException) {
+                } catch (FileNotFoundException) {
+                }
+            }
         }
     }
 }

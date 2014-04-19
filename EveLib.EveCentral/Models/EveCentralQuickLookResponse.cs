@@ -6,7 +6,7 @@ namespace eZet.EveLib.Modules.Models {
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
-    public class QuicklookResponse : EveCentralResponse {
+    public class EveCentralQuickLookResponse : EveCentralResponse {
         [XmlElement("quicklook")]
         public QuicklookResult Result { get; set; }
     }
@@ -28,13 +28,13 @@ namespace eZet.EveLib.Modules.Models {
         public Collection<string> Regions { get; set; }
 
         [XmlArray("sell_orders"), XmlArrayItem("order")]
-        public Collection<QuicklookOrder> SellOrders { get; set; }
+        public Collection<EveCentralQuicklookOrder> SellOrders { get; set; }
 
         [XmlArray("buy_orders"), XmlArrayItem("order")]
-        public Collection<QuicklookOrder> BuyOrders { get; set; }
+        public Collection<EveCentralQuicklookOrder> BuyOrders { get; set; }
     }
 
-    public class QuicklookOrder {
+    public class EveCentralQuicklookOrder {
         [XmlAttribute("id")]
         public long OrderId { get; set; }
 

@@ -150,7 +150,7 @@
     <Compile Include="Models\Character\UpcomingCalendarEvents.cs" />
     <Compile Include="Models\Character\WalletJournal.cs" />
     <Compile Include="Models\Character\WalletTransactions.cs" />
-    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\EveApiEnums.cs" />
     <Compile Include="Models\Misc\AllianceList.cs" />
     <Compile Include="Models\Misc\CallList.cs" />
     <Compile Include="Models\Misc\CertificateTree.cs" />
@@ -192,8 +192,8 @@
     <Compile Include="Util\XmlHelper.cs" />
     <Compile Include="Models\EveOnlineRowCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\RequestHandlerBase.cs" />
     <Compile Include="Util\CachedRequestHandler.cs" />
+    <Compile Include="Util\DefaultCachedRequestHandler.cs" />
     <Compile Include="Util\HashedCacheExpirationRegister.cs" />
     <Compile Include="Util\ICache.cs" />
     <Compile Include="Util\ICacheExpirationRegister.cs" />

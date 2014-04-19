@@ -47,7 +47,7 @@ namespace eZet.EveLib.Modules {
         public bool IsValidKey {
             get {
                 if (_isValidKey == null)
-                    _isValidKey = isValidKey();
+                    _isValidKey = getIsValidKey();
                 return _isValidKey.Value;
             }
         }
@@ -109,7 +109,7 @@ namespace eZet.EveLib.Modules {
             return response;
         }
 
-        private bool isValidKey() {
+        private bool getIsValidKey() {
             try {
                 Data = GetApiKeyInfo();
             } catch (InvalidRequestException e) {

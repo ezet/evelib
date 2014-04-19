@@ -97,10 +97,9 @@
     <Compile Include="EveMarketData_Tests.cs" />
     <Compile Include="Image_Tests.cs" />
     <Compile Include="Map_Tests.cs" />
-    <Compile Include="Mocks\TestRequestHandler.cs" />
-    <Compile Include="Mocks\TestSerializer.cs" />
+    <Compile Include="Mocks\MockRequestHandler.cs" />
+    <Compile Include="Mocks\MockSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EveLib_Tests.cs" />
     <Compile Include="CorporationKey_ValidKeyTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using System.Net;
 using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Modules.Util {
-    public class WebClientRequestHandler : RequestHandlerBase {
+    public class WebClientRequestHandler : CachedRequestHandler {
         public WebClientRequestHandler(ISerializer serializer) : base(serializer) {
         }
 

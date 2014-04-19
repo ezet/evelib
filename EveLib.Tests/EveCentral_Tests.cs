@@ -15,7 +15,7 @@ namespace eZet.EveLib.Test {
 
         public EveCentral_Tests() {
             api = new EveCentral();
-            validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
+            validOptions = new EveCentralOptions { HourLimit = HourLimit, MinQuantity = MinQty };
             validOptions.Items.Add(TypeId);
             validOptions.Regions.Add(RegionId);
         }
@@ -36,9 +36,9 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklook_ValidRequest_ValidReseponse() {
-            QuicklookResponse res = api.GetQuicklook(validOptions);
+            EveCentralQuickLookResponse res = api.GetQuicklook(validOptions);
             QuicklookResult entry = res.Result;
-            QuicklookOrder order = entry.BuyOrders.First();
+            EveCentralQuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual("Tritanium", entry.TypeName);
             Assert.AreEqual(HourLimit, entry.HourLimit);
@@ -57,9 +57,9 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklookPath_ValidRequest_ValidResponse() {
-            QuicklookResponse res = api.GetQuicklookPath("Jita", "Amarr", 34, validOptions);
+            EveCentralQuickLookResponse res = api.GetQuicklookPath("Jita", "Amarr", 34, validOptions);
             QuicklookResult entry = res.Result;
-            QuicklookOrder order = entry.BuyOrders.First();
+            EveCentralQuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual("Tritanium", entry.TypeName);
             Assert.AreEqual(HourLimit, entry.HourLimit);

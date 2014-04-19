@@ -18,7 +18,7 @@ namespace eZet.EveLib.Test {
 
         public Corporation_StaticDeserializationTests() {
             corp = new Corporation(new CorporationKey(0, ""), 0, "");
-            corp.RequestHandler = new TestRequestHandler(new XmlSerializerWrapper());
+            corp.RequestHandler = new MockRequestHandler(new XmlSerializerWrapper());
         }
 
         [TestMethod]

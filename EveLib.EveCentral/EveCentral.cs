@@ -43,14 +43,14 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
-        public QuicklookResponse GetQuicklook(EveCentralOptions options) {
+        public EveCentralQuickLookResponse GetQuicklook(EveCentralOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/api/quicklook";
             string queryString = options.GetItemQuery("typeid") + options.GetHourQuery("sethours") +
                                  options.GetMinQuantityQuery("setminQ") +
                                  options.GetRegionQuery("regionlimit") + options.GetSystemQuery("usesystem");
-            return request<QuicklookResponse>(relUri, queryString);
+            return request<EveCentralQuickLookResponse>(relUri, queryString);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="typeId">Type ID</param>
         /// <param name="options">Optional; Valid options: HourLimit, MinQuantity.</param>
         /// <returns></returns>
-        public QuicklookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId,
+        public EveCentralQuickLookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId,
             EveCentralOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(startSystem != null, "Start system cannot be null.");
@@ -71,7 +71,7 @@ namespace eZet.EveLib.Modules {
             relUri += "/from/" + startSystem + "/to/" + endSystem + "/fortype/" + typeId;
             string queryString = options.GetHourQuery("sethours");
             queryString += options.GetMinQuantityQuery("setminQ");
-            return request<QuicklookResponse>(relUri, queryString);
+            return request<EveCentralQuickLookResponse>(relUri, queryString);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="endSystem">SystemID or System name</param>
         /// <param name="typeId">Type ID</param>
         /// <returns></returns>
-        public QuicklookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId) {
+        public EveCentralQuickLookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId) {
             Contract.Requires(startSystem != null, "Start system cannot be null.");
             Contract.Requires(endSystem != null, "End system cannot be null.");
             return GetQuicklookPath(startSystem, endSystem, typeId, new EveCentralOptions());

@@ -97,7 +97,7 @@ namespace eZet.EveLib.Modules {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            var minmaxval = minmax == MinMax.None ? "" : minmax.ToString();
+            var minmaxval = minmax == MinMax.None ? "" : minmax.ToString().ToLower();
             string postString = generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
                 "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type),
@@ -176,7 +176,7 @@ namespace eZet.EveLib.Modules {
             // TODO Add support for return url and loop
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(options.Items.Count != 0 || options.ItemGroups.Count != 0);
-            string relUri = "/update_market.php?step=Custom&";
+            const string relUri = "/update_market.php?step=Custom&";
             string items = String.Join(",", options.Items);
             string groups = String.Join(",", options.ItemGroups);
             string query = generateQueryString("type_id", items, "marketgroup_id", groups);
