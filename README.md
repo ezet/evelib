@@ -14,6 +14,12 @@ Support thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 * Modular and open source; you can easily change the caching, serialization or any other part of the library.
 * A fairly comprehensive set of unit tests, including static xml tests for calls requiring authentication.
 
+### Current Modules
+* Eve Online API
+* Eve Central API
+* Eve Marketdata API
+* Element43 API
+
 ### General information
 The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like. The latest stable release also offers one download where all projects are merged into one dll. The libraries can be configured using app.config in your application, see dll.config for possible values.
 
