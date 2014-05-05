@@ -18,7 +18,6 @@ namespace eZet.EveLib.Modules.Models.Character {
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Contact> AllianceContacts { get; set; }
 
-
         public XmlSchema GetSchema() {
             throw new NotImplementedException();
         }

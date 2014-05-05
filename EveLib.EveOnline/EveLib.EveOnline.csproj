@@ -144,6 +144,9 @@
     <Compile Include="Models\Character\NotificationList.cs" />
     <Compile Include="Models\Character\NotificationTexts.cs" />
     <Compile Include="Models\Character\PlanetaryColonies.cs" />
+    <Compile Include="Models\Character\PlanetaryLinks.cs" />
+    <Compile Include="Models\Character\PlanetaryPins.cs" />
+    <Compile Include="Models\Character\PlanetaryRoutes.cs" />
     <Compile Include="Models\Character\Research.cs" />
     <Compile Include="Models\Character\SkillQueue.cs" />
     <Compile Include="Models\Character\SkillTraining.cs" />

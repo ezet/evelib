@@ -199,7 +199,25 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetPlanetaryColonies_ValidRequest_HasResult() {
             var res = _validKey.Characters[0].GetPlanetaryColonies();
+            Assert.IsNotNull(res.Result);
+        }
 
+        [TestMethod]
+        public void GetPlanetaryPins_ValidRequest_HasResult() {
+            var res = _validKey.Characters[0].GetPlanetaryPins(2012);
+            Assert.IsNotNull(res.Result);
+        }
+
+        [TestMethod]
+        public void GetPlanetaryRoutes_ValidRequest_HasResult() {
+            var res = _validKey.Characters[0].GetPlanetaryRoutes(2012);
+            Assert.IsNotNull(res.Result);
+        }
+
+        [TestMethod]
+        public void GetPlanetaryLinks_ValidRequest_HasResult() {
+            var res = _validKey.Characters[0].GetPlanetaryLinks(2012);
+            Assert.IsNotNull(res.Result);
         }
     }
 }

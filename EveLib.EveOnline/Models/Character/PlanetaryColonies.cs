@@ -33,7 +33,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public string OwnerName { get; set; }
 
             [XmlAttribute("lastUpdate")]
-            public string LastUpdate { get; set; }
+            public string LastUpdateAsString { get; set; }
 
             [XmlAttribute("upgradeLevel")]
             public int UpgradeLevel { get; set; }
