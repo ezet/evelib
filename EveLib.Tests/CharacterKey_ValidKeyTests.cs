@@ -10,6 +10,7 @@ using CharacterInfo = eZet.EveLib.Modules.Models.Misc.CharacterInfo;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class CharacterKey_ValidKeyTests {
+        
         private const int KeyId = 3120814;
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
@@ -193,6 +194,12 @@ namespace eZet.EveLib.Test {
         public void GetWalletTransactions_ValidRequest_HasResult() {
             EveApiResponse<WalletTransactions> res = _validKey.Characters[0].GetWalletTransactions();
             Assert.IsNotNull(res.Result);
+        }
+
+        [TestMethod]
+        public void GetPlanetaryColonies_ValidRequest_HasResult() {
+            var res = _validKey.Characters[0].GetPlanetaryColonies();
+
         }
     }
 }

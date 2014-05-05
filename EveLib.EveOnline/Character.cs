@@ -348,5 +348,26 @@ namespace eZet.EveLib.Modules {
             result.Result.CharWalker = GetWalletTransactions;
             return result;
         }
+
+        public EveApiResponse<PlanetaryColonies> GetPlanetaryColonies() {
+            const string relPath = "/char/PlanetaryColonies.xml.aspx";
+            return request<PlanetaryColonies>(relPath, Key, "characterId", CharacterId);
+        }
+
+        //public EveApiResponse<PlanetaryPins> GetPlanetaryPins(long planetId) {
+        //    const string relPath = "/char/PlanetaryPins.xml.aspx";
+        //    return request<PlanetaryPins>(relPath, Key, "characterId", CharacterId, "planetId", planetId);
+            
+        //}
+
+        //public EveApiResponse<PlanetaryRoutes> GetPlanetaryRoutes(long planetId) {
+        //    const string relPath = "/char/PlanetaryRoutes.xml.aspx";
+        //    return request<PlanetaryRoutes>(relPath, Key, "characterId", CharacterId, "planetId", planetId);
+        //}
+
+        //public EveApiResponse<PlanetaryLinks> GetPlanetaryLinks(long planetId) {
+        //    const string relPath = "/char/PlanetaryLinks.xml.aspx";
+        //    return request<PlanetaryLinks>(relPath, Key, "characterId", CharacterId, "planetId", planetId);
+        //}
     }
 }
