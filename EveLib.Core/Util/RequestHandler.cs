@@ -12,13 +12,14 @@ namespace eZet.EveLib.Core.Util {
 
         public T Request<T>(Uri uri) {
             try {
-                string data = HttpRequestHelper.Request(uri);
+                var request = HttpRequestHelper.CreateRequest(uri);
+                request.Proxy = null;
+                request.UserAgent = Config.UserAgent;
+                string data = HttpRequestHelper.GetResponseContent(request);
                 return Serializer.Deserialize<T>(data);
-            }
-            catch (WebException e) {
+            } catch (WebException e) {
                 throw new InvalidRequestException("A request caused a WebException.", e);
-            }
-            catch (InvalidOperationException e) {
+            } catch (InvalidOperationException e) {
                 throw new InvalidRequestException("A request caused an InvalidOperationException.", e);
             }
         }

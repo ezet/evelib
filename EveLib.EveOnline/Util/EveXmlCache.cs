@@ -76,6 +76,7 @@ namespace eZet.EveLib.Modules.Util {
                     string[] split = entry.Split(',');
                     _register[split[0]] = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
                 }
+                // Swallow and continue
             } catch (DirectoryNotFoundException) {
             } catch (FileNotFoundException) {
             }

@@ -11,7 +11,7 @@ namespace eZet.EveLib.Core {
 
         public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
-        public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Separator; 
+        public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Separator;
 
         public static readonly string CacheExpirationFileName = "cache";
 
@@ -21,7 +21,11 @@ namespace eZet.EveLib.Core {
 
         public static readonly string CacheRegister;
 
+        public static readonly string UserAgent = ConfigurationManager.AppSettings["eveLib.UserAgent"];
+
         static Config() {
+            if (String.IsNullOrEmpty(UserAgent))
+                UserAgent = "EveLib";
             var appName = ConfigurationManager.AppSettings["eveLib.AppData"];
             AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
             CachePath = AppData + Separator + "Cache";

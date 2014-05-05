@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using eZet.EveLib.Core;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
@@ -31,6 +32,7 @@ namespace eZet.EveLib.Modules.Util {
             } else {
                 HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
                 request.ContentType = ContentType;
+                request.UserAgent = Config.UserAgent;
                 request.Proxy = null;
                 try {
                     data = HttpRequestHelper.GetResponseContent(request);
