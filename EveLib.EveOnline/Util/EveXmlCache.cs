@@ -20,15 +20,27 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         public void Store(Uri uri, DateTime cacheTime, string data) {
-            File.WriteAllText(Config.CachePath + Path.DirectorySeparatorChar + GetUriHash(uri), data);
-            Store(uri, cacheTime);
+            try {
+                File.WriteAllText(Config.CachePath + Path.DirectorySeparatorChar + GetUriHash(uri), data);
+                Store(uri, cacheTime);
+            } catch (DirectoryNotFoundException) {
+                Directory.CreateDirectory(Config.CachePath);
+                File.WriteAllText(Config.CachePath + Path.DirectorySeparatorChar + GetUriHash(uri), data);
+                Store(uri, cacheTime);
+            }
         }
 
         public void Store(Uri uri, DateTime cacheTime) {
             string key = GetUriHash(uri);
             _register[key] = cacheTime;
-            File.WriteAllLines(Config.CacheRegister,
-                    _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
+            try {
+                File.WriteAllLines(Config.CacheRegister,
+        _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
+            } catch (DirectoryNotFoundException) {
+                Directory.CreateDirectory(Config.CachePath);
+                File.WriteAllLines(Config.CacheRegister,
+        _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
+            }
         }
 
         public bool TryGet(Uri uri, out string data) {
