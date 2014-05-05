@@ -28,7 +28,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public string LastLaunchTimeAsString { get; set; }
 
             [XmlAttribute("cycleTime")]
-            public string CycleTime { get; set; }
+            public int CycleTime { get; set; }
 
             [XmlAttribute("quantityperCycle")]
             public int QuantityPerCycle { get; set; }
@@ -50,6 +50,12 @@ namespace eZet.EveLib.Modules.Models.Character {
 
             [XmlAttribute("contentQuantity")]
             public int ContentQuantity { get; set; }
+
+            [XmlAttribute("longitude")]
+            public double Longitude { get; set; }
+
+            [XmlAttribute("latitude")]
+            public double Latitude { get; set; }
 
         }
     }
