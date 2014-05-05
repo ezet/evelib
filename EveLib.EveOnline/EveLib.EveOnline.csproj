@@ -189,15 +189,14 @@
     <Compile Include="Models\Map\Kills.cs" />
     <Compile Include="Models\Map\Sovereignty.cs" />
     <Compile Include="Models\Map\SovereigntyStatus.cs" />
+    <Compile Include="Util\WindowsCachedRequestHandler.cs" />
     <Compile Include="Util\XmlHelper.cs" />
     <Compile Include="Models\EveOnlineRowCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CachedRequestHandler.cs" />
     <Compile Include="Util\DefaultCachedRequestHandler.cs" />
-    <Compile Include="Util\HashedCacheExpirationRegister.cs" />
-    <Compile Include="Util\ICache.cs" />
-    <Compile Include="Util\ICacheExpirationRegister.cs" />
-    <Compile Include="Util\WebClientRequestHandler.cs" />
+    <Compile Include="Util\EveXmlCache.cs" />
+    <Compile Include="Util\IEveXmlCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">

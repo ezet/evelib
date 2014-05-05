@@ -7,7 +7,7 @@ namespace eZet.EveLib.Test.Mocks {
     public class MockRequestHandler : CachedRequestHandler {
         private readonly ISerializer _serializer = new XmlSerializerWrapper();
 
-        public MockRequestHandler(ISerializer serializer) : base(serializer) {
+        public MockRequestHandler(ISerializer serializer, IEveXmlCache cache) : base(serializer, cache) {
         }
 
         public override T Request<T>(Uri uri) {

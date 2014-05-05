@@ -9,9 +9,12 @@ namespace eZet.EveLib.Modules {
     ///     Provides base properties and methods for Eve Online API classes.
     /// </summary>
     public abstract class BaseEntity {
-        protected BaseEntity() {
+        protected BaseEntity() : this(new DefaultCachedRequestHandler(new XmlSerializerWrapper(), new EveXmlCache())) {
+        }
+
+        protected BaseEntity(IRequestHandler requestHandler) {
             BaseUri = new Uri("https://api.eveonline.com");
-            RequestHandler = new DefaultCachedRequestHandler(new XmlSerializerWrapper());
+            RequestHandler = requestHandler;
         }
 
         /// <summary>

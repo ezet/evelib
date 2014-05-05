@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using eZet.EveLib.Core;
 using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Modules.Util {
@@ -10,31 +6,15 @@ namespace eZet.EveLib.Modules.Util {
     ///     Provides basic properties and methods for Eve Api RequestHandler objects.
     /// </summary>
     public abstract class CachedRequestHandler : IRequestHandler {
-        /// <summary>
-        ///     A lock for the Cache
-        /// </summary>
-        private static readonly object CacheLock = new object();
-
 
         /// <summary>
-        ///     Backing field for CacheExpirationRegister.
+        ///     Cache for XML
         /// </summary>
-        private static ICacheExpirationRegister _cacheExpirationRegister;
+        public IEveXmlCache Cache;
 
-        protected CachedRequestHandler(ISerializer serializer) {
+        protected CachedRequestHandler(ISerializer serializer, IEveXmlCache cache) {
             Serializer = serializer;
-        }
-
-        /// <summary>
-        ///     A register for cached until values.
-        /// </summary>
-        protected static ICacheExpirationRegister CacheExpirationRegister {
-            get {
-                if (_cacheExpirationRegister == null)
-                    load();
-                return _cacheExpirationRegister;
-            }
-            set { _cacheExpirationRegister = value; }
+            Cache = cache;
         }
 
         /// <summary>
@@ -51,38 +31,10 @@ namespace eZet.EveLib.Modules.Util {
         /// <returns></returns>
         public abstract T Request<T>(Uri uri);
 
-        /// <summary>
-        ///     Stores the CacheExpirationRegister to disk.
-        /// </summary>
-        public virtual void SaveCacheState() {
-            try {
-                File.WriteAllLines(Config.ExpirationRegister,
-                    CacheExpirationRegister.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
-            } catch (DirectoryNotFoundException) {
-                Directory.CreateDirectory(Config.CachePath);
-                SaveCacheState();
-            }
-        }
-
-        /// <summary>
-        ///     Loads the CacheExpirationRegister from disk.
-        /// </summary>
-        private static void load() {
-            lock (CacheLock) {
-                if (_cacheExpirationRegister != null) return;
-                _cacheExpirationRegister = new HashedCacheExpirationRegister();
-                try {
-                    string[] data =
-                        File.ReadAllLines(Config.ExpirationRegister);
-                    foreach (string t in data) {
-                        string[] split = t.Split(',');
-                        _cacheExpirationRegister.Restore(split[0],
-                            DateTime.Parse(split[1], CultureInfo.InvariantCulture));
-                    }
-                } catch (DirectoryNotFoundException) {
-                } catch (FileNotFoundException) {
-                }
-            }
+        protected virtual DateTime getCacheExpirationTime(dynamic xml) {
+            //if (o.GetType().Is) throw new System.Exception("Should never occur.");
+            // TODO type check
+            return xml.CachedUntil;
         }
     }
 }
