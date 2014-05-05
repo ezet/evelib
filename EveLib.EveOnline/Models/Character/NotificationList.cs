@@ -21,6 +21,9 @@ namespace eZet.EveLib.Modules.Models.Character {
             [XmlAttribute("senderID")]
             public long SenderId { get; set; }
 
+            [XmlAttribute("senderName")]
+            public string SenderName { get; set; }
+
             [XmlIgnore]
             public DateTime SentDate { get; private set; }
 
