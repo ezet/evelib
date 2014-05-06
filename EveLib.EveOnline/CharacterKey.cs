@@ -25,8 +25,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public ReadOnlyCollection<Character> Characters {
             get {
-                if (_characters == null)
-                    lazyLoad();
+                if (_characters != null) return _characters;
+                lock (LazyLoadLock) {
+                    if (_characters == null)
+                        lazyLoad();
+                }
                 return _characters;
             }
             private set { _characters = value; }

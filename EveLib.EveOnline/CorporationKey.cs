@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 
@@ -23,8 +24,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public Corporation Corporation {
             get {
-                if (_corporation == null)
-                    lazyLoad();
+                if (_corporation != null) return _corporation;
+                lock (LazyLoadLock) {
+                    if (_corporation == null)
+                        lazyLoad();
+                }
                 return _corporation;
             }
             private set { _corporation = value; }

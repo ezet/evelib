@@ -21,7 +21,9 @@ namespace eZet.EveLib.Modules {
         private ApiKeyType? _type;
         private bool? _isValidKey;
 
-        protected EveApiResponse<ApiKeyInfo> Data;
+        protected readonly object LazyLoadLock = new object();
+
+        protected EveApiResponse<ApiKeyInfo> Data { get; set; }
 
         /// <summary>
         ///     Creates a new instance using the provided key id and vcode.
@@ -46,8 +48,11 @@ namespace eZet.EveLib.Modules {
 
         public bool IsValidKey {
             get {
-                if (_isValidKey == null)
-                    _isValidKey = getIsValidKey();
+                if (_isValidKey != null) return _isValidKey.Value;
+                lock (LazyLoadLock) {
+                    if (_isValidKey == null)
+                        _isValidKey = getIsValidKey();
+                }
                 return _isValidKey.Value;
             }
         }
@@ -57,8 +62,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public int AccessMask {
             get {
-                if (_accessMask == default(int))
-                    lazyLoad();
+                if (_accessMask != default(int)) return _accessMask;
+                lock (LazyLoadLock) {
+                    if (_accessMask == default(int))
+                        lazyLoad();
+                }
                 return _accessMask;
             }
             protected set { _accessMask = value; }
@@ -69,8 +77,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public ApiKeyType? KeyType {
             get {
-                if (_type == null)
-                    lazyLoad();
+                if (_type != null) return _type;
+                lock (LazyLoadLock) {
+                    if (_type == null)
+                        lazyLoad();
+                }
                 return _type;
             }
             protected set { _type = value; }
@@ -81,8 +92,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public DateTime ExpireDate {
             get {
-                if (_expireTime == default(DateTime))
-                    lazyLoad();
+                if (_expireTime != default(DateTime)) return _expireTime;
+                lock (LazyLoadLock) {
+                    if (_expireTime == default(DateTime))
+                        lazyLoad();
+                }
                 return _expireTime;
             }
             protected set { _expireTime = value; }
