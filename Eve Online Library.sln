@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.Element43", "EveLib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveCrest", "EveLib.EveCrest\EveLib.EveCrest.csproj", "{F81627B3-99AF-4B4F-926A-685D21569451}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evelib.ZKillboard", "zKillboard\Evelib.ZKillboard.csproj", "{741BDD36-B71C-4ABE-9B03-185FBD6767F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{F81627B3-99AF-4B4F-926A-685D21569451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F81627B3-99AF-4B4F-926A-685D21569451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F81627B3-99AF-4B4F-926A-685D21569451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741BDD36-B71C-4ABE-9B03-185FBD6767F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741BDD36-B71C-4ABE-9B03-185FBD6767F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741BDD36-B71C-4ABE-9B03-185FBD6767F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741BDD36-B71C-4ABE-9B03-185FBD6767F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
