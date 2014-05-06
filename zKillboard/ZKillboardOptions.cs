@@ -13,6 +13,23 @@ namespace eZet.EveLib.Modules {
             Xml
         }
 
+        public enum MailType {
+            Kills,
+            Losses,
+            Both
+        }
+
+        public ZKillboardOptions() {
+            CharacterId = new List<long>();
+            CorporationId = new List<long>();
+            AllianceId = new List<long>();
+            FactionId = new List<long>();
+            ShiptypeId = new List<long>();
+            GroupId = new List<long>();
+            SolarsystemId = new List<long>();
+            RegionId = new List<long>();
+        }
+
 
         public IList<long> CharacterId { get; set; }
 
@@ -62,8 +79,18 @@ namespace eZet.EveLib.Modules {
 
         public bool ApiOnly { get; set; }
 
+        public bool Solo { get; set; }
+
+        public bool WSpace { get; set; }
+
         public string GetQueryString(string uri) {
             string queryString = uri;
+
+            if (Solo)
+                queryString += "/solo";
+            if (WSpace)
+                queryString += "/w-space";
+
             if (CharacterId.Count != 0)
                 queryString += "/characterID/" + string.Join(",", CharacterId);
             if (CorporationId.Count != 0)

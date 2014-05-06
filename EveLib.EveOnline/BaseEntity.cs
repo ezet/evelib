@@ -25,12 +25,12 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Gets or sets the base url for entity requests
         /// </summary>
-        public Uri BaseUri { get; protected set; }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         ///     Gets or sets the requester this entity uses to perform requests.
         /// </summary>
-        public IRequestHandler RequestHandler { get; protected set; }
+        public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>
         ///     Performs a request on the requester, using the provided arguments.

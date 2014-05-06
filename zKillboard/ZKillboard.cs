@@ -37,18 +37,6 @@ namespace eZet.EveLib.Modules {
             return request<dynamic>(new Uri(BaseUri, relPath));
         }
 
-        public dynamic GetSolo(ZKillboardOptions options) {
-            string relPath = "/solo";
-            relPath = options.GetQueryString(relPath);
-            return request<dynamic>(new Uri(BaseUri, relPath));
-        }
-
-        public dynamic GetWSpace(ZKillboardOptions options) {
-            string relPath = "/w-space";
-            relPath = options.GetQueryString(relPath);
-            return request<dynamic>(new Uri(BaseUri, relPath));
-        }
-
         private T request<T>(Uri uri) {
             return RequestHandler.Request<T>(uri);
         }

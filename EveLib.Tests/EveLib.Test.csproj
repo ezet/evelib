@@ -103,6 +103,7 @@
     <Compile Include="Mocks\MockSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CorporationKey_ValidKeyTests.cs" />
+    <Compile Include="ZKillboard_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Xml\account\Characters.xml" />
@@ -193,6 +194,10 @@
     <ProjectReference Include="..\EveLib.EveOnline\EveLib.EveOnline.csproj">
       <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
       <Name>EveLib.EveOnline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zKillboard\Evelib.ZKillboard.csproj">
+      <Project>{741BDD36-B71C-4ABE-9B03-185FBD6767F4}</Project>
+      <Name>Evelib.ZKillboard</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
