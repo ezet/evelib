@@ -5,23 +5,30 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     public class Element43 {
+
+        public const string DefaultUri = "http://element-43.com";
+
         /// <summary>
         ///     Default constructor, with a default base uri and request handler.
         /// </summary>
-        public Element43() {
-            BaseUri = new Uri("http://element-43.com");
-            RequestHandler = new RequestHandler(new XmlSerializerWrapper());
+        public Element43(string baseUri = DefaultUri)
+            : this(new RequestHandler(new XmlSerializerWrapper()), baseUri) {
+        }
+
+        public Element43(IRequestHandler requestHandler, string baseUri = DefaultUri) {
+            RequestHandler = requestHandler;
+            BaseUri = new Uri(baseUri);
         }
 
         /// <summary>
         ///     Gets or sets the base URI for requests.
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public Uri BaseUri { get; private set; }
 
         /// <summary>
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
+        public IRequestHandler RequestHandler { get; private set; }
 
         /// <summary>
         ///     Returns aggregate statistics for the items specified.
@@ -32,7 +39,7 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(options != null, "Options cannot be null");
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/market/api/marketstat";
-            string queryString = options.GetRegionQuery("regionlimit") + options.GetItemQuery("typeid") ;
+            string queryString = options.GetRegionQuery("regionlimit") + options.GetItemQuery("typeid");
             return request<Element43MarketStatResponse>(relUri, queryString);
         }
 

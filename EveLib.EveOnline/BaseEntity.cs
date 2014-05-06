@@ -5,27 +5,32 @@ using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
+
     /// <summary>
     ///     Provides base properties and methods for Eve Online API classes.
     /// </summary>
     public abstract class BaseEntity {
-        protected BaseEntity() : this(new DefaultCachedRequestHandler(new XmlSerializerWrapper(), new EveXmlCache())) {
+
+        private const string DefaultUri = "https://api.eveonline.com";
+
+        protected BaseEntity(string baseUri = DefaultUri)
+            : this(new DefaultCachedRequestHandler(new XmlSerializerWrapper(), new EveXmlCache()), baseUri) {
         }
 
-        protected BaseEntity(IRequestHandler requestHandler) {
-            BaseUri = new Uri("https://api.eveonline.com");
+        protected BaseEntity(IRequestHandler requestHandler, string baseUri = DefaultUri) {
             RequestHandler = requestHandler;
+            BaseUri = new Uri(baseUri);
         }
 
         /// <summary>
         ///     Gets or sets the base url for entity requests
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public Uri BaseUri { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the requester this entity uses to perform requests.
         /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
+        public IRequestHandler RequestHandler { get; protected set; }
 
         /// <summary>
         ///     Performs a request on the requester, using the provided arguments.

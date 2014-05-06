@@ -5,23 +5,30 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     public class EveCentral {
+
+        private const string DefaultUri = "http://api.eve-central.com";
+
         /// <summary>
         ///     Creates a new EveCentral object, with a default base uri and request handler.
         /// </summary>
-        public EveCentral() {
-            BaseUri = new Uri("http://api.eve-central.com");
-            RequestHandler = new RequestHandler(new XmlSerializerWrapper());
+        public EveCentral(string baseUri = DefaultUri)
+            : this(new RequestHandler(new XmlSerializerWrapper()), baseUri) {
+        }
+
+        public EveCentral(IRequestHandler requestHandler, string baseUri = DefaultUri) {
+            BaseUri = new Uri(baseUri);
+            RequestHandler = requestHandler;
         }
 
         /// <summary>
         ///     Gets or sets the base URI for requests.
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public Uri BaseUri { get; private set; }
 
         /// <summary>
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
+        public IRequestHandler RequestHandler { get; private set; }
 
         /// <summary>
         ///     Returns aggregate statistics for the items specified.

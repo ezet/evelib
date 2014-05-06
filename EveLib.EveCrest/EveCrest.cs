@@ -4,13 +4,20 @@ using eZet.EveLib.Core.Util;
 namespace eZet.EveLib.Modules {
     public class EveCrest {
 
-        public EveCrest() {
-            RequestHandler = new RequestHandler(new DynamicJsonSerializer());
+        public const string DefaultUri = "http://public-crest.eveonline.com";
+
+        public EveCrest(string baseUri = DefaultUri) : this(new RequestHandler(new DynamicJsonSerializer()), baseUri) {
         }
 
-        public IRequestHandler RequestHandler { get; set; }
+        public EveCrest(IRequestHandler requestHandler, string baseUri = DefaultUri) {
+            RequestHandler = requestHandler;
+            BaseUri = new Uri(baseUri);
+        }
 
-        public Uri BaseUri = new Uri("http://public-crest.eveonline.com");
+
+        public IRequestHandler RequestHandler { get; private set; }
+
+        public Uri BaseUri { get; private set; }
 
         public dynamic GetKillmails(long id, string hash) {
             string relPath = "/killmails/" + id + "/" + hash + "/";

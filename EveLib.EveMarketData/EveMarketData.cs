@@ -14,28 +14,26 @@ namespace eZet.EveLib.Modules {
     ///     C# API for the API supplied by api.eve-marketdata.com.
     /// </summary>
     public class EveMarketData {
-        /// <summary>
-        ///     Creates a new object using the default format, JSON.
-        /// </summary>
-        public EveMarketData()
-            : this(Format.Json) {
-        }
+
+        private const string DefaultUri = "http://api.eve-marketdata.com";
 
         /// <summary>
         ///     Creates a new object using the specified format.
         /// </summary>
         /// <param name="format"></param>
-        public EveMarketData(Format format) {
+        /// <param name="name"></param>
+        /// <param name="baseUri"></param>
+        public EveMarketData(Format format = Format.Json, string name = "demo", string baseUri = DefaultUri) {
             Format = format;
-            Name = "demo";
-            BaseUri = new Uri("http://api.eve-marketdata.com");
-            setRequester(format);
+            Name = name;
+            BaseUri = new Uri(baseUri);
+            setRequestHandler(format);
         }
 
         /// <summary>
         ///     Gets or sets the base URI for Eve Market Data.
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public Uri BaseUri { get; private set; }
 
         /// <summary>
         ///     Gets or sets the request format.
@@ -46,12 +44,12 @@ namespace eZet.EveLib.Modules {
         ///     Gets or sets the name supplied to marketdata in the query string. Use your ingame name if you want evemarketdata to
         ///     be able to contact you in case of problems.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         /// <summary>
         ///     Gets or sets the RequestHandler.
         /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
+        public IRequestHandler RequestHandler { get; private set; }
 
         /// <summary>
         ///     Returns a list of any orders that were recently updated.
@@ -199,7 +197,7 @@ namespace eZet.EveLib.Modules {
             return postString;
         }
 
-        private void setRequester(Format format) {
+        private void setRequestHandler(Format format) {
             if (format == Format.Xml)
                 RequestHandler = new RequestHandler(new XmlSerializerWrapper());
             else RequestHandler = new RequestHandler(new JsonSerializer());
