@@ -43,6 +43,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetAssetList_ValidRequest_HasResult() {
             EveApiResponse<AssetList> res = _validKey.Characters[0].GetAssetList();
+            var list = res.Result.Flatten();
             Assert.IsNotNull(res.Result);
         }
 

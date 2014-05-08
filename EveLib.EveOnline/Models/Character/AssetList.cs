@@ -26,12 +26,13 @@ namespace eZet.EveLib.Modules.Models.Character {
             while (stack.Count > 0) {
                 var current = stack.Pop();
                 list.Add(current);
+                if (current.Items == null) continue;
                 foreach (var child in current.Items)
                     stack.Push(child);
             }
             return list;
         }
-        
+
         [Serializable]
         [XmlRoot("row")]
         public class Item {
