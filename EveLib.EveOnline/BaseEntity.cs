@@ -13,8 +13,11 @@ namespace eZet.EveLib.Modules {
 
         private const string DefaultUri = "https://api.eveonline.com";
 
-        protected BaseEntity(string baseUri = DefaultUri)
-            : this(new DefaultCachedRequestHandler(new XmlSerializerWrapper(), new EveXmlCache()), baseUri) {
+        protected BaseEntity(bool useCache = true, string baseUri = DefaultUri) {
+            BaseUri = new Uri(baseUri);
+            RequestHandler = useCache
+                ? new DefaultCachedRequestHandler(new XmlSerializerWrapper(), new EveXmlCache()) as IRequestHandler
+                : new RequestHandler(new XmlSerializerWrapper());
         }
 
         protected BaseEntity(IRequestHandler requestHandler, string baseUri = DefaultUri) {
