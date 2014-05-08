@@ -51,7 +51,7 @@ namespace eZet.EveLib.Modules {
                 if (_isValidKey != null) return _isValidKey.Value;
                 lock (LazyLoadLock) {
                     if (_isValidKey == null)
-                        _isValidKey = getIsValidKey();
+                        _isValidKey = getIsValidKey(false);
                 }
                 return _isValidKey.Value;
             }
@@ -123,16 +123,13 @@ namespace eZet.EveLib.Modules {
             return response;
         }
 
-        private bool getIsValidKey() {
+        private bool getIsValidKey(bool throwException) {
             try {
                 Data = GetApiKeyInfo();
             } catch (InvalidRequestException e) {
-                if (e.InnerException.GetType() == typeof(WebException)) {
-                    if (((HttpWebResponse)((WebException)e.InnerException).Response).StatusCode ==
-                        HttpStatusCode.Forbidden) {
-                        return false;
-                    }
-                    throw;
+                if (!throwException &&((HttpWebResponse)(e.InnerException).Response).StatusCode ==
+                    HttpStatusCode.Forbidden) {
+                    return false;
                 }
                 throw;
             }
@@ -140,6 +137,7 @@ namespace eZet.EveLib.Modules {
         }
 
         protected virtual void lazyLoad() {
+            _isValidKey = getIsValidKey(true);
             if (IsValidKey)
                 load(Data);
         }

@@ -47,7 +47,5 @@ namespace eZet.EveLib.Modules {
         private T request<T>(Uri uri) {
             return RequestHandler.Request<T>(uri);
         }
-
-
     }
 }

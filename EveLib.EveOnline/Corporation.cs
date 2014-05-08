@@ -28,6 +28,8 @@ namespace eZet.EveLib.Modules {
             CorporationId = corporationId;
             CorporationName = corporationName;
             BaseUri = new Uri("https://api.eveonline.com");
+
+
         }
 
         /// <summary>
