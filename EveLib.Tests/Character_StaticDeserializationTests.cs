@@ -34,7 +34,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetAssetList() {
             EveApiResponse<AssetList> xml = character.GetAssetList();
-            Assert.AreEqual(150354641, xml.Result.Assets.First().ItemId);
+            Assert.AreEqual(150354641, xml.Result.Items.First().ItemId);
         }
 
         [TestMethod]

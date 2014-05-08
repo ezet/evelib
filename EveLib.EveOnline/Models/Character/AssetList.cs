@@ -6,11 +6,11 @@ namespace eZet.EveLib.Modules.Models.Character {
     [XmlRoot("result", IsNullable = false)]
     public class AssetList {
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Asset> Assets { get; set; }
+        public EveOnlineRowCollection<Item> Items { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
-        public class Asset {
+        public class Item {
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }
 
@@ -35,7 +35,7 @@ namespace eZet.EveLib.Modules.Models.Character {
 
         [Serializable]
         [XmlRoot("row")]
-        public class Item {
+        public class Asset {
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }
 
