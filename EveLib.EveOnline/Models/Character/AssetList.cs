@@ -12,6 +12,10 @@ namespace eZet.EveLib.Modules.Models.Character {
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Item> Items { get; set; }
 
+        /// <summary>
+        /// Returns a flat list of all assets.
+        /// </summary>
+        /// <returns></returns>
         public ICollection<Item> Flatten() {
             return flatten(Items);
         }
