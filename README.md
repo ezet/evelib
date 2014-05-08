@@ -7,6 +7,7 @@ Support thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 
 ### Features
 * Easy to use.
+* Threadsafe.
 * XML configuration through app.config.
 * Access to all popular APIs through one library.
 * Adheres to C# and .NET conventions.
@@ -16,9 +17,11 @@ Support thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 
 ### Current Modules
 * Eve Online API
+* Eve CREST
 * Eve Central API
 * Eve Marketdata API
 * Element43 API
+* ZKillboard API
 
 ### General information
 The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like. The latest stable release also offers one download where all projects are merged into one dll. The libraries can be configured using app.config in your application, see dll.config for possible values.
