@@ -16,7 +16,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         /// Returns a flat list of all assets.
         /// </summary>
         /// <returns></returns>
-        public ICollection<Item> Flatten() {
+        public IEnumerable<Item> Flatten() {
             return flatten(Items);
         }
 
