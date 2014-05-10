@@ -41,12 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Element43.cs" />
     <Compile Include="Element43Legacy.cs" />
     <Compile Include="Element43Options.cs" />
-    <Compile Include="Models\Element43Collection.cs" />
     <Compile Include="Models\Element43MarketStatResponse.cs" />
-    <Compile Include="Models\InvType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

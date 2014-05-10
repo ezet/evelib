@@ -3,7 +3,7 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
-    public class Element43 {
+    public class StaticData {
 
         public enum DataFormat {
             Json,
@@ -15,7 +15,7 @@ namespace eZet.EveLib.Modules {
 
         public const string DefaultApiPath = "api/";
 
-        public Element43(DataFormat format = DataFormat.Json) {
+        public StaticData(DataFormat format = DataFormat.Json) {
             RequestHandler = new RequestHandler(new HttpRequester(), new SimpleJsonSerializer());
             BaseUri = new Uri(DefaultUri);
             ApiPath = DefaultApiPath;
@@ -41,9 +41,9 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 
-        public Element43Collection<InvType> GetInvTypes(int page = 1) {
+        public StaticDataCollection<InvType> GetInvTypes(int page = 1) {
             const string relPath = "invType/";
-            return request<Element43Collection<InvType>>(relPath, "page=" + page);
+            return request<StaticDataCollection<InvType>>(relPath, "page=" + page);
         }
 
         public InvType GetInvType(long id) {
