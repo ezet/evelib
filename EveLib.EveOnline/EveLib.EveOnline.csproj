@@ -198,8 +198,7 @@
     <Compile Include="Models\EveOnlineRowCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CachedRequestHandler.cs" />
-    <Compile Include="Util\DefaultCachedRequestHandler.cs" />
-    <Compile Include="Util\EveApiCache.cs" />
+    <Compile Include="Util\EveApiFileCache.cs" />
     <Compile Include="Util\IEveApiCache.cs" />
   </ItemGroup>
   <ItemGroup>

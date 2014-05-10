@@ -9,13 +9,13 @@ using System.Text;
 using eZet.EveLib.Core;
 
 namespace eZet.EveLib.Modules.Util {
-    public class EveApiCache : IEveApiCache {
+    public class EveApiFileCache : IEveApiCache {
 
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 
-        public EveApiCache() {
+        public EveApiFileCache() {
             loadFromDisk();
         }
 
