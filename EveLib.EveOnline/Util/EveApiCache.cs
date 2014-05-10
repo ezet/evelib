@@ -9,13 +9,13 @@ using System.Text;
 using eZet.EveLib.Core;
 
 namespace eZet.EveLib.Modules.Util {
-    public class EveXmlCache : IEveXmlCache {
+    public class EveApiCache : IEveApiCache {
 
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 
-        public EveXmlCache() {
+        public EveApiCache() {
             loadFromDisk();
         }
 
@@ -62,7 +62,7 @@ namespace eZet.EveLib.Modules.Util {
             return _register.TryGetValue(key, out value);
         }
 
-        public string GetUriHash(Uri uri) {
+        private static string GetUriHash(Uri uri) {
             string fileName = uri.PathAndQuery;
             byte[] hash = Sha1.ComputeHash(Encoding.Unicode.GetBytes(fileName));
             return BitConverter.ToString(hash).Replace("-", "");

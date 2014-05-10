@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using eZet.EveLib.Core;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
@@ -12,10 +11,9 @@ namespace eZet.EveLib.Modules.Util {
     ///     Handles requests to the Eve API. Caching is accomplished by using the native HttpWebRequest caching (IE Cache).
     /// </summary>
     public class DefaultCachedRequestHandler : CachedRequestHandler {
-        private const string ContentType = "application/x-www-form-urlencoded";
 
-        public DefaultCachedRequestHandler(ISerializer serializer, IEveXmlCache cache)
-            : base(serializer, cache) {
+        public DefaultCachedRequestHandler(IHttpRequester httpRequester, ISerializer serializer, IEveApiCache cache)
+            : base(httpRequester, serializer, cache) {
         }
 
         /// <summary>
@@ -24,20 +22,16 @@ namespace eZet.EveLib.Modules.Util {
         /// <typeparam name="T">The type parameter for the xml response.</typeparam>
         /// <param name="uri">The URI to request.</param>
         /// <returns></returns>
-        public override string Request<T>(Uri uri) {
+        public override T Request<T>(Uri uri) {
             string data = "";
             bool cached = Cache.TryGet(uri, out data);
             if (cached) {
                 Debug.WriteLine("From cache: True");
             } else {
-                HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
-                request.ContentType = ContentType;
-                request.UserAgent = Config.UserAgent;
-                request.Proxy = null;
                 try {
-                    data = HttpRequestHelper.GetResponseContent(request);
-                } catch (WebException e) {
-                    var response = (HttpWebResponse)e.Response;
+                    data = HttpRequester.Request<T>(uri);
+                } catch (InvalidRequestException e) {
+                    var response = (HttpWebResponse)e.InnerException.Response;
                     if (response == null) throw;
                     var responseStream = response.GetResponseStream();
                     if (responseStream == null) throw;
@@ -45,15 +39,14 @@ namespace eZet.EveLib.Modules.Util {
                         data = reader.ReadToEnd();
                         var error = Serializer.Deserialize<EveApiError>(data);
                         Debug.WriteLine("Error: " + error.Error.ErrorCode + ", " + error.Error.ErrorText);
-                        throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e);
+                        throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e.InnerException);
                     }
                 }
             }
-            return data;
-            //var xml = Serializer.Deserialize<T>(data);
-            //if (!cached)
-            //    Cache.Store(uri, getCacheExpirationTime(xml), data);
-            //return xml;
+            var xml = Serializer.Deserialize<T>(data);
+            if (!cached)
+                Cache.Store(uri, getCacheExpirationTime(xml), data);
+            return xml;
         }
     }
 }

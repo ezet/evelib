@@ -4,7 +4,7 @@ namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Interface for CacheExpiratoinRegisters
     /// </summary>
-    public interface IEveXmlCache {
+    public interface IEveApiCache {
 
         void Store(Uri uri, DateTime cacheTime, string data);
 
@@ -19,7 +19,5 @@ namespace eZet.EveLib.Modules.Util {
         /// <param name="value">A DateTime instance to store the date in.</param>
         /// <returns>True if an entry was retrieved, otherwise false.</returns>
         bool TryGetExpirationDate(Uri uri, out DateTime value);
-
-        string GetUriHash(Uri uri);
     }
 }
