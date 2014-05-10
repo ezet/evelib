@@ -8,19 +8,19 @@ namespace eZet.EveLib.Test {
     public class Element43_Tests {
             private const long RegionId = 10000002;
         private const long TypeId = 34;
-        private readonly Element43 api;
-        private readonly Element43Options validOptions;
+        private readonly Element43Legacy _api;
+        private readonly Element43Options _validOptions;
 
         public Element43_Tests() {
-            api = new Element43();
-            validOptions = new Element43Options();
-            validOptions.Items.Add(TypeId);
-            validOptions.Region = RegionId;
+            _api = new Element43Legacy();
+            _validOptions = new Element43Options();
+            _validOptions.Items.Add(TypeId);
+            _validOptions.Region = RegionId;
         }
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            Element43MarketStatResponse res = api.GetMarketStat(validOptions);
+            Element43MarketStatResponse res = _api.GetMarketStat(_validOptions);
             var entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.SellOrders.Average);

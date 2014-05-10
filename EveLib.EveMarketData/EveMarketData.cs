@@ -200,7 +200,7 @@ namespace eZet.EveLib.Modules {
         private void setRequestHandler(Format format) {
             if (format == Format.Xml)
                 RequestHandler = new RequestHandler(new XmlSerializerWrapper());
-            else RequestHandler = new RequestHandler(new JsonSerializer());
+            else RequestHandler = new RequestHandler(new NewtonSoftJsonSerializer());
         }
     }
 }

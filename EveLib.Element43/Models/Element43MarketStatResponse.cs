@@ -6,7 +6,7 @@ namespace eZet.EveLib.Modules.Models {
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "e43_api", IsNullable = false)]
-    public class Element43MarketStatResponse : Element43Response {
+    public class Element43MarketStatResponse {
         [XmlArray("marketstat"), XmlArrayItem("type")]
         public Collection<Element43MarketStatItem> Result { get; set; }
 

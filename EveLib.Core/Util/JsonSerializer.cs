@@ -5,7 +5,7 @@ namespace eZet.EveLib.Modules {
     /// <summary>
     ///     JSON serializer
     /// </summary>
-    public sealed class DynamicJsonSerializer : ISerializer {
+    public sealed class JsonSerializer : ISerializer {
         /// <summary>
         ///     Deserializes JSON 
         /// </summary>

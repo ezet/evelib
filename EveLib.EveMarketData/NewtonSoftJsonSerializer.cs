@@ -1,18 +1,21 @@
-﻿using System.Web.Helpers;
+﻿using System.Collections.Generic;
+using System.Linq;
 using eZet.EveLib.Core.Util;
+using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
     ///     JSON serializer
     /// </summary>
-    public sealed class DynamicJsonSerializer : ISerializer {
+    public sealed class NewtonSoftJsonSerializer : ISerializer {
         /// <summary>
-        ///     Deserializes JSON 
+        ///     Deserializes JSON using JSON.NET
         /// </summary>
         /// <param name="data">A JSON string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
-            return Json.Decode(data);
+            var dict = JsonConvert.DeserializeObject<Dictionary<string, T>>(data);
+            return dict.First().Value;
         }
     }
 }

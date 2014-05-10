@@ -122,7 +122,7 @@
     <Compile Include="JsonConverter\ItemOrdersJsonConverter.cs" />
     <Compile Include="JsonConverter\ItemPricesJsonConverter.cs" />
     <Compile Include="JsonConverter\RowCollectionConverter.cs" />
-    <Compile Include="JsonSerializer.cs" />
+    <Compile Include="NewtonSoftJsonSerializer.cs" />
     <Compile Include="Models\EveMarketDataResponse.cs" />
     <Compile Include="Models\ItemHistory.cs" />
     <Compile Include="Models\ItemOrders.cs" />
