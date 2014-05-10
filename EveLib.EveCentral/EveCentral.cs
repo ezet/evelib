@@ -15,7 +15,7 @@ namespace eZet.EveLib.Modules {
         public EveCentral() {
             BaseUri = new Uri(DefaultUri);
             RequestHandler = new HttpRequester();
-            Serializer = new XmlSerializerWrapper();
+            Serializer = new SimpleXmlSerializer();
         }
 
         /// <summary>

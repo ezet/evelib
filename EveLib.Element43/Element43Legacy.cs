@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules {
         ///     Default constructor, with a default base uri and request handler.
         /// </summary>
         public Element43Legacy() {
-            RequestHandler = new RequestHandler(new HttpRequester(), new XmlSerializerWrapper());
+            RequestHandler = new RequestHandler(new HttpRequester(), new SimpleXmlSerializer());
             BaseUri = new Uri(DefaultUri);
         }
 

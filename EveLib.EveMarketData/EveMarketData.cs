@@ -5,15 +5,15 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
-    public enum Format {
-        Json,
-        Xml,
-    }
 
     /// <summary>
     ///     C# API for the API supplied by api.eve-marketdata.com.
     /// </summary>
     public class EveMarketData {
+        public enum DataFormat {
+            Json,
+            Xml,
+        }
 
         private const string DefaultUri = "http://api.eve-marketdata.com";
 
@@ -22,11 +22,12 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="format"></param>
         /// <param name="name"></param>
-        public EveMarketData(Format format = Format.Json, string name = "demo") {
+        public EveMarketData(DataFormat format = DataFormat.Json, string name = "EveLib") {
             Format = format;
             Name = name;
             BaseUri = new Uri(DefaultUri);
-            setRequestHandler(format);
+            RequestHandler = new RequestHandler(new HttpRequester(), new NewtonSoftJsonSerializer());
+            setSerializer(format);
         }
 
         /// <summary>
@@ -37,13 +38,18 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Gets or sets the request format.
         /// </summary>
-        public Format Format { get; private set; }
+        public DataFormat Format { get; private set; }
+
+        public void SetFormat(DataFormat format) {
+            setSerializer(format);
+            Format = format;
+        }
 
         /// <summary>
         ///     Gets or sets the name supplied to marketdata in the query string. Use your ingame name if you want evemarketdata to
         ///     be able to contact you in case of problems.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         /// <summary>
         ///     Gets or sets the RequestHandler.
@@ -158,7 +164,7 @@ namespace eZet.EveLib.Modules {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            string days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
+            string days = "" + (int)options.AgeSpan.GetValueOrDefault().TotalDays;
             string postString = generateQueryString("char_name", Name, "region_ids", regions, "solarsystem_ids",
                 solarsystems, "station_ids", stations, "days", days);
             return request<StationRank>(relUri, postString);
@@ -187,7 +193,7 @@ namespace eZet.EveLib.Modules {
 
         private string generateQueryString(params object[] args) {
             Contract.Requires(args != null);
-            Contract.Requires(args.Length%2 == 0);
+            Contract.Requires(args.Length % 2 == 0);
             string postString = "";
             for (int i = 0; i < args.Length; i += 2) {
                 if (args[i + 1] != null && (args[i + 1]).ToString() != "")
@@ -196,12 +202,11 @@ namespace eZet.EveLib.Modules {
             return postString;
         }
 
-        private void setRequestHandler(Format format) {
-            ISerializer serializer;
-            if (format == Format.Xml)
-                serializer = new XmlSerializerWrapper();
-            else serializer = new NewtonSoftJsonSerializer();
-            RequestHandler = new RequestHandler(new HttpRequester(), serializer);
+        private void setSerializer(DataFormat format) {
+            if (format == DataFormat.Xml)
+                RequestHandler.Serializer = new SimpleXmlSerializer();
+            else if (format == DataFormat.Json)
+                RequestHandler.Serializer = new NewtonSoftJsonSerializer();
         }
     }
 }

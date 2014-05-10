@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace eZet.EveLib.Modules.Models {
     [Serializable]
     [DataContract]
-    public abstract class Element43Collection<T> {
+    public class Element43Collection<T> {
 
         [DataMember(Name = "count")]
         public int Count { get; set; }

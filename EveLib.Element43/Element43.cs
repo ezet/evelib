@@ -5,16 +5,31 @@ using eZet.EveLib.Modules.Models;
 namespace eZet.EveLib.Modules {
     public class Element43 {
 
+        public enum DataFormat {
+            Json,
+            Xml,
+            Yaml
+        }
+
         public const string DefaultUri = "http://element-43.com/";
 
         public const string DefaultApiPath = "api/";
 
-        public string ApiPath { get; set; }
-        public Element43() {
-            RequestHandler = new RequestHandler(new HttpRequester(), new DynamicJsonSerializer());
+        public Element43(DataFormat format = DataFormat.Json) {
+            RequestHandler = new RequestHandler(new HttpRequester(), new SimpleJsonSerializer());
             BaseUri = new Uri(DefaultUri);
             ApiPath = DefaultApiPath;
+            Format = format;
         }
+
+        public DataFormat Format { get; private set; }
+
+        public void SetFormat(DataFormat format) {
+            Format = format;
+            // TODO set format
+        }
+
+        public string ApiPath { get; set; }
 
         /// <summary>
         ///     Gets or sets the base URI for requests.
@@ -37,7 +52,7 @@ namespace eZet.EveLib.Modules {
         }
 
         private T request<T>(string relUri, string queryString = "") {
-            var uri = new Uri(BaseUri, ApiPath + relUri + "?" + queryString);
+            var uri = new Uri(BaseUri, ApiPath + relUri + "?" + queryString + "&format=" + Format.ToString().ToLower());
             return RequestHandler.Request<T>(uri);
         }
     }

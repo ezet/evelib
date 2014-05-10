@@ -6,7 +6,7 @@ namespace eZet.EveLib.Core.Util {
     /// <summary>
     ///     A simple wrapper for .NET XmlSerializer.
     /// </summary>
-    public sealed class XmlSerializerWrapper : ISerializer {
+    public sealed class SimpleXmlSerializer : ISerializer {
         /// <summary>
         ///     Deserializes Eve API xml using the .NET XmlSerializer.
         /// </summary>
