@@ -100,8 +100,8 @@
     <Compile Include="EveMarketData_Tests.cs" />
     <Compile Include="Image_Tests.cs" />
     <Compile Include="Map_Tests.cs" />
-    <Compile Include="Mocks\MockRequestHandler.cs" />
-    <Compile Include="Mocks\MockSerializer.cs" />
+    <Compile Include="Mocks\StaticXmlRequester.cs" />
+    <Compile Include="Mocks\NullSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CorporationKey_ValidKeyTests.cs" />
     <Compile Include="ZKillboard_Tests.cs" />

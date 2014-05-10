@@ -11,24 +11,24 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Creates a new EveCentral object, with a default base uri and request handler.
         /// </summary>
-        public EveCentral(string baseUri = DefaultUri)
-            : this(new RequestHandler(new XmlSerializerWrapper()), baseUri) {
-        }
-
-        public EveCentral(IRequestHandler requestHandler, string baseUri = DefaultUri) {
-            BaseUri = new Uri(baseUri);
-            RequestHandler = requestHandler;
+ 
+        public EveCentral() {
+            BaseUri = new Uri(DefaultUri);
+            RequestHandler = new HttpRequester();
+            Serializer = new XmlSerializerWrapper();
         }
 
         /// <summary>
         ///     Gets or sets the base URI for requests.
         /// </summary>
-        public Uri BaseUri { get; private set; }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
-        public IRequestHandler RequestHandler { get; private set; }
+        public IHttpRequester RequestHandler { get; set; }
+
+        public ISerializer Serializer { get; set; }
 
         /// <summary>
         ///     Returns aggregate statistics for the items specified.
@@ -100,7 +100,8 @@ namespace eZet.EveLib.Modules {
 
         private T request<T>(string relUri, string queryString) {
             var uri = new Uri(BaseUri, relUri + "?" + queryString);
-            return RequestHandler.Request<T>(uri);
+            string data = RequestHandler.Request<T>(uri);
+            return Serializer.Deserialize<T>(data);
         }
     }
 }

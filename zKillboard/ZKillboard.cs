@@ -6,17 +6,15 @@ namespace eZet.EveLib.Modules {
 
         public const string DefaultUri = "https://zkillboard.com";
 
-        public Uri BaseUri { get; private set; }
 
-        public ZKillboard(string baseUri = DefaultUri) : this(new RequestHandler(new DynamicJsonSerializer()), baseUri) {
+        public ZKillboard() {
+            RequestHandler = new RequestHandler(new HttpRequester(), new DynamicJsonSerializer());
+            BaseUri = new Uri(DefaultUri);
         }
 
-        public ZKillboard(IRequestHandler requestHandler, string baseUri = DefaultUri) {
-            RequestHandler = requestHandler;
-            BaseUri = new Uri(baseUri);
-        }
+        public Uri BaseUri { get; set; }
 
-        public IRequestHandler RequestHandler { get; private set; }
+        public IRequestHandler RequestHandler { get; set; }
 
         public dynamic GetKills(ZKillboardOptions options) {
             string relPath = "/api/kills";

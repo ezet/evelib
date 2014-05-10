@@ -4,7 +4,6 @@ using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Character;
 using eZet.EveLib.Modules.Models.Corporation;
-using eZet.EveLib.Modules.Util;
 using eZet.EveLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ContactList = eZet.EveLib.Modules.Models.Corporation.ContactList;
@@ -19,7 +18,7 @@ namespace eZet.EveLib.Test {
 
         public Corporation_StaticDeserializationTests() {
             _corp = new Corporation(new CorporationKey(0, ""), 0, "");
-            _corp.RequestHandler = new MockRequestHandler(new XmlSerializerWrapper(), new EveXmlCache());
+            _corp.RequestHandler = new RequestHandler(new StaticXmlRequester(), new XmlSerializerWrapper());
         }
 
         [TestMethod]

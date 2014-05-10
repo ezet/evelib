@@ -4,13 +4,10 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Test.Mocks {
-    public class MockRequestHandler : CachedRequestHandler {
-        private readonly ISerializer _serializer = new XmlSerializerWrapper();
+    public class StaticXmlRequester : IHttpRequester {
 
-        public MockRequestHandler(ISerializer serializer, IEveXmlCache cache) : base(serializer, cache) {
-        }
 
-        public override T Request<T>(Uri uri) {
+        public string Request<T>(Uri uri) {
             // ReSharper disable once PossibleNullReferenceException
             string baseDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string path = uri.PathAndQuery;
@@ -19,11 +16,11 @@ namespace eZet.EveLib.Test.Mocks {
                     .LastIndexOf("/", StringComparison.Ordinal));
             relPath = relPath.Remove(relPath.LastIndexOf(".aspx", StringComparison.Ordinal)).Replace("/", "\\");
             relPath = baseDir + "\\Xml" + relPath;
-            string data;
+            string data = "";
             using (StreamReader reader = (File.OpenText(relPath))) {
                 data = reader.ReadToEnd();
             }
-            return _serializer.Deserialize<T>(data);
+            return data;
         }
     }
 }

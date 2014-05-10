@@ -6,7 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class Element43Legacy_Tests {
-            private const long RegionId = 10000002;
+
+        private const long RegionId = 10000002;
         private const long TypeId = 34;
         private readonly Element43Legacy _api;
         private readonly Element43Options _validOptions;

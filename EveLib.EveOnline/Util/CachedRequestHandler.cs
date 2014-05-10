@@ -5,7 +5,7 @@ namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Provides basic properties and methods for Eve Api RequestHandler objects.
     /// </summary>
-    public abstract class CachedRequestHandler : IRequestHandler {
+    public abstract class CachedRequestHandler : IHttpRequester {
 
         /// <summary>
         ///     Cache for XML
@@ -29,7 +29,7 @@ namespace eZet.EveLib.Modules.Util {
         /// <typeparam name="T">Type of EveApiResponse.</typeparam>
         /// <param name="uri">The uri to request.</param>
         /// <returns></returns>
-        public abstract T Request<T>(Uri uri);
+        public abstract string Request<T>(Uri uri);
 
         protected virtual DateTime getCacheExpirationTime(dynamic xml) {
             //if (o.GetType().Is) throw new System.Exception("Should never occur.");

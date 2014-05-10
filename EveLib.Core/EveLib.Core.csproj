@@ -120,12 +120,14 @@
     <Compile Include="Exception\EveLibException.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Util\DynamicJsonSerializer.cs" />
+    <Compile Include="Util\IHttpRequester.cs" />
     <Compile Include="Util\IRequestHandler.cs" />
     <Compile Include="Util\ISerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\JsonSerializer.cs" />
-    <Compile Include="Util\RequestHandler.cs" />
+    <Compile Include="Util\HttpRequester.cs" />
     <Compile Include="Util\Logger.cs" />
+    <Compile Include="Util\RequestHandler.cs" />
     <Compile Include="Util\XmlSerializerWrapper.cs" />
     <Compile Include="Util\HttpRequestHelper.cs" />
   </ItemGroup>

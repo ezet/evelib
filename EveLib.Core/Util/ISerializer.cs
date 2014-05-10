@@ -1,13 +1,13 @@
 ﻿namespace eZet.EveLib.Core.Util {
     /// <summary>
-    ///     Provides serialization methods for Eve API xml and objects.
+    ///     Interface for deserializing objects.
     /// </summary>
     public interface ISerializer {
         /// <summary>
-        ///     Deserializes Eve API xml.
+        ///     Deserializes data.
         /// </summary>
-        /// <typeparam name="T">Parameter type for EveApiResponse.</typeparam>
-        /// <param name="data">String of XML to deserialize.</param>
+        /// <typeparam name="T">Type to deserialize to.</typeparam>
+        /// <param name="data">String of data to deserialize.</param>
         /// <returns></returns>
         T Deserialize<T>(string data);
     }

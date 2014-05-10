@@ -22,11 +22,10 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="format"></param>
         /// <param name="name"></param>
-        /// <param name="baseUri"></param>
-        public EveMarketData(Format format = Format.Json, string name = "demo", string baseUri = DefaultUri) {
+        public EveMarketData(Format format = Format.Json, string name = "demo") {
             Format = format;
             Name = name;
-            BaseUri = new Uri(baseUri);
+            BaseUri = new Uri(DefaultUri);
             setRequestHandler(format);
         }
 
@@ -49,7 +48,7 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Gets or sets the RequestHandler.
         /// </summary>
-        public IRequestHandler RequestHandler { get; private set; }
+        public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>
         ///     Returns a list of any orders that were recently updated.
@@ -198,9 +197,11 @@ namespace eZet.EveLib.Modules {
         }
 
         private void setRequestHandler(Format format) {
+            ISerializer serializer;
             if (format == Format.Xml)
-                RequestHandler = new RequestHandler(new XmlSerializerWrapper());
-            else RequestHandler = new RequestHandler(new NewtonSoftJsonSerializer());
+                serializer = new XmlSerializerWrapper();
+            else serializer = new NewtonSoftJsonSerializer();
+            RequestHandler = new RequestHandler(new HttpRequester(), serializer);
         }
     }
 }

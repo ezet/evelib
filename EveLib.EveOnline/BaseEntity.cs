@@ -2,7 +2,6 @@
 using System.Diagnostics.Contracts;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
 
@@ -13,16 +12,9 @@ namespace eZet.EveLib.Modules {
 
         private const string DefaultUri = "https://api.eveonline.com";
 
-        protected BaseEntity(bool useCache = true, string baseUri = DefaultUri) {
-            BaseUri = new Uri(baseUri);
-            RequestHandler = useCache
-                ? new DefaultCachedRequestHandler(new XmlSerializerWrapper(), new EveXmlCache()) as IRequestHandler
-                : new RequestHandler(new XmlSerializerWrapper());
-        }
-
-        protected BaseEntity(IRequestHandler requestHandler, string baseUri = DefaultUri) {
-            RequestHandler = requestHandler;
-            BaseUri = new Uri(baseUri);
+        protected BaseEntity() {
+            RequestHandler = new RequestHandler(new HttpRequester(), new XmlSerializerWrapper());
+            BaseUri = new Uri(DefaultUri);
         }
 
         /// <summary>

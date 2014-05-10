@@ -10,16 +10,8 @@ namespace eZet.EveLib.Modules {
         public const string DefaultApiPath = "api/";
 
         public string ApiPath { get; set; }
-
-        /// <summary>
-        ///     Default constructor, with a default base uri and request handler.
-        /// </summary>
-        public Element43()
-            : this(new RequestHandler(new DynamicJsonSerializer())) {
-        }
-
-        public Element43(IRequestHandler requestHandler) {
-            RequestHandler = requestHandler;
+        public Element43() {
+            RequestHandler = new RequestHandler(new HttpRequester(), new DynamicJsonSerializer());
             BaseUri = new Uri(DefaultUri);
             ApiPath = DefaultApiPath;
         }
@@ -33,11 +25,6 @@ namespace eZet.EveLib.Modules {
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
-
-        public Element43Collection<dynamic> MapLocationWormholeClass() {
-            const string relPath = "mapLocationWormholeClass/";
-            return request<dynamic>(relPath, "");
-        }
 
         public Element43Collection<InvType> GetInvTypes(int page = 1) {
             const string relPath = "invType/";

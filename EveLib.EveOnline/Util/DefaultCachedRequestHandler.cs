@@ -24,7 +24,7 @@ namespace eZet.EveLib.Modules.Util {
         /// <typeparam name="T">The type parameter for the xml response.</typeparam>
         /// <param name="uri">The URI to request.</param>
         /// <returns></returns>
-        public override T Request<T>(Uri uri) {
+        public override string Request<T>(Uri uri) {
             string data = "";
             bool cached = Cache.TryGet(uri, out data);
             if (cached) {
@@ -49,10 +49,11 @@ namespace eZet.EveLib.Modules.Util {
                     }
                 }
             }
-            var xml = Serializer.Deserialize<T>(data);
-            if (!cached)
-                Cache.Store(uri, getCacheExpirationTime(xml), data);
-            return xml;
+            return data;
+            //var xml = Serializer.Deserialize<T>(data);
+            //if (!cached)
+            //    Cache.Store(uri, getCacheExpirationTime(xml), data);
+            //return xml;
         }
     }
 }
