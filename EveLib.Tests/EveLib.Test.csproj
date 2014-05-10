@@ -92,6 +92,7 @@
     <Compile Include="CharacterKey_ValidKeyTests.cs" />
     <Compile Include="Character_StaticDeserializationTests.cs" />
     <Compile Include="Crest_Tests.cs" />
+    <Compile Include="Element43Legacy_Tests.cs" />
     <Compile Include="Element43_Tests.cs" />
     <Compile Include="Misc_Tests.cs" />
     <Compile Include="Corporation_StaticDeserializationTests.cs" />
