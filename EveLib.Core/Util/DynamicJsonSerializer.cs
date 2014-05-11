@@ -1,4 +1,4 @@
-﻿using System.Web.Helpers;
+﻿using Newtonsoft.Json;
 
 namespace eZet.EveLib.Core.Util {
     /// <summary>
@@ -11,7 +11,7 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="data">A JSON string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
-            return Json.Decode(data);
+            return JsonConvert.DeserializeObject<T>(data);
         }
     }
 }

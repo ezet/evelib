@@ -93,7 +93,7 @@
     <Compile Include="Character_StaticDeserializationTests.cs" />
     <Compile Include="Crest_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
-    <Compile Include="Element43_Tests.cs" />
+    <Compile Include="StaticData_Tests.cs" />
     <Compile Include="Misc_Tests.cs" />
     <Compile Include="Corporation_StaticDeserializationTests.cs" />
     <Compile Include="EveCentral_Tests.cs" />
@@ -195,6 +195,10 @@
     <ProjectReference Include="..\EveLib.EveOnline\EveLib.EveOnline.csproj">
       <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
       <Name>EveLib.EveOnline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.Static\EveLib.StaticData.csproj">
+      <Project>{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}</Project>
+      <Name>EveLib.StaticData</Name>
     </ProjectReference>
     <ProjectReference Include="..\zKillboard\Evelib.ZKillboard.csproj">
       <Project>{741BDD36-B71C-4ABE-9B03-185FBD6767F4}</Project>

@@ -3,9 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
     [TestClass]
-    public class Element43_Tests {
+    public class StaticData_Tests {
 
-        public readonly Element43 Api = new Element43();
+        public readonly StaticData Api = new StaticData();
 
         [TestMethod]
         public void GetInvTypes_ValidRequest_NoErrors() {
