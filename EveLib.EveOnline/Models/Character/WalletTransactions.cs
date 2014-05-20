@@ -49,7 +49,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public string TypeName { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("price")]
             public decimal Price { get; set; }
@@ -71,6 +71,12 @@ namespace eZet.EveLib.Modules.Models.Character {
 
             [XmlAttribute("transactionFor")]
             public string TransactionFor { get; set; }
+
+            [XmlAttribute("journalTransactionID")]
+            public long JournalTransactionId { get; set; }
+
+            [XmlAttribute("clientTypeID")]
+            public int ClientTypeId { get; set; }
 
 
         }
