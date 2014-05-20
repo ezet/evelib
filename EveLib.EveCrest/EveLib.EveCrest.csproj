@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml" />
@@ -39,6 +40,8 @@
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
     <Compile Include="Models\Alliance.cs" />
+    <Compile Include="Models\EveCrestResponse.cs" />
+    <Compile Include="Models\MarketHistoryResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

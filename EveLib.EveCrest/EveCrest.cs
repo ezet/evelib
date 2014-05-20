@@ -1,5 +1,6 @@
 ﻿using System;
 using eZet.EveLib.Core.Util;
+using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     public class EveCrest {
@@ -37,9 +38,9 @@ namespace eZet.EveLib.Modules {
             return request<dynamic>(new Uri(BaseUri, relPath));
         }
 
-        public dynamic GetMarketHistory(long regionId, long typeId) {
+        public MarketHistoryResponse GetMarketHistory(long regionId, long typeId) {
             string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
-            return request<dynamic>(new Uri(BaseUri, relPath));
+            return request<MarketHistoryResponse>(new Uri(BaseUri, relPath));
         }
 
         private T request<T>(Uri uri) {
