@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
@@ -32,16 +33,25 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public Element43MarketStatResponse GetMarketStat(Element43Options options) {
+            return GetMarketStatAsync(options).Result;
+        }
+
+        /// <summary>
+        ///     Returns aggregate statistics for the items specified.
+        /// </summary>
+        /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
+        /// <returns></returns>
+        public Task<Element43MarketStatResponse> GetMarketStatAsync(Element43Options options) {
             Contract.Requires(options != null, "Options cannot be null");
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/market/api/marketstat";
             string queryString = options.GetRegionQuery("regionlimit") + options.GetItemQuery("typeid");
-            return request<Element43MarketStatResponse>(relUri, queryString);
+            return requestAsync<Element43MarketStatResponse>(relUri, queryString);
         }
 
-        private T request<T>(string relUri, string queryString) {
+        private Task<T> requestAsync<T>(string relUri, string queryString) {
             var uri = new Uri(BaseUri, relUri + "?" + queryString);
-            return RequestHandler.Request<T>(uri);
+            return RequestHandler.RequestAsync<T>(uri);
         }
     }
 }
