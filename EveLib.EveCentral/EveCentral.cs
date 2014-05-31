@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
@@ -36,13 +37,22 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public EveCentralMarketStatResponse GetMarketStat(EveCentralOptions options) {
+            return GetMarketStatAsync(options).Result;
+        }
+
+        /// <summary>
+        ///     Returns aggregate statistics for the items specified.
+        /// </summary>
+        /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
+        /// <returns></returns>
+        public Task<EveCentralMarketStatResponse> GetMarketStatAsync(EveCentralOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/api/marketstat";
             string queryString = options.GetItemQuery("typeid") + options.GetHourQuery("hours") +
                                  options.GetMinQuantityQuery("minQ") +
                                  options.GetRegionQuery("regionlimit") + options.GetSystemQuery("usesystem");
-            return request<EveCentralMarketStatResponse>(relUri, queryString);
+            return requestAsync<EveCentralMarketStatResponse>(relUri, queryString);
         }
 
         /// <summary>
@@ -51,13 +61,23 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public EveCentralQuickLookResponse GetQuicklook(EveCentralOptions options) {
+            return GetQuicklookAsync(options).Result;
+        }
+
+
+        /// <summary>
+        ///     Returns all of the available market orders, including prices, stations, order IDs, volumes, etc.
+        /// </summary>
+        /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
+        /// <returns></returns>
+        public Task<EveCentralQuickLookResponse> GetQuicklookAsync(EveCentralOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/api/quicklook";
             string queryString = options.GetItemQuery("typeid") + options.GetHourQuery("sethours") +
                                  options.GetMinQuantityQuery("setminQ") +
                                  options.GetRegionQuery("regionlimit") + options.GetSystemQuery("usesystem");
-            return request<EveCentralQuickLookResponse>(relUri, queryString);
+            return requestAsync<EveCentralQuickLookResponse>(relUri, queryString);
         }
 
         /// <summary>
@@ -71,6 +91,20 @@ namespace eZet.EveLib.Modules {
         /// <returns></returns>
         public EveCentralQuickLookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId,
             EveCentralOptions options) {
+            return GetQuicklookPathAsync(startSystem, endSystem, typeId, options).Result;
+        }
+
+        /// <summary>
+        ///     Retrieve all of the available market orders, including prices, stations, order IDs, volumes, etc., on a given jump
+        ///     path.
+        /// </summary>
+        /// <param name="startSystem">SystemID or System name</param>
+        /// <param name="endSystem">SystemID or System name</param>
+        /// <param name="typeId">Type ID</param>
+        /// <param name="options">Optional; Valid options: HourLimit, MinQuantity.</param>
+        /// <returns></returns>
+        public Task<EveCentralQuickLookResponse> GetQuicklookPathAsync(object startSystem, object endSystem, long typeId,
+            EveCentralOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(startSystem != null, "Start system cannot be null.");
             Contract.Requires(endSystem != null, "End system cannot be null.");
@@ -78,29 +112,16 @@ namespace eZet.EveLib.Modules {
             relUri += "/from/" + startSystem + "/to/" + endSystem + "/fortype/" + typeId;
             string queryString = options.GetHourQuery("sethours");
             queryString += options.GetMinQuantityQuery("setminQ");
-            return request<EveCentralQuickLookResponse>(relUri, queryString);
+            return requestAsync<EveCentralQuickLookResponse>(relUri, queryString);
         }
-
-        /// <summary>
-        ///     You can get a snapshot of EVE-Central statistics (not game statistics) over time.
-        /// </summary>
-        /// <param name="startSystem">SystemID or System name</param>
-        /// <param name="endSystem">SystemID or System name</param>
-        /// <param name="typeId">Type ID</param>
-        /// <returns></returns>
-        public EveCentralQuickLookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId) {
-            Contract.Requires(startSystem != null, "Start system cannot be null.");
-            Contract.Requires(endSystem != null, "End system cannot be null.");
-            return GetQuicklookPath(startSystem, endSystem, typeId, new EveCentralOptions());
-        }
-
+ 
         public void GetHistory() {
             throw new NotImplementedException();
         }
 
-        private T request<T>(string relUri, string queryString) {
+        private async Task<T> requestAsync<T>(string relUri, string queryString) {
             var uri = new Uri(BaseUri, relUri + "?" + queryString);
-            string data = RequestHandler.Request<T>(uri);
+            string data = await RequestHandler.RequestAsync<T>(uri);
             return Serializer.Deserialize<T>(data);
         }
     }
