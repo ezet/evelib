@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 
@@ -43,9 +44,20 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<AccountStatus> GetAccountStatus() {
+            return GetAccountStatusAsync().Result;
+        }
+
+        /// <summary>
+        ///     Returns basic account information including when the subscription lapses, total play time in minutes, total times
+        ///     logged on and date of account creation.
+        ///     <para></para>
+        ///     In the case of game time code accounts it will also look for available offers of time codes.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<AccountStatus>> GetAccountStatusAsync() {
             //const int mask = 33554432;
             const string uri = "/account/AccountStatus.xml.aspx";
-            return request<AccountStatus>(uri, this);
+            return requestAsync<AccountStatus>(uri, this);
         }
 
         protected override void lazyLoad() {

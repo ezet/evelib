@@ -13,8 +13,6 @@ namespace eZet.EveLib.Core.Util {
         /// <typeparam name="T">Type of response.</typeparam>
         /// <param name="uri">The uri to request.</param>
         /// <returns></returns>
-        string Request<T>(Uri uri);
-
         Task<string> RequestAsync<T>(Uri uri);
 
     }

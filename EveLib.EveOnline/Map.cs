@@ -17,8 +17,16 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<FactionWarfareSystems> GetFactionWarSystems() {
+            return GetFactionWarSystemsAsync().Result;
+        }
+
+        /// <summary>
+        ///     Returns a list of contestable solarsystems and the NPC faction currently occupying them.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<FactionWarfareSystems>> GetFactionWarSystemsAsync() {
             const string path = "/map/FacWarSystems.xml.aspx";
-            return request<FactionWarfareSystems>(path);
+            return requestAsync<FactionWarfareSystems>(path);
         }
 
         /// <summary>

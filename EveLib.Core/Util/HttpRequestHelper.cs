@@ -8,72 +8,34 @@ namespace eZet.EveLib.Core.Util {
     public static class HttpRequestHelper {
         public const string ContentTypeForm = "application/x-www-form-urlencoded";
 
+        private static readonly TraceSource Trace = new TraceSource("EveLib");
+
+
         public static HttpWebRequest CreateRequest(Uri uri) {
             HttpWebRequest request = WebRequest.CreateHttp(uri);
             return request;
         }
 
-        public static string Request(Uri uri) {
-            HttpWebRequest request = CreateRequest(uri);
-            return GetResponseContent(request);
-        }
-
-        public static Task<string> RequestAsync(Uri uri) {
-            HttpWebRequest request = CreateRequest(uri);
-            return GetResponseContentAsync(request);
-        }
-
-        public static HttpWebResponse GetResponse(HttpWebRequest request) {
-            Debug.WriteLine("Requesting: " + request.RequestUri);
-            HttpWebResponse response;
-            try {
-                response = request.GetResponse() as HttpWebResponse;
-                if (response != null) {
-                    Debug.WriteLine("Reponse status: " + response.StatusCode + ", " + response.StatusDescription);
-                    Debug.WriteLine("From cache: " + response.IsFromCache);
-                }
-            } catch (WebException e) {
-                response = (HttpWebResponse)e.Response;
-                if (response == null) throw;
-                Debug.WriteLine("Reponse status: " + response.StatusCode + ", " + response.StatusDescription);
-                Debug.WriteLine("From cache: " + response.IsFromCache);
-                throw;
-            }
-            return response;
-        }
-
         public async static Task<HttpWebResponse> GetResponseAsync(HttpWebRequest request) {
-            Debug.WriteLine("Requesting: " + request.RequestUri);
             HttpWebResponse response;
             try {
                 response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
                 if (response != null) {
-                    Debug.WriteLine("Reponse status: " + response.StatusCode + ", " + response.StatusDescription);
-                    Debug.WriteLine("From cache: " + response.IsFromCache);
+                    Trace.TraceEvent(TraceEventType.Information, 0, "Response status: " + response.StatusCode + ", " + response.StatusDescription);
+                    Trace.TraceEvent(TraceEventType.Verbose, 0, "From cache: " + response.IsFromCache);
                 }
             } catch (WebException e) {
                 response = (HttpWebResponse)e.Response;
                 if (response == null) throw;
-                Debug.WriteLine("Reponse status: " + response.StatusCode + ", " + response.StatusDescription);
-                Debug.WriteLine("From cache: " + response.IsFromCache);
+                Trace.TraceEvent(TraceEventType.Information, 0, "Response status: " + response.StatusCode + ", " + response.StatusDescription);
+                Trace.TraceEvent(TraceEventType.Verbose, 0, "From cache: " + response.IsFromCache);
                 throw;
             }
             return response;
         }
 
-        public static string GetResponseContent(HttpWebRequest request) {
-            string data = "";
-            using (var response = GetResponse(request)) {
-                Stream responseStream = response.GetResponseStream();
-                if (responseStream == null) return data;
-                using (var reader = new StreamReader(responseStream)) {
-                    data = reader.ReadToEnd();
-                }
-            }
-            return data;
-        }
-
         public async static Task<string> GetResponseContentAsync(HttpWebRequest request) {
+            Trace.TraceEvent(TraceEventType.Start, 0, "Starting request: " + request.RequestUri);
             string data = "";
             using (var response = await GetResponseAsync(request).ConfigureAwait(false)) {
                 Stream responseStream = response.GetResponseStream();
@@ -82,6 +44,7 @@ namespace eZet.EveLib.Core.Util {
                     data = await reader.ReadToEndAsync().ConfigureAwait(false);
                 }
             }
+            Trace.TraceEvent(TraceEventType.Stop, 0, "Finished request: " + request.RequestUri);
             return data;
         }
     }

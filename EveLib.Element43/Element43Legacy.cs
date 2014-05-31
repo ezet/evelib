@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
@@ -46,7 +47,8 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/market/api/marketstat";
             string queryString = options.GetRegionQuery("regionlimit") + options.GetItemQuery("typeid");
-            return requestAsync<Element43MarketStatResponse>(relUri, queryString);
+            var res = requestAsync<Element43MarketStatResponse>(relUri, queryString);
+            return res;
         }
 
         private Task<T> requestAsync<T>(string relUri, string queryString) {

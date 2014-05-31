@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -7,6 +8,9 @@ namespace eZet.EveLib.Core.Util {
     ///     A simple wrapper for .NET XmlSerializer.
     /// </summary>
     public sealed class SimpleXmlSerializer : ISerializer {
+
+        private readonly TraceSource _trace = new TraceSource("EveLib");
+
         /// <summary>
         ///     Deserializes Eve API xml using the .NET XmlSerializer.
         /// </summary>

@@ -266,10 +266,6 @@ namespace eZet.EveLib.Modules {
             return new Uri("http://eve-marketdata.com" + relUri + query);
         }
 
-        private EveMarketDataResponse<T> request<T>(string relUri, string queryString) {
-            var uri = new Uri(BaseUri, relUri + "?" + queryString);
-            return RequestHandler.Request<EveMarketDataResponse<T>>(uri);
-        }
         private Task<EveMarketDataResponse<T>> requestAsync<T>(string relUri, string queryString) {
             var uri = new Uri(BaseUri, relUri + "?" + queryString);
             return RequestHandler.RequestAsync<EveMarketDataResponse<T>>(uri);

@@ -8,8 +8,6 @@ namespace eZet.EveLib.Core.Util {
 
         ISerializer Serializer { get; set; }
 
-        T Request<T>(Uri uri);
-
         Task<T> RequestAsync<T>(Uri uri);
     }
 }

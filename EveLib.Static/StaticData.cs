@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
@@ -42,18 +43,27 @@ namespace eZet.EveLib.Modules {
         public IRequestHandler RequestHandler { get; set; }
 
         public StaticDataCollection<InvType> GetInvTypes(int page = 1) {
+            return GetInvTypesAsync(page).Result;
+        }
+
+
+        public Task<StaticDataCollection<InvType>> GetInvTypesAsync(int page = 1) {
             const string relPath = "invType/";
-            return request<StaticDataCollection<InvType>>(relPath, "page=" + page);
+            return requestAsync<StaticDataCollection<InvType>>(relPath, "page=" + page);
         }
 
         public InvType GetInvType(long id) {
-            string relPath = "invType/" + id;
-            return request<InvType>(relPath);
+            return GetInvTypeAsync(id).Result;
         }
 
-        private T request<T>(string relUri, string queryString = "") {
+        public Task<InvType> GetInvTypeAsync(long id) {
+            string relPath = "invType/" + id;
+            return requestAsync<InvType>(relPath);
+        }
+
+        private Task<T> requestAsync<T>(string relUri, string queryString = "") {
             var uri = new Uri(BaseUri, ApiPath + relUri + "?" + queryString + "&format=" + Format.ToString().ToLower());
-            return RequestHandler.Request<T>(uri);
+            return RequestHandler.RequestAsync<T>(uri);
         }
     }
 }
