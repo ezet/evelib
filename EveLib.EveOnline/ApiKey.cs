@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Net;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
@@ -51,7 +52,7 @@ namespace eZet.EveLib.Modules {
                 if (_isValidKey != null) return _isValidKey.Value;
                 lock (LazyLoadLock) {
                     if (_isValidKey == null)
-                        _isValidKey = getIsValidKey(false);
+                        _isValidKey = getIsValidKeyAsync(false).Result;
                 }
                 return _isValidKey.Value;
             }
@@ -106,26 +107,25 @@ namespace eZet.EveLib.Modules {
         ///     Returns api key info. All of this information is already available as properties on this object.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<ApiKeyInfo> GetApiKeyInfo() {
+        public Task<EveApiResponse<ApiKeyInfo>> GetApiKeyInfoAsync() {
             //const int mask = 0;
             const string uri = "/account/APIKeyInfo.xml.aspx";
-            return request<ApiKeyInfo>(uri, this);
+            return requestAsync<ApiKeyInfo>(uri, this);
         }
 
         /// <summary>
         ///     Returns a list of all characters on an account.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<CharacterList> GetCharacterList() {
+        public Task<EveApiResponse<CharacterList>> GetCharacterListAsync() {
             //const int mask = 0;
             const string uri = "/account/Characters.xml.aspx";
-            EveApiResponse<CharacterList> response = request<CharacterList>(uri, this);
-            return response;
+            return requestAsync<CharacterList>(uri, this);
         }
 
-        private bool getIsValidKey(bool throwException) {
+        private async Task<bool> getIsValidKeyAsync(bool throwException) {
             try {
-                Data = GetApiKeyInfo();
+                Data = await GetApiKeyInfoAsync().ConfigureAwait(false);
             } catch (InvalidRequestException e) {
                 if (!throwException &&((HttpWebResponse)(e.InnerException).Response).StatusCode ==
                     HttpStatusCode.Forbidden) {
@@ -136,8 +136,8 @@ namespace eZet.EveLib.Modules {
             return true;
         }
 
-        protected virtual void lazyLoad() {
-            _isValidKey = getIsValidKey(true);
+        protected async virtual void lazyLoad() {
+            _isValidKey = await getIsValidKeyAsync(true).ConfigureAwait(false);
             if (IsValidKey)
                 load(Data);
         }

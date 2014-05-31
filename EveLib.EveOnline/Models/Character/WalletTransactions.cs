@@ -7,25 +7,9 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletTransactions {
-        internal CharWalletTransactionWalker CharWalker;
-        internal CorpWalletTransactionWalker CorpWalker;
-
-        internal int Division;
 
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Transaction> Transactions { get; set; }
-
-        public EveApiResponse<WalletTransactions> GetOlder(int count = 1000) {
-            var transaction = Transactions.OrderBy(t => t.TransactionId).FirstOrDefault();
-            long lastId = transaction != null ? transaction.TransactionId : 0;
-            return CharWalker != null ? CharWalker.Invoke(count, lastId) : CorpWalker.Invoke(Division, count, lastId);
-        }
-
-        internal delegate EveApiResponse<WalletTransactions> CharWalletTransactionWalker(
-            int count = 1000, long fromId = 0);
-
-        internal delegate EveApiResponse<WalletTransactions> CorpWalletTransactionWalker(
-            int division = 1000, int count = 1000, long fromId = 0);
 
         [Serializable]
         [XmlRoot("row")]

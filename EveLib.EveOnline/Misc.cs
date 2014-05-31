@@ -65,7 +65,7 @@ namespace eZet.EveLib.Modules {
 
         /// <summary>
         ///     Returns the same data as a show info call on the character would do in the client. For the extended API key
-        ///     version, see Character.GetCharacterInfo.
+        ///     version, see Character.GetCharacterInfoAsync.
         /// </summary>
         /// <param name="id">The character id.</param>
         /// <returns></returns>

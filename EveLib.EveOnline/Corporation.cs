@@ -307,8 +307,6 @@ namespace eZet.EveLib.Modules {
             EveApiResponse<WalletJournal> result = fromId == 0
                 ? request<WalletJournal>(relPath, Key, "accountKey", division, "rowCount", count)
                 : request<WalletJournal>(relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
-            result.Result.CorpWalker = GetWalletJournal;
-            result.Result.Division = division;
             return result;
         }
 
@@ -325,8 +323,6 @@ namespace eZet.EveLib.Modules {
             EveApiResponse<WalletTransactions> result = fromId == 0
                 ? request<WalletTransactions>(relPath, Key, "accountKey", division, "rowCount", count)
                 : request<WalletTransactions>(relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
-            result.Result.CorpWalker = GetWalletTransactions;
-            result.Result.Division = division;
             return result;
         }
     }

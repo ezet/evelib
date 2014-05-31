@@ -15,12 +15,12 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetApiKeyInfo_NoExceptions() {
-            EveApiResponse<ApiKeyInfo> res = _validKey.GetApiKeyInfo();
+            EveApiResponse<ApiKeyInfo> res = _validKey.GetApiKeyInfoAsync().Result;
         }
 
         [TestMethod]
         public void GetCharacterList_NoExceptions() {
-            EveApiResponse<CharacterList> res = _validKey.GetCharacterList();
+            EveApiResponse<CharacterList> res = _validKey.GetCharacterListAsync().Result;
         }
 
         [TestMethod]

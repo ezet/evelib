@@ -7,24 +7,9 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletJournal {
-        internal CharWalletJournalWalker CharWalker;
-
-        internal CorpWalletJournalWalker CorpWalker;
-
-
-        internal int Division;
-
+       
         [XmlElement("rowset")]
         public EveOnlineRowCollection<JournalEntry> Journal { get; set; }
-
-        public EveApiResponse<WalletJournal> GetOlder(int count = 1000) {
-            long lastId = Journal.OrderBy(t => t.RefId).First().RefId;
-            return CharWalker != null ? CharWalker.Invoke(count, lastId) : CorpWalker.Invoke(Division, count, lastId);
-        }
-
-        internal delegate EveApiResponse<WalletJournal> CharWalletJournalWalker(int count, long fromId);
-
-        internal delegate EveApiResponse<WalletJournal> CorpWalletJournalWalker(int division, int count, long fromId);
 
         [Serializable]
         [XmlRoot("row")]
