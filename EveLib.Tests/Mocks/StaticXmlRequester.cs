@@ -23,7 +23,7 @@ namespace eZet.EveLib.Test.Mocks {
             throw new InvalidOperationException();
         }
 
-        public Task<string> RequestAsync<T>(Uri uri) {
+        public async Task<string> RequestAsync<T>(Uri uri) {
             var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo != null) {
                 string baseDir = directoryInfo.FullName;
@@ -34,7 +34,7 @@ namespace eZet.EveLib.Test.Mocks {
                 relPath = relPath.Remove(relPath.LastIndexOf(".aspx", StringComparison.Ordinal)).Replace("/", "\\");
                 relPath = baseDir + "\\Xml" + relPath;
                 using (StreamReader reader = (File.OpenText(relPath))) {
-                    return reader.ReadToEndAsync();
+                    return await reader.ReadToEndAsync().ConfigureAwait(false);
                 }
             }
             throw new InvalidOperationException();
