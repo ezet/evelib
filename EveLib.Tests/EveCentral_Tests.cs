@@ -6,8 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class EveCentral_Tests {
-        private const long RegionId = 10000002;
-        private const long TypeId = 34;
+        private const int RegionId = 10000002;
+        private const int TypeId = 34;
         private const int HourLimit = 5;
         private const int MinQty = 5;
         private readonly EveCentral api;

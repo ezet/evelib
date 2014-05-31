@@ -9,9 +9,9 @@ using OrderType = eZet.EveLib.Modules.OrderType;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class EveMarketData_Tests {
-        private const long RegionId = 10000002;
+        private const int RegionId = 10000002;
 
-        private const long TypeId = 34;
+        private const int TypeId = 34;
         private readonly EveMarketData _api;
         private readonly EveMarketDataOptions _invalidOptions;
         private readonly EveMarketDataOptions _validOptions;

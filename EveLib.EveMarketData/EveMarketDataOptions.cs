@@ -39,38 +39,38 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public class EveMarketDataOptions {
         public EveMarketDataOptions() {
-            Items = new List<long>();
-            ItemGroups = new List<long>();
-            Regions = new List<long>();
-            Solarsystems = new List<long>();
-            Stations = new List<long>();
+            Items = new List<int>();
+            ItemGroups = new List<int>();
+            Regions = new List<int>();
+            Solarsystems = new List<int>();
+            Stations = new List<int>();
             RowLimit = 10000;
         }
 
         /// <summary>
         ///     Gets or sets a collection of item IDs.
         /// </summary>
-        public ICollection<long> Items { get; set; }
+        public ICollection<int> Items { get; set; }
 
         /// <summary>
         ///     Gets or sets a collection of item group IDs.
         /// </summary>
-        public ICollection<long> ItemGroups { get; set; }
+        public ICollection<int> ItemGroups { get; set; }
 
         /// <summary>
         ///     Gets or sets a list of region IDs.
         /// </summary>
-        public ICollection<long> Regions { get; set; }
+        public ICollection<int> Regions { get; set; }
 
         /// <summary>
         ///     Gets or sets a list of solarsystem IDs.
         /// </summary>
-        public ICollection<long> Solarsystems { get; set; }
+        public ICollection<int> Solarsystems { get; set; }
 
         /// <summary>
         ///     Gets or sets a list of station IDs.
         /// </summary>
-        public ICollection<long> Stations { get; set; }
+        public ICollection<int> Stations { get; set; }
 
         /// <summary>
         ///     Gets or sets the maximum nubmer of rows to request.

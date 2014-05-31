@@ -10,13 +10,13 @@ namespace eZet.EveLib.Modules {
         ///     Creates a new options object.
         /// </summary>
         public Element43Options() {
-            Items = new List<long>();
+            Items = new List<int>();
         }
 
         /// <summary>
         ///     Gets or sets a collection of type IDs.
         /// </summary>
-        public ICollection<long> Items { get; set; }
+        public ICollection<int> Items { get; set; }
 
         /// <summary>
         ///     Gets or sets a collection of region IDs.
