@@ -16,7 +16,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public long PinId { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("typeName")]
             public string TypeName { get; set; }

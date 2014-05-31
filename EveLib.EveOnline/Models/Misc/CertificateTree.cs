@@ -57,7 +57,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
         [XmlRoot("row")]
         public class Skill {
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("level")]
             public int Level { get; set; }

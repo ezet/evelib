@@ -37,20 +37,23 @@ namespace eZet.EveLib.Modules.Models.Character {
         [XmlElement("gender")]
         public string Gender { get; set; }
 
-        [XmlElement("corporationName")]
-        public string CorporationName { get; set; }
-
         [XmlElement("corporationID")]
         public long CorporationId { get; set; }
 
-        [XmlElement("allianceName")]
-        public object AllianceName { get; set; }
+        [XmlElement("corporationName")]
+        public string CorporationName { get; set; }
 
         [XmlElement("allianceID")]
         public long AllianceId { get; set; }
 
+        [XmlElement("allianceName")]
+        public string AllianceName { get; set; }
+
         [XmlElement("factionID")]
-        public object FactionId { get; set; }
+        public long FactionId { get; set; }
+
+        [XmlElement("factionName")]
+        public string FactionName { get; set; }
         
         [XmlElement("cloneName")]
         public string CloneName { get; set; }
@@ -185,7 +188,7 @@ namespace eZet.EveLib.Modules.Models.Character {
     [XmlRoot("row")]
     public class Skill {
         [XmlAttribute("typeID")]
-        public long TypeId { get; set; }
+        public int TypeId { get; set; }
 
         [XmlAttribute("skillpoints")]
         public int Skillpoints { get; set; }

@@ -21,7 +21,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
         public string CeoName { get; set; }
 
         [XmlElement("stationID")]
-        public long StationId { get; set; }
+        public int StationId { get; set; }
 
         [XmlElement("stationName")]
         public string StationName { get; set; }

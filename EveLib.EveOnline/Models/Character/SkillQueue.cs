@@ -16,7 +16,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int QueuePosition { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("level")]
             public int Level { get; set; }

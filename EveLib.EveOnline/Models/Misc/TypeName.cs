@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
         [XmlRoot("row")]
         public class TypeData {
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("typeName")]
             public string TypeName { get; set; }

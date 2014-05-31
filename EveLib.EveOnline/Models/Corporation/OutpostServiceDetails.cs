@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
         [XmlRoot("row")]
         public class Service {
             [XmlAttribute("stationID")]
-            public long StationId { get; set; }
+            public int StationId { get; set; }
 
             [XmlAttribute("ownerID")]
             public long OwnerId { get; set; }

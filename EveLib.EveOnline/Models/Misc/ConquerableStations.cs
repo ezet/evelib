@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
         [XmlRoot("row")]
         public class StationData {
             [XmlAttribute("stationID")]
-            public long StationId { get; set; }
+            public int StationId { get; set; }
 
             [XmlAttribute("stationName")]
             public string StationName { get; set; }
@@ -21,7 +21,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
             public long StationTypeId { get; set; }
 
             [XmlAttribute("solarSystemID")]
-            public long SolarSystemId { get; set; }
+            public int SolarSystemId { get; set; }
 
             [XmlAttribute("corporationID")]
             public long CorporationId { get; set; }

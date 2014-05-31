@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         public class PlanetaryColony {
 
             [XmlAttribute("solarSystemID")]
-            public long SolarSystemId { get; set; }
+            public int SolarSystemId { get; set; }
 
             [XmlAttribute("solarSystemName")]
             public string SolarSystemName { get; set; }

@@ -35,7 +35,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         }
 
         [XmlElement("trainingTypeID")]
-        public long TypeId { get; set; }
+        public int TypeId { get; set; }
 
         [XmlElement("trainingStartSP")]
         public int StartSp { get; set; }

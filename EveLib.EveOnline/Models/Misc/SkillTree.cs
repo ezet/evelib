@@ -28,7 +28,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
             public int SkillLevel { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
         }
 
         [Serializable]
@@ -41,7 +41,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
             public bool Published { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("typeName")]
             public string TypeName { get; set; }
@@ -69,7 +69,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
                 var xml = new XmlHelper(reader);
                 GroupId = xml.getLongAttribute("groupID");
                 Published = xml.getBoolAttribute("published") ?? false;
-                TypeId = xml.getLongAttribute("typeID");
+                TypeId = xml.getIntAttribute("typeID");
                 TypeName = xml.getStringAttribute("typeName");
                 Description = xml.getString("description");
                 Rank = xml.getInt("rank");

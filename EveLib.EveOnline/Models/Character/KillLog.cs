@@ -64,7 +64,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int QtyDestroyed { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("singleton")]
             public int Singleton { get; set; }
@@ -80,7 +80,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public long KillId { get; set; }
 
             [XmlAttribute("solarSystemID")]
-            public long SolarSystemId { get; set; }
+            public int SolarSystemId { get; set; }
 
             [XmlIgnore]
             public DateTime KillTime { get; private set; }
@@ -110,7 +110,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public void ReadXml(XmlReader reader) {
                 var xml = new XmlHelper(reader);
                 KillId = xml.getLongAttribute("killID");
-                SolarSystemId = xml.getLongAttribute("solarSystemID");
+                SolarSystemId = xml.getIntAttribute("solarSystemID");
                 KillTimeAsString = xml.getStringAttribute("killTime");
                 MoonId = xml.getLongAttribute("moonID");
                 Victim = xml.deserialize<Victim>("victim");

@@ -61,7 +61,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public string ClientName { get; set; }
 
             [XmlAttribute("stationID")]
-            public long StationId { get; set; }
+            public int StationId { get; set; }
 
             [XmlAttribute("stationName")]
             public string StationName { get; set; }

@@ -19,7 +19,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public long CharacterId { get; set; }
 
             [XmlAttribute("stationID")]
-            public long StationId { get; set; }
+            public int StationId { get; set; }
 
             [XmlAttribute("volEntered")]
             public int VolumeEntered { get; set; }
@@ -34,7 +34,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int OrderState { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("range")]
             public int Range { get; set; }

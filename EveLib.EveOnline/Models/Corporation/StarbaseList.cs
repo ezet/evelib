@@ -25,7 +25,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
             public long ItemId { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("locationID")]
             public long LocationId { get; set; }

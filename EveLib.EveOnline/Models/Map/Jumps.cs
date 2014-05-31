@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules.Models.Map {
         [XmlRoot("row")]
         public class SolarSystem {
             [XmlAttribute("solarSystemID")]
-            public long SolarSystemId { get; set; }
+            public int SolarSystemId { get; set; }
 
             [XmlAttribute("shipJumps")]
             public int ShipJumps { get; set; }

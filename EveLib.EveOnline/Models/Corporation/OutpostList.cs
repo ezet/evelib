@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
         [XmlRoot("row")]
         public class Outpost {
             [XmlAttribute("stationID")]
-            public long StationId { get; set; }
+            public int StationId { get; set; }
 
             [XmlAttribute("ownerID")]
             public long OwnerId { get; set; }
@@ -21,7 +21,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
             public string StationName { get; set; }
 
             [XmlAttribute("solarSystemID")]
-            public long SolarSystemId { get; set; }
+            public int SolarSystemId { get; set; }
 
             [XmlAttribute("dockingCostPerShipVolume")]
             public decimal DockingCost { get; set; }

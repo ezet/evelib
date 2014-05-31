@@ -42,7 +42,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
         [XmlRoot("row")]
         public class FuelEntry {
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("quantity")]
             public int Quantity { get; set; }
