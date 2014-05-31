@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.JsonConverter;
 using Newtonsoft.Json;
@@ -20,15 +21,15 @@ namespace eZet.EveLib.Modules.Models {
 
             [DataMember(Name = "regionID")]
             [XmlAttribute("regionID")]
-            public long RegionId { get; set; }
+            public int RegionId { get; set; }
 
             [DataMember(Name = "typeID")]
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [DataMember(Name = "updated")]
             [XmlAttribute("updated")]
-            public string Updated { get; set; }
+            public DateTime Updated { get; set; }
         }
     }
 }

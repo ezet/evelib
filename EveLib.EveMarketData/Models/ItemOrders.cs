@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.JsonConverter;
 using Newtonsoft.Json;
@@ -20,19 +21,19 @@ namespace eZet.EveLib.Modules.Models {
 
             [XmlAttribute("typeID")]
             [DataMember(Name = "typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("stationID")]
             [DataMember(Name = "stationID")]
-            public long StationId { get; set; }
+            public int StationId { get; set; }
 
             [XmlAttribute("solarsystemID")]
             [DataMember(Name = "solarsystemID")]
-            public long SolarSystemId { get; set; }
+            public int SolarSystemId { get; set; }
 
             [XmlAttribute("regionID")]
             [DataMember(Name = "regionID")]
-            public long RegionId { get; set; }
+            public int RegionId { get; set; }
 
             [XmlAttribute("price")]
             [DataMember(Name = "price")]
@@ -44,11 +45,11 @@ namespace eZet.EveLib.Modules.Models {
 
             [XmlAttribute("volEntered")]
             [DataMember(Name = "volEntered")]
-            public int VolEntered { get; set; }
+            public long VolEntered { get; set; }
 
             [XmlAttribute("volRemaining")]
             [DataMember(Name = "volRemaining")]
-            public int VolRemaining { get; set; }
+            public long VolRemaining { get; set; }
 
             [XmlAttribute("minVolume")]
             [DataMember(Name = "minVolume")]
@@ -60,15 +61,15 @@ namespace eZet.EveLib.Modules.Models {
 
             [XmlAttribute("issued")]
             [DataMember(Name = "issued")]
-            public string IssuedDate { get; set; }
+            public DateTime IssuedDate { get; set; }
 
             [XmlAttribute("expires")]
             [DataMember(Name = "expires")]
-            public string ExpiresDate { get; set; }
+            public DateTime ExpiresDate { get; set; }
 
             [XmlAttribute("created")]
             [DataMember(Name = "created")]
-            public string CreatedDate { get; set; }
+            public DateTime CreatedDate { get; set; }
         }
     }
 }

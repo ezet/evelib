@@ -16,11 +16,11 @@ namespace eZet.EveLib.Modules.Models {
         public class ItemHistoryEntry {
             [XmlAttribute("typeID")]
             [DataMember(Name = "typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("regionID")]
             [DataMember(Name = "regionID")]
-            public long RegionId { get; set; }
+            public int RegionId { get; set; }
 
             [XmlAttribute("date")]
             [DataMember(Name = "date")]

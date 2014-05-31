@@ -13,7 +13,7 @@ namespace eZet.EveLib.Modules.Models.Character {
     [XmlRoot("row")]
     public class AccountBalanceRow {
         [XmlAttribute("accountID")]
-        public long AccountId { get; set; }
+        public int AccountId { get; set; }
 
         [XmlAttribute("accountKey")]
         public int AccountKey { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.JsonConverter;
 using Newtonsoft.Json;
@@ -16,11 +17,11 @@ namespace eZet.EveLib.Modules.Models {
         public class StationRankEntry {
             [DataMember(Name = "stationID")]
             [XmlAttribute("stationID")]
-            public long StationId { get; set; }
+            public int StationId { get; set; }
 
             [DataMember(Name = "date")]
             [XmlAttribute("date")]
-            public string Date { get; set; }
+            public DateTime Date { get; set; }
 
             [DataMember(Name = "rankOrders")]
             [XmlAttribute("rankOrders")]
@@ -32,11 +33,11 @@ namespace eZet.EveLib.Modules.Models {
 
             [DataMember(Name = "countSell")]
             [XmlAttribute("countSell")]
-            public int SellOrders { get; set; }
+            public long SellOrders { get; set; }
 
             [DataMember(Name = "countBuy")]
             [XmlAttribute("countBuy")]
-            public int BuyOrders { get; set; }
+            public long BuyOrders { get; set; }
 
             [DataMember(Name = "priceTotalSell")]
             [XmlAttribute("priceTotalSell")]

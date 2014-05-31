@@ -13,7 +13,7 @@ namespace eZet.EveLib.Modules.Models {
 
     public class QuicklookResult {
         [XmlElement("item")]
-        public long TypeId { get; set; }
+        public int TypeId { get; set; }
 
         [XmlElement("itemname")]
         public string TypeName { get; set; }
@@ -39,10 +39,10 @@ namespace eZet.EveLib.Modules.Models {
         public long OrderId { get; set; }
 
         [XmlElement("region")]
-        public long RegionId { get; set; }
+        public int RegionId { get; set; }
 
         [XmlElement("station")]
-        public long StationId { get; set; }
+        public int StationId { get; set; }
 
         [XmlElement("station_name")]
         public string StationName { get; set; }

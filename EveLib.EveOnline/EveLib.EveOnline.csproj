@@ -120,7 +120,6 @@
     <Compile Include="Map.cs" />
     <Compile Include="Models\Account\AccountStatus.cs" />
     <Compile Include="Models\Account\ApiKeyInfo.cs" />
-    <Compile Include="Models\Account\CharacterInfo.cs" />
     <Compile Include="Models\Account\CharacterList.cs" />
     <Compile Include="Models\Character\AccountBalance.cs" />
     <Compile Include="Models\Character\AssetList.cs" />

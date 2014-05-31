@@ -14,7 +14,7 @@ namespace eZet.EveLib.Modules.Models {
 
     public class Element43MarketStatItem {
         [XmlAttribute("id")]
-        public long TypeId { get; set; }
+        public int TypeId { get; set; }
 
         [XmlElement("buy")]
         public Element43MarketStatOrderData BuyOrders { get; set; }
@@ -35,21 +35,21 @@ namespace eZet.EveLib.Modules.Models {
         public long Volume { get; set; }
 
         [XmlElement("avg")]
-        public double Average { get; set; }
+        public decimal Average { get; set; }
 
         [XmlElement("max")]
-        public double Max { get; set; }
+        public decimal Max { get; set; }
 
         [XmlElement("min")]
-        public double Min { get; set; }
+        public decimal Min { get; set; }
 
         [XmlElement("stddev")]
         public double StdDev { get; set; }
 
         [XmlElement("median")]
-        public double Median { get; set; }
+        public decimal Median { get; set; }
 
         [XmlElement("percentile")]
-        public double Percentile { get; set; }
+        public decimal Percentile { get; set; }
     }
 }

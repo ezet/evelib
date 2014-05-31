@@ -42,7 +42,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public long LocationId { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("quantity")]
             public int Quantity { get; set; }
@@ -64,7 +64,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public long ItemId { get; set; }
 
             [XmlAttribute("typeID")]
-            public long TypeId { get; set; }
+            public int TypeId { get; set; }
 
             [XmlAttribute("quantity")]
             public int Quantity { get; set; }
