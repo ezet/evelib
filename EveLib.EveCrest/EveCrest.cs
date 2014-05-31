@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
@@ -19,32 +20,53 @@ namespace eZet.EveLib.Modules {
         public Uri BaseUri { get; set; }
 
         public dynamic GetKillmails(long id, string hash) {
+            return GetKillmailsAsync(id, hash).Result;
+        }
+
+        public Task<dynamic> GetKillmailsAsync(long id, string hash) {
             string relPath = "killmails/" + id + "/" + hash + "/";
-            return request<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
         }
 
         public dynamic GetIncursions() {
+            return GetIncursionsAsync().Result;
+        }
+
+        public Task<dynamic> GetIncursionsAsync() {
             const string relPath = "incursions/";
-            return request<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
         }
 
         public dynamic GetAlliances() {
+            return GetAlliancesAsync().Result;
+        }
+
+        public Task<dynamic> GetAlliancesAsync() {
             const string relPath = "alliances/";
-            return request<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
         }
 
         public dynamic GetAlliance(long allianceId) {
+            return GetAllianceAsync(allianceId).Result;
+        }
+
+        public Task<dynamic> GetAllianceAsync(long allianceId) {
             string relPath = "alliances/" + allianceId + "/";
-            return request<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
         }
 
-        public MarketHistoryResponse GetMarketHistory(long regionId, long typeId) {
+        public MarketHistoryResponse GetMarketHistory(int regionId, int typeId) {
+            return GetMarketHistoryAsync(regionId, typeId).Result;
+        }
+
+
+        public Task<MarketHistoryResponse> GetMarketHistoryAsync(int regionId, int typeId) {
             string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
-            return request<MarketHistoryResponse>(new Uri(BaseUri, relPath));
+            return requestAsync<MarketHistoryResponse>(new Uri(BaseUri, relPath));
         }
 
-        private T request<T>(Uri uri) {
-            return RequestHandler.Request<T>(uri);
+        private Task<T> requestAsync<T>(Uri uri) {
+            return RequestHandler.RequestAsync<T>(uri);
         }
     }
 }
