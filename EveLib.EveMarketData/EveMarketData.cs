@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
@@ -64,19 +65,37 @@ namespace eZet.EveLib.Modules {
         /// <returns>A list of any orders that were recently updated.</returns>
         /// <exception cref="InvalidRequestException">The request was invalid.</exception>
         public EveMarketDataResponse<RecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
+            string relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
+            string postString = getRecentUploadsQueryString(options, type);
+            return request<RecentUploads>(relUri, postString);
+        }
+
+
+        /// <summary>
+        ///     Returns a list of any orders that were recently updated.
+        /// </summary>
+        /// <param name="options">Valid options: Items, Marketgroups, Regions, Date, RowLimit</param>
+        /// <param name="type"></param>
+        /// <returns>A list of any orders that were recently updated.</returns>
+        /// <exception cref="InvalidRequestException">The request was invalid.</exception>
+        public Task<EveMarketDataResponse<RecentUploads>> GetRecentUploadsAsync(EveMarketDataOptions options, UploadType type) {
+            string relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
+            string postString = getRecentUploadsQueryString(options, type);
+            return requestAsync<RecentUploads>(relUri, postString);
+        }
+
+        private string getRecentUploadsQueryString(EveMarketDataOptions options, UploadType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(options.Items != null);
             Contract.Requires(options.ItemGroups != null);
             Contract.Requires(options.Regions != null);
-            string relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
             string items = String.Join(",", options.Items);
             string groups = String.Join(",", options.ItemGroups);
             string regions = String.Join(",", options.Regions);
             string date = options.GetAgeLimit();
-            string postString = generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions,
+            return generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions,
                 "marketgroup_ids", groups,
                 "limit", options.RowLimit, "upload_type", options.UploadTypeToString(type), "date", date);
-            return request<RecentUploads>(relUri, postString);
         }
 
         /// <summary>
@@ -88,25 +107,47 @@ namespace eZet.EveLib.Modules {
         /// <returns>All orders on the market.</returns>
         public EveMarketDataResponse<ItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type,
             MinMax minmax = default(MinMax)) {
+            string relUri = "/api/item_prices2." + Format.ToString().ToLower();
+            string postString = getItemPriceQueryString(options, type, minmax);
+            return request<ItemPrices>(relUri, postString);
+        }
+
+        /// <summary>
+        ///     Returns all the orders on the market.
+        /// </summary>
+        /// <param name="options">Valid options: Items, Marketgroups, Regions, Solarsystems, Stations</param>
+        /// <param name="type"></param>
+        /// <param name="minmax"></param>
+        /// <returns>All orders on the market.</returns>
+        public Task<EveMarketDataResponse<ItemPrices>> GetItemPriceAsync(EveMarketDataOptions options, OrderType type,
+            MinMax minmax = default(MinMax)) {
+            string relUri = "/api/item_prices2." + Format.ToString().ToLower();
+            string postString = getItemPriceQueryString(options, type, minmax);
+            return requestAsync<ItemPrices>(relUri, postString);
+        }
+
+        private string getItemPriceQueryString(EveMarketDataOptions options, OrderType type,
+            MinMax minmax = default(MinMax)) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(options.Stations != null);
             Contract.Requires(options.Items != null);
             Contract.Requires(options.ItemGroups != null);
             Contract.Requires(options.Regions != null);
             Contract.Requires(options.Solarsystems != null);
-            string relUri = "/api/item_prices2." + Format.ToString().ToLower();
             string items = String.Join(",", options.Items);
             string groups = String.Join(",", options.ItemGroups);
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
             var minmaxval = minmax == MinMax.None ? "" : minmax.ToString().ToLower();
-            string postString = generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
+            return generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
                 "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type),
                 "minmax", minmaxval);
-            return request<ItemPrices>(relUri, postString);
+
         }
+
+
 
         /// <summary>
         ///     Returns market history for one or more items.
@@ -115,23 +156,40 @@ namespace eZet.EveLib.Modules {
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
         public EveMarketDataResponse<ItemOrders> GetItemOrders(EveMarketDataOptions options, OrderType type) {
+            string relUri = "/api/item_orders2." + Format.ToString().ToLower();
+            string postString = getItemOrdersQueryString(options, type);
+            return request<ItemOrders>(relUri, postString);
+        }
+
+        /// <summary>
+        ///     Returns market history for one or more items.
+        /// </summary>
+        /// <param name="options">Valid options: Items, Regions, DayLimit</param>
+        /// <param name="type"></param>
+        /// <returns>Market history for one or more items.</returns>
+        public Task<EveMarketDataResponse<ItemOrders>> GetItemOrdersAsync(EveMarketDataOptions options, OrderType type) {
+            string relUri = "/api/item_orders2." + Format.ToString().ToLower();
+            string postString = getItemOrdersQueryString(options, type);
+            return requestAsync<ItemOrders>(relUri, postString);
+        }
+
+        private string getItemOrdersQueryString(EveMarketDataOptions options, OrderType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(options.Stations != null);
             Contract.Requires(options.Items != null);
             Contract.Requires(options.ItemGroups != null);
             Contract.Requires(options.Regions != null);
             Contract.Requires(options.Solarsystems != null);
-            string relUri = "/api/item_orders2." + Format.ToString().ToLower();
             string items = String.Join(",", options.Items);
             string groups = String.Join(",", options.ItemGroups);
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            string postString = generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
+            return generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
                 "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type));
-            return request<ItemOrders>(relUri, postString);
         }
+
 
         /// <summary>
         ///     Returns a best guess price of one or multiple items.
@@ -139,16 +197,32 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <returns>A best guess price of one or multiple items.</returns>
         public EveMarketDataResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
+            string relUri = "/api/item_history2." + Format.ToString().ToLower();
+            string postString = getItemHistoryQueryString(options);
+            return request<ItemHistory>(relUri, postString);
+        }
+
+        /// <summary>
+        ///     Returns a best guess price of one or multiple items.
+        /// </summary>
+        /// <param name="options">Valid options: Items, Regions, DayLimit</param>
+        /// <returns>A best guess price of one or multiple items.</returns>
+        public Task<EveMarketDataResponse<ItemHistory>> GetItemHistoryAsync(EveMarketDataOptions options) {
+            string relUri = "/api/item_history2." + Format.ToString().ToLower();
+            string postString = getItemHistoryQueryString(options);
+            return requestAsync<ItemHistory>(relUri, postString);
+        }
+
+        private string getItemHistoryQueryString(EveMarketDataOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(options.Items.Count != 0, "You must specify atleast one type.");
             Contract.Requires(options.Regions.Count != 0, "You must specify atleast one region.");
-            string relUri = "/api/item_history2." + Format.ToString().ToLower();
             string items = String.Join(",", options.Items);
             string regions = String.Join(",", options.Regions);
             string days = "" + (int)options.AgeSpan.GetValueOrDefault().TotalDays;
-            string postString = generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions, "days", days);
-            return request<ItemHistory>(relUri, postString);
+            return generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions, "days", days);
         }
+
 
         /// <summary>
         ///     Returns the daily station rank in a region and order statistics for stations.
@@ -156,19 +230,35 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
         /// <returns>The daily station rank in a region and order statistics for stations</returns>
         public EveMarketDataResponse<StationRank> GetStationRank(EveMarketDataOptions options) {
+            string relUri = "/api/station_rank2." + Format.ToString().ToLower();
+            string postString = getStationRankQueryString(options);
+            return request<StationRank>(relUri, postString);
+        }
+
+        /// <summary>
+        ///     Returns the daily station rank in a region and order statistics for stations.
+        /// </summary>
+        /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
+        /// <returns>The daily station rank in a region and order statistics for stations</returns>
+        public Task<EveMarketDataResponse<StationRank>> GetStationRankAsync(EveMarketDataOptions options) {
+            string relUri = "/api/station_rank2." + Format.ToString().ToLower();
+            string postString = getStationRankQueryString(options);
+            return requestAsync<StationRank>(relUri, postString);
+        }
+
+        private string getStationRankQueryString(EveMarketDataOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(
                 options.Regions.Count != 0 ^ options.Solarsystems.Count != 0 ^ options.Stations.Count != 0,
                 "You must specify atleast one of the following: Station, Solarsystem, Region.");
-            string relUri = "/api/station_rank2." + Format.ToString().ToLower();
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
             string days = "" + (int)options.AgeSpan.GetValueOrDefault().TotalDays;
-            string postString = generateQueryString("char_name", Name, "region_ids", regions, "solarsystem_ids",
+            return generateQueryString("char_name", Name, "region_ids", regions, "solarsystem_ids",
                 solarsystems, "station_ids", stations, "days", days);
-            return request<StationRank>(relUri, postString);
         }
+
 
         /// <summary>
         ///     Returns a url to a list of ingame item links. Reqiured use of the ingame browser.
@@ -189,6 +279,10 @@ namespace eZet.EveLib.Modules {
         private EveMarketDataResponse<T> request<T>(string relUri, string queryString) {
             var uri = new Uri(BaseUri, relUri + "?" + queryString);
             return RequestHandler.Request<EveMarketDataResponse<T>>(uri);
+        }
+        private Task<EveMarketDataResponse<T>> requestAsync<T>(string relUri, string queryString) {
+            var uri = new Uri(BaseUri, relUri + "?" + queryString);
+            return RequestHandler.RequestAsync<EveMarketDataResponse<T>>(uri);
         }
 
         private string generateQueryString(params object[] args) {

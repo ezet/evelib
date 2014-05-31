@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
     /// <summary>
@@ -13,5 +14,8 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="uri">The uri to request.</param>
         /// <returns></returns>
         string Request<T>(Uri uri);
+
+        Task<string> RequestAsync<T>(Uri uri);
+
     }
 }

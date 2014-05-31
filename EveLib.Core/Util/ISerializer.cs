@@ -10,5 +10,6 @@
         /// <param name="data">String of data to deserialize.</param>
         /// <returns></returns>
         T Deserialize<T>(string data);
+
     }
 }
