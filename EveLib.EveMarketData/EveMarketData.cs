@@ -65,9 +65,7 @@ namespace eZet.EveLib.Modules {
         /// <returns>A list of any orders that were recently updated.</returns>
         /// <exception cref="InvalidRequestException">The request was invalid.</exception>
         public EveMarketDataResponse<RecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
-            string relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
-            string postString = getRecentUploadsQueryString(options, type);
-            return request<RecentUploads>(relUri, postString);
+            return GetRecentUploadsAsync(options, type).Result;
         }
 
 
@@ -107,9 +105,7 @@ namespace eZet.EveLib.Modules {
         /// <returns>All orders on the market.</returns>
         public EveMarketDataResponse<ItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type,
             MinMax minmax = default(MinMax)) {
-            string relUri = "/api/item_prices2." + Format.ToString().ToLower();
-            string postString = getItemPriceQueryString(options, type, minmax);
-            return request<ItemPrices>(relUri, postString);
+            return GetItemPriceAsync(options, type, minmax).Result;
         }
 
         /// <summary>
@@ -156,9 +152,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
         public EveMarketDataResponse<ItemOrders> GetItemOrders(EveMarketDataOptions options, OrderType type) {
-            string relUri = "/api/item_orders2." + Format.ToString().ToLower();
-            string postString = getItemOrdersQueryString(options, type);
-            return request<ItemOrders>(relUri, postString);
+            return GetItemOrdersAsync(options, type).Result;
         }
 
         /// <summary>
@@ -197,9 +191,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <returns>A best guess price of one or multiple items.</returns>
         public EveMarketDataResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
-            string relUri = "/api/item_history2." + Format.ToString().ToLower();
-            string postString = getItemHistoryQueryString(options);
-            return request<ItemHistory>(relUri, postString);
+            return GetItemHistoryAsync(options).Result;
         }
 
         /// <summary>
@@ -230,9 +222,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
         /// <returns>The daily station rank in a region and order statistics for stations</returns>
         public EveMarketDataResponse<StationRank> GetStationRank(EveMarketDataOptions options) {
-            string relUri = "/api/station_rank2." + Format.ToString().ToLower();
-            string postString = getStationRankQueryString(options);
-            return request<StationRank>(relUri, postString);
+            return GetStationRankAsync(options).Result;
         }
 
         /// <summary>
