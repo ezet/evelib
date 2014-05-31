@@ -12,10 +12,10 @@ namespace eZet.EveLib.Modules.Models {
 
         public class MarketHistoryEntry {
             [DataMember(Name = "volume")]
-            public int Volume { get; set; }
+            public long Volume { get; set; }
 
             [DataMember(Name = "orderCount")]
-            public int OrderCount { get; set; }
+            public long OrderCount { get; set; }
 
             [DataMember(Name = "lowPrice")]
             public decimal LowPrice { get; set; }
