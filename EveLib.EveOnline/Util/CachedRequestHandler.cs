@@ -36,8 +36,8 @@ namespace eZet.EveLib.Modules.Util {
             } else {
                 try {
                     data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
-                } catch (InvalidRequestException e) {
-                    var response = (HttpWebResponse)e.InnerException.Response;
+                } catch (WebException e) {
+                    var response = (HttpWebResponse)e.Response;
                     if (response == null) throw;
                     var responseStream = response.GetResponseStream();
                     if (responseStream == null) throw;
@@ -45,7 +45,7 @@ namespace eZet.EveLib.Modules.Util {
                         data = reader.ReadToEnd();
                         var error = Serializer.Deserialize<EveApiError>(data);
                         Debug.WriteLine("Error: " + error.Error.ErrorCode + ", " + error.Error.ErrorText);
-                        throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e.InnerException);
+                        throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e);
                     }
                 }
             }

@@ -9,7 +9,7 @@ namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to Character objects and related API calls.
     /// </summary>
-    public class CharacterKey : AccountKey {
+    public class CharacterKey : ApiKey {
 
         private readonly Lazy<ReadOnlyCollection<Character>> _characters;
 
@@ -27,7 +27,7 @@ namespace eZet.EveLib.Modules {
         /// Creates a new CharacterKey using data from an existing key
         /// </summary>
         /// <param name="key"></param>
-        internal CharacterKey(AccountKey key)
+        internal CharacterKey(ApiKey key)
             : base(key) {
                 _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.Result.Key.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
         }
@@ -63,7 +63,7 @@ namespace eZet.EveLib.Modules {
             return requestAsync<AccountStatus>(uri, this);
         }
 
-        // Hide AccountKey.ActualKey
+        // Hide ApiKey.ActualKey
         private new void ActualKey() {
 
         }

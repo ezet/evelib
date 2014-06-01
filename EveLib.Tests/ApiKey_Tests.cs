@@ -11,7 +11,7 @@ namespace eZet.EveLib.Test {
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private readonly AccountKey _validKey = new AccountKey(KeyId, VCode);
+        private readonly ApiKey _validKey = new ApiKey(KeyId, VCode);
 
         [TestMethod]
         public void Init_NoExceptions() {
@@ -45,8 +45,17 @@ namespace eZet.EveLib.Test {
         /// </summary>
         [TestMethod]
         public void IsValidKey_InvalidKey_NoExceptions() {
-            var key = new AccountKey(0, "invalid");
-            Assert.AreEqual(false, key.IsValidKey);
+            var key = new ApiKey(0, "invalid");
+            Assert.AreEqual(false, key.IsValidKey());
+        }
+
+        /// <summary>
+        /// Returns 403 Forbidden with error content on invalid key requests
+        /// </summary>
+        [TestMethod]
+        public async Task IsValidKeyAsync_InvalidKey_NoExceptions() {
+            var key = new ApiKey(0, "invalid");
+            Assert.AreEqual(false, await key.IsValidKeyAsync());
         }
     }
 }

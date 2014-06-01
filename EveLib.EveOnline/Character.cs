@@ -2,7 +2,6 @@
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 using eZet.EveLib.Modules.Models.Character;
@@ -27,14 +26,14 @@ namespace eZet.EveLib.Modules {
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
         /// <param name="characterName"></param>
-        internal Character(AccountKey key, long characterId, string characterName) {
+        internal Character(ApiKey key, long characterId, string characterName) {
             Key = key;
             CharacterId = characterId;
             CharacterName = characterName;
             BaseUri = new Uri("https://api.eveonline.com");
         }
 
-        internal Character(AccountKey key, ApiKeyInfo.ApiKeyEntity entity) {
+        internal Character(ApiKey key, ApiKeyInfo.ApiKeyEntity entity) {
             Key = key;
             CharacterId = entity.CharacterId;
             CharacterName = entity.CharacterName;
@@ -50,7 +49,7 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Gets the API key used for this character.
         /// </summary>
-        public AccountKey Key { get; private set; }
+        public ApiKey Key { get; private set; }
 
         /// <summary>
         ///     Gets the Character ID.

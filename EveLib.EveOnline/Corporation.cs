@@ -25,15 +25,17 @@ namespace eZet.EveLib.Modules {
         /// <param name="key"></param>
         /// <param name="corporationId"></param>
         /// <param name="corporationName"></param>
-        internal Corporation(AccountKey key, long corporationId, string corporationName) {
+        internal Corporation(ApiKey key, long corporationId, string corporationName) {
             Key = key;
             CorporationId = corporationId;
             CorporationName = corporationName;
             BaseUri = new Uri("https://api.eveonline.com");
         }
 
-        internal Corporation(AccountKey key, ApiKeyInfo.ApiKeyEntity entity) {
+        internal Corporation(ApiKey key, ApiKeyInfo.ApiKeyEntity entity) {
             Key = key;
+            CharacterId = entity.CharacterId;
+            CharacterName = entity.CharacterName;
             CorporationId = entity.CorporationId;
             CorporationName = entity.CorporationName;
             AllianceId = entity.AllianceId;
@@ -44,26 +46,49 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     The API key used for this character.
+        ///     The API key used for this Corporation
         /// </summary>
-        public AccountKey Key { get; private set; }
+        public ApiKey Key { get; private set; }
 
         /// <summary>
-        ///     The corporation ID.
+        ///     Gets the Character ID.
+        /// </summary>
+        public long CharacterId { get; private set; }
+
+        /// <summary>
+        ///     Gets the name of this character.
+        /// </summary>
+        public string CharacterName { get; private set; }
+
+
+        /// <summary>
+        /// Gets the Corporation ID.
         /// </summary>
         public long CorporationId { get; private set; }
 
         /// <summary>
-        ///     The corporation name.
+        /// Gets the corporation name.
         /// </summary>
         public string CorporationName { get; private set; }
 
+        /// <summary>
+        /// Gets the Alliance ID.
+        /// </summary>
         public long AllianceId { get; private set; }
 
+        /// <summary>
+        /// Gets the Alliance name.
+        /// </summary>
         public string AllianceName { get; private set; }
 
+        /// <summary>
+        /// Gets the Faction ID.
+        /// </summary>
         public long FactionId { get; private set; }
 
+        /// <summary>
+        /// Gets the Faction name.
+        /// </summary>
         public string FactionName { get; private set; }
 
         /// <summary>

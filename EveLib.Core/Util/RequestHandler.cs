@@ -18,8 +18,9 @@ namespace eZet.EveLib.Core.Util {
             string data = "";
             try {
                 data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
-            } catch (WebException e) {
-                throw new InvalidRequestException("A request caused a WebException.", e);
+            } catch (AggregateException e) {
+                if (e.InnerException.GetType() == typeof(WebException))
+                    throw new InvalidRequestException("A request caused a WebException.", e.InnerException as WebException);
             }
             var val = Serializer.Deserialize<T>(data);
             return val;
