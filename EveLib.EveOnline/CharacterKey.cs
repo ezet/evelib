@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +11,8 @@ namespace eZet.EveLib.Modules {
     ///     Provides access to Character objects and related API calls.
     /// </summary>
     public class CharacterKey : ApiKey {
-        private ReadOnlyCollection<Character> _characters;
+
+        private readonly Lazy<ReadOnlyCollection<Character>> _characters;
 
         /// <summary>
         ///     Creates a new key using the specified key id and vcode.
@@ -19,22 +21,32 @@ namespace eZet.EveLib.Modules {
         /// <param name="vCode"></param>
         public CharacterKey(long keyId, string vCode)
             : base(keyId, vCode) {
+            _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.Result.Key.KeyEntities.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList().AsReadOnly());
         }
 
         /// <summary>
         ///     Gets a list of Characters this key has access to.
         /// </summary>
         public ReadOnlyCollection<Character> Characters {
-            get {
-                if (_characters != null) return _characters;
-                lock (LazyLoadLock) {
-                    if (_characters == null)
-                        lazyLoad();
-                }
-                return _characters;
-            }
-            private set { _characters = value; }
+            get { return _characters.Value; }
         }
+
+        public ReadOnlyCollection<Character> GetCharacters() {
+            return GetCharactersAsync().Result;
+        }
+
+        public async Task<ReadOnlyCollection<Character>> GetCharactersAsync() {
+            return (await KeyInfo.ConfigureAwait(false)).Result.Key.KeyEntities.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList().AsReadOnly();
+        }
+
+        public ICollection<ApiKeyInfo.CharacterInfo> GetCharacterInfo() {
+            return GetCharacterInfoAsync().Result;
+        }
+
+        public async Task<ICollection<ApiKeyInfo.CharacterInfo>> GetCharacterInfoAsync() {
+            return (await KeyInfo.ConfigureAwait(false)).Result.Key.KeyEntities;
+        }
+
 
         /// <summary>
         ///     Returns basic account information including when the subscription lapses, total play time in minutes, total times
@@ -58,15 +70,6 @@ namespace eZet.EveLib.Modules {
             //const int mask = 33554432;
             const string uri = "/account/AccountStatus.xml.aspx";
             return requestAsync<AccountStatus>(uri, this);
-        }
-
-        protected override void lazyLoad() {
-            if (IsValidKey) {
-                List<Character> list =
-                    Data.Result.Key.Characters.Select(c => new Character(this, c.CharacterId, c.CharacterName)).ToList();
-                Characters = list.AsReadOnly();
-                load(Data);
-            }
         }
     }
 }

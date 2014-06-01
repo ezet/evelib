@@ -26,9 +26,12 @@ namespace eZet.EveLib.Modules.Util {
         public ISerializer Serializer { get; set; }
 
         public async Task<T> RequestAsync<T>(Uri uri) {
+            Debug.WriteLine("Requesting: " + uri.ToString());
+
             string data = "";
             bool cached = Cache.TryGet(uri, out data);
             if (cached) {
+
                 Debug.WriteLine("From cache: True");
             } else {
                 try {

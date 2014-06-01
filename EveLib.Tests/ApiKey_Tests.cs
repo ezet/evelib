@@ -1,4 +1,5 @@
-﻿using eZet.EveLib.Modules;
+﻿using System.Threading.Tasks;
+using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,6 +13,15 @@ namespace eZet.EveLib.Test {
 
         private readonly ApiKey _validKey = new ApiKey(KeyId, VCode);
 
+        [TestMethod]
+        public void Init_NoExceptions() {
+            var res = _validKey.Init();
+        }
+
+        [TestMethod]
+        public async Task InitAsync_NoExceptions() {
+            var res = await _validKey.InitAsync();
+        }
 
         [TestMethod]
         public void GetApiKeyInfo_NoExceptions() {
@@ -26,7 +36,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void Properties_LazyLoaded() {
             Assert.AreEqual(ApiKeyType.Character, _validKey.KeyType);
-            Assert.IsNotNull(_validKey.ExpireDate);
+            Assert.IsNotNull(_validKey.ExpiryDate);
             Assert.AreEqual(268435455, _validKey.AccessMask);
         }
 

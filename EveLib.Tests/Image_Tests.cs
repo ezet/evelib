@@ -9,7 +9,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetCharacterPortrait_ValidRequest_NoExceptions() {
-            image.GetCharacterPortrait(CharId, Image.CharacterPortraitSize.X256);
+            //image.GetCharacterPortrait(CharId, Image.CharacterPortraitSize.X256);
         }
 
         [TestMethod]

@@ -6,18 +6,19 @@ namespace eZet.EveLib.Modules.Models.Account {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ApiKeyInfo {
+
         [XmlElement("key")]
         public ApiKeyData Key { get; set; }
 
         public class ApiKeyData {
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterInfo> Characters { get; set; }
+            public EveOnlineRowCollection<CharacterInfo> KeyEntities { get; set; }
 
             [XmlAttribute("accessMask")]
             public int AccessMask { get; set; }
 
             [XmlAttribute("type")]
-            public string Type { get; set; }
+            public ApiKeyType Type { get; set; }
 
             [XmlIgnore]
             public DateTime ExpireDate { get; private set; }

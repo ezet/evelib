@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using eZet.EveLib.Core.Exception;
+using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 
 namespace eZet.EveLib.Modules {
+
     public enum ApiKeyType {
+        [XmlEnum("Account")]
         Account,
+        [XmlEnum("Character")]
         Character,
+        [XmlEnum("Corporation")]
         Corporation
     }
 
@@ -17,14 +23,21 @@ namespace eZet.EveLib.Modules {
     ///     Base class for Key entities, providing common properties and methods.
     /// </summary>
     public class ApiKey : BaseEntity {
-        private int _accessMask;
-        private DateTime _expireTime;
-        private ApiKeyType? _type;
         private bool? _isValidKey;
 
-        protected readonly object LazyLoadLock = new object();
+        private EveApiResponse<ApiKeyInfo> _apiKeyInfo;
 
-        protected EveApiResponse<ApiKeyInfo> Data { get; set; }
+        protected object LazyLoadLock = new object();
+        private bool _isInitialized;
+
+        protected EveApiResponse<ApiKeyInfo> ApiKeyInfo {
+            get {
+                LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref LazyLoadLock, GetApiKeyInfo);
+                return _apiKeyInfo;
+            }
+        }
+
+        protected AsyncLazy<EveApiResponse<ApiKeyInfo>> KeyInfo { get; set; }
 
         /// <summary>
         ///     Creates a new instance using the provided key id and vcode.
@@ -35,6 +48,7 @@ namespace eZet.EveLib.Modules {
             BaseUri = new Uri("https://api.eveonline.com");
             KeyId = keyId;
             VCode = vCode;
+            KeyInfo = new AsyncLazy<EveApiResponse<ApiKeyInfo>>(() => GetApiKeyInfoAsync());
         }
 
         /// <summary>
@@ -46,6 +60,22 @@ namespace eZet.EveLib.Modules {
         ///     Gets the VCode for this key.
         /// </summary>
         public string VCode { get; protected set; }
+
+        public bool IsInitialized {
+            get { return _isInitialized; }
+        }
+
+        public virtual ApiKey Init() {
+            var unused = ApiKeyInfo;
+            return this;
+        }
+
+        public virtual async Task<ApiKey> InitAsync() {
+            if (IsInitialized) return this;
+            var keyInfo = await GetApiKeyInfoAsync().ConfigureAwait(false);
+            LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref LazyLoadLock, () => keyInfo);
+            return this;
+        }
 
         public bool IsValidKey {
             get {
@@ -62,46 +92,44 @@ namespace eZet.EveLib.Modules {
         ///     Gets the CAK access mask of this key.
         /// </summary>
         public int AccessMask {
-            get {
-                if (_accessMask != default(int)) return _accessMask;
-                lock (LazyLoadLock) {
-                    if (_accessMask == default(int))
-                        lazyLoad();
-                }
-                return _accessMask;
-            }
-            protected set { _accessMask = value; }
+            get { return ApiKeyInfo.Result.Key.AccessMask; }
         }
 
         /// <summary>
         ///     Gets the type of this key.
         /// </summary>
         public ApiKeyType? KeyType {
-            get {
-                if (_type != null) return _type;
-                lock (LazyLoadLock) {
-                    if (_type == null)
-                        lazyLoad();
-                }
-                return _type;
-            }
-            protected set { _type = value; }
+            get { return ApiKeyInfo.Result.Key.Type; }
         }
 
         /// <summary>
         ///     Gets the expiration date of this key.
         /// </summary>
-        public DateTime ExpireDate {
-            get {
-                if (_expireTime != default(DateTime)) return _expireTime;
-                lock (LazyLoadLock) {
-                    if (_expireTime == default(DateTime))
-                        lazyLoad();
-                }
-                return _expireTime;
-            }
-            protected set { _expireTime = value; }
+        public DateTime ExpiryDate {
+            get { return ApiKeyInfo.Result.Key.ExpireDate; }
         }
+
+        public ApiKey ActualKey {
+            get {
+                switch (KeyType) {
+                    case ApiKeyType.Character:
+                        return new CharacterKey(KeyId, VCode);
+                    case ApiKeyType.Corporation:
+                        return new CorporationKey(KeyId, VCode);
+                    default:
+                        return this;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Returns api key info. All of this information is already available as properties on this object.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<ApiKeyInfo> GetApiKeyInfo() {
+            return GetApiKeyInfoAsync().Result;
+        }
+
 
         /// <summary>
         ///     Returns api key info. All of this information is already available as properties on this object.
@@ -117,17 +145,26 @@ namespace eZet.EveLib.Modules {
         ///     Returns a list of all characters on an account.
         /// </summary>
         /// <returns></returns>
+        public EveApiResponse<CharacterList> GetCharacterList() {
+            return GetCharacterListAsync().Result;
+        }
+
+        /// <summary>
+        ///     Returns a list of all characters on an account.
+        /// </summary>
+        /// <returns></returns>
         public Task<EveApiResponse<CharacterList>> GetCharacterListAsync() {
             //const int mask = 0;
             const string uri = "/account/Characters.xml.aspx";
             return requestAsync<CharacterList>(uri, this);
         }
 
+
         private async Task<bool> getIsValidKeyAsync(bool throwException) {
             try {
-                Data = await GetApiKeyInfoAsync().ConfigureAwait(false);
+                var unused = await KeyInfo;
             } catch (InvalidRequestException e) {
-                if (!throwException &&((HttpWebResponse)(e.InnerException).Response).StatusCode ==
+                if (!throwException && ((HttpWebResponse)(e.InnerException).Response).StatusCode ==
                     HttpStatusCode.Forbidden) {
                     return false;
                 }
@@ -136,17 +173,5 @@ namespace eZet.EveLib.Modules {
             return true;
         }
 
-        protected async virtual void lazyLoad() {
-            _isValidKey = await getIsValidKeyAsync(true).ConfigureAwait(false);
-            if (IsValidKey)
-                load(Data);
-        }
-
-        protected void load(EveApiResponse<ApiKeyInfo> info) {
-            Contract.Requires(info != null);
-            AccessMask = info.Result.Key.AccessMask;
-            KeyType = (ApiKeyType)Enum.Parse(typeof(ApiKeyType), info.Result.Key.Type);
-            ExpireDate = info.Result.Key.ExpireDate;
-        }
     }
 }

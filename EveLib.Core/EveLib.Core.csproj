@@ -121,6 +121,7 @@
     <Compile Include="Exception\InvalidRequestException.cs" />
     <Compile Include="Exception\EveLibException.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Util\AsyncLazy.cs" />
     <Compile Include="Util\DynamicJsonSerializer.cs" />
     <Compile Include="Util\IHttpRequester.cs" />
     <Compile Include="Util\IRequestHandler.cs" />
