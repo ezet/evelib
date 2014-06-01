@@ -11,7 +11,7 @@ namespace eZet.EveLib.Test {
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private readonly ApiKey _validKey = new ApiKey(KeyId, VCode);
+        private readonly AccountKey _validKey = new AccountKey(KeyId, VCode);
 
         [TestMethod]
         public void Init_NoExceptions() {
@@ -45,7 +45,7 @@ namespace eZet.EveLib.Test {
         /// </summary>
         [TestMethod]
         public void IsValidKey_InvalidKey_NoExceptions() {
-            var key = new ApiKey(0, "invalid");
+            var key = new AccountKey(0, "invalid");
             Assert.AreEqual(false, key.IsValidKey);
         }
     }

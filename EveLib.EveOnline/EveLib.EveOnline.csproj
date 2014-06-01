@@ -109,7 +109,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiKey.cs" />
+    <Compile Include="AccountKey.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="CharacterKey.cs" />

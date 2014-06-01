@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Account;
 using eZet.EveLib.Modules.Models.Character;
 using eZet.EveLib.Modules.Models.Corporation;
 using ContactList = eZet.EveLib.Modules.Models.Corporation.ContactList;
@@ -24,19 +25,28 @@ namespace eZet.EveLib.Modules {
         /// <param name="key"></param>
         /// <param name="corporationId"></param>
         /// <param name="corporationName"></param>
-        internal Corporation(ApiKey key, long corporationId, string corporationName) {
+        internal Corporation(AccountKey key, long corporationId, string corporationName) {
             Key = key;
             CorporationId = corporationId;
             CorporationName = corporationName;
             BaseUri = new Uri("https://api.eveonline.com");
+        }
 
-
+        internal Corporation(AccountKey key, ApiKeyInfo.ApiKeyEntity entity) {
+            Key = key;
+            CorporationId = entity.CorporationId;
+            CorporationName = entity.CorporationName;
+            AllianceId = entity.AllianceId;
+            AllianceName = entity.AllianceName;
+            FactionId = entity.FactionId;
+            FactionName = entity.FactionName;
+            BaseUri = new Uri("https://api.eveonline.com");
         }
 
         /// <summary>
         ///     The API key used for this character.
         /// </summary>
-        public ApiKey Key { get; private set; }
+        public AccountKey Key { get; private set; }
 
         /// <summary>
         ///     The corporation ID.
@@ -47,6 +57,14 @@ namespace eZet.EveLib.Modules {
         ///     The corporation name.
         /// </summary>
         public string CorporationName { get; private set; }
+
+        public long AllianceId { get; private set; }
+
+        public string AllianceName { get; private set; }
+
+        public long FactionId { get; private set; }
+
+        public string FactionName { get; private set; }
 
         /// <summary>
         ///     Returns the ISK balance of a corporation.

@@ -4,52 +4,59 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using eZet.EveLib.Core.Exception;
-using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 
 namespace eZet.EveLib.Modules {
 
+    /// <summary>
+    /// Api key types
+    /// </summary>
     public enum ApiKeyType {
-        [XmlEnum("Account")]
-        Account,
-        [XmlEnum("Character")]
-        Character,
-        [XmlEnum("Corporation")]
-        Corporation
+        [XmlEnum("Account")] Account,
+        [XmlEnum("Character")] Character,
+        [XmlEnum("Corporation")] Corporation
     }
 
     /// <summary>
-    ///     Base class for Key entities, providing common properties and methods.
+    ///     Represents an API Account key. This type can be used if the exact type of the key is unknown.
     /// </summary>
-    public class ApiKey : BaseEntity {
-        private bool? _isValidKey;
-
-        private EveApiResponse<ApiKeyInfo> _apiKeyInfo;
-
+    public class AccountKey : BaseEntity {
         protected object LazyLoadLock = new object();
+        private EveApiResponse<ApiKeyInfo> _apiKeyInfo;
         private bool _isInitialized;
-
-        protected EveApiResponse<ApiKeyInfo> ApiKeyInfo {
-            get {
-                LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref LazyLoadLock, GetApiKeyInfo);
-                return _apiKeyInfo;
-            }
-        }
-
-        protected AsyncLazy<EveApiResponse<ApiKeyInfo>> KeyInfo { get; set; }
+        private bool? _isValidKey;
 
         /// <summary>
         ///     Creates a new instance using the provided key id and vcode.
         /// </summary>
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
-        public ApiKey(long keyId, string vCode) {
+        public AccountKey(long keyId, string vCode) {
             BaseUri = new Uri("https://api.eveonline.com");
             KeyId = keyId;
             VCode = vCode;
-            KeyInfo = new AsyncLazy<EveApiResponse<ApiKeyInfo>>(() => GetApiKeyInfoAsync());
         }
+
+        /// <summary>
+        /// Creates a new AccountKey using data from an existing key.
+        /// </summary>
+        /// <param name="key"></param>
+        protected AccountKey(AccountKey key) {
+            BaseUri = new Uri("https://api.eveonline.com");
+            ApiKeyInfo = key.ApiKeyInfo;
+            KeyId = key.KeyId;
+            VCode = key.VCode;
+        }
+
+        protected EveApiResponse<ApiKeyInfo> ApiKeyInfo {
+            get {
+                LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref LazyLoadLock, GetApiKeyInfo);
+                return _apiKeyInfo;
+            }
+            set { _apiKeyInfo = value; }
+        }
+
 
         /// <summary>
         ///     Gets the key ID for this key.
@@ -61,22 +68,16 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public string VCode { get; protected set; }
 
+        /// <summary>
+        /// Returns true if this object has already been initialized.
+        /// </summary>
         public bool IsInitialized {
             get { return _isInitialized; }
         }
 
-        public virtual ApiKey Init() {
-            var unused = ApiKeyInfo;
-            return this;
-        }
-
-        public virtual async Task<ApiKey> InitAsync() {
-            if (IsInitialized) return this;
-            var keyInfo = await GetApiKeyInfoAsync().ConfigureAwait(false);
-            LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref LazyLoadLock, () => keyInfo);
-            return this;
-        }
-
+        /// <summary>
+        /// Returns true if this is a valid key.
+        /// </summary>
         public bool IsValidKey {
             get {
                 if (_isValidKey != null) return _isValidKey.Value;
@@ -98,7 +99,7 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Gets the type of this key.
         /// </summary>
-        public ApiKeyType? KeyType {
+        public ApiKeyType KeyType {
             get { return ApiKeyInfo.Result.Key.Type; }
         }
 
@@ -109,17 +110,41 @@ namespace eZet.EveLib.Modules {
             get { return ApiKeyInfo.Result.Key.ExpireDate; }
         }
 
-        public ApiKey ActualKey {
+        /// <summary>
+        /// Returns a new Key for this KeyIDs actual type. It preserves any key data, so the returned object comes pre-initialized.
+        /// The returned key should be cast to it's real type by using GetType() or KeyType.
+        /// </summary>
+        public virtual AccountKey ActualKey {
             get {
                 switch (KeyType) {
                     case ApiKeyType.Character:
-                        return new CharacterKey(KeyId, VCode);
+                        return new CharacterKey(this);
                     case ApiKeyType.Corporation:
-                        return new CorporationKey(KeyId, VCode);
+                        return new CorporationKey(this);
                     default:
                         return this;
                 }
             }
+        }
+
+        /// <summary>
+        /// Initiates all properties on this object.
+        /// </summary>
+        /// <returns></returns>
+        public virtual AccountKey Init() {
+            EveApiResponse<ApiKeyInfo> unused = ApiKeyInfo;
+            return this;
+        }
+
+        /// <summary>
+        /// Initiates all properties on this object asynchronously.
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task<AccountKey> InitAsync() {
+            if (IsInitialized) return this;
+            EveApiResponse<ApiKeyInfo> keyInfo = await GetApiKeyInfoAsync().ConfigureAwait(false);
+            LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref LazyLoadLock, () => keyInfo);
+            return this;
         }
 
         /// <summary>
@@ -142,7 +167,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Returns a list of all characters on an account.
+        ///     Returns a list of all characters on this account.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<CharacterList> GetCharacterList() {
@@ -150,7 +175,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Returns a list of all characters on an account.
+        ///     Returns a list of all characters on this account.
         /// </summary>
         /// <returns></returns>
         public Task<EveApiResponse<CharacterList>> GetCharacterListAsync() {
@@ -162,9 +187,10 @@ namespace eZet.EveLib.Modules {
 
         private async Task<bool> getIsValidKeyAsync(bool throwException) {
             try {
-                var unused = await KeyInfo;
-            } catch (InvalidRequestException e) {
-                if (!throwException && ((HttpWebResponse)(e.InnerException).Response).StatusCode ==
+                EveApiResponse<ApiKeyInfo> unused = ApiKeyInfo;
+            }
+            catch (InvalidRequestException e) {
+                if (!throwException && ((HttpWebResponse) (e.InnerException).Response).StatusCode ==
                     HttpStatusCode.Forbidden) {
                     return false;
                 }
@@ -172,6 +198,5 @@ namespace eZet.EveLib.Modules {
             }
             return true;
         }
-
     }
 }

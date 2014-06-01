@@ -50,7 +50,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="relUri">A relative path to the resource to be requested.</param>
         /// <param name="key">An API Key to be used with this request.</param>
         /// <returns></returns>
-        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, ApiKey key) where T : new() {
+        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, AccountKey key) where T : new() {
             Contract.Requires(BaseUri != null);
             var uri = new Uri(BaseUri, relUri + generateQueryString(key));
             return RequestHandler.RequestAsync<EveApiResponse<T>>(uri);
@@ -64,7 +64,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="key">An API Key to be used with this request.</param>
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
-        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, ApiKey key, params object[] args) where T : new() {
+        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, AccountKey key, params object[] args) where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
             var uri = new Uri(BaseUri, relUri + generateQueryString(key, args));
@@ -77,7 +77,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="key">Optional; api key to generate query from</param>
         /// <param name="args">Optional; arguments to generate query from</param>
         /// <returns></returns>
-        protected string generateQueryString(ApiKey key = null, params object[] args) {
+        protected string generateQueryString(AccountKey key = null, params object[] args) {
             Contract.Requires(args != null);
             string queryString = "?";
             if (key != null)

@@ -2,7 +2,9 @@
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Account;
 using eZet.EveLib.Modules.Models.Character;
 using eZet.EveLib.Modules.Models.Misc;
 using FactionWarfareStats = eZet.EveLib.Modules.Models.Character.FactionWarfareStats;
@@ -25,20 +27,33 @@ namespace eZet.EveLib.Modules {
         /// <param name="key">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
         /// <param name="characterName"></param>
-        internal Character(ApiKey key, long characterId, string characterName) {
+        internal Character(AccountKey key, long characterId, string characterName) {
             Key = key;
             CharacterId = characterId;
             CharacterName = characterName;
             BaseUri = new Uri("https://api.eveonline.com");
         }
 
+        internal Character(AccountKey key, ApiKeyInfo.ApiKeyEntity entity) {
+            Key = key;
+            CharacterId = entity.CharacterId;
+            CharacterName = entity.CharacterName;
+            CorporationId = entity.CorporationId;
+            CorporationName = entity.CorporationName;
+            AllianceId = entity.AllianceId;
+            AllianceName = entity.AllianceName;
+            FactionId = entity.FactionId;
+            FactionName = entity.FactionName;
+            BaseUri = new Uri("https://api.eveonline.com");
+        }
+
         /// <summary>
         ///     Gets the API key used for this character.
         /// </summary>
-        public ApiKey Key { get; private set; }
+        public AccountKey Key { get; private set; }
 
         /// <summary>
-        ///     Gets the id of this character.
+        ///     Gets the Character ID.
         /// </summary>
         public long CharacterId { get; private set; }
 
@@ -46,6 +61,37 @@ namespace eZet.EveLib.Modules {
         ///     Gets the name of this character.
         /// </summary>
         public string CharacterName { get; private set; }
+
+
+        /// <summary>
+        /// Gets the Corporation ID.
+        /// </summary>
+        public long CorporationId { get; private set; }
+
+        /// <summary>
+        /// Gets the corporation name.
+        /// </summary>
+        public string CorporationName { get; private set; }
+
+        /// <summary>
+        /// Gets the Alliance ID.
+        /// </summary>
+        public long AllianceId { get; private set; }
+
+        /// <summary>
+        /// Gets the Alliance name.
+        /// </summary>
+        public string AllianceName { get; private set; }
+
+        /// <summary>
+        /// Gets the Faction ID.
+        /// </summary>
+        public long FactionId { get; private set; }
+
+        /// <summary>
+        /// Gets the Faction name.
+        /// </summary>
+        public string FactionName { get; private set; }
 
         /// <summary>
         ///     Returns general information about the character.

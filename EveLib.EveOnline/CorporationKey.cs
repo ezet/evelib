@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Account;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to Corporation objects and related API calls.
     /// </summary>
-    public class CorporationKey : ApiKey {
+    public class CorporationKey : AccountKey {
+
         private readonly Lazy<Corporation> _corporation;
 
         /// <summary>
@@ -18,8 +16,16 @@ namespace eZet.EveLib.Modules {
         /// <param name="vCode"></param>
         public CorporationKey(long keyId, string vCode)
             : base(keyId, vCode) {
-            _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.Result.Key.KeyEntities.First().CorporationId,
-                     ApiKeyInfo.Result.Key.KeyEntities.First().CorporationName));
+            _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.Result.Key.KeyEntities.Single()));
+        }
+
+        /// <summary>
+        /// Creates a new CorporationKey using data from an existing AccountKey
+        /// </summary>
+        /// <param name="key"></param>
+        internal CorporationKey(AccountKey key)
+            : base(key) {
+            _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.Result.Key.KeyEntities.Single()));
         }
 
         /// <summary>
@@ -27,6 +33,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public Corporation Corporation {
             get { return _corporation.Value; }
+        }
+
+        // Hide AccountKey.ActualKey
+        private new void ActualKey() {
+
         }
     }
 }

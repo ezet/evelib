@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules.Models.Account {
 
         public class ApiKeyData {
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterInfo> KeyEntities { get; set; }
+            public EveOnlineRowCollection<ApiKeyEntity> KeyEntities { get; set; }
 
             [XmlAttribute("accessMask")]
             public int AccessMask { get; set; }
@@ -34,7 +34,7 @@ namespace eZet.EveLib.Modules.Models.Account {
 
         [Serializable]
         [XmlRoot("row", IsNullable = false)]
-        public class CharacterInfo {
+        public class ApiKeyEntity {
 
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
