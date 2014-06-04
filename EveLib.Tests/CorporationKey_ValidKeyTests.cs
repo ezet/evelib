@@ -1,4 +1,5 @@
-﻿using eZet.EveLib.Core.Exception;
+﻿using System.Threading.Tasks;
+using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Character;
@@ -190,6 +191,16 @@ namespace eZet.EveLib.Test {
             EveApiResponse<WalletTransactions> res = _validKey.Corporation.GetWalletTransactions(50);
             Assert.IsNotNull(res.Result);
             //res = res.Result.GetOlder(50);
+        }
+
+        [TestMethod]
+        public void GetCustomsOffices_ValidRequest_HasResult() {
+            var res = _validKey.Corporation.GetCustomsOffices();
+        }
+
+        [TestMethod]
+        public async Task GetCustomsOfficesAsync_ValidRequest_HasResult() {
+            var res = await _validKey.Corporation.GetCustomsOfficesAsync();
         }
     }
 }

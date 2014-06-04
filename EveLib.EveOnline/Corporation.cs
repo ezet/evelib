@@ -613,5 +613,14 @@ namespace eZet.EveLib.Modules {
                 ? requestAsync<WalletTransactions>(relPath, Key, "accountKey", division, "rowCount", count)
                 : requestAsync<WalletTransactions>(relPath, Key, "accountKey", division, "rowCount", count, "fromID", fromId);
         }
+
+        public EveApiResponse<CustomsOffices> GetCustomsOffices() {
+            return GetCustomsOfficesAsync().Result;
+        }
+
+        public Task<EveApiResponse<CustomsOffices>> GetCustomsOfficesAsync() {
+            const string relPath = "/corp/CustomsOffices.xml.aspx";
+            return requestAsync<CustomsOffices>(relPath, Key);
+        }
     }
 }

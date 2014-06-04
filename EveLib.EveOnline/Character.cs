@@ -683,5 +683,6 @@ namespace eZet.EveLib.Modules {
             const string relPath = "/char/PlanetaryLinks.xml.aspx";
             return requestAsync<PlanetaryLinks>(relPath, Key, "characterId", CharacterId, "planetId", planetId);
         }
+
     }
 }
