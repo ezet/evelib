@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
-using eZet.Utilities.Io;
+using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Modules.Util {
     public class EveApiFileCache : IEveApiCache {
@@ -59,7 +59,7 @@ namespace eZet.EveLib.Modules.Util {
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "CacheDataFound: {0}", fileExist);
                     if (File.Exists(filePath)) {
                         try {
-                            data = await FileEx.ReadAllTextAsync(Config.CachePath + Config.Separator + getHash(uri)).ConfigureAwait(false);
+                            data = await FileAsync.ReadAllTextAsync(Config.CachePath + Config.Separator + getHash(uri)).ConfigureAwait(false);
                             _trace.TraceEvent(TraceEventType.Verbose, 0, "Data successfully loaded from cache: {0}");
                         } catch (Exception) {
                             _trace.TraceEvent(TraceEventType.Error, 0, "Cache data could not be loaded: {0}", filePath);
@@ -77,13 +77,13 @@ namespace eZet.EveLib.Modules.Util {
 
         private Task writeRegisterToDiskAsync() {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "Writing cache register to disk");
-            return FileEx.WriteAllLinesAsync(Config.CacheRegister,
+            return FileAsync.WriteAllLinesAsync(Config.CacheRegister,
                 _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
         }
 
         private Task writeCacheDataToDiskAsync(Uri uri, string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "Writing cache data to disk: {0}", uri);
-            return FileEx.WriteAllTextAsync(Config.CachePath + Path.DirectorySeparatorChar + getHash(uri), data);
+            return FileAsync.WriteAllTextAsync(Config.CachePath + Path.DirectorySeparatorChar + getHash(uri), data);
         }
 
         private static string getHash(Uri uri) {
@@ -105,7 +105,7 @@ namespace eZet.EveLib.Modules.Util {
             try {
                 // read all lines
                 string[] data = await
-                    FileEx.ReadAllLinesAsync(Config.CacheRegister).ConfigureAwait(false);
+                    FileAsync.ReadAllLinesAsync(Config.CacheRegister).ConfigureAwait(false);
                 foreach (string entry in data) {
                     string[] split = entry.Split(',');
                     var date = DateTime.Parse(split[1], CultureInfo.InvariantCulture);

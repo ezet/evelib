@@ -28,8 +28,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evelib.ZKillboard", "zKillb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.StaticData", "EveLib.Static\EveLib.StaticData.csproj", "{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Io", "..\NET Utilities\IoUtils\Io.csproj", "{1C0627DE-5E16-4079-9F4B-8A0092AE88AA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,10 +70,6 @@ Global
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C0627DE-5E16-4079-9F4B-8A0092AE88AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C0627DE-5E16-4079-9F4B-8A0092AE88AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C0627DE-5E16-4079-9F4B-8A0092AE88AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C0627DE-5E16-4079-9F4B-8A0092AE88AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

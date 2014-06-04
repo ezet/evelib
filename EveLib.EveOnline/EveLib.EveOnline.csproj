@@ -201,10 +201,6 @@
     <Compile Include="Util\IEveApiCache.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\NET Utilities\IoUtils\Io.csproj">
-      <Project>{1C0627DE-5E16-4079-9F4B-8A0092AE88AA}</Project>
-      <Name>Io</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
       <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
       <Name>EveLib.Core</Name>
