@@ -13,7 +13,7 @@ namespace eZet.EveLib.Core {
 
         public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Separator;
 
-        public static readonly string CacheExpirationFileName = "cache";
+        public static readonly string CacheRegisterFileName = "cache";
 
         public static readonly string CachePath;
 
@@ -30,7 +30,7 @@ namespace eZet.EveLib.Core {
             AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
             CachePath = AppData + Separator + "Cache";
             ImagePath = AppData + Separator + "Images";
-            CacheRegister = CachePath + Separator + CacheExpirationFileName;
+            CacheRegister = CachePath + Separator + CacheRegisterFileName;
         }
     }
 }

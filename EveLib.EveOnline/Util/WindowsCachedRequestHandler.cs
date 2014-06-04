@@ -50,7 +50,7 @@
 //            }
 //            var xml = Serializer.Deserialize<T>(data);
 //            if (!cached)
-//                Cache.Store(uri, getCacheExpirationTime(xml));
+//                Cache.StoreAsync(uri, getCacheExpirationTime(xml));
 //            return xml;
 //        }
 

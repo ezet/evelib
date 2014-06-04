@@ -13,6 +13,8 @@ namespace eZet.EveLib.Modules.Util {
     /// </summary>
     public class CachedRequestHandler : IRequestHandler {
 
+        private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
+
         public CachedRequestHandler(IHttpRequester httpRequester, ISerializer serializer, IEveApiCache cache) {
             HttpRequester = httpRequester;
             Serializer = serializer;
@@ -26,17 +28,13 @@ namespace eZet.EveLib.Modules.Util {
         public ISerializer Serializer { get; set; }
 
         public async Task<T> RequestAsync<T>(Uri uri) {
-            Debug.WriteLine("Requesting: " + uri);
-
-            string data = "";
-            bool cached = Cache.TryGet(uri, out data);
-            if (cached) {
-
-                Debug.WriteLine("From cache: True");
-            } else {
+            string data  = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            var cached = data != null;
+            if (!cached) {
                 try {
                     data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
                 } catch (WebException e) {
+                    _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
                     var response = (HttpWebResponse)e.Response;
                     if (response == null) throw;
                     var responseStream = response.GetResponseStream();
@@ -44,14 +42,14 @@ namespace eZet.EveLib.Modules.Util {
                     using (var reader = new StreamReader(responseStream)) {
                         data = reader.ReadToEnd();
                         var error = Serializer.Deserialize<EveApiError>(data);
-                        Debug.WriteLine("Error: " + error.Error.ErrorCode + ", " + error.Error.ErrorText);
+                        _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText, error.Error.ErrorCode);
                         throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e);
                     }
                 }
             }
             var xml = Serializer.Deserialize<T>(data);
             if (!cached)
-                Cache.Store(uri, getCacheExpirationTime(xml), data);
+                await Cache.StoreAsync(uri, getCacheExpirationTime(xml), data).ConfigureAwait(false);
             return xml;
         }
 

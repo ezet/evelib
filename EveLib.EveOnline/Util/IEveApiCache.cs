@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace eZet.EveLib.Modules.Util {
     /// <summary>
@@ -6,11 +7,11 @@ namespace eZet.EveLib.Modules.Util {
     /// </summary>
     public interface IEveApiCache {
 
-        void Store(Uri uri, DateTime cacheTime, string data);
+        Task StoreAsync(Uri uri, DateTime cacheTime, string data);
 
-        void Store(Uri uri, DateTime cacheTime);
+        //void StoreAsync(Uri uri, DateTime cacheTime);
 
-        bool TryGet(Uri uri, out string data);
+        Task<string> LoadAsync(Uri uri);
 
         /// <summary>
         ///     Attempts to get the CachedUntil date for a uri.
