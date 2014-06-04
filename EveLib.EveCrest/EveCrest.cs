@@ -25,7 +25,7 @@ namespace eZet.EveLib.Modules {
 
         public Task<dynamic> GetKillmailsAsync(long id, string hash) {
             string relPath = "killmails/" + id + "/" + hash + "/";
-            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(relPath);
         }
 
         public dynamic GetIncursions() {
@@ -34,7 +34,7 @@ namespace eZet.EveLib.Modules {
 
         public Task<dynamic> GetIncursionsAsync() {
             const string relPath = "incursions/";
-            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(relPath);
         }
 
         public dynamic GetAlliances() {
@@ -43,7 +43,7 @@ namespace eZet.EveLib.Modules {
 
         public Task<dynamic> GetAlliancesAsync() {
             const string relPath = "alliances/";
-            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(relPath);
         }
 
         public dynamic GetAlliance(long allianceId) {
@@ -52,7 +52,7 @@ namespace eZet.EveLib.Modules {
 
         public Task<dynamic> GetAllianceAsync(long allianceId) {
             string relPath = "alliances/" + allianceId + "/";
-            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<dynamic>(relPath);
         }
 
         public MarketHistoryResponse GetMarketHistory(int regionId, int typeId) {
@@ -62,11 +62,22 @@ namespace eZet.EveLib.Modules {
 
         public Task<MarketHistoryResponse> GetMarketHistoryAsync(int regionId, int typeId) {
             string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
-            return requestAsync<MarketHistoryResponse>(new Uri(BaseUri, relPath));
+            return requestAsync<MarketHistoryResponse>(relPath);
         }
 
-        private Task<T> requestAsync<T>(Uri uri) {
-            return RequestHandler.RequestAsync<T>(uri);
+        public dynamic GetWars() {
+            return GetWarsAsync().Result;
+        }
+
+        public Task<dynamic> GetWarsAsync() {
+            string relPath = "/wars/";
+            return requestAsync<dynamic>(relPath);
+        }
+
+
+
+        private Task<T> requestAsync<T>(string relPath) {
+            return RequestHandler.RequestAsync<T>(new Uri(BaseUri, relPath));
         }
     }
 }

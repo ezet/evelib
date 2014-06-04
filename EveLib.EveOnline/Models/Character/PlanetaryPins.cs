@@ -25,7 +25,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int SchematicId { get; set; }
 
             [XmlAttribute("lastLaunchTime")]
-            public string LastLaunchTimeAsString { get; set; }
+            public DateTime LastLaunchTime { get; set; }
 
             [XmlAttribute("cycleTime")]
             public int CycleTime { get; set; }
@@ -34,13 +34,10 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int QuantityPerCycle { get; set; }
 
             [XmlAttribute("installTime")]
-            public string InstallTimeAsString { get; set; }
+            public DateTime InstallTime { get; set; }
 
             [XmlAttribute("expiryTime")]
-            public string ExpiryTimeAsString { get; set; }
-
-            [XmlAttribute("headRadius")]
-            public int headRadius { get; set; }
+            public DateTime ExpiryTime { get; set; }
 
             [XmlAttribute("contentTypeID")]
             public int ContentTypeId { get; set; }
