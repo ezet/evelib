@@ -74,6 +74,24 @@ namespace eZet.EveLib.Modules {
             return requestAsync<dynamic>(relPath);
         }
 
+        public dynamic GetWar(int id) {
+            return GetWarAsync(id).Result;
+        }
+
+        public Task<dynamic> GetWarAsync(int id) {
+            string relPath = "/wars/" + id + "/";
+            return requestAsync<dynamic>(relPath);
+        }
+
+        public dynamic GetWarKillmails(int id) {
+            return GetWarKillmailsAsync(id).Result;
+        }
+
+        public Task<dynamic> GetWarKillmailsAsync(int id) {
+            string relPath = "/wars/" + id + "/killmails/all/";
+            return requestAsync<dynamic>(relPath);
+        }
+
 
 
         private Task<T> requestAsync<T>(string relPath) {
