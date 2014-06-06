@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
@@ -26,6 +27,10 @@ namespace eZet.EveLib.Modules {
         internal CorporationKey(ApiKey key)
             : base(key) {
             _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.Result.Key.KeyEntities.Single()));
+        }
+
+        public async new Task<CorporationKey> InitAsync() {
+            return await base.InitAsync().ConfigureAwait(false) as CorporationKey;
         }
 
         /// <summary>

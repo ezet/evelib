@@ -32,6 +32,10 @@ namespace eZet.EveLib.Modules {
                 _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.Result.Key.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
         }
 
+        public new async Task<CharacterKey> InitAsync() {
+            return await base.InitAsync().ConfigureAwait(false) as CharacterKey;
+        }
+
         /// <summary>
         ///     Gets a list of Characters this key has access to.
         /// </summary>
