@@ -27,7 +27,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             public long RefId { get; set; }
 
             [XmlAttribute("refTypeID")]
-            public long refTypeId { get; set; }
+            public int RefTypeId { get; set; }
 
             [XmlAttribute("ownerName1")]
             public string OwnerName { get; set; }
@@ -63,6 +63,12 @@ namespace eZet.EveLib.Modules.Models.Character {
             // TODO Convert to decimal
             [XmlAttribute("taxAmount")]
             public string TaxAmount { get; set; }
+
+            [XmlAttribute("owner1TypeID")]
+            public int OwnerTypeId { get; set; }
+
+            [XmlAttribute("owner2TypeID")]
+            public int ParticipantTypeId { get; set; }
         }
     }
 }

@@ -45,6 +45,7 @@ namespace eZet.EveLib.Modules {
             Solarsystems = new List<int>();
             Stations = new List<int>();
             RowLimit = 10000;
+            AgeSpan = TimeSpan.FromDays(10);
         }
 
         /// <summary>

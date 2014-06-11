@@ -10,7 +10,7 @@ namespace eZet.EveLib.Test {
         private const string CharName = "CCP Garthagk";
 
         private const long CharId = 797400947;
-        private readonly Misc api = new Misc();
+        private readonly Eve api = new Eve();
 
         [TestMethod]
         public void GetAllianceList_ValidRequest_HasResult() {

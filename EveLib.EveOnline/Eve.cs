@@ -9,11 +9,11 @@ namespace eZet.EveLib.Modules {
     ///     Provides access to API calls that do not require a valid API key or character/corporation ID, and are not covered
     ///     by Image or Map.
     /// </summary>
-    public class Misc : BaseEntity {
+    public class Eve : BaseEntity {
         /// <summary>
         ///     Creates a new object.
         /// </summary>
-        public Misc() {
+        public Eve() {
             BaseUri = new Uri("https://api.eveonline.com");
         }
 
