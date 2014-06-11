@@ -197,8 +197,6 @@
     <Compile Include="Models\EveOnlineRowCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CachedRequestHandler.cs" />
-    <Compile Include="Util\XmlFileFileCache.cs" />
-    <Compile Include="Util\IXmlFileCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">

@@ -11,7 +11,7 @@ using eZet.EveLib.Core;
 using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Modules.Util {
-    public class XmlFileFileCache : IXmlFileCache {
+    public class XmlFileCache : IEveLibCache {
 
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 

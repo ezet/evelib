@@ -15,13 +15,13 @@ namespace eZet.EveLib.Modules.Util {
 
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
-        public CachedRequestHandler(IHttpRequester httpRequester, ISerializer serializer, IXmlFileCache cache) {
+        public CachedRequestHandler(IHttpRequester httpRequester, ISerializer serializer, IEveLibCache cache) {
             HttpRequester = httpRequester;
             Serializer = serializer;
             Cache = cache;
         }
 
-        public IXmlFileCache Cache { get; set; }
+        public IEveLibCache Cache { get; set; }
 
         public IHttpRequester HttpRequester { get; set; }
 

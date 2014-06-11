@@ -15,7 +15,7 @@ namespace eZet.EveLib.Modules {
         private const string DefaultUri = "https://api.eveonline.com";
 
         protected BaseEntity() {
-            RequestHandler = new CachedRequestHandler(new HttpRequester(), new SimpleXmlSerializer(), new XmlFileFileCache());
+            RequestHandler = new CachedRequestHandler(new HttpRequester(), new SimpleXmlSerializer(), new XmlFileCache());
             BaseUri = new Uri(DefaultUri);
         }
 

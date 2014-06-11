@@ -5,7 +5,7 @@ namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Interface for CacheExpiratoinRegisters
     /// </summary>
-    public interface IXmlFileCache {
+    public interface IEveLibCache {
 
         Task StoreAsync(Uri uri, DateTime cacheTime, string data);
 
