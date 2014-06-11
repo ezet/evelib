@@ -14,7 +14,7 @@
 //    public class WindowsCachedRequestHandler : CachedRequestHandler {
 //        private const string ContentType = "application/x-www-form-urlencoded";
 
-//        public WindowsCachedRequestHandler(ISerializer serializer, IEveApiCache cache)
+//        public WindowsCachedRequestHandler(ISerializer serializer, IXmlFileCache cache)
 //            : base(serializer, cache) {
 //        }
 
