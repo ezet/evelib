@@ -7,10 +7,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using eZet.EveLib.Core;
-using eZet.EveLib.Core.Util;
 
-namespace eZet.EveLib.Modules.Util {
+namespace eZet.EveLib.Core.Util {
     public class XmlFileCache : IEveLibCache {
 
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
@@ -38,7 +36,7 @@ namespace eZet.EveLib.Modules.Util {
                 var cacheTask = writeCacheDataToDiskAsync(uri, data);
                 var registerTask = writeRegisterToDiskAsync();
                 await Task.WhenAll(cacheTask, registerTask).ConfigureAwait(false);
-            } catch (Exception) {
+            } catch (System.Exception) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "An error occured while writing to cache");
             }
         }
@@ -47,21 +45,23 @@ namespace eZet.EveLib.Modules.Util {
             await initAsync().ConfigureAwait(false);
             string data = null;
             _trace.TraceEvent(TraceEventType.Verbose, 0, "CacheRegisterLookup: {0}", uri);
+            var hash = getHash(uri);
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "CacheRegisterLookupHash: {0}", hash);
             DateTime cacheExpirationTime;
-            var found = _register.TryGetValue(getHash(uri), out cacheExpirationTime);
+            var found = _register.TryGetValue(hash, out cacheExpirationTime);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "CacheRegisterHit: {0}", found);
             if (found) {
                 bool validCache = DateTime.UtcNow < cacheExpirationTime;
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "CacheIsValid: {0} ({1})", validCache, cacheExpirationTime);
                 if (validCache) {
-                    var filePath = Config.CachePath + Config.Separator + getHash(uri);
+                    var filePath = Config.CachePath + Config.Separator + hash;
                     var fileExist = File.Exists(filePath);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "CacheDataFound: {0}", fileExist);
                     if (File.Exists(filePath)) {
                         try {
                             data = await FileAsync.ReadAllTextAsync(Config.CachePath + Config.Separator + getHash(uri)).ConfigureAwait(false);
-                            _trace.TraceEvent(TraceEventType.Verbose, 0, "Data successfully loaded from cache: {0}");
-                        } catch (Exception) {
+                            _trace.TraceEvent(TraceEventType.Verbose, 0, "Data successfully loaded from cache: {0}", filePath);
+                        } catch (System.Exception) {
                             _trace.TraceEvent(TraceEventType.Error, 0, "Cache data could not be loaded: {0}", filePath);
                         }
                     }
@@ -108,24 +108,23 @@ namespace eZet.EveLib.Modules.Util {
                     FileAsync.ReadAllLinesAsync(Config.CacheRegister).ConfigureAwait(false);
                 foreach (string entry in data) {
                     string[] split = entry.Split(',');
-                    var date = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
+                    var cacheValidUntil = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
                     var fileName = split[0];
                     // if cache is still valid we insert it
-                    if (date < DateTime.UtcNow)
-                        _register[fileName] = date;
+                    if (cacheValidUntil > DateTime.UtcNow)
+                        _register[fileName] = cacheValidUntil;
                     else {
                         // if cache is out of date we delete the data
-                        if (File.Exists(fileName)) {
+                        if (File.Exists(Config.CachePath + Config.Separator + fileName)) {
                             File.Delete(Config.CachePath + Config.Separator + fileName);
                         }
                     }
 
                 }
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "CacheRegisterLoaded");
-            } catch (Exception) {
+            } catch (System.Exception) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Could not load cache register");
             }
         }
-
     }
 }

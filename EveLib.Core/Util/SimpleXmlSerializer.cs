@@ -18,9 +18,11 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="data">An XML string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
-            var serializer = new XmlSerializer(typeof (T));
+            var type = typeof (T);
+            var serializer = new XmlSerializer(type);
             T xmlResponse;
-            using (XmlReader reader = XmlReader.Create(new StringReader(data))) {
+            var stringreader = new StringReader(data);
+            using (XmlReader reader = XmlReader.Create(stringreader)) {
                 xmlResponse = (T) serializer.Deserialize(reader);
             }
             return xmlResponse;

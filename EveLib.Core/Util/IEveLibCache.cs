@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace eZet.EveLib.Modules.Util {
+namespace eZet.EveLib.Core.Util {
     /// <summary>
     ///     Interface for CacheExpiratoinRegisters
     /// </summary>

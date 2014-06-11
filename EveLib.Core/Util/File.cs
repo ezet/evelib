@@ -8,12 +8,11 @@ namespace eZet.EveLib.Core.Util {
     public static class FileAsync {
 
         public static async Task<string> ReadAllTextAsync(string filePath) {
-            using (FileStream sourceStream = new FileStream(filePath,
+            using (var sourceStream = new FileStream(filePath,
                 FileMode.Open, FileAccess.Read, FileShare.Read,
                 bufferSize: 4096, useAsync: true)) {
-                StringBuilder sb = new StringBuilder();
-
-                byte[] buffer = new byte[0x1000];
+                var sb = new StringBuilder();
+                var buffer = new byte[0x1000];
                 int numRead;
                 while ((numRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false)) != 0) {
                     string text = Encoding.Unicode.GetString(buffer, 0, numRead);
@@ -30,8 +29,8 @@ namespace eZet.EveLib.Core.Util {
 
         public static async Task WriteAllTextAsync(string filePath, string text) {
             byte[] encodedText = Encoding.Unicode.GetBytes(text);
-            using (FileStream sourceStream = new FileStream(filePath,
-                FileMode.Append, FileAccess.Write, FileShare.None,
+            using (var sourceStream = new FileStream(filePath,
+                FileMode.Create, FileAccess.Write, FileShare.None,
                 bufferSize: 4096, useAsync: true)) {
                 await sourceStream.WriteAsync(encodedText, 0, encodedText.Length).ConfigureAwait(false);
             }
