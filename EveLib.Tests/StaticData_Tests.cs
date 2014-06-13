@@ -5,7 +5,7 @@ namespace eZet.EveLib.Test {
     [TestClass]
     public class StaticData_Tests {
 
-        public readonly StaticData Api = new StaticData();
+        public readonly EveStaticData Api = new EveStaticData();
 
         [TestMethod]
         public void GetInvTypes_ValidRequest_NoErrors() {

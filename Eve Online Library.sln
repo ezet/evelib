@@ -24,9 +24,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.Element43", "EveLib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveCrest", "EveLib.EveCrest\EveLib.EveCrest.csproj", "{F81627B3-99AF-4B4F-926A-685D21569451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evelib.ZKillboard", "zKillboard\Evelib.ZKillboard.csproj", "{741BDD36-B71C-4ABE-9B03-185FBD6767F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evelib.ZKillboard", "EveLib.ZKillboard\Evelib.ZKillboard.csproj", "{741BDD36-B71C-4ABE-9B03-185FBD6767F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.StaticData", "EveLib.Static\EveLib.StaticData.csproj", "{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib", "EveLib\EveLib.csproj", "{845B3203-B28A-4038-9E4D-48CD9D2E8A45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.StaticData", "EveLib.EveStaticData\EveLib.StaticData.csproj", "{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{741BDD36-B71C-4ABE-9B03-185FBD6767F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{741BDD36-B71C-4ABE-9B03-185FBD6767F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{741BDD36-B71C-4ABE-9B03-185FBD6767F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{845B3203-B28A-4038-9E4D-48CD9D2E8A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{845B3203-B28A-4038-9E4D-48CD9D2E8A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{845B3203-B28A-4038-9E4D-48CD9D2E8A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{845B3203-B28A-4038-9E4D-48CD9D2E8A45}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Release|Any CPU.ActiveCfg = Release|Any CPU

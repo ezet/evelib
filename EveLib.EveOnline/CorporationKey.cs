@@ -40,7 +40,7 @@ namespace eZet.EveLib.Modules {
             get { return _corporation.Value; }
         }
 
-        // Hide ApiKey.ActualKey
+        // Hide ApiKey.GetActualKey
         private new void ActualKey() {
 
         }

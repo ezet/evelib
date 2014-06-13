@@ -105,8 +105,7 @@ namespace eZet.EveLib.Modules {
         /// Returns a new Key for this KeyIDs actual type. It preserves any key data, so the returned object comes pre-initialized.
         /// The returned key should be cast to it's real type by using GetType().
         /// </summary>
-        public virtual ApiKey ActualKey {
-            get {
+        public virtual ApiKey GetActualKey() {
                 switch (KeyType) {
                     case ApiKeyType.Character:
                         return new CharacterKey(this);
@@ -117,7 +116,6 @@ namespace eZet.EveLib.Modules {
                     default:
                         return this;
                 }
-            }
         }
 
         /// <summary>

@@ -4,7 +4,7 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
-    public class StaticData {
+    public class EveStaticData {
 
         public enum DataFormat {
             Json,
@@ -16,7 +16,7 @@ namespace eZet.EveLib.Modules {
 
         public const string DefaultApiPath = "api/";
 
-        public StaticData(DataFormat format = DataFormat.Json) {
+        public EveStaticData(DataFormat format = DataFormat.Json) {
             RequestHandler = new RequestHandler(new HttpRequester(), new SimpleJsonSerializer());
             BaseUri = new Uri(DefaultUri);
             ApiPath = DefaultApiPath;

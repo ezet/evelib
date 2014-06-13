@@ -6,26 +6,45 @@ namespace eZet.EveLib.Modules {
     /// Static helper facade for accessing the Eve Online API.
     /// </summary>
     public static class EveOnlineApi {
+        private static readonly Lazy<Eve> _eve;
+        private static readonly Lazy<Image> _image;
+        private static readonly Lazy<Map> _map;
 
         /// <summary>
         /// Provides access to a default instance of Eve
         /// </summary>
-        public static Lazy<Eve> Eve { get; private set; }
+        public static Eve Eve {
+            get { return _eve.Value; }
+        }
 
         /// <summary>
         /// Provides access to a default instance of Image
         /// </summary>
-        public static Lazy<Image> Image { get; private set; }
+        public static Image Image {
+            get { return _image.Value; }
+        }
 
         /// <summary>
         /// Provides access to a default instance of Map
         /// </summary>
-        public static Lazy<Map> Map { get; private set; }
+        public static Map Map {
+            get { return _map.Value; }
+        }
 
         static EveOnlineApi() {
-            Eve = new Lazy<Eve>();
-            Image = new Lazy<Image>();
-            Map = new Lazy<Map>();
+            _eve = new Lazy<Eve>();
+            _image = new Lazy<Image>();
+            _map = new Lazy<Map>();
+        }
+
+        /// <summary>
+        /// Creates a new ApiKey and returns it. This is the same as invoking new ApiKey
+        /// </summary>
+        /// <param name="keyId">Eve API Key ID</param>
+        /// <param name="vCode">Eve API Verification Code (vCode)</param>
+        /// <returns></returns>
+        public static ApiKey CreateApiKey(int keyId, string vCode) {
+            return new ApiKey(keyId, vCode);
         }
 
         /// <summary>

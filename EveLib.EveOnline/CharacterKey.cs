@@ -67,7 +67,7 @@ namespace eZet.EveLib.Modules {
             return requestAsync<AccountStatus>(uri, this);
         }
 
-        // Hide ApiKey.ActualKey
+        // Hide ApiKey.GetActualKey
         private new void ActualKey() {
 
         }

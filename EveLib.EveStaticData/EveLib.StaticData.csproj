@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StaticData.cs" />
+    <Compile Include="EveStaticData.cs" />
     <Compile Include="Models\StaticDataCollection.cs" />
     <Compile Include="Models\InvType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
