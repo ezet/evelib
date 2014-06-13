@@ -2,7 +2,6 @@
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
@@ -30,6 +29,12 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public const int AccountKey = 1000;
 
+        /// <summary>
+        /// Creates a new Character using the provided key data and character id.
+        /// </summary>
+        /// <param name="keyId">Eve API Key ID</param>
+        /// <param name="vCode">Eve API Verification Code (vCode)</param>
+        /// <param name="characterId">Eve Character ID</param>
         public Character(int keyId, string vCode, long characterId) {
             ApiKey = new CharacterKey(keyId, vCode);
             CharacterId = characterId;
@@ -40,12 +45,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="apiKey">A valid key.</param>
         /// <param name="characterId">A character id exposed by the provided key.</param>
-        /// <param name="characterName"></param>
-        internal Character(CharacterKey apiKey, long characterId, string characterName) {
+        internal Character(CharacterKey apiKey, long characterId) {
             ApiKey = apiKey;
             CharacterId = characterId;
-            CharacterName = characterName;
             BaseUri = new Uri("https://api.eveonline.com");
+            IsInitialized = true;
         }
 
         internal Character(CharacterKey apiKey, ApiKeyInfo.ApiKeyEntity entity) {
@@ -59,6 +63,7 @@ namespace eZet.EveLib.Modules {
             FactionId = entity.FactionId;
             FactionName = entity.FactionName;
             BaseUri = new Uri("https://api.eveonline.com");
+            IsInitialized = true;
         }
 
         /// <summary>
@@ -72,7 +77,7 @@ namespace eZet.EveLib.Modules {
         public long CharacterId { get; private set; }
 
         /// <summary>
-        ///     Gets the name of this character.
+        ///     Gets the name of this character. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public string CharacterName {
             get {
@@ -83,7 +88,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets the Corporation ID.
+        /// Gets the Corporation ID. Note: Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public long CorporationId {
             get { if (!_isInitialized) Init(); return _corporationId; }
@@ -91,7 +96,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets the corporation name.
+        /// Gets the corporation name. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public string CorporationName {
             get { if (!_isInitialized) Init(); return _corporationName; }
@@ -99,7 +104,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets the Alliance ID.
+        /// Gets the Alliance ID. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public long AllianceId {
             get { if (!_isInitialized) Init(); return _allianceId; }
@@ -107,7 +112,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets the Alliance name.
+        /// Gets the Alliance name. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public string AllianceName {
             get { if (!_isInitialized) Init(); return _allianceName; }
@@ -115,7 +120,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets the Faction ID.
+        /// Gets the Faction ID. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public long FactionId {
             get { if (!_isInitialized) Init(); return _factionId; }
@@ -123,18 +128,25 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets the Faction name.
+        /// Gets the Faction name. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public string FactionName {
             get { if (!_isInitialized) Init(); return _factionName; }
             private set { _factionName = value; }
         }
 
+        /// <summary>
+        /// Resets the properties for this Character and it's CharacterKey, allowing new data to be fethed with Init() or InitAsync().
+        /// </summary>
         public void Reset() {
             IsInitialized = false;
             ApiKey.Reset();
         }
 
+        /// <summary>
+        /// Initializes this Characters properties with values fetched from the API. Returns immediately if this character is already initialized.
+        /// </summary>
+        /// <returns>This Character</returns>
         public Character Init() {
             if (IsInitialized) return this;
             ApiKey.Init();
@@ -142,6 +154,10 @@ namespace eZet.EveLib.Modules {
             return this;
         }
 
+        /// <summary>
+        /// Initializes this Characters properties with values fetched from the API. Returns immediately if this character is already initialized.
+        /// </summary>
+        /// <returns>This Character</returns>
         public async Task<Character> InitAsync() {
             if (IsInitialized) return this;
             await ApiKey.InitAsync().ConfigureAwait(false);

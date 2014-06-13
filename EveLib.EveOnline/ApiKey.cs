@@ -81,21 +81,21 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Gets the CAK access mask of this key. Note: If this key has not been initialized with Init() or InitAsync(), this will start a web request.
+        ///     Gets the CAK access mask of this key. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public int AccessMask {
             get { return ApiKeyInfo.AccessMask; }
         }
 
         /// <summary>
-        ///     Gets the type of this key. Note: If this key has not been initialized with Init() or InitAsync(), this will start a web request.
+        ///     Gets the type of this key. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public ApiKeyType KeyType {
             get { return ApiKeyInfo.Type; }
         }
 
         /// <summary>
-        ///     Gets the expiration date of this key. Note: If this key has not been initialized with Init() or InitAsync(), this will start a web request.
+        ///     Gets the expiration date of this key. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public DateTime ExpiryDate {
             get { return ApiKeyInfo.ExpireDate; }
@@ -129,7 +129,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Initiates all properties on this object.
+        /// Initiates all properties on this object. Method will return immediately if this object is already initialized.
         /// </summary>
         /// <returns></returns>
         public virtual ApiKey Init() {
@@ -139,7 +139,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Initiates all properties on this object asynchronously.
+        /// Initiates all properties on this object asynchronously. Method will return immediately if this object is already initialized.
         /// </summary>
         /// <returns></returns>
         public virtual async Task<ApiKey> InitAsync() {
@@ -192,7 +192,7 @@ namespace eZet.EveLib.Modules {
 
 
         /// <summary>
-        /// Returns true if this key is valid, otherwise false. Note: If this key has not been initialized with Init() or InitAsync(), this will start a web request.
+        /// Returns true if this key is valid, otherwise false. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         /// <returns></returns>
         public bool IsValidKey() {
@@ -211,7 +211,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns true if this key is valid, otherwise false. Note: If this key has not been initialized with Init() or InitAsync(), this will start a web request.
+        /// Returns true if this key is valid, otherwise false. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         /// <returns></returns>
         public async Task<bool> IsValidKeyAsync() {

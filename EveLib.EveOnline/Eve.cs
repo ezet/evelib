@@ -7,7 +7,7 @@ using eZet.EveLib.Modules.Models.Misc;
 namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to API calls that do not require a valid API key or character/corporation ID, and are not covered
-    ///     by Image or Map.
+    ///     by Image or Map. Paths: /eve, /misc, /server, /api
     /// </summary>
     public class Eve : BaseEntity {
         /// <summary>
@@ -64,6 +64,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="list">A list of character ids.</param>
         /// <returns></returns>
         public EveApiResponse<CharacterAffiliation> GetCharacterAffiliation(params long[] list) {
+            Contract.Requires(list != null);
             return GetCharacterAffiliationAsync(list).Result;
         }
 
@@ -87,6 +88,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="list">A list of ids.</param>
         /// <returns></returns>
         public EveApiResponse<CharacterNameId> GetCharacterId(params string[] list) {
+            Contract.Requires(list != null);
             return GetCharacterIdAsync(list).Result;
         }
 
@@ -139,6 +141,7 @@ namespace eZet.EveLib.Modules {
         /// </param>
         /// <returns></returns>
         public EveApiResponse<CharacterNameId> GetCharacterName(params long[] list) {
+            Contract.Requires(list != null);
             return GetCharacterNameAsync(list).Result;
         }
 
@@ -282,6 +285,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="list">A list of type ids.</param>
         /// <returns></returns>
         public EveApiResponse<TypeName> GetTypeName(params long[] list) {
+            Contract.Requires(list != null);
             return GetTypeNameAsync(list).Result;
         }
 
@@ -337,6 +341,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="list">A list of names or IDs</param>
         /// <returns></returns>
         public EveApiResponse<OwnerCollection> GetOwnerId(params string[] list) {
+            Contract.Requires(list != null);
             return GetOwnerIdAsync(list).Result;
         }
 

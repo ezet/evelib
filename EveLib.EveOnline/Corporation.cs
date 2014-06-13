@@ -27,33 +27,47 @@ namespace eZet.EveLib.Modules {
         private string _factionName;
 
         /// <summary>
-        ///     Created a new instance
+        /// Creates a new Corporation, preserving the initialized data and key from the passed in entity
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="entity"></param>
+        internal Corporation(CorporationKey apiKey, ApiKeyInfo.ApiKeyEntity entity) {
+            ApiKey = apiKey;
+            CorporationId = entity.CorporationId;
+            CorporationName = entity.CorporationName;
+            AllianceId = entity.AllianceId;
+            AllianceName = entity.AllianceName;
+            FactionId = entity.FactionId;
+            FactionName = entity.FactionName;
+            BaseUri = new Uri("https://api.eveonline.com");
+        }
+
+        /// <summary>
+        ///     Creates a new corporation. If the Key is initialized, the Corporation will also be initialized with data from the Key.
         /// </summary>
         /// <param name="apiKey"></param>
         /// <param name="corporationId"></param>
-        /// <param name="corporationName"></param>
-        internal Corporation(CorporationKey apiKey, long corporationId, string corporationName) {
+        public Corporation(CorporationKey apiKey, long corporationId) {
             ApiKey = apiKey;
             CorporationId = corporationId;
-            CorporationName = corporationName;
             BaseUri = new Uri("https://api.eveonline.com");
+            if (ApiKey.IsInitialized)
+                ensureInitialized();
         }
 
-        internal Corporation(CorporationKey apiKey, ApiKeyInfo.ApiKeyEntity entity) {
-            ApiKey = apiKey;
-            initData(entity);
-            BaseUri = new Uri("https://api.eveonline.com");
-        }
-
+        /// <summary>
+        /// Creates a new corporation. This object will not be initialized.
+        /// </summary>
+        /// <param name="keyId"></param>
+        /// <param name="vCode"></param>
+        /// <param name="corporationId"></param>
         public Corporation(int keyId, string vCode, long corporationId) {
             ApiKey = new CorporationKey(keyId, vCode);
             CorporationId = corporationId;
         }
 
-
-
         /// <summary>
-        ///     The API key used for this Corporation
+        ///     Gets the CorporationKey for this Corporation.
         /// </summary>
         public CorporationKey ApiKey { get; private set; }
 
@@ -64,20 +78,23 @@ namespace eZet.EveLib.Modules {
         public long CorporationId { get; private set; }
 
         /// <summary>
-        ///     Gets the corporation name.
+        ///     Gets the Corporation name. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public string CorporationName {
             get { if (!IsInitialized) Init(); return _corporationName; }
             private set { _corporationName = value; }
         }
 
+        /// <summary>
+        /// Gets the Alliance name. Note: If this object has not already been initialized, this will send a web request to the API.
+        /// </summary>
         public string AllianceName {
             get { if (!IsInitialized) Init(); return _allianceName; }
             private set { _allianceName = value; }
         }
 
         /// <summary>
-        ///     Gets the Alliance ID.
+        ///     Gets the Alliance ID. Note: If this object has not already been initialized, this will send a web request to the API.
         /// </summary>
         public long AllianceId {
             get {
@@ -88,34 +105,35 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Gets the Faction ID.
-        /// </summary>
+        ///     Gets the Faction ID. Note: If this object has not already been initialized, this will send a web request to the API.
+        /// </summary> 
         public long FactionId {
             get { if (!IsInitialized) Init(); return _factionId; }
             private set { _factionId = value; }
         }
 
+        /// <summary>
+        /// Gets the Faction name. Note: If this object has not already been initialized, this will send a web request to the API.
+        /// </summary>
         public string FactionName {
             get { if (!IsInitialized) Init(); return _factionName; }
             private set { _factionName = value; }
         }
 
 
-        private void initData(ApiKeyInfo.ApiKeyEntity entity) {
-            CorporationId = entity.CorporationId;
-            CorporationName = entity.CorporationName;
-            AllianceId = entity.AllianceId;
-            AllianceName = entity.AllianceName;
-            FactionId = entity.FactionId;
-            FactionName = entity.FactionName;
-        }
-
-
+        /// <summary>
+        /// Resets the properties for this Corporation and it's CorporationKey, allowing new data to be fethed with Init() or InitAsync().
+        /// </summary>
         public void Reset() {
             IsInitialized = false;
             ApiKey.Reset();
         }
 
+
+        /// <summary>
+        /// Initializes this Corporations properties with values fetched from the API. Returns immediately if this Corporation is already initialized.
+        /// </summary>
+        /// <returns>This corporation</returns>
         public Corporation Init() {
             if (IsInitialized) return this;
             ApiKey.Init();
@@ -123,6 +141,10 @@ namespace eZet.EveLib.Modules {
             return this;
         }
 
+        /// <summary>
+        /// Initializes this Corporations properties with values fetched from the API. Returns immediately if this Corporation is already initialized.
+        /// </summary>
+        /// <returns>This corporation</returns>
         public async Task<Corporation> InitAsync() {
             if (IsInitialized) return this;
             await ApiKey.InitAsync().ConfigureAwait(false);

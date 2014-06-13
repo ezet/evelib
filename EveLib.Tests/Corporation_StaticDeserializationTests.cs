@@ -17,7 +17,7 @@ namespace eZet.EveLib.Test {
         private readonly Corporation _corp;
 
         public Corporation_StaticDeserializationTests() {
-            _corp = new Corporation(new CorporationKey(0, ""), 0, "");
+            _corp = new Corporation(new CorporationKey(0, ""), 0);
             _corp.RequestHandler = new RequestHandler(new StaticXmlRequester(), new SimpleXmlSerializer());
         }
 

@@ -14,7 +14,7 @@ namespace eZet.EveLib.Test {
         private readonly Character _character;
 
         public Character_StaticDeserializationTests() {
-            _character = new Character(new CharacterKey(0, ""), 0, "");
+            _character = new Character(new CharacterKey(0, ""), 0);
             _character.RequestHandler = new RequestHandler(new StaticXmlRequester(), new SimpleXmlSerializer());
         }
 
