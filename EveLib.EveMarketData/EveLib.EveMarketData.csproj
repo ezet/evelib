@@ -114,13 +114,13 @@
   <ItemGroup>
     <Compile Include="EveMarketData.cs" />
     <Compile Include="EveMarketDataOptions.cs" />
-    <Compile Include="JsonConverter\RecentUploadsJsonConverter.cs" />
-    <Compile Include="JsonConverter\RowSetCollectionJsonConverter.cs" />
-    <Compile Include="JsonConverter\StationRankJsonConverter.cs" />
-    <Compile Include="JsonConverter\ItemHistoryJsonConverter.cs" />
-    <Compile Include="JsonConverter\ItemOrdersJsonConverter.cs" />
-    <Compile Include="JsonConverter\ItemPricesJsonConverter.cs" />
-    <Compile Include="JsonConverter\RowCollectionConverter.cs" />
+    <Compile Include="JsonConverters\RecentUploadsJsonConverter.cs" />
+    <Compile Include="JsonConverters\RowSetCollectionJsonConverter.cs" />
+    <Compile Include="JsonConverters\StationRankJsonConverter.cs" />
+    <Compile Include="JsonConverters\ItemHistoryJsonConverter.cs" />
+    <Compile Include="JsonConverters\ItemOrdersJsonConverter.cs" />
+    <Compile Include="JsonConverters\ItemPricesJsonConverter.cs" />
+    <Compile Include="JsonConverters\RowCollectionConverter.cs" />
     <Compile Include="NewtonSoftJsonSerializer.cs" />
     <Compile Include="Models\EveMarketDataResponse.cs" />
     <Compile Include="Models\ItemHistory.cs" />

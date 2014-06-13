@@ -40,13 +40,14 @@ namespace eZet.EveLib.Modules {
             FactionId = entity.FactionId;
             FactionName = entity.FactionName;
             BaseUri = new Uri("https://api.eveonline.com");
+            IsInitialized = true;
         }
 
         /// <summary>
-        ///     Creates a new corporation. If the Key is initialized, the Corporation will also be initialized with data from the Key.
+        ///     Creates a new Corporation. If the Key is initialized, the Corporation will also be initialized with data from the Key.
         /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="corporationId"></param>
+        /// <param name="apiKey">A CorporationKey</param>
+        /// <param name="corporationId">A valid Eve Online Corporation ID</param>
         public Corporation(CorporationKey apiKey, long corporationId) {
             ApiKey = apiKey;
             CorporationId = corporationId;

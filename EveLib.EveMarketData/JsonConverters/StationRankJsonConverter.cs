@@ -2,7 +2,7 @@
 using eZet.EveLib.Modules.Models;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.Modules.JsonConverter {
+namespace eZet.EveLib.Modules.JsonConverters {
     public class StationRankJsonConverter : Newtonsoft.Json.JsonConverter {
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer) {
             throw new NotImplementedException();

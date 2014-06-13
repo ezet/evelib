@@ -29,29 +29,6 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public const int AccountKey = 1000;
 
-        /// <summary>
-        /// Creates a new Character using the provided key data and character id.
-        /// </summary>
-        /// <param name="keyId">Eve API Key ID</param>
-        /// <param name="vCode">Eve API Verification Code (vCode)</param>
-        /// <param name="characterId">Eve Character ID</param>
-        public Character(int keyId, string vCode, long characterId) {
-            ApiKey = new CharacterKey(keyId, vCode);
-            CharacterId = characterId;
-        }
-
-        /// <summary>
-        ///     Creates a new object using the proided key and character id.
-        /// </summary>
-        /// <param name="apiKey">A valid key.</param>
-        /// <param name="characterId">A character id exposed by the provided key.</param>
-        internal Character(CharacterKey apiKey, long characterId) {
-            ApiKey = apiKey;
-            CharacterId = characterId;
-            BaseUri = new Uri("https://api.eveonline.com");
-            IsInitialized = true;
-        }
-
         internal Character(CharacterKey apiKey, ApiKeyInfo.ApiKeyEntity entity) {
             ApiKey = apiKey;
             CharacterId = entity.CharacterId;
@@ -67,7 +44,32 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Gets the API key used for this character.
+        /// Creates a new Character using the provided key data and character id.
+        /// </summary>
+        /// <param name="keyId">Eve API Key ID</param>
+        /// <param name="vCode">Eve API Verification Code (vCode)</param>
+        /// <param name="characterId">Eve Character ID</param>
+        public Character(int keyId, string vCode, long characterId) {
+            ApiKey = new CharacterKey(keyId, vCode);
+            CharacterId = characterId;
+        }
+
+        /// <summary>
+        ///     Creates a new Character. If the CharacterKey is initialized, the Character will also be initialized with data from the Key.
+        /// </summary>
+        /// <param name="apiKey">A valid CharacterKey</param>
+        /// <param name="characterId">A valid Eve Online Character ID</param>
+        public Character(CharacterKey apiKey, long characterId) {
+            Contract.Requires(apiKey != null);
+            ApiKey = apiKey;
+            CharacterId = characterId;
+            BaseUri = new Uri("https://api.eveonline.com");
+            if (ApiKey.IsInitialized)
+                ensureInitialized();
+        }
+
+        /// <summary>
+        ///     Gets the CharacterKey for this Character.
         /// </summary>
         public CharacterKey ApiKey { get; private set; }
 

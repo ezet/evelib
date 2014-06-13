@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using eZet.EveLib.Modules.JsonConverter;
+using eZet.EveLib.Modules.JsonConverters;
 using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {

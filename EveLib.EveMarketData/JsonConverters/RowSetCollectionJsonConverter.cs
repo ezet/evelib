@@ -1,23 +1,26 @@
 ﻿using System;
 using eZet.EveLib.Modules.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace eZet.EveLib.Modules.JsonConverter {
-    public class ItemOrderJsonConverter : Newtonsoft.Json.JsonConverter {
+namespace eZet.EveLib.Modules.JsonConverters {
+    public class RowSetCollectionJsonConverter<T> : Newtonsoft.Json.JsonConverter {
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer) {
             throw new NotImplementedException();
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             Newtonsoft.Json.JsonSerializer serializer) {
-            var result = new ItemOrders();
-            serializer.Converters.Add(new RowCollectionJsonConverter<ItemOrders.ItemOrderEntry>());
-            result.Orders = serializer.Deserialize<EveMarketDataRowCollection<ItemOrders.ItemOrderEntry>>(reader);
+            var result = new EveMarketDataRowCollection<T>();
+            JObject json = JObject.Load(reader);
+            foreach (JToken row in json["row"]) {
+                result.Add(serializer.Deserialize<T>(row.CreateReader()));
+            }
             return result;
         }
 
         public override bool CanConvert(Type objectType) {
-            throw new NotImplementedException();
+            return objectType == typeof (EveMarketDataRowCollection<T>);
         }
     }
 }
