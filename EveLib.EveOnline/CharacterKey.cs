@@ -20,7 +20,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="vCode"></param>
         public CharacterKey(long keyId, string vCode)
             : base(keyId, vCode) {
-            _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.Result.Key.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
+            _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="key"></param>
         internal CharacterKey(ApiKey key)
             : base(key) {
-                _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.Result.Key.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
+                _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
         }
 
         public new async Task<CharacterKey> InitAsync() {

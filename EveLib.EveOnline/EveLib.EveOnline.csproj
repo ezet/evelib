@@ -116,7 +116,9 @@
     <Compile Include="Eve.cs" />
     <Compile Include="Corporation.cs" />
     <Compile Include="CorporationKey.cs" />
+    <Compile Include="EveOnlineApi.cs" />
     <Compile Include="Image.cs" />
+    <Compile Include="LazyLoadEntity.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Models\Account\AccountStatus.cs" />
     <Compile Include="Models\Account\ApiKeyInfo.cs" />

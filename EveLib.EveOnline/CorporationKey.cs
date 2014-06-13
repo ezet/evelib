@@ -17,7 +17,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="vCode"></param>
         public CorporationKey(long keyId, string vCode)
             : base(keyId, vCode) {
-            _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.Result.Key.KeyEntities.Single()));
+            _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.KeyEntities.Single()));
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="key"></param>
         internal CorporationKey(ApiKey key)
             : base(key) {
-            _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.Result.Key.KeyEntities.Single()));
+            _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.KeyEntities.Single()));
         }
 
         public async new Task<CorporationKey> InitAsync() {

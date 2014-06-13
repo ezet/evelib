@@ -35,11 +35,8 @@ namespace eZet.EveLib.Modules.Models.Corporation {
         [XmlElement("allianceID")]
         public long AllianceId { get; set; }
 
-        [XmlElement("allianceName")]
-        public string AllianceName { get; set; }
-
         [XmlElement("factionID")]
-        public string FactionId { get; set; }
+        public long FactionId { get; set; }
 
         [XmlElement("taxRate")]
         public string TaxRate { get; set; }
