@@ -23,6 +23,7 @@ Support thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 * Eve Marketdata API `EveMarketData`
 * Element43 API `Element43`
 * ZKillboard API `ZKillBoard`
+* Eve Static Data (Element43) `EveStaticData`
 
 ### General information
 The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like.
@@ -76,7 +77,7 @@ You can delete the stored data from keys by calling `Reset()`, which will remove
 
 EveLib also provides a method to detect and return the actual type of key, which you can then cast to the real type. This method preserves any initialization data within the key.
 
-    var key = new ApiKey(keyId, vCode); // A user gave me some key info, and I have no idea if its for a character or corporation
+    var key = new ApiKey(keyId, vCode); // A user gave me some key info, and I have no idea if its for a char or corp
     if (key.KeyType == ApiKeyType.Character) { // This lazily loads the KeyType and all other properties, from the API
         CharacterKey cKey = (CharacterKey)key.GetActualKey();
         // do work with your character key.
@@ -139,3 +140,10 @@ Requires Newtonsoft.Json.dll.
 This module provides access to all calls on the EveMarketData api. All api calls can be made through any `EveMarketData` object. Most parameters for requests can be set and passed in a `EveMarketDataOptions` object. This module also supports both JSON and XML mode, where JSON is the default. You can specify which format you want in the EveMarketData constructor. It is otherwise very similar to the EveCentral module.
 
 
+Element43
+-
+Very similar to EveCentral API
+
+Zkillbord
+-
+Work in progress.
