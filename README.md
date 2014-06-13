@@ -17,28 +17,24 @@ Support thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 * A fairly comprehensive set of unit tests, including static xml tests for calls requiring authentication.
 
 ### Current Modules
-* Eve Online API
-* Eve CREST
-* Eve Central API
-* Eve Marketdata API
-* Element43 API
-* ZKillboard API
+* Eve Online API `EveOnlineApi`
+* Eve CREST `EveCrest`
+* Eve Central API `EveCentral`
+* Eve Marketdata API `EveMarketData`
+* Element43 API `Element43`
+* ZKillboard API `ZKillBoard`
 
 ### General information
-The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like. The latest stable release also offers one download where all projects are merged into one dll. The libraries can be configured using app.config in your application, see dll.config for possible values.
+The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like.
 
 #### Code Contracts
 The library uses Code Contracts, see [code contracts] (http://research.microsoft.com/en-us/projects/contracts/) for more information.
-
-#### Threading
-The library is currently not threaded in any way. There's not really room for effective parallelization in the requests, so the only use would be for offloading eg. a GUI thread. This responsibility should be left to the client code.
 
 #### Caching
 The EveOnline API module caches XML files to disk, adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
 
 #### Async/Await
-All API methods provide both a synchronous version, and an asynchronous version of the method, postfixed with `Async`.
-I strongly recommend using the Async methods.
+All methods that access an API provide both a synchronous and an asynchronous. Asynchronous methods are postfixed with `Async`. Some classes provide lazily loaded properties, which will always be loaded synchronously if a new request has to be made. To load such properties asynchronously, call `InitAsync()` on the respective objects, before accessing it's properties. All such properties are documented as such in it's comments.
 
 EveOnline API
 -
@@ -54,7 +50,7 @@ This library exposes all of CCPs Eve API calls through an easy to use API, using
 All basic functionality can be reached through a static facade class, EveOnlineApi. However, all methods and properties available in this class, can also be accessed by instantiating the respective classes using the new operator.
 
 ##### Basic
-Eve, Map and Image do not require authentication, and can be accessed directlyy.
+Eve, Map and Image do not require authentication, and can be accessed directly.
 
     var result = EveOnlineApi.Map.GetFactionWarSystems();
 
@@ -65,7 +61,7 @@ The library has 3 different key classes, `CharacterKey`, `CorporationKey` and `A
     CharacterKey charKey = EveOnlineApi.CreateCharacterKey(id, vcode);
     CorporationKey corpKey = EveOnlineApi.CreateCorporationKey(id, vcode);
     
-All keys have a few properties in common, such as `KeyType`, `ExpiryDate` and `AccessMask`. These properties will be lazily loaded, synchronously, the first time they are accessed. After one of them have been accessed once, they will be stored in the object. You can also load them exclicitly by calling `Init()`, or asynchronously by calling `InitAsync()`.
+All keys have a few properties in common, such as `KeyType`, `ExpiryDate` and `AccessMask`. These properties will be lazily loaded, synchronously, the first time they are accessed. After one of them have been accessed once, they will be stored in the object. You can also load them explicitly by calling `Init()`, or asynchronously by calling `InitAsync()`.
 `CharacterKey` and `CorporationKey` also have additinal properties, `Characters` and `Corporation`, that are also lazily loaded in the same fashion. You can safely call `Init()` or `InitAsync()` repeatedly, if the object is already initialized it will return immediately.
 
     key.Init(); // loads all properties, sync
@@ -80,7 +76,8 @@ You can delete the stored data from keys by calling `Reset()`, which will remove
 
 EveLib also provides a method to detect and return the actual type of key, which you can then cast to the real type. This method preserves any initialization data within the key.
 
-    if (key.KeyType == ApiKeyType.Character) {
+    var key = new ApiKey(keyId, vCode); // A user gave me some key info, and I have no idea if its for a character or corporation
+    if (key.KeyType == ApiKeyType.Character) { // This lazily loads the KeyType and all other properties, from the API
         CharacterKey cKey = (CharacterKey)key.GetActualKey();
         // do work with your character key.
     }
@@ -95,13 +92,13 @@ There are mainly two ways to instantiate the Character and Corporation classes.
 
 You can create a new object directly
 
-    Character character = EveOnlineApi.CreateNewCharacter(keyId, vCode, characterId);
-    Corporation corporation = EveOnlineApi.CreateNewCorporation(keyId, vCode, corporationId);
+    Character character = EveOnlineApi.CreateNewCharacter(keyId, vCode, characterId); // using the static class
+    Corporation corporation = new Corporation(keyId, vCode, corporationId); // or using new
     
 Or you can get them from an existing key
 
     Character character = characterKey.Characters.Single(c => c.CharacterId == characterId); // key.Characters is a list of all characters this key can access
-    Character character = characterKey.Characters.Single(c => c.CharacterName == "MyName");
+    Character character = characterKey.Characters.Single(c => c.CharacterName == "MyName"); // find by name, or any other property
     Corporation corporation = corporationKey.Corporation; // corp keys can only access a single corporation
     
 The difference is, when creating an object directly, you will not know for sure whether the KeyID, vCode, and entityID is valid until you try to request data from API. Secondly, when creating it directly, it's properties will not be initialized. If you access objects through a key, all properties in both Character and Corporation objects will be pre-initialized with data from the key, at the cost of one call to the ApiKeyInfo endpoint.
