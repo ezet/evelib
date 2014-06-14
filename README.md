@@ -9,12 +9,10 @@ EveLib.NET is a open source library for accessing the Eve Online API, CREST, and
 * Support Thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 
 ### Features
-* Easy to use.
-* Threadsafe.
 * Fully asynchronous using TAP.
 * XML configuration through app.config.
+* Threadsafe.
 * Access to all popular APIs through one library.
-* Adheres to C# and .NET conventions.
 * Provides caching for CCP API requests.
 * Modular and open source; you can easily change the caching, serialization or any other part of the library.
 * A fairly comprehensive set of unit tests, including static xml tests for calls requiring authentication.
