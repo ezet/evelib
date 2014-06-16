@@ -1,76 +1,112 @@
-Eve Online Library.NET
+EveLib.NET
 =
 
-Eve Online Library.NET is an open source C# wrapper for CCPs Eve Online API and other popular Eve Online APIs.
+EveLib.NET is a open source library for accessing the Eve Online API, CREST, and many other popular APIs.
 
-Support thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
+### Links
+* NuGet Package: http://www.nuget.org/packages/EveLib
+* Symbols: http://www.symbolsource.org/Public/Metadata/NuGet/Project/EveLib
+* Support Thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 
 ### Features
-* Easy to use.
-* Threadsafe.
+* Fully asynchronous using TAP.
 * XML configuration through app.config.
+* Threadsafe.
 * Access to all popular APIs through one library.
-* Adheres to C# and .NET conventions.
 * Provides caching for CCP API requests.
 * Modular and open source; you can easily change the caching, serialization or any other part of the library.
 * A fairly comprehensive set of unit tests, including static xml tests for calls requiring authentication.
 
 ### Current Modules
-* Eve Online API
-* Eve CREST
-* Eve Central API
-* Eve Marketdata API
-* Element43 API
-* ZKillboard API
+* Eve Online API `EveOnlineApi`
+* Eve CREST `EveCrest`
+* Eve Central API `EveCentral`
+* Eve Marketdata API `EveMarketData`
+* Element43 API `Element43`
+* ZKillboard API `ZKillBoard`
+* Eve Static Data (Element43) `EveStaticData`
 
 ### General information
-The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like. The latest stable release also offers one download where all projects are merged into one dll. The libraries can be configured using app.config in your application, see dll.config for possible values.
+The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like.
 
 #### Code Contracts
 The library uses Code Contracts, see [code contracts] (http://research.microsoft.com/en-us/projects/contracts/) for more information.
 
-#### Threading
-The library is currently not threaded in any way. There's not really room for effective parallelization in the requests, so the only use would be for offloading eg. a GUI thread. This responsibility should be left to the client code.
-
 #### Caching
-The EveOnline API module uses the default HttpWebRequest cache (IE Cache), adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
+The EveOnline API module caches XML files to disk, adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
+
+#### Async/Await
+All methods that access an API provide both a synchronous and an asynchronous. Asynchronous methods are postfixed with `Async`. Some classes provide lazily loaded properties, which will always be loaded synchronously if a new request has to be made. To load such properties asynchronously, call `InitAsync()` on the respective objects, before accessing it's properties. All such properties are documented as such in it's comments.
 
 EveOnline API
 -
-This library exposes all of CCPs Eve API calls through an easy to use API, using C# programming and naming conventions. It uses a structure similar to how the API URIs are structured. See [APIv2] (http://wiki.eve-id.net/APIv2_Page_Index) for a reference. The basic structure is as follows:
-* `CharacterKey` and `CorporationKey` exposes requests prefixed with /account/.
+This library exposes all of CCPs Eve API calls through an easy to use API, using common .NEt an C# conventions. It uses a structure similar to how the API URIs are structured. See [APIv2] (http://wiki.eve-id.net/APIv2_Page_Index) for a reference. The basic structure is as follows:
+* `CharacterKey`, `CorporationKey` and `ApiKey` exposes requests prefixed with /account/.
 * `Character` exposes all requests prefixed with /char/.
 * `Corporation` exposes all requests  prefixed with /corp/.
 * `Map` exposes all requests prefixed with /map/.
 * `Image` exposes all requests to image.eveonline.com.
-* `Misc` exposes all other API requests.
+* `Eve` exposes all other API requests.
 
 #### Requests 
-Map, Image and Misc does not require any state, and can be accessed by creating a new object:
+All basic functionality can be reached through a static facade class, EveOnlineApi. However, all methods and properties available in this class, can also be accessed by instantiating the respective classes using the new operator.
 
-    var mapApi = new Map();
-    EveApiResponse<Kills> result = map.GetKills();
+##### Basic
+Eve, Map and Image do not require authentication, and can be accessed directly.
 
-Character and Corporation require a valid Eve Online API Key, which consist of a key id and a vertification code.
-To access these, you need to create a new `CharacterKey` or `CorporationKey` respectively. An example using id '123' and vcode 'qwerty':
+    var result = EveOnlineApi.Map.GetFactionWarSystems();
 
-    var key = new CharacterKey(123, "qwerty");
+##### Keys
+The library has 3 different key classes, `CharacterKey`, `CorporationKey` and `ApiKey`. These represent "physical" Eve Online API keys, and are required to access any part of the API that requires authentication. The `ApiKey` can be used as a general key to access endpoints in the /account/ path, if you do not know which type of KeyID you have in advance.
 
-Using this key, you can access all /account/* calls (note: Only `CharacterKey` provides `GetAccountInfo()`):
+    ApiKey key = EveOnlineApi.CreateApiKey(id, vcode);
+    CharacterKey charKey = EveOnlineApi.CreateCharacterKey(id, vcode);
+    CorporationKey corpKey = EveOnlineApi.CreateCorporationKey(id, vcode);
+    
+All keys have a few properties in common, such as `KeyType`, `ExpiryDate` and `AccessMask`. These properties will be lazily loaded, synchronously, the first time they are accessed. After one of them have been accessed once, they will be stored in the object. You can also load them explicitly by calling `Init()`, or asynchronously by calling `InitAsync()`.
+`CharacterKey` and `CorporationKey` also have additinal properties, `Characters` and `Corporation`, that are also lazily loaded in the same fashion. You can safely call `Init()` or `InitAsync()` repeatedly, if the object is already initialized it will return immediately.
+
+    key.Init(); // loads all properties, sync
+    key.Init(); // since it's already initialized, returns immediately.
+    await charKey.InitAsync(); // loads all properties, async
+    int mask = corpKey.AccessMask(); // internally uses Init() to load all properties
+    var newkey = EveOnlineApi.CreateApiKey(id, vcode).Init(); // Init() and InitAsync() returns this, so it can be chained.
+
+You can delete the stored data from keys by calling `Reset()`, which will remove any stored data, and any calls to `Init()`, `InitAsync()` or a lazily loaded property will cause a new request for the data, from the API or cache.
+
+    key.Reset(); // resets all properties, and IsInitialized is set to false
+
+EveLib also provides a method to detect and return the actual type of key, which you can then cast to the real type. This method preserves any initialization data within the key.
+
+    var key = new ApiKey(keyId, vCode); // A user gave me some key info, and I have no idea if its for a char or corp
+    if (key.KeyType == ApiKeyType.Character) { // This lazily loads the KeyType and all other properties, from the API
+        CharacterKey cKey = (CharacterKey)key.GetActualKey();
+        // do work with your character key.
+    }
+
+Using any key, you can access all /account/* paths (note: Only `CharacterKey` provides `GetAccountInfo()`):
 
     EveApiResponse<ApiKeyInfo> result = key.GetApiKeyInfo();
-	
-To get access to Character objects, simply get `key.Characters`, which lazily loads a list of Character objects for all characters this key has access to. You can then pick the character you want, and access the API through it.
-
-    Character character = key.Characters.First();
-    EveApiResponse<CharacterSheet> result = character.GetCharacterSheet();
-
-You can also use LINQ and predicates to find a specific character, eg:
-
-    Character character = key.Characters.Single(c => c.CharacterId == 12345);
-    Character peter = key.Characters.Single(c => c.CharacterName == "Peter");
     
-`CorporationKey` objects work the same way, except it provides access to a single `Corporation` object, rather than a list of `Character` objects.
+##### Character and Corporation
+Character and Corporation classes provide access to endpoints in the /char/ and /corp/ paths respectively.
+There are mainly two ways to instantiate the Character and Corporation classes.
+
+You can create a new object directly
+
+    Character character = EveOnlineApi.CreateNewCharacter(keyId, vCode, characterId); // using the static class
+    Corporation corporation = new Corporation(keyId, vCode, corporationId); // or using new
+    
+Or you can get them from an existing key
+
+    Character character = characterKey.Characters.Single(c => c.CharacterId == characterId); // key.Characters is a list of all characters this key can access
+    Character character = characterKey.Characters.Single(c => c.CharacterName == "MyName"); // find by name, or any other property
+    Corporation corporation = corporationKey.Corporation; // corp keys can only access a single corporation
+    
+The difference is, when creating an object directly, you will not know for sure whether the KeyID, vCode, and entityID is valid until you try to request data from API. Secondly, when creating it directly, it's properties will not be initialized. If you access objects through a key, all properties in both Character and Corporation objects will be pre-initialized with data from the key, at the cost of one call to the ApiKeyInfo endpoint.
+
+`Character` and `Corporation` objects are initialized the same ways keys are, using `Init()`, `InitAsync()` or by accessing a property. You can also call `Reset()` to reset all data. 
+
 
 #### Responses
 All API calls return results in the form of `EveApiResponse<T>` objects, where `T` is the specific type of response. These objects reflect the structure of the actual XML responses, with a few exceptions. All properties have been renamed in compliance with C# naming conventions, eg. 'characterID' is converted to CharacterId. Also, some properties have been renamed for clarity and consistency, where most changes are extensions of the original names.
@@ -78,14 +114,12 @@ All API calls return results in the form of `EveApiResponse<T>` objects, where `
 Every XML response has a Version, CachedUntil and Result. Result is of type T, and contains all request specific data. All calls can throw InvalidRequestException if there is an issue with the request. This exception provides access to the error description and error code returned by the CCP Api, aswell as any inner exceptions that may have been thrown.
 
     try {
-        EveApiResponse<ServerStatus> data = new Misc().GetServerStatus();
+        EveApiResponse<ServerStatus> data = EveOnlineAPi.Eve.GetServerStatus();
         int players = data.Result.PlayersOnline;
     } catch (InvalidRequestException e) {
         Logger.log(e.Message, e.ErrorCode);
     }
     
-#### Walking    
-A few API calls allows "walking" through older data by specifying an ID to start from. This can be done manually by specifying an ID, or you can use a method `getOlder()` available on the result of the calls that support it. See the APIv2 reference linked above for more details.
 
 EveCentral API
 -
@@ -107,3 +141,10 @@ Requires Newtonsoft.Json.dll.
 This module provides access to all calls on the EveMarketData api. All api calls can be made through any `EveMarketData` object. Most parameters for requests can be set and passed in a `EveMarketDataOptions` object. This module also supports both JSON and XML mode, where JSON is the default. You can specify which format you want in the EveMarketData constructor. It is otherwise very similar to the EveCentral module.
 
 
+Element43
+-
+Very similar to EveCentral API
+
+Zkillbord
+-
+Work in progress.
