@@ -31,7 +31,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetKillmails_NoErrors() {
-            dynamic data = EveCrest.GetKillmail(1, "test");
+            dynamic data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
         }
 
         [TestMethod]
@@ -41,17 +41,17 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetWars_NoErrors() {
-            var data = EveCrest.GetWars();
+            WarCollection data = EveCrest.GetWars();
         }
 
         [TestMethod]
         public void GetWar_NoErrors() {
-            var data = EveCrest.GetWar(1);
+            War data = EveCrest.GetWar(1);
         }
 
         [TestMethod]
         public void GetWarKillmails_NoErrors() {
-            var data = EveCrest.GetWarKillmails(1);
+            KillmailCollection data = EveCrest.GetWarKillmails(1);
         }
     }
 }

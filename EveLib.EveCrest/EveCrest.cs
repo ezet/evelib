@@ -83,13 +83,13 @@ namespace eZet.EveLib.Modules {
             return requestAsync<War>(relPath);
         }
 
-        public dynamic GetWarKillmails(int id) {
+        public KillmailCollection GetWarKillmails(int id) {
             return GetWarKillmailsAsync(id).Result;
         }
 
-        public Task<dynamic> GetWarKillmailsAsync(int id) {
+        public Task<KillmailCollection> GetWarKillmailsAsync(int id) {
             string relPath = "/wars/" + id + "/killmails/all/";
-            return requestAsync<dynamic>(relPath);
+            return requestAsync<KillmailCollection>(relPath);
         }
 
         private Task<T> requestAsync<T>(string relPath) {
