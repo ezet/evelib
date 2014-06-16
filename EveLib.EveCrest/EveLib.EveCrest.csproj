@@ -84,8 +84,17 @@
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
     <Compile Include="Models\Alliance.cs" />
-    <Compile Include="Models\EveCrestResponse.cs" />
-    <Compile Include="Models\MarketHistoryResponse.cs" />
+    <Compile Include="Models\AllianceCollection.cs" />
+    <Compile Include="Models\EveCrestEntity.cs" />
+    <Compile Include="Models\EveCrestCollection.cs" />
+    <Compile Include="Models\EveCrestHref.cs" />
+    <Compile Include="Models\EveCrestNamedEntity.cs" />
+    <Compile Include="Models\IncursionCollection.cs" />
+    <Compile Include="Models\Killmail.cs" />
+    <Compile Include="Models\KillmailCollection.cs" />
+    <Compile Include="Models\MarketHistoryCollection.cs" />
+    <Compile Include="Models\War.cs" />
+    <Compile Include="Models\WarCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

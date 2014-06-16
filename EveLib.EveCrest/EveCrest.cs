@@ -19,68 +19,68 @@ namespace eZet.EveLib.Modules {
 
         public Uri BaseUri { get; set; }
 
-        public dynamic GetKillmails(long id, string hash) {
-            return GetKillmailsAsync(id, hash).Result;
+        public dynamic GetKillmail(long id, string hash) {
+            return GetKillmailAsync(id, hash).Result;
         }
 
-        public Task<dynamic> GetKillmailsAsync(long id, string hash) {
+        public Task<dynamic> GetKillmailAsync(long id, string hash) {
             string relPath = "killmails/" + id + "/" + hash + "/";
             return requestAsync<dynamic>(relPath);
         }
 
-        public dynamic GetIncursions() {
+        public IncursionCollection GetIncursions() {
             return GetIncursionsAsync().Result;
         }
 
-        public Task<dynamic> GetIncursionsAsync() {
+        public Task<IncursionCollection> GetIncursionsAsync() {
             const string relPath = "incursions/";
-            return requestAsync<dynamic>(relPath);
+            return requestAsync<IncursionCollection>(relPath);
         }
 
-        public dynamic GetAlliances() {
-            return GetAlliancesAsync().Result;
+        public AllianceCollection GetAlliances(int page = 1) {
+            return GetAlliancesAsync(page).Result;
         }
 
-        public Task<dynamic> GetAlliancesAsync() {
-            const string relPath = "alliances/";
-            return requestAsync<dynamic>(relPath);
+        public Task<AllianceCollection> GetAlliancesAsync(int page = 1) {
+            string relPath = "alliances/?page=" + page;
+            return requestAsync<AllianceCollection>(relPath);
         }
 
-        public dynamic GetAlliance(long allianceId) {
+        public Alliance GetAlliance(long allianceId) {
             return GetAllianceAsync(allianceId).Result;
         }
 
-        public Task<dynamic> GetAllianceAsync(long allianceId) {
+        public Task<Alliance> GetAllianceAsync(long allianceId) {
             string relPath = "alliances/" + allianceId + "/";
-            return requestAsync<dynamic>(relPath);
+            return requestAsync<Alliance>(relPath);
         }
 
-        public MarketHistoryResponse GetMarketHistory(int regionId, int typeId) {
+        public MarketHistoryCollection GetMarketHistory(int regionId, int typeId) {
             return GetMarketHistoryAsync(regionId, typeId).Result;
         }
 
 
-        public Task<MarketHistoryResponse> GetMarketHistoryAsync(int regionId, int typeId) {
+        public Task<MarketHistoryCollection> GetMarketHistoryAsync(int regionId, int typeId) {
             string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
-            return requestAsync<MarketHistoryResponse>(relPath);
+            return requestAsync<MarketHistoryCollection>(relPath);
         }
 
-        public dynamic GetWars() {
+        public WarCollection GetWars(int page = 1) {
             return GetWarsAsync().Result;
         }
 
-        public Task<dynamic> GetWarsAsync() {
-            string relPath = "/wars/";
-            return requestAsync<dynamic>(relPath);
+        public Task<WarCollection> GetWarsAsync(int page = 1) {
+            string relPath = "/wars/?page=" + page;
+            return requestAsync<WarCollection>(relPath);
         }
 
-        public dynamic GetWar(int id) {
+        public War GetWar(int id) {
             return GetWarAsync(id).Result;
         }
 
-        public Task<dynamic> GetWarAsync(int id) {
+        public Task<War> GetWarAsync(int id) {
             string relPath = "/wars/" + id + "/";
-            return requestAsync<dynamic>(relPath);
+            return requestAsync<War>(relPath);
         }
 
         public dynamic GetWarKillmails(int id) {
@@ -91,8 +91,6 @@ namespace eZet.EveLib.Modules {
             string relPath = "/wars/" + id + "/killmails/all/";
             return requestAsync<dynamic>(relPath);
         }
-
-
 
         private Task<T> requestAsync<T>(string relPath) {
             return RequestHandler.RequestAsync<T>(new Uri(BaseUri, relPath));

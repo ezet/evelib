@@ -58,7 +58,7 @@
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -90,7 +90,7 @@
     <Compile Include="ApiKey_Tests.cs" />
     <Compile Include="CharacterKey_ValidKeyTests.cs" />
     <Compile Include="Character_StaticDeserializationTests.cs" />
-    <Compile Include="Crest_Tests.cs" />
+    <Compile Include="EveCrest_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
     <Compile Include="StaticData_Tests.cs" />
     <Compile Include="Misc_Tests.cs" />

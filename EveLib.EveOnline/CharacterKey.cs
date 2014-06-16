@@ -68,8 +68,8 @@ namespace eZet.EveLib.Modules {
         }
 
         // Hide ApiKey.GetActualKey
-        private new void ActualKey() {
-
+        private new void GetActualKey() {
+            throw new NotImplementedException();
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class MarketHistoryResponse : EveCrestResponse {
+    public class MarketHistoryCollection : EveCrestCollection {
 
         [DataMember(Name = "items")]
         public IList<MarketHistoryEntry> Entries { get; set; }
 
-
+        [DataContract]
         public class MarketHistoryEntry {
             [DataMember(Name = "volume")]
             public long Volume { get; set; }
