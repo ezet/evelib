@@ -195,6 +195,10 @@
       <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
       <Name>EveLib.EveOnline</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveStaticData\EveLib.StaticData.csproj">
+      <Project>{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}</Project>
+      <Name>EveLib.StaticData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EveLib.ZKillboard\Evelib.ZKillboard.csproj">
       <Project>{741BDD36-B71C-4ABE-9B03-185FBD6767F4}</Project>
       <Name>Evelib.ZKillboard</Name>
