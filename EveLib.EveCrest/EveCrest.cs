@@ -19,13 +19,13 @@ namespace eZet.EveLib.Modules {
 
         public Uri BaseUri { get; set; }
 
-        public dynamic GetKillmail(long id, string hash) {
+        public Killmail GetKillmail(long id, string hash) {
             return GetKillmailAsync(id, hash).Result;
         }
 
-        public Task<dynamic> GetKillmailAsync(long id, string hash) {
+        public Task<Killmail> GetKillmailAsync(long id, string hash) {
             string relPath = "killmails/" + id + "/" + hash + "/";
-            return requestAsync<dynamic>(relPath);
+            return requestAsync<Killmail>(relPath);
         }
 
         public IncursionCollection GetIncursions() {

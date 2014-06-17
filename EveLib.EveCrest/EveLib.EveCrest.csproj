@@ -88,6 +88,7 @@
     <Compile Include="Models\EveCrestEntity.cs" />
     <Compile Include="Models\EveCrestCollection.cs" />
     <Compile Include="Models\EveCrestHref.cs" />
+    <Compile Include="Models\EveCrestIconEntity.cs" />
     <Compile Include="Models\EveCrestNamedEntity.cs" />
     <Compile Include="Models\IncursionCollection.cs" />
     <Compile Include="Models\Killmail.cs" />

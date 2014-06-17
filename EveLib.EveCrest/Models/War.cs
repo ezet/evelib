@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-    
+
     [DataContract]
     public class War {
 
@@ -27,19 +27,16 @@ namespace eZet.EveLib.Modules.Models {
         [DataMember(Name = "mutual")]
         public bool Mutual { get; set; }
 
-        [DataMember(Name ="defender")]
+        [DataMember(Name = "defender")]
         public WarEntity Defender { get; set; }
 
         [DataMember(Name = "aggressor")]
         public WarEntity Aggressor { get; set; }
 
-        public class WarEntity : EveCrestEntity {
+        public class WarEntity : EveCrestIconEntity {
 
             [DataMember(Name = "shipsKilled")]
             public int ShipsKilled { get; set; }
-
-            [DataMember(Name = "icon")]
-            public EveCrestHref<string> Icon { get; set; }
 
             [DataMember(Name = "iskKilled")]
             public decimal IskKilled { get; set; }

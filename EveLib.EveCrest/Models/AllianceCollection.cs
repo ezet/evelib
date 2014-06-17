@@ -7,14 +7,7 @@ namespace eZet.EveLib.Modules.Models {
     public class AllianceCollection : EveCrestCollection {
 
         [DataMember(Name = "items")]
-        public IList<EveCrestHref<AllianceCollectionEntry>> Alliances { get; set; }
-
-        [DataContract]
-        public class AllianceCollectionEntry : EveCrestNamedEntity {
-
-            [DataMember(Name = "shortName")]
-            public string ShortName { get; set; }
-        }
+        public IList<EveCrestHref<EveCrestIconEntity>> Alliances { get; set; }
 
     }
 }

@@ -30,8 +30,10 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetKillmails_NoErrors() {
-            dynamic data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+        public void GetKillmail_NoErrors() {
+            var data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+            Assert.AreEqual(30000131, data.SolarSystem.Id);
+            Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }
 
         [TestMethod]
