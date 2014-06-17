@@ -14,13 +14,12 @@ namespace eZet.EveLib.Core.Util {
         public IHttpRequester HttpRequester { get; set; }
         public ISerializer Serializer { get; set; }
 
-        public async Task<T> RequestAsync<T>(Uri uri) {
+        public virtual async Task<T> RequestAsync<T>(Uri uri) {
             string data = "";
             try {
                 data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
-            } catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof(WebException))
-                    throw new InvalidRequestException("A request caused a WebException.", e.InnerException as WebException);
+            } catch (WebException e) {
+                throw new InvalidRequestException("A request caused a WebException.", e.InnerException as WebException);
             }
             var val = Serializer.Deserialize<T>(data);
             return val;

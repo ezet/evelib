@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
     public class EveCrest {
@@ -15,7 +16,7 @@ namespace eZet.EveLib.Modules {
         /// Creates a new EveCrest object with a default request handler
         /// </summary>
         public EveCrest() {
-            RequestHandler = new RequestHandler(new HttpRequester(), new DynamicJsonSerializer());
+            RequestHandler = new EveCrestRequestHandler(new HttpRequester(), new DynamicJsonSerializer());
             BaseUri = new Uri(DefaultUri);
         }
 

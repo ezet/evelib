@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
@@ -77,7 +78,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
+        [ExpectedException(typeof (AggregateException))]
         public void GetContractItems_InvalidRequest_InvalidRequestException() {
             EveApiResponse<ContractItems> res = _validKey.Characters[0].GetContractItems(0);
         }
@@ -89,7 +90,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
+        [ExpectedException(typeof (AggregateException))]
         public void GetFactionWarfareStats_InvalidRequest_InvalidRequestException() {
             EveApiResponse<FactionWarfareStats> res = _validKey.Characters[0].GetFactionWarfareStats();
         }
@@ -108,7 +109,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
+        [ExpectedException(typeof (AggregateException))]
         public void GetLocations_InvalidId_InvalidRequestException() {
             EveApiResponse<Locations> res = _validKey.Characters[0].GetLocations(0);
         }

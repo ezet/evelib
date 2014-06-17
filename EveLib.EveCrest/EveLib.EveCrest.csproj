@@ -87,6 +87,7 @@
     <Compile Include="Models\AllianceCollection.cs" />
     <Compile Include="Models\EveCrestEntity.cs" />
     <Compile Include="Models\EveCrestCollection.cs" />
+    <Compile Include="Models\EveCrestError.cs" />
     <Compile Include="Models\EveCrestHref.cs" />
     <Compile Include="Models\EveCrestIconEntity.cs" />
     <Compile Include="Models\EveCrestNamedEntity.cs" />
@@ -97,6 +98,8 @@
     <Compile Include="Models\War.cs" />
     <Compile Include="Models\WarCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\EveCrestException.cs" />
+    <Compile Include="Util\EveCrestRequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">

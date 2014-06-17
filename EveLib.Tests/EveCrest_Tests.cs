@@ -1,5 +1,7 @@
-﻿using eZet.EveLib.Modules;
+﻿using System.Threading.Tasks;
+using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -31,7 +33,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetKillmail_NoErrors() {
-            var data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+            Killmail data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }
@@ -48,12 +50,18 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetWar_NoErrors() {
-            War data = EveCrest.GetWar(1);
+            War data = EveCrest.GetWar(291410);
         }
 
         [TestMethod]
         public void GetWarKillmails_NoErrors() {
             KillmailCollection data = EveCrest.GetWarKillmails(1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (EveCrestException))]
+        public async Task GetWar_InvalidId_EveCrestException() {
+            War data = await EveCrest.GetWarAsync(999999999);
         }
     }
 }

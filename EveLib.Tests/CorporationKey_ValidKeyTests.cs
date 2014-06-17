@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
@@ -54,7 +55,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
+        [ExpectedException(typeof (AggregateException))]
         public void GetContractItems_InvalidId_InvalidRequestException() {
             _validKey.Corporation.GetContractItems(0);
             // Returns http 500 on invalid id
@@ -76,7 +77,7 @@ namespace eZet.EveLib.Test {
         ///     Test using character that has not participated in factional warfare
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
+        [ExpectedException(typeof (AggregateException))]
         public void GetFactionalWarfareStats_InvalidRequest_InvalidRequestException() {
             _validKey.Corporation.GetFactionWarfareStats();
         }
@@ -95,7 +96,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
+        [ExpectedException(typeof (AggregateException))]
         public void GetLocations_InvalidId_InvalidRequestException() {
             _validKey.Corporation.GetLocations(0);
         }
@@ -161,7 +162,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidRequestException))]
+        [ExpectedException(typeof (AggregateException))]
         public void GetStarbaseDetails_InvalidId_InvalidRequestException() {
             _validKey.Corporation.GetStarbaseDetails(0);
             // TODO Add valid ID test
