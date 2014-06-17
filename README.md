@@ -4,8 +4,8 @@ EveLib.NET
 EveLib.NET is a open source library for accessing the Eve Online API, CREST, and many other popular APIs.
 
 ### Links
-* NuGet Package: http://www.nuget.org/packages/EveLib
-* Symbols: http://www.symbolsource.org/Public/Metadata/NuGet/Project/EveLib
+* NuGet Package: https://www.nuget.org/packages/eZet.EveLib
+* Symbols: http://www.symbolsource.org/Public/Metadata/NuGet/Project/eZet.EveLib
 * Support Thread: https://forums.eveonline.com/default.aspx?g=posts&m=4415506
 
 ### Features
