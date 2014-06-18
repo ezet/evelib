@@ -37,6 +37,5 @@ namespace eZet.EveLib.Modules {
         internal string GetRegionQuery(string paramName) {
             return Region != 0 ? paramName + "=" + Region + "&" : "";
         }
-
     }
 }

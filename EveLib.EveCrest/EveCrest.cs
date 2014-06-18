@@ -6,17 +6,16 @@ using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
-    /// Provides access to the Eve Online CREST API.
+    ///     Provides access to the Eve Online CREST API.
     /// </summary>
     public class EveCrest {
-
         /// <summary>
-        /// The default URI used to access the CREST API.
+        ///     The default URI used to access the CREST API.
         /// </summary>
         public const string DefaultUri = "http://public-crest.eveonline.com/";
 
         /// <summary>
-        /// Creates a new EveCrest object with a default request handler
+        ///     Creates a new EveCrest object with a default request handler
         /// </summary>
         public EveCrest() {
             RequestHandler = new EveCrestRequestHandler(new HttpRequester(), new DynamicJsonSerializer());
@@ -24,18 +23,18 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets or sets the request handler used by this instance
+        ///     Gets or sets the request handler used by this instance
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        /// Gets or sets the URI used to access the CREST API by this instance.
+        ///     Gets or sets the URI used to access the CREST API by this instance.
         /// </summary>
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Returns data on the specified killmail.
-        /// Path: /killmails/$warId/$hash/
+        ///     Returns data on the specified killmail.
+        ///     Path: /killmails/$warId/$hash/
         /// </summary>
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
@@ -45,8 +44,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data on the specified killmail.
-        /// Path: /killmails/$warId/$hash/
+        ///     Returns data on the specified killmail.
+        ///     Path: /killmails/$warId/$hash/
         /// </summary>
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
@@ -57,8 +56,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all active incursions.
-        /// Path: /incursions/
+        ///     Returns a list of all active incursions.
+        ///     Path: /incursions/
         /// </summary>
         /// <returns>A list of all active incursions.</returns>
         public IncursionCollection GetIncursions() {
@@ -66,8 +65,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all active incursions.
-        /// Path: /incursions/
+        ///     Returns a list of all active incursions.
+        ///     Path: /incursions/
         /// </summary>
         /// <returns>A list of all active incursions.</returns>
         public Task<IncursionCollection> GetIncursionsAsync() {
@@ -76,8 +75,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all alliances.
-        /// Path: /alliances/
+        ///     Returns a list of all alliances.
+        ///     Path: /alliances/
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all alliances.</returns>
@@ -86,8 +85,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all alliances.
-        /// Path: /alliances/
+        ///     Returns a list of all alliances.
+        ///     Path: /alliances/
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all alliances.</returns>
@@ -97,8 +96,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data about a specific alliance.
-        /// Path: /alliances/$allianceId/
+        ///     Returns data about a specific alliance.
+        ///     Path: /alliances/$allianceId/
         /// </summary>
         /// <param name="allianceId">A valid alliance ID</param>
         /// <returns>Data for specified alliance</returns>
@@ -107,8 +106,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data about a specific alliance.
-        /// Path: /alliances/$allianceId/
+        ///     Returns data about a specific alliance.
+        ///     Path: /alliances/$allianceId/
         /// </summary>
         /// <param name="allianceId">A valid alliance ID</param>
         /// <returns>Data for specified alliance</returns>
@@ -118,8 +117,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns daily price and volume history for a specific region and item type.
-        /// Path: /market/$regionId/types/$typeId/history/
+        ///     Returns daily price and volume history for a specific region and item type.
+        ///     Path: /market/$regionId/types/$typeId/history/
         /// </summary>
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
@@ -129,8 +128,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns daily price and volume history for a specific region and item type.
-        /// Path: /market/$regionId/types/$typeId/history/
+        ///     Returns daily price and volume history for a specific region and item type.
+        ///     Path: /market/$regionId/types/$typeId/history/
         /// </summary>
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
@@ -141,8 +140,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all wars.
-        /// Path: /wars/
+        ///     Returns a list of all wars.
+        ///     Path: /wars/
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
@@ -151,8 +150,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all wars.
-        /// Path: /wars/
+        ///     Returns a list of all wars.
+        ///     Path: /wars/
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
@@ -162,8 +161,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data for a specific war.
-        /// Path: /wars/$warId
+        ///     Returns data for a specific war.
+        ///     Path: /wars/$warId
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>Data for the specified war.</returns>
@@ -172,8 +171,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data for a specific war.
-        /// Path: /wars/$warId
+        ///     Returns data for a specific war.
+        ///     Path: /wars/$warId
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>Data for the specified war.</returns>
@@ -183,8 +182,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all killmails related to a specified war.
-        /// Path: /wars/$warId/killmails/all
+        ///     Returns a list of all killmails related to a specified war.
+        ///     Path: /wars/$warId/killmails/all
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
@@ -193,8 +192,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all killmails related to a specified war.
-        /// Path: /wars/$warId/killmails/all
+        ///     Returns a list of all killmails related to a specified war.
+        ///     Path: /wars/$warId/killmails/all
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
@@ -204,7 +203,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Performs a request using the request handler.
+        ///     Performs a request using the request handler.
         /// </summary>
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="relPath">Relative path</param>

@@ -15,12 +15,12 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void Init_NoExceptions() {
-            var res = _validKey.Init();
+            ApiKey res = _validKey.Init();
         }
 
         [TestMethod]
         public async Task InitAsync_NoExceptions() {
-            var res = await _validKey.InitAsync();
+            ApiKey res = await _validKey.InitAsync();
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace eZet.EveLib.Test {
         }
 
         /// <summary>
-        /// Returns 403 Forbidden with error content on invalid key requests
+        ///     Returns 403 Forbidden with error content on invalid key requests
         /// </summary>
         [TestMethod]
         public void IsValidKey_InvalidKey_NoExceptions() {
@@ -50,7 +50,7 @@ namespace eZet.EveLib.Test {
         }
 
         /// <summary>
-        /// Returns 403 Forbidden with error content on invalid key requests
+        ///     Returns 403 Forbidden with error content on invalid key requests
         /// </summary>
         [TestMethod]
         public async Task IsValidKeyAsync_InvalidKey_NoExceptions() {

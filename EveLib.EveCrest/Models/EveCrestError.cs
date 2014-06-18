@@ -1,10 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public class EveCrestError {
-
         [DataMember(Name = "message")]
         public string Message { get; set; }
 

@@ -8,10 +8,10 @@ namespace eZet.EveLib.Core {
     ///     Provides configuration and constants for the library.
     /// </summary>
     public static class Config {
-
         public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
-        public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Separator;
+        public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                                                Separator;
 
         public static readonly string CacheRegisterFileName = "cache";
 
@@ -26,7 +26,7 @@ namespace eZet.EveLib.Core {
         static Config() {
             if (String.IsNullOrEmpty(UserAgent))
                 UserAgent = "EveLib";
-            var appName = ConfigurationManager.AppSettings["eveLib.AppData"];
+            string appName = ConfigurationManager.AppSettings["eveLib.AppData"];
             AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
             CachePath = AppData + Separator + "Cache";
             ImagePath = AppData + Separator + "Images";

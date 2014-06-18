@@ -27,13 +27,12 @@ namespace eZet.EveLib.Modules.Models.Account {
 
             [XmlAttribute("AllianceID")]
             public long AllianceId { get; set; }
-      
+
             [XmlAttribute("factionName")]
             public string FactionName { get; set; }
 
             [XmlAttribute("factionID")]
             public long FactionId { get; set; }
-
         }
     }
 }

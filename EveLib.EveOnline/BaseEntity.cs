@@ -6,12 +6,10 @@ using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
-
     /// <summary>
     ///     Provides base properties and methods for Eve Online API classes.
     /// </summary>
     public abstract class BaseEntity {
-
         private const string DefaultUri = "https://api.eveonline.com";
 
         protected BaseEntity() {
@@ -64,7 +62,8 @@ namespace eZet.EveLib.Modules {
         /// <param name="key">An API Key to be used with this request.</param>
         /// <param name="args">Arguments for the request.</param>
         /// <returns></returns>
-        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, ApiKey key, params object[] args) where T : new() {
+        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, ApiKey key, params object[] args)
+            where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
             var uri = new Uri(BaseUri, relUri + generateQueryString(key, args));

@@ -356,6 +356,5 @@ namespace eZet.EveLib.Modules {
             string names = String.Join(",", list);
             return requestAsync<OwnerCollection>(relpath, "names", names);
         }
-
     }
 }

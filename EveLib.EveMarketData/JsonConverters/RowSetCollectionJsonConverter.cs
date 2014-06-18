@@ -4,13 +4,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace eZet.EveLib.Modules.JsonConverters {
-    public class RowSetCollectionJsonConverter<T> : Newtonsoft.Json.JsonConverter {
-        public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer) {
+    public class RowSetCollectionJsonConverter<T> : JsonConverter {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
             throw new NotImplementedException();
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-            Newtonsoft.Json.JsonSerializer serializer) {
+            JsonSerializer serializer) {
             var result = new EveMarketDataRowCollection<T>();
             JObject json = JObject.Load(reader);
             foreach (JToken row in json["row"]) {

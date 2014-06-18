@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class Element43Legacy_Tests {
-
         private const int RegionId = 10000002;
         private const int TypeId = 34;
         private readonly Element43Legacy _api;
@@ -22,7 +21,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
             Element43MarketStatResponse res = _api.GetMarketStat(_validOptions);
-            var entry = res.Result.First();
+            Element43MarketStatItem entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.SellOrders.Average);
             Assert.AreNotEqual(0, entry.SellOrders.Volume);

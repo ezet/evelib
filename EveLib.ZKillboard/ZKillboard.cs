@@ -4,7 +4,6 @@ using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Modules {
     public class ZKillboard {
-
         public const string DefaultUri = "https://zkillboard.com";
 
 

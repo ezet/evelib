@@ -6,7 +6,6 @@ namespace eZet.EveLib.Core.Util {
     ///     Interface for performing requests against the Eve API.
     /// </summary>
     public interface IHttpRequester {
-
         /// <summary>
         ///     Performs a request on the uri, deserializes the response to type T, and returns it.
         /// </summary>
@@ -14,6 +13,5 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="uri">The uri to request.</param>
         /// <returns></returns>
         Task<string> RequestAsync<T>(Uri uri);
-
     }
 }

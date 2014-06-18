@@ -4,9 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class ZKillboard_Tests {
-
         public ZKillboard Api = new ZKillboard();
-        
+
         public ZKillboardOptions Options = new ZKillboardOptions();
 
         public ZKillboard_Tests() {
@@ -16,17 +15,17 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetKills_ValidRequest_NoErrors() {
-            var result = Api.GetKills(Options);
+            dynamic result = Api.GetKills(Options);
         }
 
         [TestMethod]
         public void GetLosses_ValidRequest_NoErrors() {
-            var result = Api.GetLosses(Options);
+            dynamic result = Api.GetLosses(Options);
         }
 
         [TestMethod]
         public void GetAll_ValidRequest_NoErrors() {
-            var result = Api.GetLosses(Options);
+            dynamic result = Api.GetLosses(Options);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace eZet.EveLib.Test {
 
         public EveCentral_Tests() {
             api = new EveCentral();
-            validOptions = new EveCentralOptions { HourLimit = HourLimit, MinQuantity = MinQty };
+            validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
             validOptions.Items.Add(TypeId);
             validOptions.Regions.Add(RegionId);
         }

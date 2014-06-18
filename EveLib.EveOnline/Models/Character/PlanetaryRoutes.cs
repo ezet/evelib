@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
-
     [Serializable]
     [XmlRoot("result")]
     public class PlanetaryRoutes {
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<PlanetaryRoute> Routes { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class PlanetaryRoute {
-
             [XmlAttribute("routeID")]
             public long RouteId { get; set; }
 

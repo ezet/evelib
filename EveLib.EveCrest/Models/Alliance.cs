@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
     public class Alliance {
-
         [DataMember(Name = "Id")]
         public int Id { get; set; }
 
@@ -41,6 +40,5 @@ namespace eZet.EveLib.Modules.Models {
 
         [DataMember(Name = "corporations")]
         public IList<EveCrestEntity> Corporations { get; set; }
-
     }
 }

@@ -2,8 +2,6 @@
 
 namespace eZet.EveLib.Core.Exception {
     public class InvalidRequestException : EveLibException {
-
-        public new WebException InnerException { get; set; }
         public InvalidRequestException(string message)
             : base(message) {
         }
@@ -18,6 +16,8 @@ namespace eZet.EveLib.Core.Exception {
             ErrorCode = code;
             InnerException = iException;
         }
+
+        public new WebException InnerException { get; set; }
 
         public int ErrorCode { get; private set; }
     }

@@ -8,13 +8,13 @@ namespace eZet.EveLib.Core.Util {
     /// </summary>
     public sealed class SimpleJsonSerializer : ISerializer {
         /// <summary>
-        ///     Deserializes JSON 
+        ///     Deserializes JSON
         /// </summary>
         /// <param name="data">A JSON string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
-            var serializer = new DataContractJsonSerializer(typeof(T));
-            return (T)serializer.ReadObject(getStream(data));
+            var serializer = new DataContractJsonSerializer(typeof (T));
+            return (T) serializer.ReadObject(getStream(data));
         }
 
 

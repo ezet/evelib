@@ -6,7 +6,6 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
-
     /// <summary>
     ///     C# API for the API supplied by api.eve-marketdata.com.
     /// </summary>
@@ -41,11 +40,6 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public DataFormat Format { get; private set; }
 
-        public void SetFormat(DataFormat format) {
-            setSerializer(format);
-            Format = format;
-        }
-
         /// <summary>
         ///     Gets or sets the name supplied to marketdata in the query string. Use your ingame name if you want evemarketdata to
         ///     be able to contact you in case of problems.
@@ -56,6 +50,11 @@ namespace eZet.EveLib.Modules {
         ///     Gets or sets the RequestHandler.
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
+
+        public void SetFormat(DataFormat format) {
+            setSerializer(format);
+            Format = format;
+        }
 
         /// <summary>
         ///     Returns a list of any orders that were recently updated.
@@ -77,7 +76,8 @@ namespace eZet.EveLib.Modules {
         /// <param name="type"></param>
         /// <returns>A list of any orders that were recently updated.</returns>
         /// <exception cref="InvalidRequestException">The request was invalid.</exception>
-        public Task<EveMarketDataResponse<RecentUploads>> GetRecentUploadsAsync(EveMarketDataOptions options, UploadType type) {
+        public Task<EveMarketDataResponse<RecentUploads>> GetRecentUploadsAsync(EveMarketDataOptions options,
+            UploadType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             string relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
             string postString = getRecentUploadsQueryString(options, type);
@@ -139,14 +139,12 @@ namespace eZet.EveLib.Modules {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            var minmaxval = minmax == MinMax.None ? "" : minmax.ToString().ToLower();
+            string minmaxval = minmax == MinMax.None ? "" : minmax.ToString().ToLower();
             return generateQueryString("char_name", Name, "type_ids", items, "marketgroup_ids", groups,
                 "region_ids", regions,
                 "solarsystem_ids", solarsystems, "station_ids", stations, "buysell", options.OrderTypeToString(type),
                 "minmax", minmaxval);
-
         }
-
 
 
         /// <summary>
@@ -219,7 +217,7 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(options.Regions.Count != 0, "You must specify atleast one region.");
             string items = String.Join(",", options.Items);
             string regions = String.Join(",", options.Regions);
-            string days = "" + (int)options.AgeSpan.GetValueOrDefault().TotalDays;
+            string days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
             return generateQueryString("char_name", Name, "type_ids", items, "region_ids", regions, "days", days);
         }
 
@@ -254,7 +252,7 @@ namespace eZet.EveLib.Modules {
             string regions = String.Join(",", options.Regions);
             string solarsystems = String.Join(",", options.Solarsystems);
             string stations = String.Join(",", options.Stations);
-            string days = "" + (int)options.AgeSpan.GetValueOrDefault().TotalDays;
+            string days = "" + (int) options.AgeSpan.GetValueOrDefault().TotalDays;
             return generateQueryString("char_name", Name, "region_ids", regions, "solarsystem_ids",
                 solarsystems, "station_ids", stations, "days", days);
         }

@@ -5,12 +5,10 @@ namespace eZet.EveLib.Modules.Models.Corporation {
     [Serializable]
     [XmlRoot("result")]
     public class CustomsOffices {
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<CustomsOffice> Pocos { get; set; }
 
         public class CustomsOffice {
-
             [XmlAttribute("itemID")]
             public int ItemId { get; set; }
 
@@ -49,8 +47,6 @@ namespace eZet.EveLib.Modules.Models.Corporation {
 
             [XmlAttribute("taxRateStandingHorrible")]
             public double TaxRateStandingHorrible { get; set; }
-
         }
-
     }
 }

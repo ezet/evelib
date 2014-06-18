@@ -1,10 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public abstract class EveCrestCollection {
-
         [DataMember(Name = "totalCount")]
         public int TotalCount { get; set; }
 
@@ -16,6 +14,5 @@ namespace eZet.EveLib.Modules.Models {
 
         [DataMember(Name = "pageCount_str")]
         public string PageCounAsString { get; set; }
-
     }
 }

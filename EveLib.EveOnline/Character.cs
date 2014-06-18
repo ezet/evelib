@@ -16,18 +16,19 @@ namespace eZet.EveLib.Modules {
     ///     Provides access to all API calls relating to a specific character, that is, URIs prefixed with /char in CCPs API.
     /// </summary>
     public class Character : LazyLoadEntity {
-        private string _characterName;
-        private long _corporationId;
-        private string _corporationName;
-        private long _allianceId;
-        private string _allianceName;
-        private long _factionId;
-        private string _factionName;
-
         /// <summary>
         ///     The Wallet identifier. For characters this is always 1000.
         /// </summary>
         public const int AccountKey = 1000;
+
+        private long _allianceId;
+        private string _allianceName;
+
+        private string _characterName;
+        private long _corporationId;
+        private string _corporationName;
+        private long _factionId;
+        private string _factionName;
 
         internal Character(CharacterKey apiKey, ApiKeyInfo.ApiKeyEntity entity) {
             ApiKey = apiKey;
@@ -44,7 +45,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new Character using the provided key data and character id.
+        ///     Creates a new Character using the provided key data and character id.
         /// </summary>
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
@@ -55,7 +56,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Creates a new Character. If the CharacterKey is initialized, the Character will also be initialized with data from the Key.
+        ///     Creates a new Character. If the CharacterKey is initialized, the Character will also be initialized with data from
+        ///     the Key.
         /// </summary>
         /// <param name="apiKey">A valid CharacterKey</param>
         /// <param name="characterId">A valid Eve Online Character ID</param>
@@ -79,7 +81,8 @@ namespace eZet.EveLib.Modules {
         public long CharacterId { get; private set; }
 
         /// <summary>
-        ///     Gets the name of this character. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the name of this character. Note: If this object has not already been initialized, this will send a web
+        ///     request to the API.
         /// </summary>
         public string CharacterName {
             get {
@@ -90,55 +93,80 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets the Corporation ID. Note: Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the Corporation ID. Note: Note: If this object has not already been initialized, this will send a web request
+        ///     to the API.
         /// </summary>
         public long CorporationId {
-            get { if (!_isInitialized) Init(); return _corporationId; }
+            get {
+                if (!_isInitialized) Init();
+                return _corporationId;
+            }
             private set { _corporationId = value; }
         }
 
         /// <summary>
-        /// Gets the corporation name. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the corporation name. Note: If this object has not already been initialized, this will send a web request to
+        ///     the API.
         /// </summary>
         public string CorporationName {
-            get { if (!_isInitialized) Init(); return _corporationName; }
+            get {
+                if (!_isInitialized) Init();
+                return _corporationName;
+            }
             private set { _corporationName = value; }
         }
 
         /// <summary>
-        /// Gets the Alliance ID. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the Alliance ID. Note: If this object has not already been initialized, this will send a web request to the
+        ///     API.
         /// </summary>
         public long AllianceId {
-            get { if (!_isInitialized) Init(); return _allianceId; }
+            get {
+                if (!_isInitialized) Init();
+                return _allianceId;
+            }
             private set { _allianceId = value; }
         }
 
         /// <summary>
-        /// Gets the Alliance name. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the Alliance name. Note: If this object has not already been initialized, this will send a web request to the
+        ///     API.
         /// </summary>
         public string AllianceName {
-            get { if (!_isInitialized) Init(); return _allianceName; }
+            get {
+                if (!_isInitialized) Init();
+                return _allianceName;
+            }
             private set { _allianceName = value; }
         }
 
         /// <summary>
-        /// Gets the Faction ID. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the Faction ID. Note: If this object has not already been initialized, this will send a web request to the
+        ///     API.
         /// </summary>
         public long FactionId {
-            get { if (!_isInitialized) Init(); return _factionId; }
+            get {
+                if (!_isInitialized) Init();
+                return _factionId;
+            }
             private set { _factionId = value; }
         }
 
         /// <summary>
-        /// Gets the Faction name. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the Faction name. Note: If this object has not already been initialized, this will send a web request to the
+        ///     API.
         /// </summary>
         public string FactionName {
-            get { if (!_isInitialized) Init(); return _factionName; }
+            get {
+                if (!_isInitialized) Init();
+                return _factionName;
+            }
             private set { _factionName = value; }
         }
 
         /// <summary>
-        /// Resets the properties for this Character and it's CharacterKey, allowing new data to be fethed with Init() or InitAsync().
+        ///     Resets the properties for this Character and it's CharacterKey, allowing new data to be fethed with Init() or
+        ///     InitAsync().
         /// </summary>
         public void Reset() {
             IsInitialized = false;
@@ -146,7 +174,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Initializes this Characters properties with values fetched from the API. Returns immediately if this character is already initialized.
+        ///     Initializes this Characters properties with values fetched from the API. Returns immediately if this character is
+        ///     already initialized.
         /// </summary>
         /// <returns>This Character</returns>
         public Character Init() {
@@ -157,7 +186,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Initializes this Characters properties with values fetched from the API. Returns immediately if this character is already initialized.
+        ///     Initializes this Characters properties with values fetched from the API. Returns immediately if this character is
+        ///     already initialized.
         /// </summary>
         /// <returns>This Character</returns>
         public async Task<Character> InitAsync() {
@@ -171,7 +201,7 @@ namespace eZet.EveLib.Modules {
             if (_isInitialized) return;
             lock (_lazyLoadLock) {
                 if (_isInitialized) return;
-                var character = ApiKey.Characters.Single(c => c.CharacterId == CharacterId);
+                Character character = ApiKey.Characters.Single(c => c.CharacterId == CharacterId);
                 _characterName = character.CharacterName;
                 _corporationId = character.CorporationId;
                 _corporationName = character.CorporationName;
@@ -709,7 +739,8 @@ namespace eZet.EveLib.Modules {
             const string relPath = "/char/WalletJournal.xml.aspx";
             return fromId == 0
                 ? requestAsync<WalletJournal>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count)
-                : requestAsync<WalletJournal>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count, "fromID", fromId);
+                : requestAsync<WalletJournal>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count, "fromID",
+                    fromId);
         }
 
         /// <summary>
@@ -732,7 +763,8 @@ namespace eZet.EveLib.Modules {
             const string relPath = "/char/WalletTransactions.xml.aspx";
             return fromId == 0
                 ? requestAsync<WalletTransactions>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count)
-                : requestAsync<WalletTransactions>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count, "fromID",
+                : requestAsync<WalletTransactions>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count,
+                    "fromID",
                     fromId);
         }
 
@@ -774,6 +806,5 @@ namespace eZet.EveLib.Modules {
             const string relPath = "/char/PlanetaryLinks.xml.aspx";
             return requestAsync<PlanetaryLinks>(relPath, ApiKey, "characterId", CharacterId, "planetId", planetId);
         }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
@@ -7,7 +6,6 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     public class Element43Legacy {
-
         public const string DefaultUri = "http://element-43.com";
 
         /// <summary>
@@ -47,7 +45,7 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/market/api/marketstat";
             string queryString = options.GetRegionQuery("regionlimit") + options.GetItemQuery("typeid");
-            var res = requestAsync<Element43MarketStatResponse>(relUri, queryString);
+            Task<Element43MarketStatResponse> res = requestAsync<Element43MarketStatResponse>(relUri, queryString);
             return res;
         }
 

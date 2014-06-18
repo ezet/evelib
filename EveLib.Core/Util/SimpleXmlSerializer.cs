@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -8,7 +9,6 @@ namespace eZet.EveLib.Core.Util {
     ///     A simple wrapper for .NET XmlSerializer.
     /// </summary>
     public sealed class SimpleXmlSerializer : ISerializer {
-
         private readonly TraceSource _trace = new TraceSource("EveLib");
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="data">An XML string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
-            var type = typeof (T);
+            Type type = typeof (T);
             var serializer = new XmlSerializer(type);
             T xmlResponse;
             var stringreader = new StringReader(data);

@@ -5,14 +5,12 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [XmlRoot("result")]
     public class PlanetaryColonies {
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<PlanetaryColony> Colonies { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class PlanetaryColony {
-
             [XmlAttribute("solarSystemID")]
             public int SolarSystemId { get; set; }
 

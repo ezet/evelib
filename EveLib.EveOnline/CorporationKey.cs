@@ -7,7 +7,6 @@ namespace eZet.EveLib.Modules {
     ///     Provides access to Corporation objects and related API calls.
     /// </summary>
     public class CorporationKey : ApiKey {
-
         private readonly Lazy<Corporation> _corporation;
 
         /// <summary>
@@ -21,7 +20,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new CorporationKey using data from an existing ApiKey
+        ///     Creates a new CorporationKey using data from an existing ApiKey
         /// </summary>
         /// <param name="key"></param>
         internal CorporationKey(ApiKey key)
@@ -29,15 +28,15 @@ namespace eZet.EveLib.Modules {
             _corporation = new Lazy<Corporation>(() => new Corporation(this, ApiKeyInfo.KeyEntities.Single()));
         }
 
-        public async new Task<CorporationKey> InitAsync() {
-            return await base.InitAsync().ConfigureAwait(false) as CorporationKey;
-        }
-
         /// <summary>
         ///     Gets the Corporation this key provides access to.
         /// </summary>
         public Corporation Corporation {
             get { return _corporation.Value; }
+        }
+
+        public new async Task<CorporationKey> InitAsync() {
+            return await base.InitAsync().ConfigureAwait(false) as CorporationKey;
         }
 
         // Hide ApiKey.GetActualKey

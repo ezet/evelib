@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Character;
@@ -196,12 +195,12 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetCustomsOffices_ValidRequest_HasResult() {
-            var res = _validKey.Corporation.GetCustomsOffices();
+            EveApiResponse<CustomsOffices> res = _validKey.Corporation.GetCustomsOffices();
         }
 
         [TestMethod]
         public async Task GetCustomsOfficesAsync_ValidRequest_HasResult() {
-            var res = await _validKey.Corporation.GetCustomsOfficesAsync();
+            EveApiResponse<CustomsOffices> res = await _validKey.Corporation.GetCustomsOfficesAsync();
         }
     }
 }

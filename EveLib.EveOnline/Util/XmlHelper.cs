@@ -38,8 +38,8 @@ namespace eZet.EveLib.Modules.Util {
             XmlReader reader = getRowSetReader(name);
             if (reader == null) return default(EveOnlineRowCollection<T>);
             reader.ReadToDescendant("rowset");
-            var serializer = new XmlSerializer(typeof(EveOnlineRowCollection<T>));
-            return (EveOnlineRowCollection<T>)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (EveOnlineRowCollection<T>));
+            return (EveOnlineRowCollection<T>) serializer.Deserialize(reader);
         }
 
 
@@ -51,8 +51,8 @@ namespace eZet.EveLib.Modules.Util {
         public T deserialize<T>(string name) {
             XmlReader reader = getReader(name);
             if (reader == null) return default(T);
-            var serializer = new XmlSerializer(typeof(T));
-            return (T)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (T));
+            return (T) serializer.Deserialize(reader);
         }
 
         /// <summary>
@@ -76,22 +76,22 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         public long getLong(string name) {
-            var val = list.FirstOrDefault(x => x.Name == name);
+            XElement val = list.FirstOrDefault(x => x.Name == name);
             return val != null ? long.Parse(val.Value) : 0;
         }
 
         public string getString(string name) {
-            var val = list.SingleOrDefault(x => x.Name == name);
+            XElement val = list.SingleOrDefault(x => x.Name == name);
             return val != null ? val.Value : "";
         }
 
         public int getInt(string name) {
-            var val = list.FirstOrDefault(x => x.Name == name);
+            XElement val = list.FirstOrDefault(x => x.Name == name);
             return val != null ? int.Parse(val.Value) : 0;
         }
 
         public decimal getDecimal(string name) {
-            var val = list.FirstOrDefault(x => x.Name == name);
+            XElement val = list.FirstOrDefault(x => x.Name == name);
             return val != null ? decimal.Parse(list.First(x => x.Name == name).Value, CultureInfo.InvariantCulture) : 0;
         }
 
@@ -108,7 +108,9 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         public bool? getBoolAttribute(string name) {
-            return root.Attribute(name) != null ? root.Attribute(name).Value != "0" && root.Attribute(name).Value.ToLower() != "false" : default(bool?);
+            return root.Attribute(name) != null
+                ? root.Attribute(name).Value != "0" && root.Attribute(name).Value.ToLower() != "false"
+                : default(bool?);
         }
     }
 }

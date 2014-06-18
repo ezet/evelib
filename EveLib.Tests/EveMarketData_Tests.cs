@@ -38,7 +38,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetRecentUploadsAsync_ValidRequest_ValidResponse() {
-            EveMarketDataResponse<RecentUploads> res = await _api.GetRecentUploadsAsync(_validOptions, UploadType.Orders);
+            EveMarketDataResponse<RecentUploads> res =
+                await _api.GetRecentUploadsAsync(_validOptions, UploadType.Orders);
             RecentUploads.RecentUploadsEntry entry = res.Result.Uploads.First();
             Assert.AreEqual(UploadType.Orders, entry.UploadType);
             Assert.AreEqual(TypeId, res.Result.Uploads.First().TypeId);
@@ -67,7 +68,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetItemPriceAsync_ValidRequest_ValidResponse() {
-            EveMarketDataResponse<ItemPrices> res = await _api.GetItemPriceAsync(_validOptions, OrderType.Buy, MinMax.Min);
+            EveMarketDataResponse<ItemPrices> res =
+                await _api.GetItemPriceAsync(_validOptions, OrderType.Buy, MinMax.Min);
             ItemPrices.ItemPriceEntry entry = res.Result.Prices.First();
             Assert.AreEqual(OrderType.Buy, entry.OrderType);
             Assert.AreEqual(TypeId, entry.TypeId);

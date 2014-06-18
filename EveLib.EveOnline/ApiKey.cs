@@ -8,28 +8,25 @@ using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 
 namespace eZet.EveLib.Modules {
-
     /// <summary>
-    /// Eve Online API Key Types
+    ///     Eve Online API Key Types
     /// </summary>
     public enum ApiKeyType {
-        [XmlEnum("Account")]
-        Account,
-        [XmlEnum("Character")]
-        Character,
-        [XmlEnum("Corporation")]
-        Corporation
+        [XmlEnum("Account")] Account,
+        [XmlEnum("Character")] Character,
+        [XmlEnum("Corporation")] Corporation
     }
 
 
     /// <summary>
-    ///     Represents a general API Account key. This type can be used if the exact type of the key is unknown, but prevents access to Characters and Corporations.
+    ///     Represents a general API Account key. This type can be used if the exact type of the key is unknown, but prevents
+    ///     access to Characters and Corporations.
     /// </summary>
     public class ApiKey : BaseEntity {
-        private object _lazyLoadLock = new object();
         private ApiKeyInfo.ApiKeyData _apiKeyInfo;
         private bool _isInitialized;
         private bool? _isValidKey;
+        private object _lazyLoadLock = new object();
 
         /// <summary>
         ///     Creates a new instance using the provided key id and vcode.
@@ -43,7 +40,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new ApiKey using data from an existing key.
+        ///     Creates a new ApiKey using data from an existing key.
         /// </summary>
         /// <param name="key"></param>
         protected ApiKey(ApiKey key) {
@@ -73,7 +70,7 @@ namespace eZet.EveLib.Modules {
         public string VCode { get; protected set; }
 
         /// <summary>
-        /// Returns true if this key is initialized, or false otherwise.
+        ///     Returns true if this key is initialized, or false otherwise.
         /// </summary>
         public bool IsInitialized {
             get { return _isInitialized; }
@@ -81,45 +78,49 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Gets the CAK access mask of this key. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the CAK access mask of this key. Note: If this object has not already been initialized, this will send a web
+        ///     request to the API.
         /// </summary>
         public int AccessMask {
             get { return ApiKeyInfo.AccessMask; }
         }
 
         /// <summary>
-        ///     Gets the type of this key. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the type of this key. Note: If this object has not already been initialized, this will send a web request to
+        ///     the API.
         /// </summary>
         public ApiKeyType KeyType {
             get { return ApiKeyInfo.Type; }
         }
 
         /// <summary>
-        ///     Gets the expiration date of this key. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Gets the expiration date of this key. Note: If this object has not already been initialized, this will send a web
+        ///     request to the API.
         /// </summary>
         public DateTime ExpiryDate {
             get { return ApiKeyInfo.ExpireDate; }
         }
 
         /// <summary>
-        /// Returns a new Key for this KeyIDs actual type. It preserves any key data, so the returned object comes pre-initialized.
-        /// The returned key should be cast to it's real type by using GetType().
+        ///     Returns a new Key for this KeyIDs actual type. It preserves any key data, so the returned object comes
+        ///     pre-initialized.
+        ///     The returned key should be cast to it's real type by using GetType().
         /// </summary>
         public virtual ApiKey GetActualKey() {
-                switch (KeyType) {
-                    case ApiKeyType.Character:
-                        return new CharacterKey(this);
-                    case ApiKeyType.Account:
-                        return new CharacterKey(this);
-                    case ApiKeyType.Corporation:
-                        return new CorporationKey(this);
-                    default:
-                        return this;
-                }
+            switch (KeyType) {
+                case ApiKeyType.Character:
+                    return new CharacterKey(this);
+                case ApiKeyType.Account:
+                    return new CharacterKey(this);
+                case ApiKeyType.Corporation:
+                    return new CorporationKey(this);
+                default:
+                    return this;
+            }
         }
 
         /// <summary>
-        /// This de-initializes the key and it's data, allowing it to be fetched again from the API with Init() or InitAsync().
+        ///     This de-initializes the key and it's data, allowing it to be fetched again from the API with Init() or InitAsync().
         /// </summary>
         public virtual void Reset() {
             IsInitialized = false;
@@ -127,7 +128,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Initiates all properties on this object. Method will return immediately if this object is already initialized.
+        ///     Initiates all properties on this object. Method will return immediately if this object is already initialized.
         /// </summary>
         /// <returns></returns>
         public virtual ApiKey Init() {
@@ -137,7 +138,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Initiates all properties on this object asynchronously. Method will return immediately if this object is already initialized.
+        ///     Initiates all properties on this object asynchronously. Method will return immediately if this object is already
+        ///     initialized.
         /// </summary>
         /// <returns></returns>
         public virtual async Task<ApiKey> InitAsync() {
@@ -147,8 +149,9 @@ namespace eZet.EveLib.Modules {
         }
 
         private async Task ensureInitialized() {
-            var result = await GetApiKeyInfoAsync().ConfigureAwait(false);
-            LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref _lazyLoadLock, () => result.Result.Key);
+            EveApiResponse<ApiKeyInfo> result = await GetApiKeyInfoAsync().ConfigureAwait(false);
+            LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref _lazyLoadLock,
+                () => result.Result.Key);
         }
 
         /// <summary>
@@ -190,39 +193,45 @@ namespace eZet.EveLib.Modules {
 
 
         /// <summary>
-        /// Returns true if this key is valid, otherwise false. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Returns true if this key is valid, otherwise false. Note: If this object has not already been initialized, this
+        ///     will send a web request to the API.
         /// </summary>
         /// <returns></returns>
         public bool IsValidKey() {
             if (_isValidKey.HasValue) return _isValidKey.Value;
             try {
                 Init();
-            } catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof(InvalidRequestException)) {
-                    var ire = (InvalidRequestException)e.InnerException;
-                    if (((HttpWebResponse)ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
+            }
+            catch (AggregateException e) {
+                if (e.InnerException.GetType() == typeof (InvalidRequestException)) {
+                    var ire = (InvalidRequestException) e.InnerException;
+                    if (((HttpWebResponse) ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
                         _isValidKey = false;
                     }
-                } else throw;
+                }
+                else throw;
             }
             return _isValidKey.GetValueOrDefault(true);
         }
 
         /// <summary>
-        /// Returns true if this key is valid, otherwise false. Note: If this object has not already been initialized, this will send a web request to the API.
+        ///     Returns true if this key is valid, otherwise false. Note: If this object has not already been initialized, this
+        ///     will send a web request to the API.
         /// </summary>
         /// <returns></returns>
         public async Task<bool> IsValidKeyAsync() {
             if (_isValidKey.HasValue) return _isValidKey.Value;
             try {
                 await InitAsync();
-            } catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof(InvalidRequestException)) {
-                    var ire = (InvalidRequestException)e.InnerException;
-                    if (((HttpWebResponse)ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
+            }
+            catch (AggregateException e) {
+                if (e.InnerException.GetType() == typeof (InvalidRequestException)) {
+                    var ire = (InvalidRequestException) e.InnerException;
+                    if (((HttpWebResponse) ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
                         _isValidKey = false;
                     }
-                } else throw;
+                }
+                else throw;
             }
             return _isValidKey.GetValueOrDefault(true);
         }

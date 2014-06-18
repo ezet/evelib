@@ -10,7 +10,6 @@ namespace eZet.EveLib.Modules {
     ///     Provides access to Character objects and related API calls.
     /// </summary>
     public class CharacterKey : ApiKey {
-
         private readonly Lazy<ReadOnlyCollection<Character>> _characters;
 
         /// <summary>
@@ -20,20 +19,20 @@ namespace eZet.EveLib.Modules {
         /// <param name="vCode"></param>
         public CharacterKey(long keyId, string vCode)
             : base(keyId, vCode) {
-            _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
+            _characters =
+                new Lazy<ReadOnlyCollection<Character>>(
+                    () => ApiKeyInfo.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
         }
 
         /// <summary>
-        /// Creates a new CharacterKey using data from an existing key
+        ///     Creates a new CharacterKey using data from an existing key
         /// </summary>
         /// <param name="key"></param>
         internal CharacterKey(ApiKey key)
             : base(key) {
-                _characters = new Lazy<ReadOnlyCollection<Character>>(() => ApiKeyInfo.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
-        }
-
-        public new async Task<CharacterKey> InitAsync() {
-            return await base.InitAsync().ConfigureAwait(false) as CharacterKey;
+            _characters =
+                new Lazy<ReadOnlyCollection<Character>>(
+                    () => ApiKeyInfo.KeyEntities.Select(c => new Character(this, c)).ToList().AsReadOnly());
         }
 
         /// <summary>
@@ -41,6 +40,10 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public ReadOnlyCollection<Character> Characters {
             get { return _characters.Value; }
+        }
+
+        public new async Task<CharacterKey> InitAsync() {
+            return await base.InitAsync().ConfigureAwait(false) as CharacterKey;
         }
 
         /// <summary>

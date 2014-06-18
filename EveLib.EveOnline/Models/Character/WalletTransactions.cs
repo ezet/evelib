@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
@@ -7,7 +6,6 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletTransactions {
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Transaction> Transactions { get; set; }
 
@@ -61,8 +59,6 @@ namespace eZet.EveLib.Modules.Models.Character {
 
             [XmlAttribute("clientTypeID")]
             public int ClientTypeId { get; set; }
-
-
         }
     }
 }

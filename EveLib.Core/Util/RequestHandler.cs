@@ -5,7 +5,6 @@ using eZet.EveLib.Core.Exception;
 
 namespace eZet.EveLib.Core.Util {
     public class RequestHandler : IRequestHandler {
-
         public RequestHandler(IHttpRequester httpRequester, ISerializer serializer) {
             HttpRequester = httpRequester;
             Serializer = serializer;
@@ -18,7 +17,8 @@ namespace eZet.EveLib.Core.Util {
             string data = "";
             try {
                 data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
-            } catch (WebException e) {
+            }
+            catch (WebException e) {
                 throw new InvalidRequestException("A request caused a WebException.", e.InnerException as WebException);
             }
             var val = Serializer.Deserialize<T>(data);

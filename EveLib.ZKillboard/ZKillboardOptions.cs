@@ -3,11 +3,6 @@ using System.Collections.Generic;
 
 namespace eZet.EveLib.Modules {
     public class ZKillboardOptions {
-        public enum OrderDirection {
-            Descending,
-            Ascending
-        }
-
         public enum DataFormat {
             Json,
             Xml
@@ -17,6 +12,11 @@ namespace eZet.EveLib.Modules {
             Kills,
             Losses,
             Both
+        }
+
+        public enum OrderDirection {
+            Descending,
+            Ascending
         }
 
         public ZKillboardOptions() {
@@ -136,8 +136,6 @@ namespace eZet.EveLib.Modules {
                 queryString += "/page/" + Page;
 
 
-
-
             if (Order == OrderDirection.Ascending)
                 queryString += "/orderDirection/asc";
 
@@ -154,6 +152,5 @@ namespace eZet.EveLib.Modules {
             queryString += "/";
             return queryString;
         }
-
     }
 }

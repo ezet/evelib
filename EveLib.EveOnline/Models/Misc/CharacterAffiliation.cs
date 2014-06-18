@@ -13,7 +13,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
         public class CharacterAffiliationData {
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
- 
+
             [XmlAttribute("characterName")]
             public string CharacterName { get; set; }
 

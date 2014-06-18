@@ -6,7 +6,7 @@ namespace eZet.EveLib.Core.Util {
     /// </summary>
     public sealed class DynamicJsonSerializer : ISerializer {
         /// <summary>
-        ///     Deserializes JSON 
+        ///     Deserializes JSON
         /// </summary>
         /// <param name="data">A JSON string</param>
         /// <returns></returns>

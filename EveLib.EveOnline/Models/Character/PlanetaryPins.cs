@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
-    
     [Serializable]
     [XmlRoot("result")]
     public class PlanetaryPins {
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<PlanetaryPin> Pins { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class PlanetaryPin {
-
             [XmlAttribute("pinID")]
             public long PinId { get; set; }
 
@@ -28,8 +25,9 @@ namespace eZet.EveLib.Modules.Models.Character {
 
             [XmlAttribute("lastLaunchTime")]
             public string LastLaunchTimeAsString {
-                set { LastLaunchTime = DateTime.Parse(value); } }
-            
+                set { LastLaunchTime = DateTime.Parse(value); }
+            }
+
             [XmlIgnore]
             public DateTime LastLaunchTime { get; set; }
 
@@ -41,14 +39,16 @@ namespace eZet.EveLib.Modules.Models.Character {
 
             [XmlAttribute("installTime")]
             public string InstallTimeAsString {
-                set { InstallTime = DateTime.Parse(value); } }
+                set { InstallTime = DateTime.Parse(value); }
+            }
 
             [XmlIgnore]
             public DateTime InstallTime { get; set; }
 
             [XmlAttribute("expiryTime")]
             public string ExpiryTimeAsString {
-                set { ExpiryTime = DateTime.Parse(value); } }
+                set { ExpiryTime = DateTime.Parse(value); }
+            }
 
             [XmlIgnore]
             public DateTime ExpiryTime { get; set; }
@@ -67,7 +67,6 @@ namespace eZet.EveLib.Modules.Models.Character {
 
             [XmlAttribute("latitude")]
             public double Latitude { get; set; }
-
         }
     }
 }

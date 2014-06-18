@@ -6,13 +6,11 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class AssetList {
-
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Item> Items { get; set; }
 
         /// <summary>
-        /// Returns a flat list of all assets.
+        ///     Returns a flat list of all assets.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Item> Flatten() {
@@ -23,10 +21,10 @@ namespace eZet.EveLib.Modules.Models.Character {
             var list = new List<Item>();
             var stack = new Stack<Item>(items);
             while (stack.Count > 0) {
-                var current = stack.Pop();
+                Item current = stack.Pop();
                 list.Add(current);
                 if (current.Items == null) continue;
-                foreach (var child in current.Items)
+                foreach (Item child in current.Items)
                     stack.Push(child);
             }
             return list;

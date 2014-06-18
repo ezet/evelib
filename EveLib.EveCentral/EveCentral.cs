@@ -6,13 +6,11 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     public class EveCentral {
-
         private const string DefaultUri = "http://api.eve-central.com";
 
         /// <summary>
         ///     Creates a new EveCentral object, with a default base uri and request handler.
         /// </summary>
- 
         public EveCentral() {
             BaseUri = new Uri(DefaultUri);
             RequestHandler = new HttpRequester();
@@ -114,7 +112,7 @@ namespace eZet.EveLib.Modules {
             queryString += options.GetMinQuantityQuery("setminQ");
             return requestAsync<EveCentralQuickLookResponse>(relUri, queryString);
         }
- 
+
         public void GetHistory() {
             throw new NotImplementedException();
         }

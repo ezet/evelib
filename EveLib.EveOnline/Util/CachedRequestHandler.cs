@@ -12,7 +12,6 @@ namespace eZet.EveLib.Modules.Util {
     ///     Handles requests to the Eve API using a cache.
     /// </summary>
     public class CachedRequestHandler : IRequestHandler {
-
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         public CachedRequestHandler(IHttpRequester httpRequester, ISerializer serializer, IEveLibCache cache) {
@@ -28,21 +27,23 @@ namespace eZet.EveLib.Modules.Util {
         public ISerializer Serializer { get; set; }
 
         public async Task<T> RequestAsync<T>(Uri uri) {
-            string data  = await Cache.LoadAsync(uri).ConfigureAwait(false);
-            var cached = data != null;
+            string data = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            bool cached = data != null;
             if (!cached) {
                 try {
                     data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
-                } catch (WebException e) {
+                }
+                catch (WebException e) {
                     _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
-                    var response = (HttpWebResponse)e.Response;
+                    var response = (HttpWebResponse) e.Response;
                     if (response == null) throw;
-                    var responseStream = response.GetResponseStream();
+                    Stream responseStream = response.GetResponseStream();
                     if (responseStream == null) throw;
                     using (var reader = new StreamReader(responseStream)) {
                         data = reader.ReadToEnd();
                         var error = Serializer.Deserialize<EveApiError>(data);
-                        _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText, error.Error.ErrorCode);
+                        _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText,
+                            error.Error.ErrorCode);
                         throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e);
                     }
                 }

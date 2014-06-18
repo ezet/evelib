@@ -1,35 +1,13 @@
 ﻿using System;
 
 namespace eZet.EveLib.Modules {
-
     /// <summary>
-    /// Static helper facade for accessing the Eve Online API.
+    ///     Static helper facade for accessing the Eve Online API.
     /// </summary>
     public static class EveOnlineApi {
         private static readonly Lazy<Eve> _eve;
         private static readonly Lazy<Image> _image;
         private static readonly Lazy<Map> _map;
-
-        /// <summary>
-        /// Provides access to a default instance of Eve
-        /// </summary>
-        public static Eve Eve {
-            get { return _eve.Value; }
-        }
-
-        /// <summary>
-        /// Provides access to a default instance of Image
-        /// </summary>
-        public static Image Image {
-            get { return _image.Value; }
-        }
-
-        /// <summary>
-        /// Provides access to a default instance of Map
-        /// </summary>
-        public static Map Map {
-            get { return _map.Value; }
-        }
 
         static EveOnlineApi() {
             _eve = new Lazy<Eve>();
@@ -38,7 +16,28 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new ApiKey and returns it. This is the same as invoking new ApiKey
+        ///     Provides access to a default instance of Eve
+        /// </summary>
+        public static Eve Eve {
+            get { return _eve.Value; }
+        }
+
+        /// <summary>
+        ///     Provides access to a default instance of Image
+        /// </summary>
+        public static Image Image {
+            get { return _image.Value; }
+        }
+
+        /// <summary>
+        ///     Provides access to a default instance of Map
+        /// </summary>
+        public static Map Map {
+            get { return _map.Value; }
+        }
+
+        /// <summary>
+        ///     Creates a new ApiKey and returns it. This is the same as invoking new ApiKey
         /// </summary>
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
@@ -48,7 +47,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new CharacterKey and returns it. This is the same as invoking new CharacterKey
+        ///     Creates a new CharacterKey and returns it. This is the same as invoking new CharacterKey
         /// </summary>
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
@@ -58,7 +57,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new CorporationKey returns it. This is the same as invoking new CorporationKey
+        ///     Creates a new CorporationKey returns it. This is the same as invoking new CorporationKey
         /// </summary>
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
@@ -68,7 +67,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new CharacterKey and Character, and returns the Character.
+        ///     Creates a new CharacterKey and Character, and returns the Character.
         /// </summary>
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
@@ -79,7 +78,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Creates a new CorporationKey and Corporation, and returns the Corporation.
+        ///     Creates a new CorporationKey and Corporation, and returns the Corporation.
         /// </summary>
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
@@ -88,6 +87,5 @@ namespace eZet.EveLib.Modules {
         public static Corporation CreateCorporation(int keyId, string vCode, long corporationId) {
             return new Corporation(keyId, vCode, corporationId);
         }
-
     }
 }

@@ -5,9 +5,8 @@ using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Test.Mocks {
     public class StaticXmlRequester : IHttpRequester {
-
         public async Task<string> RequestAsync<T>(Uri uri) {
-            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
+            DirectoryInfo directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo != null) {
                 string baseDir = directoryInfo.FullName;
                 string path = uri.PathAndQuery;

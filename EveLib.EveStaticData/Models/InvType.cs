@@ -1,11 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public class InvType {
-
-
         public long TypeId { get; set; }
 
         [DataMember(Name = "url")]
@@ -18,7 +15,7 @@ namespace eZet.EveLib.Modules.Models {
         public string Description { get; set; }
 
         public long GroupId { get; set; }
-        
+
         [DataMember(Name = "group")]
         public string Group { get; set; }
 
@@ -50,6 +47,5 @@ namespace eZet.EveLib.Modules.Models {
 
         [DataMember(Name = "chance_of_duplicating")]
         public double ChanceOfDuplicating { get; set; }
-        
     }
 }

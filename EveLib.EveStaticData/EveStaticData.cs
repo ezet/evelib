@@ -5,7 +5,6 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     public class EveStaticData {
-
         public enum DataFormat {
             Json,
             Xml,
@@ -25,11 +24,6 @@ namespace eZet.EveLib.Modules {
 
         public DataFormat Format { get; private set; }
 
-        public void SetFormat(DataFormat format) {
-            Format = format;
-            // TODO set format
-        }
-
         public string ApiPath { get; set; }
 
         /// <summary>
@@ -41,6 +35,11 @@ namespace eZet.EveLib.Modules {
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
+
+        public void SetFormat(DataFormat format) {
+            Format = format;
+            // TODO set format
+        }
 
         public StaticDataCollection<InvType> GetInvTypes(int page = 1) {
             return GetInvTypesAsync(page).Result;

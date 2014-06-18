@@ -56,15 +56,6 @@ namespace eZet.EveLib.Modules.Models {
 
 
         [DataContract]
-        public class KillmailVictim : KillmailEntity {
-            [DataMember(Name = "damageTaken")]
-            public int DamageTaken { get; set; }
-
-            [DataMember(Name = "items")]
-            public IList<Item> Items { get; set; }
-        }
-
-        [DataContract]
         public abstract class KillmailEntity {
             [DataMember(Name = "character")]
             public EveCrestIconEntity Character { get; set; }
@@ -77,6 +68,15 @@ namespace eZet.EveLib.Modules.Models {
 
             [DataMember(Name = "shipType")]
             public EveCrestIconEntity ShipType { get; set; }
+        }
+
+        [DataContract]
+        public class KillmailVictim : KillmailEntity {
+            [DataMember(Name = "damageTaken")]
+            public int DamageTaken { get; set; }
+
+            [DataMember(Name = "items")]
+            public IList<Item> Items { get; set; }
         }
     }
 }

@@ -2,10 +2,8 @@
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public class War {
-
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
@@ -34,14 +32,11 @@ namespace eZet.EveLib.Modules.Models {
         public WarEntity Aggressor { get; set; }
 
         public class WarEntity : EveCrestIconEntity {
-
             [DataMember(Name = "shipsKilled")]
             public int ShipsKilled { get; set; }
 
             [DataMember(Name = "iskKilled")]
             public decimal IskKilled { get; set; }
-
         }
-
     }
 }

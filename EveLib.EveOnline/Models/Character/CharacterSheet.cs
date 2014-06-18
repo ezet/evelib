@@ -54,7 +54,7 @@ namespace eZet.EveLib.Modules.Models.Character {
 
         [XmlElement("factionName")]
         public string FactionName { get; set; }
-        
+
         [XmlElement("cloneName")]
         public string CloneName { get; set; }
 

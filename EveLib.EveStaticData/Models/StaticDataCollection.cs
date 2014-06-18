@@ -6,7 +6,6 @@ namespace eZet.EveLib.Modules.Models {
     [Serializable]
     [DataContract]
     public class StaticDataCollection<T> {
-
         [DataMember(Name = "count")]
         public int Count { get; set; }
 

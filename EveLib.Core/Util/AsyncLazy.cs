@@ -4,17 +4,17 @@ using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
     /// <summary>
-    /// Provides support for asynchronous lazy initialization. This type is fully threadsafe.
+    ///     Provides support for asynchronous lazy initialization. This type is fully threadsafe.
     /// </summary>
     /// <typeparam name="T">The type of object that is being asynchronously initialized.</typeparam>
-    public sealed class AsyncLazy<T>  {
+    public sealed class AsyncLazy<T> {
         /// <summary>
-        /// The underlying lazy task.
+        ///     The underlying lazy task.
         /// </summary>
         private readonly Lazy<Task<T>> _instance;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;"/> class.
+        ///     Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;" /> class.
         /// </summary>
         /// <param name="factory">The delegate that is invoked on a background thread to produce the value when it is needed.</param>
         public AsyncLazy(Func<T> factory) {
@@ -22,15 +22,19 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;"/> class.
+        ///     Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;" /> class.
         /// </summary>
-        /// <param name="factory">The asynchronous delegate that is invoked on a background thread to produce the value when it is needed.</param>
+        /// <param name="factory">
+        ///     The asynchronous delegate that is invoked on a background thread to produce the value when it is
+        ///     needed.
+        /// </param>
         public AsyncLazy(Func<Task<T>> factory) {
             _instance = new Lazy<Task<T>>(factory);
         }
 
         /// <summary>
-        /// Asynchronous infrastructure support. This method permits instances of <see cref="AsyncLazy&lt;T&gt;"/> to be await'ed.
+        ///     Asynchronous infrastructure support. This method permits instances of <see cref="AsyncLazy&lt;T&gt;" /> to be
+        ///     await'ed.
         /// </summary>
         public TaskAwaiter<T> GetAwaiter() {
             return _instance.Value.GetAwaiter();
@@ -41,10 +45,10 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Starts the asynchronous initialization, if it has not already started.
+        ///     Starts the asynchronous initialization, if it has not already started.
         /// </summary>
         public void Start() {
-            var unused = _instance.Value;
+            Task<T> unused = _instance.Value;
         }
     }
 }

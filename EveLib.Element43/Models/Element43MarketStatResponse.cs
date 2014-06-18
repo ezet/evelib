@@ -9,7 +9,6 @@ namespace eZet.EveLib.Modules.Models {
     public class Element43MarketStatResponse {
         [XmlArray("marketstat"), XmlArrayItem("type")]
         public Collection<Element43MarketStatItem> Result { get; set; }
-
     }
 
     public class Element43MarketStatItem {
@@ -27,7 +26,6 @@ namespace eZet.EveLib.Modules.Models {
 
         [XmlElement("traded_last_7")]
         public long VolumeLastWeek { get; set; }
-
     }
 
     public class Element43MarketStatOrderData {

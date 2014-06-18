@@ -72,7 +72,7 @@ namespace eZet.EveLib.Modules {
         public Task<string> GetCharacterPortraitAsync(long characterId, CharacterPortraitSize size, string path) {
             const string relUri = "/Character";
             const string ext = ".jpg";
-            return requestImageAsync(relUri, characterId, (int)size, ext, path);
+            return requestImageAsync(relUri, characterId, (int) size, ext, path);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace eZet.EveLib.Modules {
         public Task<string> GetCorporationLogoAsync(long corporationId, CorporationLogoSize size, string path) {
             const string relUri = "/Corporation";
             const string ext = ".png";
-            return requestImageAsync(relUri, corporationId, (int)size, ext, path);
+            return requestImageAsync(relUri, corporationId, (int) size, ext, path);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace eZet.EveLib.Modules {
         public Task<byte[]> GetCorporationLogoDataAsync(long corporationId, CorporationLogoSize size) {
             const string relUri = "/Corporation";
             const string ext = ".png";
-            return requestImageDataAsync(relUri, corporationId, (int)size, ext);
+            return requestImageDataAsync(relUri, corporationId, (int) size, ext);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace eZet.EveLib.Modules {
         public Task<string> GetAllianceLogoAsync(long allianceId, AllianceLogoSize size, string path) {
             const string relUri = "/Alliance";
             const string ext = ".png";
-            return requestImageAsync(relUri, allianceId, (int)size, ext, path);
+            return requestImageAsync(relUri, allianceId, (int) size, ext, path);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace eZet.EveLib.Modules {
         public Task<byte[]> GetAllianceLogoDataAsync(long allianceId, AllianceLogoSize size) {
             const string relUri = "/Alliance";
             const string ext = ".png";
-            return requestImageDataAsync(relUri, allianceId, (int)size, ext);
+            return requestImageDataAsync(relUri, allianceId, (int) size, ext);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace eZet.EveLib.Modules {
         public Task<string> GetTypeIconAsync(long typeId, TypeIconSize size, string path) {
             const string relUri = "/InventoryType";
             const string ext = ".png";
-            return requestImageAsync(relUri, typeId, (int)size, ext, path);
+            return requestImageAsync(relUri, typeId, (int) size, ext, path);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace eZet.EveLib.Modules {
         public Task<byte[]> GetTypeIconDataAsync(long typeId, TypeIconSize size) {
             const string relUri = "/InventoryType";
             const string ext = ".png";
-            return requestImageDataAsync(relUri, typeId, (int)size, ext);
+            return requestImageDataAsync(relUri, typeId, (int) size, ext);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace eZet.EveLib.Modules {
         public Task<string> GetRenderAsync(long typeId, RenderSize size, string path) {
             const string relUri = "/Render";
             const string ext = ".png";
-            return requestImageAsync(relUri, typeId, (int)size, ext, path);
+            return requestImageAsync(relUri, typeId, (int) size, ext, path);
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace eZet.EveLib.Modules {
         public Task<byte[]> GetRenderDataAsync(long typeId, RenderSize size) {
             const string relUri = "/Render";
             const string ext = ".png";
-            return requestImageDataAsync(relUri, typeId, (int)size, ext);
+            return requestImageDataAsync(relUri, typeId, (int) size, ext);
         }
 
         private Task<byte[]> requestImageDataAsync(string relPath, long id, int size, string extension) {

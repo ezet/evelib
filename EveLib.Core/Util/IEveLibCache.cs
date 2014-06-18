@@ -6,7 +6,6 @@ namespace eZet.EveLib.Core.Util {
     ///     Interface for CacheExpiratoinRegisters
     /// </summary>
     public interface IEveLibCache {
-
         Task StoreAsync(Uri uri, DateTime cacheTime, string data);
 
         //void StoreAsync(Uri uri, DateTime cacheTime);

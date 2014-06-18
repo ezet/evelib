@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
     public class MarketHistoryCollection : EveCrestCollection {
-
         [DataMember(Name = "items")]
         public IList<MarketHistoryEntry> Entries { get; set; }
 
@@ -29,6 +28,5 @@ namespace eZet.EveLib.Modules.Models {
             [DataMember(Name = "date")]
             public DateTime Date { get; set; }
         }
-
     }
 }

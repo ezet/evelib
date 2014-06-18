@@ -6,7 +6,6 @@ namespace eZet.EveLib.Modules.Models.Account {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ApiKeyInfo {
-
         [XmlElement("key")]
         public ApiKeyData Key { get; set; }
 
@@ -35,7 +34,6 @@ namespace eZet.EveLib.Modules.Models.Account {
         [Serializable]
         [XmlRoot("row", IsNullable = false)]
         public class ApiKeyEntity {
-
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
 

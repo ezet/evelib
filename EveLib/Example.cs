@@ -2,15 +2,15 @@
 using System.Linq;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models.Character;
+using eZet.EveLib.Modules.Models.Misc;
 
 namespace eZet.EveLib {
     public class Example {
-
         /// This shows how you can access API endpoints that do not require authentication
         public void NoAuthRequired() {
             // Access the API. You should probably wrap this in a try/catch block
-            var result = EveOnlineApi.Eve.GetAllianceList().Result;
-            foreach (var alliance in result.Alliances) {
+            AllianceList result = EveOnlineApi.Eve.GetAllianceList().Result;
+            foreach (AllianceList.AllianceData alliance in result.Alliances) {
                 Console.WriteLine(alliance.AllianceName);
             }
         }
@@ -49,13 +49,15 @@ namespace eZet.EveLib {
             // Create a more general ApiKey
             ApiKey key = EveOnlineApi.CreateApiKey(567, "bar");
             if (key.KeyType == ApiKeyType.Character) {
-                CharacterKey characterKey = key.GetActualKey() as CharacterKey;
+                var characterKey = key.GetActualKey() as CharacterKey;
                 // Use your shiny new character key
-            } else if (key.KeyType == ApiKeyType.Corporation) {
-                CorporationKey corpKey = key.GetActualKey() as CorporationKey;
+            }
+            else if (key.KeyType == ApiKeyType.Corporation) {
+                var corpKey = key.GetActualKey() as CorporationKey;
                 // Do something else if it's a corporation key
-            } else if (key.KeyType == ApiKeyType.Account) {
-                CharacterKey characterKey = key.GetActualKey() as CharacterKey;
+            }
+            else if (key.KeyType == ApiKeyType.Account) {
+                var characterKey = key.GetActualKey() as CharacterKey;
                 // ApiKeyType.Account is just a CharacterKey with access to more than one character
             }
         }
