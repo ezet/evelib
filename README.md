@@ -38,6 +38,17 @@ The EveOnline API module caches XML files to disk, adhering to the CachedUntil v
 #### Async/Await
 All methods that access an API provide both a synchronous and an asynchronous. Asynchronous methods are postfixed with `Async`. Some classes provide lazily loaded properties, which will always be loaded synchronously if a new request has to be made. To load such properties asynchronously, call `InitAsync()` on the respective objects, before accessing it's properties. All such properties are documented as such in it's comments.
 
+#### Exception Handling
+The exception handling is slightly different between the synchronous and asynchronous methods.
+For examples of handling AggregateException, see http://msdn.microsoft.com/en-us/library/dd537614(v=vs.110).aspx
+
+##### Synchronous
+Because the synchronous methods use sync over async, they can throw multiple exceptions. This is handled by wrapping all exceptions in an `AggregateException`, which has a list, `InnerExceptions`, of all Exceptions that has been thrown. When using the synchronous methods, you catch `AggregateException`. 
+
+##### Asynchronous
+When using async/await, the `AggregateException` is unwrapped and only the FIRST inner exception is thrown. The `AggregateException` is available through the Exception property on the Task that is awaited. Catch `InvalidRequestException` or any other specific exception, like normal, and check the `Exception` on the Task if you need to handle more than the first.
+
+
 EveOnline API
 -
 This library exposes all of CCPs Eve API calls through an easy to use API, using common .NEt an C# conventions. It uses a structure similar to how the API URIs are structured. See [APIv2] (http://wiki.eve-id.net/APIv2_Page_Index) for a reference. The basic structure is as follows:
