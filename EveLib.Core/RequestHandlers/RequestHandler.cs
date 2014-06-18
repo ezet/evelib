@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Exception;
+using eZet.EveLib.Core.Exceptions;
+using eZet.EveLib.Core.Serializers;
+using eZet.EveLib.Core.Util;
 
-namespace eZet.EveLib.Core.Util {
+namespace eZet.EveLib.Core.RequestHandlers {
     public class RequestHandler : IRequestHandler {
         public RequestHandler(IHttpRequester httpRequester, ISerializer serializer) {
             HttpRequester = httpRequester;

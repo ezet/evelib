@@ -7,8 +7,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.Util;
 
-namespace eZet.EveLib.Core.Util {
+namespace eZet.EveLib.Core.Cache {
     public class XmlFileCache : IEveLibCache {
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 

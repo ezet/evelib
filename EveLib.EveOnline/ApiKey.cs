@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using eZet.EveLib.Core.Exception;
+using eZet.EveLib.Core.Exceptions;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 

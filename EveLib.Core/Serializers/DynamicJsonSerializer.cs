@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace eZet.EveLib.Core.Util {
+namespace eZet.EveLib.Core.Serializers {
     /// <summary>
     ///     JSON serializer
     /// </summary>

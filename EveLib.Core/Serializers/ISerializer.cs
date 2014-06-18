@@ -1,4 +1,4 @@
-﻿namespace eZet.EveLib.Core.Util {
+﻿namespace eZet.EveLib.Core.Serializers {
     /// <summary>
     ///     Interface for deserializing objects.
     /// </summary>

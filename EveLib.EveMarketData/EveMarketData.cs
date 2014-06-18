@@ -2,6 +2,9 @@
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Exception;
+using eZet.EveLib.Core.Exceptions;
+using eZet.EveLib.Core.RequestHandlers;
+using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 

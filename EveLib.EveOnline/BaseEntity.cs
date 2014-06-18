@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.Cache;
+using eZet.EveLib.Core.RequestHandlers;
+using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Util;
@@ -12,25 +15,42 @@ namespace eZet.EveLib.Modules {
     public abstract class BaseEntity {
         private const string DefaultUri = "https://api.eveonline.com";
 
-        private CachedRequestHandler crh() {
-            return RequestHandler as CachedRequestHandler;
+        private ICachedRequestHandler cachedRequestHandler() {
+            return RequestHandler as ICachedRequestHandler;
         }
 
-        public bool AllowCacheLoad {
-            get { return crh() != null && crh().EnableCacheLoad; }
-            set { crh().EnableCacheLoad = value; }
+        /// <summary>
+        /// Gets or sets whether data can be loaded from the cache.
+        /// </summary>
+        public bool EnableCacheLoad {
+            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheLoad; }
+            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheLoad = value; }
         }
 
-        public bool AllowCacheStore {
-            get { return crh() != null && crh().EnableCacheStore; }
-            set { crh().EnableCacheStore = value; }
+        /// <summary>
+        /// Gets or sets whether data can be stored in the cache.
+        /// </summary>
+        public bool EnableCacheStore {
+            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheStore; }
+            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheStore = value; }
+        }
+
+        /// <summary>
+        /// Returns true if the current request handler supports caching.
+        /// </summary>
+        public bool IsCacheHandler {
+            get { return cachedRequestHandler() != null; }
         }
 
         protected BaseEntity() {
-            RequestHandler = new CachedRequestHandler(new HttpRequester(), new SimpleXmlSerializer(), new XmlFileCache());
+            var handler = new EveApiRequestHandler();
+            handler.HttpRequester = new HttpRequester();
+            handler.Serializer = new SimpleXmlSerializer();
+            handler.Cache = new XmlFileCache();
+            RequestHandler = handler;
             BaseUri = new Uri(DefaultUri);
-            AllowCacheLoad = true;
-            AllowCacheStore = true;
+            EnableCacheLoad = true;
+            EnableCacheStore = true;
         }
 
         /// <summary>

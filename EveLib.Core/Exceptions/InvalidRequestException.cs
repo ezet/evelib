@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace eZet.EveLib.Core.Exception {
+namespace eZet.EveLib.Core.Exceptions {
     public class InvalidRequestException : EveLibException {
         public InvalidRequestException(string message)
             : base(message) {

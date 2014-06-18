@@ -1,4 +1,4 @@
-﻿namespace eZet.EveLib.Core.Exception {
+﻿namespace eZet.EveLib.Core.Exceptions {
     public abstract class EveLibException : System.Exception {
         protected EveLibException() {
         }

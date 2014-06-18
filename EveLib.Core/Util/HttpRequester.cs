@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Exception;
+using eZet.EveLib.Core.Exceptions;
 
 namespace eZet.EveLib.Core.Util {
     public class HttpRequester : IHttpRequester {

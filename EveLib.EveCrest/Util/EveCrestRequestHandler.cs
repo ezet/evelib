@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
+using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 

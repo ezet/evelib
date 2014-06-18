@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Core.Util {
+namespace eZet.EveLib.Core.Serializers {
     /// <summary>
     ///     A simple wrapper for .NET XmlSerializer.
     /// </summary>

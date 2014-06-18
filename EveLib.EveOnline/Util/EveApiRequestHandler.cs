@@ -3,7 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Exception;
+using eZet.EveLib.Core.Cache;
+using eZet.EveLib.Core.Exceptions;
+using eZet.EveLib.Core.RequestHandlers;
+using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
@@ -11,14 +14,8 @@ namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Handles requests to the Eve API using a cache.
     /// </summary>
-    public class CachedRequestHandler : IRequestHandler {
+    public class EveApiRequestHandler : ICachedRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
-
-        public CachedRequestHandler(IHttpRequester httpRequester, ISerializer serializer, IEveLibCache cache) {
-            HttpRequester = httpRequester;
-            Serializer = serializer;
-            Cache = cache;
-        }
 
         public bool EnableCacheLoad { get; set; }
 
