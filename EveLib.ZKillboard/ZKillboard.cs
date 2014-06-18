@@ -17,6 +17,33 @@ namespace eZet.EveLib.Modules {
             BaseUri = new Uri(DefaultUri);
         }
 
+        private ICachedRequestHandler cachedRequestHandler() {
+            return RequestHandler as ICachedRequestHandler;
+        }
+
+        /// <summary>
+        /// Gets or sets whether data can be loaded from the cache.
+        /// </summary>
+        public bool EnableCacheLoad {
+            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheLoad; }
+            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheLoad = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets whether data can be stored in the cache.
+        /// </summary>
+        public bool EnableCacheStore {
+            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheStore; }
+            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheStore = value; }
+        }
+
+        /// <summary>
+        /// Returns true if the current request handler supports caching.
+        /// </summary>
+        public bool IsCacheHandler {
+            get { return cachedRequestHandler() != null; }
+        }
+
         public Uri BaseUri { get; set; }
 
         public IRequestHandler RequestHandler { get; set; }
