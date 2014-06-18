@@ -5,6 +5,9 @@ using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
+    /// <summary>
+    /// Provides access to the Eve Online CREST API.
+    /// </summary>
     public class EveCrest {
 
         /// <summary>

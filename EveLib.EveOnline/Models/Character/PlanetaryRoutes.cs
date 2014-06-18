@@ -1,13 +1,17 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
 
+    [Serializable]
     [XmlRoot("result")]
     public class PlanetaryRoutes {
 
         [XmlElement("rowset")]
         public EveOnlineRowCollection<PlanetaryRoute> Routes { get; set; }
 
+        [Serializable]
+        [XmlRoot("row")]
         public class PlanetaryRoute {
 
             [XmlAttribute("routeID")]
@@ -29,19 +33,19 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int Quantity { get; set; }
 
             [XmlAttribute("waypoint1")]
-            public string Waypoint { get; set; }
+            public long Waypoint { get; set; }
 
             [XmlAttribute("waypoint2")]
-            public string Waypoint2 { get; set; }
+            public long Waypoint2 { get; set; }
 
             [XmlAttribute("waypoint3")]
-            public string Waypoint3 { get; set; }
+            public long Waypoint3 { get; set; }
 
             [XmlAttribute("waypoint4")]
-            public string Waypoint4 { get; set; }
+            public long Waypoint4 { get; set; }
 
             [XmlAttribute("waypoint5")]
-            public string Waypoint5 { get; set; }
+            public long Waypoint5 { get; set; }
         }
     }
 }

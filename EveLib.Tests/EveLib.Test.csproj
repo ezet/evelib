@@ -163,6 +163,10 @@
     <Content Include="Xml\char\Medals.xml" />
     <Content Include="Xml\char\Notifications.xml" />
     <Content Include="Xml\char\NotificationTexts.xml" />
+    <Content Include="Xml\char\PlanetaryColonies.xml" />
+    <Content Include="Xml\char\PlanetaryLinks.xml" />
+    <Content Include="Xml\char\PlanetaryPins.xml" />
+    <Content Include="Xml\char\PlanetaryRoutes.xml" />
     <Content Include="Xml\char\Research.xml" />
     <Content Include="Xml\char\SkillInTraining.xml" />
     <Content Include="Xml\char\SkillQueue.xml" />

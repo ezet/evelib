@@ -10,6 +10,8 @@ namespace eZet.EveLib.Modules.Models.Character {
         [XmlElement("rowset")]
         public EveOnlineRowCollection<PlanetaryPin> Pins { get; set; }
 
+        [Serializable]
+        [XmlRoot("row")]
         public class PlanetaryPin {
 
             [XmlAttribute("pinID")]
@@ -25,6 +27,10 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int SchematicId { get; set; }
 
             [XmlAttribute("lastLaunchTime")]
+            public string LastLaunchTimeAsString {
+                set { LastLaunchTime = DateTime.Parse(value); } }
+            
+            [XmlIgnore]
             public DateTime LastLaunchTime { get; set; }
 
             [XmlAttribute("cycleTime")]
@@ -34,9 +40,17 @@ namespace eZet.EveLib.Modules.Models.Character {
             public int QuantityPerCycle { get; set; }
 
             [XmlAttribute("installTime")]
+            public string InstallTimeAsString {
+                set { InstallTime = DateTime.Parse(value); } }
+
+            [XmlIgnore]
             public DateTime InstallTime { get; set; }
 
             [XmlAttribute("expiryTime")]
+            public string ExpiryTimeAsString {
+                set { ExpiryTime = DateTime.Parse(value); } }
+
+            [XmlIgnore]
             public DateTime ExpiryTime { get; set; }
 
             [XmlAttribute("contentTypeID")]

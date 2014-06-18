@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<eveapi version="2">
+  <currentTime>2014-06-18 09:53:44</currentTime>
+  <result>
+    <rowset name="colonies" key="planetID" columns="solarSystemID,solarSystemName,planetID,planetName,planetTypeID,planetTypeName,ownerID,ownerName,lastUpdate,upgradeLevel,numberOfPins">
+      <row solarSystemID="30000060" solarSystemName="Janus" planetID="40003660" planetName="Janus I" planetTypeID="2015" planetTypeName="Planet (Lava)" ownerID="91564070" ownerName="Sheng Zhou" lastUpdate="2013-07-30 05:42:12" upgradeLevel="4" numberOfPins="9"/>
+      <row solarSystemID="30000060" solarSystemName="Janus" planetID="40003670" planetName="Janus V" planetTypeID="2014" planetTypeName="Planet (Oceanic)" ownerID="91564070" ownerName="Sheng Zhou" lastUpdate="2013-07-24 19:10:17" upgradeLevel="4" numberOfPins="15"/>
+      <row solarSystemID="30000060" solarSystemName="Janus" planetID="40003675" planetName="Janus VII" planetTypeID="13" planetTypeName="Planet (Gas)" ownerID="91564070" ownerName="Sheng Zhou" lastUpdate="2013-07-25 23:19:18" upgradeLevel="4" numberOfPins="9"/>
+      <row solarSystemID="30000060" solarSystemName="Janus" planetID="40003703" planetName="Janus X" planetTypeID="2063" planetTypeName="Planet (Plasma)" ownerID="91564070" ownerName="Sheng Zhou" lastUpdate="2013-07-25 23:19:40" upgradeLevel="4" numberOfPins="9"/>
+    </rowset>
+  </result>
+  <cachedUntil>2014-06-18 10:53:44</cachedUntil>
+</eveapi>

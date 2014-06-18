@@ -9,6 +9,8 @@ namespace eZet.EveLib.Modules.Models.Character {
         [XmlElement("rowset")]
         public EveOnlineRowCollection<PlanetaryColony> Colonies { get; set; }
 
+        [Serializable]
+        [XmlRoot("row")]
         public class PlanetaryColony {
 
             [XmlAttribute("solarSystemID")]

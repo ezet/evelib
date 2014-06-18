@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<eveapi version="2">
+  <currentTime>2014-06-18 10:23:55</currentTime>
+  <result>
+    <rowset name="routes" key="routeID" columns="routeID,sourcePinID,destinationPinID,contentTypeID,contentTypeName,quantity,waypoint1,waypoint2,waypoint3,waypoint4,waypoint5">
+      <row routeID="530850002" sourcePinID="1011119443901" destinationPinID="1011181019173" contentTypeID="2306" contentTypeName="Non-CS Crystals" quantity="3000" waypoint1="1011181019174" waypoint2="1011181019176" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="530850003" sourcePinID="1011119443901" destinationPinID="1011181019176" contentTypeID="2306" contentTypeName="Non-CS Crystals" quantity="3000" waypoint1="1011181019174" waypoint2="0" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="530850004" sourcePinID="1011119443901" destinationPinID="1011181019177" contentTypeID="2272" contentTypeName="Heavy Metals" quantity="3000" waypoint1="1011181019174" waypoint2="1011181019176" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="530850005" sourcePinID="1011119443901" destinationPinID="1011181019174" contentTypeID="2272" contentTypeName="Heavy Metals" quantity="3000" waypoint1="0" waypoint2="0" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="535899244" sourcePinID="1011181019169" destinationPinID="1011119443901" contentTypeID="2306" contentTypeName="Non-CS Crystals" quantity="62368" waypoint1="1011181019171" waypoint2="0" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="535008358" sourcePinID="1011181019171" destinationPinID="1011119443901" contentTypeID="2272" contentTypeName="Heavy Metals" quantity="11152" waypoint1="0" waypoint2="0" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="530849999" sourcePinID="1011181019173" destinationPinID="1011068289226" contentTypeID="2401" contentTypeName="Chiral Structures" quantity="20" waypoint1="1011181019176" waypoint2="1011181019174" waypoint3="1011119443901" waypoint4="0" waypoint5="0"/>
+      <row routeID="530849998" sourcePinID="1011181019174" destinationPinID="1011068289226" contentTypeID="2400" contentTypeName="Toxic Metals" quantity="20" waypoint1="1011119443901" waypoint2="0" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="530850000" sourcePinID="1011181019176" destinationPinID="1011068289226" contentTypeID="2401" contentTypeName="Chiral Structures" quantity="20" waypoint1="1011181019174" waypoint2="1011119443901" waypoint3="0" waypoint4="0" waypoint5="0"/>
+      <row routeID="530850001" sourcePinID="1011181019177" destinationPinID="1011068289226" contentTypeID="2400" contentTypeName="Toxic Metals" quantity="20" waypoint1="1011181019176" waypoint2="1011181019174" waypoint3="1011119443901" waypoint4="0" waypoint5="0"/>
+    </rowset>
+  </result>
+  <cachedUntil>2014-06-18 11:23:55</cachedUntil>
+</eveapi>

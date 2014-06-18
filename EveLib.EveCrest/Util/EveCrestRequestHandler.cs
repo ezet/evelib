@@ -7,9 +7,17 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules.Util {
+    /// <summary>
+    /// Performs requests on the Eve Online CREST API.
+    /// </summary>
     public class EveCrestRequestHandler : RequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
+        /// <summary>
+        /// Creates a new EveCrestRequestHandler
+        /// </summary>
+        /// <param name="httpRequester"></param>
+        /// <param name="serializer"></param>
         public EveCrestRequestHandler(IHttpRequester httpRequester, ISerializer serializer)
             : base(httpRequester, serializer) {
         }
@@ -21,7 +29,7 @@ namespace eZet.EveLib.Modules.Util {
         /// <param name="uri"></param>
         /// <returns></returns>
         public override async Task<T> RequestAsync<T>(Uri uri) {
-            string data = "";
+            string data;
             try {
                 data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
             } catch (WebException e) {

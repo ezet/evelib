@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using eZet.EveLib.Core.Exception;
+using System.Threading.Tasks;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 using eZet.EveLib.Modules.Models.Character;
+using eZet.EveLib.Modules.Models.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CharacterInfo = eZet.EveLib.Modules.Models.Misc.CharacterInfo;
+using FactionWarfareStats = eZet.EveLib.Modules.Models.Character.FactionWarfareStats;
 
 namespace eZet.EveLib.Test {
     [TestClass]
     public class CharacterKey_ValidKeyTests {
-        
         private const int KeyId = 3120814;
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
+
+        private readonly CharacterKey _piKey = new CharacterKey(3460081,
+            "wpzj1BPcUMrSGj9L4YmkHLtoRWXCOsIipMECdUDElUiA3GUWvC67cy5xUZltyYoI");
 
         private readonly CharacterKey _validKey = new CharacterKey(KeyId, VCode);
 
@@ -44,7 +48,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetAssetList_ValidRequest_HasResult() {
             EveApiResponse<AssetList> res = _validKey.Characters[0].GetAssetList();
-            var list = res.Result.Flatten();
+            IEnumerable<AssetList.Item> list = res.Result.Flatten();
             Assert.IsNotNull(res.Result);
         }
 
@@ -200,25 +204,25 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetPlanetaryColonies_ValidRequest_HasResult() {
-            var res = _validKey.Characters[0].GetPlanetaryColonies();
+            EveApiResponse<PlanetaryColonies> res = _piKey.Characters[0].GetPlanetaryColonies();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
-        public void GetPlanetaryPins_ValidRequest_HasResult() {
-            var res = _validKey.Characters[0].GetPlanetaryPins(2012);
+        public async Task GetPlanetaryPins_ValidRequest_HasResult() {
+            EveApiResponse<PlanetaryPins> res = await _piKey.Characters[0].GetPlanetaryPinsAsync(40003660);
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetPlanetaryRoutes_ValidRequest_HasResult() {
-            var res = _validKey.Characters[0].GetPlanetaryRoutes(2012);
+            EveApiResponse<PlanetaryRoutes> res = _piKey.Characters[0].GetPlanetaryRoutes(40003660);
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetPlanetaryLinks_ValidRequest_HasResult() {
-            var res = _validKey.Characters[0].GetPlanetaryLinks(2012);
+            EveApiResponse<PlanetaryLinks> res = _piKey.Characters[0].GetPlanetaryLinks(40003660);
             Assert.IsNotNull(res.Result);
         }
     }
