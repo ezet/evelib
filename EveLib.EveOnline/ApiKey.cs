@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,6 +45,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="key"></param>
         protected ApiKey(ApiKey key) {
+            Contract.Requires(key != null);
             BaseUri = new Uri("https://api.eveonline.com");
             ApiKeyInfo = key.ApiKeyInfo;
             _isValidKey = key._isValidKey;

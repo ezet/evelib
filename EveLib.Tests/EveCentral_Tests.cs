@@ -10,19 +10,19 @@ namespace eZet.EveLib.Test {
         private const int TypeId = 34;
         private const int HourLimit = 5;
         private const int MinQty = 5;
-        private readonly EveCentral api;
-        private readonly EveCentralOptions validOptions;
+        private readonly EveCentral _api;
+        private readonly EveCentralOptions _validOptions;
 
         public EveCentral_Tests() {
-            api = new EveCentral();
-            validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
-            validOptions.Items.Add(TypeId);
-            validOptions.Regions.Add(RegionId);
+            _api = new EveCentral();
+            _validOptions = new EveCentralOptions {HourLimit = HourLimit, MinQuantity = MinQty};
+            _validOptions.Items.Add(TypeId);
+            _validOptions.Regions.Add(RegionId);
         }
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            EveCentralMarketStatResponse res = api.GetMarketStat(validOptions);
+            EveCentralMarketStatResponse res = _api.GetMarketStat(_validOptions);
             EveCentralMarketStatItem entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.All.Average);
@@ -36,7 +36,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklook_ValidRequest_ValidReseponse() {
-            EveCentralQuickLookResponse res = api.GetQuicklook(validOptions);
+            EveCentralQuickLookResponse res = _api.GetQuicklook(_validOptions);
             QuicklookResult entry = res.Result;
             EveCentralQuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
@@ -57,7 +57,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklookPath_ValidRequest_ValidResponse() {
-            EveCentralQuickLookResponse res = api.GetQuicklookPath("Jita", "Amarr", 34, validOptions);
+            EveCentralQuickLookResponse res = _api.GetQuicklookPath("Jita", "Amarr", 34, _validOptions);
             QuicklookResult entry = res.Result;
             EveCentralQuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
@@ -77,7 +77,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetHistory_ValidRequest_ValidResponse() {
-            api.GetHistory();
+            //api.GetHistory();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace eZet.EveLib.Modules {
         protected BaseEntity() {
             var handler = new EveApiRequestHandler();
             handler.Serializer = new SimpleXmlSerializer();
-            handler.Cache = new XmlFileCache();
+            handler.Cache = new EveLibFileCache();
             RequestHandler = handler;
             BaseUri = new Uri(DefaultUri);
             EnableCacheLoad = true;

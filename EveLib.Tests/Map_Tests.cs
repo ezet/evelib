@@ -10,30 +10,30 @@ namespace eZet.EveLib.Test {
     /// </summary>
     [TestClass]
     public class Map_Tests {
-        private readonly Map api = new Map();
+        private readonly Map _api = new Map();
 
 
         [TestMethod]
         public void TestFacWarSystems_ValidRequest_HasResult() {
-            EveApiResponse<FactionWarfareSystems> res = api.GetFactionWarSystems();
+            EveApiResponse<FactionWarfareSystems> res = _api.GetFactionWarSystems();
             Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestJumps_ValidRequest_HasResult() {
-            EveApiResponse<Jumps> res = api.GetJumps();
+            EveApiResponse<Jumps> res = _api.GetJumps();
             Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestKills_ValidRequest_HasResult() {
-            EveApiResponse<Kills> res = api.GetKills();
+            EveApiResponse<Kills> res = _api.GetKills();
             Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestSovereignty_ValidRequest_HasResult() {
-            EveApiResponse<Sovereignty> res = api.GetSovereignty();
+            EveApiResponse<Sovereignty> res = _api.GetSovereignty();
             Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 
@@ -42,7 +42,7 @@ namespace eZet.EveLib.Test {
         /// </summary>
         [TestMethod]
         public void TestSovereigntyStatus_ValidRequest_HasResult() {
-            Assert.Fail("Disabled by CCP.");
+            //Assert.Inconclusive("Disabled by CCP.");
             //var res = api.GetSovereigntyStatus();
         }
     }

@@ -11,16 +11,22 @@ namespace eZet.EveLib.Modules.RequestHandlers {
 
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
-        public ZkbRequestHandler(ISerializer serializer) {
+        public ZkbRequestHandler(ISerializer serializer, IEveLibCache cache) {
             Serializer = serializer;
+            Cache = cache;
+            EnableCacheLoad = true;
+            EnableCacheStore = true;
         }
 
         public ISerializer Serializer { get; set; }
+ 
 
         public async Task<T> RequestAsync<T>(Uri uri) {
+            _trace.TraceEvent(TraceEventType.Start, 0, "ZkbRequestHandler.RequestAsync(): {0}", uri);
             string data = null;
-            if (EnableCacheLoad)
+            if (EnableCacheLoad) {
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            }
             var cacheTime = new DateTime();
             var isCached = data != null;
             if (!isCached) {
@@ -29,11 +35,12 @@ namespace eZet.EveLib.Modules.RequestHandlers {
                     data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
                     cacheTime = DateTime.Parse(response.GetResponseHeader("Expires"));
                 }
+
             }
             if (!isCached && EnableCacheStore) {
                 await Cache.StoreAsync(uri, cacheTime.ToUniversalTime(), data).ConfigureAwait(false);
-                _trace.TraceEvent(TraceEventType.Verbose, 0, "ZKillboard Cache Time: {0}", cacheTime);
             }
+            _trace.TraceEvent(TraceEventType.Stop, 0, "ZkbRequestHandler.RequestAsync()", uri);
             return Serializer.Deserialize<T>(data);
         }
 

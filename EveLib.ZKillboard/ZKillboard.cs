@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules.Models;
@@ -12,7 +13,7 @@ namespace eZet.EveLib.Modules {
 
 
         public ZKillboard() {
-            RequestHandler = new ZkbRequestHandler(new DynamicJsonSerializer());
+            RequestHandler = new ZkbRequestHandler(new DynamicJsonSerializer(), new EveLibFileCache());
             BaseUri = new Uri(DefaultUri);
         }
 
