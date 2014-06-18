@@ -12,9 +12,25 @@ namespace eZet.EveLib.Modules {
     public abstract class BaseEntity {
         private const string DefaultUri = "https://api.eveonline.com";
 
+        private CachedRequestHandler crh() {
+            return RequestHandler as CachedRequestHandler;
+        }
+
+        public bool AllowCacheLoad {
+            get { return crh() != null && crh().EnableCacheLoad; }
+            set { crh().EnableCacheLoad = value; }
+        }
+
+        public bool AllowCacheStore {
+            get { return crh() != null && crh().EnableCacheStore; }
+            set { crh().EnableCacheStore = value; }
+        }
+
         protected BaseEntity() {
             RequestHandler = new CachedRequestHandler(new HttpRequester(), new SimpleXmlSerializer(), new XmlFileCache());
             BaseUri = new Uri(DefaultUri);
+            AllowCacheLoad = true;
+            AllowCacheStore = true;
         }
 
         /// <summary>

@@ -20,6 +20,10 @@ namespace eZet.EveLib.Modules.Util {
             Cache = cache;
         }
 
+        public bool EnableCacheLoad { get; set; }
+
+        public bool EnableCacheStore { get; set; }
+
         public IEveLibCache Cache { get; set; }
 
         public IHttpRequester HttpRequester { get; set; }
@@ -27,15 +31,16 @@ namespace eZet.EveLib.Modules.Util {
         public ISerializer Serializer { get; set; }
 
         public async Task<T> RequestAsync<T>(Uri uri) {
-            string data = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            string data = null;
+            if (EnableCacheLoad)
+                data = await Cache.LoadAsync(uri).ConfigureAwait(false);
             bool cached = data != null;
             if (!cached) {
                 try {
                     data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
-                }
-                catch (WebException e) {
+                } catch (WebException e) {
                     _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
-                    var response = (HttpWebResponse) e.Response;
+                    var response = (HttpWebResponse)e.Response;
                     if (response == null) throw;
                     Stream responseStream = response.GetResponseStream();
                     if (responseStream == null) throw;
@@ -49,7 +54,7 @@ namespace eZet.EveLib.Modules.Util {
                 }
             }
             var xml = Serializer.Deserialize<T>(data);
-            if (!cached)
+            if (EnableCacheStore && !cached)
                 await Cache.StoreAsync(uri, getCacheExpirationTime(xml), data).ConfigureAwait(false);
             return xml;
         }
