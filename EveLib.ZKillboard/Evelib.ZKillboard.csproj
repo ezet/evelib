@@ -102,8 +102,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ZkbResponse.cs" />
+    <Compile Include="RequestHandlers\ZkbRequestHandler.cs" />
     <Compile Include="ZKillboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZKillboardOptions.cs" />

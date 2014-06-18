@@ -1,11 +1,19 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Util;
+using eZet.EveLib.Core.RequestHandlers;
+using eZet.EveLib.Core.Serializers;
 
 namespace eZet.EveLib.Test.Mocks {
-    public class StaticXmlRequester : IHttpRequester {
-        public async Task<string> RequestAsync<T>(Uri uri) {
+    public class StaticXmlRequestHandler : IRequestHandler {
+        public StaticXmlRequestHandler(ISerializer serializer) {
+            Serializer = serializer;
+        }
+
+        public ISerializer Serializer { get; set; }
+
+        public async Task<T> RequestAsync<T>(Uri uri) {
             DirectoryInfo directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo != null) {
                 string baseDir = directoryInfo.FullName;
@@ -16,10 +24,15 @@ namespace eZet.EveLib.Test.Mocks {
                 relPath = relPath.Remove(relPath.LastIndexOf(".aspx", StringComparison.Ordinal)).Replace("/", "\\");
                 relPath = baseDir + "\\Xml" + relPath;
                 using (StreamReader reader = (File.OpenText(relPath))) {
-                    return await reader.ReadToEndAsync().ConfigureAwait(false);
+                    var data = await reader.ReadToEndAsync().ConfigureAwait(false);
+                    return Serializer.Deserialize<T>(data);
                 }
             }
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("Static XML directory not found.");
+        }
+
+        public Task<HttpWebResponse> GetResponseAsync(Uri uri) {
+            throw new NotImplementedException();
         }
     }
 }

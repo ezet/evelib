@@ -3,7 +3,6 @@ using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
@@ -15,7 +14,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public EveCentral() {
             BaseUri = new Uri(DefaultUri);
-            RequestHandler = new RequestHandler(new HttpRequester(), new SimpleXmlSerializer());
+            RequestHandler = new RequestHandler(new SimpleXmlSerializer());
         }
 
         /// <summary>

@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
     public static class HttpRequestHelper {
-        public const string ContentTypeForm = "application/x-www-form-urlencoded";
+        public const string ContentType = "application/x-www-form-urlencoded";
 
         private static readonly TraceSource Trace = new TraceSource("EveLib");
 
-
         public static HttpWebRequest CreateRequest(Uri uri) {
             HttpWebRequest request = WebRequest.CreateHttp(uri);
+            request.Proxy = null;
+            request.UserAgent = Config.UserAgent;
+            request.ContentType = ContentType;
             return request;
+        }
+
+        public static Task<string> RequestAsync(Uri uri) {
+            var request = CreateRequest(uri);
+            return GetResponseContentAsync(request);
         }
 
         public static async Task<HttpWebResponse> GetResponseAsync(HttpWebRequest request) {
@@ -35,6 +42,16 @@ namespace eZet.EveLib.Core.Util {
                 throw;
             }
             return response;
+        }
+
+        public static async Task<string> GetResponseContentAsync(HttpWebResponse response) {
+            string data;
+            Stream responseStream = response.GetResponseStream();
+            if (responseStream == null) return null;
+            using (var reader = new StreamReader(responseStream)) {
+                data = await reader.ReadToEndAsync().ConfigureAwait(false);
+            }
+            return data;
         }
 
         public static async Task<string> GetResponseContentAsync(HttpWebRequest request) {

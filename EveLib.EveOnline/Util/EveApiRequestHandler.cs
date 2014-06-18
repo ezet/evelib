@@ -33,11 +33,6 @@ namespace eZet.EveLib.Modules.Util {
         public IEveLibCache Cache { get; set; }
 
         /// <summary>
-        /// Gets or sets the HttpRequester.
-        /// </summary>
-        public IHttpRequester HttpRequester { get; set; }
-
-        /// <summary>
         /// Gets or sets the serializer.
         /// </summary>
         public ISerializer Serializer { get; set; }
@@ -55,7 +50,7 @@ namespace eZet.EveLib.Modules.Util {
             bool cached = data != null;
             if (!cached) {
                 try {
-                    data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
+                    data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
                 } catch (WebException e) {
                     _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
                     var response = (HttpWebResponse)e.Response;

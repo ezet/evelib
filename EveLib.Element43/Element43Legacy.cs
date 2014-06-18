@@ -3,7 +3,6 @@ using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
@@ -14,7 +13,7 @@ namespace eZet.EveLib.Modules {
         ///     Default constructor, with a default base uri and request handler.
         /// </summary>
         public Element43Legacy() {
-            RequestHandler = new RequestHandler(new HttpRequester(), new SimpleXmlSerializer());
+            RequestHandler = new RequestHandler(new SimpleXmlSerializer());
             BaseUri = new Uri(DefaultUri);
         }
 

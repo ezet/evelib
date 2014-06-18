@@ -20,7 +20,7 @@ namespace eZet.EveLib.Modules {
         ///     Creates a new EveCrest object with a default request handler
         /// </summary>
         public EveCrest() {
-            RequestHandler = new EveCrestRequestHandler(new HttpRequester(), new DynamicJsonSerializer());
+            RequestHandler = new EveCrestRequestHandler(new DynamicJsonSerializer());
             BaseUri = new Uri(DefaultUri);
         }
 

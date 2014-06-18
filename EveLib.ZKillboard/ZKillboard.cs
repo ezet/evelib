@@ -3,7 +3,8 @@ using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
+using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
     public class ZKillboard {
@@ -11,7 +12,7 @@ namespace eZet.EveLib.Modules {
 
 
         public ZKillboard() {
-            RequestHandler = new RequestHandler(new HttpRequester(), new DynamicJsonSerializer());
+            RequestHandler = new ZkbRequestHandler(new DynamicJsonSerializer());
             BaseUri = new Uri(DefaultUri);
         }
 
@@ -19,40 +20,40 @@ namespace eZet.EveLib.Modules {
 
         public IRequestHandler RequestHandler { get; set; }
 
-        public dynamic GetKills(ZKillboardOptions options) {
+        public ZkbResponse GetKills(ZKillboardOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             return GetKillsAsync(options).Result;
         }
 
-        public Task<dynamic> GetKillsAsync(ZKillboardOptions options) {
+        public Task<ZkbResponse> GetKillsAsync(ZKillboardOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/kills";
             relPath = options.GetQueryString(relPath);
-            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<ZkbResponse>(new Uri(BaseUri, relPath));
         }
 
-        public dynamic GetLosses(ZKillboardOptions options) {
+        public ZkbResponse GetLosses(ZKillboardOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             return GetLossesAsync(options).Result;
         }
 
-        public Task<dynamic> GetLossesAsync(ZKillboardOptions options) {
+        public Task<ZkbResponse> GetLossesAsync(ZKillboardOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/losses";
             relPath = options.GetQueryString(relPath);
-            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<ZkbResponse>(new Uri(BaseUri, relPath));
         }
 
-        public dynamic GetAll(ZKillboardOptions options) {
+        public ZkbResponse GetAll(ZKillboardOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             return GetAllAsync(options).Result;
         }
 
-        public Task<dynamic> GetAllAsync(ZKillboardOptions options) {
+        public Task<ZkbResponse> GetAllAsync(ZKillboardOptions options) {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api";
             relPath = options.GetQueryString(relPath);
-            return requestAsync<dynamic>(new Uri(BaseUri, relPath));
+            return requestAsync<ZkbResponse>(new Uri(BaseUri, relPath));
         }
 
         private Task<T> requestAsync<T>(Uri uri) {

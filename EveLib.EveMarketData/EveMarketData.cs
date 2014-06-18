@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.Exceptions;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
@@ -28,7 +27,7 @@ namespace eZet.EveLib.Modules {
             Format = format;
             Name = name;
             BaseUri = new Uri(DefaultUri);
-            RequestHandler = new RequestHandler(new HttpRequester(), new NewtonSoftJsonSerializer());
+            RequestHandler = new RequestHandler(new NewtonSoftJsonSerializer());
             setSerializer(format);
         }
 

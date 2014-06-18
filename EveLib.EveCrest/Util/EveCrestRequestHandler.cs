@@ -12,17 +12,18 @@ namespace eZet.EveLib.Modules.Util {
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
-    public class EveCrestRequestHandler : RequestHandler {
+    public class EveCrestRequestHandler : IRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
         ///     Creates a new EveCrestRequestHandler
         /// </summary>
-        /// <param name="httpRequester"></param>
         /// <param name="serializer"></param>
-        public EveCrestRequestHandler(IHttpRequester httpRequester, ISerializer serializer)
-            : base(httpRequester, serializer) {
+        public EveCrestRequestHandler(ISerializer serializer) {
+            Serializer = serializer;
         }
+
+        public ISerializer Serializer { get; set; }
 
         /// <summary>
         ///     Performs a request, deserializes it, and returns the deserialized data.
@@ -30,10 +31,10 @@ namespace eZet.EveLib.Modules.Util {
         /// <typeparam name="T"></typeparam>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public override async Task<T> RequestAsync<T>(Uri uri) {
+        public async Task<T> RequestAsync<T>(Uri uri) {
             string data;
             try {
-                data = await HttpRequester.RequestAsync<T>(uri).ConfigureAwait(false);
+                data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
             }
             catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Eve CREST Request Failed.");

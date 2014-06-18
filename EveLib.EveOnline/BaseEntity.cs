@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Util;
 
@@ -44,7 +43,6 @@ namespace eZet.EveLib.Modules {
 
         protected BaseEntity() {
             var handler = new EveApiRequestHandler();
-            handler.HttpRequester = new HttpRequester();
             handler.Serializer = new SimpleXmlSerializer();
             handler.Cache = new XmlFileCache();
             RequestHandler = handler;
