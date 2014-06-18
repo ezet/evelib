@@ -32,6 +32,22 @@ The project is split into one dll for each api, aswell as one core library. All 
 #### Code Contracts
 The library uses Code Contracts, see [code contracts] (http://research.microsoft.com/en-us/projects/contracts/) for more information.
 
+#### Debugging and Tracing
+The library uses `TraceSource` from the `System.Diagnostics` namespace. The TraceSource is named "EveLib".
+To add the Default listener to EveLibs `TraceSource`, add this to your application configuration (usually app.config):
+
+    <configuration>
+      <system.diagnostics>
+        <sources>
+          <source name="EveLib" switchValue="All"/>
+        </sources>
+      </system.diagnostics>
+    </configuration>
+
+This adds the Default listener, which usually outputs to the VS output window.
+For more information on using `TraceSource`, visit http://msdn.microsoft.com/en-us/library/ms228993(v=vs.110).aspx
+
+
 #### Caching
 The EveOnline API module caches XML files to disk, adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
 
