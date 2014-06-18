@@ -18,7 +18,7 @@ namespace eZet.EveLib.Modules {
         public const string DefaultApiPath = "api/";
 
         public EveStaticData(DataFormat format = DataFormat.Json) {
-            RequestHandler = new RequestHandler(new HttpRequester(), new SimpleJsonSerializer());
+            RequestHandler = new RequestHandler(new HttpRequester(), new DynamicJsonSerializer());
             BaseUri = new Uri(DefaultUri);
             ApiPath = DefaultApiPath;
             Format = format;
@@ -42,6 +42,7 @@ namespace eZet.EveLib.Modules {
             Format = format;
             // TODO set format
         }
+
 
         public StaticDataCollection<InvType> GetInvTypes(int page = 1) {
             return GetInvTypesAsync(page).Result;

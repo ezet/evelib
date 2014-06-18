@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
 using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules {

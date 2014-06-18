@@ -34,6 +34,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public Element43MarketStatResponse GetMarketStat(Element43Options options) {
+            Contract.Requires(options != null);
             return GetMarketStatAsync(options).Result;
         }
 

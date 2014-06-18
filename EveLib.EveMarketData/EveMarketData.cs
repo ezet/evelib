@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Core.Exceptions;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
@@ -284,7 +283,7 @@ namespace eZet.EveLib.Modules {
 
         private string generateQueryString(params object[] args) {
             Contract.Requires(args != null);
-            Contract.Requires(args.Length == 0 && args.Length > 1);
+            Contract.Requires(args.Length == 0 || args.Length > 1);
             string postString = "";
             for (int i = 0; i < args.Length; i += 2) {
                 if (args[i + 1] != null && (args[i + 1]).ToString() != "")

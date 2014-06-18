@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         public static Task WriteAllLinesAsync(string filePath, IEnumerable<string> lines) {
+            Contract.Requires(lines != null);
             var sb = new StringBuilder();
             foreach (string line in lines) {
                 sb.AppendLine(line);

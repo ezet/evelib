@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -29,6 +30,7 @@ namespace eZet.EveLib.Core.Util {
         ///     needed.
         /// </param>
         public AsyncLazy(Func<Task<T>> factory) {
+            Contract.Requires(factory != null);
             _instance = new Lazy<Task<T>>(factory);
         }
 

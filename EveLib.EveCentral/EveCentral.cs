@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
@@ -14,8 +15,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public EveCentral() {
             BaseUri = new Uri(DefaultUri);
-            RequestHandler = new HttpRequester();
-            Serializer = new SimpleXmlSerializer();
+            RequestHandler = new RequestHandler(new HttpRequester(), new SimpleXmlSerializer());
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
-        public IHttpRequester RequestHandler { get; set; }
+        public IRequestHandler RequestHandler { get; set; }
 
         public ISerializer Serializer { get; set; }
 
@@ -36,6 +36,8 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public EveCentralMarketStatResponse GetMarketStat(EveCentralOptions options) {
+            Contract.Requires(options != null, "Options cannot be null");
+            Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             return GetMarketStatAsync(options).Result;
         }
 
@@ -60,6 +62,8 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
         public EveCentralQuickLookResponse GetQuicklook(EveCentralOptions options) {
+            Contract.Requires(options != null, "Options cannot be null");
+            Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             return GetQuicklookAsync(options).Result;
         }
 
@@ -90,6 +94,9 @@ namespace eZet.EveLib.Modules {
         /// <returns></returns>
         public EveCentralQuickLookResponse GetQuicklookPath(object startSystem, object endSystem, long typeId,
             EveCentralOptions options) {
+            Contract.Requires(options != null, "Options cannot be null.");
+            Contract.Requires(startSystem != null, "Start system cannot be null.");
+            Contract.Requires(endSystem != null, "End system cannot be null.");
             return GetQuicklookPathAsync(startSystem, endSystem, typeId, options).Result;
         }
 
@@ -120,8 +127,7 @@ namespace eZet.EveLib.Modules {
 
         private async Task<T> requestAsync<T>(string relUri, string queryString) {
             var uri = new Uri(BaseUri, relUri + "?" + queryString);
-            string data = await RequestHandler.RequestAsync<T>(uri);
-            return Serializer.Deserialize<T>(data);
+            return await RequestHandler.RequestAsync<T>(uri).ConfigureAwait(false);
         }
     }
 }

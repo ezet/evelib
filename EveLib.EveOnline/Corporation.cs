@@ -49,6 +49,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="apiKey">A CorporationKey</param>
         /// <param name="corporationId">A valid Eve Online Corporation ID</param>
         public Corporation(CorporationKey apiKey, long corporationId) {
+            Contract.Requires(apiKey != null);
             ApiKey = apiKey;
             CorporationId = corporationId;
             BaseUri = new Uri("https://api.eveonline.com");
@@ -399,6 +400,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
         public EveApiResponse<Locations> GetLocations(params long[] list) {
+            Contract.Requires(list != null);
             return GetLocationsAsync(list).Result;
         }
 

@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using eZet.EveLib.Core.Exception;
 using eZet.EveLib.Core.Exceptions;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
@@ -223,7 +222,7 @@ namespace eZet.EveLib.Modules {
         public async Task<bool> IsValidKeyAsync() {
             if (_isValidKey.HasValue) return _isValidKey.Value;
             try {
-                await InitAsync();
+                await InitAsync().ConfigureAwait(false);
             }
             catch (AggregateException e) {
                 if (e.InnerException.GetType() == typeof (InvalidRequestException)) {

@@ -476,6 +476,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
         public EveApiResponse<Locations> GetLocations(params long[] list) {
+            Contract.Requires(list != null);
             return GetLocationsAsync(list).Result;
         }
 
@@ -503,6 +504,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="list">A list of message ids from GetMailMessages.</param>
         /// <returns></returns>
         public EveApiResponse<MailBodies> GetMailBodies(params long[] list) {
+            Contract.Requires(list != null);
             return GetMailBodiesAsync(list).Result;
         }
 
@@ -616,6 +618,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="ids">A list of notification ids obtained from GetNotifications.</param>
         /// <returns></returns>
         public EveApiResponse<NotificationTexts> GetNotificationTexts(params long[] ids) {
+            Contract.Requires(ids != null);
             return GetNotificationTextsAsync(ids).Result;
         }
 
