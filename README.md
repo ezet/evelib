@@ -30,7 +30,11 @@ EveLib.NET is a open source library for accessing the Eve Online API, CREST, and
 The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like.
 
 #### Code Contracts
-The library uses Code Contracts, see [code contracts] (http://research.microsoft.com/en-us/projects/contracts/) for more information.
+The library implements Code Contracts, but this feature is completely optional and is disabled by default.
+Code Contracts enables static and runtime checks to ensure you are using the EveLib API correctly.
+If you want to utilize this, you should install http://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970 and read the documentation.
+The Code Contract reference assemblies are available in the NuGet package. 
+See http://research.microsoft.com/en-us/projects/contracts/ for more information.
 
 #### Debugging and Tracing
 The library uses `TraceSource` from the `System.Diagnostics` namespace. The TraceSource is named "EveLib".
