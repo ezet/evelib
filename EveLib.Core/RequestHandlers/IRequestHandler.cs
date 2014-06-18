@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 

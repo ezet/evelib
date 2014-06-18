@@ -17,16 +17,37 @@ namespace eZet.EveLib.Modules.Util {
     public class EveApiRequestHandler : ICachedRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
+        /// <summary>
+        /// Gets or sets whether the handler can load data from the cache.
+        /// </summary>
         public bool EnableCacheLoad { get; set; }
 
+        /// <summary>
+        /// Gets or sets whether the handler can store data in cache.
+        /// </summary>
         public bool EnableCacheStore { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Cache.
+        /// </summary>
         public IEveLibCache Cache { get; set; }
 
+        /// <summary>
+        /// Gets or sets the HttpRequester.
+        /// </summary>
         public IHttpRequester HttpRequester { get; set; }
 
+        /// <summary>
+        /// Gets or sets the serializer.
+        /// </summary>
         public ISerializer Serializer { get; set; }
 
+        /// <summary>
+        /// Requests data from uri, with error handling specific to the Eve Online API.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public async Task<T> RequestAsync<T>(Uri uri) {
             string data = null;
             if (EnableCacheLoad)
@@ -56,6 +77,11 @@ namespace eZet.EveLib.Modules.Util {
             return xml;
         }
 
+        /// <summary>
+        /// Gets the CachedUntil value from a EveApiResponse object.
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
         private DateTime getCacheExpirationTime(dynamic xml) {
             //if (o.GetType().Is) throw new System.Exception("Should never occur.");
             // TODO type check
