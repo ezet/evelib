@@ -30,13 +30,44 @@ EveLib.NET is a open source library for accessing the Eve Online API, CREST, and
 The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like.
 
 #### Code Contracts
-The library uses Code Contracts, see [code contracts] (http://research.microsoft.com/en-us/projects/contracts/) for more information.
+The library implements Code Contracts, but this feature is completely optional and is disabled by default.
+Code Contracts enables static and runtime checks to ensure you are using the EveLib API correctly.
+If you want to utilize this, you should install http://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970 and read the documentation.
+The Code Contract reference assemblies are available in the NuGet package. 
+See http://research.microsoft.com/en-us/projects/contracts/ for more information.
+
+#### Debugging and Tracing
+The library uses `TraceSource` from the `System.Diagnostics` namespace. The TraceSource is named "EveLib".
+To add the Default listener to EveLibs `TraceSource`, add this to your application configuration (usually app.config):
+
+    <configuration>
+      <system.diagnostics>
+        <sources>
+          <source name="EveLib" switchValue="All"/>
+        </sources>
+      </system.diagnostics>
+    </configuration>
+
+This adds the Default listener, which usually outputs to the VS output window.
+For more information on using `TraceSource`, visit http://msdn.microsoft.com/en-us/library/ms228993(v=vs.110).aspx
+
 
 #### Caching
 The EveOnline API module caches XML files to disk, adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
 
 #### Async/Await
 All methods that access an API provide both a synchronous and an asynchronous. Asynchronous methods are postfixed with `Async`. Some classes provide lazily loaded properties, which will always be loaded synchronously if a new request has to be made. To load such properties asynchronously, call `InitAsync()` on the respective objects, before accessing it's properties. All such properties are documented as such in it's comments.
+
+#### Exception Handling
+The exception handling is slightly different between the synchronous and asynchronous methods.
+For examples of handling AggregateException, see http://msdn.microsoft.com/en-us/library/dd537614(v=vs.110).aspx
+
+##### Synchronous
+Because the synchronous methods use sync over async, they can throw multiple exceptions. This is handled by wrapping all exceptions in an `AggregateException`, which has a list, `InnerExceptions`, of all Exceptions that has been thrown. When using the synchronous methods, you catch `AggregateException`. 
+
+##### Asynchronous
+When using async/await, the `AggregateException` is unwrapped and only the FIRST inner exception is thrown. The `AggregateException` is available through the Exception property on the Task that is awaited. Catch `InvalidRequestException` or any other specific exception, like normal, and check the `Exception` on the Task if you need to handle more than the first.
+
 
 EveOnline API
 -
