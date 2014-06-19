@@ -24,7 +24,8 @@ EveLib.NET is a open source library for accessing the Eve Online API, CREST, and
 * Eve Marketdata API `EveMarketData`
 * Element43 API `Element43`
 * ZKillboard API `ZKillBoard`
-* Eve Static Data (Element43) `EveStaticData`
+* EveWho `EveWho`
+* Eve Static Data (Element43) `EveStaticData` [partial]
 
 ### General information
 The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like.
