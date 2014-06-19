@@ -3,11 +3,11 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class WarCollection : EveCrestCollection {
+    public class EveCrestWars : EveCrestCollectionResponse {
         [DataMember(Name = "items")]
-        public IList<WarCollectionEntry> Wars { get; set; }
+        public IList<War> Wars { get; set; }
 
-        public class WarCollectionEntry {
+        public class War {
             [DataMember(Name = "id")]
             public int Id { get; set; }
 

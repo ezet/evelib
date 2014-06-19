@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class War {
+    public class EveCrestWar {
         [DataMember(Name = "id")]
         public int Id { get; set; }
 

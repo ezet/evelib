@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class Killmail {
+    public class EveCrestKillmail {
         [DataMember(Name = "solarSystem")]
         public EveCrestNamedEntity SolarSystem { get; set; }
 

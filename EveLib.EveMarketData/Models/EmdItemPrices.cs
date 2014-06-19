@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    [JsonConverter(typeof (ItemPricesJsonConverter))]
-    public class ItemPrices {
+    [JsonConverter(typeof (EmdItemPricesJsonConverter))]
+    public class EmdItemPrices {
         [XmlElement("rowset")]
         [DataMember(Name = "result")]
         public EveMarketDataRowCollection<ItemPriceEntry> Prices { get; set; }

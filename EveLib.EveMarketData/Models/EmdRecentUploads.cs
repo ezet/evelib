@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    [JsonConverter(typeof (RecentUploadsJsonConverter))]
-    public class RecentUploads {
+    [JsonConverter(typeof (EmdRecentUploadsJsonConverter))]
+    public class EmdRecentUploads {
         [DataMember(Name = "rowset")]
         [XmlElement("rowset")]
         public EveMarketDataRowCollection<RecentUploadsEntry> Uploads { get; set; }

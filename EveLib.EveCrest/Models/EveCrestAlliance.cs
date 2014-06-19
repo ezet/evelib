@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class Alliance {
+    public class EveCrestAlliance {
         [DataMember(Name = "Id")]
         public int Id { get; set; }
 

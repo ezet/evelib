@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Character;
 using eZet.EveLib.Modules.Models.Misc;
 
@@ -60,6 +61,11 @@ namespace eZet.EveLib {
                 var characterKey = key.GetActualKey() as CharacterKey;
                 // ApiKeyType.Account is just a CharacterKey with access to more than one character
             }
+        }
+
+        public void Crest() {
+            var crest = new EveCrest();
+            EveCrestWar result = crest.GetWar(1);
         }
     }
 }

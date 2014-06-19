@@ -64,7 +64,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="type"></param>
         /// <returns>A list of any orders that were recently updated.</returns>
         /// <exception cref="EveLibWebException">The request was invalid.</exception>
-        public EveMarketDataResponse<RecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
+        public EveMarketDataResponse<EmdRecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             return GetRecentUploadsAsync(options, type).Result;
         }
@@ -77,12 +77,12 @@ namespace eZet.EveLib.Modules {
         /// <param name="type"></param>
         /// <returns>A list of any orders that were recently updated.</returns>
         /// <exception cref="EveLibWebException">The request was invalid.</exception>
-        public Task<EveMarketDataResponse<RecentUploads>> GetRecentUploadsAsync(EveMarketDataOptions options,
+        public Task<EveMarketDataResponse<EmdRecentUploads>> GetRecentUploadsAsync(EveMarketDataOptions options,
             UploadType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             string relUri = "/api/recent_uploads2." + Format.ToString().ToLower();
             string postString = getRecentUploadsQueryString(options, type);
-            return requestAsync<RecentUploads>(relUri, postString);
+            return requestAsync<EmdRecentUploads>(relUri, postString);
         }
 
         private string getRecentUploadsQueryString(EveMarketDataOptions options, UploadType type) {
@@ -106,7 +106,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="type"></param>
         /// <param name="minmax"></param>
         /// <returns>All orders on the market.</returns>
-        public EveMarketDataResponse<ItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type,
+        public EveMarketDataResponse<EmdItemPrices> GetItemPrice(EveMarketDataOptions options, OrderType type,
             MinMax minmax = default(MinMax)) {
             Contract.Requires(options != null, "Options cannot be null.");
             return GetItemPriceAsync(options, type, minmax).Result;
@@ -119,12 +119,12 @@ namespace eZet.EveLib.Modules {
         /// <param name="type"></param>
         /// <param name="minmax"></param>
         /// <returns>All orders on the market.</returns>
-        public Task<EveMarketDataResponse<ItemPrices>> GetItemPriceAsync(EveMarketDataOptions options, OrderType type,
+        public Task<EveMarketDataResponse<EmdItemPrices>> GetItemPriceAsync(EveMarketDataOptions options, OrderType type,
             MinMax minmax = default(MinMax)) {
             Contract.Requires(options != null, "Options cannot be null.");
             string relUri = "/api/item_prices2." + Format.ToString().ToLower();
             string postString = getItemPriceQueryString(options, type, minmax);
-            return requestAsync<ItemPrices>(relUri, postString);
+            return requestAsync<EmdItemPrices>(relUri, postString);
         }
 
         private string getItemPriceQueryString(EveMarketDataOptions options, OrderType type,
@@ -154,7 +154,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
-        public EveMarketDataResponse<ItemOrders> GetItemOrders(EveMarketDataOptions options, OrderType type) {
+        public EveMarketDataResponse<EmdItemOrders> GetItemOrders(EveMarketDataOptions options, OrderType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             return GetItemOrdersAsync(options, type).Result;
         }
@@ -165,11 +165,11 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
-        public Task<EveMarketDataResponse<ItemOrders>> GetItemOrdersAsync(EveMarketDataOptions options, OrderType type) {
+        public Task<EveMarketDataResponse<EmdItemOrders>> GetItemOrdersAsync(EveMarketDataOptions options, OrderType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             string relUri = "/api/item_orders2." + Format.ToString().ToLower();
             string postString = getItemOrdersQueryString(options, type);
-            return requestAsync<ItemOrders>(relUri, postString);
+            return requestAsync<EmdItemOrders>(relUri, postString);
         }
 
         private string getItemOrdersQueryString(EveMarketDataOptions options, OrderType type) {
@@ -195,7 +195,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <returns>A best guess price of one or multiple items.</returns>
-        public EveMarketDataResponse<ItemHistory> GetItemHistory(EveMarketDataOptions options) {
+        public EveMarketDataResponse<EmdItemHistory> GetItemHistory(EveMarketDataOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             return GetItemHistoryAsync(options).Result;
         }
@@ -205,11 +205,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <returns>A best guess price of one or multiple items.</returns>
-        public Task<EveMarketDataResponse<ItemHistory>> GetItemHistoryAsync(EveMarketDataOptions options) {
+        public Task<EveMarketDataResponse<EmdItemHistory>> GetItemHistoryAsync(EveMarketDataOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             string relUri = "/api/item_history2." + Format.ToString().ToLower();
             string postString = getItemHistoryQueryString(options);
-            return requestAsync<ItemHistory>(relUri, postString);
+            return requestAsync<EmdItemHistory>(relUri, postString);
         }
 
         private string getItemHistoryQueryString(EveMarketDataOptions options) {
@@ -228,7 +228,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
         /// <returns>The daily station rank in a region and order statistics for stations</returns>
-        public EveMarketDataResponse<StationRank> GetStationRank(EveMarketDataOptions options) {
+        public EveMarketDataResponse<EmdStationRank> GetStationRank(EveMarketDataOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             return GetStationRankAsync(options).Result;
         }
@@ -238,11 +238,11 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="options">Valid options: Stations, Solarsystems, Regions, DayLimit</param>
         /// <returns>The daily station rank in a region and order statistics for stations</returns>
-        public Task<EveMarketDataResponse<StationRank>> GetStationRankAsync(EveMarketDataOptions options) {
+        public Task<EveMarketDataResponse<EmdStationRank>> GetStationRankAsync(EveMarketDataOptions options) {
             Contract.Requires(options != null, "Options cannot be null.");
             string relUri = "/api/station_rank2." + Format.ToString().ToLower();
             string postString = getStationRankQueryString(options);
-            return requestAsync<StationRank>(relUri, postString);
+            return requestAsync<EmdStationRank>(relUri, postString);
         }
 
         private string getStationRankQueryString(EveMarketDataOptions options) {

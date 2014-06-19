@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class IncursionCollection : EveCrestCollection {
+    public class EveCrestIncursions : EveCrestCollectionResponse {
         public enum IncursionState {
             [DataMember(Name = "Established")] Established,
             [DataMember(Name = "Mobilizing")] Mobilizing,
@@ -11,9 +11,9 @@ namespace eZet.EveLib.Modules.Models {
         }
 
         [DataMember(Name = "items")]
-        public IList<IncursionCollectionEntry> Incursions { get; set; }
+        public IList<Incursion> Incursions { get; set; }
 
-        public class IncursionCollectionEntry {
+        public class Incursion {
             [DataMember(Name = "influence")]
             public double Influence { get; set; }
 
