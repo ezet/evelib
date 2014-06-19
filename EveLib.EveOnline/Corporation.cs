@@ -38,7 +38,7 @@ namespace eZet.EveLib.Modules {
             AllianceName = entity.AllianceName;
             FactionId = entity.FactionId;
             FactionName = entity.FactionName;
-            BaseUri = new Uri("https://api.eveonline.com");
+            BaseUri = apiKey.BaseUri;
             IsInitialized = true;
         }
 

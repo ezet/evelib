@@ -31,7 +31,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetFacilities_NoErrors() {
-            var result = await _sisiKey.Corporation
+            var result = await _sisiKey.Corporation.GetFacilitiesAsync();
         }
     }
 }
