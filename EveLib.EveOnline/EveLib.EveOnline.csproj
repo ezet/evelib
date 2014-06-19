@@ -205,11 +205,12 @@
     <Compile Include="Models\Map\Sovereignty.cs" />
     <Compile Include="Models\Map\SovereigntyStatus.cs" />
     <Compile Include="Models\NewIndustryJobs.cs" />
-    <Compile Include="Util\WindowsCachedRequestHandler.cs" />
+    <Compile Include="Exceptions\EveOnlineException.cs" />
+    <Compile Include="RequestHandlers\WindowsCachedRequestHandler.cs" />
     <Compile Include="Util\XmlHelper.cs" />
     <Compile Include="Models\EveOnlineRowCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\EveApiRequestHandler.cs" />
+    <Compile Include="RequestHandlers\EveOnlineRequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">

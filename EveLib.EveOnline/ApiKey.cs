@@ -217,8 +217,8 @@ namespace eZet.EveLib.Modules {
                 Init();
             }
             catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof (InvalidRequestException)) {
-                    var ire = (InvalidRequestException) e.InnerException;
+                if (e.InnerException.GetType() == typeof (EveLibWebException)) {
+                    var ire = (EveLibWebException) e.InnerException;
                     if (((HttpWebResponse) ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
                         _isValidKey = false;
                     }
@@ -239,8 +239,8 @@ namespace eZet.EveLib.Modules {
                 await InitAsync().ConfigureAwait(false);
             }
             catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof (InvalidRequestException)) {
-                    var ire = (InvalidRequestException) e.InnerException;
+                if (e.InnerException.GetType() == typeof (EveLibWebException)) {
+                    var ire = (EveLibWebException) e.InnerException;
                     if (((HttpWebResponse) ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
                         _isValidKey = false;
                     }

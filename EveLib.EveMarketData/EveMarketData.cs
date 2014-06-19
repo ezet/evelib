@@ -63,7 +63,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Items, Marketgroups, Regions, Date, RowLimit</param>
         /// <param name="type"></param>
         /// <returns>A list of any orders that were recently updated.</returns>
-        /// <exception cref="InvalidRequestException">The request was invalid.</exception>
+        /// <exception cref="EveLibWebException">The request was invalid.</exception>
         public EveMarketDataResponse<RecentUploads> GetRecentUploads(EveMarketDataOptions options, UploadType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             return GetRecentUploadsAsync(options, type).Result;
@@ -76,7 +76,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Items, Marketgroups, Regions, Date, RowLimit</param>
         /// <param name="type"></param>
         /// <returns>A list of any orders that were recently updated.</returns>
-        /// <exception cref="InvalidRequestException">The request was invalid.</exception>
+        /// <exception cref="EveLibWebException">The request was invalid.</exception>
         public Task<EveMarketDataResponse<RecentUploads>> GetRecentUploadsAsync(EveMarketDataOptions options,
             UploadType type) {
             Contract.Requires(options != null, "Options cannot be null.");

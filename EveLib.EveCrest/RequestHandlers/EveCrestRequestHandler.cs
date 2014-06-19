@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
+using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
 
-namespace eZet.EveLib.Modules.Util {
+namespace eZet.EveLib.Modules.RequestHandlers {
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>

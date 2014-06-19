@@ -5,6 +5,7 @@ using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.RequestHandlers;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
@@ -42,7 +43,7 @@ namespace eZet.EveLib.Modules {
         }
 
         protected BaseEntity() {
-            var handler = new EveApiRequestHandler();
+            var handler = new EveOnlineRequestHandler();
             handler.Serializer = new SimpleXmlSerializer();
             handler.Cache = new EveLibFileCache();
             RequestHandler = handler;

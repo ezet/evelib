@@ -4,17 +4,17 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Cache;
-using eZet.EveLib.Core.Exceptions;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
+using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
 
-namespace eZet.EveLib.Modules.Util {
+namespace eZet.EveLib.Modules.RequestHandlers {
     /// <summary>
     ///     Handles requests to the Eve API using a cache.
     /// </summary>
-    public class EveApiRequestHandler : ICachedRequestHandler {
+    public class EveOnlineRequestHandler : ICachedRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace eZet.EveLib.Modules.Util {
                         var error = Serializer.Deserialize<EveApiError>(data);
                         _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText,
                             error.Error.ErrorCode);
-                        throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e);
+                        throw new EveOnlineException(error.Error.ErrorText, error.Error.ErrorCode, e);
                     }
                 }
             }

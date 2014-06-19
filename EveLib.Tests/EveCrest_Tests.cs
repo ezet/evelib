@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

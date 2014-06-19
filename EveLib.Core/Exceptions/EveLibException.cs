@@ -1,12 +1,25 @@
-﻿namespace eZet.EveLib.Core.Exceptions {
-    public abstract class EveLibException : System.Exception {
-        protected EveLibException() {
-        }
+﻿using System;
 
+namespace eZet.EveLib.Core.Exceptions {
+    /// <summary>
+    /// Base for all EveLib Exceptions
+    /// </summary>
+    public abstract class EveLibException : Exception {
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message"></param>
         protected EveLibException(string message) : base(message) {
         }
 
-        protected EveLibException(string message, System.Exception iException) : base(message, iException) {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="iException"></param>
+        protected EveLibException(string message, Exception iException) : base(message, iException) {
         }
+
     }
 }
