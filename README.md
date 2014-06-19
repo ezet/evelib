@@ -24,7 +24,8 @@ EveLib.NET is a open source library for accessing the Eve Online API, CREST, and
 * Eve Marketdata API `EveMarketData`
 * Element43 API `Element43`
 * ZKillboard API `ZKillBoard`
-* Eve Static Data (Element43) `EveStaticData`
+* EveWho `EveWho`
+* Eve Static Data (Element43) `EveStaticData` [partial]
 
 ### General information
 The project is split into one dll for each api, aswell as one core library. All libraries require the core library, but can otherwise be mixed and matched as you like.
@@ -62,12 +63,14 @@ All methods that access an API provide both a synchronous and an asynchronous. A
 The exception handling is slightly different between the synchronous and asynchronous methods.
 For examples of handling AggregateException, see http://msdn.microsoft.com/en-us/library/dd537614(v=vs.110).aspx
 
+##### General information
+The actual exceptions thrown (directly or inside `AggregateException`) should always inherit from `EveLibException`. If any other exception is throw, that is a bug and should be reported. Most exceptions will inherit from `EveLibWebException`, which indicates there was an error when performing the web request. All EveLibWebExceptions have a property `WebException`, which contains the responsible `WebException`. Most modules throw `EveLibWebException` directly, unless otherwise is stated. (Currently EveOnline and EveCrest throw more specific exceptions).
+
 ##### Synchronous
 Because the synchronous methods use sync over async, they can throw multiple exceptions. This is handled by wrapping all exceptions in an `AggregateException`, which has a list, `InnerExceptions`, of all Exceptions that has been thrown. When using the synchronous methods, you catch `AggregateException`. 
 
 ##### Asynchronous
 When using async/await, the `AggregateException` is unwrapped and only the FIRST inner exception is thrown. The `AggregateException` is available through the Exception property on the Task that is awaited. Catch `InvalidRequestException` or any other specific exception, like normal, and check the `Exception` on the Task if you need to handle more than the first.
-
 
 EveOnline API
 -
@@ -138,20 +141,28 @@ The difference is, when creating an object directly, you will not know for sure 
 
 `Character` and `Corporation` objects are initialized the same ways keys are, using `Init()`, `InitAsync()` or by accessing a property. You can also call `Reset()` to reset all data. 
 
-
 #### Responses
 All API calls return results in the form of `EveApiResponse<T>` objects, where `T` is the specific type of response. These objects reflect the structure of the actual XML responses, with a few exceptions. All properties have been renamed in compliance with C# naming conventions, eg. 'characterID' is converted to CharacterId. Also, some properties have been renamed for clarity and consistency, where most changes are extensions of the original names.
 
-Every XML response has a Version, CachedUntil and Result. Result is of type T, and contains all request specific data. All calls can throw InvalidRequestException if there is an issue with the request. This exception provides access to the error description and error code returned by the CCP Api, aswell as any inner exceptions that may have been thrown.
+Every XML response has a Version, CachedUntil and Result. Result is of type T, and contains all request specific data. 
 
-    try {
         EveApiResponse<ServerStatus> data = EveOnlineAPi.Eve.GetServerStatus();
         int players = data.Result.PlayersOnline;
-    } catch (InvalidRequestException e) {
-        Logger.log(e.Message, e.ErrorCode);
-    }
-    
+        
+#### Exceptions
+All calls to the Eve Online API can throw `EveOnlineException`, which inherits from `EveLibWebException`. This additionaly exposes `Message` and `ErrorCode`, as returned by the API.
 
+    
+Eve CREST
+-
+Eve CREST endpoints can be called by instantating a new EveCrest object, and using it's methods.
+
+    var crest = new EveCrest();
+    var result = crest.GetWar(1);
+
+#### Exceptions
+All calls to the CREST API can throw `EveCrestException`, which inherits from `EveLibWebException`.  This additionaly exposes `Message`, `Key`, `ExceptionType` and `RefId` as returned by the API.
+    
 EveCentral API
 -
 This module provides access to all calls on the EveCentral api. All api calls can be made through any `EveCentral` object. Most parameters for requests can be set and passed in a `EveCentralOptions` object.
@@ -160,22 +171,21 @@ This module provides access to all calls on the EveCentral api. All api calls ca
     options.Items.Add(34);
     options.Regoins.Add(10000002);
     var eveCentral = new EveCentral();
-    try {
-        MarketStat result = eveCentral.GetMarketStat(options);
-    } Catch (InvalidRequestException e) {
-        // handle
-    }
-
-EveMarketData API
--
-Requires Newtonsoft.Json.dll.
-This module provides access to all calls on the EveMarketData api. All api calls can be made through any `EveMarketData` object. Most parameters for requests can be set and passed in a `EveMarketDataOptions` object. This module also supports both JSON and XML mode, where JSON is the default. You can specify which format you want in the EveMarketData constructor. It is otherwise very similar to the EveCentral module.
+    MarketStat result = eveCentral.GetMarketStat(options);
 
 
 Element43
 -
-Very similar to EveCentral API
+Similar to EveCentral API. Uses `Element43Options`.
+
+EveMarketData API
+-
+Similar to EveCentral API. Uses `EveMarketDataOptions`.
 
 Zkillbord
+-
+Work in progress.
+
+EveWho
 -
 Work in progress.
