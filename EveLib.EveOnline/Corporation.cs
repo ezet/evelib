@@ -751,7 +751,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of owned Customs Offices
+        ///     Returns a list of owned Customs Offices
         /// </summary>
         /// <returns></returns>
         public Task<EveApiResponse<CustomsOffices>> GetCustomsOfficesAsync() {
@@ -760,7 +760,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of owned Customs Offices
+        ///     Returns a list of owned Customs Offices
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<CustomsOffices> GetCustomsOffices() {
@@ -768,7 +768,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a listing all of a corporations facilities, including POS and Outposts.
+        ///     Returns a listing all of a corporations facilities, including POS and Outposts.
         /// </summary>
         /// <returns></returns>
         public Task<EveApiResponse<Facilities>> GetFacilitiesAsync() {
@@ -777,7 +777,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a listing all of a corporations facilities, including POS and Outposts.
+        ///     Returns a listing all of a corporations facilities, including POS and Outposts.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<Facilities> GetFacilities() {

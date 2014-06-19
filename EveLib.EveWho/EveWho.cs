@@ -38,7 +38,8 @@ namespace eZet.EveLib.Modules {
             return GetCorporationAsync(corporationId, page).Result;
         }
 
-        public Task<EveWhoResponse<EveWhoCorporationMembers>> GetCorporationMembersAsync(long corporationId, int page = 0) {
+        public Task<EveWhoResponse<EveWhoCorporationMembers>> GetCorporationMembersAsync(long corporationId,
+            int page = 0) {
             string relPath = "?type=corplist&id=" + corporationId + "&page=" + page;
             return requestAsync<EveWhoResponse<EveWhoCorporationMembers>>(relPath);
         }
@@ -61,9 +62,8 @@ namespace eZet.EveLib.Modules {
             return requestAsync<EveWhoResponse<EveWhoAllianceMembers>>(relPath);
         }
 
-        public EveWhoResponse<EveWhoAllianceMembers>  GetAllianceMembers(long allianceId, int page = 0) {
+        public EveWhoResponse<EveWhoAllianceMembers> GetAllianceMembers(long allianceId, int page = 0) {
             return GetAllianceMembersAsync(allianceId, page).Result;
         }
-
     }
 }

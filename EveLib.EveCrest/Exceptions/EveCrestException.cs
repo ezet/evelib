@@ -3,7 +3,7 @@ using eZet.EveLib.Core.Exceptions;
 
 namespace eZet.EveLib.Modules.Exceptions {
     /// <summary>
-    /// Exception for EveCrest
+    ///     Exception for EveCrest
     /// </summary>
     public class EveCrestException : EveLibWebException {
         /// <summary>

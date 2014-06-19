@@ -1,14 +1,12 @@
 ﻿using System.Net;
 
 namespace eZet.EveLib.Core.Exceptions {
-
     /// <summary>
-    /// Base for EveLib WebExceptions
+    ///     Base for EveLib WebExceptions
     /// </summary>
     public class EveLibWebException : EveLibException {
-
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="message"></param>
         /// <param name="iException"></param>
@@ -18,10 +16,8 @@ namespace eZet.EveLib.Core.Exceptions {
         }
 
         /// <summary>
-        /// The inner exception
+        ///     The inner exception
         /// </summary>
         public WebException WebException { get; set; }
-
     }
-
 }

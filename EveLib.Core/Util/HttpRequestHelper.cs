@@ -19,7 +19,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         public static Task<string> RequestAsync(Uri uri) {
-            var request = CreateRequest(uri);
+            HttpWebRequest request = CreateRequest(uri);
             return GetResponseContentAsync(request);
         }
 

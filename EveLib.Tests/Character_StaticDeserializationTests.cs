@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Character;

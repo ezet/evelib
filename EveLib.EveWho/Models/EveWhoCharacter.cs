@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public class EveWhoCharacter {
-
         [DataMember(Name = "character_id")]
         public long CharacterId { get; set; }
 
@@ -37,7 +34,5 @@ namespace eZet.EveLib.Modules.Models {
             [DataMember(Name = "end_date")]
             public DateTime EndDate { get; set; }
         }
-
     }
-
 }

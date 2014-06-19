@@ -807,7 +807,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns planetary colonies.
+        ///     Returns planetary colonies.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<PlanetaryColonies> GetPlanetaryColonies() {
@@ -815,7 +815,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns planetary colonies.
+        ///     Returns planetary colonies.
         /// </summary>
         /// <returns></returns>
         public Task<EveApiResponse<PlanetaryColonies>> GetPlanetaryColoniesAsync() {
@@ -824,7 +824,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns planetary pins for a planet.
+        ///     Returns planetary pins for a planet.
         /// </summary>
         /// <param name="planetId">Planet ID</param>
         /// <returns></returns>
@@ -833,7 +833,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns planetary pins for a planet.
+        ///     Returns planetary pins for a planet.
         /// </summary>
         /// <param name="planetId">Planet ID</param>
         /// <returns></returns>
@@ -843,7 +843,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns planetary routes for a planet.
+        ///     Returns planetary routes for a planet.
         /// </summary>
         /// <param name="planetId">Planet ID</param>
         /// <returns></returns>
@@ -853,7 +853,7 @@ namespace eZet.EveLib.Modules {
 
 
         /// <summary>
-        /// Returns planetary routes for a planet.
+        ///     Returns planetary routes for a planet.
         /// </summary>
         /// <param name="planetId">Planet ID</param>
         /// <returns></returns>
@@ -863,7 +863,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns planetary links for a planet.
+        ///     Returns planetary links for a planet.
         /// </summary>
         /// <param name="planetId">Planet ID</param>
         /// <returns></returns>
@@ -872,7 +872,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns planetary links for a planet.
+        ///     Returns planetary links for a planet.
         /// </summary>
         /// <param name="planetId">Planet ID</param>
         /// <returns></returns>

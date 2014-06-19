@@ -39,7 +39,6 @@ namespace eZet.EveLib.Core.Cache {
                 _trace.TraceEvent(TraceEventType.Error, 0, "EveLibFileCache:An error occured while writing to cache");
             }
             _trace.TraceEvent(TraceEventType.Stop, 0, "EveLibFileCache.StoreAsync()");
-
         }
 
         public async Task<string> LoadAsync(Uri uri) {
@@ -54,7 +53,8 @@ namespace eZet.EveLib.Core.Cache {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterHit: {0}", found);
             if (found) {
                 bool validCache = DateTime.UtcNow < cacheExpirationTime;
-                _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheIsValid: {0} ({1})", validCache, cacheExpirationTime);
+                _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheIsValid: {0} ({1})", validCache,
+                    cacheExpirationTime);
                 if (validCache) {
                     string filePath = Config.CachePath + Config.Separator + hash;
                     bool fileExist = File.Exists(filePath);
@@ -65,11 +65,13 @@ namespace eZet.EveLib.Core.Cache {
                                 await
                                     FileAsync.ReadAllTextAsync(Config.CachePath + Config.Separator + getHash(uri))
                                         .ConfigureAwait(false);
-                            _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Data successfully loaded from cache: {0}",
+                            _trace.TraceEvent(TraceEventType.Verbose, 0,
+                                "EveLibFileCache:Data successfully loaded from cache: {0}",
                                 filePath);
                         }
-                        catch (System.Exception) {
-                            _trace.TraceEvent(TraceEventType.Error, 0, "EveLibFileCache:Cache data could not be loaded: {0}", filePath);
+                        catch (Exception) {
+                            _trace.TraceEvent(TraceEventType.Error, 0,
+                                "EveLibFileCache:Cache data could not be loaded: {0}", filePath);
                         }
                     }
                 }
@@ -107,13 +109,16 @@ namespace eZet.EveLib.Core.Cache {
         }
 
         private async Task loadRegisterFromDiskAsync() {
-            _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Loading cache register: {0}", Config.CacheRegister);
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Loading cache register: {0}",
+                Config.CacheRegister);
             if (!Directory.Exists(Config.CachePath)) {
-                _trace.TraceEvent(TraceEventType.Warning, 0, "EveLibFileCache:Cache directory not found: {0}", Config.CachePath);
+                _trace.TraceEvent(TraceEventType.Warning, 0, "EveLibFileCache:Cache directory not found: {0}",
+                    Config.CachePath);
                 return;
             }
             if (!File.Exists(Config.CacheRegister)) {
-                _trace.TraceEvent(TraceEventType.Warning, 0, "EveLibFileCache:Cache register not found: {0}", Config.CacheRegister);
+                _trace.TraceEvent(TraceEventType.Warning, 0, "EveLibFileCache:Cache register not found: {0}",
+                    Config.CacheRegister);
                 return;
             }
             try {
@@ -136,7 +141,7 @@ namespace eZet.EveLib.Core.Cache {
                 }
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterLoaded");
             }
-            catch (System.Exception) {
+            catch (Exception) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "EveLibFileCache:Could not load cache register");
             }
         }

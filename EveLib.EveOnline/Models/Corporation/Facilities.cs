@@ -2,18 +2,15 @@
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Corporation {
-
     [Serializable]
     [XmlRoot("result")]
     public class Facilities {
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Facility> FacilityEntries { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class Facility {
-            
             [XmlAttribute("facilityID")]
             public long FacilityId { get; set; }
 

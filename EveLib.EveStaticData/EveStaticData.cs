@@ -27,7 +27,7 @@ namespace eZet.EveLib.Modules {
 
 
         /// <summary>
-        /// Gets or sets the relative path for the API.
+        ///     Gets or sets the relative path for the API.
         /// </summary>
         public string ApiPath { get; set; }
 
@@ -47,7 +47,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of InvTypes
+        ///     Returns a list of InvTypes
         /// </summary>
         /// <param name="page">Page number</param>
         /// <returns>InvType list</returns>
@@ -57,7 +57,7 @@ namespace eZet.EveLib.Modules {
 
 
         /// <summary>
-        /// Returns a list of InvTypes
+        ///     Returns a list of InvTypes
         /// </summary>
         /// <param name="page">Page number</param>
         /// <returns>InvType list</returns>
@@ -67,7 +67,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data for a specific InvType
+        ///     Returns data for a specific InvType
         /// </summary>
         /// <param name="id">InvType ID</param>
         /// <returns></returns>
@@ -76,7 +76,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data for a specific InvType
+        ///     Returns data for a specific InvType
         /// </summary>
         /// <param name="id">InvType ID</param>
         /// <returns></returns>

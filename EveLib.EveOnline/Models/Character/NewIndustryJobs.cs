@@ -5,14 +5,12 @@ namespace eZet.EveLib.Modules.Models {
     [Serializable]
     [XmlRoot("result")]
     public class NewIndustryJobs {
-
         [XmlElement("rowset")]
         public EveOnlineRowCollection<NewIndustryJob> Jobs { get; set; }
 
         [Serializable]
         [XmlRoot("row")]
         public class NewIndustryJob {
-
             [XmlAttribute("jobID")]
             public long JobId { get; set; }
 
@@ -93,7 +91,6 @@ namespace eZet.EveLib.Modules.Models {
 
             [XmlAttribute("completedCharacterID")]
             public long CompletedCharacterId { get; set; }
-
         }
     }
 }

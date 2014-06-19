@@ -2,10 +2,8 @@
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public class EveWhoAllianceMembers {
-
         [DataMember(Name = "alliance_id")]
         public long AllianceId { get; set; }
 
@@ -17,6 +15,5 @@ namespace eZet.EveLib.Modules.Models {
 
         [DataMember(Name = "characters")]
         public IList<EveWhoMember> Members { get; set; }
-
     }
 }

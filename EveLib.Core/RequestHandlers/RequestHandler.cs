@@ -6,13 +6,12 @@ using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Core.RequestHandlers {
-
     /// <summary>
-    /// A basic RequestHandler with no special handling.
+    ///     A basic RequestHandler with no special handling.
     /// </summary>
     public class RequestHandler : IRequestHandler {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="serializer">Serializer to use for deserialization</param>
         public RequestHandler(ISerializer serializer) {
@@ -20,12 +19,12 @@ namespace eZet.EveLib.Core.RequestHandlers {
         }
 
         /// <summary>
-        /// Gets or sets the ISerializer used to deserialize response data.
+        ///     Gets or sets the ISerializer used to deserialize response data.
         /// </summary>
         public ISerializer Serializer { get; set; }
 
         /// <summary>
-        /// Performs a request against the specified URI, and returns the deserialized data.
+        ///     Performs a request against the specified URI, and returns the deserialized data.
         /// </summary>
         /// <typeparam name="T">Type to deserialize to</typeparam>
         /// <param name="uri">URI to request</param>
@@ -34,7 +33,8 @@ namespace eZet.EveLib.Core.RequestHandlers {
             string data = "";
             try {
                 data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
-            } catch (WebException e) {
+            }
+            catch (WebException e) {
                 throw new EveLibWebException("A request caused a WebException.", e.InnerException as WebException);
             }
             var val = Serializer.Deserialize<T>(data);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
@@ -8,7 +9,6 @@ using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Modules.RequestHandlers {
     public class ZkbRequestHandler : ICachedRequestHandler {
-
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         public ZkbRequestHandler(ISerializer serializer, IEveLibCache cache) {
@@ -19,7 +19,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         }
 
         public ISerializer Serializer { get; set; }
- 
+
 
         public async Task<T> RequestAsync<T>(Uri uri) {
             _trace.TraceEvent(TraceEventType.Start, 0, "ZkbRequestHandler.RequestAsync(): {0}", uri);
@@ -28,14 +28,14 @@ namespace eZet.EveLib.Modules.RequestHandlers {
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
             }
             var cacheTime = new DateTime();
-            var isCached = data != null;
+            bool isCached = data != null;
             if (!isCached) {
-                var request = HttpRequestHelper.CreateRequest(uri);
-                using (var response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false)) {
+                HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
+                using (
+                    HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false)) {
                     data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
                     cacheTime = DateTime.Parse(response.GetResponseHeader("Expires"));
                 }
-
             }
             if (!isCached && EnableCacheStore) {
                 await Cache.StoreAsync(uri, cacheTime.ToUniversalTime(), data).ConfigureAwait(false);

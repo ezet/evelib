@@ -204,7 +204,7 @@
     <Compile Include="Models\Map\Kills.cs" />
     <Compile Include="Models\Map\Sovereignty.cs" />
     <Compile Include="Models\Map\SovereigntyStatus.cs" />
-    <Compile Include="Models\NewIndustryJobs.cs" />
+    <Compile Include="Models\Character\NewIndustryJobs.cs" />
     <Compile Include="Exceptions\EveOnlineException.cs" />
     <Compile Include="RequestHandlers\WindowsCachedRequestHandler.cs" />
     <Compile Include="Util\XmlHelper.cs" />

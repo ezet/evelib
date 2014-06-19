@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public class EveWhoCorporationMembers {
-
         [DataMember(Name = "corporation_id")]
         public long CorporationId { get; set; }
 
@@ -18,7 +15,5 @@ namespace eZet.EveLib.Modules.Models {
 
         [DataMember(Name = "characters")]
         public IList<EveWhoMember> Members { get; set; }
-
-        
     }
 }

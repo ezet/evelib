@@ -1,10 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     [DataContract]
     public class EveWhoCorporation {
-
         [DataMember(Name = "corporation_id")]
         public long CorporationId { get; set; }
 
@@ -21,16 +19,19 @@ namespace eZet.EveLib.Modules.Models {
         public int MemberCount { get; set; }
 
         [DataMember(Name = "is_npc_corp")]
-        public string IsNpcCorporationString { set { IsNpcCorporation = value == "1"; } }
+        public string IsNpcCorporationString {
+            set { IsNpcCorporation = value == "1"; }
+        }
 
         public bool IsNpcCorporation { get; set; }
 
         [DataMember(Name = "avg_sec_status")]
-
         public double AvgSecurityStatus { get; set; }
 
         [DataMember(Name = "active")]
-        public string IsActiveString { set { IsActive = value == "1"; } }
+        public string IsActiveString {
+            set { IsActive = value == "1"; }
+        }
 
         public bool IsActive { get; set; }
 
@@ -42,6 +43,5 @@ namespace eZet.EveLib.Modules.Models {
 
         [DataMember(Name = "description")]
         public string Description { get; set; }
-
     }
 }

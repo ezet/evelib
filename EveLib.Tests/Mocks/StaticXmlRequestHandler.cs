@@ -24,7 +24,7 @@ namespace eZet.EveLib.Test.Mocks {
                 relPath = relPath.Remove(relPath.LastIndexOf(".aspx", StringComparison.Ordinal)).Replace("/", "\\");
                 relPath = baseDir + "\\Xml" + relPath;
                 using (StreamReader reader = (File.OpenText(relPath))) {
-                    var data = await reader.ReadToEndAsync().ConfigureAwait(false);
+                    string data = await reader.ReadToEndAsync().ConfigureAwait(false);
                     return Serializer.Deserialize<T>(data);
                 }
             }

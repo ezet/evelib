@@ -6,7 +6,6 @@ using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.RequestHandlers;
-using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
@@ -14,33 +13,6 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public abstract class BaseEntity {
         private const string DefaultUri = "https://api.eveonline.com";
-
-        private ICachedRequestHandler cachedRequestHandler() {
-            return RequestHandler as ICachedRequestHandler;
-        }
-
-        /// <summary>
-        /// Gets or sets whether data can be loaded from the cache.
-        /// </summary>
-        public bool EnableCacheLoad {
-            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheLoad; }
-            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheLoad = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets whether data can be stored in the cache.
-        /// </summary>
-        public bool EnableCacheStore {
-            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheStore; }
-            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheStore = value; }
-        }
-
-        /// <summary>
-        /// Returns true if the current request handler supports caching.
-        /// </summary>
-        public bool IsCacheHandler {
-            get { return cachedRequestHandler() != null; }
-        }
 
         protected BaseEntity() {
             var handler = new EveOnlineRequestHandler();
@@ -53,6 +25,29 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
+        ///     Gets or sets whether data can be loaded from the cache.
+        /// </summary>
+        public bool EnableCacheLoad {
+            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheLoad; }
+            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheLoad = value; }
+        }
+
+        /// <summary>
+        ///     Gets or sets whether data can be stored in the cache.
+        /// </summary>
+        public bool EnableCacheStore {
+            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheStore; }
+            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheStore = value; }
+        }
+
+        /// <summary>
+        ///     Returns true if the current request handler supports caching.
+        /// </summary>
+        public bool IsCacheHandler {
+            get { return cachedRequestHandler() != null; }
+        }
+
+        /// <summary>
         ///     Gets or sets the base url for entity requests
         /// </summary>
         public Uri BaseUri { get; set; }
@@ -61,6 +56,10 @@ namespace eZet.EveLib.Modules {
         ///     Gets or sets the requester this entity uses to perform requests.
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
+
+        private ICachedRequestHandler cachedRequestHandler() {
+            return RequestHandler as ICachedRequestHandler;
+        }
 
         /// <summary>
         ///     Performs a request on the requester, using the provided arguments.

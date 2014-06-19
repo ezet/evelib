@@ -16,7 +16,7 @@ namespace eZet.EveLib.Test {
         private const int KeyId = 3120814;
 
         private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
-        
+
 
         private readonly CharacterKey _piKey = new CharacterKey(3460081,
             "wpzj1BPcUMrSGj9L4YmkHLtoRWXCOsIipMECdUDElUiA3GUWvC67cy5xUZltyYoI");

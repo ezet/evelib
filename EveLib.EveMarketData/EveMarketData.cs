@@ -165,7 +165,8 @@ namespace eZet.EveLib.Modules {
         /// <param name="options">Valid options: Items, Regions, DayLimit</param>
         /// <param name="type"></param>
         /// <returns>Market history for one or more items.</returns>
-        public Task<EveMarketDataResponse<EmdItemOrders>> GetItemOrdersAsync(EveMarketDataOptions options, OrderType type) {
+        public Task<EveMarketDataResponse<EmdItemOrders>> GetItemOrdersAsync(EveMarketDataOptions options,
+            OrderType type) {
             Contract.Requires(options != null, "Options cannot be null.");
             string relUri = "/api/item_orders2." + Format.ToString().ToLower();
             string postString = getItemOrdersQueryString(options, type);

@@ -17,12 +17,8 @@ namespace eZet.EveLib.Modules {
             BaseUri = new Uri(DefaultUri);
         }
 
-        private ICachedRequestHandler cachedRequestHandler() {
-            return RequestHandler as ICachedRequestHandler;
-        }
-
         /// <summary>
-        /// Gets or sets whether data can be loaded from the cache.
+        ///     Gets or sets whether data can be loaded from the cache.
         /// </summary>
         public bool EnableCacheLoad {
             get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheLoad; }
@@ -30,7 +26,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets or sets whether data can be stored in the cache.
+        ///     Gets or sets whether data can be stored in the cache.
         /// </summary>
         public bool EnableCacheStore {
             get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheStore; }
@@ -38,7 +34,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns true if the current request handler supports caching.
+        ///     Returns true if the current request handler supports caching.
         /// </summary>
         public bool IsCacheHandler {
             get { return cachedRequestHandler() != null; }
@@ -47,6 +43,10 @@ namespace eZet.EveLib.Modules {
         public Uri BaseUri { get; set; }
 
         public IRequestHandler RequestHandler { get; set; }
+
+        private ICachedRequestHandler cachedRequestHandler() {
+            return RequestHandler as ICachedRequestHandler;
+        }
 
         public ZkbResponse GetKills(ZKillboardOptions options) {
             Contract.Requires(options != null, "Options cannot be null");

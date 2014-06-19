@@ -3,21 +3,18 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.Core.Util {
-
     /// <summary>
-    /// A base class for Eve Lib API modules.
+    ///     A base class for Eve Lib API modules.
     /// </summary>
     public abstract class EveLibApiBase {
-
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         protected EveLibApiBase() {
-            
         }
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="requestHandler"></param>
@@ -37,7 +34,7 @@ namespace eZet.EveLib.Core.Util {
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets the relative path to the API base. 
+        ///     Gets or sets the relative path to the API base.
         /// </summary>
         public string ApiPath { get; set; }
 

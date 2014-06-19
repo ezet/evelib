@@ -18,27 +18,27 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
-        /// Gets or sets whether the handler can load data from the cache.
+        ///     Gets or sets whether the handler can load data from the cache.
         /// </summary>
         public bool EnableCacheLoad { get; set; }
 
         /// <summary>
-        /// Gets or sets whether the handler can store data in cache.
+        ///     Gets or sets whether the handler can store data in cache.
         /// </summary>
         public bool EnableCacheStore { get; set; }
 
         /// <summary>
-        /// Gets or sets the Cache.
+        ///     Gets or sets the Cache.
         /// </summary>
         public IEveLibCache Cache { get; set; }
 
         /// <summary>
-        /// Gets or sets the serializer.
+        ///     Gets or sets the serializer.
         /// </summary>
         public ISerializer Serializer { get; set; }
 
         /// <summary>
-        /// Requests data from uri, with error handling specific to the Eve Online API.
+        ///     Requests data from uri, with error handling specific to the Eve Online API.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri"></param>
@@ -51,9 +51,10 @@ namespace eZet.EveLib.Modules.RequestHandlers {
             if (!cached) {
                 try {
                     data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
-                } catch (WebException e) {
+                }
+                catch (WebException e) {
                     _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
-                    var response = (HttpWebResponse)e.Response;
+                    var response = (HttpWebResponse) e.Response;
                     if (response == null) throw;
                     Stream responseStream = response.GetResponseStream();
                     if (responseStream == null) throw;
@@ -73,7 +74,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         }
 
         /// <summary>
-        /// Gets the CachedUntil value from a EveApiResponse object.
+        ///     Gets the CachedUntil value from a EveApiResponse object.
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>

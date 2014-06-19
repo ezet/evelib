@@ -3,12 +3,11 @@ using eZet.EveLib.Core.Exceptions;
 
 namespace eZet.EveLib.Modules.Exceptions {
     /// <summary>
-    /// Exception class for the Eve Online API.
+    ///     Exception class for the Eve Online API.
     /// </summary>
     public class EveOnlineException : EveLibWebException {
-
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="message">Messaged returned by the Eve Online API</param>
         /// <param name="code">Error code returned by the Eve Online API</param>
@@ -19,7 +18,7 @@ namespace eZet.EveLib.Modules.Exceptions {
         }
 
         /// <summary>
-        /// Gets the error code returned by the Eve Online API.
+        ///     Gets the error code returned by the Eve Online API.
         /// </summary>
         public int ErrorCode { get; private set; }
     }

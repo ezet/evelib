@@ -36,7 +36,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Initializes properties.
+        ///     Initializes properties.
         /// </summary>
         /// <returns></returns>
         public new async Task<CorporationKey> InitAsync() {

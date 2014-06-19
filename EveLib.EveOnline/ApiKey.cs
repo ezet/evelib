@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using eZet.EveLib.Core.Exceptions;
+using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 
@@ -14,15 +15,17 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public enum ApiKeyType {
         /// <summary>
-        /// Key with access to all characters.
+        ///     Key with access to all characters.
         /// </summary>
         [XmlEnum("Account")] Account,
+
         /// <summary>
-        /// Key with access to a single character.
+        ///     Key with access to a single character.
         /// </summary>
         [XmlEnum("Character")] Character,
+
         /// <summary>
-        /// Key with access to a single corporation.
+        ///     Key with access to a single corporation.
         /// </summary>
         [XmlEnum("Corporation")] Corporation
     }
@@ -63,7 +66,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets or sets the ApiKeyData used to initialize properties.
+        ///     Gets or sets the ApiKeyData used to initialize properties.
         /// </summary>
         protected ApiKeyInfo.ApiKeyData ApiKeyInfo {
             get {
@@ -217,9 +220,9 @@ namespace eZet.EveLib.Modules {
                 Init();
             }
             catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof (EveLibWebException)) {
-                    var ire = (EveLibWebException) e.InnerException;
-                    if (((HttpWebResponse) ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
+                if (e.InnerException.GetType() == typeof (EveOnlineException)) {
+                    var ire = (EveOnlineException) e.InnerException;
+                    if (((HttpWebResponse) ire.WebException.Response).StatusCode == HttpStatusCode.Forbidden) {
                         _isValidKey = false;
                     }
                 }
@@ -238,13 +241,10 @@ namespace eZet.EveLib.Modules {
             try {
                 await InitAsync().ConfigureAwait(false);
             }
-            catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof (EveLibWebException)) {
-                    var ire = (EveLibWebException) e.InnerException;
-                    if (((HttpWebResponse) ire.InnerException.Response).StatusCode == HttpStatusCode.Forbidden) {
+            catch (EveOnlineException e) {
+                    if (((HttpWebResponse) e.WebException.Response).StatusCode == HttpStatusCode.Forbidden) {
                         _isValidKey = false;
                     }
-                }
                 else throw;
             }
             return _isValidKey.GetValueOrDefault(true);

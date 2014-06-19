@@ -9,38 +9,38 @@ namespace eZet.EveLib.Core {
     /// </summary>
     public static class Config {
         /// <summary>
-        /// Directory Separator
+        ///     Directory Separator
         /// </summary>
         public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
-        /// Path to ApplicationData folder.
+        ///     Path to ApplicationData folder.
         /// </summary>
         public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                                 Separator;
 
         /// <summary>
-        /// Filename for the Cache Register
+        ///     Filename for the Cache Register
         /// </summary>
         public static readonly string CacheRegisterFileName = "cache";
 
         /// <summary>
-        /// Path to cache directory
+        ///     Path to cache directory
         /// </summary>
         public static readonly string CachePath;
 
         /// <summary>
-        /// Path to image directory
+        ///     Path to image directory
         /// </summary>
         public static readonly string ImagePath;
 
         /// <summary>
-        /// Full path to cache register file
+        ///     Full path to cache register file
         /// </summary>
         public static readonly string CacheRegister;
 
         /// <summary>
-        /// UserAgent used for HTTP requests
+        ///     UserAgent used for HTTP requests
         /// </summary>
         public static readonly string UserAgent = ConfigurationManager.AppSettings["eveLib.UserAgent"];
 
