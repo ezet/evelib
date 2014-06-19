@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib", "EveLib\EveLib.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.StaticData", "EveLib.EveStaticData\EveLib.StaticData.csproj", "{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveWho", "EveLib.EveWho\EveLib.EveWho.csproj", "{A11F0424-9183-4C54-9D0E-AD82BC9D6923}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A11F0424-9183-4C54-9D0E-AD82BC9D6923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11F0424-9183-4C54-9D0E-AD82BC9D6923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11F0424-9183-4C54-9D0E-AD82BC9D6923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11F0424-9183-4C54-9D0E-AD82BC9D6923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

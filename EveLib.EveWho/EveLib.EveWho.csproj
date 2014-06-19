@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{845B3203-B28A-4038-9E4D-48CD9D2E8A45}</ProjectGuid>
+    <ProjectGuid>{A11F0424-9183-4C54-9D0E-AD82BC9D6923}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib</RootNamespace>
-    <AssemblyName>EveLib</AssemblyName>
+    <RootNamespace>eZet.EveLib.Modules</RootNamespace>
+    <AssemblyName>EveLib.EveWho</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
@@ -21,8 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
-    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>True</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
     <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
     <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
@@ -52,11 +52,9 @@
     <CodeContractsBaseLineFile />
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
-    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
+    <CodeContractsRuntimeCheckingLevel>Pre and Post</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -86,7 +84,7 @@
     <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
     <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
     <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
-    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
     <CodeContractsCustomRewriterAssembly />
     <CodeContractsCustomRewriterClass />
     <CodeContractsLibPaths />
@@ -97,57 +95,28 @@
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Example.cs" />
+    <Compile Include="EveWho.cs" />
+    <Compile Include="Models\EveWhoAlliance.cs" />
+    <Compile Include="Models\EveWhoCharacter.cs" />
+    <Compile Include="Models\EveWhoCorporation.cs" />
+    <Compile Include="Models\EveWhoCorporationMembers.cs" />
+    <Compile Include="Models\EveWhoMember.cs" />
+    <Compile Include="Models\EveWhoResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
-      <Project>{aa85978c-2bf5-419f-9f8e-b70162e83f34}</Project>
-      <Name>EveLib.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.Element43\EveLib.Element43.csproj">
-      <Project>{91c78379-3d32-4131-8cd7-c1e8876d0933}</Project>
-      <Name>EveLib.Element43</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveCentral\EveLib.EveCentral.csproj">
-      <Project>{fcd48e90-6605-4bc1-b761-0b37df390990}</Project>
-      <Name>EveLib.EveCentral</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveCrest\EveLib.EveCrest.csproj">
-      <Project>{f81627b3-99af-4b4f-926a-685d21569451}</Project>
-      <Name>EveLib.EveCrest</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveMarketData\EveLib.EveMarketData.csproj">
-      <Project>{185e2271-bba1-4071-ac46-bf47153bdb7a}</Project>
-      <Name>EveLib.EveMarketData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveOnline\EveLib.EveOnline.csproj">
-      <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
-      <Name>EveLib.EveOnline</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveStaticData\EveLib.StaticData.csproj">
-      <Project>{25a492fe-1004-4a0b-aad3-b5395c2d47ea}</Project>
-      <Name>EveLib.StaticData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveWho\EveLib.EveWho.csproj">
-      <Project>{a11f0424-9183-4c54-9d0e-ad82bc9d6923}</Project>
-      <Name>EveLib.EveWho</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.ZKillboard\Evelib.ZKillboard.csproj">
-      <Project>{741bdd36-b71c-4abe-9b03-185fbd6767f4}</Project>
-      <Name>Evelib.ZKillboard</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
