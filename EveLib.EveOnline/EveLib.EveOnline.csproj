@@ -164,6 +164,7 @@
     <Compile Include="Models\Character\WalletJournal.cs" />
     <Compile Include="Models\Character\WalletTransactions.cs" />
     <Compile Include="Models\Corporation\CustomsOffices.cs" />
+    <Compile Include="Models\Corporation\Facilities.cs" />
     <Compile Include="Models\EveApiEnums.cs" />
     <Compile Include="Models\Misc\AllianceList.cs" />
     <Compile Include="Models\Misc\CallList.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Models\Map\Kills.cs" />
     <Compile Include="Models\Map\Sovereignty.cs" />
     <Compile Include="Models\Map\SovereigntyStatus.cs" />
+    <Compile Include="Models\NewIndustryJobs.cs" />
     <Compile Include="Util\WindowsCachedRequestHandler.cs" />
     <Compile Include="Util\XmlHelper.cs" />
     <Compile Include="Models\EveOnlineRowCollection.cs" />

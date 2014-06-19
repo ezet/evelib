@@ -365,6 +365,41 @@ namespace eZet.EveLib.Modules {
             return requestAsync<IndustryJobs>(relPath, ApiKey);
         }
 
+
+        /// <summary>
+        ///     Returns the currently running industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<NewIndustryJobs>> GetNewIndustryJobsAsync() {
+            const string relPath = "/corp/IndustryJobs.xml.aspx";
+            return requestAsync<NewIndustryJobs>(relPath, ApiKey);
+        }
+
+        /// <summary>
+        ///     Returns the currently running industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<NewIndustryJobs> GetNewIndustryJobs() {
+            return GetNewIndustryJobsAsync().Result;
+        }
+
+        /// <summary>
+        ///     Returns currently running and ended industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<NewIndustryJobs>> GetIndustryJobsHistoryAsync() {
+            const string relPath = "/corp/IndustryJobsHistory.xml.aspx";
+            return requestAsync<NewIndustryJobs>(relPath, ApiKey);
+        }
+
+        /// <summary>
+        ///     Returns currently running and ended industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<NewIndustryJobs> GetIndustryHistoryJobs() {
+            return GetIndustryJobsHistoryAsync().Result;
+        }
+
         /// <summary>
         ///     Returns a list of kills where this corporation received the final blow and losses of this corporation.
         ///     <para></para>
@@ -715,13 +750,38 @@ namespace eZet.EveLib.Modules {
                     fromId);
         }
 
+        /// <summary>
+        /// Returns a list of owned Customs Offices
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<CustomsOffices>> GetCustomsOfficesAsync() {
+            const string relPath = "/corp/CustomsOffices.xml.aspx";
+            return requestAsync<CustomsOffices>(relPath, ApiKey);
+        }
+
+        /// <summary>
+        /// Returns a list of owned Customs Offices
+        /// </summary>
+        /// <returns></returns>
         public EveApiResponse<CustomsOffices> GetCustomsOffices() {
             return GetCustomsOfficesAsync().Result;
         }
 
-        public Task<EveApiResponse<CustomsOffices>> GetCustomsOfficesAsync() {
-            const string relPath = "/corp/CustomsOffices.xml.aspx";
-            return requestAsync<CustomsOffices>(relPath, ApiKey);
+        /// <summary>
+        /// Returns a listing all of a corporations facilities, including POS and Outposts.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<Facilities>> GetFacilitiesAsync() {
+            const string relPath = "/corp/Facilities.xml.aspx";
+            return requestAsync<Facilities>(relPath, ApiKey);
+        }
+
+        /// <summary>
+        /// Returns a listing all of a corporations facilities, including POS and Outposts.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<Facilities> GetFacilities() {
+            return GetFacilitiesAsync().Result;
         }
     }
 }

@@ -442,9 +442,44 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
+        ///     Returns the currently running industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<NewIndustryJobs>> GetNewIndustryJobsAsync() {
+            const string relPath = "/char/IndustryJobs.xml.aspx";
+            return requestAsync<NewIndustryJobs>(relPath, ApiKey, "characterId", CharacterId);
+        }
+
+        /// <summary>
+        ///     Returns the currently running industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<NewIndustryJobs> GetNewIndustryJobs() {
+            return GetNewIndustryJobsAsync().Result;
+        }
+
+
+        /// <summary>
+        ///     Returns currently running and ended industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<NewIndustryJobs>> GetIndustryJobsHistoryAsync() {
+            const string relPath = "/char/IndustryJobsHistory.xml.aspx";
+            return requestAsync<NewIndustryJobs>(relPath, ApiKey, "characterId", CharacterId);
+        }
+
+        /// <summary>
+        ///     Returns currently running and ended industry jobs.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<NewIndustryJobs> GetIndustryJobsHistory() {
+            return GetIndustryJobsHistoryAsync().Result;
+        }
+
+        /// <summary>
         ///     Returns a list of kills where this character received the final blow and losses of this character.
         ///     <para></para>
-        ///     Returns the 25 most recent kills. You can scroll back with the killId parameter.
+        ///     Returns the 25 most recent kills. You can walk back with the killId parameter.
         /// </summary>
         /// <param name="killId">Optional; if present, return the most recent kills before the specified killID.</param>
         /// <returns></returns>
@@ -455,7 +490,7 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Returns a list of kills where this character received the final blow and losses of this character.
         ///     <para></para>
-        ///     Returns the 25 most recent kills. You can scroll back with the killId parameter.
+        ///     Returns the 25 most recent kills. You can walk back with the killId parameter.
         /// </summary>
         /// <param name="killId">Optional; if present, return the most recent kills before the specified killID.</param>
         /// <returns></returns>
