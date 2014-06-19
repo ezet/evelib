@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
@@ -10,9 +9,9 @@ namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to the Eve Online CREST API.
     /// </summary>
-    public class EveCrest {
+    public class EveCrest : EveLibApiBase {
         /// <summary>
-        ///     The default URI used to access the CREST API.
+        ///     The default URI used to access the CREST API. This can be overridded by setting the BaseUri.
         /// </summary>
         public const string DefaultUri = "http://public-crest.eveonline.com/";
 
@@ -23,16 +22,6 @@ namespace eZet.EveLib.Modules {
             RequestHandler = new EveCrestRequestHandler(new DynamicJsonSerializer());
             BaseUri = new Uri(DefaultUri);
         }
-
-        /// <summary>
-        ///     Gets or sets the request handler used by this instance
-        /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the URI used to access the CREST API by this instance.
-        /// </summary>
-        public Uri BaseUri { get; set; }
 
         /// <summary>
         ///     Returns data on the specified killmail.
@@ -202,16 +191,6 @@ namespace eZet.EveLib.Modules {
         public Task<KillmailCollection> GetWarKillmailsAsync(int warId) {
             string relPath = "/wars/" + warId + "/killmails/all/";
             return requestAsync<KillmailCollection>(relPath);
-        }
-
-        /// <summary>
-        ///     Performs a request using the request handler.
-        /// </summary>
-        /// <typeparam name="T">Response type</typeparam>
-        /// <param name="relPath">Relative path</param>
-        /// <returns></returns>
-        private Task<T> requestAsync<T>(string relPath) {
-            return RequestHandler.RequestAsync<T>(new Uri(BaseUri, relPath));
         }
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="Character_StaticDeserializationTests.cs" />
     <Compile Include="EveCrest_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
+    <Compile Include="EveWho_Tests.cs" />
     <Compile Include="StaticData_Tests.cs" />
     <Compile Include="Misc_Tests.cs" />
     <Compile Include="Corporation_StaticDeserializationTests.cs" />
@@ -236,6 +237,10 @@
     <ProjectReference Include="..\EveLib.EveStaticData\EveLib.StaticData.csproj">
       <Project>{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}</Project>
       <Name>EveLib.StaticData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveWho\EveLib.EveWho.csproj">
+      <Project>{A11F0424-9183-4C54-9D0E-AD82BC9D6923}</Project>
+      <Name>EveLib.EveWho</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveLib.ZKillboard\Evelib.ZKillboard.csproj">
       <Project>{741BDD36-B71C-4ABE-9B03-185FBD6767F4}</Project>

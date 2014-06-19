@@ -111,12 +111,19 @@
   <ItemGroup>
     <Compile Include="EveWho.cs" />
     <Compile Include="Models\EveWhoAlliance.cs" />
+    <Compile Include="Models\EveWhoAllianceMembers.cs" />
     <Compile Include="Models\EveWhoCharacter.cs" />
     <Compile Include="Models\EveWhoCorporation.cs" />
     <Compile Include="Models\EveWhoCorporationMembers.cs" />
     <Compile Include="Models\EveWhoMember.cs" />
     <Compile Include="Models\EveWhoResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
+      <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
+      <Name>EveLib.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

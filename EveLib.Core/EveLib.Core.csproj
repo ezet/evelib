@@ -135,6 +135,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Util\AsyncLazy.cs" />
     <Compile Include="Serializers\DynamicJsonSerializer.cs" />
+    <Compile Include="Util\EveLibApiBase.cs" />
     <Compile Include="Util\File.cs" />
     <Compile Include="RequestHandlers\ICachedRequestHandler.cs" />
     <Compile Include="Cache\IEveLibCache.cs" />
