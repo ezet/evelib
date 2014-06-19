@@ -4,7 +4,7 @@ namespace eZet.EveLib.Core.Exceptions {
     /// <summary>
     /// Base for all EveLib Exceptions
     /// </summary>
-    public abstract class EveLibException : Exception {
+    public class EveLibException : Exception {
 
         /// <summary>
         /// Constructor
