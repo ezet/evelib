@@ -13,8 +13,17 @@ namespace eZet.EveLib.Modules {
     ///     Eve Online API Key Types
     /// </summary>
     public enum ApiKeyType {
+        /// <summary>
+        /// Key with access to all characters.
+        /// </summary>
         [XmlEnum("Account")] Account,
+        /// <summary>
+        /// Key with access to a single character.
+        /// </summary>
         [XmlEnum("Character")] Character,
+        /// <summary>
+        /// Key with access to a single corporation.
+        /// </summary>
         [XmlEnum("Corporation")] Corporation
     }
 
@@ -53,6 +62,9 @@ namespace eZet.EveLib.Modules {
             VCode = key.VCode;
         }
 
+        /// <summary>
+        /// Gets or sets the ApiKeyData used to initialize properties.
+        /// </summary>
         protected ApiKeyInfo.ApiKeyData ApiKeyInfo {
             get {
                 Init();

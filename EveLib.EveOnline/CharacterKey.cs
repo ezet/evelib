@@ -42,6 +42,10 @@ namespace eZet.EveLib.Modules {
             get { return _characters.Value; }
         }
 
+        /// <summary>
+        /// Initializes properties.
+        /// </summary>
+        /// <returns></returns>
         public new async Task<CharacterKey> InitAsync() {
             return await base.InitAsync().ConfigureAwait(false) as CharacterKey;
         }

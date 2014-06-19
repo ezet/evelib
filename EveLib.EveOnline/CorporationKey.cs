@@ -35,6 +35,10 @@ namespace eZet.EveLib.Modules {
             get { return _corporation.Value; }
         }
 
+        /// <summary>
+        /// Initializes properties.
+        /// </summary>
+        /// <returns></returns>
         public new async Task<CorporationKey> InitAsync() {
             return await base.InitAsync().ConfigureAwait(false) as CorporationKey;
         }

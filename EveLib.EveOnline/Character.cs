@@ -806,40 +806,76 @@ namespace eZet.EveLib.Modules {
                     fromId);
         }
 
-
+        /// <summary>
+        /// Returns planetary colonies.
+        /// </summary>
+        /// <returns></returns>
         public EveApiResponse<PlanetaryColonies> GetPlanetaryColonies() {
             return GetPlanetaryColoniesAsync().Result;
         }
 
+        /// <summary>
+        /// Returns planetary colonies.
+        /// </summary>
+        /// <returns></returns>
         public Task<EveApiResponse<PlanetaryColonies>> GetPlanetaryColoniesAsync() {
             const string relPath = "/char/PlanetaryColonies.xml.aspx";
             return requestAsync<PlanetaryColonies>(relPath, ApiKey, "characterId", CharacterId);
         }
 
+        /// <summary>
+        /// Returns planetary pins for a planet.
+        /// </summary>
+        /// <param name="planetId">Planet ID</param>
+        /// <returns></returns>
         public EveApiResponse<PlanetaryPins> GetPlanetaryPins(long planetId) {
             return GetPlanetaryPinsAsync(planetId).Result;
         }
 
-
+        /// <summary>
+        /// Returns planetary pins for a planet.
+        /// </summary>
+        /// <param name="planetId">Planet ID</param>
+        /// <returns></returns>
         public Task<EveApiResponse<PlanetaryPins>> GetPlanetaryPinsAsync(long planetId) {
             const string relPath = "/char/PlanetaryPins.xml.aspx";
             return requestAsync<PlanetaryPins>(relPath, ApiKey, "characterId", CharacterId, "planetId", planetId);
         }
 
+        /// <summary>
+        /// Returns planetary routes for a planet.
+        /// </summary>
+        /// <param name="planetId">Planet ID</param>
+        /// <returns></returns>
         public EveApiResponse<PlanetaryRoutes> GetPlanetaryRoutes(long planetId) {
             return GetPlanetaryRoutesAsync(planetId).Result;
         }
 
+
+        /// <summary>
+        /// Returns planetary routes for a planet.
+        /// </summary>
+        /// <param name="planetId">Planet ID</param>
+        /// <returns></returns>
         public Task<EveApiResponse<PlanetaryRoutes>> GetPlanetaryRoutesAsync(long planetId) {
             const string relPath = "/char/PlanetaryRoutes.xml.aspx";
             return requestAsync<PlanetaryRoutes>(relPath, ApiKey, "characterId", CharacterId, "planetId", planetId);
         }
 
-
+        /// <summary>
+        /// Returns planetary links for a planet.
+        /// </summary>
+        /// <param name="planetId">Planet ID</param>
+        /// <returns></returns>
         public EveApiResponse<PlanetaryLinks> GetPlanetaryLinks(long planetId) {
             return GetPlanetaryLinksAsync(planetId).Result;
         }
 
+        /// <summary>
+        /// Returns planetary links for a planet.
+        /// </summary>
+        /// <param name="planetId">Planet ID</param>
+        /// <returns></returns>
         public Task<EveApiResponse<PlanetaryLinks>> GetPlanetaryLinksAsync(long planetId) {
             const string relPath = "/char/PlanetaryLinks.xml.aspx";
             return requestAsync<PlanetaryLinks>(relPath, ApiKey, "characterId", CharacterId, "planetId", planetId);
