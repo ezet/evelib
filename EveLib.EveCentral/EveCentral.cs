@@ -6,6 +6,9 @@ using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
+    /// <summary>
+    /// Class for accessing the EveCentral API
+    /// </summary>
     public class EveCentral {
         private const string DefaultUri = "http://api.eve-central.com";
 
@@ -14,7 +17,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public EveCentral() {
             BaseUri = new Uri(DefaultUri);
-            RequestHandler = new RequestHandler(new SimpleXmlSerializer());
+            RequestHandler = new RequestHandler(new XmlSerializer());
         }
 
         /// <summary>
@@ -26,8 +29,6 @@ namespace eZet.EveLib.Modules {
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
-
-        public ISerializer Serializer { get; set; }
 
         /// <summary>
         ///     Returns aggregate statistics for the items specified.
@@ -120,7 +121,11 @@ namespace eZet.EveLib.Modules {
             return requestAsync<EveCentralQuickLookResponse>(relUri, queryString);
         }
 
+        /// <summary>
+        /// Retrieves the eve central market history
+        /// </summary>
         public void GetHistory() {
+            // TODO Implements this
             throw new NotImplementedException();
         }
 

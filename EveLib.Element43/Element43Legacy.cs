@@ -6,14 +6,20 @@ using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
+    /// <summary>
+    /// Class for accessing the Element43 Legacy API
+    /// </summary>
     public class Element43Legacy {
+        /// <summary>
+        /// The default api URI 
+        /// </summary>
         public const string DefaultUri = "http://element-43.com";
 
         /// <summary>
         ///     Default constructor, with a default base uri and request handler.
         /// </summary>
         public Element43Legacy() {
-            RequestHandler = new RequestHandler(new SimpleXmlSerializer());
+            RequestHandler = new RequestHandler(new XmlSerializer());
             BaseUri = new Uri(DefaultUri);
         }
 

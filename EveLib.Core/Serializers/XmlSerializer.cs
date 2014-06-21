@@ -8,7 +8,7 @@ namespace eZet.EveLib.Core.Serializers {
     /// <summary>
     ///     A simple wrapper for .NET XmlSerializer.
     /// </summary>
-    public sealed class SimpleXmlSerializer : ISerializer {
+    public sealed class XmlSerializer : ISerializer {
         private readonly TraceSource _trace = new TraceSource("EveLib");
 
         /// <summary>
@@ -18,13 +18,15 @@ namespace eZet.EveLib.Core.Serializers {
         /// <param name="data">An XML string</param>
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "XmlSerializer.Deserialize:Start");
             Type type = typeof (T);
-            var serializer = new XmlSerializer(type);
+            var serializer = new System.Xml.Serialization.XmlSerializer(type);
             T xmlResponse;
             var stringreader = new StringReader(data);
             using (XmlReader reader = XmlReader.Create(stringreader)) {
                 xmlResponse = (T) serializer.Deserialize(reader);
             }
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "XmlSerializer.Deserialize:Complete");
             return xmlResponse;
         }
     }

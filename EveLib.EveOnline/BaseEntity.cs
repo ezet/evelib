@@ -19,7 +19,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         protected BaseEntity() {
             var handler = new EveOnlineRequestHandler();
-            handler.Serializer = new SimpleXmlSerializer();
+            handler.Serializer = new XmlSerializer();
             handler.Cache = new EveLibFileCache();
             RequestHandler = handler;
             BaseUri = DefaultUri;

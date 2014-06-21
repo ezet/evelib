@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Exceptions;
@@ -10,6 +11,8 @@ namespace eZet.EveLib.Core.RequestHandlers {
     ///     A basic RequestHandler with no special handling.
     /// </summary>
     public class RequestHandler : IRequestHandler {
+        private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
+
         /// <summary>
         ///     Constructor
         /// </summary>
@@ -30,7 +33,8 @@ namespace eZet.EveLib.Core.RequestHandlers {
         /// <param name="uri">URI to request</param>
         /// <returns></returns>
         public virtual async Task<T> RequestAsync<T>(Uri uri) {
-            string data = "";
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "RequestHandler.Deserialize:Start");
+            string data;
             try {
                 data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
             }
@@ -38,6 +42,7 @@ namespace eZet.EveLib.Core.RequestHandlers {
                 throw new EveLibWebException("A request caused a WebException.", e.InnerException as WebException);
             }
             var val = Serializer.Deserialize<T>(data);
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "RequestHandler.Deserialize:Complete");
             return val;
         }
     }

@@ -11,10 +11,13 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public const string DefaultUri = "http://www.evewho.com/";
 
+        /// <summary>
+        /// The default relative path to the API base.
+        /// </summary>
         public const string DefaultApiPath = "api.php";
 
         public EveWho() {
-            RequestHandler = new RequestHandler(new DynamicJsonSerializer());
+            RequestHandler = new RequestHandler(new JsonSerializer());
             BaseUri = DefaultUri;
             ApiPath = DefaultApiPath;
         }

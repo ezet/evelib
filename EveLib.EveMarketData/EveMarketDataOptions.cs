@@ -7,30 +7,60 @@ using Newtonsoft.Json.Converters;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
-    ///     Used to specify upload type in requests.
+    ///     Represents the upload types.
     /// </summary>
     [DataContract]
     [JsonConverter(typeof (StringEnumConverter))]
     public enum UploadType {
+        /// <summary>
+        /// Orders
+        /// </summary>
         [XmlEnum("o"), EnumMember(Value = "o")] Orders,
+        /// <summary>
+        /// History
+        /// </summary>
         [XmlEnum("h"), EnumMember(Value = "h")] History,
+        /// <summary>
+        /// Order and history
+        /// </summary>
         [XmlEnum("b"), EnumMember(Value = "b")] Both
     }
 
     /// <summary>
-    ///     Used to specify OrderType in requests.
+    ///     Represents the order types
     /// </summary>
     [DataContract]
     [JsonConverter(typeof (StringEnumConverter))]
     public enum OrderType {
+        /// <summary>
+        /// Sell order
+        /// </summary>
         [XmlEnum("s"), EnumMember(Value = "s")] Sell,
+        /// <summary>
+        /// Buy order
+        /// </summary>
         [XmlEnum("b"), EnumMember(Value = "b")] Buy,
+        /// <summary>
+        /// Buy and sell orders
+        /// </summary>
         [XmlEnum("a"), EnumMember(Value = "a")] Both
     }
 
+    /// <summary>
+    /// I honestly don't know what this represents, see marketdata api docs.
+    /// </summary>
     public enum MinMax {
+        /// <summary>
+        /// None
+        /// </summary>
         None,
+        /// <summary>
+        /// Minimum
+        /// </summary>
         Min,
+        /// <summary>
+        /// Maximum
+        /// </summary>
         Max
     }
 
@@ -38,6 +68,9 @@ namespace eZet.EveLib.Modules {
     ///     Provides a set of configurable options for EveMarketData requests.
     /// </summary>
     public class EveMarketDataOptions {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public EveMarketDataOptions() {
             Items = new List<int>();
             ItemGroups = new List<int>();

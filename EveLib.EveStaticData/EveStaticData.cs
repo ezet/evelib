@@ -5,24 +5,47 @@ using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
+    /// <summary>
+    /// Class for accessing the static data API from Elemen43
+    /// </summary>
     public class EveStaticData {
+
+        /// <summary>
+        /// Represents the data formats
+        /// </summary>
         public enum DataFormat {
+            /// <summary>
+            /// JSON
+            /// </summary>
             Json,
             //Xml,
             //Yaml
         }
 
+        /// <summary>
+        /// The default URI base.
+        /// </summary>
         public const string DefaultUri = "http://element-43.com/";
 
+        /// <summary>
+        /// The default relative path for the API base.
+        /// </summary>
         public const string DefaultApiPath = "api/";
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="format">The format to request</param>
         public EveStaticData(DataFormat format = DataFormat.Json) {
-            RequestHandler = new RequestHandler(new DynamicJsonSerializer());
+            RequestHandler = new RequestHandler(new JsonSerializer());
             BaseUri = new Uri(DefaultUri);
             ApiPath = DefaultApiPath;
             Format = format;
         }
 
+        /// <summary>
+        /// Gets the format requested by this instance.
+        /// </summary>
         public DataFormat Format { get; private set; }
 
 
@@ -41,6 +64,10 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 
+        /// <summary>
+        /// Sets the format requested by this instance
+        /// </summary>
+        /// <param name="format"></param>
         public void SetFormat(DataFormat format) {
             Format = format;
             // TODO set format

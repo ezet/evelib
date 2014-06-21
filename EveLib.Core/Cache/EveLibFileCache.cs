@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Core.Cache {
+    /// <summary>
+    /// Simple plain file cache implementation
+    /// </summary>
     public class EveLibFileCache : IEveLibCache {
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 
@@ -19,8 +22,15 @@ namespace eZet.EveLib.Core.Cache {
 
         private bool _isInitialized;
 
+        /// <summary>
+        /// Stores data to the cache
+        /// </summary>
+        /// <param name="uri">The uri this caches</param>
+        /// <param name="cacheTime">The cache expiry time</param>
+        /// <param name="data">The data to cache</param>
+        /// <returns></returns>
         public async Task StoreAsync(Uri uri, DateTime cacheTime, string data) {
-            _trace.TraceEvent(TraceEventType.Start, 0, "EveLibFileCache.StoreAsync()");
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache.StoreAsync:Start");
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Uri: {0}", uri);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Cache Expiry: {0}", cacheTime);
 
@@ -38,11 +48,16 @@ namespace eZet.EveLib.Core.Cache {
             catch (Exception) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "EveLibFileCache:An error occured while writing to cache");
             }
-            _trace.TraceEvent(TraceEventType.Stop, 0, "EveLibFileCache.StoreAsync()");
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache.StoreAsync:Complete");
         }
 
+        /// <summary>
+        /// Loads data from cache
+        /// </summary>
+        /// <param name="uri">The uri to load cache for</param>
+        /// <returns>The cached data</returns>
         public async Task<string> LoadAsync(Uri uri) {
-            _trace.TraceEvent(TraceEventType.Start, 0, "EveLibFileCache.LoadAsync()");
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache.LoadAsync:Start");
             await initAsync().ConfigureAwait(false);
             string data = null;
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterLookupUri: {0}", uri);
@@ -63,7 +78,7 @@ namespace eZet.EveLib.Core.Cache {
                         try {
                             data =
                                 await
-                                    FileAsync.ReadAllTextAsync(Config.CachePath + Config.Separator + getHash(uri))
+                                    AsyncFileUtilities.ReadAllTextAsync(Config.CachePath + Config.Separator + getHash(uri))
                                         .ConfigureAwait(false);
                             _trace.TraceEvent(TraceEventType.Verbose, 0,
                                 "EveLibFileCache:Data successfully loaded from cache: {0}",
@@ -76,10 +91,16 @@ namespace eZet.EveLib.Core.Cache {
                     }
                 }
             }
-            _trace.TraceEvent(TraceEventType.Stop, 0, "EveLibFileCache.LoadAsync()");
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache.LoadAsync:Complete");
             return data;
         }
 
+        /// <summary>
+        /// Gets the cache expiry time for specified uri
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public virtual bool TryGetExpirationDate(Uri uri, out DateTime value) {
             string key = getHash(uri);
             return _register.TryGetValue(key, out value);
@@ -93,13 +114,13 @@ namespace eZet.EveLib.Core.Cache {
 
         private Task writeRegisterToDiskAsync() {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache register to disk");
-            return FileAsync.WriteAllLinesAsync(Config.CacheRegister,
+            return AsyncFileUtilities.WriteAllLinesAsync(Config.CacheRegister,
                 _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
         }
 
         private Task writeCacheDataToDiskAsync(Uri uri, string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache data to disk: {0}", uri);
-            return FileAsync.WriteAllTextAsync(Config.CachePath + Path.DirectorySeparatorChar + getHash(uri), data);
+            return AsyncFileUtilities.WriteAllTextAsync(Config.CachePath + Path.DirectorySeparatorChar + getHash(uri), data);
         }
 
         private static string getHash(Uri uri) {
@@ -124,7 +145,7 @@ namespace eZet.EveLib.Core.Cache {
             try {
                 // read all lines
                 string[] data = await
-                    FileAsync.ReadAllLinesAsync(Config.CacheRegister).ConfigureAwait(false);
+                    AsyncFileUtilities.ReadAllLinesAsync(Config.CacheRegister).ConfigureAwait(false);
                 foreach (string entry in data) {
                     string[] split = entry.Split(',');
                     DateTime cacheValidUntil = DateTime.Parse(split[1], CultureInfo.InvariantCulture);

@@ -6,7 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
-    public static class FileAsync {
+
+    /// <summary>
+    /// Async file utilities
+    /// </summary>
+    public static class AsyncFileUtilities {
+        /// <summary>
+        /// Reads all test async
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static async Task<string> ReadAllTextAsync(string filePath) {
             using (var sourceStream = new FileStream(filePath,
                 FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true)) {
@@ -21,11 +30,22 @@ namespace eZet.EveLib.Core.Util {
             }
         }
 
+        /// <summary>
+        /// Reads all lines async
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static async Task<string[]> ReadAllLinesAsync(string filePath) {
             string data = await ReadAllTextAsync(filePath).ConfigureAwait(false);
             return data.Split(new[] {"\r\n", "\n"}, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        /// <summary>
+        /// Writes all test async
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static async Task WriteAllTextAsync(string filePath, string text) {
             byte[] encodedText = Encoding.Unicode.GetBytes(text);
             using (var sourceStream = new FileStream(filePath,
@@ -34,6 +54,12 @@ namespace eZet.EveLib.Core.Util {
             }
         }
 
+        /// <summary>
+        /// Writes all lines async
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="lines"></param>
+        /// <returns></returns>
         public static Task WriteAllLinesAsync(string filePath, IEnumerable<string> lines) {
             Contract.Requires(lines != null);
             var sb = new StringBuilder();

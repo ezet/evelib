@@ -6,10 +6,21 @@ namespace eZet.EveLib.Core.Cache {
     ///     Interface for CacheExpiratoinRegisters
     /// </summary>
     public interface IEveLibCache {
+
+        /// <summary>
+        /// Stores data to the cache
+        /// </summary>
+        /// <param name="uri">The uri this caches</param>
+        /// <param name="cacheTime">The cache expiry time</param>
+        /// <param name="data">The data to cache</param>
+        /// <returns></returns>
         Task StoreAsync(Uri uri, DateTime cacheTime, string data);
 
-        //void StoreAsync(Uri uri, DateTime cacheTime);
-
+        /// <summary>
+        /// Loads data from cache
+        /// </summary>
+        /// <param name="uri">The uri to load cache for</param>
+        /// <returns>The cached data</returns>
         Task<string> LoadAsync(Uri uri);
 
         /// <summary>

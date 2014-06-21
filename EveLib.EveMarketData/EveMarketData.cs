@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Exceptions;
@@ -308,7 +307,7 @@ namespace eZet.EveLib.Modules {
 
         private void setSerializer(DataFormat format) {
             if (format == DataFormat.Xml)
-                RequestHandler.Serializer = new SimpleXmlSerializer();
+                RequestHandler.Serializer = new XmlSerializer();
             else if (format == DataFormat.Json)
                 RequestHandler.Serializer = new NewtonSoftJsonSerializer();
         }
