@@ -139,12 +139,13 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public Image() {
             RequestHandler = new ImageRequestHandler();
+            BaseUri = "http://image.eveonline.com/";
         }
 
         /// <summary>
         ///     Gets or sets the base URI.
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public String BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets the RequestHandler
@@ -313,13 +314,13 @@ namespace eZet.EveLib.Modules {
 
         private Task<byte[]> requestImageDataAsync(string relPath, long id, int size, string extension) {
             string fileName = id + "_" + size + extension;
-            var uri = new Uri(BaseUri, relPath + Config.Separator + fileName);
+            var uri = new Uri(BaseUri + relPath + Config.Separator + fileName);
             return RequestHandler.RequestImageDataAsync(uri);
         }
 
         private async Task<string> requestImageAsync(string relUri, long id, int size, string extension, string path) {
             string fileName = id + "_" + size + extension;
-            var uri = new Uri(BaseUri, relUri + Config.Separator + fileName);
+            var uri = new Uri(BaseUri + relUri + Config.Separator + fileName);
             string file = path + Config.Separator + fileName;
             await RequestHandler.RequestImageAsync(uri, file).ConfigureAwait(false);
             return file;
