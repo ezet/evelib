@@ -133,6 +133,8 @@
     <Compile Include="Exceptions\EveLibWebException.cs" />
     <Compile Include="Exceptions\EveLibException.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RequestHandlers\IImageRequestHandler.cs" />
+    <Compile Include="RequestHandlers\ImageRequestHandler.cs" />
     <Compile Include="Util\AsyncLazy.cs" />
     <Compile Include="Serializers\DynamicJsonSerializer.cs" />
     <Compile Include="Util\EveLibApiBase.cs" />

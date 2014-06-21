@@ -17,8 +17,8 @@ namespace eZet.EveLib.Test {
 
 
         public CorporationKey_Sisi() {
-            _sisiKey.BaseUri = new Uri("https://api.testeveonline.com");
-            _sisiKey.Corporation.BaseUri = new Uri("https://api.testeveonline.com");
+            _sisiKey.BaseUri = "https://api.testeveonline.com";
+            _sisiKey.Corporation.BaseUri = "https://api.testeveonline.com";
         }
 
         [TestMethod]

@@ -14,12 +14,15 @@ namespace eZet.EveLib.Modules {
     public abstract class BaseEntity {
         private const string DefaultUri = "https://api.eveonline.com";
 
+        /// <summary>
+        /// Default construcor
+        /// </summary>
         protected BaseEntity() {
             var handler = new EveOnlineRequestHandler();
             handler.Serializer = new SimpleXmlSerializer();
             handler.Cache = new EveLibFileCache();
             RequestHandler = handler;
-            BaseUri = new Uri(DefaultUri);
+            BaseUri = DefaultUri;
             EnableCacheLoad = true;
             EnableCacheStore = true;
         }
@@ -50,7 +53,7 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         ///     Gets or sets the base url for entity requests
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public string BaseUri { get; set; }
 
         /// <summary>
         ///     Gets or sets the requester this entity uses to perform requests.
@@ -71,7 +74,7 @@ namespace eZet.EveLib.Modules {
         protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, params object[] args) where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
-            var uri = new Uri(BaseUri, relUri + generateQueryString(null, args));
+            var uri = new Uri(BaseUri + relUri + generateQueryString(null, args));
             return RequestHandler.RequestAsync<EveApiResponse<T>>(uri);
         }
 
@@ -84,7 +87,7 @@ namespace eZet.EveLib.Modules {
         /// <returns></returns>
         protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, ApiKey key) where T : new() {
             Contract.Requires(BaseUri != null);
-            var uri = new Uri(BaseUri, relUri + generateQueryString(key));
+            var uri = new Uri(BaseUri + relUri + generateQueryString(key));
             return RequestHandler.RequestAsync<EveApiResponse<T>>(uri);
         }
 
@@ -100,7 +103,7 @@ namespace eZet.EveLib.Modules {
             where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
-            var uri = new Uri(BaseUri, relUri + generateQueryString(key, args));
+            var uri = new Uri(BaseUri + relUri + generateQueryString(key, args));
             return RequestHandler.RequestAsync<EveApiResponse<T>>(uri);
         }
 

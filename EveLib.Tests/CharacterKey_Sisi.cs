@@ -16,8 +16,8 @@ namespace eZet.EveLib.Test {
 
 
         public CharacterKey_Sisi() {
-            _sisiKey.BaseUri = new Uri("https://api.testeveonline.com");
-            _sisiKey.Characters.First().BaseUri = new Uri("https://api.testeveonline.com");
+            _sisiKey.BaseUri = "https://api.testeveonline.com";
+            _sisiKey.Characters.First().BaseUri = "https://api.testeveonline.com";
         }
 
         [TestMethod]

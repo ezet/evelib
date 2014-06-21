@@ -52,7 +52,6 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(apiKey != null);
             ApiKey = apiKey;
             CorporationId = corporationId;
-            BaseUri = new Uri("https://api.eveonline.com");
             if (ApiKey.IsInitialized)
                 ensureInitialized();
         }

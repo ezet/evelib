@@ -10,12 +10,6 @@ namespace eZet.EveLib.Modules {
     ///     by Image or Map. Paths: /eve, /misc, /server, /api
     /// </summary>
     public class Eve : BaseEntity {
-        /// <summary>
-        ///     Creates a new object.
-        /// </summary>
-        public Eve() {
-            BaseUri = new Uri("https://api.eveonline.com");
-        }
 
         /// <summary>
         ///     Returns a list of alliances in eve.

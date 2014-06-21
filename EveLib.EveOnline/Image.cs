@@ -1,55 +1,144 @@
 ﻿using System;
-using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
+using eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to all image related requests.
     /// </summary>
     public class Image {
+        /// <summary>
+        /// Represents the alliancelogo sizes
+        /// </summary>
         public enum AllianceLogoSize {
+            /// <summary>
+            /// 30x30
+            /// </summary>
             X30 = 30,
+            /// <summary>
+            /// 32x32
+            /// </summary>
             X32 = 32,
+            /// <summary>
+            /// 64x64
+            /// </summary>
             X64 = 64,
+            /// <summary>
+            /// 128x128
+            /// </summary>
             X128 = 128,
         }
 
+        /// <summary>
+        /// Represents the characterportrait sizes
+        /// </summary>
         public enum CharacterPortraitSize {
+            /// <summary>
+            /// 30x30
+            /// </summary>
             X30 = 30,
+            /// <summary>
+            /// 32x32
+            /// </summary>
             X32 = 32,
+            /// <summary>
+            /// 64x64k
+            /// </summary>
             X64 = 64,
+            /// <summary>
+            /// 128x128
+            /// </summary>
             X128 = 128,
+            /// <summary>
+            /// 200x200
+            /// </summary>
             X200 = 200,
+            /// <summary>
+            /// 256x256
+            /// </summary>
             X256 = 256,
+            /// <summary>
+            /// 512x512
+            /// </summary>
             X512 = 512,
+            /// <summary>
+            /// 1024x1024
+            /// </summary>
             X1024 = 1024
         }
 
+        /// <summary>
+        /// Represents the corporationlogo sizes
+        /// </summary>
         public enum CorporationLogoSize {
+            /// <summary>
+            /// 30x30
+            /// </summary>
             X30 = 30,
+            /// <summary>
+            /// 32x32
+            /// </summary>
             X32 = 32,
+            /// <summary>
+            /// 64x64
+            /// </summary>
             X64 = 64,
+            /// <summary>
+            /// 128x128
+            /// </summary>
             X128 = 128,
+            /// <summary>
+            /// 256x256
+            /// </summary>
             X256 = 256,
         }
 
+        /// <summary>
+        /// Represents the render sizes
+        /// </summary>
         public enum RenderSize {
+            /// <summary>
+            /// 32x32
+            /// </summary>
             X32 = 32,
+            /// <summary>
+            /// 64x64
+            /// </summary>
             X64 = 64,
+            /// <summary>
+            /// 128x128
+            /// </summary>
             X128 = 128,
+            /// <summary>
+            /// 256x256
+            /// </summary>
             X256 = 256,
+            /// <summary>
+            /// 512x512
+            /// </summary>
             X512 = 512,
         }
 
+        /// <summary>
+        /// Represents the type icon sizes
+        /// </summary>
         public enum TypeIconSize {
+            /// <summary>
+            /// 32x32
+            /// </summary>
             X32 = 32,
+            /// <summary>
+            /// 64x64
+            /// </summary>
             X64 = 64,
         }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Image() {
-            BaseUri = new Uri("http://image.eveonline.com");
-            ImageRequester = new ImageRequester();
+            RequestHandler = new ImageRequestHandler();
         }
 
         /// <summary>
@@ -57,7 +146,10 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public Uri BaseUri { get; set; }
 
-        public IImageRequester ImageRequester { get; private set; }
+        /// <summary>
+        /// Gets or sets the RequestHandler
+        /// </summary>
+        public IImageRequestHandler RequestHandler { get; set; }
 
         /// <summary>
         ///     Saves the image to disk , and returns the path to the image.
@@ -222,33 +314,18 @@ namespace eZet.EveLib.Modules {
         private Task<byte[]> requestImageDataAsync(string relPath, long id, int size, string extension) {
             string fileName = id + "_" + size + extension;
             var uri = new Uri(BaseUri, relPath + Config.Separator + fileName);
-            return ImageRequester.RequestImageDataAsync(uri);
+            return RequestHandler.RequestImageDataAsync(uri);
         }
 
         private async Task<string> requestImageAsync(string relUri, long id, int size, string extension, string path) {
             string fileName = id + "_" + size + extension;
             var uri = new Uri(BaseUri, relUri + Config.Separator + fileName);
             string file = path + Config.Separator + fileName;
-            await ImageRequester.RequestImageAsync(uri, file).ConfigureAwait(false);
+            await RequestHandler.RequestImageAsync(uri, file).ConfigureAwait(false);
             return file;
         }
     }
 
-    public interface IImageRequester {
-        Task<byte[]> RequestImageDataAsync(Uri uri);
 
-        Task RequestImageAsync(Uri uri, string file);
-    }
 
-    public class ImageRequester : IImageRequester {
-        public Task<byte[]> RequestImageDataAsync(Uri uri) {
-            var client = new WebClient();
-            return client.DownloadDataTaskAsync(uri);
-        }
-
-        public Task RequestImageAsync(Uri uri, string file) {
-            var client = new WebClient();
-            return client.DownloadFileTaskAsync(uri, file);
-        }
-    }
 }

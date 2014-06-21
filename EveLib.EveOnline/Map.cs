@@ -8,9 +8,6 @@ namespace eZet.EveLib.Modules {
     ///     Provides access to Map related requests.
     /// </summary>
     public class Map : BaseEntity {
-        public Map() {
-            BaseUri = new Uri("https://api.eveonline.com");
-        }
 
         /// <summary>
         ///     Returns a list of contestable solarsystems and the NPC faction currently occupying them.

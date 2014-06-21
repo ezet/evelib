@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
@@ -16,7 +15,7 @@ namespace eZet.EveLib.Modules {
 
         public EveWho() {
             RequestHandler = new RequestHandler(new DynamicJsonSerializer());
-            BaseUri = new Uri(DefaultUri);
+            BaseUri = DefaultUri;
             ApiPath = DefaultApiPath;
         }
 

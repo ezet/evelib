@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Exceptions;
@@ -11,8 +12,17 @@ namespace eZet.EveLib.Modules {
     ///     C# API for the API supplied by api.eve-marketdata.com.
     /// </summary>
     public class EveMarketData {
+        /// <summary>
+        /// Represents the requestable data formats
+        /// </summary>
         public enum DataFormat {
+            /// <summary>
+            /// JSON
+            /// </summary>
             Json,
+            /// <summary>
+            /// XML
+            /// </summary>
             Xml,
         }
 
@@ -52,6 +62,10 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 
+        /// <summary>
+        /// Sets the request format
+        /// </summary>
+        /// <param name="format"></param>
         public void SetFormat(DataFormat format) {
             setSerializer(format);
             Format = format;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using eZet.EveLib.Modules;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +10,7 @@ namespace eZet.EveLib.Test {
     private readonly EveCrest _crest = new EveCrest();
 
         public EveCrest_SiSi_Tests() {
-            _crest.BaseUri = new Uri("http://public-crest-sisi.testeveonline.com/");
+            _crest.BaseUri = "http://public-crest-sisi.testeveonline.com/";
         }
 
         [TestMethod]

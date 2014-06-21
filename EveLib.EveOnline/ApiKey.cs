@@ -46,7 +46,6 @@ namespace eZet.EveLib.Modules {
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
         public ApiKey(long keyId, string vCode) {
-            BaseUri = new Uri("https://api.eveonline.com");
             KeyId = keyId;
             VCode = vCode;
         }
@@ -57,7 +56,6 @@ namespace eZet.EveLib.Modules {
         /// <param name="key"></param>
         protected ApiKey(ApiKey key) {
             Contract.Requires(key != null);
-            BaseUri = new Uri("https://api.eveonline.com");
             ApiKeyInfo = key.ApiKeyInfo;
             _isValidKey = key._isValidKey;
             KeyId = key.KeyId;

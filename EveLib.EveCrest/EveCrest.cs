@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
@@ -20,7 +19,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public EveCrest() {
             RequestHandler = new EveCrestRequestHandler(new DynamicJsonSerializer());
-            BaseUri = new Uri(DefaultUri);
+            BaseUri = DefaultUri;
         }
 
         /// <summary>
