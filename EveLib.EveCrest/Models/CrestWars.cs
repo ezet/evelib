@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestWars : EveCrestCollectionResponse {
+    public class CrestWars : CrestCollectionResponse {
         [DataMember(Name = "items")]
         public IList<War> Wars { get; set; }
 

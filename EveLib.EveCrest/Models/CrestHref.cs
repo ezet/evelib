@@ -2,7 +2,7 @@
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestHref<T> {
+    public class CrestHref<T> {
         [DataMember(Name = "href")]
         public T Value { get; set; }
 

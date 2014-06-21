@@ -2,7 +2,7 @@
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestError {
+    public class CrestError {
         [DataMember(Name = "message")]
         public string Message { get; set; }
 

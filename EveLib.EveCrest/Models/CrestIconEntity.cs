@@ -2,8 +2,8 @@
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestIconEntity : EveCrestNamedEntity {
+    public class CrestIconEntity : CrestNamedEntity {
         [DataMember(Name = "icon")]
-        public EveCrestHref<string> Icon { get; set; }
+        public CrestHref<string> Icon { get; set; }
     }
 }

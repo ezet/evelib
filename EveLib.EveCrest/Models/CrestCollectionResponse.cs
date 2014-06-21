@@ -2,7 +2,7 @@
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public abstract class EveCrestCollectionResponse {
+    public abstract class CrestCollectionResponse {
         [DataMember(Name = "totalCount")]
         public int TotalCount { get; set; }
 

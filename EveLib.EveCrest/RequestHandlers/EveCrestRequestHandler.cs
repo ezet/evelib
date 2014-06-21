@@ -45,7 +45,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
                 if (responseStream == null) throw;
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();
-                    var error = Serializer.Deserialize<EveCrestError>(data);
+                    var error = Serializer.Deserialize<CrestError>(data);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
                         "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType, error.RefId);
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);

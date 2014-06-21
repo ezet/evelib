@@ -17,51 +17,51 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetIncursions_NoErrors() {
-            EveCrestIncursions data = EveCrest.GetIncursions();
+            CrestIncursions data = EveCrest.GetIncursions();
         }
 
         [TestMethod]
         public void GetAlliances_NoErrors() {
-            EveCrestAlliances data = EveCrest.GetAlliances();
+            CrestAlliances data = EveCrest.GetAlliances();
         }
 
         [TestMethod]
         public void GetAlliance_NoErrors() {
-            EveCrestAlliance data = EveCrest.GetAlliance(AllianceId);
+            CrestAlliance data = EveCrest.GetAlliance(AllianceId);
             Assert.AreNotEqual(data.Id, 0);
         }
 
         [TestMethod]
         public void GetKillmail_NoErrors() {
-            EveCrestKillmail data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+            CrestKillmail data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }
 
         [TestMethod]
         public void GetMarketHistory_NoErrors() {
-            EveCrestMarketHistory data = EveCrest.GetMarketHistory(RegionId, TypeId);
+            CrestMarketHistory data = EveCrest.GetMarketHistory(RegionId, TypeId);
         }
 
         [TestMethod]
         public void GetWars_NoErrors() {
-            EveCrestWars data = EveCrest.GetWars();
+            CrestWars data = EveCrest.GetWars();
         }
 
         [TestMethod]
         public void GetWar_NoErrors() {
-            EveCrestWar data = EveCrest.GetWar(291410);
+            CrestWar data = EveCrest.GetWar(291410);
         }
 
         [TestMethod]
         public void GetWarKillmails_NoErrors() {
-            EveCrestKillmails data = EveCrest.GetWarKillmails(1);
+            CrestKillmails data = EveCrest.GetWarKillmails(1);
         }
 
         [TestMethod]
         [ExpectedException(typeof (EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
-            EveCrestWar data = await EveCrest.GetWarAsync(999999999);
+            CrestWar data = await EveCrest.GetWarAsync(999999999);
         }
     }
 }

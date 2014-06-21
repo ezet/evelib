@@ -65,7 +65,7 @@ namespace eZet.EveLib {
 
         public void Crest() {
             var crest = new EveCrest();
-            EveCrestWar result = crest.GetWar(1);
+            CrestWar result = crest.GetWar(1);
         }
     }
 }

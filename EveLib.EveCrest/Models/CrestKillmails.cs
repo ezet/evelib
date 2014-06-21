@@ -3,8 +3,8 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestAlliances : EveCrestCollectionResponse {
+    public class CrestKillmails : CrestCollectionResponse {
         [DataMember(Name = "items")]
-        public IList<EveCrestHref<EveCrestIconEntity>> Alliances { get; set; }
+        public IList<CrestEntity> Killmails { get; set; }
     }
 }

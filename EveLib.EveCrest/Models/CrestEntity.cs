@@ -2,7 +2,7 @@
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestEntity {
+    public class CrestEntity {
         [DataMember(Name = "id")]
         public int Id { get; set; }
 

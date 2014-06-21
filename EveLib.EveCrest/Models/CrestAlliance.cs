@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestAlliance {
+    public class CrestAlliance {
         [DataMember(Name = "Id")]
         public int Id { get; set; }
 
@@ -30,15 +30,15 @@ namespace eZet.EveLib.Modules.Models {
         public string Url { get; set; }
 
         [DataMember(Name = "executorCorporation")]
-        public EveCrestEntity ExecutorCorporation { get; set; }
+        public CrestEntity ExecutorCorporation { get; set; }
 
         [DataMember(Name = "creatorCorporation")]
-        public EveCrestEntity CreatorCorporation { get; set; }
+        public CrestEntity CreatorCorporation { get; set; }
 
         [DataMember(Name = "creatorCharacter")]
-        public EveCrestEntity CreatorCharacter { get; set; }
+        public CrestEntity CreatorCharacter { get; set; }
 
         [DataMember(Name = "corporations")]
-        public IList<EveCrestEntity> Corporations { get; set; }
+        public IList<CrestEntity> Corporations { get; set; }
     }
 }

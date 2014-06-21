@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestIncursions : EveCrestCollectionResponse {
+    public class CrestIncursions : CrestCollectionResponse {
         public enum IncursionState {
             [DataMember(Name = "Established")] Established,
             [DataMember(Name = "Mobilizing")] Mobilizing,
@@ -24,10 +24,10 @@ namespace eZet.EveLib.Modules.Models {
             public IncursionState State { get; set; }
 
             [DataMember(Name = "stagingSolarSystem")]
-            public EveCrestNamedEntity StatingSolarSystem { get; set; }
+            public CrestNamedEntity StatingSolarSystem { get; set; }
 
             [DataMember(Name = "constellation")]
-            public EveCrestNamedEntity Constellation { get; set; }
+            public CrestNamedEntity Constellation { get; set; }
         }
     }
 }

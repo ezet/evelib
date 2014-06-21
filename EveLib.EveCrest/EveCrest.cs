@@ -30,8 +30,9 @@ namespace eZet.EveLib.Modules {
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
         /// <returns>Returns data for the specified killmail.</returns>
-        public EveCrestKillmail GetKillmail(long id, string hash) {
-            return GetKillmailAsync(id, hash).Result;
+        public Task<CrestKillmail> GetKillmailAsync(long id, string hash) {
+            string relPath = "killmails/" + id + "/" + hash + "/";
+            return requestAsync<CrestKillmail>(relPath);
         }
 
         /// <summary>
@@ -41,9 +42,8 @@ namespace eZet.EveLib.Modules {
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
         /// <returns>Returns data for the specified killmail.</returns>
-        public Task<EveCrestKillmail> GetKillmailAsync(long id, string hash) {
-            string relPath = "killmails/" + id + "/" + hash + "/";
-            return requestAsync<EveCrestKillmail>(relPath);
+        public CrestKillmail GetKillmail(long id, string hash) {
+            return GetKillmailAsync(id, hash).Result;
         }
 
         /// <summary>
@@ -51,18 +51,29 @@ namespace eZet.EveLib.Modules {
         ///     Path: /incursions/
         /// </summary>
         /// <returns>A list of all active incursions.</returns>
-        public EveCrestIncursions GetIncursions() {
+        public Task<CrestIncursions> GetIncursionsAsync() {
+            const string relPath = "incursions/";
+            return requestAsync<CrestIncursions>(relPath);
+        }
+
+        /// <summary>
+        ///     Returns a list of all active incursions.
+        ///     Path: /incursions/
+        /// </summary>
+        /// <returns>A list of all active incursions.</returns>
+        public CrestIncursions GetIncursions() {
             return GetIncursionsAsync().Result;
         }
 
         /// <summary>
-        ///     Returns a list of all active incursions.
-        ///     Path: /incursions/
+        ///     Returns a list of all alliances.
+        ///     Path: /alliances/
         /// </summary>
-        /// <returns>A list of all active incursions.</returns>
-        public Task<EveCrestIncursions> GetIncursionsAsync() {
-            const string relPath = "incursions/";
-            return requestAsync<EveCrestIncursions>(relPath);
+        /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
+        /// <returns>A list of all alliances.</returns>
+        public Task<CrestAlliances> GetAlliancesAsync(int page = 1) {
+            string relPath = "alliances/?page=" + page;
+            return requestAsync<CrestAlliances>(relPath);
         }
 
         /// <summary>
@@ -71,19 +82,19 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all alliances.</returns>
-        public EveCrestAlliances GetAlliances(int page = 1) {
+        public CrestAlliances GetAlliances(int page = 1) {
             return GetAlliancesAsync(page).Result;
         }
 
         /// <summary>
-        ///     Returns a list of all alliances.
-        ///     Path: /alliances/
+        ///     Returns data about a specific alliance.
+        ///     Path: /alliances/$allianceId/
         /// </summary>
-        /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
-        /// <returns>A list of all alliances.</returns>
-        public Task<EveCrestAlliances> GetAlliancesAsync(int page = 1) {
-            string relPath = "alliances/?page=" + page;
-            return requestAsync<EveCrestAlliances>(relPath);
+        /// <param name="allianceId">A valid alliance ID</param>
+        /// <returns>Data for specified alliance</returns>
+        public Task<CrestAlliance> GetAllianceAsync(long allianceId) {
+            string relPath = "alliances/" + allianceId + "/";
+            return requestAsync<CrestAlliance>(relPath);
         }
 
         /// <summary>
@@ -92,19 +103,20 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="allianceId">A valid alliance ID</param>
         /// <returns>Data for specified alliance</returns>
-        public EveCrestAlliance GetAlliance(long allianceId) {
+        public CrestAlliance GetAlliance(long allianceId) {
             return GetAllianceAsync(allianceId).Result;
         }
 
         /// <summary>
-        ///     Returns data about a specific alliance.
-        ///     Path: /alliances/$allianceId/
+        ///     Returns daily price and volume history for a specific region and item type.
+        ///     Path: /market/$regionId/types/$typeId/history/
         /// </summary>
-        /// <param name="allianceId">A valid alliance ID</param>
-        /// <returns>Data for specified alliance</returns>
-        public Task<EveCrestAlliance> GetAllianceAsync(long allianceId) {
-            string relPath = "alliances/" + allianceId + "/";
-            return requestAsync<EveCrestAlliance>(relPath);
+        /// <param name="regionId">Region ID</param>
+        /// <param name="typeId">Type ID</param>
+        /// <returns>Market history for the specified region and type.</returns>
+        public Task<CrestMarketHistory> GetMarketHistoryAsync(int regionId, int typeId) {
+            string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
+            return requestAsync<CrestMarketHistory>(relPath);
         }
 
         /// <summary>
@@ -114,20 +126,19 @@ namespace eZet.EveLib.Modules {
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
         /// <returns>Market history for the specified region and type.</returns>
-        public EveCrestMarketHistory GetMarketHistory(int regionId, int typeId) {
+        public CrestMarketHistory GetMarketHistory(int regionId, int typeId) {
             return GetMarketHistoryAsync(regionId, typeId).Result;
         }
 
         /// <summary>
-        ///     Returns daily price and volume history for a specific region and item type.
-        ///     Path: /market/$regionId/types/$typeId/history/
+        ///     Returns a list of all wars.
+        ///     Path: /wars/
         /// </summary>
-        /// <param name="regionId">Region ID</param>
-        /// <param name="typeId">Type ID</param>
-        /// <returns>Market history for the specified region and type.</returns>
-        public Task<EveCrestMarketHistory> GetMarketHistoryAsync(int regionId, int typeId) {
-            string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
-            return requestAsync<EveCrestMarketHistory>(relPath);
+        /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
+        /// <returns>A list of all wars.</returns>
+        public Task<CrestWars> GetWarsAsync(int page = 1) {
+            string relPath = "/wars/?page=" + page;
+            return requestAsync<CrestWars>(relPath);
         }
 
         /// <summary>
@@ -136,61 +147,86 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
-        public EveCrestWars GetWars(int page = 1) {
+        public CrestWars GetWars(int page = 1) {
             return GetWarsAsync().Result;
         }
 
         /// <summary>
-        ///     Returns a list of all wars.
-        ///     Path: /wars/
+        ///     Returns data for a specific war.
+        ///     Path: /wars/$warId/
         /// </summary>
-        /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
-        /// <returns>A list of all wars.</returns>
-        public Task<EveCrestWars> GetWarsAsync(int page = 1) {
-            string relPath = "/wars/?page=" + page;
-            return requestAsync<EveCrestWars>(relPath);
+        /// <param name="warId">CrestWar ID</param>
+        /// <returns>Data for the specified war.</returns>
+        public Task<CrestWar> GetWarAsync(int warId) {
+            string relPath = "/wars/" + warId + "/";
+            return requestAsync<CrestWar>(relPath);
         }
 
         /// <summary>
         ///     Returns data for a specific war.
-        ///     Path: /wars/$warId
+        ///     Path: /wars/$warId/
         /// </summary>
-        /// <param name="warId">EveCrestWar ID</param>
+        /// <param name="warId">CrestWar ID</param>
         /// <returns>Data for the specified war.</returns>
-        public EveCrestWar GetWar(int warId) {
+        public CrestWar GetWar(int warId) {
             return GetWarAsync(warId).Result;
         }
 
         /// <summary>
-        ///     Returns data for a specific war.
-        ///     Path: /wars/$warId
+        ///     Returns a list of all killmails related to a specified war.
+        ///     Path: /wars/$warId/killmails/all/
         /// </summary>
-        /// <param name="warId">EveCrestWar ID</param>
-        /// <returns>Data for the specified war.</returns>
-        public Task<EveCrestWar> GetWarAsync(int warId) {
-            string relPath = "/wars/" + warId + "/";
-            return requestAsync<EveCrestWar>(relPath);
+        /// <param name="warId">CrestWar ID</param>
+        /// <returns>A list of all killmails related to the specified war.</returns>
+        public Task<CrestKillmails> GetWarKillmailsAsync(int warId) {
+            string relPath = "/wars/" + warId + "/killmails/all/";
+            return requestAsync<CrestKillmails>(relPath);
         }
 
         /// <summary>
         ///     Returns a list of all killmails related to a specified war.
-        ///     Path: /wars/$warId/killmails/all
+        ///     Path: /wars/$warId/killmails/all/
         /// </summary>
-        /// <param name="warId">EveCrestWar ID</param>
+        /// <param name="warId">CrestWar ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
-        public EveCrestKillmails GetWarKillmails(int warId) {
+        public CrestKillmails GetWarKillmails(int warId) {
             return GetWarKillmailsAsync(warId).Result;
         }
 
         /// <summary>
-        ///     Returns a list of all killmails related to a specified war.
-        ///     Path: /wars/$warId/killmails/all
+        /// Returns a list of all industry specialities
+        /// Path: /industry/specialities/
         /// </summary>
-        /// <param name="warId">EveCrestWar ID</param>
-        /// <returns>A list of all killmails related to the specified war.</returns>
-        public Task<EveCrestKillmails> GetWarKillmailsAsync(int warId) {
-            string relPath = "/wars/" + warId + "/killmails/all/";
-            return requestAsync<EveCrestKillmails>(relPath);
+        /// <returns>A list of all industry specialities</returns>
+        public Task<CrestSpecialities> GetSpecialitiesAsync() {
+            const string relPath = "/industry/specialities/";
+            return requestAsync<CrestSpecialities>(relPath);
+        }
+
+        /// <summary>
+        /// Returns a list of all industry specialities
+        /// Path: /industry/specialities/
+        /// </summary>
+        /// <returns>A list of all industry specialities</returns>
+        public CrestSpecialities GetSpecialities() {
+            return GetSpecialitiesAsync().Result;
+        }
+
+        /// <summary>
+        /// Returns a list of all industry teams
+        /// </summary>
+        /// <returns>A list of all industry teams</returns>
+        public Task<CrestIndustryTeams> GetIndustryTeamsAsync() {
+            const string relPath = "/industry/teams/";
+            return requestAsync<CrestIndustryTeams>(relPath);
+        }
+
+        /// <summary>
+        /// Returns a list of all industry teams
+        /// </summary>
+        /// <returns>A list of all industry teams</returns>
+        public CrestIndustryTeams GetIndustryTeams() {
+            return GetIndustryTeamsAsync().Result;
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     [DataContract]
-    public class EveCrestKillmail {
+    public class CrestKillmail {
         [DataMember(Name = "solarSystem")]
-        public EveCrestNamedEntity SolarSystem { get; set; }
+        public CrestNamedEntity SolarSystem { get; set; }
 
         [DataMember(Name = "killID")]
         public long KillId { get; set; }
@@ -24,11 +24,11 @@ namespace eZet.EveLib.Modules.Models {
         public KillmailVictim Victim { get; set; }
 
         [DataMember(Name = "war")]
-        public EveCrestEntity War { get; set; }
+        public CrestEntity War { get; set; }
 
 
         [DataContract]
-        public class Item : EveCrestIconEntity {
+        public class Item : CrestIconEntity {
             [DataMember(Name = "singleton")]
             public bool Singleton { get; set; }
 
@@ -45,7 +45,7 @@ namespace eZet.EveLib.Modules.Models {
             public int DamageDone { get; set; }
 
             [DataMember(Name = "weaponType")]
-            public EveCrestIconEntity WeaponType { get; set; }
+            public CrestIconEntity WeaponType { get; set; }
 
             [DataMember(Name = "finalBlow")]
             public bool FinalBlow { get; set; }
@@ -58,16 +58,16 @@ namespace eZet.EveLib.Modules.Models {
         [DataContract]
         public abstract class KillmailEntity {
             [DataMember(Name = "character")]
-            public EveCrestIconEntity Character { get; set; }
+            public CrestIconEntity Character { get; set; }
 
             [DataMember(Name = "corporation")]
-            public EveCrestIconEntity Corporation { get; set; }
+            public CrestIconEntity Corporation { get; set; }
 
             [DataMember(Name = "alliance")]
-            public EveCrestIconEntity Alliance { get; set; }
+            public CrestIconEntity Alliance { get; set; }
 
             [DataMember(Name = "shipType")]
-            public EveCrestIconEntity ShipType { get; set; }
+            public CrestIconEntity ShipType { get; set; }
         }
 
         [DataContract]
