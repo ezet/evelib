@@ -106,10 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
+    <Compile Include="Models\CrestIndustrySpeciality.cs" />
+    <Compile Include="Models\CrestIndustrySystems.cs" />
     <Compile Include="Models\CrestIndustryTeams.cs" />
     <Compile Include="Models\CrestMarketPrices.cs" />
     <Compile Include="Models\CrestRoot.cs" />
-    <Compile Include="Models\CrestSpecialities.cs" />
+    <Compile Include="Models\CrestIndstrySpecialities.cs" />
     <Compile Include="Models\CrestAlliance.cs" />
     <Compile Include="Models\CrestAlliances.cs" />
     <Compile Include="Models\CrestEntity.cs" />

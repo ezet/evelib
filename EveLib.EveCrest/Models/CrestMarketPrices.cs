@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
@@ -7,6 +8,11 @@ namespace eZet.EveLib.Modules.Models {
     [DataContract]
     public class CrestMarketPrices : CrestCollectionResponse {
 
+        /// <summary>
+        /// A list of market price entries
+        /// </summary>
+        [DataMember(Name = "items")]
+        public List<MarketPriceEntry> Prices { get; set; }
 
         /// <summary>
         /// Represents an entry in the Market Price Response collection

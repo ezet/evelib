@@ -216,7 +216,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="warId">CrestWar ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
         public Task<CrestKillmails> GetWarKillmailsAsync(int warId) {
-            string relPath = "/wars/" + warId + "/killmails/all/";
+            string relPath = "wars/" + warId + "/killmails/all/";
             return requestAsync<CrestKillmails>(relPath);
         }
 
@@ -235,9 +235,9 @@ namespace eZet.EveLib.Modules {
         /// Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
-        public Task<CrestSpecialities> GetSpecialitiesAsync() {
-            const string relPath = "/industry/specialities/";
-            return requestAsync<CrestSpecialities>(relPath);
+        public Task<CrestIndstrySpecialities> GetSpecialitiesAsync() {
+            const string relPath = "industry/specialities/";
+            return requestAsync<CrestIndstrySpecialities>(relPath);
         }
 
         /// <summary>
@@ -245,16 +245,36 @@ namespace eZet.EveLib.Modules {
         /// Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
-        public CrestSpecialities GetSpecialities() {
+        public CrestIndstrySpecialities GetSpecialities() {
             return GetSpecialitiesAsync().Result;
         }
+
+        /// <summary>
+        /// Returns details for the requested speciality
+        /// </summary>
+        /// <param name="specialityId">Speciality ID</param>
+        /// <returns></returns>
+        public Task<CrestIndustrySpeciality> GetSpecialityAsync(int specialityId) {
+            string relPath = "industry/specialities/" + specialityId + "/";
+            return requestAsync<CrestIndustrySpeciality>(relPath);
+        }
+
+        /// <summary>
+        /// Returns details for the requested speciality
+        /// </summary>
+        /// <param name="specialityId">Speciality ID</param>
+        /// <returns></returns>
+        public CrestIndustrySpeciality GetSpeciality(int specialityId) {
+            return GetSpecialityAsync(specialityId).Result;
+        }
+
 
         /// <summary>
         /// Returns a list of all industry teams
         /// </summary>
         /// <returns>A list of all industry teams</returns>
         public Task<CrestIndustryTeams> GetIndustryTeamsAsync() {
-            const string relPath = "/industry/teams/";
+            const string relPath = "industry/teams/";
             return requestAsync<CrestIndustryTeams>(relPath);
         }
 
@@ -266,6 +286,21 @@ namespace eZet.EveLib.Modules {
             return GetIndustryTeamsAsync().Result;
         }
 
+        /// <summary>
+        /// Returns a list of industry systems and prices
+        /// </summary>
+        /// <returns></returns>
+        public Task<CrestIndustrySystems> GetIndustrySystemsAsync() {
+            const string relPath = "industry/systems/";
+            return requestAsync<CrestIndustrySystems>(relPath);
+        }
 
+        /// <summary>
+        /// Returns a list of industry systems and prices
+        /// </summary>
+        /// <returns></returns>
+        public CrestIndustrySystems GetIndustrySystems() {
+            return GetIndustrySystemsAsync().Result;
+        }
     }
 }

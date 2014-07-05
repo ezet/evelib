@@ -29,6 +29,16 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetIndustrySystems() {
+            var result = await _crest.GetIndustrySystemsAsync();
+        }
+
+        [TestMethod]
+        public async Task GetSpeciality() {
+            var result = await _crest.GetSpecialityAsync(10);
+        }
+
+        [TestMethod]
         public async Task GetMarketPrices() {
             var result = await _crest.GetMarketPricesAsync();
         }
