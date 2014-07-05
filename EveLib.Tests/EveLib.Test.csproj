@@ -122,11 +122,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApiKey_Tests.cs" />
-    <Compile Include="CharacterKey_Sisi.cs" />
+    <Compile Include="CharacterKey_Beta.cs" />
     <Compile Include="CharacterKey_ValidKeyTests.cs" />
     <Compile Include="Character_StaticDeserializationTests.cs" />
-    <Compile Include="CorporationKey_Sisi.cs" />
-    <Compile Include="EveCrest_SiSi_Tests.cs" />
+    <Compile Include="CorporationKey_Beta.cs" />
+    <Compile Include="EveCrest_Beta_Tests.cs" />
     <Compile Include="EveCrest_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
     <Compile Include="EveWho_Tests.cs" />
