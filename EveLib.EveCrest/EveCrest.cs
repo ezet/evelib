@@ -23,6 +23,25 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
+        /// Returns the CREST root
+        /// Path: /
+        /// </summary>
+        /// <returns></returns>
+        public Task<CrestRoot> GetRootAsync() {
+            string relPath = "";
+            return requestAsync<CrestRoot>(relPath);
+        }
+
+        /// <summary>
+        /// Returns the CREST root
+        /// Path: /
+        /// </summary>
+        /// <returns></returns>
+        public CrestRoot GetRoot() {
+            return GetRootAsync().Result;
+        }
+
+        /// <summary>
         ///     Returns data on the specified killmail.
         ///     Path: /killmails/$warId/$hash/
         /// </summary>
@@ -130,6 +149,25 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
+        /// Returns the average and adjusted values for all items
+        /// Path: /market/prices/
+        /// </summary>
+        /// <returns></returns>
+        public Task<CrestMarketPrices> GetMarketPricesAsync() {
+            string relpath = "market/prices/";
+            return requestAsync<CrestMarketPrices>(relpath);
+        }
+
+        /// <summary>
+        /// Returns the average and adjusted values for all items
+        /// Path: /market/prices/
+        /// </summary>
+        /// <returns></returns>
+        public CrestMarketPrices GetMarketPrices() {
+            return GetMarketPricesAsync().Result;
+        }
+
+        /// <summary>
         ///     Returns a list of all wars.
         ///     Path: /wars/
         /// </summary>
@@ -227,5 +265,7 @@ namespace eZet.EveLib.Modules {
         public CrestIndustryTeams GetIndustryTeams() {
             return GetIndustryTeamsAsync().Result;
         }
+
+
     }
 }

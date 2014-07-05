@@ -14,6 +14,11 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetRoot() {
+            var result = await _crest.GetRootAsync();
+        }
+
+        [TestMethod]
         public async Task GetSpecialities() {
             var result = await _crest.GetSpecialitiesAsync();
         }
@@ -21,6 +26,11 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetIndustryTeams() {
             var result = await _crest.GetIndustryTeamsAsync();
+        }
+
+        [TestMethod]
+        public async Task GetMarketPrices() {
+            var result = await _crest.GetMarketPricesAsync();
         }
     }
 }

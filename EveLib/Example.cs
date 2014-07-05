@@ -67,5 +67,12 @@ namespace eZet.EveLib {
             var crest = new EveCrest();
             CrestWar result = crest.GetWar(1);
         }
+
+        public void test() {
+            CharacterKey key = new CharacterKey(1, "");
+            var result = key.GetAccountStatus().Result;
+
+
+        }
     }
 }

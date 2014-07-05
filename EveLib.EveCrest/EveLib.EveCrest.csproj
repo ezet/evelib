@@ -107,6 +107,8 @@
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
     <Compile Include="Models\CrestIndustryTeams.cs" />
+    <Compile Include="Models\CrestMarketPrices.cs" />
+    <Compile Include="Models\CrestRoot.cs" />
     <Compile Include="Models\CrestSpecialities.cs" />
     <Compile Include="Models\CrestAlliance.cs" />
     <Compile Include="Models\CrestAlliances.cs" />
