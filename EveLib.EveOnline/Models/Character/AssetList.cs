@@ -51,6 +51,12 @@ namespace eZet.EveLib.Modules.Models.Character {
             [XmlAttribute("singleton")]
             public bool Singleton { get; set; }
 
+            /// <summary>
+            /// Blueprint: -1 = original; -2= copy; otherwise -1 for singelton
+            /// </summary>
+            [XmlAttribute("rawQuantity")]
+            public int RawQuantity { get; set; }
+
             [XmlElement("rowset")]
             public EveOnlineRowCollection<Item> Items { get; set; }
         }

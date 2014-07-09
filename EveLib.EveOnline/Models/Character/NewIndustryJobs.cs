@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
+using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
@@ -156,26 +157,63 @@ namespace eZet.EveLib.Modules.Models.Character {
             /// <summary>
             /// The start date
             /// </summary>
+            [XmlIgnore]
+            public DateTime StartDate { get; private set; }
+
+            /// <summary>
+            /// The start date
+            /// </summary>
             [XmlAttribute("startDate")]
-            public DateTime StartDate { get; set; }
+            public string StartDateAsString {
+                get { return StartDate.ToString(XmlHelper.DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            }
+
+            /// <summary>
+            /// The end date
+            /// </summary>
+            [XmlIgnore]
+            public DateTime EndDate { get; private set; }
 
             /// <summary>
             /// The end date
             /// </summary>
             [XmlAttribute("endDate")]
-            public DateTime EndDate { get; set; }
+            public string EndDateAsString {
+                get { return EndDate.ToString(XmlHelper.DateFormat); }
+                set { EndDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            }
+
+
+            /// <summary>
+            /// The pause date, if any
+            /// </summary>
+            [XmlIgnore]
+            public DateTime PauseDate { get; private set; }
 
             /// <summary>
             /// The pause date, if any
             /// </summary>
             [XmlAttribute("pauseDate")]
-            public DateTime PauseDate { get; set; }
+            public string PauseDateAsString {
+                get { return PauseDate.ToString(XmlHelper.DateFormat); }
+                set { PauseDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            }
+
+            /// <summary>
+            /// The date the job completed, if any
+            /// </summary>
+            [XmlIgnore]
+            public DateTime CompletedDate { get; private set; }
 
             /// <summary>
             /// The date the job completed, if any
             /// </summary>
             [XmlAttribute("completedDate")]
-            public DateTime CompletedDate { get; set; }
+            public string CompletedDateAsString {
+                get { return CompletedDate.ToString(XmlHelper.DateFormat); }
+                set { CompletedDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            }
 
             /// <summary>
             /// The ID of the character that completed the job
