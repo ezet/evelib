@@ -44,7 +44,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             /// The id of the facility the job was installed in
             /// </summary>
             [XmlAttribute("facilityID")]
-            public int FacilityId { get; set; }
+            public long FacilityId { get; set; }
 
             /// <summary>
             /// The solar system ID of the facility
@@ -92,13 +92,13 @@ namespace eZet.EveLib.Modules.Models.Character {
             /// The location ID for the blueprint
             /// </summary>
             [XmlAttribute("blueprintLocationID")]
-            public int BlueprintLocationId { get; set; }
+            public long BlueprintLocationId { get; set; }
 
             /// <summary>
             /// The location ID for the job output
             /// </summary>
             [XmlAttribute("outputLocationID")]
-            public int OutputLocationId { get; set; }
+            public long OutputLocationId { get; set; }
 
             /// <summary>
             /// The number of runs
