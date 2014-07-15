@@ -302,5 +302,22 @@ namespace eZet.EveLib.Modules {
         public CrestIndustrySystems GetIndustrySystems() {
             return GetIndustrySystemsAsync().Result;
         }
+
+        /// <summary>
+        /// Returns a list of all current industry team auctions
+        /// </summary>
+        /// <returns>A list of all current industry team auctions</returns>
+        public Task<CrestIndustryTeamAuction> GetIndustryTeamAuctionsAsync() {
+            const string relPath = "industry/teams/auction/";
+            return requestAsync<CrestIndustryTeamAuction>(relPath);
+        }
+
+        /// <summary>
+        /// Returns a list of all current industry team auctions
+        /// </summary>
+        /// <returns>A list of all current industry team auctions</returns>
+        public CrestIndustryTeamAuction GetIndustryTeamAuction() {
+            return GetIndustryTeamAuctionsAsync().Result;
+        }
     }
 }

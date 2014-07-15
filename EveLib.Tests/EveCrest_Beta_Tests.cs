@@ -34,6 +34,11 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetIndustryTeamAuctions() {
+            var result = await _crest.GetIndustryTeamAuctionsAsync();
+        }
+
+        [TestMethod]
         public async Task GetSpeciality() {
             var result = await _crest.GetSpecialityAsync(10);
         }

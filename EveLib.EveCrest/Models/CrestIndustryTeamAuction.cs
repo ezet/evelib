@@ -3,46 +3,53 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     /// <summary>
-    /// Represents a CREST /industry/teams/ response
+    /// Response type for CREST Industry Team Auctions
     /// </summary>
-    public class CrestIndustryTeams : CrestCollectionResponse {
+    [DataContract]
+    public class CrestIndustryTeamAuction : CrestCollectionResponse {
 
         /// <summary>
-        /// A list of the teams
+        /// A list of team auctions
         /// </summary>
         [DataMember(Name = "items")]
-        public IList<Team> Teams { get; set; }
+        public List<TeamAuction> Auctions { get; set; }
 
         /// <summary>
-        /// Represents a CREST industry team
+        /// Represents a team auction
         /// </summary>
-        public class Team {
+        [DataContract]
+        public class TeamAuction {
 
             /// <summary>
-            /// The solar system
+            /// The solar system the auction is for
             /// </summary>
             [DataMember(Name = "solarSystem")]
             public CrestNamedEntity SolarSystem { get; set; }
 
             /// <summary>
-            /// The team specialization
+            /// The specialization of the team
             /// </summary>
             [DataMember(Name = "specialization")]
             public CrestEntity Specialization { get; set; }
 
             /// <summary>
-            /// The team creation time
+            /// The time the team was created
             /// </summary>
             [DataMember(Name = "creationTime")]
             public DateTime CreationTime { get; set; }
 
             /// <summary>
-            /// The team expiry time
+            /// The time the team will expire
             /// </summary>
             [DataMember(Name = "expiryTime")]
             public DateTime ExpiryTime { get; set; }
+
+            /// <summary>
+            /// The expiry time of the auction
+            /// </summary>
+            [DataMember(Name = "auctionExpiryTime")]
+            public DateTime AuctionExpiryTime { get; set; }
 
             /// <summary>
             /// The team cost modifier
@@ -51,12 +58,14 @@ namespace eZet.EveLib.Modules.Models {
             public float CostModifier { get; set; }
 
             /// <summary>
-            /// A list of the team workers
+            /// A list of workers on the team
             /// </summary>
             [DataMember(Name = "workers")]
-            public IList<CrestIndustryTeamWorker> Workers { get; set; }
+            public List<CrestIndustryTeamWorker> Workers { get; set; }
+
+
+
 
         }
-   
     }
 }
