@@ -11,7 +11,7 @@ namespace eZet.EveLib.Modules.Models {
         /// <summary>
         /// The solar system
         /// </summary>
-        [DataMember(Name = "solarSystem")]
+        [DataMember(Name = "items")]
         public List<SolarSystemEntry> SolarSystems { get; set; }
 
         /// <summary>
@@ -23,11 +23,13 @@ namespace eZet.EveLib.Modules.Models {
             /// <summary>
             /// The solar system
             /// </summary>
+            [DataMember(Name = "solarSystem")]
             public CrestNamedEntity SolarSystem { get; set; }
 
             /// <summary>
             /// A list of system costs
             /// </summary>
+            [DataMember(Name = "systemCostIndices")]
             public List<SystemCostEntry> SystemCostIndices { get; set; }
 
         }
@@ -36,7 +38,7 @@ namespace eZet.EveLib.Modules.Models {
         /// Represents a system cost index in CREST Industry Systems collection
         /// </summary>
         [DataContract]
-        public class SystemCostEntry : CrestNamedEntity {
+        public class SystemCostEntry {
             /// <summary>
             /// The cost index
             /// </summary>

@@ -35,6 +35,8 @@ namespace eZet.EveLib.Modules {
             set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheLoad = value; }
         }
 
+        public CacheType CacheType { get; set; }
+
         /// <summary>
         ///     Gets or sets whether data can be stored in the cache.
         /// </summary>

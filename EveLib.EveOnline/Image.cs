@@ -327,6 +327,4 @@ namespace eZet.EveLib.Modules {
         }
     }
 
-
-
 }

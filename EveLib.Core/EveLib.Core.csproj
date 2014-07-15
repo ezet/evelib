@@ -122,6 +122,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\Enums.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="EveLib.cs" />
     <Compile Include="Exceptions\EveLibWebException.cs" />
