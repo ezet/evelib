@@ -132,7 +132,6 @@
     <Compile Include="Models\Character\ContractItems.cs" />
     <Compile Include="Models\Character\ContractList.cs" />
     <Compile Include="Models\Character\FactionWarfareStats.cs" />
-    <Compile Include="Models\Character\IndustryJobs.cs" />
     <Compile Include="Models\Character\KillLog.cs" />
     <Compile Include="Models\Character\Locations.cs" />
     <Compile Include="Models\Character\MailBodies.cs" />
@@ -194,7 +193,7 @@
     <Compile Include="Models\Map\Kills.cs" />
     <Compile Include="Models\Map\Sovereignty.cs" />
     <Compile Include="Models\Map\SovereigntyStatus.cs" />
-    <Compile Include="Models\Character\NewIndustryJobs.cs" />
+    <Compile Include="Models\Character\IndustryJobs.cs" />
     <Compile Include="Exceptions\EveOnlineException.cs" />
     <Compile Include="RequestHandlers\WindowsCachedRequestHandler.cs" />
     <Compile Include="Util\XmlHelper.cs" />

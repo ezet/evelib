@@ -28,7 +28,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <returns></returns>
         public Task<CrestRoot> GetRootAsync() {
-            string relPath = "";
+            const string relPath = "";
             return requestAsync<CrestRoot>(relPath);
         }
 
@@ -154,7 +154,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <returns></returns>
         public Task<CrestMarketPrices> GetMarketPricesAsync() {
-            string relpath = "market/prices/";
+            const string relpath = "market/prices/";
             return requestAsync<CrestMarketPrices>(relpath);
         }
 

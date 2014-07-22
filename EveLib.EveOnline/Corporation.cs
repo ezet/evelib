@@ -347,16 +347,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///     Returns the corporation industry jobs.
-        /// </summary>
-        /// <returns></returns>
-        public EveApiResponse<IndustryJobs> GetIndustryJobs() {
-            return GetIndustryJobsAsync().Result;
-        }
-
-
-        /// <summary>
-        ///     Returns the corporation industry jobs.
+        ///     Returns the currently running industry jobs.
         /// </summary>
         /// <returns></returns>
         public Task<EveApiResponse<IndustryJobs>> GetIndustryJobsAsync() {
@@ -364,38 +355,28 @@ namespace eZet.EveLib.Modules {
             return requestAsync<IndustryJobs>(relPath, ApiKey);
         }
 
-
         /// <summary>
         ///     Returns the currently running industry jobs.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<NewIndustryJobs>> GetNewIndustryJobsAsync() {
-            const string relPath = "/corp/IndustryJobs.xml.aspx";
-            return requestAsync<NewIndustryJobs>(relPath, ApiKey);
-        }
-
-        /// <summary>
-        ///     Returns the currently running industry jobs.
-        /// </summary>
-        /// <returns></returns>
-        public EveApiResponse<NewIndustryJobs> GetNewIndustryJobs() {
-            return GetNewIndustryJobsAsync().Result;
+        public EveApiResponse<IndustryJobs> GetIndustryJobs() {
+            return GetIndustryJobsAsync().Result;
         }
 
         /// <summary>
         ///     Returns currently running and ended industry jobs.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<NewIndustryJobs>> GetIndustryJobsHistoryAsync() {
+        public Task<EveApiResponse<IndustryJobs>> GetIndustryJobsHistoryAsync() {
             const string relPath = "/corp/IndustryJobsHistory.xml.aspx";
-            return requestAsync<NewIndustryJobs>(relPath, ApiKey);
+            return requestAsync<IndustryJobs>(relPath, ApiKey);
         }
 
         /// <summary>
         ///     Returns currently running and ended industry jobs.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<NewIndustryJobs> GetIndustryHistoryJobs() {
+        public EveApiResponse<IndustryJobs> GetIndustryHistoryJobs() {
             return GetIndustryJobsHistoryAsync().Result;
         }
 

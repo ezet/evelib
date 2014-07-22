@@ -63,9 +63,6 @@ namespace eZet.EveLib.Modules.Models {
             [DataMember(Name = "workers")]
             public List<CrestIndustryTeamWorker> Workers { get; set; }
 
-
-
-
         }
     }
 }

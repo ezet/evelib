@@ -21,14 +21,5 @@ namespace eZet.EveLib.Test {
             _sisiKey.Characters.First().BaseUri = "https://api.testeveonline.com";
         }
 
-        [TestMethod]
-        public async Task GetNewIndustryJobs_NoErrors() {
-            EveApiResponse<NewIndustryJobs> data = await _sisiKey.Characters.First().GetNewIndustryJobsAsync();
-        }
-
-        [TestMethod]
-        public async Task GetIndustryJobsHistory_NoErrors() {
-            EveApiResponse<NewIndustryJobs> data = await _sisiKey.Characters.First().GetNewIndustryJobsAsync();
-        }
     }
 }

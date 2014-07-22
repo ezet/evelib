@@ -101,9 +101,13 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetIndustryJobs_ValidRequest_HasResult() {
-            EveApiResponse<IndustryJobs> res = _validKey.Characters[0].GetIndustryJobs();
-            Assert.IsNotNull(res.Result);
+        public async Task GetIndustryJobs_NoErrors() {
+            EveApiResponse<IndustryJobs> data = await _validKey.Characters.First().GetIndustryJobsAsync();
+        }
+
+        [TestMethod]
+        public async Task GetIndustryJobsHistory_NoErrors() {
+            EveApiResponse<IndustryJobs> data = await _validKey.Characters.First().GetIndustryJobsAsync();
         }
 
         [TestMethod]

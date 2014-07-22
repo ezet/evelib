@@ -3,146 +3,223 @@ using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Character {
+    /// <summary>
+    /// Represents a IndustryJobs response
+    /// </summary>
     [Serializable]
-    [XmlRoot("result", IsNullable = false)]
+    [XmlRoot("result")]
     public class IndustryJobs {
-        public enum CompletedStatusType {
-            [XmlEnum("0")] Failed,
-            [XmlEnum("1")] Delivered,
-            [XmlEnum("2")] Aborted,
-            [XmlEnum("3")] GmAborted,
-            [XmlEnum("4")] Unanchored,
-            [XmlEnum("5")] Destroyed
-        }
 
+        /// <summary>
+        /// A list of industry jobs
+        /// </summary>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<IndustryJob> Jobs { get; set; }
+        public EveOnlineRowCollection<NewIndustryJob> Jobs { get; set; }
 
+        /// <summary>
+        /// Represents a industry job
+        /// </summary>
         [Serializable]
         [XmlRoot("row")]
-        public class IndustryJob {
+        public class NewIndustryJob {
+            /// <summary>
+            /// The job ID
+            /// </summary>
             [XmlAttribute("jobID")]
             public long JobId { get; set; }
 
-            [XmlAttribute("assemblyLineID")]
-            public long AssemblyLineId { get; set; }
-
-            [XmlAttribute("containerID")]
-            public long ContainerId { get; set; }
-
-            [XmlAttribute("installedItemID")]
-            public long InstalledItemId { get; set; }
-
-            [XmlAttribute("installedItemLocationID")]
-            public long InstalledItemLocationId { get; set; }
-
-            [XmlAttribute("installedItemQuantity")]
-            public int InstalledItemQuantity { get; set; }
-
-            [XmlAttribute("installedItemProductivityLevel")]
-            public int InstalledItemProducivityLevel { get; set; }
-
-            [XmlAttribute("installedItemMaterialLevel")]
-            public int InstalledItemMaterialLevel { get; set; }
-
-            [XmlAttribute("installedItemLicenseProductionRunsRemaining")]
-            public int InstalledItemLicenseProductionRunsRemaining { get; set; }
-
-            [XmlAttribute("outputLocationID")]
-            public long OutputLocationId { get; set; }
-
+            /// <summary>
+            /// The installer entity ID
+            /// </summary>
             [XmlAttribute("installerID")]
             public long InstallerId { get; set; }
 
-            [XmlAttribute("runs")]
-            public int Runs { get; set; }
+            /// <summary>
+            /// The installer's name
+            /// </summary>
+            [XmlAttribute("installerName")]
+            public string InstallerName { get; set; }
 
-            [XmlAttribute("licensedProductionRuns")]
-            public int LicensedProductionRuns { get; set; }
+            /// <summary>
+            /// The id of the facility the job was installed in
+            /// </summary>
+            [XmlAttribute("facilityID")]
+            public long FacilityId { get; set; }
 
-            [XmlAttribute("installedInSolarSystemID")]
-            public long InstalledInSolarSystemId { get; set; }
+            /// <summary>
+            /// The solar system ID of the facility
+            /// </summary>
+            [XmlAttribute("solarSystemID")]
+            public int SolarSystemId { get; set; }
 
-            [XmlAttribute("containerLocationID")]
-            public long ContainerLocationId { get; set; }
+            /// <summary>
+            /// The solar system name
+            /// </summary>
+            [XmlAttribute("solarSystemName")]
+            public string SolarSystemName { get; set; }
 
-            [XmlAttribute("materialMultiplier")]
-            public float MaterialMultiplier { get; set; }
+            /// <summary>
+            /// The station ID
+            /// </summary>
+            [XmlAttribute("stationID")]
+            public int StationId { get; set; }
 
-            [XmlAttribute("charMaterialMultiplier")]
-            public float CharMaterialMultiplier { get; set; }
-
-            [XmlAttribute("timeMultiplier")]
-            public float TimeMultiplier { get; set; }
-
-            [XmlAttribute("charTimeMultiplier")]
-            public float CharTimeMultiplier { get; set; }
-
-            [XmlAttribute("installedItemTypeID")]
-            public long InstalledItemTypeId { get; set; }
-
-            [XmlAttribute("outputTypeID")]
-            public long OutputTypeId { get; set; }
-
-            [XmlAttribute("containerTypeID")]
-            public long containerTypeId { get; set; }
-
-            [XmlAttribute("intalledItemCopy")]
-            public bool InstalledItemCopy { get; set; }
-
-            [XmlAttribute("completed")]
-            public bool Completed { get; set; }
-
-            [XmlAttribute("completedSuccessfully")]
-            public bool CompletedSuccessfully { get; set; }
-
-            [XmlAttribute("installedItemFlag")]
-            public int InstalledItemFlag { get; set; }
-
-            [XmlAttribute("outputFlag")]
-            public int OutputFlag { get; set; }
-
+            /// <summary>
+            /// The activity ID
+            /// </summary>
             [XmlAttribute("activityID")]
             public int ActivityId { get; set; }
 
-            [XmlAttribute("completedStatus")]
-            public CompletedStatusType CompletedStatus { get; set; }
+            /// <summary>
+            /// The blueprint ID
+            /// </summary>
+            [XmlAttribute("blueprintID")]
+            public long BlueprintId { get; set; }
 
+            /// <summary>
+            /// The blueprint type ID
+            /// </summary>
+            [XmlAttribute("blueprintTypeID")]
+            public int BlueprintTypeId { get; set; }
+
+            /// <summary>
+            /// The blueprint name
+            /// </summary>
+            [XmlAttribute("blueprintTypeName")]
+            public string BueprintTypeName { get; set; }
+
+            /// <summary>
+            /// The location ID for the blueprint
+            /// </summary>
+            [XmlAttribute("blueprintLocationID")]
+            public long BlueprintLocationId { get; set; }
+
+            /// <summary>
+            /// The location ID for the job output
+            /// </summary>
+            [XmlAttribute("outputLocationID")]
+            public long OutputLocationId { get; set; }
+
+            /// <summary>
+            /// The number of runs
+            /// </summary>
+            [XmlAttribute("runs")]
+            public int Runs { get; set; }
+
+            /// <summary>
+            /// The job cost
+            /// </summary>
+            [XmlAttribute("cost")]
+            public decimal Cost { get; set; }
+
+            /// <summary>
+            /// The team ID
+            /// </summary>
+            [XmlAttribute("teamID")]
+            public int TeamId { get; set; }
+
+            /// <summary>
+            /// The number of licensed runs
+            /// </summary>
+            [XmlAttribute("licensedRuns")]
+            public int LicensedRuns { get; set; }
+
+            /// <summary>
+            /// The probability of success for invention
+            /// </summary>
+            [XmlAttribute("probability")]
+            public float Probability { get; set; }
+
+            /// <summary>
+            /// The type ID of the final product
+            /// </summary>
+            [XmlAttribute("productTypeID")]
+            public int ProductTypeId { get; set; }
+
+            /// <summary>
+            /// The type name of the final product
+            /// </summary>
+            [XmlAttribute("productTypeName")]
+            public string ProductTypeName { get; set; }
+
+            /// <summary>
+            /// The job status
+            /// </summary>
+            [XmlAttribute("status")]
+            public string Status { get; set; }
+
+            /// <summary>
+            /// The time left on the job, in seconds
+            /// </summary>
+            [XmlAttribute("timeInSeconds")]
+            public int timeInSeconds { get; set; }
+
+            /// <summary>
+            /// The start date
+            /// </summary>
             [XmlIgnore]
-            public DateTime InstallTime { get; private set; }
+            public DateTime StartDate { get; private set; }
 
-            [XmlAttribute("installTime")]
-            public string InstallTimeAsString {
-                get { return InstallTime.ToString(XmlHelper.DateFormat); }
-                set { InstallTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            /// <summary>
+            /// The start date
+            /// </summary>
+            [XmlAttribute("startDate")]
+            public string StartDateAsString {
+                get { return StartDate.ToString(XmlHelper.DateFormat); }
+                set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
+            /// <summary>
+            /// The end date
+            /// </summary>
             [XmlIgnore]
-            public DateTime BeginProductionTime { get; private set; }
+            public DateTime EndDate { get; private set; }
 
-            [XmlAttribute("beginProductionTime")]
-            public string BeginProductionTimeAsString {
-                get { return BeginProductionTime.ToString(XmlHelper.DateFormat); }
-                set { BeginProductionTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            /// <summary>
+            /// The end date
+            /// </summary>
+            [XmlAttribute("endDate")]
+            public string EndDateAsString {
+                get { return EndDate.ToString(XmlHelper.DateFormat); }
+                set { EndDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
-            [XmlIgnore]
-            public DateTime EndProductionTime { get; private set; }
 
-            [XmlAttribute("endProductionTime")]
-            public string EndProductionTimeAsString {
-                get { return EndProductionTime.ToString(XmlHelper.DateFormat); }
-                set { EndProductionTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            /// <summary>
+            /// The pause date, if any
+            /// </summary>
+            [XmlIgnore]
+            public DateTime PauseDate { get; private set; }
+
+            /// <summary>
+            /// The pause date, if any
+            /// </summary>
+            [XmlAttribute("pauseDate")]
+            public string PauseDateAsString {
+                get { return PauseDate.ToString(XmlHelper.DateFormat); }
+                set { PauseDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
 
+            /// <summary>
+            /// The date the job completed, if any
+            /// </summary>
             [XmlIgnore]
-            public DateTime PauseProductionTime { get; private set; }
+            public DateTime CompletedDate { get; private set; }
 
-            [XmlAttribute("pauseProductionTime")]
-            public string PauseProductionTimeAsString {
-                get { return PauseProductionTime.ToString(XmlHelper.DateFormat); }
-                set { PauseProductionTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+            /// <summary>
+            /// The date the job completed, if any
+            /// </summary>
+            [XmlAttribute("completedDate")]
+            public string CompletedDateAsString {
+                get { return CompletedDate.ToString(XmlHelper.DateFormat); }
+                set { CompletedDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
+
+            /// <summary>
+            /// The ID of the character that completed the job
+            /// </summary>
+            [XmlAttribute("completedCharacterID")]
+            public long CompletedCharacterId { get; set; }
         }
     }
 }
