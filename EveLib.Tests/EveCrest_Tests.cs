@@ -17,6 +17,19 @@ namespace eZet.EveLib.Test {
         public EveCrest EveCrest = new EveCrest();
 
         [TestMethod]
+        public async Task GetRoot() {
+            var result = await EveCrest.GetRootAsync();
+        }
+
+
+        [TestMethod]
+        public void GetKillmail_NoErrors() {
+            CrestKillmail data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+            Assert.AreEqual(30000131, data.SolarSystem.Id);
+            Assert.AreEqual(99000652, data.Victim.Alliance.Id);
+        }
+
+        [TestMethod]
         public void GetIncursions_NoErrors() {
             CrestIncursions data = EveCrest.GetIncursions();
         }
@@ -32,16 +45,16 @@ namespace eZet.EveLib.Test {
             Assert.AreNotEqual(data.Id, 0);
         }
 
-        [TestMethod]
-        public void GetKillmail_NoErrors() {
-            CrestKillmail data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
-            Assert.AreEqual(30000131, data.SolarSystem.Id);
-            Assert.AreEqual(99000652, data.Victim.Alliance.Id);
-        }
 
         [TestMethod]
         public void GetMarketHistory_NoErrors() {
             CrestMarketHistory data = EveCrest.GetMarketHistory(RegionId, TypeId);
+        }
+
+        [TestMethod]
+        public async Task GetMarketPrices() {
+            var result = await EveCrest.GetMarketPricesAsync();
+            Console.WriteLine(result.Prices.Count);
         }
 
         [TestMethod]
@@ -66,14 +79,15 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task GetRoot() {
-            var result = await EveCrest.GetRootAsync();
-        }
-
-        [TestMethod]
         public async Task GetSpecialities() {
             var result = await EveCrest.GetSpecialitiesAsync();
         }
+
+        [TestMethod]
+        public async Task GetSpeciality() {
+            var result = await EveCrest.GetSpecialityAsync(10);
+        }
+
 
         [TestMethod]
         public async Task GetIndustryTeams() {
@@ -91,24 +105,8 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetIndustrySystems() {
-            var result = EveCrest.GetIndustrySystems();
-        }
-
-        [TestMethod]
         public async Task GetIndustryTeamAuctions() {
             var result = await EveCrest.GetIndustryTeamAuctionsAsync();
-        }
-
-        [TestMethod]
-        public async Task GetSpeciality() {
-            var result = await EveCrest.GetSpecialityAsync(10);
-        }
-
-        [TestMethod]
-        public async Task GetMarketPrices() {
-            var result = await EveCrest.GetMarketPricesAsync();
-            Console.WriteLine(result.Prices.Count);
         }
 
         [TestMethod]
