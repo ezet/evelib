@@ -48,7 +48,7 @@ namespace eZet.EveLib.Modules.Models {
         /// The war this kill is related to
         /// </summary>
         [DataMember(Name = "war")]
-        public CrestEntity War { get; set; }
+        public CrestLinkedEntity War { get; set; }
 
         /// <summary>
         /// Represents a killmail item

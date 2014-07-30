@@ -17,7 +17,7 @@ namespace eZet.EveLib.Modules.Models {
         /// The worker specialization
         /// </summary>
         [DataMember(Name = "specialization")]
-        public CrestEntity Specialization { get; set; }
+        public CrestLinkedEntity Specialization { get; set; }
 
 
         /// <summary>

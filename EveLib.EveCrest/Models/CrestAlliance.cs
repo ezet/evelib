@@ -60,24 +60,24 @@ namespace eZet.EveLib.Modules.Models {
         /// The alliance executor corporation
         /// </summary>
         [DataMember(Name = "executorCorporation")]
-        public CrestEntity ExecutorCorporation { get; set; }
+        public CrestLinkedEntity ExecutorCorporation { get; set; }
 
         /// <summary>
         /// The alliance creator corporation
         /// </summary>
         [DataMember(Name = "creatorCorporation")]
-        public CrestEntity CreatorCorporation { get; set; }
+        public CrestLinkedEntity CreatorCorporation { get; set; }
 
         /// <summary>
         /// The alliance creator character
         /// </summary>
         [DataMember(Name = "creatorCharacter")]
-        public CrestEntity CreatorCharacter { get; set; }
+        public CrestLinkedEntity CreatorCharacter { get; set; }
 
         /// <summary>
         /// A list of all corporations in the alliance
         /// </summary>
         [DataMember(Name = "corporations")]
-        public IList<CrestEntity> Corporations { get; set; }
+        public IList<CrestLinkedEntity> Corporations { get; set; }
     }
 }

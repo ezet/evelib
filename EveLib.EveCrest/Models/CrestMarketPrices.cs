@@ -17,7 +17,14 @@ namespace eZet.EveLib.Modules.Models {
         /// <summary>
         /// Represents an entry in the Market Price Response collection
         /// </summary>
-        public class MarketPriceEntry : CrestNamedEntity {
+        [DataContract]
+        public class MarketPriceEntry {
+
+            /// <summary>
+            /// The item type
+            /// </summary>
+            [DataMember(Name = "type")]
+            public CrestNamedEntity Type { get; set; }
 
             /// <summary>
             /// The estimated value as displayed in game

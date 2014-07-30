@@ -31,7 +31,7 @@ namespace eZet.EveLib.Modules.Models {
             /// The specialization of the team
             /// </summary>
             [DataMember(Name = "specialization")]
-            public CrestEntity Specialization { get; set; }
+            public CrestLinkedEntity Specialization { get; set; }
 
             /// <summary>
             /// The time the team was created

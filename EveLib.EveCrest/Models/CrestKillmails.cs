@@ -11,6 +11,6 @@ namespace eZet.EveLib.Modules.Models {
         /// A list of killmails
         /// </summary>
         [DataMember(Name = "items")]
-        public IList<CrestEntity> Killmails { get; set; }
+        public IList<CrestLinkedEntity> Killmails { get; set; }
     }
 }

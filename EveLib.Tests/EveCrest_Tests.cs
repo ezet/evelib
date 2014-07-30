@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
@@ -62,6 +63,55 @@ namespace eZet.EveLib.Test {
         [ExpectedException(typeof (EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
             CrestWar data = await EveCrest.GetWarAsync(999999999);
+        }
+
+        [TestMethod]
+        public async Task GetRoot() {
+            var result = await EveCrest.GetRootAsync();
+        }
+
+        [TestMethod]
+        public async Task GetSpecialities() {
+            var result = await EveCrest.GetSpecialitiesAsync();
+        }
+
+        [TestMethod]
+        public async Task GetIndustryTeams() {
+            var result = await EveCrest.GetIndustryTeamsAsync();
+        }
+
+        [TestMethod]
+        public async Task GetIndustrySystemsAsync() {
+            var result = await EveCrest.GetIndustrySystemsAsync();
+            Console.WriteLine(result.SolarSystems.Count);
+        }
+
+        [TestMethod]
+        public void GetIndustrySystems() {
+            var result = EveCrest.GetIndustrySystems();
+            Assert.IsNotNull(result.SolarSystems);
+            Console.WriteLine(result.SolarSystems.Count);
+        }
+
+        [TestMethod]
+        public async Task GetIndustryTeamAuctions() {
+            var result = await EveCrest.GetIndustryTeamAuctionsAsync();
+        }
+
+        [TestMethod]
+        public async Task GetSpeciality() {
+            var result = await EveCrest.GetSpecialityAsync(10);
+        }
+
+        [TestMethod]
+        public async Task GetMarketPrices() {
+            var result = await EveCrest.GetMarketPricesAsync();
+            Console.WriteLine(result.Prices.Count);
+        }
+
+        [TestMethod]
+        public async Task GetIndustryFacilities() {
+            var result = await EveCrest.GetIndustryFacilitiesAsync();
         }
     }
 }

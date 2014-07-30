@@ -106,6 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
+    <Compile Include="Models\CrestEntity.cs" />
+    <Compile Include="Models\CrestIndustryFacilities.cs" />
     <Compile Include="Models\CrestIndustrySpeciality.cs" />
     <Compile Include="Models\CrestIndustrySystems.cs" />
     <Compile Include="Models\CrestIndustryTeamAuction.cs" />
@@ -116,7 +118,7 @@
     <Compile Include="Models\CrestIndstrySpecialities.cs" />
     <Compile Include="Models\CrestAlliance.cs" />
     <Compile Include="Models\CrestAlliances.cs" />
-    <Compile Include="Models\CrestEntity.cs" />
+    <Compile Include="Models\CrestLinkedEntity.cs" />
     <Compile Include="Models\CrestCollectionResponse.cs" />
     <Compile Include="Models\CrestError.cs" />
     <Compile Include="Models\CrestHref.cs" />

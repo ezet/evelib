@@ -1,22 +1,16 @@
 ﻿using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-    
+
     /// <summary>
-    /// Represents a basic CREST entity
+    /// Represents a simple CREST entity with an ID
     /// </summary>
     [DataContract]
     public class CrestEntity {
         /// <summary>
-        /// The entity name
+        /// The ID
         /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
-
-        /// <summary>
-        /// The entity href
-        /// </summary>
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 }
