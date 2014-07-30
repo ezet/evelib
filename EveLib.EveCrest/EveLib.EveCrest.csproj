@@ -110,6 +110,7 @@
     <Compile Include="Models\CrestIndustryFacilities.cs" />
     <Compile Include="Models\CrestIndustrySpeciality.cs" />
     <Compile Include="Models\CrestIndustrySystems.cs" />
+    <Compile Include="Models\CrestIndustryTeam.cs" />
     <Compile Include="Models\CrestIndustryTeamAuction.cs" />
     <Compile Include="Models\CrestIndustryTeams.cs" />
     <Compile Include="Models\CrestIndustryTeamWorker.cs" />
