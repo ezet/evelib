@@ -287,6 +287,26 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
+        /// Returns data for the specified industry team
+        /// </summary>
+        /// <param name="teamId">The team ID</param>
+        /// <returns></returns>
+        public Task<CrestIndustryTeam> GetIndustryTeamAsync(int teamId) {
+            string relPath = "industry/teams/" + teamId + "/";
+            return requestAsync<CrestIndustryTeam>(relPath);
+        }
+
+        /// <summary>
+        /// Returns data for the specified industry team
+        /// </summary>
+        /// <param name="teamId">The team ID</param>
+        /// <returns></returns>
+        public CrestIndustryTeam GetIndustryTeam(int teamId) {
+            return GetIndustryTeamAsync(teamId).Result;
+        }
+
+
+        /// <summary>
         /// Returns a list of industry systems and prices
         /// </summary>
         /// <returns></returns>

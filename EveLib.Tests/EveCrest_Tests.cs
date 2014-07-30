@@ -81,16 +81,18 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetIndustryTeam() {
+            var result = await EveCrest.GetIndustryTeamAsync(1);
+        }
+
+        [TestMethod]
         public async Task GetIndustrySystemsAsync() {
             var result = await EveCrest.GetIndustrySystemsAsync();
-            Console.WriteLine(result.SolarSystems.Count);
         }
 
         [TestMethod]
         public void GetIndustrySystems() {
             var result = EveCrest.GetIndustrySystems();
-            Assert.IsNotNull(result.SolarSystems);
-            Console.WriteLine(result.SolarSystems.Count);
         }
 
         [TestMethod]

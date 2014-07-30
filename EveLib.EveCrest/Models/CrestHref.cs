@@ -14,6 +14,10 @@ namespace eZet.EveLib.Modules.Models {
         [DataMember(Name = "href")]
         public T Value { get; set; }
 
+        /// <summary>
+        /// Returns the href as a string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() {
             return Value.ToString();
         }
