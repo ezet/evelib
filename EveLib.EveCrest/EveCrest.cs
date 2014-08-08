@@ -185,7 +185,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
         public CrestWars GetWars(int page = 1) {
-            return GetWarsAsync().Result;
+            return GetWarsAsync(page).Result;
         }
 
         /// <summary>
