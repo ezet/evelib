@@ -21,6 +21,11 @@ namespace eZet.EveLib.Test {
             _sisiKey.Corporation.BaseUri = "https://api.testeveonline.com";
         }
 
+        [TestMethod]
+        public async Task GetBlueprints() {
+            var result = _sisiKey.Corporation.GetBlueprintsAsync();
+        }
+
 
     }
 }

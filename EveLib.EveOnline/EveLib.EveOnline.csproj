@@ -124,6 +124,7 @@
     <Compile Include="Models\Account\CharacterList.cs" />
     <Compile Include="Models\Character\AccountBalance.cs" />
     <Compile Include="Models\Character\AssetList.cs" />
+    <Compile Include="Models\Character\Blueprints.cs" />
     <Compile Include="Models\Character\CalendarEventAttendees.cs" />
     <Compile Include="Models\Character\CharacterSheet.cs" />
     <Compile Include="Models\Character\ContactList.cs" />

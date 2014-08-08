@@ -862,5 +862,22 @@ namespace eZet.EveLib.Modules {
             const string relPath = "/char/PlanetaryLinks.xml.aspx";
             return requestAsync<PlanetaryLinks>(relPath, ApiKey, "characterId", CharacterId, "planetId", planetId);
         }
+
+        /// <summary>
+        ///  Returns the blueprints owned by this character.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<BlueprintList>> GetBlueprintsAsync() {
+            const string relPath = "/char/Blueprints.xml.aspx";
+            return requestAsync<BlueprintList>(relPath, ApiKey, "characterID", CharacterId);
+        }
+
+        /// <summary>
+        ///  Returns the blueprints owned by this character.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<BlueprintList> GetBlueprints() {
+            return GetBlueprintsAsync().Result;
+        }
     }
 }

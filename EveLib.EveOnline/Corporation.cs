@@ -763,5 +763,22 @@ namespace eZet.EveLib.Modules {
         public EveApiResponse<Facilities> GetFacilities() {
             return GetFacilitiesAsync().Result;
         }
+
+        /// <summary>
+        ///  Returns the blueprints owned by this character.
+        /// </summary>
+        /// <returns></returns>
+        public Task<EveApiResponse<BlueprintList>> GetBlueprintsAsync() {
+            const string relPath = "/corp/Blueprints.xml.aspx";
+            return requestAsync<BlueprintList>(relPath, ApiKey, "characterID", CorporationId);
+        }
+
+        /// <summary>
+        ///  Returns the blueprints owned by this character.
+        /// </summary>
+        /// <returns></returns>
+        public EveApiResponse<BlueprintList> GetBlueprints() {
+            return GetBlueprintsAsync().Result;
+        }
     }
 }
