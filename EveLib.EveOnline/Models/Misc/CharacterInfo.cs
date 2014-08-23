@@ -72,15 +72,33 @@ namespace eZet.EveLib.Modules.Models.Misc {
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Employment> EmploymentHistory { get; set; }
 
+        /// <summary>
+        /// Represents a employment entry
+        /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Employment {
+            /// <summary>
+            /// The employment record ID
+            /// </summary>
             [XmlAttribute("recordID")]
             public long RecordId { get; set; }
 
+            /// <summary>
+            /// The corporation ID
+            /// </summary>
             [XmlAttribute("corporationID")]
             public long CorporationId { get; set; }
 
+            /// <summary>
+            /// The corporation name
+            /// </summary>
+            [XmlAttribute("corporationName")]
+            public string CorporationName { get; set; }
+
+            /// <summary>
+            /// The employment start date
+            /// </summary>
             [XmlIgnore]
             public DateTime StartDate { get; private set; }
 
