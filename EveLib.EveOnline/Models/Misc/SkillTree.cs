@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Misc {
+    /// <summary>
+    /// Represents the skill tree
+    /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTree {
@@ -100,7 +103,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
             public int GroupId { get; set; }
 
             [XmlAttribute("groupName")]
-            public string CorporationName { get; set; }
+            public string GroupName { get; set; }
 
             [XmlElement("rowset")]
             public EveOnlineRowCollection<Skill> Skills { get; set; }
