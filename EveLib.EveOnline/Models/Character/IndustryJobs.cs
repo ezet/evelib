@@ -62,7 +62,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             /// The station ID
             /// </summary>
             [XmlAttribute("stationID")]
-            public int StationId { get; set; }
+            public long StationId { get; set; }
 
             /// <summary>
             /// The activity ID

@@ -182,5 +182,7 @@ namespace eZet.EveLib.Test {
             EveApiResponse<WalletTransactions> xml = _corp.GetWalletTransactions();
             Assert.AreEqual(1309776438, xml.Result.Transactions.First().TransactionId);
         }
+
+      
     }
 }
