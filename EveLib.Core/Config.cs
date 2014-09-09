@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Globalization;
 using System.IO;
+using eZet.EveLib.Core.Cache;
 
 namespace eZet.EveLib.Core {
     /// <summary>
@@ -18,6 +19,11 @@ namespace eZet.EveLib.Core {
         /// </summary>
         public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                                 Separator;
+
+        /// <summary>
+        ///     The cache factory
+        /// </summary>
+        public static Func<IEveLibCache> CacheFactory;
 
         /// <summary>
         ///     Filename for the Cache Register
@@ -48,6 +54,7 @@ namespace eZet.EveLib.Core {
             if (String.IsNullOrEmpty(UserAgent))
                 UserAgent = "EveLib";
             string appName = ConfigurationManager.AppSettings["eveLib.AppData"];
+            CacheFactory = () => new EveLibFileCache();
             AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
             CachePath = AppData + Separator + "Cache";
             ImagePath = AppData + Separator + "Images";

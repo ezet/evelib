@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Cache;
+using eZet.EveLib.Core;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules.Models;
@@ -21,7 +21,7 @@ namespace eZet.EveLib.Modules {
         /// Default constructor
         /// </summary>
         public ZKillboard() {
-            RequestHandler = new ZkbRequestHandler(new JsonSerializer(), new EveLibFileCache());
+            RequestHandler = new ZkbRequestHandler(new JsonSerializer(), Config.CacheFactory());
             BaseUri = new Uri(DefaultUri);
         }
 
