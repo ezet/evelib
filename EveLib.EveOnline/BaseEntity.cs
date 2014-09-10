@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using eZet.EveLib.Core;
 using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
@@ -20,7 +21,7 @@ namespace eZet.EveLib.Modules {
         protected BaseEntity() {
             var handler = new EveOnlineRequestHandler();
             handler.Serializer = new XmlSerializer();
-            handler.Cache = new EveLibFileCache();
+            handler.Cache = Config.CacheFactory();
             RequestHandler = handler;
             BaseUri = DefaultUri;
             EnableCacheLoad = true;
