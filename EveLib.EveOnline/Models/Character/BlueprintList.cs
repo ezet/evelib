@@ -12,25 +12,27 @@ namespace eZet.EveLib.Modules.Models.Character {
         /// <summary>
         /// A list of blueprints
         /// </summary>
-        [XmlElement("blueprints")]
-        public List<Blueprint> Blueprints { get; set; }
+        [XmlElement("rowset")]
+        public EveOnlineRowCollection<Blueprint> Blueprints { get; set; }
 
 
         /// <summary>
         /// Represents a blueprint
         /// </summary>
+        [Serializable]
+        [XmlRoot("row")]
         public class Blueprint {
             /// <summary>
             /// Unique ID of the blueprint
             /// </summary>
             [XmlAttribute("itemID")]
-            public int ItemId { get; set; }
+            public long ItemId { get; set; }
 
             /// <summary>
             /// ID for the location of the blueprint
             /// </summary>
             [XmlAttribute("locationID")]
-            public int LocationId { get; set; }
+            public long LocationId { get; set; }
 
             /// <summary>
             /// TypeID of the blueprint

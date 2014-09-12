@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
@@ -210,6 +211,12 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetCustomsOfficesAsync_ValidRequest_HasResult() {
             EveApiResponse<CustomsOffices> res = await _validKey.Corporation.GetCustomsOfficesAsync();
+        }
+
+        [TestMethod]
+        public async Task GetBlueprints_ValidRequest_HasResult() {
+            var res = (await _validKey.Corporation.GetBlueprintsAsync()).Result;
+            Assert.IsTrue(res.Blueprints.Any());
         }
     }
 }

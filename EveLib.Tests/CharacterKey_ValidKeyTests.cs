@@ -230,5 +230,10 @@ namespace eZet.EveLib.Test {
             EveApiResponse<PlanetaryLinks> res = _piKey.Characters[0].GetPlanetaryLinks(40003660);
             Assert.IsNotNull(res.Result);
         }
+
+        [TestMethod]
+        public async Task GetBlueprints_ValidRequest_HasResult() {
+            var res = (await _validKey.Characters[0].GetBlueprintsAsync()).Result;
+        }
     }
 }
