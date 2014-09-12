@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -52,7 +51,6 @@ namespace eZet.EveLib.Modules.Models.Character {
             public string InWatchlistAsString {
                 get { return InWatchlist.ToString(); }
                 set {
-                    Contract.Requires(value != null);
                     InWatchlist = (value.ToLower() == "true");
                 }
             }

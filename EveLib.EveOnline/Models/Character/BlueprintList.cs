@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
@@ -14,7 +13,6 @@ namespace eZet.EveLib.Modules.Models.Character {
         /// </summary>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Blueprint> Blueprints { get; set; }
-
 
         /// <summary>
         /// Represents a blueprint
@@ -67,7 +65,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             /// <summary>
             /// Material Efficiency Level of the blueprint.
             /// </summary>
-            [XmlAttribute("MaterialEfficiency")]
+            [XmlAttribute("materialEfficiency")]
             public int MaterialEfficiency { get; set; }
 
             /// <summary>
