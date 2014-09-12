@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
@@ -183,6 +184,11 @@ namespace eZet.EveLib.Test {
             Assert.AreEqual(1309776438, xml.Result.Transactions.First().TransactionId);
         }
 
+        [TestMethod]
+        public async Task GetBlueprints() {
+            var xml = await _corp.GetBlueprintsAsync();
+            Assert.IsTrue(xml.Result.Blueprints.Any());
+        }
       
     }
 }

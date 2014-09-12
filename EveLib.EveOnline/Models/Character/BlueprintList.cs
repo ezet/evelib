@@ -6,7 +6,7 @@ namespace eZet.EveLib.Modules.Models.Character {
     /// Eve Online Blueprint response
     /// </summary>
     [Serializable]
-    [XmlRoot("result", IsNullable = false)]
+    [XmlRoot("result")]
     public class BlueprintList {
         /// <summary>
         /// A list of blueprints

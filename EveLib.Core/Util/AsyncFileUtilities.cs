@@ -47,7 +47,7 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="text"></param>
         /// <returns></returns>
         public static async Task WriteAllTextAsync(string filePath, string text) {
-            byte[] encodedText = Encoding.Unicode.GetBytes(text);
+            byte[] encodedText = Encoding.UTF8.GetBytes(text);
             using (var sourceStream = new FileStream(filePath,
                 FileMode.Create, FileAccess.Write, FileShare.None, 4096, true)) {
                 await sourceStream.WriteAsync(encodedText, 0, encodedText.Length).ConfigureAwait(false);
