@@ -1,0 +1,61 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<eveapi version="2">
+  <currentTime>2014-09-12 13:26:23</currentTime>
+  <result>
+    <rowset name="blueprints" key="itemID" columns="itemID,locationID,typeID,typeName,flagID,quantity,timeEfficiency,materialEfficiency,runs">
+      <row itemID="1014319087952" locationID="1023177378" typeID="810" typeName="Scourge Heavy Missile Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014319089679" locationID="1023177378" typeID="808" typeName="Mjolnir Heavy Missile Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422602103" locationID="1012910006689" typeID="31066" typeName="Medium Nanobot Accelerator I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422604256" locationID="1012910006689" typeID="31457" typeName="Medium Energy Collision Accelerator I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422609704" locationID="1012910006689" typeID="31084" typeName="Small Salvage Tackle I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422611586" locationID="1012910006689" typeID="31036" typeName="Medium Anti-Thermic Pump I Blueprint" flagID="119" quantity="-1" timeEfficiency="18" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422631061" locationID="1012910006689" typeID="31803" typeName="Medium Core Defense Field Purger I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422632766" locationID="1012910006689" typeID="31373" typeName="Medium Capacitor Control Circuit I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422634223" locationID="1012910006689" typeID="31601" typeName="Medium Hydraulic Bay Thrusters I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422669551" locationID="1012910006689" typeID="31156" typeName="Medium Low Friction Nozzle Joints I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422673196" locationID="1012910006689" typeID="31162" typeName="Medium Hyperspatial Velocity Optimizer I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014422762641" locationID="1012910006689" typeID="31120" typeName="Medium Cargohold Optimization I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014431770656" locationID="1023177378" typeID="813" typeName="Mjolnir Light Missile Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014431772287" locationID="1023177378" typeID="811" typeName="Scourge Light Missile Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014431799931" locationID="1023177378" typeID="2204" typeName="Acolyte I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014431801891" locationID="1023177378" typeID="2455" typeName="Hobgoblin I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014431803211" locationID="1023177378" typeID="2465" typeName="Hornet I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014431803858" locationID="1023177378" typeID="2487" typeName="Warrior I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014444709083" locationID="1012910006689" typeID="32773" typeName="Medium Ancillary Shield Booster Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="3" />
+      <row itemID="1014445127972" locationID="1012910006689" typeID="4384" typeName="Large Micro Jump Drive Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="3" />
+      <row itemID="1014445234638" locationID="1012910006689" typeID="32775" typeName="Small Ancillary Shield Booster Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="3" />
+      <row itemID="1014453329773" locationID="1012910006689" typeID="4410" typeName="Target Spectrum Breaker Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="3" />
+      <row itemID="1014455657526" locationID="1012910006689" typeID="31178" typeName="Small Polycarbon Engine Housing I Blueprint" flagID="119" quantity="-1" timeEfficiency="18" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455844103" locationID="1012910006689" typeID="31289" typeName="Medium Particle Dispersion Augmentor I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455874935" locationID="1012910006689" typeID="31048" typeName="Medium Auxiliary Nano Pump I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455882855" locationID="1012910006689" typeID="26021" typeName="Large Warhead Rigor Catalyst I Blueprint" flagID="119" quantity="-1" timeEfficiency="18" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455891689" locationID="1012910006689" typeID="31539" typeName="Small Hybrid Collision Accelerator I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455896863" locationID="1012910006689" typeID="30988" typeName="Small Trimark Armor Pump I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455900984" locationID="1012910006689" typeID="31046" typeName="Small Auxiliary Nano Pump I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455904098" locationID="1012910006689" typeID="31010" typeName="Small Anti-Explosive Pump I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455909374" locationID="1012910006689" typeID="31323" typeName="Small Targeting System Subcontroller I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455922485" locationID="1012910006689" typeID="31024" typeName="Medium Anti-Kinetic Pump I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455926622" locationID="1012910006689" typeID="31621" typeName="Small Warhead Calefaction Catalyst I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455930051" locationID="1012910006689" typeID="31180" typeName="Medium Polycarbon Engine Housing I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455934006" locationID="1012910006689" typeID="31012" typeName="Medium Anti-Explosive Pump I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455942237" locationID="1012910006689" typeID="25921" typeName="Large Sentry Damage Augmentor I Blueprint" flagID="119" quantity="-1" timeEfficiency="18" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455952186" locationID="1012910006689" typeID="31565" typeName="Medium Hybrid Locus Coordinator I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455956841" locationID="1012910006689" typeID="31202" typeName="Small Emission Scope Sharpener I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014455964961" locationID="1012910006689" typeID="31541" typeName="Medium Hybrid Collision Accelerator I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014502021279" locationID="1012910006689" typeID="32773" typeName="Medium Ancillary Shield Booster Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="3" />
+      <row itemID="1014580520891" locationID="1012910006689" typeID="26600" typeName="Esoteric Tuner Data Interface Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="1" />
+      <row itemID="1014580520892" locationID="1012910006689" typeID="27946" typeName="Guristas Cruise Missile Battery Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="3" />
+      <row itemID="1014580520894" locationID="1012910006689" typeID="27944" typeName="Guristas Citadel Torpedo Battery Blueprint" flagID="119" quantity="-2" timeEfficiency="0" materialEfficiency="0" runs="3" />
+      <row itemID="1014589586173" locationID="1012910006689" typeID="31527" typeName="Small Hybrid Burst Aerator I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589589023" locationID="1012910006689" typeID="31669" typeName="Small Projectile Burst Aerator I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589605378" locationID="1012910006689" typeID="31717" typeName="Small Anti-EM Screen Reinforcer I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589608784" locationID="1012910006689" typeID="4396" typeName="Medium Processor Overclocking Unit I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589611345" locationID="1012910006689" typeID="31719" typeName="Medium Anti-EM Screen Reinforcer I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589618792" locationID="1012910006689" typeID="26930" typeName="Small Processor Overclocking Unit I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589621088" locationID="1012910006689" typeID="31753" typeName="Small Anti-Thermal Screen Reinforcer I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589622988" locationID="1012910006689" typeID="31106" typeName="Small Auxiliary Thrusters I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+      <row itemID="1014589625712" locationID="1012910006689" typeID="31755" typeName="Medium Anti-Thermal Screen Reinforcer I Blueprint" flagID="119" quantity="-1" timeEfficiency="20" materialEfficiency="10" runs="-1" />
+    </rowset>
+  </result>
+  <cachedUntil>2014-09-13 11:01:23</cachedUntil>
+</eveapi>
