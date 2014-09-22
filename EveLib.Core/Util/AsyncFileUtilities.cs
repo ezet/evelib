@@ -23,7 +23,7 @@ namespace eZet.EveLib.Core.Util {
                 var buffer = new byte[0x1000];
                 int numRead;
                 while ((numRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false)) != 0) {
-                    string text = Encoding.Unicode.GetString(buffer, 0, numRead);
+                    string text = Encoding.UTF8.GetString(buffer, 0, numRead);
                     sb.Append(text);
                 }
                 return sb.ToString();
