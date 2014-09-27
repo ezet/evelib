@@ -279,7 +279,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         /// <summary>
         /// Total willpower
         /// </summary>
-        [XmlElement("willlpower")]
+        [XmlElement("willpower")]
         public int Willpower { get; set; }
     }
 
