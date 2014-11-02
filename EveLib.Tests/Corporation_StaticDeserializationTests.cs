@@ -189,6 +189,5 @@ namespace eZet.EveLib.Test {
             var xml = await _corp.GetBlueprintsAsync();
             Assert.IsTrue(xml.Result.Blueprints.Any());
         }
-      
     }
 }

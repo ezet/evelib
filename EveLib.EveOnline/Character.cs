@@ -423,7 +423,7 @@ namespace eZet.EveLib.Modules {
             return requestAsync<FactionWarfareStats>(relPath, ApiKey, "characterId", CharacterId);
         }
 
-  /// <summary>
+        /// <summary>
         ///     Returns the currently running industry jobs.
         /// </summary>
         /// <returns></returns>

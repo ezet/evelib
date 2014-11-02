@@ -50,9 +50,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             [XmlAttribute("inWatchlist")]
             public string InWatchlistAsString {
                 get { return InWatchlist.ToString(); }
-                set {
-                    InWatchlist = (value.ToLower() == "true");
-                }
+                set { InWatchlist = (value.ToLower() == "true"); }
             }
         }
     }

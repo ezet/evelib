@@ -10,7 +10,6 @@ namespace eZet.EveLib.Modules {
     ///     by Image or Map. Paths: /eve, /misc, /server, /api
     /// </summary>
     public class Eve : BaseEntity {
-
         /// <summary>
         ///     Returns a list of alliances in eve.
         /// </summary>

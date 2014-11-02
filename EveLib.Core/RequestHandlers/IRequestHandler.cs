@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 
 namespace eZet.EveLib.Core.RequestHandlers {
-
     /// <summary>
     /// Interface for Request Handlers
     /// </summary>

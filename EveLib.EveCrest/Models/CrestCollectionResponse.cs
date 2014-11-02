@@ -1,8 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
-
     /// <summary>
     /// Represents a CREST collection response
     /// </summary>

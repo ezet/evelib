@@ -1,13 +1,11 @@
 ﻿using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     /// <summary>
     /// Represents the root response for CREST
     /// </summary>
     [DataContract]
     public class CrestRoot {
-
         /// <summary>
         /// The message of the day for each service
         /// </summary>
@@ -55,7 +53,6 @@ namespace eZet.EveLib.Modules.Models {
         /// </summary>
         [DataContract]
         public class UserCount {
-
             /// <summary>
             /// Number of currently online users for DUST
             /// </summary>
@@ -101,10 +98,12 @@ namespace eZet.EveLib.Modules.Models {
             /// Server is online
             /// </summary>
             Online,
+
             /// <summary>
             /// Server is in VIP mode
             /// </summary>
             Vip,
+
             /// <summary>
             /// Server is offline
             /// </summary>
@@ -117,7 +116,6 @@ namespace eZet.EveLib.Modules.Models {
         /// </summary>
         [DataContract]
         public class MessageOfTheDay {
-
             /// <summary>
             /// Gets the MOTD for Dust 514
             /// </summary>
@@ -136,6 +134,5 @@ namespace eZet.EveLib.Modules.Models {
             [DataMember(Name = "server")]
             public CrestHref<string> Server { get; set; }
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace eZet.EveLib.Modules.Models {
     /// </summary>
     [DataContract]
     public class CrestIndustryFacilities : CrestCollectionResponse {
-
         /// <summary>
         /// A list of facilities
         /// </summary>
@@ -18,7 +17,6 @@ namespace eZet.EveLib.Modules.Models {
         /// Represents an industry facility
         /// </summary>
         public class Facility {
-
             /// <summary>
             /// The facility ID
             /// </summary>
@@ -60,10 +58,6 @@ namespace eZet.EveLib.Modules.Models {
             /// </summary>
             [DataMember(Name = "type")]
             public CrestEntity Type { get; set; }
-
-
-
         }
-
     }
 }

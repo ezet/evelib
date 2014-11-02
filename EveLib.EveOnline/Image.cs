@@ -16,14 +16,17 @@ namespace eZet.EveLib.Modules {
             /// 30x30
             /// </summary>
             X30 = 30,
+
             /// <summary>
             /// 32x32
             /// </summary>
             X32 = 32,
+
             /// <summary>
             /// 64x64
             /// </summary>
             X64 = 64,
+
             /// <summary>
             /// 128x128
             /// </summary>
@@ -38,30 +41,37 @@ namespace eZet.EveLib.Modules {
             /// 30x30
             /// </summary>
             X30 = 30,
+
             /// <summary>
             /// 32x32
             /// </summary>
             X32 = 32,
+
             /// <summary>
             /// 64x64k
             /// </summary>
             X64 = 64,
+
             /// <summary>
             /// 128x128
             /// </summary>
             X128 = 128,
+
             /// <summary>
             /// 200x200
             /// </summary>
             X200 = 200,
+
             /// <summary>
             /// 256x256
             /// </summary>
             X256 = 256,
+
             /// <summary>
             /// 512x512
             /// </summary>
             X512 = 512,
+
             /// <summary>
             /// 1024x1024
             /// </summary>
@@ -76,18 +86,22 @@ namespace eZet.EveLib.Modules {
             /// 30x30
             /// </summary>
             X30 = 30,
+
             /// <summary>
             /// 32x32
             /// </summary>
             X32 = 32,
+
             /// <summary>
             /// 64x64
             /// </summary>
             X64 = 64,
+
             /// <summary>
             /// 128x128
             /// </summary>
             X128 = 128,
+
             /// <summary>
             /// 256x256
             /// </summary>
@@ -102,18 +116,22 @@ namespace eZet.EveLib.Modules {
             /// 32x32
             /// </summary>
             X32 = 32,
+
             /// <summary>
             /// 64x64
             /// </summary>
             X64 = 64,
+
             /// <summary>
             /// 128x128
             /// </summary>
             X128 = 128,
+
             /// <summary>
             /// 256x256
             /// </summary>
             X256 = 256,
+
             /// <summary>
             /// 512x512
             /// </summary>
@@ -128,6 +146,7 @@ namespace eZet.EveLib.Modules {
             /// 32x32
             /// </summary>
             X32 = 32,
+
             /// <summary>
             /// 64x64
             /// </summary>
@@ -326,5 +345,4 @@ namespace eZet.EveLib.Modules {
             return file;
         }
     }
-
 }

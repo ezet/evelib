@@ -2,13 +2,11 @@
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     /// <summary>
     /// Represents a speciality
     /// </summary>
     [DataContract]
     public class CrestIndustrySpeciality {
-
         /// <summary>
         /// The speciality ID
         /// </summary>
@@ -33,12 +31,10 @@ namespace eZet.EveLib.Modules.Models {
     /// </summary>
     [DataContract]
     public class Group {
-
         /// <summary>
         /// The group ID
         /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
-
     }
 }

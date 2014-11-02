@@ -14,6 +14,7 @@ namespace eZet.EveLib.Modules {
             /// JSON
             /// </summary>
             Json,
+
             /// <summary>
             /// XML
             /// </summary>
@@ -28,10 +29,12 @@ namespace eZet.EveLib.Modules {
             /// Kills
             /// </summary>
             Kills,
+
             /// <summary>
             /// Losses
             /// </summary>
             Losses,
+
             /// <summary>
             /// Kills and losses
             /// </summary>
@@ -46,6 +49,7 @@ namespace eZet.EveLib.Modules {
             /// Descending order
             /// </summary>
             Descending,
+
             /// <summary>
             /// Ascending order
             /// </summary>

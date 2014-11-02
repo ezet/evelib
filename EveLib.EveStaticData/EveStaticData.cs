@@ -9,7 +9,6 @@ namespace eZet.EveLib.Modules {
     /// Class for accessing the static data API from Elemen43
     /// </summary>
     public class EveStaticData {
-
         /// <summary>
         /// Represents the data formats
         /// </summary>

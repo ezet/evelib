@@ -9,7 +9,6 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [XmlRoot("result")]
     public class IndustryJobs {
-
         /// <summary>
         /// A list of industry jobs
         /// </summary>

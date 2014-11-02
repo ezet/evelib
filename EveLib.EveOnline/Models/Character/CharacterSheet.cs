@@ -13,7 +13,6 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterSheet : IXmlSerializable {
-
         /// <summary>
         /// The character ID
         /// </summary>

@@ -25,7 +25,5 @@ namespace eZet.EveLib.Test {
         public async Task GetBlueprints() {
             var result = _sisiKey.Corporation.GetBlueprintsAsync();
         }
-
-
     }
 }

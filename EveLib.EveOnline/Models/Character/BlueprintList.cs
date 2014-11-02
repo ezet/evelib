@@ -61,7 +61,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             /// </summary>
             [XmlAttribute("timeEfficiency")]
             public int TimeEfficiency { get; set; }
-            
+
             /// <summary>
             /// Material Efficiency Level of the blueprint.
             /// </summary>
@@ -73,8 +73,6 @@ namespace eZet.EveLib.Modules.Models.Character {
             /// </summary>
             [XmlAttribute("runs")]
             public int Runs { get; set; }
-
-            
         }
     }
 }

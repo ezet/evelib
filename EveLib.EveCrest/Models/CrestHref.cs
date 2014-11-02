@@ -7,7 +7,6 @@ namespace eZet.EveLib.Modules.Models {
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class CrestHref<T> {
-
         /// <summary>
         /// The href object
         /// </summary>

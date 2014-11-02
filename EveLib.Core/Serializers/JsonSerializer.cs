@@ -6,7 +6,6 @@ namespace eZet.EveLib.Core.Serializers {
     ///     JSON serializer
     /// </summary>
     public sealed class JsonSerializer : ISerializer {
-
         private readonly TraceSource _trace = new TraceSource("EveLib");
 
         /// <summary>

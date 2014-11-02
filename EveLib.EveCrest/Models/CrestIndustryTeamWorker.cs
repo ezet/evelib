@@ -6,7 +6,6 @@ namespace eZet.EveLib.Modules.Models {
     /// Represents a team worker
     /// </summary>
     public class CrestIndustryTeamWorker {
-
         /// <summary>
         /// The worker bonus
         /// </summary>
@@ -24,7 +23,6 @@ namespace eZet.EveLib.Modules.Models {
         /// Represents a worker bonus
         /// </summary>
         public class WorkerBonus {
-
             /// <summary>
             /// The bonus ID
             /// </summary>

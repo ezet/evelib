@@ -19,6 +19,7 @@ namespace eZet.EveLib.Modules {
             /// JSON
             /// </summary>
             Json,
+
             /// <summary>
             /// XML
             /// </summary>

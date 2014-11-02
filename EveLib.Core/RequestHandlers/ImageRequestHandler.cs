@@ -4,12 +4,10 @@ using System.Net;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.RequestHandlers {
-
     /// <summary>
     /// Simple implementation for requesting images
     /// </summary>
     public class ImageRequestHandler : IImageRequestHandler {
-
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>

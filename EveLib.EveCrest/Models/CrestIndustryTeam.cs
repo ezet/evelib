@@ -7,7 +7,6 @@ namespace eZet.EveLib.Modules.Models {
     /// Represents a CREST industry team
     /// </summary>
     public class CrestIndustryTeam {
-
         /// <summary>
         /// The solar system
         /// </summary>
@@ -55,6 +54,5 @@ namespace eZet.EveLib.Modules.Models {
         /// </summary>
         [DataMember(Name = "activity")]
         public int Activity { get; set; }
-
     }
 }

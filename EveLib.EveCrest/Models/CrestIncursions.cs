@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     /// <summary>
     /// Represents a CREST /incursions/ response
     /// </summary>
@@ -16,10 +15,12 @@ namespace eZet.EveLib.Modules.Models {
             /// Established incursion
             /// </summary>
             [DataMember(Name = "Established")] Established,
+
             /// <summary>
             /// Mobilizing incursion
             /// </summary>
             [DataMember(Name = "Mobilizing")] Mobilizing,
+
             /// <summary>
             /// Withdrawing incursion
             /// </summary>

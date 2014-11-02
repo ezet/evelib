@@ -38,7 +38,6 @@ namespace eZet.EveLib.Modules.Models {
         public bool OpenForAllies { get; set; }
 
 
-
         /// <summary>
         /// The number of allied entities
         /// </summary>

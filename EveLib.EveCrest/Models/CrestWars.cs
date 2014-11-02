@@ -2,13 +2,11 @@
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
-
     /// <summary>
     /// Represents a CREST collection of wars
     /// </summary>
     [DataContract]
     public class CrestWars : CrestCollectionResponse {
-
         /// <summary>
         /// A list of wars
         /// </summary>

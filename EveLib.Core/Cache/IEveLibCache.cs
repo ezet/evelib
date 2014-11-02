@@ -6,7 +6,6 @@ namespace eZet.EveLib.Core.Cache {
     ///     Interface for CacheExpiratoinRegisters
     /// </summary>
     public interface IEveLibCache {
-
         /// <summary>
         /// Stores data to the cache
         /// </summary>

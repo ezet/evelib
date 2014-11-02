@@ -8,7 +8,6 @@ namespace eZet.EveLib.Modules.Models {
     /// </summary>
     [DataContract]
     public class CrestIndustryTeamAuction : CrestCollectionResponse {
-
         /// <summary>
         /// A list of team auctions
         /// </summary>
@@ -20,7 +19,6 @@ namespace eZet.EveLib.Modules.Models {
         /// </summary>
         [DataContract]
         public class TeamAuction {
-
             /// <summary>
             /// The solar system the auction is for
             /// </summary>
@@ -62,7 +60,6 @@ namespace eZet.EveLib.Modules.Models {
             /// </summary>
             [DataMember(Name = "workers")]
             public List<CrestIndustryTeamWorker> Workers { get; set; }
-
         }
     }
 }

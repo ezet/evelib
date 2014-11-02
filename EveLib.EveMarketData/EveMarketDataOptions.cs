@@ -16,10 +16,12 @@ namespace eZet.EveLib.Modules {
         /// Orders
         /// </summary>
         [XmlEnum("o"), EnumMember(Value = "o")] Orders,
+
         /// <summary>
         /// History
         /// </summary>
         [XmlEnum("h"), EnumMember(Value = "h")] History,
+
         /// <summary>
         /// Order and history
         /// </summary>
@@ -36,10 +38,12 @@ namespace eZet.EveLib.Modules {
         /// Sell order
         /// </summary>
         [XmlEnum("s"), EnumMember(Value = "s")] Sell,
+
         /// <summary>
         /// Buy order
         /// </summary>
         [XmlEnum("b"), EnumMember(Value = "b")] Buy,
+
         /// <summary>
         /// Buy and sell orders
         /// </summary>
@@ -54,10 +58,12 @@ namespace eZet.EveLib.Modules {
         /// None
         /// </summary>
         None,
+
         /// <summary>
         /// Minimum
         /// </summary>
         Min,
+
         /// <summary>
         /// Maximum
         /// </summary>

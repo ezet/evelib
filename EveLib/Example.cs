@@ -72,6 +72,5 @@ namespace eZet.EveLib {
             CharacterKey key = new CharacterKey(1, "");
             var result = key.GetAccountStatus().Result;
         }
-
     }
 }

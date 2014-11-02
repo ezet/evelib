@@ -239,9 +239,9 @@ namespace eZet.EveLib.Modules {
                 await InitAsync().ConfigureAwait(false);
             }
             catch (EveOnlineException e) {
-                    if (((HttpWebResponse) e.WebException.Response).StatusCode == HttpStatusCode.Forbidden) {
-                        _isValidKey = false;
-                    }
+                if (((HttpWebResponse) e.WebException.Response).StatusCode == HttpStatusCode.Forbidden) {
+                    _isValidKey = false;
+                }
                 else throw;
             }
             return _isValidKey.GetValueOrDefault(true);

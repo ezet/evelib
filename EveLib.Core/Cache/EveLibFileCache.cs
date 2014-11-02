@@ -78,7 +78,8 @@ namespace eZet.EveLib.Core.Cache {
                         try {
                             data =
                                 await
-                                    AsyncFileUtilities.ReadAllTextAsync(Config.CachePath + Config.Separator + getHash(uri))
+                                    AsyncFileUtilities.ReadAllTextAsync(Config.CachePath + Config.Separator +
+                                                                        getHash(uri))
                                         .ConfigureAwait(false);
                             _trace.TraceEvent(TraceEventType.Verbose, 0,
                                 "EveLibFileCache:Data successfully loaded from cache: {0}",
@@ -120,7 +121,8 @@ namespace eZet.EveLib.Core.Cache {
 
         private Task writeCacheDataToDiskAsync(Uri uri, string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache data to disk: {0}", uri);
-            return AsyncFileUtilities.WriteAllTextAsync(Config.CachePath + Path.DirectorySeparatorChar + getHash(uri), data);
+            return AsyncFileUtilities.WriteAllTextAsync(Config.CachePath + Path.DirectorySeparatorChar + getHash(uri),
+                data);
         }
 
         private static string getHash(Uri uri) {

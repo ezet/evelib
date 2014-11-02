@@ -6,7 +6,6 @@ namespace eZet.EveLib.Core.RequestHandlers {
     /// Interface for requesting images from URIs
     /// </summary>
     public interface IImageRequestHandler {
-
         /// <summary>
         /// Requests and returns image data
         /// </summary>

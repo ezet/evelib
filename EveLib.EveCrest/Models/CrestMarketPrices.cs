@@ -7,7 +7,6 @@ namespace eZet.EveLib.Modules.Models {
     /// </summary>
     [DataContract]
     public class CrestMarketPrices : CrestCollectionResponse {
-
         /// <summary>
         /// A list of market price entries
         /// </summary>
@@ -19,7 +18,6 @@ namespace eZet.EveLib.Modules.Models {
         /// </summary>
         [DataContract]
         public class MarketPriceEntry {
-
             /// <summary>
             /// The item type
             /// </summary>

@@ -7,7 +7,6 @@ namespace eZet.EveLib.Modules.Models {
     /// </summary>
     [DataContract]
     public class CrestIndustrySystems : CrestCollectionResponse {
-
         /// <summary>
         /// The solar system
         /// </summary>
@@ -19,7 +18,6 @@ namespace eZet.EveLib.Modules.Models {
         /// </summary>
         [DataContract]
         public class SolarSystemEntry {
-
             /// <summary>
             /// The solar system
             /// </summary>
@@ -31,7 +29,6 @@ namespace eZet.EveLib.Modules.Models {
             /// </summary>
             [DataMember(Name = "systemCostIndices")]
             public List<SystemCostEntry> SystemCostIndices { get; set; }
-
         }
 
         /// <summary>
@@ -56,7 +53,6 @@ namespace eZet.EveLib.Modules.Models {
             /// </summary>
             [DataMember(Name = "activityName")]
             public string ActivityName { get; set; }
-
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
-
     /// <summary>
     /// Async file utilities
     /// </summary>
