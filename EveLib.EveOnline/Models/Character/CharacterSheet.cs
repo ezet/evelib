@@ -118,24 +118,51 @@ namespace eZet.EveLib.Modules.Models.Character {
         [XmlElement("balance")]
         public decimal Balance { get; set; }
 
+        /// <summary>
+        /// Gets or sets AttributeEnhancers
+        /// </summary>
         [XmlElement("attributeEnhancers")]
         public Implants AttributeEnhancers { get; set; }
 
+        /// <summary>
+        /// Gets or sets Attributes
+        /// </summary>
         [XmlElement("attributes")]
         public Attributes Attributes { get; set; }
 
+        /// <summary>
+        /// Gets or sets HomeStationId
+        /// </summary>
+        [XmlElement("homeStationID")]
+        public int HomeStationId { get; set; }
+
+        /// <summary>
+        /// Gets or sets Skills
+        /// </summary>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Skill> Skills { get; set; }
 
+        /// <summary>
+        /// Gets or sets Certificates
+        /// </summary>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Certificate> Certificates { get; set; }
 
+        /// <summary>
+        /// Gets or sets CorporationRoles
+        /// </summary>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Role> CorporationRoles { get; set; }
 
+        /// <summary>
+        /// Gets or sets CorporationrolesAtHq
+        /// </summary>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Role> CorporationRolesAtHq { get; set; }
 
+        /// <summary>
+        /// Gets or sets CorporationRolesAtBase
+        /// </summary>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Role> CorporationRolesAtBase { get; set; }
 
