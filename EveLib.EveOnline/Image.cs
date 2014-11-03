@@ -9,7 +9,7 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public class Image {
         /// <summary>
-        /// Represents the alliancelogo sizes
+        /// Represents the alliance logo sizes
         /// </summary>
         public enum AllianceLogoSize {
             /// <summary>
@@ -34,7 +34,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Represents the characterportrait sizes
+        /// Represents the character portrait sizes
         /// </summary>
         public enum CharacterPortraitSize {
             /// <summary>
@@ -79,7 +79,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Represents the corporationlogo sizes
+        /// Represents the corporation logo sizes
         /// </summary>
         public enum CorporationLogoSize {
             /// <summary>

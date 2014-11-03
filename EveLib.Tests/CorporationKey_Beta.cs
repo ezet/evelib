@@ -23,7 +23,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetBlueprints() {
-            var result = _sisiKey.Corporation.GetBlueprintsAsync();
+            var result = await _sisiKey.Corporation.GetBlueprintsAsync();
         }
     }
 }
