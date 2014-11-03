@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
@@ -136,7 +135,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         public string CloneName { get; set; }
 
         /// <summary>
-        /// The amount of skillpoints supported by the current medical clone
+        /// The amount of skill points supported by the current medical clone
         /// </summary>
         /// <value>The clone skill points.</value>
         [XmlElement("cloneSkillPoints")]
@@ -149,12 +148,12 @@ namespace eZet.EveLib.Modules.Models.Character {
         [XmlElement("balance")]
         public decimal Balance { get; set; }
 
-        /// <summary>
-        /// Deprecated, use the Implants collection. Gets or sets AttributeEnhancers
-        /// </summary>
-        /// <value>The attribute enhancers.</value>
-        [XmlElement("attributeEnhancers")]
-        public AttributeEnhancers AttributeEnhancers { get; set; }
+        ///// <summary>
+        ///// Deprecated, use the Implants collection. Gets or sets AttributeEnhancers
+        ///// </summary>
+        ///// <value>The attribute enhancers.</value>
+        //[XmlElement("attributeEnhancers")]
+        //public AttributeEnhancers AttributeEnhancers { get; set; }
 
         /// <summary>
         /// Gets or sets Attributes
@@ -337,7 +336,8 @@ namespace eZet.EveLib.Modules.Models.Character {
             CloneSkillPoints = xml.getInt("cloneSkillPoints");
             Balance = xml.getDecimal("balance");
             Attributes = xml.deserialize<Attributes>("attributes");
-            AttributeEnhancers = xml.deserialize<AttributeEnhancers>("attributeEnhancers");
+            //AttributeEnhancers = xml.deserialize<AttributeEnhancers>("attributeEnhancers");
+            Implants = xml.deserializeRowSet<Implant>("implants");
             JumpClones = xml.deserializeRowSet<JumpClone>("jumpClones");
             JumpCloneImplants = xml.deserializeRowSet<JumpCloneImplant>("jumpCloneImplants");
             Skills = xml.deserializeRowSet<Skill>("skills");
@@ -444,72 +444,72 @@ namespace eZet.EveLib.Modules.Models.Character {
     }
 
 
-    /// <summary>
-    /// Represents the current attribute implants
-    /// </summary>
-    [Serializable]
-    [DebuggerStepThrough]
-    [XmlRoot("attributeEnhancers")]
-    public class AttributeEnhancers {
-        /// <summary>
-        /// The current memory bonus
-        /// </summary>
-        /// <value>The memory.</value>
-        [XmlElement("memoryBonus")]
-        public DeprecatedImplant Memory { get; set; }
+    ///// <summary>
+    ///// Represents the current attribute implants
+    ///// </summary>
+    //[Serializable]
+    //[DebuggerStepThrough]
+    //[XmlRoot("attributeEnhancers")]
+    //public class AttributeEnhancers {
+    //    /// <summary>
+    //    /// The current memory bonus
+    //    /// </summary>
+    //    /// <value>The memory.</value>
+    //    [XmlElement("memoryBonus")]
+    //    public DeprecatedImplant Memory { get; set; }
 
-        /// <summary>
-        /// The current perception bonus
-        /// </summary>
-        /// <value>The perception.</value>
-        [XmlElement("perceptionBonus")]
-        public DeprecatedImplant Perception { get; set; }
+    //    /// <summary>
+    //    /// The current perception bonus
+    //    /// </summary>
+    //    /// <value>The perception.</value>
+    //    [XmlElement("perceptionBonus")]
+    //    public DeprecatedImplant Perception { get; set; }
 
-        /// <summary>
-        /// The current willpower bonus
-        /// </summary>
-        /// <value>The willpower.</value>
-        [XmlElement("willpowerBonus")]
-        public DeprecatedImplant Willpower { get; set; }
+    //    /// <summary>
+    //    /// The current willpower bonus
+    //    /// </summary>
+    //    /// <value>The willpower.</value>
+    //    [XmlElement("willpowerBonus")]
+    //    public DeprecatedImplant Willpower { get; set; }
 
-        /// <summary>
-        /// The current intelligence bonus
-        /// </summary>
-        /// <value>The intelligence.</value>
-        [XmlElement("intelligenceBonus")]
-        public DeprecatedImplant Intelligence { get; set; }
+    //    /// <summary>
+    //    /// The current intelligence bonus
+    //    /// </summary>
+    //    /// <value>The intelligence.</value>
+    //    [XmlElement("intelligenceBonus")]
+    //    public DeprecatedImplant Intelligence { get; set; }
 
-        /// <summary>
-        /// The current charisma bonus
-        /// </summary>
-        /// <value>The charisma.</value>
-        [XmlElement("charismaBonus")]
-        public DeprecatedImplant Charisma { get; set; }
-    }
+    //    /// <summary>
+    //    /// The current charisma bonus
+    //    /// </summary>
+    //    /// <value>The charisma.</value>
+    //    [XmlElement("charismaBonus")]
+    //    public DeprecatedImplant Charisma { get; set; }
+    //}
 
 
-    /// <summary>
-    /// Represents an implant
-    /// </summary>
-    [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
-    [XmlType(AnonymousType = true)]
-    public class DeprecatedImplant {
-        /// <summary>
-        /// The implant name
-        /// </summary>
-        /// <value>The name.</value>
-        [XmlElement("augmentatorName")]
-        public string Name { get; set; }
+    ///// <summary>
+    ///// Represents an implant
+    ///// </summary>
+    //[Serializable]
+    //[DebuggerStepThrough]
+    //[DesignerCategory("code")]
+    //[XmlType(AnonymousType = true)]
+    //public class DeprecatedImplant {
+    //    /// <summary>
+    //    /// The implant name
+    //    /// </summary>
+    //    /// <value>The name.</value>
+    //    [XmlElement("augmentatorName")]
+    //    public string Name { get; set; }
 
-        /// <summary>
-        /// The attribute bonus
-        /// </summary>
-        /// <value>The value.</value>
-        [XmlElement("augmentatorValue")]
-        public int Value { get; set; }
-    }
+    //    /// <summary>
+    //    /// The attribute bonus
+    //    /// </summary>
+    //    /// <value>The value.</value>
+    //    [XmlElement("augmentatorValue")]
+    //    public int Value { get; set; }
+    //}
 
     /// <summary>
     /// The total attribute values
