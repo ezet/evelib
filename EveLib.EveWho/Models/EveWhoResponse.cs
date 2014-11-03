@@ -11,17 +11,18 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EveWhoResponse.
+    ///     Class EveWhoResponse.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class EveWhoResponse<T> {
         /// <summary>
-        /// Gets or sets the information.
+        ///     Gets or sets the information.
         /// </summary>
         /// <value>The information.</value>
         [DataMember(Name = "info")]

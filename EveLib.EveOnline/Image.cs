@@ -9,152 +9,152 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public class Image {
         /// <summary>
-        /// Represents the alliance logo sizes
+        ///     Represents the alliance logo sizes
         /// </summary>
         public enum AllianceLogoSize {
             /// <summary>
-            /// 30x30
+            ///     30x30
             /// </summary>
             X30 = 30,
 
             /// <summary>
-            /// 32x32
+            ///     32x32
             /// </summary>
             X32 = 32,
 
             /// <summary>
-            /// 64x64
+            ///     64x64
             /// </summary>
             X64 = 64,
 
             /// <summary>
-            /// 128x128
+            ///     128x128
             /// </summary>
             X128 = 128,
         }
 
         /// <summary>
-        /// Represents the character portrait sizes
+        ///     Represents the character portrait sizes
         /// </summary>
         public enum CharacterPortraitSize {
             /// <summary>
-            /// 30x30
+            ///     30x30
             /// </summary>
             X30 = 30,
 
             /// <summary>
-            /// 32x32
+            ///     32x32
             /// </summary>
             X32 = 32,
 
             /// <summary>
-            /// 64x64k
+            ///     64x64k
             /// </summary>
             X64 = 64,
 
             /// <summary>
-            /// 128x128
+            ///     128x128
             /// </summary>
             X128 = 128,
 
             /// <summary>
-            /// 200x200
+            ///     200x200
             /// </summary>
             X200 = 200,
 
             /// <summary>
-            /// 256x256
+            ///     256x256
             /// </summary>
             X256 = 256,
 
             /// <summary>
-            /// 512x512
+            ///     512x512
             /// </summary>
             X512 = 512,
 
             /// <summary>
-            /// 1024x1024
+            ///     1024x1024
             /// </summary>
             X1024 = 1024
         }
 
         /// <summary>
-        /// Represents the corporation logo sizes
+        ///     Represents the corporation logo sizes
         /// </summary>
         public enum CorporationLogoSize {
             /// <summary>
-            /// 30x30
+            ///     30x30
             /// </summary>
             X30 = 30,
 
             /// <summary>
-            /// 32x32
+            ///     32x32
             /// </summary>
             X32 = 32,
 
             /// <summary>
-            /// 64x64
+            ///     64x64
             /// </summary>
             X64 = 64,
 
             /// <summary>
-            /// 128x128
+            ///     128x128
             /// </summary>
             X128 = 128,
 
             /// <summary>
-            /// 256x256
+            ///     256x256
             /// </summary>
             X256 = 256,
         }
 
         /// <summary>
-        /// Represents the render sizes
+        ///     Represents the render sizes
         /// </summary>
         public enum RenderSize {
             /// <summary>
-            /// 32x32
+            ///     32x32
             /// </summary>
             X32 = 32,
 
             /// <summary>
-            /// 64x64
+            ///     64x64
             /// </summary>
             X64 = 64,
 
             /// <summary>
-            /// 128x128
+            ///     128x128
             /// </summary>
             X128 = 128,
 
             /// <summary>
-            /// 256x256
+            ///     256x256
             /// </summary>
             X256 = 256,
 
             /// <summary>
-            /// 512x512
+            ///     512x512
             /// </summary>
             X512 = 512,
         }
 
         /// <summary>
-        /// Represents the type icon sizes
+        ///     Represents the type icon sizes
         /// </summary>
         public enum TypeIconSize {
             /// <summary>
-            /// 32x32
+            ///     32x32
             /// </summary>
             X32 = 32,
 
             /// <summary>
-            /// 64x64
+            ///     64x64
             /// </summary>
             X64 = 64,
         }
 
         /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         public Image() {
             RequestHandler = new ImageRequestHandler();
@@ -167,7 +167,7 @@ namespace eZet.EveLib.Modules {
         public String BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets the RequestHandler
+        ///     Gets or sets the RequestHandler
         /// </summary>
         public IImageRequestHandler RequestHandler { get; set; }
 

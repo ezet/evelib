@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.JsonConverters;
@@ -18,13 +19,13 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EmdItemHistory.
+    ///     Class EmdItemHistory.
     /// </summary>
     [DataContract]
     [JsonConverter(typeof (EmdItemHistoryJsonConverter))]
     public class EmdItemHistory {
         /// <summary>
-        /// Gets or sets the history.
+        ///     Gets or sets the history.
         /// </summary>
         /// <value>The history.</value>
         [DataMember(Name = "result")]
@@ -32,13 +33,13 @@ namespace eZet.EveLib.Modules.Models {
         public EveMarketDataRowCollection<ItemHistoryEntry> History { get; set; }
 
         /// <summary>
-        /// Class ItemHistoryEntry.
+        ///     Class ItemHistoryEntry.
         /// </summary>
         [XmlRoot("row")]
         [DataContract]
         public class ItemHistoryEntry {
             /// <summary>
-            /// Gets or sets the type identifier.
+            ///     Gets or sets the type identifier.
             /// </summary>
             /// <value>The type identifier.</value>
             [XmlAttribute("typeID")]
@@ -46,7 +47,7 @@ namespace eZet.EveLib.Modules.Models {
             public int TypeId { get; set; }
 
             /// <summary>
-            /// Gets or sets the region identifier.
+            ///     Gets or sets the region identifier.
             /// </summary>
             /// <value>The region identifier.</value>
             [XmlAttribute("regionID")]
@@ -54,7 +55,7 @@ namespace eZet.EveLib.Modules.Models {
             public int RegionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the date.
+            ///     Gets or sets the date.
             /// </summary>
             /// <value>The date.</value>
             [XmlAttribute("date")]
@@ -62,7 +63,7 @@ namespace eZet.EveLib.Modules.Models {
             public string Date { get; set; }
 
             /// <summary>
-            /// Gets or sets the minimum price.
+            ///     Gets or sets the minimum price.
             /// </summary>
             /// <value>The minimum price.</value>
             [XmlAttribute("lowPrice")]
@@ -70,7 +71,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal MinPrice { get; set; }
 
             /// <summary>
-            /// Gets or sets the maximum price.
+            ///     Gets or sets the maximum price.
             /// </summary>
             /// <value>The maximum price.</value>
             [XmlAttribute("highPrice")]
@@ -78,7 +79,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal MaxPrice { get; set; }
 
             /// <summary>
-            /// Gets or sets the average price.
+            ///     Gets or sets the average price.
             /// </summary>
             /// <value>The average price.</value>
             [XmlAttribute("avgPrice")]
@@ -86,7 +87,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal AvgPrice { get; set; }
 
             /// <summary>
-            /// Gets or sets the volume.
+            ///     Gets or sets the volume.
             /// </summary>
             /// <value>The volume.</value>
             [XmlAttribute("volume")]
@@ -94,7 +95,7 @@ namespace eZet.EveLib.Modules.Models {
             public long Volume { get; set; }
 
             /// <summary>
-            /// Gets or sets the orders.
+            ///     Gets or sets the orders.
             /// </summary>
             /// <value>The orders.</value>
             [XmlAttribute("orders")]

@@ -13,17 +13,17 @@ namespace eZet.EveLib.Modules {
     [JsonConverter(typeof (StringEnumConverter))]
     public enum UploadType {
         /// <summary>
-        /// Orders
+        ///     Orders
         /// </summary>
         [XmlEnum("o"), EnumMember(Value = "o")] Orders,
 
         /// <summary>
-        /// History
+        ///     History
         /// </summary>
         [XmlEnum("h"), EnumMember(Value = "h")] History,
 
         /// <summary>
-        /// Order and history
+        ///     Order and history
         /// </summary>
         [XmlEnum("b"), EnumMember(Value = "b")] Both
     }
@@ -35,37 +35,37 @@ namespace eZet.EveLib.Modules {
     [JsonConverter(typeof (StringEnumConverter))]
     public enum OrderType {
         /// <summary>
-        /// Sell order
+        ///     Sell order
         /// </summary>
         [XmlEnum("s"), EnumMember(Value = "s")] Sell,
 
         /// <summary>
-        /// Buy order
+        ///     Buy order
         /// </summary>
         [XmlEnum("b"), EnumMember(Value = "b")] Buy,
 
         /// <summary>
-        /// Buy and sell orders
+        ///     Buy and sell orders
         /// </summary>
         [XmlEnum("a"), EnumMember(Value = "a")] Both
     }
 
     /// <summary>
-    /// I honestly don't know what this represents, see marketdata api docs.
+    ///     I honestly don't know what this represents, see marketdata api docs.
     /// </summary>
     public enum MinMax {
         /// <summary>
-        /// None
+        ///     None
         /// </summary>
         None,
 
         /// <summary>
-        /// Minimum
+        ///     Minimum
         /// </summary>
         Min,
 
         /// <summary>
-        /// Maximum
+        ///     Maximum
         /// </summary>
         Max
     }
@@ -75,7 +75,7 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public class EveMarketDataOptions {
         /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         public EveMarketDataOptions() {
             Items = new List<int>();

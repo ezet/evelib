@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
@@ -23,7 +22,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetBlueprints() {
-            var result = await _sisiKey.Characters.First().GetBlueprintsAsync();
+            EveApiResponse<BlueprintList> result = await _sisiKey.Characters.First().GetBlueprintsAsync();
         }
     }
 }

@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Diagnostics;
 using System.Net;
@@ -22,16 +23,16 @@ using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Modules.RequestHandlers {
     /// <summary>
-    /// Class ZkbRequestHandler.
+    ///     Class ZkbRequestHandler.
     /// </summary>
     public class ZkbRequestHandler : ICachedRequestHandler {
         /// <summary>
-        /// The _trace
+        ///     The _trace
         /// </summary>
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ZkbRequestHandler"/> class.
+        ///     Initializes a new instance of the <see cref="ZkbRequestHandler" /> class.
         /// </summary>
         /// <param name="serializer">The serializer.</param>
         /// <param name="cache">The cache.</param>
@@ -43,14 +44,14 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         }
 
         /// <summary>
-        /// Gets or sets the serializer used to deserialize data
+        ///     Gets or sets the serializer used to deserialize data
         /// </summary>
         /// <value>The serializer.</value>
         public ISerializer Serializer { get; set; }
 
 
         /// <summary>
-        /// Request as an asynchronous operation.
+        ///     Request as an asynchronous operation.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
@@ -79,17 +80,19 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         }
 
         /// <summary>
-        /// Gets or sets the cache used by this request handler
+        ///     Gets or sets the cache used by this request handler
         /// </summary>
         /// <value>The cache.</value>
         public IEveLibCache Cache { get; set; }
+
         /// <summary>
-        /// Enables or disables loading from cache
+        ///     Enables or disables loading from cache
         /// </summary>
         /// <value><c>true</c> if [enable cache load]; otherwise, <c>false</c>.</value>
         public bool EnableCacheLoad { get; set; }
+
         /// <summary>
-        /// Enables or disables storing to cache
+        ///     Enables or disables storing to cache
         /// </summary>
         /// <value><c>true</c> if [enable cache store]; otherwise, <c>false</c>.</value>
         public bool EnableCacheStore { get; set; }

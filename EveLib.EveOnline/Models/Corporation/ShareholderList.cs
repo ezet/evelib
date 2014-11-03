@@ -11,18 +11,19 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Corporation {
     /// <summary>
-    /// Class ShareholderList.
+    ///     Class ShareholderList.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ShareholderList {
         /// <summary>
-        /// Gets or sets the shareholders.
+        ///     Gets or sets the shareholders.
         /// </summary>
         /// <value>The shareholders.</value>
         [XmlElement("rowset")]
@@ -30,41 +31,41 @@ namespace eZet.EveLib.Modules.Models.Corporation {
 
 
         /// <summary>
-        /// Class Shareholder.
+        ///     Class Shareholder.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Shareholder {
             /// <summary>
-            /// Gets or sets the shareholder identifier.
+            ///     Gets or sets the shareholder identifier.
             /// </summary>
             /// <value>The shareholder identifier.</value>
             [XmlAttribute("shareholderID")]
             public long ShareholderId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the shareholder.
+            ///     Gets or sets the name of the shareholder.
             /// </summary>
             /// <value>The name of the shareholder.</value>
             [XmlAttribute("shareholderName")]
             public string ShareholderName { get; set; }
 
             /// <summary>
-            /// Gets or sets the shares.
+            ///     Gets or sets the shares.
             /// </summary>
             /// <value>The shares.</value>
             [XmlAttribute("shares")]
             public int Shares { get; set; }
 
             /// <summary>
-            /// Gets or sets the shareholder corporation identifier.
+            ///     Gets or sets the shareholder corporation identifier.
             /// </summary>
             /// <value>The shareholder corporation identifier.</value>
             [XmlAttribute("shareholderCorporationID")]
             public long ShareholderCorporationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the shareholder corporation.
+            ///     Gets or sets the name of the shareholder corporation.
             /// </summary>
             /// <value>The name of the shareholder corporation.</value>
             [XmlAttribute("shareholderCorporationName")]

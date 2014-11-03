@@ -11,38 +11,39 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Map {
     /// <summary>
-    /// Class Jumps.
+    ///     Class Jumps.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Jumps {
         /// <summary>
-        /// Gets or sets the solar systems.
+        ///     Gets or sets the solar systems.
         /// </summary>
         /// <value>The solar systems.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<SolarSystem> SolarSystems { get; set; }
 
         /// <summary>
-        /// Class SolarSystem.
+        ///     Class SolarSystem.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
             /// <summary>
-            /// Gets or sets the solar system identifier.
+            ///     Gets or sets the solar system identifier.
             /// </summary>
             /// <value>The solar system identifier.</value>
             [XmlAttribute("solarSystemID")]
             public int SolarSystemId { get; set; }
 
             /// <summary>
-            /// Gets or sets the ship jumps.
+            ///     Gets or sets the ship jumps.
             /// </summary>
             /// <value>The ship jumps.</value>
             [XmlAttribute("shipJumps")]

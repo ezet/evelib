@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -19,13 +20,13 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EmdStationRank.
+    ///     Class EmdStationRank.
     /// </summary>
     [DataContract]
     [JsonConverter(typeof (EmdStationRankJsonConverter))]
     public class EmdStationRank {
         /// <summary>
-        /// Gets or sets the stations.
+        ///     Gets or sets the stations.
         /// </summary>
         /// <value>The stations.</value>
         [DataMember(Name = "result")]
@@ -33,13 +34,13 @@ namespace eZet.EveLib.Modules.Models {
         public EveMarketDataRowCollection<StationRankEntry> Stations { get; set; }
 
         /// <summary>
-        /// Class StationRankEntry.
+        ///     Class StationRankEntry.
         /// </summary>
         [DataContract]
         [XmlRoot("row")]
         public class StationRankEntry {
             /// <summary>
-            /// Gets or sets the station identifier.
+            ///     Gets or sets the station identifier.
             /// </summary>
             /// <value>The station identifier.</value>
             [DataMember(Name = "stationID")]
@@ -47,7 +48,7 @@ namespace eZet.EveLib.Modules.Models {
             public int StationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the date.
+            ///     Gets or sets the date.
             /// </summary>
             /// <value>The date.</value>
             [DataMember(Name = "date")]
@@ -55,7 +56,7 @@ namespace eZet.EveLib.Modules.Models {
             public DateTime Date { get; set; }
 
             /// <summary>
-            /// Gets or sets the rank by orders.
+            ///     Gets or sets the rank by orders.
             /// </summary>
             /// <value>The rank by orders.</value>
             [DataMember(Name = "rankOrders")]
@@ -63,7 +64,7 @@ namespace eZet.EveLib.Modules.Models {
             public int RankByOrders { get; set; }
 
             /// <summary>
-            /// Gets or sets the rank by price.
+            ///     Gets or sets the rank by price.
             /// </summary>
             /// <value>The rank by price.</value>
             [DataMember(Name = "rankPrice")]
@@ -71,7 +72,7 @@ namespace eZet.EveLib.Modules.Models {
             public int RankByPrice { get; set; }
 
             /// <summary>
-            /// Gets or sets the sell orders.
+            ///     Gets or sets the sell orders.
             /// </summary>
             /// <value>The sell orders.</value>
             [DataMember(Name = "countSell")]
@@ -79,7 +80,7 @@ namespace eZet.EveLib.Modules.Models {
             public long SellOrders { get; set; }
 
             /// <summary>
-            /// Gets or sets the buy orders.
+            ///     Gets or sets the buy orders.
             /// </summary>
             /// <value>The buy orders.</value>
             [DataMember(Name = "countBuy")]
@@ -87,7 +88,7 @@ namespace eZet.EveLib.Modules.Models {
             public long BuyOrders { get; set; }
 
             /// <summary>
-            /// Gets or sets the sell total.
+            ///     Gets or sets the sell total.
             /// </summary>
             /// <value>The sell total.</value>
             [DataMember(Name = "priceTotalSell")]
@@ -95,7 +96,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal SellTotal { get; set; }
 
             /// <summary>
-            /// Gets or sets the buy total.
+            ///     Gets or sets the buy total.
             /// </summary>
             /// <value>The buy total.</value>
             [DataMember(Name = "priceTotalBuy")]
@@ -103,7 +104,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal BuyTotal { get; set; }
 
             /// <summary>
-            /// Gets or sets the average sell price.
+            ///     Gets or sets the average sell price.
             /// </summary>
             /// <value>The average sell price.</value>
             [DataMember(Name = "priceAvgSell")]
@@ -111,7 +112,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal AvgSellPrice { get; set; }
 
             /// <summary>
-            /// Gets or sets the average buy price.
+            ///     Gets or sets the average buy price.
             /// </summary>
             /// <value>The average buy price.</value>
             [DataMember(Name = "priceAvgBuy")]

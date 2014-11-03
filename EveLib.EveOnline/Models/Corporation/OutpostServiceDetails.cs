@@ -11,66 +11,67 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Corporation {
     /// <summary>
-    /// Class OutpostServiceDetails.
+    ///     Class OutpostServiceDetails.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class OutpostServiceDetails {
         /// <summary>
-        /// Gets or sets the services.
+        ///     Gets or sets the services.
         /// </summary>
         /// <value>The services.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Service> Services { get; set; }
 
         /// <summary>
-        /// Class Service.
+        ///     Class Service.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Service {
             /// <summary>
-            /// Gets or sets the station identifier.
+            ///     Gets or sets the station identifier.
             /// </summary>
             /// <value>The station identifier.</value>
             [XmlAttribute("stationID")]
             public int StationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the owner identifier.
+            ///     Gets or sets the owner identifier.
             /// </summary>
             /// <value>The owner identifier.</value>
             [XmlAttribute("ownerID")]
             public long OwnerId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the service.
+            ///     Gets or sets the name of the service.
             /// </summary>
             /// <value>The name of the service.</value>
             [XmlAttribute("serviceName")]
             public string ServiceName { get; set; }
 
             /// <summary>
-            /// Gets or sets the minimum standing.
+            ///     Gets or sets the minimum standing.
             /// </summary>
             /// <value>The minimum standing.</value>
             [XmlAttribute("minStanding")]
             public double MinStanding { get; set; }
 
             /// <summary>
-            /// Gets or sets the surcharge per bad standing.
+            ///     Gets or sets the surcharge per bad standing.
             /// </summary>
             /// <value>The surcharge per bad standing.</value>
             [XmlAttribute("surchargePerBadStanding")]
             public double SurchargePerBadStanding { get; set; }
 
             /// <summary>
-            /// Gets or sets the discount per good standing.
+            ///     Gets or sets the discount per good standing.
             /// </summary>
             /// <value>The discount per good standing.</value>
             [XmlAttribute("discountPerGoodStanding")]

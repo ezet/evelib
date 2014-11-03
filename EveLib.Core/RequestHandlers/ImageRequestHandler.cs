@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.RequestHandlers {
     /// <summary>
-    /// Simple implementation for requesting images
+    ///     Simple implementation for requesting images
     /// </summary>
     public class ImageRequestHandler : IImageRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
-        /// Requests and returns image data
+        ///     Requests and returns image data
         /// </summary>
         /// <param name="uri">URI to request</param>
         /// <returns>The image data</returns>
@@ -21,7 +21,7 @@ namespace eZet.EveLib.Core.RequestHandlers {
         }
 
         /// <summary>
-        /// Requests image and saves it to a file.
+        ///     Requests image and saves it to a file.
         /// </summary>
         /// <param name="uri">URI to request</param>
         /// <param name="file">File to save image as.</param>

@@ -11,59 +11,60 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class Locations.
+    ///     Class Locations.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Locations {
         /// <summary>
-        /// Gets or sets the items.
+        ///     Gets or sets the items.
         /// </summary>
         /// <value>The items.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Location> Items { get; set; }
 
         /// <summary>
-        /// Class Location.
+        ///     Class Location.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Location {
             /// <summary>
-            /// Gets or sets the item identifier.
+            ///     Gets or sets the item identifier.
             /// </summary>
             /// <value>The item identifier.</value>
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the item.
+            ///     Gets or sets the name of the item.
             /// </summary>
             /// <value>The name of the item.</value>
             [XmlAttribute("itemName")]
             public string ItemName { get; set; }
 
             /// <summary>
-            /// Gets or sets the x.
+            ///     Gets or sets the x.
             /// </summary>
             /// <value>The x.</value>
             [XmlAttribute("x")]
             public double X { get; set; }
 
             /// <summary>
-            /// Gets or sets the y.
+            ///     Gets or sets the y.
             /// </summary>
             /// <value>The y.</value>
             [XmlAttribute("y")]
             public double Y { get; set; }
 
             /// <summary>
-            /// Gets or sets the z.
+            ///     Gets or sets the z.
             /// </summary>
             /// <value>The z.</value>
             [XmlAttribute("z")]

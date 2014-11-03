@@ -11,26 +11,27 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EveApiError.
+    ///     Class EveApiError.
     /// </summary>
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
     public class EveApiError {
         /// <summary>
-        /// Gets the current time.
+        ///     Gets the current time.
         /// </summary>
         /// <value>The current time.</value>
         [XmlIgnore]
         public DateTime CurrentTime { get; private set; }
 
         /// <summary>
-        /// Gets or sets the current time as string.
+        ///     Gets or sets the current time as string.
         /// </summary>
         /// <value>The current time as string.</value>
         [XmlElement("currentTime")]
@@ -40,21 +41,21 @@ namespace eZet.EveLib.Modules.Models {
         }
 
         /// <summary>
-        /// Gets or sets the error.
+        ///     Gets or sets the error.
         /// </summary>
         /// <value>The error.</value>
         [XmlElement("error")]
         public ErrorData Error { get; set; }
 
         /// <summary>
-        /// Gets or sets the cached until.
+        ///     Gets or sets the cached until.
         /// </summary>
         /// <value>The cached until.</value>
         [XmlIgnore]
         public DateTime CachedUntil { get; set; }
 
         /// <summary>
-        /// Gets or sets the cached until as string.
+        ///     Gets or sets the cached until as string.
         /// </summary>
         /// <value>The cached until as string.</value>
         [XmlElement("cachedUntil")]
@@ -64,25 +65,25 @@ namespace eZet.EveLib.Modules.Models {
         }
 
         /// <summary>
-        /// Gets or sets the version.
+        ///     Gets or sets the version.
         /// </summary>
         /// <value>The version.</value>
         [XmlAttribute("version")]
         public int Version { get; set; }
 
         /// <summary>
-        /// Class ErrorData.
+        ///     Class ErrorData.
         /// </summary>
         public class ErrorData {
             /// <summary>
-            /// Gets or sets the error code.
+            ///     Gets or sets the error code.
             /// </summary>
             /// <value>The error code.</value>
             [XmlAttribute("code")]
             public int ErrorCode { get; set; }
 
             /// <summary>
-            /// Gets or sets the error text.
+            ///     Gets or sets the error text.
             /// </summary>
             /// <value>The error text.</value>
             [XmlText]

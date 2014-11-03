@@ -11,37 +11,38 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EveWhoMember.
+    ///     Class EveWhoMember.
     /// </summary>
     [DataContract]
     public class EveWhoMember {
         /// <summary>
-        /// Gets or sets the character identifier.
+        ///     Gets or sets the character identifier.
         /// </summary>
         /// <value>The character identifier.</value>
         [DataMember(Name = "character_id")]
         public long CharacterId { get; set; }
 
         /// <summary>
-        /// Gets or sets the corporation identifier.
+        ///     Gets or sets the corporation identifier.
         /// </summary>
         /// <value>The corporation identifier.</value>
         [DataMember(Name = "corporation_id")]
         public long CorporationId { get; set; }
 
         /// <summary>
-        /// Gets or sets the alliance identifier.
+        ///     Gets or sets the alliance identifier.
         /// </summary>
         /// <value>The alliance identifier.</value>
         [DataMember(Name = "alliance_id")]
         public long AllianceId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
         [DataMember(Name = "name")]

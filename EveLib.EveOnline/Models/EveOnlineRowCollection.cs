@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.ObjectModel;
 using System.Xml;
@@ -19,36 +20,43 @@ using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EveOnlineRowCollection.
+    ///     Class EveOnlineRowCollection.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Serializable]
     [XmlRoot("rowset")]
     public class EveOnlineRowCollection<T> : Collection<T>, IXmlSerializable {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveOnlineRowCollection{T}"/> class.
+        ///     Initializes a new instance of the <see cref="EveOnlineRowCollection{T}" /> class.
         /// </summary>
         public EveOnlineRowCollection() {
             RowSetMeta = new RowSetAttributes();
         }
 
         /// <summary>
-        /// Gets the row set meta.
+        ///     Gets the row set meta.
         /// </summary>
         /// <value>The row set meta.</value>
         public RowSetAttributes RowSetMeta { get; private set; }
 
         /// <summary>
-        /// This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
+        ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
+        ///     null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the
+        ///     <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
         /// </summary>
-        /// <returns>An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</returns>
+        /// <returns>
+        ///     An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is
+        ///     produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method
+        ///     and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+        ///     method.
+        /// </returns>
         /// <exception cref="System.NotImplementedException"></exception>
         public XmlSchema GetSchema() {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Generates an object from its XML representation.
+        ///     Generates an object from its XML representation.
         /// </summary>
         /// <param name="reader">The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.</param>
         public void ReadXml(XmlReader reader) {
@@ -68,7 +76,7 @@ namespace eZet.EveLib.Modules.Models {
         }
 
         /// <summary>
-        /// Converts an object into its XML representation.
+        ///     Converts an object into its XML representation.
         /// </summary>
         /// <param name="writer">The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.</param>
         /// <exception cref="System.NotImplementedException"></exception>
@@ -77,23 +85,23 @@ namespace eZet.EveLib.Modules.Models {
         }
 
         /// <summary>
-        /// Class RowSetAttributes.
+        ///     Class RowSetAttributes.
         /// </summary>
         public class RowSetAttributes {
             /// <summary>
-            /// Gets or sets the name.
+            ///     Gets or sets the name.
             /// </summary>
             /// <value>The name.</value>
             public string Name { get; set; }
 
             /// <summary>
-            /// Gets or sets the key.
+            ///     Gets or sets the key.
             /// </summary>
             /// <value>The key.</value>
             public string Key { get; set; }
 
             /// <summary>
-            /// Gets or sets the columns.
+            ///     Gets or sets the columns.
             /// </summary>
             /// <value>The columns.</value>
             public string Columns { get; set; }

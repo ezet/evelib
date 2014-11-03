@@ -11,26 +11,27 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EveCentralResponse.
+    ///     Class EveCentralResponse.
     /// </summary>
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class EveCentralResponse {
         /// <summary>
-        /// Gets or sets the version.
+        ///     Gets or sets the version.
         /// </summary>
         /// <value>The version.</value>
         [XmlAttribute("version")]
         public string Version { get; set; }
 
         /// <summary>
-        /// Gets or sets the method.
+        ///     Gets or sets the method.
         /// </summary>
         /// <value>The method.</value>
         [XmlAttribute("method")]

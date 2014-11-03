@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml;
 using System.Xml.Schema;
@@ -19,13 +20,13 @@ using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Misc {
     /// <summary>
-    /// Class CallList.
+    ///     Class CallList.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CallList : IXmlSerializable {
         /// <summary>
-        /// Gets or sets the call groups.
+        ///     Gets or sets the call groups.
         /// </summary>
         /// <value>The call groups.</value>
         [XmlElement("rowset")]
@@ -33,7 +34,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
 
 
         /// <summary>
-        /// Gets or sets the calls.
+        ///     Gets or sets the calls.
         /// </summary>
         /// <value>The calls.</value>
         [XmlElement("rowset")]
@@ -41,16 +42,23 @@ namespace eZet.EveLib.Modules.Models.Misc {
 
 
         /// <summary>
-        /// This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
+        ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
+        ///     null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the
+        ///     <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
         /// </summary>
-        /// <returns>An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</returns>
+        /// <returns>
+        ///     An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is
+        ///     produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method
+        ///     and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+        ///     method.
+        /// </returns>
         /// <exception cref="System.NotImplementedException"></exception>
         public XmlSchema GetSchema() {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Generates an object from its XML representation.
+        ///     Generates an object from its XML representation.
         /// </summary>
         /// <param name="reader">The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.</param>
         public void ReadXml(XmlReader reader) {
@@ -60,7 +68,7 @@ namespace eZet.EveLib.Modules.Models.Misc {
         }
 
         /// <summary>
-        /// Converts an object into its XML representation.
+        ///     Converts an object into its XML representation.
         /// </summary>
         /// <param name="writer">The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.</param>
         /// <exception cref="System.NotImplementedException"></exception>
@@ -69,41 +77,41 @@ namespace eZet.EveLib.Modules.Models.Misc {
         }
 
         /// <summary>
-        /// Class Call.
+        ///     Class Call.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Call {
             /// <summary>
-            /// Gets or sets the access mask.
+            ///     Gets or sets the access mask.
             /// </summary>
             /// <value>The access mask.</value>
             [XmlAttribute("accessMask")]
             public int AccessMask { get; set; }
 
             /// <summary>
-            /// Gets or sets the character.
+            ///     Gets or sets the character.
             /// </summary>
             /// <value>The character.</value>
             [XmlAttribute("type")]
             public string Character { get; set; }
 
             /// <summary>
-            /// Gets or sets the name.
+            ///     Gets or sets the name.
             /// </summary>
             /// <value>The name.</value>
             [XmlAttribute("name")]
             public string Name { get; set; }
 
             /// <summary>
-            /// Gets or sets the group identifier.
+            ///     Gets or sets the group identifier.
             /// </summary>
             /// <value>The group identifier.</value>
             [XmlAttribute("groupID")]
             public long groupId { get; set; }
 
             /// <summary>
-            /// Gets or sets the description.
+            ///     Gets or sets the description.
             /// </summary>
             /// <value>The description.</value>
             [XmlAttribute("description")]
@@ -111,27 +119,27 @@ namespace eZet.EveLib.Modules.Models.Misc {
         }
 
         /// <summary>
-        /// Class CallGroup.
+        ///     Class CallGroup.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class CallGroup {
             /// <summary>
-            /// Gets or sets the group identifier.
+            ///     Gets or sets the group identifier.
             /// </summary>
             /// <value>The group identifier.</value>
             [XmlAttribute("groupID")]
             public long GroupId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the group.
+            ///     Gets or sets the name of the group.
             /// </summary>
             /// <value>The name of the group.</value>
             [XmlAttribute("name")]
             public string GroupName { get; set; }
 
             /// <summary>
-            /// Gets or sets the description.
+            ///     Gets or sets the description.
             /// </summary>
             /// <value>The description.</value>
             [XmlAttribute("description")]

@@ -11,25 +11,26 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Misc {
     /// <summary>
-    /// Class ServerStatus.
+    ///     Class ServerStatus.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ServerStatus {
         /// <summary>
-        /// Gets or sets the server open.
+        ///     Gets or sets the server open.
         /// </summary>
         /// <value>The server open.</value>
         [XmlElement("serverOpen")]
         public string ServerOpen { get; set; }
 
         /// <summary>
-        /// Gets or sets the players online.
+        ///     Gets or sets the players online.
         /// </summary>
         /// <value>The players online.</value>
         [XmlElement("onlinePlayers")]

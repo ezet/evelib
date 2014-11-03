@@ -11,7 +11,7 @@ using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Core.Cache {
     /// <summary>
-    /// Simple plain file cache implementation
+    ///     Simple plain file cache implementation
     /// </summary>
     public class EveLibFileCache : IEveLibCache {
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
@@ -23,7 +23,7 @@ namespace eZet.EveLib.Core.Cache {
         private bool _isInitialized;
 
         /// <summary>
-        /// Stores data to the cache
+        ///     Stores data to the cache
         /// </summary>
         /// <param name="uri">The uri this caches</param>
         /// <param name="cacheTime">The cache expiry time</param>
@@ -52,7 +52,7 @@ namespace eZet.EveLib.Core.Cache {
         }
 
         /// <summary>
-        /// Loads data from cache
+        ///     Loads data from cache
         /// </summary>
         /// <param name="uri">The uri to load cache for</param>
         /// <returns>The cached data</returns>
@@ -97,7 +97,7 @@ namespace eZet.EveLib.Core.Cache {
         }
 
         /// <summary>
-        /// Gets the cache expiry time for specified uri
+        ///     Gets the cache expiry time for specified uri
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="value"></param>

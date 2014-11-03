@@ -11,21 +11,24 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace eZet.EveLib.Core.Cache {
     /// <summary>
-    /// Enum CacheType
+    ///     Enum CacheType
     /// </summary>
     public enum CacheType {
         /// <summary>
-        /// The default
+        ///     The default
         /// </summary>
         Default,
+
         /// <summary>
-        /// The force cache
+        ///     The force cache
         /// </summary>
         ForceCache,
+
         /// <summary>
-        /// The force refresh
+        ///     The force refresh
         /// </summary>
         ForceRefresh
     }

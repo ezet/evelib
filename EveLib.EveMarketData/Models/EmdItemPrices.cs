@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -19,13 +20,13 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EmdItemPrices.
+    ///     Class EmdItemPrices.
     /// </summary>
     [DataContract]
     [JsonConverter(typeof (EmdItemPricesJsonConverter))]
     public class EmdItemPrices {
         /// <summary>
-        /// Gets or sets the prices.
+        ///     Gets or sets the prices.
         /// </summary>
         /// <value>The prices.</value>
         [XmlElement("rowset")]
@@ -33,13 +34,13 @@ namespace eZet.EveLib.Modules.Models {
         public EveMarketDataRowCollection<ItemPriceEntry> Prices { get; set; }
 
         /// <summary>
-        /// Class ItemPriceEntry.
+        ///     Class ItemPriceEntry.
         /// </summary>
         [DataContract]
         [XmlRoot("row")]
         public class ItemPriceEntry {
             /// <summary>
-            /// Gets or sets the type of the order.
+            ///     Gets or sets the type of the order.
             /// </summary>
             /// <value>The type of the order.</value>
             [XmlAttribute("buysell")]
@@ -47,7 +48,7 @@ namespace eZet.EveLib.Modules.Models {
             public OrderType OrderType { get; set; }
 
             /// <summary>
-            /// Gets or sets the type identifier.
+            ///     Gets or sets the type identifier.
             /// </summary>
             /// <value>The type identifier.</value>
             [XmlAttribute("typeID")]
@@ -55,7 +56,7 @@ namespace eZet.EveLib.Modules.Models {
             public int TypeId { get; set; }
 
             /// <summary>
-            /// Gets or sets the region identifier.
+            ///     Gets or sets the region identifier.
             /// </summary>
             /// <value>The region identifier.</value>
             [XmlAttribute("regionID")]
@@ -63,7 +64,7 @@ namespace eZet.EveLib.Modules.Models {
             public int RegionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the price.
+            ///     Gets or sets the price.
             /// </summary>
             /// <value>The price.</value>
             [XmlAttribute("price")]
@@ -71,7 +72,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal Price { get; set; }
 
             /// <summary>
-            /// Gets or sets the updated.
+            ///     Gets or sets the updated.
             /// </summary>
             /// <value>The updated.</value>
             [XmlAttribute("updated")]

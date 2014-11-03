@@ -11,19 +11,21 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Enum OrderType
+    ///     Enum OrderType
     /// </summary>
     public enum OrderType {
         /// <summary>
-        /// The buy
+        ///     The buy
         /// </summary>
         [XmlEnum("buy")] Buy,
+
         /// <summary>
-        /// The sell
+        ///     The sell
         /// </summary>
         [XmlEnum("sell")] Sell
     }

@@ -2,6 +2,7 @@
 using System.Linq;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Account;
 using eZet.EveLib.Modules.Models.Character;
 using eZet.EveLib.Modules.Models.Misc;
 
@@ -69,8 +70,8 @@ namespace eZet.EveLib {
         }
 
         public void test() {
-            CharacterKey key = new CharacterKey(1, "");
-            var result = key.GetAccountStatus().Result;
+            var key = new CharacterKey(1, "");
+            AccountStatus result = key.GetAccountStatus().Result;
         }
     }
 }

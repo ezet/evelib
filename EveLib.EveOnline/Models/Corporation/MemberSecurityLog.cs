@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml;
 using System.Xml.Schema;
@@ -19,33 +20,33 @@ using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Corporation {
     /// <summary>
-    /// Class MemberSecurityLog.
+    ///     Class MemberSecurityLog.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberSecurityLog {
         /// <summary>
-        /// Gets or sets the role history.
+        ///     Gets or sets the role history.
         /// </summary>
         /// <value>The role history.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<LogEntry> RoleHistory { get; set; }
 
         /// <summary>
-        /// Class LogEntry.
+        ///     Class LogEntry.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class LogEntry : IXmlSerializable {
             /// <summary>
-            /// Gets the change time.
+            ///     Gets the change time.
             /// </summary>
             /// <value>The change time.</value>
             [XmlIgnore]
             public DateTime ChangeTime { get; private set; }
 
             /// <summary>
-            /// Gets or sets the change time as string.
+            ///     Gets or sets the change time as string.
             /// </summary>
             /// <value>The change time as string.</value>
             [XmlAttribute("changeTime")]
@@ -55,65 +56,72 @@ namespace eZet.EveLib.Modules.Models.Corporation {
             }
 
             /// <summary>
-            /// Gets or sets the character identifier.
+            ///     Gets or sets the character identifier.
             /// </summary>
             /// <value>The character identifier.</value>
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the character.
+            ///     Gets or sets the name of the character.
             /// </summary>
             /// <value>The name of the character.</value>
             [XmlAttribute("characterName")]
             public string CharacterName { get; set; }
 
             /// <summary>
-            /// Gets or sets the issuer identifier.
+            ///     Gets or sets the issuer identifier.
             /// </summary>
             /// <value>The issuer identifier.</value>
             [XmlAttribute("issuerID")]
             public long IssuerId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the issuer.
+            ///     Gets or sets the name of the issuer.
             /// </summary>
             /// <value>The name of the issuer.</value>
             [XmlAttribute("issuerName")]
             public string IssuerName { get; set; }
 
             /// <summary>
-            /// Gets or sets the type of the role location.
+            ///     Gets or sets the type of the role location.
             /// </summary>
             /// <value>The type of the role location.</value>
             [XmlAttribute("roleLocationType")]
             public string RoleLocationType { get; set; }
 
             /// <summary>
-            /// Gets or sets the old roles.
+            ///     Gets or sets the old roles.
             /// </summary>
             /// <value>The old roles.</value>
             [XmlElement("rowset")]
             public EveOnlineRowCollection<MemberSecurity.Role> OldRoles { get; set; }
 
             /// <summary>
-            /// Gets or sets the new roles.
+            ///     Gets or sets the new roles.
             /// </summary>
             /// <value>The new roles.</value>
             [XmlElement("rowset")]
             public EveOnlineRowCollection<MemberSecurity.Role> NewRoles { get; set; }
 
             /// <summary>
-            /// This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
+            ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
+            ///     null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the
+            ///     <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
             /// </summary>
-            /// <returns>An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</returns>
+            /// <returns>
+            ///     An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is
+            ///     produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method
+            ///     and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+            ///     method.
+            /// </returns>
             /// <exception cref="System.NotImplementedException"></exception>
             public XmlSchema GetSchema() {
                 throw new NotImplementedException();
             }
 
             /// <summary>
-            /// Generates an object from its XML representation.
+            ///     Generates an object from its XML representation.
             /// </summary>
             /// <param name="reader">The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.</param>
             public void ReadXml(XmlReader reader) {
@@ -129,7 +137,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
             }
 
             /// <summary>
-            /// Converts an object into its XML representation.
+            ///     Converts an object into its XML representation.
             /// </summary>
             /// <param name="writer">The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.</param>
             /// <exception cref="System.NotImplementedException"></exception>

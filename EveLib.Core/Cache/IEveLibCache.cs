@@ -7,7 +7,7 @@ namespace eZet.EveLib.Core.Cache {
     /// </summary>
     public interface IEveLibCache {
         /// <summary>
-        /// Stores data to the cache
+        ///     Stores data to the cache
         /// </summary>
         /// <param name="uri">The uri this caches</param>
         /// <param name="cacheTime">The cache expiry time</param>
@@ -16,7 +16,7 @@ namespace eZet.EveLib.Core.Cache {
         Task StoreAsync(Uri uri, DateTime cacheTime, string data);
 
         /// <summary>
-        /// Loads data from cache
+        ///     Loads data from cache
         /// </summary>
         /// <param name="uri">The uri to load cache for</param>
         /// <returns>The cached data</returns>

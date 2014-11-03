@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
@@ -23,16 +24,16 @@ using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
-    /// Provides base properties and methods for Eve Online API classes.
+    ///     Provides base properties and methods for Eve Online API classes.
     /// </summary>
     public abstract class BaseEntity {
         /// <summary>
-        /// The default URI
+        ///     The default URI
         /// </summary>
         private const string DefaultUri = "https://api.eveonline.com";
 
         /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         protected BaseEntity() {
             var handler = new EveOnlineRequestHandler();
@@ -45,7 +46,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets or sets whether data can be loaded from the cache.
+        ///     Gets or sets whether data can be loaded from the cache.
         /// </summary>
         /// <value><c>true</c> if [enable cache load]; otherwise, <c>false</c>.</value>
         public bool EnableCacheLoad {
@@ -54,13 +55,13 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets or sets the type of the cache.
+        ///     Gets or sets the type of the cache.
         /// </summary>
         /// <value>The type of the cache.</value>
         public CacheType CacheType { get; set; }
 
         /// <summary>
-        /// Gets or sets whether data can be stored in the cache.
+        ///     Gets or sets whether data can be stored in the cache.
         /// </summary>
         /// <value><c>true</c> if [enable cache store]; otherwise, <c>false</c>.</value>
         public bool EnableCacheStore {
@@ -69,7 +70,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns true if the current request handler supports caching.
+        ///     Returns true if the current request handler supports caching.
         /// </summary>
         /// <value><c>true</c> if this instance is cache handler; otherwise, <c>false</c>.</value>
         public bool IsCacheHandler {
@@ -77,19 +78,19 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets or sets the base url for entity requests
+        ///     Gets or sets the base url for entity requests
         /// </summary>
         /// <value>The base URI.</value>
         public string BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets the requester this entity uses to perform requests.
+        ///     Gets or sets the requester this entity uses to perform requests.
         /// </summary>
         /// <value>The request handler.</value>
         public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        /// Cacheds the request handler.
+        ///     Cacheds the request handler.
         /// </summary>
         /// <returns>ICachedRequestHandler.</returns>
         private ICachedRequestHandler cachedRequestHandler() {
@@ -97,7 +98,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Performs a request on the requester, using the provided arguments.
+        ///     Performs a request on the requester, using the provided arguments.
         /// </summary>
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
@@ -111,7 +112,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Performs a request on the requester, using the provided arguments.
+        ///     Performs a request on the requester, using the provided arguments.
         /// </summary>
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
@@ -124,7 +125,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Performs a request on the requester, using the provided arguments.
+        ///     Performs a request on the requester, using the provided arguments.
         /// </summary>
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
@@ -140,7 +141,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Generates a query string from the Api key and supplied arguments
+        ///     Generates a query string from the Api key and supplied arguments
         /// </summary>
         /// <param name="key">Optional; api key to generate query from</param>
         /// <param name="args">Optional; arguments to generate query from</param>

@@ -9,16 +9,16 @@ using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
-    /// Class for accessing the ZKillboard API
+    ///     Class for accessing the ZKillboard API
     /// </summary>
     public class ZKillboard {
         /// <summary>
-        /// Default base URI.
+        ///     Default base URI.
         /// </summary>
         public const string DefaultUri = "https://zkillboard.com";
 
         /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         public ZKillboard() {
             RequestHandler = new ZkbRequestHandler(new JsonSerializer(), Config.CacheFactory());
@@ -49,12 +49,12 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Gets or sets the default base URI
+        ///     Gets or sets the default base URI
         /// </summary>
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets the request handler
+        ///     Gets or sets the request handler
         /// </summary>
         public IRequestHandler RequestHandler { get; set; }
 
@@ -63,7 +63,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns kill mails
+        ///     Returns kill mails
         /// </summary>
         /// <param name="options">ZKillboard options</param>
         /// <returns>Kill mails</returns>
@@ -73,7 +73,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns kill mails
+        ///     Returns kill mails
         /// </summary>
         /// <param name="options">ZKillboard options</param>
         /// <returns>Kill mails</returns>
@@ -85,7 +85,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns loss mails
+        ///     Returns loss mails
         /// </summary>
         /// <param name="options">ZKillboard options</param>
         /// <returns>Loss mails</returns>
@@ -95,7 +95,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns loss mails
+        ///     Returns loss mails
         /// </summary>
         /// <param name="options">ZKillboard options</param>
         /// <returns>Loss mails</returns>
@@ -107,7 +107,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns both Kill and loss mails
+        ///     Returns both Kill and loss mails
         /// </summary>
         /// <param name="options">ZKillboard options</param>
         /// <returns>Kill and loss mails</returns>
@@ -117,7 +117,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns both Kill and loss mails
+        ///     Returns both Kill and loss mails
         /// </summary>
         /// <param name="options">ZKillboard options</param>
         /// <returns>Kill and loss mails</returns>

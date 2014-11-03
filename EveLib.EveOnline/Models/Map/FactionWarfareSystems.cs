@@ -11,66 +11,67 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Map {
     /// <summary>
-    /// Class FactionWarfareSystems.
+    ///     Class FactionWarfareSystems.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareSystems {
         /// <summary>
-        /// Gets or sets the solar systems.
+        ///     Gets or sets the solar systems.
         /// </summary>
         /// <value>The solar systems.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<SolarSystem> SolarSystems { get; set; }
 
         /// <summary>
-        /// Class SolarSystem.
+        ///     Class SolarSystem.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
             /// <summary>
-            /// Gets or sets the solar system identifier.
+            ///     Gets or sets the solar system identifier.
             /// </summary>
             /// <value>The solar system identifier.</value>
             [XmlAttribute("solarSystemID")]
             public int SolarSystemId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the solar system.
+            ///     Gets or sets the name of the solar system.
             /// </summary>
             /// <value>The name of the solar system.</value>
             [XmlAttribute("solarSystemName")]
             public string SolarSystemName { get; set; }
 
             /// <summary>
-            /// Gets or sets the occupying faction identifier.
+            ///     Gets or sets the occupying faction identifier.
             /// </summary>
             /// <value>The occupying faction identifier.</value>
             [XmlAttribute("occupyingFactionID")]
             public long OccupyingFactionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the occupying faction.
+            ///     Gets or sets the name of the occupying faction.
             /// </summary>
             /// <value>The name of the occupying faction.</value>
             [XmlAttribute("occupyingFactionName")]
             public string OccupyingFactionName { get; set; }
 
             /// <summary>
-            /// Gets a value indicating whether this <see cref="SolarSystem"/> is contested.
+            ///     Gets a value indicating whether this <see cref="SolarSystem" /> is contested.
             /// </summary>
             /// <value><c>true</c> if contested; otherwise, <c>false</c>.</value>
             [XmlIgnore]
             public bool Contested { get; private set; }
 
             /// <summary>
-            /// Gets or sets the contested as string.
+            ///     Gets or sets the contested as string.
             /// </summary>
             /// <value>The contested as string.</value>
             [XmlAttribute("contested")]

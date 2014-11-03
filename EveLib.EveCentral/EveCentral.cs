@@ -7,7 +7,7 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
-    /// Class for accessing the EveCentral API
+    ///     Class for accessing the EveCentral API
     /// </summary>
     public class EveCentral {
         private const string DefaultUri = "http://api.eve-central.com";
@@ -122,7 +122,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Retrieves the eve central market history
+        ///     Retrieves the eve central market history
         /// </summary>
         public void GetHistory() {
             // TODO Implements this

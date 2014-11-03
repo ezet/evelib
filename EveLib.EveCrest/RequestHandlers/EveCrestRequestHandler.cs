@@ -25,7 +25,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         }
 
         /// <summary>
-        /// Gets or sets the serialier used to deserialize responses
+        ///     Gets or sets the serialier used to deserialize responses
         /// </summary>
         public ISerializer Serializer { get; set; }
 

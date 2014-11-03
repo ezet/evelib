@@ -864,7 +864,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///  Returns the blueprints owned by this character.
+        ///     Returns the blueprints owned by this character.
         /// </summary>
         /// <returns></returns>
         public Task<EveApiResponse<BlueprintList>> GetBlueprintsAsync() {
@@ -873,7 +873,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        ///  Returns the blueprints owned by this character.
+        ///     Returns the blueprints owned by this character.
         /// </summary>
         /// <returns></returns>
         public EveApiResponse<BlueprintList> GetBlueprints() {

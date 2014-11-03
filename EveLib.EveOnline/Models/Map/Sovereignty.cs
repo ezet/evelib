@@ -11,18 +11,19 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Map {
     /// <summary>
-    /// Class Sovereignty.
+    ///     Class Sovereignty.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Sovereignty {
         /// <summary>
-        /// Gets or sets the solar systems.
+        ///     Gets or sets the solar systems.
         /// </summary>
         /// <value>The solar systems.</value>
         [XmlElement("rowset")]
@@ -30,41 +31,41 @@ namespace eZet.EveLib.Modules.Models.Map {
 
 
         /// <summary>
-        /// Class SolarSystem.
+        ///     Class SolarSystem.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
             /// <summary>
-            /// Gets or sets the solar system identifier.
+            ///     Gets or sets the solar system identifier.
             /// </summary>
             /// <value>The solar system identifier.</value>
             [XmlAttribute("solarSystemID")]
             public int SolarSystemId { get; set; }
 
             /// <summary>
-            /// Gets or sets the alliance identifier.
+            ///     Gets or sets the alliance identifier.
             /// </summary>
             /// <value>The alliance identifier.</value>
             [XmlAttribute("allianceID")]
             public long AllianceId { get; set; }
 
             /// <summary>
-            /// Gets or sets the faction identifier.
+            ///     Gets or sets the faction identifier.
             /// </summary>
             /// <value>The faction identifier.</value>
             [XmlAttribute("factionID")]
             public long FactionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the solar system.
+            ///     Gets or sets the name of the solar system.
             /// </summary>
             /// <value>The name of the solar system.</value>
             [XmlAttribute("solarSystemName")]
             public string SolarSystemName { get; set; }
 
             /// <summary>
-            /// Gets or sets the corporation identifier.
+            ///     Gets or sets the corporation identifier.
             /// </summary>
             /// <value>The corporation identifier.</value>
             [XmlAttribute("corporationID")]

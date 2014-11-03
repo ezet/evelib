@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Globalization;
@@ -22,16 +23,16 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules.Util {
     /// <summary>
-    /// Provides utility methods for XML element classes.
+    ///     Provides utility methods for XML element classes.
     /// </summary>
     public class XmlHelper {
         /// <summary>
-        /// The date format
+        ///     The date format
         /// </summary>
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";
 
         /// <summary>
-        /// Sets and initializes the xml document for parsing using linq to xml.
+        ///     Sets and initializes the xml document for parsing using linq to xml.
         /// </summary>
         /// <param name="reader">The reader.</param>
         public XmlHelper(XmlReader reader) {
@@ -41,19 +42,19 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets or sets the list.
+        ///     Gets or sets the list.
         /// </summary>
         /// <value>The list.</value>
         protected IEnumerable<XElement> list { get; set; }
 
         /// <summary>
-        /// Gets or sets the root.
+        ///     Gets or sets the root.
         /// </summary>
         /// <value>The root.</value>
         protected XElement root { get; set; }
 
         /// <summary>
-        /// Deserializes an XML rowset using .NETs XmlSerializer.
+        ///     Deserializes an XML rowset using .NETs XmlSerializer.
         /// </summary>
         /// <typeparam name="T">KeyType used for deserialization.</typeparam>
         /// <param name="name">The name.</param>
@@ -68,7 +69,7 @@ namespace eZet.EveLib.Modules.Util {
 
 
         /// <summary>
-        /// Deserializes the specified name.
+        ///     Deserializes the specified name.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="name">The name.</param>
@@ -81,7 +82,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets a XML reader for a regular element for use with reflected XML serialization.
+        ///     Gets a XML reader for a regular element for use with reflected XML serialization.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>XmlReader.</returns>
@@ -91,7 +92,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets a XML reader for a rowset element for use with reflected XML serialization.
+        ///     Gets a XML reader for a rowset element for use with reflected XML serialization.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>XmlReader.</returns>
@@ -101,7 +102,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the long.
+        ///     Gets the long.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>System.Int64.</returns>
@@ -111,7 +112,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the string.
+        ///     Gets the string.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>System.String.</returns>
@@ -121,7 +122,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the int.
+        ///     Gets the int.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>System.Int32.</returns>
@@ -131,7 +132,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the decimal.
+        ///     Gets the decimal.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>System.Decimal.</returns>
@@ -141,7 +142,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the string attribute.
+        ///     Gets the string attribute.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>System.String.</returns>
@@ -150,7 +151,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the long attribute.
+        ///     Gets the long attribute.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>System.Int64.</returns>
@@ -159,7 +160,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the int attribute.
+        ///     Gets the int attribute.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>System.Int32.</returns>
@@ -168,7 +169,7 @@ namespace eZet.EveLib.Modules.Util {
         }
 
         /// <summary>
-        /// Gets the bool attribute.
+        ///     Gets the bool attribute.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>

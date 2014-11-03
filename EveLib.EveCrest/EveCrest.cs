@@ -23,8 +23,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns the CREST root
-        /// Path: /
+        ///     Returns the CREST root
+        ///     Path: /
         /// </summary>
         /// <returns></returns>
         public Task<CrestRoot> GetRootAsync() {
@@ -33,8 +33,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns the CREST root
-        /// Path: /
+        ///     Returns the CREST root
+        ///     Path: /
         /// </summary>
         /// <returns></returns>
         public CrestRoot GetRoot() {
@@ -149,8 +149,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns the average and adjusted values for all items
-        /// Path: /market/prices/
+        ///     Returns the average and adjusted values for all items
+        ///     Path: /market/prices/
         /// </summary>
         /// <returns></returns>
         public Task<CrestMarketPrices> GetMarketPricesAsync() {
@@ -159,8 +159,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns the average and adjusted values for all items
-        /// Path: /market/prices/
+        ///     Returns the average and adjusted values for all items
+        ///     Path: /market/prices/
         /// </summary>
         /// <returns></returns>
         public CrestMarketPrices GetMarketPrices() {
@@ -231,8 +231,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all industry specialities
-        /// Path: /industry/specialities/
+        ///     Returns a list of all industry specialities
+        ///     Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
         public Task<CrestIndstrySpecialities> GetSpecialitiesAsync() {
@@ -241,8 +241,8 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all industry specialities
-        /// Path: /industry/specialities/
+        ///     Returns a list of all industry specialities
+        ///     Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
         public CrestIndstrySpecialities GetSpecialities() {
@@ -250,7 +250,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns details for the requested speciality
+        ///     Returns details for the requested speciality
         /// </summary>
         /// <param name="specialityId">Speciality ID</param>
         /// <returns></returns>
@@ -260,7 +260,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns details for the requested speciality
+        ///     Returns details for the requested speciality
         /// </summary>
         /// <param name="specialityId">Speciality ID</param>
         /// <returns></returns>
@@ -270,7 +270,7 @@ namespace eZet.EveLib.Modules {
 
 
         /// <summary>
-        /// Returns a list of all industry teams
+        ///     Returns a list of all industry teams
         /// </summary>
         /// <returns>A list of all industry teams</returns>
         public Task<CrestIndustryTeams> GetIndustryTeamsAsync() {
@@ -279,7 +279,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all industry teams
+        ///     Returns a list of all industry teams
         /// </summary>
         /// <returns>A list of all industry teams</returns>
         public CrestIndustryTeams GetIndustryTeams() {
@@ -287,7 +287,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data for the specified industry team
+        ///     Returns data for the specified industry team
         /// </summary>
         /// <param name="teamId">The team ID</param>
         /// <returns></returns>
@@ -297,7 +297,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns data for the specified industry team
+        ///     Returns data for the specified industry team
         /// </summary>
         /// <param name="teamId">The team ID</param>
         /// <returns></returns>
@@ -307,7 +307,7 @@ namespace eZet.EveLib.Modules {
 
 
         /// <summary>
-        /// Returns a list of industry systems and prices
+        ///     Returns a list of industry systems and prices
         /// </summary>
         /// <returns></returns>
         public Task<CrestIndustrySystems> GetIndustrySystemsAsync() {
@@ -316,7 +316,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of industry systems and prices
+        ///     Returns a list of industry systems and prices
         /// </summary>
         /// <returns></returns>
         public CrestIndustrySystems GetIndustrySystems() {
@@ -324,7 +324,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all current industry team auctions
+        ///     Returns a list of all current industry team auctions
         /// </summary>
         /// <returns>A list of all current industry team auctions</returns>
         public Task<CrestIndustryTeamAuction> GetIndustryTeamAuctionsAsync() {
@@ -333,7 +333,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a list of all current industry team auctions
+        ///     Returns a list of all current industry team auctions
         /// </summary>
         /// <returns>A list of all current industry team auctions</returns>
         public CrestIndustryTeamAuction GetIndustryTeamAuction() {
@@ -341,7 +341,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a collection of all industry facilities
+        ///     Returns a collection of all industry facilities
         /// </summary>
         /// <returns></returns>
         public Task<CrestIndustryFacilities> GetIndustryFacilitiesAsync() {
@@ -350,7 +350,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns a collection of all industry facilities
+        ///     Returns a collection of all industry facilities
         /// </summary>
         /// <returns></returns>
         public CrestIndustryFacilities GetIndustryFacilities() {

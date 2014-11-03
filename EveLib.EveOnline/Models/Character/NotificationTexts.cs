@@ -11,25 +11,26 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class NotificationTexts.
+    ///     Class NotificationTexts.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class NotificationTexts {
         /// <summary>
-        /// Gets or sets the notifications.
+        ///     Gets or sets the notifications.
         /// </summary>
         /// <value>The notifications.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Notification> Notifications { get; set; }
 
         /// <summary>
-        /// Gets or sets the missing ids.
+        ///     Gets or sets the missing ids.
         /// </summary>
         /// <value>The missing ids.</value>
         [XmlElement("MissingIDs")]
@@ -37,20 +38,20 @@ namespace eZet.EveLib.Modules.Models.Character {
 
 
         /// <summary>
-        /// Class Notification.
+        ///     Class Notification.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Notification {
             /// <summary>
-            /// Gets or sets the notification identifier.
+            ///     Gets or sets the notification identifier.
             /// </summary>
             /// <value>The notification identifier.</value>
             [XmlAttribute("notificationID")]
             public long NotificationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the content.
+            ///     Gets or sets the content.
             /// </summary>
             /// <value>The content.</value>
             [XmlText]

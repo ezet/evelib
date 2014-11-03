@@ -11,38 +11,39 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Misc {
     /// <summary>
-    /// Class ErrorList.
+    ///     Class ErrorList.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ErrorList {
         /// <summary>
-        /// Gets or sets the errors.
+        ///     Gets or sets the errors.
         /// </summary>
         /// <value>The errors.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Error> Errors { get; set; }
 
         /// <summary>
-        /// Class Error.
+        ///     Class Error.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Error {
             /// <summary>
-            /// Gets or sets the error code.
+            ///     Gets or sets the error code.
             /// </summary>
             /// <value>The error code.</value>
             [XmlAttribute("errorCode")]
             public int ErrorCode { get; set; }
 
             /// <summary>
-            /// Gets or sets the error text.
+            ///     Gets or sets the error text.
             /// </summary>
             /// <value>The error text.</value>
             [XmlAttribute("errorText")]

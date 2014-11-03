@@ -11,45 +11,46 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class MailBodies.
+    ///     Class MailBodies.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MailBodies {
         /// <summary>
-        /// Gets or sets the messages.
+        ///     Gets or sets the messages.
         /// </summary>
         /// <value>The messages.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Message> Messages { get; set; }
 
         /// <summary>
-        /// Gets or sets the missing message ids.
+        ///     Gets or sets the missing message ids.
         /// </summary>
         /// <value>The missing message ids.</value>
         [XmlElement("missingMessageIDs")]
         public string MissingMessageIds { get; set; }
 
         /// <summary>
-        /// Class Message.
+        ///     Class Message.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Message {
             /// <summary>
-            /// Gets or sets the message identifier.
+            ///     Gets or sets the message identifier.
             /// </summary>
             /// <value>The message identifier.</value>
             [XmlAttribute("messageID")]
             public long MessageId { get; set; }
 
             /// <summary>
-            /// Gets or sets the message data.
+            ///     Gets or sets the message data.
             /// </summary>
             /// <value>The message data.</value>
             [XmlText]

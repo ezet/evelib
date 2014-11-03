@@ -12,7 +12,7 @@ namespace eZet.EveLib.Modules {
         public const string DefaultUri = "http://www.evewho.com/";
 
         /// <summary>
-        /// The default relative path to the API base.
+        ///     The default relative path to the API base.
         /// </summary>
         public const string DefaultApiPath = "api.php";
 

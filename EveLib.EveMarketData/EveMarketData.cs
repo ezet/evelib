@@ -12,16 +12,16 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public class EveMarketData {
         /// <summary>
-        /// Represents the requestable data formats
+        ///     Represents the requestable data formats
         /// </summary>
         public enum DataFormat {
             /// <summary>
-            /// JSON
+            ///     JSON
             /// </summary>
             Json,
 
             /// <summary>
-            /// XML
+            ///     XML
             /// </summary>
             Xml,
         }
@@ -63,7 +63,7 @@ namespace eZet.EveLib.Modules {
         public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        /// Sets the request format
+        ///     Sets the request format
         /// </summary>
         /// <param name="format"></param>
         public void SetFormat(DataFormat format) {

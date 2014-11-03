@@ -233,7 +233,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetBlueprints_ValidRequest_HasResult() {
-            var res = (await _validKey.Characters[0].GetBlueprintsAsync()).Result;
+            BlueprintList res = (await _validKey.Characters[0].GetBlueprintsAsync()).Result;
         }
     }
 }

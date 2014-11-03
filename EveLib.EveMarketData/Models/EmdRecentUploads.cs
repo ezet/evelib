@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -19,13 +20,13 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EmdRecentUploads.
+    ///     Class EmdRecentUploads.
     /// </summary>
     [DataContract]
     [JsonConverter(typeof (EmdRecentUploadsJsonConverter))]
     public class EmdRecentUploads {
         /// <summary>
-        /// Gets or sets the uploads.
+        ///     Gets or sets the uploads.
         /// </summary>
         /// <value>The uploads.</value>
         [DataMember(Name = "rowset")]
@@ -33,13 +34,13 @@ namespace eZet.EveLib.Modules.Models {
         public EveMarketDataRowCollection<RecentUploadsEntry> Uploads { get; set; }
 
         /// <summary>
-        /// Class RecentUploadsEntry.
+        ///     Class RecentUploadsEntry.
         /// </summary>
         [DataContract]
         [XmlRoot("row")]
         public class RecentUploadsEntry {
             /// <summary>
-            /// Gets or sets the type of the upload.
+            ///     Gets or sets the type of the upload.
             /// </summary>
             /// <value>The type of the upload.</value>
             [DataMember(Name = "upload_type")]
@@ -47,7 +48,7 @@ namespace eZet.EveLib.Modules.Models {
             public UploadType UploadType { get; set; }
 
             /// <summary>
-            /// Gets or sets the region identifier.
+            ///     Gets or sets the region identifier.
             /// </summary>
             /// <value>The region identifier.</value>
             [DataMember(Name = "regionID")]
@@ -55,7 +56,7 @@ namespace eZet.EveLib.Modules.Models {
             public int RegionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the type identifier.
+            ///     Gets or sets the type identifier.
             /// </summary>
             /// <value>The type identifier.</value>
             [DataMember(Name = "typeID")]
@@ -63,7 +64,7 @@ namespace eZet.EveLib.Modules.Models {
             public int TypeId { get; set; }
 
             /// <summary>
-            /// Gets or sets the updated.
+            ///     Gets or sets the updated.
             /// </summary>
             /// <value>The updated.</value>
             [DataMember(Name = "updated")]

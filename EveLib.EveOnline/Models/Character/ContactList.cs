@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml;
 using System.Xml.Schema;
@@ -19,43 +20,50 @@ using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class ContactList.
+    ///     Class ContactList.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContactList : IXmlSerializable {
         /// <summary>
-        /// Gets or sets the personal contacts.
+        ///     Gets or sets the personal contacts.
         /// </summary>
         /// <value>The personal contacts.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Contact> PersonalContacts { get; set; }
 
         /// <summary>
-        /// Gets or sets the corporation contacts.
+        ///     Gets or sets the corporation contacts.
         /// </summary>
         /// <value>The corporation contacts.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Contact> CorporationContacts { get; set; }
 
         /// <summary>
-        /// Gets or sets the alliance contacts.
+        ///     Gets or sets the alliance contacts.
         /// </summary>
         /// <value>The alliance contacts.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Contact> AllianceContacts { get; set; }
 
         /// <summary>
-        /// This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
+        ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
+        ///     null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the
+        ///     <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
         /// </summary>
-        /// <returns>An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</returns>
+        /// <returns>
+        ///     An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is
+        ///     produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method
+        ///     and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+        ///     method.
+        /// </returns>
         /// <exception cref="System.NotImplementedException"></exception>
         public XmlSchema GetSchema() {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Generates an object from its XML representation.
+        ///     Generates an object from its XML representation.
         /// </summary>
         /// <param name="reader">The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.</param>
         public void ReadXml(XmlReader reader) {
@@ -66,7 +74,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         }
 
         /// <summary>
-        /// Converts an object into its XML representation.
+        ///     Converts an object into its XML representation.
         /// </summary>
         /// <param name="writer">The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.</param>
         /// <exception cref="System.NotImplementedException"></exception>
@@ -75,41 +83,41 @@ namespace eZet.EveLib.Modules.Models.Character {
         }
 
         /// <summary>
-        /// Class Contact.
+        ///     Class Contact.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Contact {
             /// <summary>
-            /// Gets or sets the contact identifier.
+            ///     Gets or sets the contact identifier.
             /// </summary>
             /// <value>The contact identifier.</value>
             [XmlAttribute("contactID")]
             public long ContactId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the contact.
+            ///     Gets or sets the name of the contact.
             /// </summary>
             /// <value>The name of the contact.</value>
             [XmlAttribute("contactName")]
             public string ContactName { get; set; }
 
             /// <summary>
-            /// Gets or sets the standing.
+            ///     Gets or sets the standing.
             /// </summary>
             /// <value>The standing.</value>
             [XmlAttribute("standing")]
             public double Standing { get; set; }
 
             /// <summary>
-            /// Gets or sets a value indicating whether [in watchlist].
+            ///     Gets or sets a value indicating whether [in watchlist].
             /// </summary>
             /// <value><c>true</c> if [in watchlist]; otherwise, <c>false</c>.</value>
             [XmlIgnore]
             public bool InWatchlist { get; set; }
 
             /// <summary>
-            /// Gets or sets the in watchlist as string.
+            ///     Gets or sets the in watchlist as string.
             /// </summary>
             /// <value>The in watchlist as string.</value>
             [XmlAttribute("inWatchlist")]

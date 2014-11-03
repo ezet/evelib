@@ -11,59 +11,60 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Misc {
     /// <summary>
-    /// Class CertificateTree.
+    ///     Class CertificateTree.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CertificateTree {
         /// <summary>
-        /// Gets or sets the categories.
+        ///     Gets or sets the categories.
         /// </summary>
         /// <value>The categories.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<CertificateCategory> Categories { get; set; }
 
         /// <summary>
-        /// Class Certificate.
+        ///     Class Certificate.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Certificate {
             /// <summary>
-            /// Gets or sets the certificate identifier.
+            ///     Gets or sets the certificate identifier.
             /// </summary>
             /// <value>The certificate identifier.</value>
             [XmlAttribute("certificateID")]
             public long CertificateId { get; set; }
 
             /// <summary>
-            /// Gets or sets the grade.
+            ///     Gets or sets the grade.
             /// </summary>
             /// <value>The grade.</value>
             [XmlAttribute("grade")]
             public int Grade { get; set; }
 
             /// <summary>
-            /// Gets or sets the corporation identifier.
+            ///     Gets or sets the corporation identifier.
             /// </summary>
             /// <value>The corporation identifier.</value>
             [XmlAttribute("corporationID")]
             public long CorporationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the description.
+            ///     Gets or sets the description.
             /// </summary>
             /// <value>The description.</value>
             [XmlAttribute("description")]
             public string Description { get; set; }
 
             /// <summary>
-            /// Gets or sets the required skills.
+            ///     Gets or sets the required skills.
             /// </summary>
             /// <value>The required skills.</value>
             [XmlElement("rowset")]
@@ -71,27 +72,27 @@ namespace eZet.EveLib.Modules.Models.Misc {
         }
 
         /// <summary>
-        /// Class CertificateCategory.
+        ///     Class CertificateCategory.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class CertificateCategory {
             /// <summary>
-            /// Gets or sets the category identifier.
+            ///     Gets or sets the category identifier.
             /// </summary>
             /// <value>The category identifier.</value>
             [XmlAttribute("categoryID")]
             public long CategoryId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the category.
+            ///     Gets or sets the name of the category.
             /// </summary>
             /// <value>The name of the category.</value>
             [XmlAttribute("categoryName")]
             public string CategoryName { get; set; }
 
             /// <summary>
-            /// Gets or sets the classes.
+            ///     Gets or sets the classes.
             /// </summary>
             /// <value>The classes.</value>
             [XmlElement("rowset")]
@@ -99,27 +100,27 @@ namespace eZet.EveLib.Modules.Models.Misc {
         }
 
         /// <summary>
-        /// Class CertificateClass.
+        ///     Class CertificateClass.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class CertificateClass {
             /// <summary>
-            /// Gets or sets the class identifier.
+            ///     Gets or sets the class identifier.
             /// </summary>
             /// <value>The class identifier.</value>
             [XmlAttribute("classID")]
             public long ClassId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the class.
+            ///     Gets or sets the name of the class.
             /// </summary>
             /// <value>The name of the class.</value>
             [XmlAttribute("className")]
             public string ClassName { get; set; }
 
             /// <summary>
-            /// Gets or sets the certificates.
+            ///     Gets or sets the certificates.
             /// </summary>
             /// <value>The certificates.</value>
             [XmlElement("rowset")]
@@ -127,20 +128,20 @@ namespace eZet.EveLib.Modules.Models.Misc {
         }
 
         /// <summary>
-        /// Class Skill.
+        ///     Class Skill.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Skill {
             /// <summary>
-            /// Gets or sets the type identifier.
+            ///     Gets or sets the type identifier.
             /// </summary>
             /// <value>The type identifier.</value>
             [XmlAttribute("typeID")]
             public int TypeId { get; set; }
 
             /// <summary>
-            /// Gets or sets the level.
+            ///     Gets or sets the level.
             /// </summary>
             /// <value>The level.</value>
             [XmlAttribute("level")]

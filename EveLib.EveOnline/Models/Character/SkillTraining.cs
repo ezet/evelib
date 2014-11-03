@@ -11,27 +11,28 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class SkillTraining.
+    ///     Class SkillTraining.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTraining {
         // TODO Convert zone
         /// <summary>
-        /// Gets the current tq time.
+        ///     Gets the current tq time.
         /// </summary>
         /// <value>The current tq time.</value>
         [XmlIgnore]
         public DateTime CurrentTqTime { get; private set; }
 
         /// <summary>
-        /// Gets or sets the current tq time as string.
+        ///     Gets or sets the current tq time as string.
         /// </summary>
         /// <value>The current tq time as string.</value>
         [XmlElement("currentTQTime")]
@@ -41,14 +42,14 @@ namespace eZet.EveLib.Modules.Models.Character {
         }
 
         /// <summary>
-        /// Gets the end time.
+        ///     Gets the end time.
         /// </summary>
         /// <value>The end time.</value>
         [XmlIgnore]
         public DateTime EndTime { get; private set; }
 
         /// <summary>
-        /// Gets or sets the end time as string.
+        ///     Gets or sets the end time as string.
         /// </summary>
         /// <value>The end time as string.</value>
         [XmlElement("EndTime")]
@@ -58,14 +59,14 @@ namespace eZet.EveLib.Modules.Models.Character {
         }
 
         /// <summary>
-        /// Gets the start time.
+        ///     Gets the start time.
         /// </summary>
         /// <value>The start time.</value>
         [XmlIgnore]
         public DateTime StartTime { get; private set; }
 
         /// <summary>
-        /// Gets or sets the start time as string.
+        ///     Gets or sets the start time as string.
         /// </summary>
         /// <value>The start time as string.</value>
         [XmlElement("StartTime")]
@@ -75,35 +76,35 @@ namespace eZet.EveLib.Modules.Models.Character {
         }
 
         /// <summary>
-        /// Gets or sets the type identifier.
+        ///     Gets or sets the type identifier.
         /// </summary>
         /// <value>The type identifier.</value>
         [XmlElement("trainingTypeID")]
         public int TypeId { get; set; }
 
         /// <summary>
-        /// Gets or sets the start sp.
+        ///     Gets or sets the start sp.
         /// </summary>
         /// <value>The start sp.</value>
         [XmlElement("trainingStartSP")]
         public int StartSp { get; set; }
 
         /// <summary>
-        /// Gets or sets the destination sp.
+        ///     Gets or sets the destination sp.
         /// </summary>
         /// <value>The destination sp.</value>
         [XmlElement("trainingDestinationSP")]
         public int DestinationSp { get; set; }
 
         /// <summary>
-        /// Gets or sets to level.
+        ///     Gets or sets to level.
         /// </summary>
         /// <value>To level.</value>
         [XmlElement("trainingToLevel")]
         public int ToLevel { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is training.
+        ///     Gets or sets a value indicating whether this instance is training.
         /// </summary>
         /// <value><c>true</c> if this instance is training; otherwise, <c>false</c>.</value>
         [XmlElement("skillInTraining")]

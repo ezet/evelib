@@ -11,39 +11,40 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class WalletTransactions.
+    ///     Class WalletTransactions.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletTransactions {
         /// <summary>
-        /// Gets or sets the transactions.
+        ///     Gets or sets the transactions.
         /// </summary>
         /// <value>The transactions.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Transaction> Transactions { get; set; }
 
         /// <summary>
-        /// Class Transaction.
+        ///     Class Transaction.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Transaction {
             /// <summary>
-            /// Gets the transaction date.
+            ///     Gets the transaction date.
             /// </summary>
             /// <value>The transaction date.</value>
             [XmlIgnore]
             public DateTime TransactionDate { get; private set; }
 
             /// <summary>
-            /// Gets or sets the transaction date as string.
+            ///     Gets or sets the transaction date as string.
             /// </summary>
             /// <value>The transaction date as string.</value>
             [XmlAttribute("transactionDateTime")]
@@ -53,91 +54,91 @@ namespace eZet.EveLib.Modules.Models.Character {
             }
 
             /// <summary>
-            /// Gets or sets the transaction identifier.
+            ///     Gets or sets the transaction identifier.
             /// </summary>
             /// <value>The transaction identifier.</value>
             [XmlAttribute("transactionID")]
             public long TransactionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the quantity.
+            ///     Gets or sets the quantity.
             /// </summary>
             /// <value>The quantity.</value>
             [XmlAttribute("quantity")]
             public int Quantity { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the type.
+            ///     Gets or sets the name of the type.
             /// </summary>
             /// <value>The name of the type.</value>
             [XmlAttribute("typeName")]
             public string TypeName { get; set; }
 
             /// <summary>
-            /// Gets or sets the type identifier.
+            ///     Gets or sets the type identifier.
             /// </summary>
             /// <value>The type identifier.</value>
             [XmlAttribute("typeID")]
             public int TypeId { get; set; }
 
             /// <summary>
-            /// Gets or sets the price.
+            ///     Gets or sets the price.
             /// </summary>
             /// <value>The price.</value>
             [XmlAttribute("price")]
             public decimal Price { get; set; }
 
             /// <summary>
-            /// Gets or sets the client identifier.
+            ///     Gets or sets the client identifier.
             /// </summary>
             /// <value>The client identifier.</value>
             [XmlAttribute("clientID")]
             public long ClientId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the client.
+            ///     Gets or sets the name of the client.
             /// </summary>
             /// <value>The name of the client.</value>
             [XmlAttribute("clientName")]
             public string ClientName { get; set; }
 
             /// <summary>
-            /// Gets or sets the station identifier.
+            ///     Gets or sets the station identifier.
             /// </summary>
             /// <value>The station identifier.</value>
             [XmlAttribute("stationID")]
             public int StationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the station.
+            ///     Gets or sets the name of the station.
             /// </summary>
             /// <value>The name of the station.</value>
             [XmlAttribute("stationName")]
             public string StationName { get; set; }
 
             /// <summary>
-            /// Gets or sets the type of the transaction.
+            ///     Gets or sets the type of the transaction.
             /// </summary>
             /// <value>The type of the transaction.</value>
             [XmlAttribute("transactionType")]
             public OrderType TransactionType { get; set; }
 
             /// <summary>
-            /// Gets or sets the transaction for.
+            ///     Gets or sets the transaction for.
             /// </summary>
             /// <value>The transaction for.</value>
             [XmlAttribute("transactionFor")]
             public string TransactionFor { get; set; }
 
             /// <summary>
-            /// Gets or sets the journal transaction identifier.
+            ///     Gets or sets the journal transaction identifier.
             /// </summary>
             /// <value>The journal transaction identifier.</value>
             [XmlAttribute("journalTransactionID")]
             public long JournalTransactionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the client type identifier.
+            ///     Gets or sets the client type identifier.
             /// </summary>
             /// <value>The client type identifier.</value>
             [XmlAttribute("clientTypeID")]

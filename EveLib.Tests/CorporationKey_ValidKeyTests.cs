@@ -215,13 +215,13 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetFacilities_ValidRequest_HasResult() {
-            var res = (await _validKey.Corporation.GetFacilitiesAsync()).Result;
+            Facilities res = (await _validKey.Corporation.GetFacilitiesAsync()).Result;
             Assert.IsNotNull(res);
         }
 
         [TestMethod]
         public async Task GetBlueprints_ValidRequest_HasResult() {
-            var res = (await _validKey.Corporation.GetBlueprintsAsync()).Result;
+            BlueprintList res = (await _validKey.Corporation.GetBlueprintsAsync()).Result;
             Assert.IsTrue(res.Blueprints.Any());
         }
     }

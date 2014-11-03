@@ -186,7 +186,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetBlueprints() {
-            var xml = await _corp.GetBlueprintsAsync();
+            EveApiResponse<BlueprintList> xml = await _corp.GetBlueprintsAsync();
             Assert.IsTrue(xml.Result.Blueprints.Any());
         }
     }

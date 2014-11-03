@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
     /// <summary>
-    /// Async file utilities
+    ///     Async file utilities
     /// </summary>
     public static class AsyncFileUtilities {
         /// <summary>
-        /// Reads all test async
+        ///     Reads all test async
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
@@ -30,7 +30,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Reads all lines async
+        ///     Reads all lines async
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
@@ -40,7 +40,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Writes all test async
+        ///     Writes all test async
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="text"></param>
@@ -54,7 +54,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Writes all lines async
+        ///     Writes all lines async
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="lines"></param>

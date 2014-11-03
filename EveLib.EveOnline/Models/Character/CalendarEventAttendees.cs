@@ -11,18 +11,19 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class CalendarEventAttendees.
+    ///     Class CalendarEventAttendees.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CalendarEventAttendees {
         /// <summary>
-        /// Gets or sets the attendees.
+        ///     Gets or sets the attendees.
         /// </summary>
         /// <value>The attendees.</value>
         [XmlElement("rowset")]
@@ -30,27 +31,27 @@ namespace eZet.EveLib.Modules.Models.Character {
 
 
         /// <summary>
-        /// Class Attendee.
+        ///     Class Attendee.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Attendee {
             /// <summary>
-            /// Gets or sets the character identifier.
+            ///     Gets or sets the character identifier.
             /// </summary>
             /// <value>The character identifier.</value>
             [XmlAttribute("characterID")]
             public long CharacterId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the character.
+            ///     Gets or sets the name of the character.
             /// </summary>
             /// <value>The name of the character.</value>
             [XmlAttribute("characterName")]
             public string CharacterName { get; set; }
 
             /// <summary>
-            /// Gets or sets the response.
+            ///     Gets or sets the response.
             /// </summary>
             /// <value>The response.</value>
             [XmlAttribute("response")]

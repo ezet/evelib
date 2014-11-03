@@ -6,7 +6,7 @@ using eZet.EveLib.Core.Util;
 
 namespace eZet.EveLib.Core {
     /// <summary>
-    /// This is a class for general EveLib utilities and methods
+    ///     This is a class for general EveLib utilities and methods
     /// </summary>
     public class EveLib : EveLibApiBase {
         private readonly JsonSerializer _jsonSerializer = new JsonSerializer();
@@ -14,14 +14,14 @@ namespace eZet.EveLib.Core {
         private readonly XmlSerializer _xmlSerializer = new XmlSerializer();
 
         /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         public EveLib() {
             RequestHandler = new RequestHandler(_jsonSerializer);
         }
 
         /// <summary>
-        /// Requests and deserializes JSON content to a dynamic object
+        ///     Requests and deserializes JSON content to a dynamic object
         /// </summary>
         /// <param name="uri">URI to request</param>
         /// <returns></returns>
@@ -31,7 +31,7 @@ namespace eZet.EveLib.Core {
         }
 
         /// <summary>
-        /// Requests and deserializes JSON content to a dynamic object
+        ///     Requests and deserializes JSON content to a dynamic object
         /// </summary>
         /// <param name="uri">URI to request</param>
         /// <returns></returns>
@@ -40,7 +40,7 @@ namespace eZet.EveLib.Core {
         }
 
         /// <summary>
-        /// Requests and deserializes XML content to a dynamic object. Not implemented yet.
+        ///     Requests and deserializes XML content to a dynamic object. Not implemented yet.
         /// </summary>
         /// <param name="uri">URI to request</param>
         /// <returns></returns>
@@ -51,7 +51,7 @@ namespace eZet.EveLib.Core {
         }
 
         /// <summary>
-        /// Requests and deserializes XML content to a dynamic object. Not implemented yet.
+        ///     Requests and deserializes XML content to a dynamic object. Not implemented yet.
         /// </summary>
         /// <param name="uri">URI to request</param>
         /// <returns></returns>

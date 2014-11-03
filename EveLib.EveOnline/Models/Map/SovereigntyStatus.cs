@@ -11,25 +11,26 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Map {
     /// <summary>
-    /// Class SovereigntyStatus.
+    ///     Class SovereigntyStatus.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SovereigntyStatus {
         /// <summary>
-        /// Gets or sets the structures.
+        ///     Gets or sets the structures.
         /// </summary>
         /// <value>The structures.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<Structure> Structures { get; set; }
 
         /// <summary>
-        /// Class Structure.
+        ///     Class Structure.
         /// </summary>
         public class Structure {
             // TODO Implement

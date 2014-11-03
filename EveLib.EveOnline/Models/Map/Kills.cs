@@ -11,18 +11,19 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 
 namespace eZet.EveLib.Modules.Models.Map {
     /// <summary>
-    /// Class Kills.
+    ///     Class Kills.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Kills {
         /// <summary>
-        /// Gets or sets the solar systems.
+        ///     Gets or sets the solar systems.
         /// </summary>
         /// <value>The solar systems.</value>
         [XmlElement("rowset")]
@@ -30,34 +31,34 @@ namespace eZet.EveLib.Modules.Models.Map {
 
 
         /// <summary>
-        /// Class SolarSystem.
+        ///     Class SolarSystem.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
             /// <summary>
-            /// Gets or sets the solar system identifier.
+            ///     Gets or sets the solar system identifier.
             /// </summary>
             /// <value>The solar system identifier.</value>
             [XmlAttribute("solarSystemID")]
             public int SolarSystemId { get; set; }
 
             /// <summary>
-            /// Gets or sets the ship kills.
+            ///     Gets or sets the ship kills.
             /// </summary>
             /// <value>The ship kills.</value>
             [XmlAttribute("shipKills")]
             public int ShipKills { get; set; }
 
             /// <summary>
-            /// Gets or sets the faction kills.
+            ///     Gets or sets the faction kills.
             /// </summary>
             /// <value>The faction kills.</value>
             [XmlAttribute("factionKills")]
             public int FactionKills { get; set; }
 
             /// <summary>
-            /// Gets or sets the pod kills.
+            ///     Gets or sets the pod kills.
             /// </summary>
             /// <value>The pod kills.</value>
             [XmlAttribute("podKills")]

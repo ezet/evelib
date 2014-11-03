@@ -7,11 +7,11 @@ using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules {
     /// <summary>
-    /// Class for accessing the Element43 Legacy API
+    ///     Class for accessing the Element43 Legacy API
     /// </summary>
     public class Element43Legacy {
         /// <summary>
-        /// The default api URI 
+        ///     The default api URI
         /// </summary>
         public const string DefaultUri = "http://element-43.com";
 

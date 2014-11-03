@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -19,13 +20,13 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Class EmdItemOrders.
+    ///     Class EmdItemOrders.
     /// </summary>
     [JsonConverter(typeof (EmdItemOrderJsonConverter))]
     [DataContract]
     public class EmdItemOrders {
         /// <summary>
-        /// Gets or sets the orders.
+        ///     Gets or sets the orders.
         /// </summary>
         /// <value>The orders.</value>
         [XmlElement("rowset")]
@@ -33,13 +34,13 @@ namespace eZet.EveLib.Modules.Models {
         public EveMarketDataRowCollection<ItemOrderEntry> Orders { get; set; }
 
         /// <summary>
-        /// Class ItemOrderEntry.
+        ///     Class ItemOrderEntry.
         /// </summary>
         [XmlRoot("row")]
         [DataContract]
         public class ItemOrderEntry {
             /// <summary>
-            /// Gets or sets the type of the order.
+            ///     Gets or sets the type of the order.
             /// </summary>
             /// <value>The type of the order.</value>
             [XmlAttribute("buysell")]
@@ -47,7 +48,7 @@ namespace eZet.EveLib.Modules.Models {
             public OrderType OrderType { get; set; }
 
             /// <summary>
-            /// Gets or sets the type identifier.
+            ///     Gets or sets the type identifier.
             /// </summary>
             /// <value>The type identifier.</value>
             [XmlAttribute("typeID")]
@@ -55,7 +56,7 @@ namespace eZet.EveLib.Modules.Models {
             public int TypeId { get; set; }
 
             /// <summary>
-            /// Gets or sets the station identifier.
+            ///     Gets or sets the station identifier.
             /// </summary>
             /// <value>The station identifier.</value>
             [XmlAttribute("stationID")]
@@ -63,7 +64,7 @@ namespace eZet.EveLib.Modules.Models {
             public int StationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the solar system identifier.
+            ///     Gets or sets the solar system identifier.
             /// </summary>
             /// <value>The solar system identifier.</value>
             [XmlAttribute("solarsystemID")]
@@ -71,7 +72,7 @@ namespace eZet.EveLib.Modules.Models {
             public int SolarSystemId { get; set; }
 
             /// <summary>
-            /// Gets or sets the region identifier.
+            ///     Gets or sets the region identifier.
             /// </summary>
             /// <value>The region identifier.</value>
             [XmlAttribute("regionID")]
@@ -79,7 +80,7 @@ namespace eZet.EveLib.Modules.Models {
             public int RegionId { get; set; }
 
             /// <summary>
-            /// Gets or sets the price.
+            ///     Gets or sets the price.
             /// </summary>
             /// <value>The price.</value>
             [XmlAttribute("price")]
@@ -87,7 +88,7 @@ namespace eZet.EveLib.Modules.Models {
             public decimal Price { get; set; }
 
             /// <summary>
-            /// Gets or sets the order identifier.
+            ///     Gets or sets the order identifier.
             /// </summary>
             /// <value>The order identifier.</value>
             [XmlAttribute("orderID")]
@@ -95,7 +96,7 @@ namespace eZet.EveLib.Modules.Models {
             public long OrderId { get; set; }
 
             /// <summary>
-            /// Gets or sets the vol entered.
+            ///     Gets or sets the vol entered.
             /// </summary>
             /// <value>The vol entered.</value>
             [XmlAttribute("volEntered")]
@@ -103,7 +104,7 @@ namespace eZet.EveLib.Modules.Models {
             public long VolEntered { get; set; }
 
             /// <summary>
-            /// Gets or sets the vol remaining.
+            ///     Gets or sets the vol remaining.
             /// </summary>
             /// <value>The vol remaining.</value>
             [XmlAttribute("volRemaining")]
@@ -111,7 +112,7 @@ namespace eZet.EveLib.Modules.Models {
             public long VolRemaining { get; set; }
 
             /// <summary>
-            /// Gets or sets the minimum volume.
+            ///     Gets or sets the minimum volume.
             /// </summary>
             /// <value>The minimum volume.</value>
             [XmlAttribute("minVolume")]
@@ -119,7 +120,7 @@ namespace eZet.EveLib.Modules.Models {
             public int MinVolume { get; set; }
 
             /// <summary>
-            /// Gets or sets the range.
+            ///     Gets or sets the range.
             /// </summary>
             /// <value>The range.</value>
             [XmlAttribute("range")]
@@ -127,7 +128,7 @@ namespace eZet.EveLib.Modules.Models {
             public int Range { get; set; }
 
             /// <summary>
-            /// Gets or sets the issued date.
+            ///     Gets or sets the issued date.
             /// </summary>
             /// <value>The issued date.</value>
             [XmlAttribute("issued")]
@@ -135,7 +136,7 @@ namespace eZet.EveLib.Modules.Models {
             public DateTime IssuedDate { get; set; }
 
             /// <summary>
-            /// Gets or sets the expires date.
+            ///     Gets or sets the expires date.
             /// </summary>
             /// <value>The expires date.</value>
             [XmlAttribute("expires")]
@@ -143,7 +144,7 @@ namespace eZet.EveLib.Modules.Models {
             public DateTime ExpiresDate { get; set; }
 
             /// <summary>
-            /// Gets or sets the created date.
+            ///     Gets or sets the created date.
             /// </summary>
             /// <value>The created date.</value>
             [XmlAttribute("created")]

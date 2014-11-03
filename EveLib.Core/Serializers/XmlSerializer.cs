@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace eZet.EveLib.Core.Serializers {
     /// <summary>

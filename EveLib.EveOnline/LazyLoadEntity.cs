@@ -11,22 +11,24 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace eZet.EveLib.Modules {
     /// <summary>
-    /// Class LazyLoadEntity.
+    ///     Class LazyLoadEntity.
     /// </summary>
     public abstract class LazyLoadEntity : BaseEntity {
         /// <summary>
-        /// The _is initialized
+        ///     The _is initialized
         /// </summary>
         protected bool _isInitialized;
+
         /// <summary>
-        /// The _lazy load lock
+        ///     The _lazy load lock
         /// </summary>
         protected object _lazyLoadLock = new object();
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is initialized.
+        ///     Gets or sets a value indicating whether this instance is initialized.
         /// </summary>
         /// <value><c>true</c> if this instance is initialized; otherwise, <c>false</c>.</value>
         public bool IsInitialized {

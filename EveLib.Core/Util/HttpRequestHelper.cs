@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
     /// <summary>
-    /// Helper class for performing web requests
+    ///     Helper class for performing web requests
     /// </summary>
     public static class HttpRequestHelper {
         /// <summary>
-        /// Default content type
+        ///     Default content type
         /// </summary>
         public const string ContentType = "application/x-www-form-urlencoded";
 
         private static readonly TraceSource Trace = new TraceSource("EveLib");
 
         /// <summary>
-        /// Creates a new HttpWebRequest for the specified URI, and returns it
+        ///     Creates a new HttpWebRequest for the specified URI, and returns it
         /// </summary>
         /// <param name="uri">URI to create request for</param>
         /// <returns>The HttpWebRequest</returns>
@@ -30,7 +30,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Performs a web request against the specified URI, and returns the response content
+        ///     Performs a web request against the specified URI, and returns the response content
         /// </summary>
         /// <param name="uri">URI to request</param>
         /// <returns>The response content</returns>
@@ -40,7 +40,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Executes a web request using the given request, and returns the HttpWebResponse
+        ///     Executes a web request using the given request, and returns the HttpWebResponse
         /// </summary>
         /// <param name="request">The web request</param>
         /// <returns></returns>
@@ -66,7 +66,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Extracts and returns the response content from a HttpWebResponse
+        ///     Extracts and returns the response content from a HttpWebResponse
         /// </summary>
         /// <param name="response">The HttpWebResponse</param>
         /// <returns></returns>
@@ -81,7 +81,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Executes, exctracts and returns response content for a HttpWebRequest
+        ///     Executes, exctracts and returns response content for a HttpWebRequest
         /// </summary>
         /// <param name="request">The HttpWebRequest</param>
         /// <returns></returns>

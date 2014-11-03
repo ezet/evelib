@@ -2,12 +2,12 @@
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
-    /// Represents a simple CREST entity with an ID
+    ///     Represents a simple CREST entity with an ID
     /// </summary>
     [DataContract]
     public class CrestEntity {
         /// <summary>
-        /// The ID
+        ///     The ID
         /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }

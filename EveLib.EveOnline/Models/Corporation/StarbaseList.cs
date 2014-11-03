@@ -11,19 +11,20 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Corporation {
     /// <summary>
-    /// Class StarbaseList.
+    ///     Class StarbaseList.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class StarbaseList {
         /// <summary>
-        /// Gets or sets the starbases.
+        ///     Gets or sets the starbases.
         /// </summary>
         /// <value>The starbases.</value>
         [XmlElement("rowset")]
@@ -31,81 +32,85 @@ namespace eZet.EveLib.Modules.Models.Corporation {
 
 
         /// <summary>
-        /// Class Starbase.
+        ///     Class Starbase.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Starbase {
             /// <summary>
-            /// Enum StarbaseState
+            ///     Enum StarbaseState
             /// </summary>
             public enum StarbaseState {
                 /// <summary>
-                /// The unanchored
+                ///     The unanchored
                 /// </summary>
                 [XmlEnum("0")] Unanchored,
+
                 /// <summary>
-                /// The anchored
+                ///     The anchored
                 /// </summary>
                 [XmlEnum("1")] Anchored,
+
                 /// <summary>
-                /// The onlining
+                ///     The onlining
                 /// </summary>
                 [XmlEnum("2")] Onlining,
+
                 /// <summary>
-                /// The reinforced
+                ///     The reinforced
                 /// </summary>
                 [XmlEnum("3")] Reinforced,
+
                 /// <summary>
-                /// The online
+                ///     The online
                 /// </summary>
                 [XmlEnum("4")] Online
             }
 
             /// <summary>
-            /// Gets or sets the item identifier.
+            ///     Gets or sets the item identifier.
             /// </summary>
             /// <value>The item identifier.</value>
             [XmlAttribute("itemID")]
             public long ItemId { get; set; }
 
             /// <summary>
-            /// Gets or sets the type identifier.
+            ///     Gets or sets the type identifier.
             /// </summary>
             /// <value>The type identifier.</value>
             [XmlAttribute("typeID")]
             public int TypeId { get; set; }
 
             /// <summary>
-            /// Gets or sets the location identifier.
+            ///     Gets or sets the location identifier.
             /// </summary>
             /// <value>The location identifier.</value>
             [XmlAttribute("locationID")]
             public long LocationId { get; set; }
 
             /// <summary>
-            /// Gets or sets the moon identifier.
+            ///     Gets or sets the moon identifier.
             /// </summary>
             /// <value>The moon identifier.</value>
             [XmlAttribute("moonID")]
             public long MoonId { get; set; }
 
             /// <summary>
-            /// Gets or sets the state.
+            ///     Gets or sets the state.
             /// </summary>
             /// <value>The state.</value>
             [XmlAttribute("state")]
             public StarbaseState State { get; set; }
 
             /// <summary>
-            /// Gets the state timestamp.
+            ///     Gets the state timestamp.
             /// </summary>
             /// <value>The state timestamp.</value>
             [XmlIgnore]
             public DateTime StateTimestamp { get; private set; }
 
             /// <summary>
-            /// Gets or sets the state timestamp as string.
+            ///     Gets or sets the state timestamp as string.
             /// </summary>
             /// <value>The state timestamp as string.</value>
             [XmlElement("stateTimestamp")]
@@ -115,14 +120,14 @@ namespace eZet.EveLib.Modules.Models.Corporation {
             }
 
             /// <summary>
-            /// Gets the online timestamp.
+            ///     Gets the online timestamp.
             /// </summary>
             /// <value>The online timestamp.</value>
             [XmlIgnore]
             public DateTime OnlineTimestamp { get; private set; }
 
             /// <summary>
-            /// Gets or sets the online timestamp as string.
+            ///     Gets or sets the online timestamp as string.
             /// </summary>
             /// <value>The online timestamp as string.</value>
             [XmlElement("onlineTimestamp")]
@@ -132,7 +137,7 @@ namespace eZet.EveLib.Modules.Models.Corporation {
             }
 
             /// <summary>
-            /// Gets or sets the standing owner identifier.
+            ///     Gets or sets the standing owner identifier.
             /// </summary>
             /// <value>The standing owner identifier.</value>
             [XmlAttribute("standingOwnerID")]

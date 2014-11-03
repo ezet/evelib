@@ -11,53 +11,54 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml.Serialization;
 using eZet.EveLib.Modules.Util;
 
 namespace eZet.EveLib.Modules.Models.Character {
     /// <summary>
-    /// Class Research.
+    ///     Class Research.
     /// </summary>
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Research {
         /// <summary>
-        /// Gets or sets the entries.
+        ///     Gets or sets the entries.
         /// </summary>
         /// <value>The entries.</value>
         [XmlElement("rowset")]
         public EveOnlineRowCollection<ResearchEntry> Entries { get; set; }
 
         /// <summary>
-        /// Class ResearchEntry.
+        ///     Class ResearchEntry.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class ResearchEntry {
             /// <summary>
-            /// Gets or sets the agent identifier.
+            ///     Gets or sets the agent identifier.
             /// </summary>
             /// <value>The agent identifier.</value>
             [XmlAttribute("agentID")]
             public long AgentId { get; set; }
 
             /// <summary>
-            /// Gets or sets the skill type identifier.
+            ///     Gets or sets the skill type identifier.
             /// </summary>
             /// <value>The skill type identifier.</value>
             [XmlAttribute("skillTypeID")]
             public long SkillTypeId { get; set; }
 
             /// <summary>
-            /// Gets the start date.
+            ///     Gets the start date.
             /// </summary>
             /// <value>The start date.</value>
             [XmlIgnore]
             public DateTime StartDate { get; private set; }
 
             /// <summary>
-            /// Gets or sets the start date as string.
+            ///     Gets or sets the start date as string.
             /// </summary>
             /// <value>The start date as string.</value>
             [XmlAttribute("researchStartDate")]
@@ -67,14 +68,14 @@ namespace eZet.EveLib.Modules.Models.Character {
             }
 
             /// <summary>
-            /// Gets or sets the points per day.
+            ///     Gets or sets the points per day.
             /// </summary>
             /// <value>The points per day.</value>
             [XmlAttribute("pointsPerDay")]
             public decimal PointsPerDay { get; set; }
 
             /// <summary>
-            /// Gets or sets the points remaining.
+            ///     Gets or sets the points remaining.
             /// </summary>
             /// <value>The points remaining.</value>
             [XmlAttribute("remainderPoints")]

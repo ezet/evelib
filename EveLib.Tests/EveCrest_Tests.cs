@@ -18,7 +18,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetRoot() {
-            var result = await EveCrest.GetRootAsync();
+            CrestRoot result = await EveCrest.GetRootAsync();
         }
 
 
@@ -53,7 +53,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetMarketPrices() {
-            var result = await EveCrest.GetMarketPricesAsync();
+            CrestMarketPrices result = await EveCrest.GetMarketPricesAsync();
             Console.WriteLine(result.Prices.Count);
         }
 
@@ -80,38 +80,38 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetSpecialities() {
-            var result = await EveCrest.GetSpecialitiesAsync();
+            CrestIndstrySpecialities result = await EveCrest.GetSpecialitiesAsync();
         }
 
         [TestMethod]
         public async Task GetSpeciality() {
-            var result = await EveCrest.GetSpecialityAsync(10);
+            CrestIndustrySpeciality result = await EveCrest.GetSpecialityAsync(10);
         }
 
 
         [TestMethod]
         public async Task GetIndustryTeams() {
-            var result = await EveCrest.GetIndustryTeamsAsync();
+            CrestIndustryTeams result = await EveCrest.GetIndustryTeamsAsync();
         }
 
         [TestMethod]
         public async Task GetIndustryTeam() {
-            var result = await EveCrest.GetIndustryTeamAsync(1);
+            CrestIndustryTeam result = await EveCrest.GetIndustryTeamAsync(1);
         }
 
         [TestMethod]
         public async Task GetIndustrySystemsAsync() {
-            var result = await EveCrest.GetIndustrySystemsAsync();
+            CrestIndustrySystems result = await EveCrest.GetIndustrySystemsAsync();
         }
 
         [TestMethod]
         public async Task GetIndustryTeamAuctions() {
-            var result = await EveCrest.GetIndustryTeamAuctionsAsync();
+            CrestIndustryTeamAuction result = await EveCrest.GetIndustryTeamAuctionsAsync();
         }
 
         [TestMethod]
         public async Task GetIndustryFacilities() {
-            var result = await EveCrest.GetIndustryFacilitiesAsync();
+            CrestIndustryFacilities result = await EveCrest.GetIndustryFacilitiesAsync();
         }
     }
 }
