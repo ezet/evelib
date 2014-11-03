@@ -64,6 +64,7 @@ namespace eZet.EveLib.Modules.Models.Account {
     /// <summary>
     /// Multi Character Training
     /// </summary>
+    [Serializable]
     public class MultiCharacterTraining {
 
         /// <summary>
