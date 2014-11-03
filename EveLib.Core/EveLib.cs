@@ -46,8 +46,8 @@ namespace eZet.EveLib.Core {
         /// <returns></returns>
         public Task<dynamic> RequestXmlAsync(string uri) {
             throw new NotImplementedException();
-            RequestHandler.Serializer = _xmlSerializer;
-            return requestAsync<dynamic>(uri);
+            //RequestHandler.Serializer = _xmlSerializer;
+            //return requestAsync<dynamic>(uri);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace eZet.EveLib.Core {
         /// <returns></returns>
         public dynamic RequestXml(string uri) {
             throw new NotImplementedException();
-            return RequestXmlAsync(uri).Result;
+            //return RequestXmlAsync(uri).Result;
         }
     }
 }
