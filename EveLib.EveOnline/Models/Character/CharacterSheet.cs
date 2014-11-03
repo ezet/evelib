@@ -181,7 +181,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         /// </summary>
         /// <value>The last respec date as string.</value>
         [XmlElement("lastRespecDate")]
-        public String LastRespecDateAsString {
+        public string LastRespecDateAsString {
             get { return LastRespecDate.ToString(XmlHelper.DateFormat); }
             set { LastRespecDate = DateTime.Parse(value); }
         }
@@ -198,7 +198,7 @@ namespace eZet.EveLib.Modules.Models.Character {
         /// </summary>
         /// <value>The last timed respec as string.</value>
         [XmlElement("lastTimedRespec")]
-        public String LastTimedRespecAsString {
+        public string LastTimedRespecAsString {
             get { return LastRespecDate.ToString(XmlHelper.DateFormat); }
             set { LastTimedRespec = DateTime.Parse(value); }
         }
@@ -229,10 +229,69 @@ namespace eZet.EveLib.Modules.Models.Character {
         /// </summary>
         /// <value>The clone jump date as string.</value>
         [XmlElement("cloneJumpDate")]
-        public String CloneJumpDateAsString {
+        public string CloneJumpDateAsString {
             get { return CloneJumpDate.ToString(XmlHelper.DateFormat); }
             set { CloneJumpDate = DateTime.Parse(value); }
         }
+
+        /// <summary>
+        /// Gets or sets the jump activation.
+        /// </summary>
+        /// <value>The jump activation.</value>
+        [XmlIgnore]
+        public DateTime JumpActivation { get; set; }
+
+        /// <summary>
+        /// Sets the jump activation as string.
+        /// </summary>
+        /// <value>The jump activation as string.</value>
+        [XmlElement("jumpActivation")]
+        public string JumpActivationAsString {
+            set { JumpActivation = DateTime.Parse(value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the jump fatigue.
+        /// </summary>
+        /// <value>The jump fatigue.</value>
+        [XmlIgnore]
+        public DateTime JumpFatigue { get; set; }
+
+        /// <summary>
+        /// Sets the jump fatigue as string.
+        /// </summary>
+        /// <value>The jump fatigue as string.</value>
+        [XmlElement("jumpFatigue")]
+        public string JumpFatigueAsString { set { JumpFatigue = DateTime.Parse(value); } }
+
+        /// <summary>
+        /// Gets or sets the jump last update.
+        /// </summary>
+        /// <value>The jump last update.</value>
+        [XmlIgnore]
+        public DateTime JumpLastUpdate { get; set; }
+
+        /// <summary>
+        /// Sets the jump last update as string.
+        /// </summary>
+        /// <value>The jump last update as string.</value>
+        [XmlElement("jumpLastUpdate")]
+        public string JumpLastUpdateAsString { set { JumpLastUpdate = DateTime.Parse(value); } }
+
+        /// <summary>
+        /// Gets or sets the remote station date.
+        /// </summary>
+        /// <value>The remote station date.</value>
+        [XmlIgnore]
+        public DateTime RemoteStationDate { get; set; }
+
+        /// <summary>
+        /// Sets the remote station date as string.
+        /// </summary>
+        /// <value>The remote station date as string.</value>
+        [XmlElement("remoteStationDate")]
+        public string RemoteStationDateAsString { set { RemoteStationDate = DateTime.Parse(value); } }
+
 
         /// <summary>
         /// Gets or sets the implants.
