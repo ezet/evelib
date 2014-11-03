@@ -150,11 +150,11 @@ namespace eZet.EveLib.Modules.Models.Character {
         public decimal Balance { get; set; }
 
         /// <summary>
-        /// Gets or sets AttributeEnhancers
+        /// Deprecated, use the Implants collection. Gets or sets AttributeEnhancers
         /// </summary>
         /// <value>The attribute enhancers.</value>
         [XmlElement("attributeEnhancers")]
-        public Implants AttributeEnhancers { get; set; }
+        public AttributeEnhancers AttributeEnhancers { get; set; }
 
         /// <summary>
         /// Gets or sets Attributes
@@ -234,6 +234,13 @@ namespace eZet.EveLib.Modules.Models.Character {
             get { return CloneJumpDate.ToString(XmlHelper.DateFormat); }
             set { CloneJumpDate = DateTime.Parse(value); }
         }
+
+        /// <summary>
+        /// Gets or sets the implants.
+        /// </summary>
+        /// <value>The implants.</value>
+        [XmlElement("rowset")]
+        public EveOnlineRowCollection<Implant> Implants { get; set; }
 
         /// <summary>
         /// Gets or sets the jump clones.
@@ -330,7 +337,7 @@ namespace eZet.EveLib.Modules.Models.Character {
             CloneSkillPoints = xml.getInt("cloneSkillPoints");
             Balance = xml.getDecimal("balance");
             Attributes = xml.deserialize<Attributes>("attributes");
-            AttributeEnhancers = xml.deserialize<Implants>("attributeEnhancers");
+            AttributeEnhancers = xml.deserialize<AttributeEnhancers>("attributeEnhancers");
             JumpClones = xml.deserializeRowSet<JumpClone>("jumpClones");
             JumpCloneImplants = xml.deserializeRowSet<JumpCloneImplant>("jumpCloneImplants");
             Skills = xml.deserializeRowSet<Skill>("skills");
@@ -350,6 +357,27 @@ namespace eZet.EveLib.Modules.Models.Character {
         public void WriteXml(XmlWriter writer) {
             throw new NotImplementedException();
         }
+    }
+
+    /// <summary>
+    /// Class Implant.
+    /// </summary>
+    [Serializable]
+    public class Implant {
+
+        /// <summary>
+        /// Gets or sets the type identifier.
+        /// </summary>
+        /// <value>The type identifier.</value>
+        [XmlAttribute("typeID")]
+        public int TypeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the type.
+        /// </summary>
+        /// <value>The name of the type.</value>
+        [XmlAttribute("typeName")]
+        public string TypeName { get; set; }
     }
 
     /// <summary>
@@ -422,41 +450,41 @@ namespace eZet.EveLib.Modules.Models.Character {
     [Serializable]
     [DebuggerStepThrough]
     [XmlRoot("attributeEnhancers")]
-    public class Implants {
+    public class AttributeEnhancers {
         /// <summary>
         /// The current memory bonus
         /// </summary>
         /// <value>The memory.</value>
         [XmlElement("memoryBonus")]
-        public Implant Memory { get; set; }
+        public DeprecatedImplant Memory { get; set; }
 
         /// <summary>
         /// The current perception bonus
         /// </summary>
         /// <value>The perception.</value>
         [XmlElement("perceptionBonus")]
-        public Implant Perception { get; set; }
+        public DeprecatedImplant Perception { get; set; }
 
         /// <summary>
         /// The current willpower bonus
         /// </summary>
         /// <value>The willpower.</value>
         [XmlElement("willpowerBonus")]
-        public Implant Willpower { get; set; }
+        public DeprecatedImplant Willpower { get; set; }
 
         /// <summary>
         /// The current intelligence bonus
         /// </summary>
         /// <value>The intelligence.</value>
         [XmlElement("intelligenceBonus")]
-        public Implant Intelligence { get; set; }
+        public DeprecatedImplant Intelligence { get; set; }
 
         /// <summary>
         /// The current charisma bonus
         /// </summary>
         /// <value>The charisma.</value>
         [XmlElement("charismaBonus")]
-        public Implant Charisma { get; set; }
+        public DeprecatedImplant Charisma { get; set; }
     }
 
 
@@ -467,7 +495,7 @@ namespace eZet.EveLib.Modules.Models.Character {
     [DebuggerStepThrough]
     [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
-    public class Implant {
+    public class DeprecatedImplant {
         /// <summary>
         /// The implant name
         /// </summary>
