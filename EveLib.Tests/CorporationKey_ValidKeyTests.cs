@@ -193,14 +193,24 @@ namespace eZet.EveLib.Test {
         public void GetWalletJournal_ValidRequest_HasResult() {
             EveApiResponse<WalletJournal> res = _validKey.Corporation.GetWalletJournal(1001, 5);
             Assert.IsNotNull(res.Result);
-            //var older = res.Result.GetOlder(50);
+        }
+
+        [TestMethod]
+        public void GetWalletJournalUntil_ValidRequest_HasResult() {
+            var res = _validKey.Corporation.GetWalletJournalUntil(0);
+            Assert.IsNotNull(res);
         }
 
         [TestMethod]
         public void GetWalletTransactions_ValidRequest_HasResult() {
             EveApiResponse<WalletTransactions> res = _validKey.Corporation.GetWalletTransactions(50);
             Assert.IsNotNull(res.Result);
-            //res = res.Result.GetOlder(50);
+        }
+
+        [TestMethod]
+        public void GetWalletTransactionsUntil_ValidRequest_HasResult() {
+            var res = _validKey.Corporation.GetWalletTransactionsUntil(0);
+            Assert.IsNotNull(res);
         }
 
         [TestMethod]

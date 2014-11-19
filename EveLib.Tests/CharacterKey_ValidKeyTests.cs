@@ -13,9 +13,11 @@ using FactionWarfareStats = eZet.EveLib.Modules.Models.Character.FactionWarfareS
 namespace eZet.EveLib.Test {
     [TestClass]
     public class CharacterKey_ValidKeyTests {
-        private const int KeyId = 3120814;
+        //private const int KeyId = 3120814;
+        //private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
+        private const int KeyId = 3361423;
+        private const string VCode = "g0BIlsWkwyr592n0QCh8FNoxnU8ddMHVc2APpv9FmICb3n4lAljMPfvYuS7oTzU7";
 
 
         private readonly CharacterKey _piKey = new CharacterKey(3460081,
@@ -202,9 +204,21 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public void GetWalletJournalUntil_ValidRequest_HasResult() {
+            var res = _validKey.Characters[0].GetWalletJournalUntil(0);
+            Assert.IsNotNull(res);
+        }
+
+        [TestMethod]
         public void GetWalletTransactions_ValidRequest_HasResult() {
             EveApiResponse<WalletTransactions> res = _validKey.Characters[0].GetWalletTransactions();
             Assert.IsNotNull(res.Result);
+        }
+
+        [TestMethod]
+        public void GetWalletTransactionsUntil_ValidRequest_HasResult() {
+            var res = _validKey.Characters[0].GetWalletTransactionsUntil(0);
+            Assert.IsNotNull(res);
         }
 
         [TestMethod]
