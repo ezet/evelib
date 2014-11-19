@@ -13,11 +13,9 @@ using FactionWarfareStats = eZet.EveLib.Modules.Models.Character.FactionWarfareS
 namespace eZet.EveLib.Test {
     [TestClass]
     public class CharacterKey_ValidKeyTests {
-        //private const int KeyId = 3120814;
-        //private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
+        private const int KeyId = 3120814;
+        private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
 
-        private const int KeyId = 3361423;
-        private const string VCode = "g0BIlsWkwyr592n0QCh8FNoxnU8ddMHVc2APpv9FmICb3n4lAljMPfvYuS7oTzU7";
 
 
         private readonly CharacterKey _piKey = new CharacterKey(3460081,
