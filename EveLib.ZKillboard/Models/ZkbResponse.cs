@@ -23,6 +23,20 @@ namespace eZet.EveLib.Modules.Models {
     /// </summary>
     [DataContract]
     public class ZkbResponse : Collection<ZkbResponse.ZkbKill> {
+
+        /// <summary>
+        /// Gets or sets the request count.
+        /// </summary>
+        /// <value>The request count.</value>
+        public int RequestCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum requests.
+        /// </summary>
+        /// <value>The maximum requests.</value>
+        public int MaxRequests { get; set; }
+
+
         /// <summary>
         ///     Class ZkbAttacker.
         /// </summary>

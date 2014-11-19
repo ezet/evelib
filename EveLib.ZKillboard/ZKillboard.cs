@@ -81,7 +81,7 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/kills";
             relPath = options.GetQueryString(relPath);
-            return requestAsync<ZkbResponse>(new Uri(BaseUri, relPath));
+            return requestAsync(new Uri(BaseUri, relPath));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/losses";
             relPath = options.GetQueryString(relPath);
-            return requestAsync<ZkbResponse>(new Uri(BaseUri, relPath));
+            return requestAsync(new Uri(BaseUri, relPath));
         }
 
         /// <summary>
@@ -125,11 +125,11 @@ namespace eZet.EveLib.Modules {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api";
             relPath = options.GetQueryString(relPath);
-            return requestAsync<ZkbResponse>(new Uri(BaseUri, relPath));
+            return requestAsync(new Uri(BaseUri, relPath));
         }
 
-        private Task<T> requestAsync<T>(Uri uri) {
-            return RequestHandler.RequestAsync<T>(uri);
+        private Task<ZkbResponse> requestAsync(Uri uri) {
+            return RequestHandler.RequestAsync<ZkbResponse>(uri);
         }
     }
 }

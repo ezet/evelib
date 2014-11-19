@@ -20,6 +20,7 @@ using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
+using eZet.EveLib.Modules.Models;
 
 namespace eZet.EveLib.Modules.RequestHandlers {
     /// <summary>
@@ -63,21 +64,30 @@ namespace eZet.EveLib.Modules.RequestHandlers {
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
             }
             var cacheTime = new DateTime();
+            int requestCount = 0, maxRequests = 0;
             bool isCached = data != null;
             if (!isCached) {
                 HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
-                
+
                 using (
                     HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false)) {
                     data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
                     cacheTime = DateTime.Parse(response.GetResponseHeader("Expires"));
+                    requestCount = int.Parse(response.GetResponseHeader("X-Bin-Request-Count"));
+                    maxRequests = int.Parse(response.GetResponseHeader("X-Bin-Max-Requests"));
                 }
             }
             if (!isCached && EnableCacheStore) {
                 await Cache.StoreAsync(uri, cacheTime.ToUniversalTime(), data).ConfigureAwait(false);
             }
             _trace.TraceEvent(TraceEventType.Stop, 0, "ZkbRequestHandler.RequestAsync()", uri);
-            return Serializer.Deserialize<T>(data);
+            var result = Serializer.Deserialize<T>(data);
+            var zkbResponse = result as ZkbResponse;
+            if (zkbResponse != null) {
+                zkbResponse.RequestCount = requestCount;
+                zkbResponse.MaxRequests = maxRequests;
+            }
+            return result;
         }
 
         /// <summary>

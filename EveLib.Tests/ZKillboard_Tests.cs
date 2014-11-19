@@ -15,17 +15,22 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetKills_ValidRequest_NoErrors() {
-            dynamic result = Api.GetKills(Options);
+            var result = Api.GetKills(Options);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public void GetLosses_ValidRequest_NoErrors() {
-            dynamic result = Api.GetLosses(Options);
+            var result = Api.GetLosses(Options);
+            Assert.IsNotNull(result);
+
         }
 
         [TestMethod]
         public void GetAll_ValidRequest_NoErrors() {
-            dynamic result = Api.GetLosses(Options);
+            var result = Api.GetLosses(Options);
+            Assert.IsNotNull(result);
+
         }
     }
 }
