@@ -79,7 +79,6 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetIndustryJobs() {
             EveApiResponse<IndustryJobs> xml = _corp.GetIndustryJobs();
-            Assert.AreEqual(23264063, xml.Result.Jobs.First().JobId);
         }
 
         [TestMethod]

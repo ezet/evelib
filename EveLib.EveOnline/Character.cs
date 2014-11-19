@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -744,7 +745,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public EveApiResponse<WalletJournal> GetWalletJournal(int count = 50, long fromId = 0) {
+        public EveApiResponse<WalletJournal> GetWalletJournal(int count = 1000, long fromId = 0) {
             return GetWalletJournalAsync(count, fromId).Result;
         }
 
@@ -755,7 +756,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<WalletJournal>> GetWalletJournalAsync(int count = 50, long fromId = 0) {
+        public Task<EveApiResponse<WalletJournal>> GetWalletJournalAsync(int count = 1000, long fromId = 0) {
             const string relPath = "/char/WalletJournal.xml.aspx";
             return fromId == 0
                 ? requestAsync<WalletJournal>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count)
@@ -764,12 +765,44 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
+        /// Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// <param name="fromId">Optional; The forward-limiting ID</param>
+        /// <returns></returns>
+        public async Task<List<WalletJournal.JournalEntry>> GetWalletJournalUntilAsync(long untilId, long fromId = 0) {
+            var res = await GetWalletJournalAsync(2560, fromId).ConfigureAwait(false);
+            var list = new List<WalletJournal.JournalEntry>();
+            while (res.Result.Journal.Any()) {
+                var sortedList = res.Result.Journal.OrderByDescending(f => f.RefId);
+                foreach (var entry in sortedList) {
+                    if (entry.RefId == untilId) {
+                        return list;
+                    }
+                    list.Add(entry);
+                }
+                res = await GetWalletJournalAsync(2560, sortedList.Last().RefId).ConfigureAwait(false);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// <param name="fromId">The forward-limiting ID</param>
+        /// <returns></returns>
+        public List<WalletJournal.JournalEntry> GetWalletJournalUntil(long untilId, long fromId = 0) {
+            return GetWalletJournalUntilAsync(untilId, fromId).Result;
+        }
+
+        /// <summary>
         ///     Returns market transactions for the character.
         /// </summary>
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public EveApiResponse<WalletTransactions> GetWalletTransactions(int count = 1000, long fromId = 0) {
+        public EveApiResponse<WalletTransactions> GetWalletTransactions(int count = 50, long fromId = 0) {
             return GetWalletTransactionsAsync(count, fromId).Result;
         }
 
@@ -779,13 +812,45 @@ namespace eZet.EveLib.Modules {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<WalletTransactions>> GetWalletTransactionsAsync(int count = 1000, long fromId = 0) {
+        public Task<EveApiResponse<WalletTransactions>> GetWalletTransactionsAsync(int count = 50, long fromId = 0) {
             const string relPath = "/char/WalletTransactions.xml.aspx";
             return fromId == 0
                 ? requestAsync<WalletTransactions>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count)
                 : requestAsync<WalletTransactions>(relPath, ApiKey, "characterId", CharacterId, "rowCount", count,
                     "fromID",
                     fromId);
+        }
+
+        /// <summary>
+        /// Returns all transactions between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// <param name="fromId">Optional; The forward-limiting ID</param>
+        /// <returns></returns>
+        public async Task<List<WalletTransactions.Transaction>> GetWalletTransactionsUntilAsync(long untilId, long fromId = 0) {
+            var res = await GetWalletTransactionsAsync(2560, fromId).ConfigureAwait(false);
+            var list = new List<WalletTransactions.Transaction>();
+            while (res.Result.Transactions.Any()) {
+                var sortedList = res.Result.Transactions.OrderByDescending(f => f.TransactionId);
+                foreach (var entry in sortedList) {
+                    if (entry.TransactionId <= untilId) {
+                        return list;
+                    }
+                    list.Add(entry);
+                }
+                res = await GetWalletTransactionsAsync(2560, sortedList.Last().TransactionId).ConfigureAwait(false);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Returns all transactions between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// <param name="fromId">Optional; The forward-limiting ID</param>
+        /// <returns></returns>
+        public List<WalletTransactions.Transaction> GetWalletTransactionsUntil(long untilId, long fromId = 0) {
+            return GetWalletTransactionsUntilAsync(untilId, fromId).Result;
         }
 
         /// <summary>

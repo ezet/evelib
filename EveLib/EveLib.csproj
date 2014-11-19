@@ -116,13 +116,37 @@
       <Project>{aa85978c-2bf5-419f-9f8e-b70162e83f34}</Project>
       <Name>EveLib.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EveLib.Element43\EveLib.Element43.csproj">
+      <Project>{91c78379-3d32-4131-8cd7-c1e8876d0933}</Project>
+      <Name>EveLib.Element43</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveCentral\EveLib.EveCentral.csproj">
+      <Project>{fcd48e90-6605-4bc1-b761-0b37df390990}</Project>
+      <Name>EveLib.EveCentral</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EveLib.EveCrest\EveLib.EveCrest.csproj">
       <Project>{f81627b3-99af-4b4f-926a-685d21569451}</Project>
       <Name>EveLib.EveCrest</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveMarketData\EveLib.EveMarketData.csproj">
+      <Project>{185e2271-bba1-4071-ac46-bf47153bdb7a}</Project>
+      <Name>EveLib.EveMarketData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EveLib.EveOnline\EveLib.EveOnline.csproj">
       <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
       <Name>EveLib.EveOnline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveStaticData\EveLib.StaticData.csproj">
+      <Project>{25a492fe-1004-4a0b-aad3-b5395c2d47ea}</Project>
+      <Name>EveLib.StaticData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveWho\EveLib.EveWho.csproj">
+      <Project>{a11f0424-9183-4c54-9d0e-ad82bc9d6923}</Project>
+      <Name>EveLib.EveWho</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.ZKillboard\Evelib.ZKillboard.csproj">
+      <Project>{741bdd36-b71c-4abe-9b03-185fbd6767f4}</Project>
+      <Name>Evelib.ZKillboard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

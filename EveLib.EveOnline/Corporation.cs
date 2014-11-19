@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using eZet.EveLib.Modules.Models;
@@ -703,6 +705,40 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
+        /// Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// <param name="division">Optional; Wallet Division used for request. Default is Master Wallet.</param>
+        /// <param name="fromId">Optional; The forward-limiting ID</param>
+        /// <returns></returns>
+        public async Task<List<WalletJournal.JournalEntry>> GetWalletJournalUntilAsync(long untilId, int division = 1000, long fromId = 0) {
+            var res = await GetWalletJournalAsync(division, 2560, fromId).ConfigureAwait(false);
+            var list = new List<WalletJournal.JournalEntry>();
+            while (res.Result.Journal.Any()) {
+                var sortedList = res.Result.Journal.OrderByDescending(f => f.RefId);
+                foreach (var entry in sortedList) {
+                    if (entry.RefId == untilId) {
+                        return list;
+                    }
+                    list.Add(entry);
+                }
+                res = await GetWalletJournalAsync(division, 2560, sortedList.Last().RefId).ConfigureAwait(false);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// <param name="division">Optional; Wallet Division used for request. Default is Master Wallet.</param>
+        /// <param name="fromId">The forward-limiting ID</param>
+        /// <returns></returns>
+        public List<WalletJournal.JournalEntry> GetWalletJournalUntil(long untilId, int division = 1000, long fromId = 0) {
+            return GetWalletJournalUntilAsync(untilId, division, fromId).Result;
+        }
+
+        /// <summary>
         ///     Returns market transactions for the corporation.
         /// </summary>
         /// <param name="division">Optional; Wallet Division used for request. Default is Master Wallet.</param>
@@ -728,6 +764,40 @@ namespace eZet.EveLib.Modules {
                 ? requestAsync<WalletTransactions>(relPath, ApiKey, "accountKey", division, "rowCount", count)
                 : requestAsync<WalletTransactions>(relPath, ApiKey, "accountKey", division, "rowCount", count, "fromID",
                     fromId);
+        }
+
+        /// <summary>
+        /// Returns all transactions between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// <param name="division">Optional; Wallet Division used for request. Default is Master Wallet.</param>
+        /// <param name="fromId">Optional; The forward-limiting ID</param>
+        /// <returns></returns>
+        public async Task<List<WalletTransactions.Transaction>> GetWalletTransactionsUntilAsync(long untilId, int division = 1000, long fromId = 0) {
+            var res = await GetWalletTransactionsAsync(division, 2560, fromId).ConfigureAwait(false);
+            var list = new List<WalletTransactions.Transaction>();
+            while (res.Result.Transactions.Any()) {
+                var sortedList = res.Result.Transactions.OrderByDescending(f => f.TransactionId);
+                foreach (var entry in sortedList) {
+                    if (entry.TransactionId <= untilId) {
+                        return list;
+                    }
+                    list.Add(entry);
+                }
+                res = await GetWalletTransactionsAsync(division, 2560, sortedList.Last().TransactionId).ConfigureAwait(false);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Returns all transactions between, not including, fromId (newest) and untilId (oldest).
+        /// </summary>
+        /// <param name="untilId">The backward-limiting ID</param>
+        /// /// <param name="division">Optional; Wallet Division used for request. Default is Master Wallet.</param>
+        /// <param name="fromId">Optional; The forward-limiting ID</param>
+        /// <returns></returns>
+        public List<WalletTransactions.Transaction> GetWalletTransactionsUntil(long untilId, int division = 1000, long fromId = 0) {
+            return GetWalletTransactionsUntilAsync(untilId, division, fromId).Result;
         }
 
         /// <summary>
