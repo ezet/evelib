@@ -25,6 +25,7 @@ namespace eZet.EveLib.Core.Util {
             HttpWebRequest request = WebRequest.CreateHttp(uri);
             request.Proxy = null;
             request.UserAgent = Config.UserAgent;
+            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.GZip;
             request.ContentType = ContentType;
             return request;
         }

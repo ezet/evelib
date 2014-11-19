@@ -66,6 +66,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
             bool isCached = data != null;
             if (!isCached) {
                 HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
+                
                 using (
                     HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false)) {
                     data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
