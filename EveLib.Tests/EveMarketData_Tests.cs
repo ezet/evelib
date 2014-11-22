@@ -104,25 +104,6 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task GetItemOrdersAsync_ValidRequest_ValidResponse() {
-            EveMarketDataResponse<EmdItemOrders> res = await _api.GetItemOrdersAsync(_validOptions, OrderType.Buy);
-            EmdItemOrders.ItemOrderEntry entry = res.Result.Orders.First();
-            Assert.AreEqual(OrderType.Buy, entry.OrderType);
-            Assert.AreNotEqual(0, entry.OrderId);
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual(RegionId, entry.RegionId);
-            Assert.AreNotEqual(0, entry.StationId);
-            Assert.AreNotEqual(0, entry.SolarSystemId);
-            Assert.AreNotEqual(0, entry.Price);
-            Assert.AreNotEqual(0, entry.VolEntered);
-            Assert.AreNotEqual(0, entry.VolRemaining);
-            Assert.AreNotEqual(0, entry.MinVolume);
-            Assert.AreNotEqual("", entry.IssuedDate);
-            Assert.AreNotEqual("", entry.ExpiresDate);
-            Assert.AreNotEqual("", entry.CreatedDate);
-        }
-
-        [TestMethod]
         public void GetItemOrders_NoOptions_NoException() {
             EveMarketDataResponse<EmdItemOrders> res = _api.GetItemOrders(_invalidOptions, OrderType.Buy);
         }
@@ -130,20 +111,6 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetItemHistory_ValidRequest_ValidResponse() {
             EveMarketDataResponse<EmdItemHistory> res = _api.GetItemHistory(_validOptions);
-            EmdItemHistory.ItemHistoryEntry entry = res.Result.History.First();
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual(RegionId, entry.RegionId);
-            Assert.AreNotEqual(0, entry.AvgPrice);
-            Assert.AreNotEqual(0, entry.MaxPrice);
-            Assert.AreNotEqual(0, entry.MinPrice);
-            Assert.AreNotEqual(0, entry.Orders);
-            Assert.AreNotEqual(0, entry.Volume);
-            Assert.AreNotEqual("", entry.Date);
-        }
-
-        [TestMethod]
-        public async Task GetItemHistoryAsync_ValidRequest_ValidResponse() {
-            EveMarketDataResponse<EmdItemHistory> res = await _api.GetItemHistoryAsync(_validOptions);
             EmdItemHistory.ItemHistoryEntry entry = res.Result.History.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual(RegionId, entry.RegionId);

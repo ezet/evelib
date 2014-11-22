@@ -1,4 +1,5 @@
 ﻿using eZet.EveLib.Modules;
+using eZet.EveLib.Modules.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -15,22 +16,20 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetKills_ValidRequest_NoErrors() {
-            var result = Api.GetKills(Options);
+            ZkbResponse result = Api.GetKills(Options);
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public void GetLosses_ValidRequest_NoErrors() {
-            var result = Api.GetLosses(Options);
+            ZkbResponse result = Api.GetLosses(Options);
             Assert.IsNotNull(result);
-
         }
 
         [TestMethod]
         public void GetAll_ValidRequest_NoErrors() {
-            var result = Api.GetLosses(Options);
+            ZkbResponse result = Api.GetLosses(Options);
             Assert.IsNotNull(result);
-
         }
     }
 }

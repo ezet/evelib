@@ -765,17 +765,18 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
+        ///     Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
         /// </summary>
         /// <param name="untilId">The backward-limiting ID</param>
         /// <param name="fromId">Optional; The forward-limiting ID</param>
         /// <returns></returns>
         public async Task<List<WalletJournal.JournalEntry>> GetWalletJournalUntilAsync(long untilId, long fromId = 0) {
-            var res = await GetWalletJournalAsync(2560, fromId).ConfigureAwait(false);
+            EveApiResponse<WalletJournal> res = await GetWalletJournalAsync(2560, fromId).ConfigureAwait(false);
             var list = new List<WalletJournal.JournalEntry>();
             while (res.Result.Journal.Any()) {
-                var sortedList = res.Result.Journal.OrderByDescending(f => f.RefId);
-                foreach (var entry in sortedList) {
+                IOrderedEnumerable<WalletJournal.JournalEntry> sortedList =
+                    res.Result.Journal.OrderByDescending(f => f.RefId);
+                foreach (WalletJournal.JournalEntry entry in sortedList) {
                     if (entry.RefId == untilId) {
                         return list;
                     }
@@ -787,7 +788,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
+        ///     Returns all journal entries between, not including, fromId (newest) and untilId (oldest).
         /// </summary>
         /// <param name="untilId">The backward-limiting ID</param>
         /// <param name="fromId">The forward-limiting ID</param>
@@ -822,17 +823,20 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns all transactions between, not including, fromId (newest) and untilId (oldest).
+        ///     Returns all transactions between, not including, fromId (newest) and untilId (oldest).
         /// </summary>
         /// <param name="untilId">The backward-limiting ID</param>
         /// <param name="fromId">Optional; The forward-limiting ID</param>
         /// <returns></returns>
-        public async Task<List<WalletTransactions.Transaction>> GetWalletTransactionsUntilAsync(long untilId, long fromId = 0) {
-            var res = await GetWalletTransactionsAsync(2560, fromId).ConfigureAwait(false);
+        public async Task<List<WalletTransactions.Transaction>> GetWalletTransactionsUntilAsync(long untilId,
+            long fromId = 0) {
+            EveApiResponse<WalletTransactions> res =
+                await GetWalletTransactionsAsync(2560, fromId).ConfigureAwait(false);
             var list = new List<WalletTransactions.Transaction>();
             while (res.Result.Transactions.Any()) {
-                var sortedList = res.Result.Transactions.OrderByDescending(f => f.TransactionId);
-                foreach (var entry in sortedList) {
+                IOrderedEnumerable<WalletTransactions.Transaction> sortedList =
+                    res.Result.Transactions.OrderByDescending(f => f.TransactionId);
+                foreach (WalletTransactions.Transaction entry in sortedList) {
                     if (entry.TransactionId <= untilId) {
                         return list;
                     }
@@ -844,7 +848,7 @@ namespace eZet.EveLib.Modules {
         }
 
         /// <summary>
-        /// Returns all transactions between, not including, fromId (newest) and untilId (oldest).
+        ///     Returns all transactions between, not including, fromId (newest) and untilId (oldest).
         /// </summary>
         /// <param name="untilId">The backward-limiting ID</param>
         /// <param name="fromId">Optional; The forward-limiting ID</param>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Modules;
@@ -197,7 +198,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetWalletJournalUntil_ValidRequest_HasResult() {
-            var res = _validKey.Corporation.GetWalletJournalUntil(0);
+            List<WalletJournal.JournalEntry> res = _validKey.Corporation.GetWalletJournalUntil(0);
             Assert.IsNotNull(res);
         }
 
@@ -209,7 +210,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetWalletTransactionsUntil_ValidRequest_HasResult() {
-            var res = _validKey.Corporation.GetWalletTransactionsUntil(0);
+            List<WalletTransactions.Transaction> res = _validKey.Corporation.GetWalletTransactionsUntil(0);
             Assert.IsNotNull(res);
         }
 
