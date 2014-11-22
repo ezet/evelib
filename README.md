@@ -171,7 +171,7 @@ This module provides access to all calls on the EveCentral api. All api calls ca
     options.Items.Add(34);
     options.Regoins.Add(10000002);
     var eveCentral = new EveCentral();
-    MarketStat result = eveCentral.GetMarketStat(options);
+    EveCentralMarketStatResponse response = eveCentral.GetMarketStat(options);
 
 
 Element43
