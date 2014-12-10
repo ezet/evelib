@@ -126,6 +126,7 @@
     <Compile Include="CharacterKey_ValidKeyTests.cs" />
     <Compile Include="Character_StaticDeserializationTests.cs" />
     <Compile Include="CorporationKey_Beta.cs" />
+    <Compile Include="EveAuth_Tests.cs" />
     <Compile Include="EveCrest_Beta_Tests.cs" />
     <Compile Include="EveCrest_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
@@ -220,6 +221,10 @@
     <ProjectReference Include="..\EveLib.Element43\EveLib.Element43.csproj">
       <Project>{91c78379-3d32-4131-8cd7-c1e8876d0933}</Project>
       <Name>EveLib.Element43</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveAuth\EveLib.EveAuth.csproj">
+      <Project>{66A526C4-AD56-42A1-A680-0D11A524EC40}</Project>
+      <Name>EveLib.EveAuth</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveLib.EveCentral\EveLib.EveCentral.csproj">
       <Project>{fcd48e90-6605-4bc1-b761-0b37df390990}</Project>

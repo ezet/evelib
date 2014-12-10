@@ -356,5 +356,9 @@ namespace eZet.EveLib.Modules {
         public CrestIndustryFacilities GetIndustryFacilities() {
             return GetIndustryFacilitiesAsync().Result;
         }
+
+        public void Authorize(string token) {
+            
+        }
     }
 }
