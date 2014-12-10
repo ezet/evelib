@@ -91,7 +91,7 @@ Eve, Map and Image do not require authentication, and can be accessed directly.
     var result = EveOnlineApi.Map.GetFactionWarSystems();
 
 ##### Keys
-The library has 3 different key classes, `CharacterKey`, `CorporationKey` and `ApiKey`. These represent "physical" Eve Online API keys, and are required to access any part of the API that requires authentication. The `ApiKey` can be used as a general key to access endpoints in the /account/ path, if you do not know which type of KeyID you have in advance.
+The library has 3 different key classes, `CharacterKey`, `CorporationKey` and `ApiKey`. These represent actual Eve Online API keys, and are required to access any part of the API that requires authentication. The `ApiKey` can be used as a general key to access endpoints in the /account/ path, if you do not know which type of KeyID you have in advance.
 
     ApiKey key = EveOnlineApi.CreateApiKey(id, vcode);
     CharacterKey charKey = EveOnlineApi.CreateCharacterKey(id, vcode);
@@ -101,8 +101,7 @@ All keys have a few properties in common, such as `KeyType`, `ExpiryDate` and `A
 `CharacterKey` and `CorporationKey` also have additinal properties, `Characters` and `Corporation`, that are also lazily loaded in the same fashion. You can safely call `Init()` or `InitAsync()` repeatedly, if the object is already initialized it will return immediately.
 
     key.Init(); // loads all properties, sync
-    key.Init(); // since it's already initialized, returns immediately.
-    await charKey.InitAsync(); // loads all properties, async
+    await otherKey.InitAsync(); // loads all properties, async
     int mask = corpKey.AccessMask(); // internally uses Init() to load all properties
     var newkey = EveOnlineApi.CreateApiKey(id, vcode).Init(); // Init() and InitAsync() returns this, so it can be chained.
 
@@ -171,7 +170,7 @@ This module provides access to all calls on the EveCentral api. All api calls ca
     options.Items.Add(34);
     options.Regoins.Add(10000002);
     var eveCentral = new EveCentral();
-    MarketStat result = eveCentral.GetMarketStat(options);
+    EveCentralMarketStatResponse response = eveCentral.GetMarketStat(options);
 
 
 Element43
