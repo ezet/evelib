@@ -129,20 +129,6 @@ namespace eZet.EveLib.Modules.Models.Character {
         public string FactionName { get; set; }
 
         /// <summary>
-        ///     The name of the current medical clone
-        /// </summary>
-        /// <value>The name of the clone.</value>
-        [XmlElement("cloneName")]
-        public string CloneName { get; set; }
-
-        /// <summary>
-        ///     The amount of skill points supported by the current medical clone
-        /// </summary>
-        /// <value>The clone skill points.</value>
-        [XmlElement("cloneSkillPoints")]
-        public int CloneSkillPoints { get; set; }
-
-        /// <summary>
         ///     The wallet balance
         /// </summary>
         /// <value>The balance.</value>
@@ -397,8 +383,6 @@ namespace eZet.EveLib.Modules.Models.Character {
             CorporationId = xml.getLong("corporationID");
             AllianceName = xml.getString("allianceName");
             AllianceId = xml.getLong("allianceID");
-            CloneName = xml.getString("cloneName");
-            CloneSkillPoints = xml.getInt("cloneSkillPoints");
             Balance = xml.getDecimal("balance");
             //JumpClones = xml.deserializeRowSet<JumpClone>("jumpClones");
             //JumpCloneImplants = xml.deserializeRowSet<JumpCloneImplant>("jumpCloneImplants");
