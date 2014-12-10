@@ -1,4 +1,6 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace eZet.EveLib.Modules.Models {
     /// <summary>
@@ -12,12 +14,14 @@ namespace eZet.EveLib.Modules.Models {
             /// <summary>
             ///     Material Efficency Bonus
             /// </summary>
+            [EnumMember(Value = "ME")]
             Me,
 
             /// <summary>
             ///     Production Efficiency Bonus
             /// </summary>
-            Pe
+            [EnumMember(Value = "TE")]
+            Te
         }
 
         /// <summary>
@@ -52,7 +56,8 @@ namespace eZet.EveLib.Modules.Models {
             /// <summary>
             ///     The bonus type
             /// </summary>
-            [DataMember(Name = "bonusType")]
+            [JsonProperty("bonusType")]
+            [JsonConverter(typeof(StringEnumConverter))]
             public BonusType Type { get; set; }
         }
     }
