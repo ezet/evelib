@@ -14,12 +14,12 @@ using StandingsList = eZet.EveLib.Modules.Models.Corporation.StandingsList;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class CorporationKey_ValidKeyTests {
-        private const int CorpId = 3120830;
+        private const int CorpId = 3282771;
 
-        private const string CorpCode = "Zw1DpOUDPYrv49iGTVkDHoRburv2rAAYEbret9B5IVfcVjVDR4DE2bo7p1RMZQMU";
+        private const string CorpCode = "vJ3hUm3NsheYVVk5vH3UZNupbx9f1ahWO1BuIsdwi6ltUMMTyUAFQ3UQalmH8mjU";
 
         private readonly CorporationKey _validKey = new CorporationKey(CorpId, CorpCode);
-
+         
         [TestMethod]
         public void Corporation_ValidRequest_HasName() {
             Assert.IsNotNull(_validKey.Corporation.CorporationName);

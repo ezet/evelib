@@ -80,7 +80,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetSpecialities() {
-            CrestIndstrySpecialities result = await EveCrest.GetSpecialitiesAsync();
+            CrestIndustrySpecialities result = await EveCrest.GetSpecialitiesAsync();
         }
 
         [TestMethod]

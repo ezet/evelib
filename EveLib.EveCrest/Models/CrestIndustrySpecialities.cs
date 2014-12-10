@@ -6,10 +6,11 @@ namespace eZet.EveLib.Modules.Models {
     ///     Represents a CREST /industry/specialities/ response
     /// </summary>
     [DataContract]
-    public class CrestIndstrySpecialities : CrestCollectionResponse {
+    public class CrestIndustrySpecialities : CrestCollectionResponse {
         /// <summary>
         ///     A list of specializations
         /// </summary>
-        public IList<CrestIndustrySpeciality> Specializations { get; set; }
+        [DataMember(Name = "items")]
+        public IList<CrestIndustrySpeciality> Specialities { get; set; }
     }
 }

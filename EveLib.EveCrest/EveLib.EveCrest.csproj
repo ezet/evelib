@@ -116,7 +116,7 @@
     <Compile Include="Models\CrestIndustryTeamWorker.cs" />
     <Compile Include="Models\CrestMarketPrices.cs" />
     <Compile Include="Models\CrestRoot.cs" />
-    <Compile Include="Models\CrestIndstrySpecialities.cs" />
+    <Compile Include="Models\CrestIndustrySpecialities.cs" />
     <Compile Include="Models\CrestAlliance.cs" />
     <Compile Include="Models\CrestAlliances.cs" />
     <Compile Include="Models\CrestLinkedEntity.cs" />

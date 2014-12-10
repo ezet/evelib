@@ -235,9 +235,9 @@ namespace eZet.EveLib.Modules {
         ///     Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
-        public Task<CrestIndstrySpecialities> GetSpecialitiesAsync() {
+        public Task<CrestIndustrySpecialities> GetSpecialitiesAsync() {
             const string relPath = "industry/specialities/";
-            return requestAsync<CrestIndstrySpecialities>(relPath);
+            return requestAsync<CrestIndustrySpecialities>(relPath);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace eZet.EveLib.Modules {
         ///     Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
-        public CrestIndstrySpecialities GetSpecialities() {
+        public CrestIndustrySpecialities GetSpecialities() {
             return GetSpecialitiesAsync().Result;
         }
 
