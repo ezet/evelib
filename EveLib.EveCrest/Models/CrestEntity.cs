@@ -7,7 +7,7 @@ namespace eZet.EveLib.Modules.Models {
     [DataContract]
     public class CrestEntity {
         /// <summary>
-        ///     The ID
+        ///     The entity ID
         /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }

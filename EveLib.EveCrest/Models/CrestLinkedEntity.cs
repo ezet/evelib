@@ -5,12 +5,7 @@ namespace eZet.EveLib.Modules.Models {
     ///     Represents a basic CREST entity
     /// </summary>
     [DataContract]
-    public class CrestLinkedEntity {
-        /// <summary>
-        ///     The entity name
-        /// </summary>
-        [DataMember(Name = "id")]
-        public int Id { get; set; }
+    public class CrestLinkedEntity : CrestEntity {
 
         /// <summary>
         ///     The entity href

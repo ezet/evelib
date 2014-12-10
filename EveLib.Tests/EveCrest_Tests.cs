@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Exceptions;
@@ -96,7 +97,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetIndustryTeam() {
-            CrestIndustryTeam result = await EveCrest.GetIndustryTeamAsync(1);
+            CrestIndustryTeams teams = await EveCrest.GetIndustryTeamsAsync();
+            CrestIndustryTeam result = await EveCrest.GetIndustryTeamAsync(teams.Teams.Last().Id);
         }
 
         [TestMethod]

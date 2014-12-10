@@ -6,7 +6,7 @@ namespace eZet.EveLib.Modules.Models {
     /// <summary>
     ///     Represents a CREST industry team
     /// </summary>
-    public class CrestIndustryTeam {
+    public class CrestIndustryTeam : CrestEntity {
         /// <summary>
         ///     The solar system
         /// </summary>
