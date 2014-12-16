@@ -1,18 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
+    [TestClass]
     public class EveAuth_Tests {
 
+        private string authCode = "QiIt-_taWK-QjtyHmg2XdM8ry7GdFDQRm6OBcTOSbWrzhGrpu58En49IYehFQI1h0";
+
+        private const string clientId = "46daa2b378bd4bc189df4c3a73af226a";
+
+        private const string EncodedKey =
+            "NDZkYWEyYjM3OGJkNGJjMTg5ZGY0YzNhNzNhZjIyNmE6SzhHY1dBRGxqZ25MWnlyS0dGZmlxekhWdlZpR2hhcE9ZU0NFeTgzaA==";
+
         [TestMethod]
-        public void Authenticate() {
-   
+        public void Authorize() {
+            var response = EveAuth.EveAuth.GetAuthLink(clientId, "/", EveAuth.EveAuth.Scope.PublicData);
+            Trace.WriteLine(response);
         }
 
 
+        [TestMethod]
+        public void Authenticate() {
+            var response = EveAuth.EveAuth.Authenticate(EncodedKey, authCode).Result;
+            Assert.AreEqual("Bearer", response.TokenType);
+            Trace.WriteLine(response.AccessToken);
+        }
     }
 }

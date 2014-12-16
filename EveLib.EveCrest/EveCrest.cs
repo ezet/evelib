@@ -5,10 +5,13 @@ using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
+
+
     /// <summary>
     ///     Provides access to the Eve Online CREST API.
     /// </summary>
     public class EveCrest : EveLibApiBase {
+   
         /// <summary>
         ///     The default URI used to access the CREST API. This can be overridded by setting the BaseUri.
         /// </summary>
@@ -19,6 +22,14 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public EveCrest() {
             RequestHandler = new EveCrestRequestHandler(new JsonSerializer());
+            BaseUri = DefaultUri;
+        }
+
+        /// <summary>
+        ///     Creates a new EveCrest object with a default request handler
+        /// </summary>
+        public EveCrest(string accessToken) {
+            RequestHandler = new EveCrestRequestHandler(new JsonSerializer(), accessToken);
             BaseUri = DefaultUri;
         }
 

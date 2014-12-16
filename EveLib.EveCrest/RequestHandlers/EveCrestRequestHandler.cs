@@ -17,11 +17,27 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
+        /// Gets or sets the access token.
+        /// </summary>
+        /// <value>The access token.</value>
+        public string AccessToken { get; set; }
+
+        /// <summary>
         ///     Creates a new EveCrestRequestHandler
         /// </summary>
         /// <param name="serializer"></param>
         public EveCrestRequestHandler(ISerializer serializer) {
             Serializer = serializer;
+        }
+
+        /// <summary>
+        ///     Creates a new EveCrestRequestHandler
+        /// </summary>
+        /// <param name="serializer"></param>
+        /// <param name="accessToken"></param>
+        public EveCrestRequestHandler(ISerializer serializer, string accessToken) {
+            Serializer = serializer;
+            AccessToken = accessToken;
         }
 
         /// <summary>
@@ -38,11 +54,11 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         public async Task<T> RequestAsync<T>(Uri uri) {
             string data;
             try {
+                var request = HttpRequestHelper.CreateRequest(uri);
                 data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
-            }
-            catch (WebException e) {
+            } catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Eve CREST Request Failed.");
-                var response = (HttpWebResponse) e.Response;
+                var response = (HttpWebResponse)e.Response;
                 if (response == null) throw;
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw;
