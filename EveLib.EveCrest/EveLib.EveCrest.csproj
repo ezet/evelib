@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
+    <Compile Include="Exceptions\CrestResourceDeprecatedException.cs" />
     <Compile Include="Models\CrestEntity.cs" />
     <Compile Include="Models\CrestIndustryFacilities.cs" />
     <Compile Include="Models\CrestIndustrySpeciality.cs" />
@@ -135,9 +136,11 @@
     <Compile Include="Models\CrestMarketHistory.cs" />
     <Compile Include="Models\CrestWar.cs" />
     <Compile Include="Models\CrestWars.cs" />
+    <Compile Include="Models\CrestResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\EveCrestException.cs" />
     <Compile Include="RequestHandlers\CrestRequestHandler.cs" />
+    <Compile Include="VersionRegister.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">

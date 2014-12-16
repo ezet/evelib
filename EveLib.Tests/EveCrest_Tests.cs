@@ -17,6 +17,12 @@ namespace eZet.EveLib.Test {
 
         public EveCrest EveCrest = new EveCrest();
 
+        public EveCrest_Tests() {
+            EveCrest.AccessToken =
+                "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
+            EveCrest.Mode = CrestMode.Authenticated;
+        }
+
         [TestMethod]
         public async Task GetRoot() {
             CrestRoot result = await EveCrest.GetRootAsync();

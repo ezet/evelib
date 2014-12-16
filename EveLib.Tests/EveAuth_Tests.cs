@@ -6,7 +6,7 @@ namespace eZet.EveLib.Test {
     [TestClass]
     public class EveAuth_Tests {
 
-        private string authCode = "QiIt-_taWK-QjtyHmg2XdM8ry7GdFDQRm6OBcTOSbWrzhGrpu58En49IYehFQI1h0";
+        private string authCode = "8nOSjSN0p1LfNee1Rs6cgaui6nRESMiwKP75rN5TjTUd9YeqorYxZqPJWzEwdc4T0";
 
         private const string clientId = "46daa2b378bd4bc189df4c3a73af226a";
 

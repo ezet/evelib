@@ -8,18 +8,57 @@ using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
 
+    public enum CrestMode {
+        Public, Authenticated
+    }
+
 
     /// <summary>
     ///     Provides access to the Eve Online CREST API.
     /// </summary>
-    public class EveCrest  {
-   
+    public class EveCrest {
+
         /// <summary>
         ///     The default URI used to access the CREST API. This can be overridded by setting the BaseUri.
         /// </summary>
-        public const string DefaultUri = "http://public-crest.eveonline.com/";
-        
-        public const string AuthedUri = "https://crest-tq.eveonline.com/";
+        public const string DefaultUri = "https://public-crest.eveonline.com/";
+
+        public const string DefaultAuthedUri = "https://crest-tq.eveonline.com/";
+
+        /// <summary>
+        ///     Gets or sets the base URI used to access this API. This should include a trailing backslash.
+        /// </summary>
+        public string BaseUri { get; set; }
+
+        public string BaseAuthedUri { get; set; }
+
+
+        public string AccessToken { get; set; }
+
+        public CrestMode Mode { get; set; }
+
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="requestHandler"></param>
+        protected EveCrest(string uri, ICrestRequestHandler requestHandler) {
+            RequestHandler = requestHandler;
+            BaseUri = uri;
+
+        }
+
+        /// <summary>
+        ///     Gets or sets the request handler used by this instance
+        /// </summary>
+        public ICrestRequestHandler RequestHandler { get; set; }
+
+
+
+        /// <summary>
+        ///     Gets or sets the relative path to the API base.
+        /// </summary>
+        public string ApiPath { get; set; }
 
         /// <summary>
         ///     Creates a new EveCrest object with a default request handler
@@ -27,16 +66,10 @@ namespace eZet.EveLib.Modules {
         public EveCrest() {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
             BaseUri = DefaultUri;
+            BaseAuthedUri = DefaultAuthedUri;
         }
 
-        /// <summary>
-        ///     Creates a new EveCrest object with a default request handler
-        /// </summary>
-        public EveCrest(string accessToken) {
-            RequestHandler = new CrestRequestHandler(new JsonSerializer(), accessToken);
-            BaseUri = DefaultUri;
-        }
-
+  
         /// <summary>
         ///     Returns the CREST root
         ///     Path: /
@@ -372,35 +405,6 @@ namespace eZet.EveLib.Modules {
             return GetIndustryFacilitiesAsync().Result;
         }
 
-        public void Authorize(string token) {
-            
-        }
-
-                /// <summary>
-        ///     Constructor
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="requestHandler"></param>
-        protected EveCrest(string uri, ICrestRequestHandler requestHandler) {
-            RequestHandler = requestHandler;
-            BaseUri = uri;
-        }
-
-        /// <summary>
-        ///     Gets or sets the request handler used by this instance
-        /// </summary>
-        public ICrestRequestHandler RequestHandler { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the base URI used to access this API. This should include a trailing backslash.
-        /// </summary>
-        public string BaseUri { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the relative path to the API base.
-        /// </summary>
-        public string ApiPath { get; set; }
-
         /// <summary>
         ///     Performs a request using the request handler.
         /// </summary>
@@ -408,7 +412,10 @@ namespace eZet.EveLib.Modules {
         /// <param name="relPath">Relative path</param>
         /// <returns></returns>
         protected Task<T> requestAsync<T>(string relPath) {
-            return RequestHandler.RequestAsync<T>(new Uri(BaseUri + ApiPath + relPath));
+            if (Mode == CrestMode.Authenticated) {
+                return RequestHandler.RequestAsync<T>(new Uri(BaseAuthedUri + ApiPath + relPath), AccessToken);
+            }
+            return RequestHandler.RequestAsync<T>(new Uri(BaseUri + ApiPath + relPath), null);
         }
     }
 }

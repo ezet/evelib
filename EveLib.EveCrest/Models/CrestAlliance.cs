@@ -7,7 +7,7 @@ namespace eZet.EveLib.Modules.Models {
     ///     Represents a CREST /allliances/$allianceId/ reponse
     /// </summary>
     [DataContract]
-    public class CrestAlliance {
+    public class CrestAlliance : CrestResponse {
         /// <summary>
         ///     The alliance ID
         /// </summary>

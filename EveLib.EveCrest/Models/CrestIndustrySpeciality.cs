@@ -6,7 +6,7 @@ namespace eZet.EveLib.Modules.Models {
     ///     Represents a speciality
     /// </summary>
     [DataContract]
-    public class CrestIndustrySpeciality {
+    public class CrestIndustrySpeciality : CrestResponse {
         /// <summary>
         ///     The speciality ID
         /// </summary>

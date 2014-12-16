@@ -5,7 +5,7 @@ namespace eZet.EveLib.Modules.Models {
     ///     Represents a CREST collection response
     /// </summary>
     [DataContract]
-    public abstract class CrestCollectionResponse {
+    public abstract class CrestCollectionResponse : CrestResponse {
         /// <summary>
         ///     The total number of items in the collection
         /// </summary>

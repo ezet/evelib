@@ -5,7 +5,7 @@ namespace eZet.EveLib.Modules.Models {
     ///     Represents a CREST exception
     /// </summary>
     [DataContract]
-    public class CrestError {
+    public class CrestError : CrestResponse {
         /// <summary>
         ///     The error message
         /// </summary>
