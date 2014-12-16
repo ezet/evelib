@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Resources;
 using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
-
     public enum CrestMode {
-        Public, Authenticated
+        Public,
+        Authenticated
     }
 
 
@@ -17,13 +16,31 @@ namespace eZet.EveLib.Modules {
     ///     Provides access to the Eve Online CREST API.
     /// </summary>
     public class EveCrest {
-
         /// <summary>
         ///     The default URI used to access the CREST API. This can be overridded by setting the BaseUri.
         /// </summary>
         public const string DefaultUri = "https://public-crest.eveonline.com/";
 
         public const string DefaultAuthedUri = "https://crest-tq.eveonline.com/";
+
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="requestHandler"></param>
+        protected EveCrest(string uri, ICrestRequestHandler requestHandler) {
+            RequestHandler = requestHandler;
+            BaseUri = uri;
+        }
+
+        /// <summary>
+        ///     Creates a new EveCrest object with a default request handler
+        /// </summary>
+        public EveCrest() {
+            RequestHandler = new CrestRequestHandler(new JsonSerializer());
+            BaseUri = DefaultUri;
+            BaseAuthedUri = DefaultAuthedUri;
+        }
 
         /// <summary>
         ///     Gets or sets the base URI used to access this API. This should include a trailing backslash.
@@ -38,21 +55,9 @@ namespace eZet.EveLib.Modules {
         public CrestMode Mode { get; set; }
 
         /// <summary>
-        ///     Constructor
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="requestHandler"></param>
-        protected EveCrest(string uri, ICrestRequestHandler requestHandler) {
-            RequestHandler = requestHandler;
-            BaseUri = uri;
-
-        }
-
-        /// <summary>
         ///     Gets or sets the request handler used by this instance
         /// </summary>
         public ICrestRequestHandler RequestHandler { get; set; }
-
 
 
         /// <summary>
@@ -60,16 +65,15 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public string ApiPath { get; set; }
 
-        /// <summary>
-        ///     Creates a new EveCrest object with a default request handler
-        /// </summary>
-        public EveCrest() {
-            RequestHandler = new CrestRequestHandler(new JsonSerializer());
-            BaseUri = DefaultUri;
-            BaseAuthedUri = DefaultAuthedUri;
+        public async Task<T> Load<T>(CrestHref<T> uri) where T : ICrestResource {
+            return await RequestHandler.RequestAsync<T>(new Uri(uri.Uri), AccessToken).ConfigureAwait(false);
         }
 
-  
+        public async Task<T> Load<T>(ICrestLinkedEntity<T> entity) where T : ICrestResource {
+            return await RequestHandler.RequestAsync<T>(new Uri(entity.Href.Uri), AccessToken).ConfigureAwait(false);
+        }
+
+
         /// <summary>
         ///     Returns the CREST root
         ///     Path: /
@@ -117,9 +121,9 @@ namespace eZet.EveLib.Modules {
         ///     Path: /incursions/
         /// </summary>
         /// <returns>A list of all active incursions.</returns>
-        public Task<CrestIncursions> GetIncursionsAsync() {
+        public Task<CrestIncursionCollection> GetIncursionsAsync() {
             const string relPath = "incursions/";
-            return requestAsync<CrestIncursions>(relPath);
+            return requestAsync<CrestIncursionCollection>(relPath);
         }
 
         /// <summary>
@@ -127,7 +131,7 @@ namespace eZet.EveLib.Modules {
         ///     Path: /incursions/
         /// </summary>
         /// <returns>A list of all active incursions.</returns>
-        public CrestIncursions GetIncursions() {
+        public CrestIncursionCollection GetIncursions() {
             return GetIncursionsAsync().Result;
         }
 
@@ -137,9 +141,9 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all alliances.</returns>
-        public Task<CrestAlliances> GetAlliancesAsync(int page = 1) {
+        public Task<CrestAllianceCollection> GetAlliancesAsync(int page = 1) {
             string relPath = "alliances/?page=" + page;
-            return requestAsync<CrestAlliances>(relPath);
+            return requestAsync<CrestAllianceCollection>(relPath);
         }
 
         /// <summary>
@@ -148,7 +152,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all alliances.</returns>
-        public CrestAlliances GetAlliances(int page = 1) {
+        public CrestAllianceCollection GetAlliances(int page = 1) {
             return GetAlliancesAsync(page).Result;
         }
 
@@ -201,9 +205,9 @@ namespace eZet.EveLib.Modules {
         ///     Path: /market/prices/
         /// </summary>
         /// <returns></returns>
-        public Task<CrestMarketPrices> GetMarketPricesAsync() {
+        public Task<CrestMarketTypePriceCollection> GetMarketPricesAsync() {
             const string relpath = "market/prices/";
-            return requestAsync<CrestMarketPrices>(relpath);
+            return requestAsync<CrestMarketTypePriceCollection>(relpath);
         }
 
         /// <summary>
@@ -211,7 +215,7 @@ namespace eZet.EveLib.Modules {
         ///     Path: /market/prices/
         /// </summary>
         /// <returns></returns>
-        public CrestMarketPrices GetMarketPrices() {
+        public CrestMarketTypePriceCollection GetMarketPrices() {
             return GetMarketPricesAsync().Result;
         }
 
@@ -221,9 +225,9 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
-        public Task<CrestWars> GetWarsAsync(int page = 1) {
+        public Task<CrestWarCollection> GetWarsAsync(int page = 1) {
             string relPath = "/wars/?page=" + page;
-            return requestAsync<CrestWars>(relPath);
+            return requestAsync<CrestWarCollection>(relPath);
         }
 
         /// <summary>
@@ -232,7 +236,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
-        public CrestWars GetWars(int page = 1) {
+        public CrestWarCollection GetWars(int page = 1) {
             return GetWarsAsync(page).Result;
         }
 
@@ -243,7 +247,7 @@ namespace eZet.EveLib.Modules {
         /// <param name="warId">CrestWar ID</param>
         /// <returns>Data for the specified war.</returns>
         public Task<CrestWar> GetWarAsync(int warId) {
-            string relPath = "/wars/" + warId + "/";
+            string relPath = "wars/" + warId + "/";
             return requestAsync<CrestWar>(relPath);
         }
 
@@ -263,9 +267,9 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="warId">CrestWar ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
-        public Task<CrestKillmails> GetWarKillmailsAsync(int warId) {
+        public Task<CrestKillmailCollection> GetWarKillmailsAsync(int warId) {
             string relPath = "wars/" + warId + "/killmails/all/";
-            return requestAsync<CrestKillmails>(relPath);
+            return requestAsync<CrestKillmailCollection>(relPath);
         }
 
         /// <summary>
@@ -274,7 +278,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="warId">CrestWar ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
-        public CrestKillmails GetWarKillmails(int warId) {
+        public CrestKillmailCollection GetWarKillmails(int warId) {
             return GetWarKillmailsAsync(warId).Result;
         }
 
@@ -283,9 +287,9 @@ namespace eZet.EveLib.Modules {
         ///     Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
-        public Task<CrestIndustrySpecialities> GetSpecialitiesAsync() {
+        public Task<CrestIndustrySpecialityCollection> GetSpecialitiesAsync() {
             const string relPath = "industry/specialities/";
-            return requestAsync<CrestIndustrySpecialities>(relPath);
+            return requestAsync<CrestIndustrySpecialityCollection>(relPath);
         }
 
         /// <summary>
@@ -293,7 +297,7 @@ namespace eZet.EveLib.Modules {
         ///     Path: /industry/specialities/
         /// </summary>
         /// <returns>A list of all industry specialities</returns>
-        public CrestIndustrySpecialities GetSpecialities() {
+        public CrestIndustrySpecialityCollection GetSpecialities() {
             return GetSpecialitiesAsync().Result;
         }
 
@@ -321,16 +325,16 @@ namespace eZet.EveLib.Modules {
         ///     Returns a list of all industry teams
         /// </summary>
         /// <returns>A list of all industry teams</returns>
-        public Task<CrestIndustryTeams> GetIndustryTeamsAsync() {
+        public Task<CrestIndustryTeamCollection> GetIndustryTeamsAsync() {
             const string relPath = "industry/teams/";
-            return requestAsync<CrestIndustryTeams>(relPath);
+            return requestAsync<CrestIndustryTeamCollection>(relPath);
         }
 
         /// <summary>
         ///     Returns a list of all industry teams
         /// </summary>
         /// <returns>A list of all industry teams</returns>
-        public CrestIndustryTeams GetIndustryTeams() {
+        public CrestIndustryTeamCollection GetIndustryTeams() {
             return GetIndustryTeamsAsync().Result;
         }
 
@@ -358,16 +362,16 @@ namespace eZet.EveLib.Modules {
         ///     Returns a list of industry systems and prices
         /// </summary>
         /// <returns></returns>
-        public Task<CrestIndustrySystems> GetIndustrySystemsAsync() {
+        public Task<CrestIndustrySystemCollection> GetIndustrySystemsAsync() {
             const string relPath = "industry/systems/";
-            return requestAsync<CrestIndustrySystems>(relPath);
+            return requestAsync<CrestIndustrySystemCollection>(relPath);
         }
 
         /// <summary>
         ///     Returns a list of industry systems and prices
         /// </summary>
         /// <returns></returns>
-        public CrestIndustrySystems GetIndustrySystems() {
+        public CrestIndustrySystemCollection GetIndustrySystems() {
             return GetIndustrySystemsAsync().Result;
         }
 
@@ -392,16 +396,16 @@ namespace eZet.EveLib.Modules {
         ///     Returns a collection of all industry facilities
         /// </summary>
         /// <returns></returns>
-        public Task<CrestIndustryFacilities> GetIndustryFacilitiesAsync() {
+        public Task<CrestIndustryFacilityCollection> GetIndustryFacilitiesAsync() {
             const string relPath = "industry/facilities/";
-            return requestAsync<CrestIndustryFacilities>(relPath);
+            return requestAsync<CrestIndustryFacilityCollection>(relPath);
         }
 
         /// <summary>
         ///     Returns a collection of all industry facilities
         /// </summary>
         /// <returns></returns>
-        public CrestIndustryFacilities GetIndustryFacilities() {
+        public CrestIndustryFacilityCollection GetIndustryFacilities() {
             return GetIndustryFacilitiesAsync().Result;
         }
 
@@ -411,7 +415,7 @@ namespace eZet.EveLib.Modules {
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="relPath">Relative path</param>
         /// <returns></returns>
-        protected Task<T> requestAsync<T>(string relPath) {
+        protected Task<T> requestAsync<T>(string relPath) where T : ICrestResource {
             if (Mode == CrestMode.Authenticated) {
                 return RequestHandler.RequestAsync<T>(new Uri(BaseAuthedUri + ApiPath + relPath), AccessToken);
             }

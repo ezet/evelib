@@ -15,35 +15,41 @@ namespace eZet.EveLib.Test {
 
         private const int TypeId = 34; // Tritanium
 
+        private const string killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
+
         public EveCrest EveCrest = new EveCrest();
 
         public EveCrest_Tests() {
             EveCrest.AccessToken =
                 "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
-            EveCrest.Mode = CrestMode.Authenticated;
+            //EveCrest.Mode = CrestMode.Authenticated;
+            EveCrest.RequestHandler.ThrowOnDeprecated = true;
         }
 
         [TestMethod]
         public async Task GetRoot() {
             CrestRoot result = await EveCrest.GetRootAsync();
+            var test = await EveCrest.Load(result.Alliances);
         }
 
 
         [TestMethod]
-        public void GetKillmail_NoErrors() {
+        public async Task GetKillmail_NoErrors() {
             CrestKillmail data = EveCrest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+            var system = await EveCrest.Load(data.SolarSystem);
+            var stats = await EveCrest.Load(system.Stats);
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }
 
         [TestMethod]
         public void GetIncursions_NoErrors() {
-            CrestIncursions data = EveCrest.GetIncursions();
+            CrestIncursionCollection data = EveCrest.GetIncursions();
         }
 
         [TestMethod]
         public void GetAlliances_NoErrors() {
-            CrestAlliances data = EveCrest.GetAlliances();
+            CrestAllianceCollection data = EveCrest.GetAlliances();
         }
 
         [TestMethod]
@@ -60,13 +66,13 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetMarketPrices() {
-            CrestMarketPrices result = await EveCrest.GetMarketPricesAsync();
+            CrestMarketTypePriceCollection result = await EveCrest.GetMarketPricesAsync();
             Console.WriteLine(result.Prices.Count);
         }
 
         [TestMethod]
         public void GetWars_NoErrors() {
-            CrestWars data = EveCrest.GetWars();
+            CrestWarCollection data = EveCrest.GetWars();
         }
 
         [TestMethod]
@@ -76,7 +82,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetWarKillmails_NoErrors() {
-            CrestKillmails data = EveCrest.GetWarKillmails(1);
+            CrestKillmailCollection data = EveCrest.GetWarKillmails(1);
         }
 
         [TestMethod]
@@ -87,7 +93,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetSpecialities() {
-            CrestIndustrySpecialities result = await EveCrest.GetSpecialitiesAsync();
+            CrestIndustrySpecialityCollection result = await EveCrest.GetSpecialitiesAsync();
         }
 
         [TestMethod]
@@ -98,18 +104,18 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetIndustryTeams() {
-            CrestIndustryTeams result = await EveCrest.GetIndustryTeamsAsync();
+            CrestIndustryTeamCollection result = await EveCrest.GetIndustryTeamsAsync();
         }
 
         [TestMethod]
         public async Task GetIndustryTeam() {
-            CrestIndustryTeams teams = await EveCrest.GetIndustryTeamsAsync();
-            CrestIndustryTeam result = await EveCrest.GetIndustryTeamAsync(teams.Teams.Last().Id);
+            CrestIndustryTeamCollection teams = await EveCrest.GetIndustryTeamsAsync();
+            CrestIndustryTeam result = await EveCrest.GetIndustryTeamAsync(teams.Items.Last().Id);
         }
 
         [TestMethod]
         public async Task GetIndustrySystemsAsync() {
-            CrestIndustrySystems result = await EveCrest.GetIndustrySystemsAsync();
+            CrestIndustrySystemCollection result = await EveCrest.GetIndustrySystemsAsync();
         }
 
         [TestMethod]
@@ -119,7 +125,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetIndustryFacilities() {
-            CrestIndustryFacilities result = await EveCrest.GetIndustryFacilitiesAsync();
+            CrestIndustryFacilityCollection result = await EveCrest.GetIndustryFacilitiesAsync();
         }
     }
 }

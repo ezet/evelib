@@ -3,26 +3,19 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Resources;
 
 namespace eZet.EveLib.Modules.RequestHandlers {
-
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
     public class CrestRequestHandler : ICrestRequestHandler {
-        private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
-
         public const string TokenType = "Bearer";
-
-        /// <summary>
-        /// Sets or gets whether to throw an exception when requesting a deprecated resource
-        /// </summary>
-        public bool ThrowOnDeprecated { get; set; }
+        private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
         ///     Creates a new CrestRequestHandler
@@ -31,6 +24,11 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         public CrestRequestHandler(ISerializer serializer) {
             Serializer = serializer;
         }
+
+        /// <summary>
+        ///     Sets or gets whether to throw an exception when requesting a deprecated resource
+        /// </summary>
+        public bool ThrowOnDeprecated { get; set; }
 
         /// <summary>
         ///     Gets or sets the serialier used to deserialize responses
@@ -44,25 +42,32 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         /// <param name="uri">URI to request</param>
         /// <param name="accessToken">CREST acces token</param>
         /// <returns></returns>
-        public async Task<T> RequestAsync<T>(Uri uri, string accessToken) {
+        public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : ICrestResource {
             string data;
             try {
-                var request = HttpRequestHelper.CreateRequest(uri);
+                HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
                 if (!string.IsNullOrEmpty(accessToken)) {
                     request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
                 }
-                var response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
-                var deprecated = response.GetResponseHeader("X-Deprecated");
+                request.Accept = CrestVersions.Get<T>();
+                _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
+                HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
+                _trace.TraceEvent(TraceEventType.Error, 0, "Request Complete");
+
+                string deprecated = response.GetResponseHeader("X-Deprecated");
+
                 if (!String.IsNullOrEmpty(deprecated)) {
-                    _trace.TraceEvent(TraceEventType.Warning, 0, "This CREST resource is deprecated. Please update to the newest EveLib version or notify the developers.");
+                    _trace.TraceEvent(TraceEventType.Warning, 0,
+                        "This CREST resource is deprecated. Please update to the newest EveLib version or notify the developers.");
                     if (ThrowOnDeprecated) {
                         throw new CrestResourceDeprecatedException("The CREST resource is deprecated.", response);
                     }
                 }
                 data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-            } catch (WebException e) {
+            }
+            catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
-                var response = (HttpWebResponse)e.Response;
+                var response = (HttpWebResponse) e.Response;
 
                 if (response == null) throw;
                 Stream responseStream = response.GetResponseStream();
@@ -75,9 +80,8 @@ namespace eZet.EveLib.Modules.RequestHandlers {
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
-            var val = Serializer.Deserialize<T>(data);
 
-            return val;
+            return Serializer.Deserialize<T>(data);
         }
     }
 }

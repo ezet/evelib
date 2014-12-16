@@ -23,7 +23,7 @@ namespace eZet.EveLib.EveAuth {
         }
 
 
-        public static string GetAuthLink(string clientId, string redirectUri, CrestScope crestScope) {
+        public static string CreateAuthorizatinLink(string clientId, string redirectUri, CrestScope crestScope) {
             string url =
                 "https://login.eveonline.com/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + resolveScope(crestScope);
             return url;

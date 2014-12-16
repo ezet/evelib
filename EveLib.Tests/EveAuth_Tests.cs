@@ -14,8 +14,8 @@ namespace eZet.EveLib.Test {
             "NDZkYWEyYjM3OGJkNGJjMTg5ZGY0YzNhNzNhZjIyNmE6SzhHY1dBRGxqZ25MWnlyS0dGZmlxekhWdlZpR2hhcE9ZU0NFeTgzaA==";
 
         [TestMethod]
-        public void Authorize() {
-            var response = EveSso.GetAuthLink(clientId, "/", CrestScope.PublicData);
+        public void GetAuthorizatinLink() {
+            var response = EveSso.CreateAuthorizatinLink(clientId, "/", CrestScope.PublicData);
             Trace.WriteLine(response);
         }
 

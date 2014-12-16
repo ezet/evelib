@@ -1,11 +1,12 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using eZet.EveLib.Core.Exceptions;
 
 namespace eZet.EveLib.Modules.Exceptions {
     /// <summary>
     ///     Exception for EveCrest
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
+    [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
     public class EveCrestException : EveLibWebException {
         /// <summary>
         ///     Creates a new Eve Crest Exception
