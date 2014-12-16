@@ -13,7 +13,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
-    public class EveCrestRequestHandler : IRequestHandler {
+    public class CrestRequestHandler : ICrestRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
@@ -23,19 +23,19 @@ namespace eZet.EveLib.Modules.RequestHandlers {
         public string AccessToken { get; set; }
 
         /// <summary>
-        ///     Creates a new EveCrestRequestHandler
+        ///     Creates a new CrestRequestHandler
         /// </summary>
         /// <param name="serializer"></param>
-        public EveCrestRequestHandler(ISerializer serializer) {
+        public CrestRequestHandler(ISerializer serializer) {
             Serializer = serializer;
         }
 
         /// <summary>
-        ///     Creates a new EveCrestRequestHandler
+        ///     Creates a new CrestRequestHandler
         /// </summary>
         /// <param name="serializer"></param>
         /// <param name="accessToken"></param>
-        public EveCrestRequestHandler(ISerializer serializer, string accessToken) {
+        public CrestRequestHandler(ISerializer serializer, string accessToken) {
             Serializer = serializer;
             AccessToken = accessToken;
         }

@@ -128,6 +128,7 @@
     <Compile Include="Exceptions\EveLibWebException.cs" />
     <Compile Include="Exceptions\EveLibException.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RequestHandlers\ICrestRequestHandler.cs" />
     <Compile Include="RequestHandlers\IImageRequestHandler.cs" />
     <Compile Include="RequestHandlers\ImageRequestHandler.cs" />
     <Compile Include="Util\AsyncLazy.cs" />

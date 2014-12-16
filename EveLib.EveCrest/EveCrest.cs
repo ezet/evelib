@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Models;
@@ -10,18 +12,20 @@ namespace eZet.EveLib.Modules {
     /// <summary>
     ///     Provides access to the Eve Online CREST API.
     /// </summary>
-    public class EveCrest : EveLibApiBase {
+    public class EveCrest  {
    
         /// <summary>
         ///     The default URI used to access the CREST API. This can be overridded by setting the BaseUri.
         /// </summary>
         public const string DefaultUri = "http://public-crest.eveonline.com/";
+        
+        public const string AuthedUri = "https://crest-tq.eveonline.com/";
 
         /// <summary>
         ///     Creates a new EveCrest object with a default request handler
         /// </summary>
         public EveCrest() {
-            RequestHandler = new EveCrestRequestHandler(new JsonSerializer());
+            RequestHandler = new CrestRequestHandler(new JsonSerializer());
             BaseUri = DefaultUri;
         }
 
@@ -29,7 +33,7 @@ namespace eZet.EveLib.Modules {
         ///     Creates a new EveCrest object with a default request handler
         /// </summary>
         public EveCrest(string accessToken) {
-            RequestHandler = new EveCrestRequestHandler(new JsonSerializer(), accessToken);
+            RequestHandler = new CrestRequestHandler(new JsonSerializer(), accessToken);
             BaseUri = DefaultUri;
         }
 
@@ -370,6 +374,41 @@ namespace eZet.EveLib.Modules {
 
         public void Authorize(string token) {
             
+        }
+
+                /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="requestHandler"></param>
+        protected EveCrest(string uri, ICrestRequestHandler requestHandler) {
+            RequestHandler = requestHandler;
+            BaseUri = uri;
+        }
+
+        /// <summary>
+        ///     Gets or sets the request handler used by this instance
+        /// </summary>
+        public ICrestRequestHandler RequestHandler { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the base URI used to access this API. This should include a trailing backslash.
+        /// </summary>
+        public string BaseUri { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the relative path to the API base.
+        /// </summary>
+        public string ApiPath { get; set; }
+
+        /// <summary>
+        ///     Performs a request using the request handler.
+        /// </summary>
+        /// <typeparam name="T">Response type</typeparam>
+        /// <param name="relPath">Relative path</param>
+        /// <returns></returns>
+        protected Task<T> requestAsync<T>(string relPath) {
+            return RequestHandler.RequestAsync<T>(new Uri(BaseUri + ApiPath + relPath));
         }
     }
 }
