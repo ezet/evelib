@@ -4,29 +4,28 @@ using eZet.EveLib.Core.Util;
 using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveAuth {
-    public static class EveAuth {
+    public enum CrestScope {
+        None,
+        PublicData
 
-        public enum Scope {
-            None,
-            PublicData
-
-        }
+    }
+    public static class EveSso {
 
 
-        private static string resolveScope(Scope scope) {
-            switch (scope) {
-                case Scope.None:
+        private static string resolveScope(CrestScope crestScope) {
+            switch (crestScope) {
+                case CrestScope.None:
                     return "";
-                case Scope.PublicData:
+                case CrestScope.PublicData:
                     return "publicData";
             }
             return "";
         }
 
 
-        public static string GetAuthLink(string clientId, string redirectUri, Scope scope) {
+        public static string GetAuthLink(string clientId, string redirectUri, CrestScope crestScope) {
             string url =
-                "https://login.eveonline.com/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + resolveScope(scope);
+                "https://login.eveonline.com/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + resolveScope(crestScope);
             return url;
         }
 
@@ -39,6 +38,11 @@ namespace eZet.EveLib.EveAuth {
             var response = await HttpRequestHelper.GetResponseContentAsync(request);
             var result = JsonConvert.DeserializeObject<AuthResponse>(response);
             return result;
+        }
+
+        public static string Encode(string clientId, string clientSecret) {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(clientId + ":" + clientSecret);
+            return Convert.ToBase64String(plainTextBytes);
         }
 
 

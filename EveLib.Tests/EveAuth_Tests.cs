@@ -1,5 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using eZet.EveLib.EveAuth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -15,14 +15,14 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void Authorize() {
-            var response = EveAuth.EveAuth.GetAuthLink(clientId, "/", EveAuth.EveAuth.Scope.PublicData);
+            var response = EveSso.GetAuthLink(clientId, "/", CrestScope.PublicData);
             Trace.WriteLine(response);
         }
 
 
         [TestMethod]
         public void Authenticate() {
-            var response = EveAuth.EveAuth.Authenticate(EncodedKey, authCode).Result;
+            var response = EveSso.Authenticate(EncodedKey, authCode).Result;
             Assert.AreEqual("Bearer", response.TokenType);
             Trace.WriteLine(response.AccessToken);
         }
