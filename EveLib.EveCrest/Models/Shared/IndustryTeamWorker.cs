@@ -16,12 +16,14 @@ namespace eZet.EveLib.Modules.Models.Shared {
             /// <summary>
             ///     Material Efficency Bonus
             /// </summary>
-            [EnumMember(Value = "ME")] Me,
+            [EnumMember(Value = "ME")]
+            Me,
 
             /// <summary>
             ///     Production Efficiency Bonus
             /// </summary>
-            [EnumMember(Value = "TE")] Te
+            [EnumMember(Value = "TE")]
+            Te
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace eZet.EveLib.Modules.Models.Shared {
             ///     The bonus type
             /// </summary>
             [DataMember(Name = "bonusType")]
-            [JsonConverter(typeof (StringEnumConverter))]
+            [JsonConverter(typeof(StringEnumConverter))]
             public BonusType Type { get; set; }
         }
     }

@@ -50,7 +50,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
                 if (!string.IsNullOrEmpty(accessToken)) {
                     request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
                 }
-                request.Accept = CrestVersions.Get<T>();
+                request.Accept = CrestModel.Get<T>();
                 _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
                 HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
                 _trace.TraceEvent(TraceEventType.Error, 0, "Request Complete");

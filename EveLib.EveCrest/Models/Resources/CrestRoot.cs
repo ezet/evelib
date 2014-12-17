@@ -27,19 +27,21 @@ namespace eZet.EveLib.Modules.Models.Resources {
             /// <summary>
             /// Server is online
             /// </summary>
+            [EnumMember(Value = "online")]
             Online,
 
             /// <summary>
             /// Server is in VIP mode
             /// </summary>
+            [EnumMember(Value = "vip")]
             Vip,
 
             /// <summary>
             /// Server is offline
             /// </summary>
+            [EnumMember(Value = "offline")]
             Offline
         }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CrestRoot" /> class.
@@ -159,9 +161,8 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// Gets or sets the virtual good store.
         /// </summary>
         /// <value>The virtual good store.</value>
-        /// TODO Handle this better
         [DataMember(Name = "virtualGoodStore")]
-        public CrestHref<CrestNotImplemented> VirtualGoodStore { get; set; }
+        public CrestHref<string> VirtualGoodStore { get; set; }
 
         /// <summary>
         /// The server version
@@ -184,16 +185,19 @@ namespace eZet.EveLib.Modules.Models.Resources {
         [DataMember(Name = "incursions")]
         public CrestHref<CrestIncursionCollection> Incursions { get; set; }
 
+        /// <summary>
+        /// Gets or sets the races.
+        /// </summary>
+        /// <value>The races.</value>
         [DataMember(Name = "races")]
         public CrestHref<CrestNotImplemented> Races { get; set; }
 
-        // TODO handle this better
         /// <summary>
         /// Gets or sets the authentication endpoint.
         /// </summary>
         /// <value>The authentication endpoint.</value>
         [DataMember(Name = "authEndpoint")]
-        public CrestHref<CrestNotImplemented> AuthEndpoint { get; set; }
+        public CrestHref<string> AuthEndpoint { get; set; }
 
         /// <summary>
         /// The service status for all services
@@ -216,6 +220,10 @@ namespace eZet.EveLib.Modules.Models.Resources {
         [DataMember(Name = "industry")]
         public CrestIndustry Industry { get; set; }
 
+        /// <summary>
+        /// Gets or sets the clients.
+        /// </summary>
+        /// <value>The clients.</value>
         [DataMember(Name = "clients")]
         public ClientLinks Clients { get; set; }
 
@@ -240,12 +248,23 @@ namespace eZet.EveLib.Modules.Models.Resources {
         [DataMember(Name = "serverName")]
         public string ServerName { get; set; }
 
+        /// <summary>
+        /// Class ClientLinks.
+        /// </summary>
         [DataContract]
         public class ClientLinks {
 
+            /// <summary>
+            /// Gets or sets the dust.
+            /// </summary>
+            /// <value>The dust.</value>
             [DataMember(Name = "dust")]
             public CrestHref<string> Dust { get; set; }
 
+            /// <summary>
+            /// Gets or sets the eve.
+            /// </summary>
+            /// <value>The eve.</value>
             [DataMember(Name = "eve")]
             public CrestHref<string> Eve { get; set; }
         }

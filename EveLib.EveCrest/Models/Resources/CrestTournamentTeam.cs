@@ -48,7 +48,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The isk killed.</value>
         [DataMember(Name = "iskKilled")]
-        public decimal IskKilled { get; set; }
+        public double IskKilled { get; set; }
 
         /// <summary>
         /// Gets or sets the pilots.

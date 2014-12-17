@@ -7,9 +7,6 @@ using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
 
-    // TODO Convert decimal to double
-
-
     /// <summary>
     /// Enum Crest Access Mode
     /// </summary>

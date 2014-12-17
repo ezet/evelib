@@ -33,13 +33,13 @@ namespace eZet.EveLib.Modules.Models.Resources {
             ///     The estimated value as displayed in game
             /// </summary>
             [DataMember(Name = "averagePrice")]
-            public decimal AveragePrice { get; set; }
+            public double AveragePrice { get; set; }
 
             /// <summary>
             ///     The adjusted price, used for some internal calculations and valuations, ie. industry
             /// </summary>
             [DataMember(Name = "adjustedPrice")]
-            public decimal AdjustedPrice { get; set; }
+            public double AdjustedPrice { get; set; }
         }
     }
 }

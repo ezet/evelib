@@ -9,7 +9,6 @@ namespace eZet.EveLib.Modules.Models.Resources {
     [DataContract]
     public sealed class CrestIndustryFacilityCollection : CrestCollectionResource<CrestIndustryFacilityCollection> {
         public CrestIndustryFacilityCollection() {
-            // TODO Why are these entities not linked in CREST?
             Version = "application/vnd.ccp.eve.IndustryFacilityCollection-v1+json";
         }
 
@@ -17,12 +16,12 @@ namespace eZet.EveLib.Modules.Models.Resources {
         ///     A list of facilities
         /// </summary>
         [DataMember(Name = "items")]
-        public List<Facility> Facilities { get; set; }
+        public List<FacilityEntry> Facilities { get; set; }
 
         /// <summary>
         ///     Represents an industry facility
         /// </summary>
-        public class Facility {
+        public class FacilityEntry {
             /// <summary>
             ///     The facility ID
             /// </summary>

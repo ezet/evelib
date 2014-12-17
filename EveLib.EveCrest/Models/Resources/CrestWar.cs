@@ -81,7 +81,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
             ///     The amount of isk killed
             /// </summary>
             [DataMember(Name = "iskKilled")]
-            public decimal IskKilled { get; set; }
+            public double IskKilled { get; set; }
         }
     }
 }
