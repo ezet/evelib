@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EveLib.EveAuth
+// Author           : Lars Kristian
+// Created          : 12-10-2014
+//
+// Last Modified By : Lars Kristian
+// Last Modified On : 12-17-2014
+// ***********************************************************************
+// <copyright file="EveAuth.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -9,41 +22,41 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveAuthModule {
     /// <summary>
-    ///     Enum CrestScope
+    /// Enum CrestScope
     /// </summary>
     public enum CrestScope {
         /// <summary>
-        ///     The 360 noscope
+        /// The 360 noscope
         /// </summary>
         None,
 
         /// <summary>
-        ///     The publicData scope
+        /// The publicData scope
         /// </summary>
         PublicData
     }
 
     /// <summary>
-    ///     Class EveAuth. A helper class for Eve Online SSO authentication
+    /// Class EveAuth. A helper class for Eve Online SSO authentication
     /// </summary>
     public class EveAuth : IEveAuth {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="EveAuth" /> class.
+        /// Initializes a new instance of the <see cref="EveAuth" /> class.
         /// </summary>
         public EveAuth() {
             BaseUri = "https://login.eveonline.com";
         }
 
         /// <summary>
-        ///     Gets or sets the base URI.
+        /// Gets or sets the base URI.
         /// </summary>
         /// <value>The base URI.</value>
         public static string BaseUri { get; set; }
 
         /// <summary>
-        ///     Authenticates the specified encoded key.
+        /// Authenticates the specified encoded key.
         /// </summary>
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="authCode">The authentication code.</param>
@@ -60,7 +73,7 @@ namespace eZet.EveLib.EveAuthModule {
         }
 
         /// <summary>
-        ///     Refreshes the specified encoded key.
+        /// Refreshes the specified encoded key.
         /// </summary>
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="refreshToken">The refresh token.</param>
@@ -76,6 +89,11 @@ namespace eZet.EveLib.EveAuthModule {
             return result;
         }
 
+        /// <summary>
+        /// Verifies the access token
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;VerifyResponse&gt;.</returns>
         public async Task<VerifyResponse> VerifyAsync(string accessToken) {
             HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/verify"));
             request.Host = "login.eveonline.com";
@@ -98,7 +116,7 @@ namespace eZet.EveLib.EveAuthModule {
 
 
         /// <summary>
-        ///     Creates an authentication link.
+        /// Creates an authentication link.
         /// </summary>
         /// <param name="clientId">The client identifier.</param>
         /// <param name="redirectUri">The redirect URI.</param>
@@ -112,7 +130,7 @@ namespace eZet.EveLib.EveAuthModule {
         }
 
         /// <summary>
-        ///     Encodes the specified client identifier and secret.
+        /// Encodes the specified client identifier and secret.
         /// </summary>
         /// <param name="clientId">The client identifier.</param>
         /// <param name="clientSecret">The client secret.</param>

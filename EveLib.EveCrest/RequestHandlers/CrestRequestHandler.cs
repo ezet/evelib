@@ -14,6 +14,9 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
     public class CrestRequestHandler : ICrestRequestHandler {
+        /// <summary>
+        /// The token type
+        /// </summary>
         public const string TokenType = "Bearer";
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
@@ -49,7 +52,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 if (accessToken != null) {
                     request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
                 }
-                request.Accept = CrestModel.Get<T>();
+                request.Accept = CrestModels.Get<T>();
                 _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
                 HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
                 _trace.TraceEvent(TraceEventType.Error, 0, "Request Complete");

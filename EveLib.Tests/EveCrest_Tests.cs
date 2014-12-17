@@ -51,10 +51,8 @@ namespace eZet.EveLib.Test {
 
 
         [TestMethod]
-        public async Task GetKillmail_NoErrors() {
+        public void GetKillmail_NoErrors() {
             Killmail data = crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
-            SolarSystem system = await crest.LoadAsync(data.SolarSystem);
-            NotImplemented stats = await crest.LoadAsync(system.Stats);
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }

@@ -9,8 +9,16 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     ///     Interface ICrestRequestHandler
     /// </summary>
     public interface ICrestRequestHandler {
+        /// <summary>
+        /// Gets or sets a value indicating whether [throw on deprecated].
+        /// </summary>
+        /// <value><c>true</c> if [throw on deprecated]; otherwise, <c>false</c>.</value>
         bool ThrowOnDeprecated { get; set; }
 
+        /// <summary>
+        /// Gets or sets the serializer.
+        /// </summary>
+        /// <value>The serializer.</value>
         ISerializer Serializer { get; set; }
 
         /// <summary>
