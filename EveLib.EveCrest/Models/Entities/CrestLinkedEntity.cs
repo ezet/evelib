@@ -25,7 +25,7 @@ namespace eZet.EveLib.Modules.Models.Entities {
         private int _id;
 
         /// <summary>
-        /// Gets or sets the identifier. If the ID is not returned explicitly in the API, it will try to infer the ID from the Href. See IsExplicitId.
+        /// Gets or sets the identifier. If the ID is not returned explicitly by the API, it will try to infer the ID from the Href. See IsExplicitId. If the ID is negative, it failed to infer the ID.
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
@@ -42,8 +42,9 @@ namespace eZet.EveLib.Modules.Models.Entities {
         }
 
         private int inferId() {
-            int id = -1;
-            int.TryParse(Href.Uri.Split('/').Last(), out id);
+            int id;
+            if (!int.TryParse(Href.Uri.Split('/').Last(), out id))
+                id = -1;
             return id;
         }
 
