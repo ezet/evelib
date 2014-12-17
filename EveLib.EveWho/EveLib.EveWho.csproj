@@ -7,7 +7,7 @@
     <ProjectGuid>{A11F0424-9183-4C54-9D0E-AD82BC9D6923}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.Modules</RootNamespace>
+    <RootNamespace>eZet.EveLib.EveWhoModule</RootNamespace>
     <AssemblyName>EveLib.EveWho</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

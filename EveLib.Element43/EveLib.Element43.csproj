@@ -7,7 +7,7 @@
     <ProjectGuid>{91C78379-3D32-4131-8CD7-C1E8876D0933}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.Modules</RootNamespace>
+    <RootNamespace>eZet.EveLib.Element43Module</RootNamespace>
     <AssemblyName>EveLib.Element43</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

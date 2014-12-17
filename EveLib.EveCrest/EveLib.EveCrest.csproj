@@ -7,7 +7,7 @@
     <ProjectGuid>{F81627B3-99AF-4B4F-926A-685D21569451}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.Modules</RootNamespace>
+    <RootNamespace>eZet.EveLib.EveCrestModule</RootNamespace>
     <AssemblyName>EveLib.EveCrest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

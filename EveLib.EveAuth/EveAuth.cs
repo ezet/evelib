@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
+using eZet.EveLib.EveAuth;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.EveAuth {
+namespace eZet.EveLib.Modules {
     /// <summary>
     /// Enum CrestScope
     /// </summary>
@@ -19,9 +23,11 @@ namespace eZet.EveLib.EveAuth {
 
     }
     /// <summary>
-    /// Class EveSso. A helper class for Eve Online SSO authentication
+    /// Class EveAuth. A helper class for Eve Online SSO authentication
     /// </summary>
-    public class EveSso {
+    public class EveAuth : IEveAuth {
+
+        private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
         /// Gets or sets the base URI.
@@ -30,9 +36,9 @@ namespace eZet.EveLib.EveAuth {
         public static string BaseUri { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveSso"/> class.
+        /// Initializes a new instance of the <see cref="EveAuth"/> class.
         /// </summary>
-        public EveSso() {
+        public EveAuth() {
             BaseUri = "https://login.eveonline.com";
         }
 
@@ -89,7 +95,7 @@ namespace eZet.EveLib.EveAuth {
             request.Host = "login.eveonline.com";
             request.Headers.Add("Authorization", "Basic " + encodedKey);
             request.Method = "POST";
-            HttpRequestHelper.AddPostData(request, "grant_type=refresh_token&code=" + refreshToken);
+            HttpRequestHelper.AddPostData(request, "grant_type=refresh_token&refresh_token=" + refreshToken);
             var response = await HttpRequestHelper.GetResponseContentAsync(request);
             var result = JsonConvert.DeserializeObject<AuthResponse>(response);
             return result;
@@ -106,6 +112,24 @@ namespace eZet.EveLib.EveAuth {
             return Convert.ToBase64String(plainTextBytes);
         }
 
+        private async Task<string> request(HttpWebRequest request) {
+            try {
+                return await HttpRequestHelper.GetResponseContentAsync(request);
+            } catch (WebException e) {
+                _trace.TraceEvent(TraceEventType.Error, 0, "Auth failed.");
+                var response = (HttpWebResponse) e.Response;
 
+                if (response == null) throw;
+                Stream responseStream = response.GetResponseStream();
+                if (responseStream == null) throw;
+                using (var reader = new StreamReader(responseStream)) {
+                    var data = reader.ReadToEnd();
+                    var error = JsonConvert.DeserializeObject<AuthError>(data);
+                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
+                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType, error.RefId);
+                    throw new EveAuthException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
+                }
+            }
+        }
     }
 }

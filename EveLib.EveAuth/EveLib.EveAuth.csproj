@@ -7,7 +7,7 @@
     <ProjectGuid>{66A526C4-AD56-42A1-A680-0D11A524EC40}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eZet.EveLib.EveAuth</RootNamespace>
+    <RootNamespace>eZet.EveLib.EveAuthModule</RootNamespace>
     <AssemblyName>EveLib.EveAuth</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthResponse.cs" />
-    <Compile Include="EveSso.cs" />
+    <Compile Include="AuthError.cs" />
+    <Compile Include="EveAuthException.cs" />
+    <Compile Include="EveAuth.cs" />
+    <Compile Include="IEveAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

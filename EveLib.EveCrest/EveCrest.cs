@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveAuth;
+using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models.Entities;
 using eZet.EveLib.Modules.Models.Resources;
 using eZet.EveLib.Modules.RequestHandlers;
@@ -27,6 +29,9 @@ namespace eZet.EveLib.Modules {
     /// Provides access to the Eve Online CREST API.
     /// </summary>
     public class EveCrest {
+
+        private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
+
         /// <summary>
         ///     The default URI used to access the public CREST API. This can be overridded by setting the BasePublicUri.
         /// </summary>
@@ -55,7 +60,7 @@ namespace eZet.EveLib.Modules {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
             BasePublicUri = DefaultPublicUri;
             BaseAuthUri = DefaultAuthUri;
-            EveAuth = new EveSso();
+            EveAuth = new EveAuth();
 
         }
 
@@ -73,7 +78,7 @@ namespace eZet.EveLib.Modules {
         /// Gets or sets the eve sso.
         /// </summary>
         /// <value>The eve sso.</value>
-        public EveSso EveAuth { get; set; }
+        public IEveAuth EveAuth { get; set; }
 
         /// <summary>
         /// Gets or sets the CREST Access Token
@@ -97,9 +102,11 @@ namespace eZet.EveLib.Modules {
         /// <summary>
         /// Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
         /// </summary>
-        public async void Refresh() {
+        public async Task<AuthResponse> RefreshAccessToken() {
             var response = await EveAuth.Refresh(EncodedKey, RefreshToken).ConfigureAwait(false);
             AccessToken = response.AccessToken;
+            RefreshToken = response.RefreshToken;
+            return response;
         }
 
         /// <summary>
@@ -487,11 +494,20 @@ namespace eZet.EveLib.Modules {
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="relPath">Relative path</param>
         /// <returns></returns>
-        protected Task<T> requestAsync<T>(string relPath) where T : ICrestResource {
+        protected async Task<T> requestAsync<T>(string relPath) where T : ICrestResource {
             if (Mode == CrestMode.Authenticated) {
-                return RequestHandler.RequestAsync<T>(new Uri(BaseAuthUri + ApiPath + relPath), AccessToken);
+                if (AllowAutomaticRefresh) {
+                    try {
+                        return await RequestHandler.RequestAsync<T>(new Uri(BaseAuthUri + ApiPath + relPath), AccessToken);
+
+                    } catch (EveCrestException) {
+                        _trace.TraceEvent(TraceEventType.Information, 0, "Invalid AccessToken: Attempting automatic refresh");
+                    }
+                    await RefreshAccessToken();
+                }
+                return await RequestHandler.RequestAsync<T>(new Uri(BaseAuthUri + ApiPath + relPath), AccessToken);
             }
-            return RequestHandler.RequestAsync<T>(new Uri(BasePublicUri + ApiPath + relPath), null);
+            return await RequestHandler.RequestAsync<T>(new Uri(BasePublicUri + ApiPath + relPath), null);
         }
     }
 }
