@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
+using eZet.EveLib.Modules.Models.Entities;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Resources {
     [DataContract]
     public sealed class CrestMarketGroup : CrestLinkedResource<CrestMarketGroup> {
         public CrestMarketGroup() {

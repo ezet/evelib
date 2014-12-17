@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using eZet.EveLib.Modules.Models.Resources;
+using eZet.EveLib.Modules.Models.Entities;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Resources {
     /// <summary>
     ///     Represents a CREST war
     /// </summary>

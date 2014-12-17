@@ -8,6 +8,7 @@ using eZet.EveLib.Core.Util;
 using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Resources;
+using eZet.EveLib.Modules.Models.Shared;
 
 namespace eZet.EveLib.Modules.RequestHandlers {
     /// <summary>

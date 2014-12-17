@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using eZet.EveLib.Modules.Models.Entities;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Resources {
     /// <summary>
     ///     Represents a CREST collection of wars
     /// </summary>

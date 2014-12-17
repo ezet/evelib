@@ -1,13 +1,24 @@
 ﻿using System;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Entities;
 using eZet.EveLib.Modules.Models.Resources;
 using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
+
+
+    /// <summary>
+    /// Enum Crest Access Mode
+    /// </summary>
     public enum CrestMode {
+        /// <summary>
+        /// Public CREST
+        /// </summary>
         Public,
+        /// <summary>
+        /// Authenticated CREST. This requires a valid AccessToken
+        /// </summary>
         Authenticated
     }
 
@@ -17,20 +28,24 @@ namespace eZet.EveLib.Modules {
     /// </summary>
     public class EveCrest {
         /// <summary>
-        ///     The default URI used to access the CREST API. This can be overridded by setting the BaseUri.
+        ///     The default URI used to access the public CREST API. This can be overridded by setting the BasePublicUri.
         /// </summary>
-        public const string DefaultUri = "https://public-crest.eveonline.com/";
+        public const string DefaultPublicUri = "https://public-crest.eveonline.com/";
 
-        public const string DefaultAuthedUri = "https://crest-tq.eveonline.com/";
+
+        /// <summary>
+        ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the BaseAuthUri.
+        /// </summary>
+        public const string DefaultAuthUri = "https://crest-tq.eveonline.com/";
 
         /// <summary>
         ///     Constructor
         /// </summary>
-        /// <param name="uri"></param>
+        /// <param name="publicUri"></param>
         /// <param name="requestHandler"></param>
-        protected EveCrest(string uri, ICrestRequestHandler requestHandler) {
+        protected EveCrest(string publicUri, ICrestRequestHandler requestHandler) {
             RequestHandler = requestHandler;
-            BaseUri = uri;
+            BasePublicUri = publicUri;
         }
 
         /// <summary>
@@ -38,20 +53,29 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public EveCrest() {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
-            BaseUri = DefaultUri;
-            BaseAuthedUri = DefaultAuthedUri;
+            BasePublicUri = DefaultPublicUri;
+            BaseAuthUri = DefaultAuthUri;
         }
 
         /// <summary>
-        ///     Gets or sets the base URI used to access this API. This should include a trailing backslash.
+        ///     Gets or sets the base URI used to access the public CREST API. This should include a trailing backslash.
         /// </summary>
-        public string BaseUri { get; set; }
+        public string BasePublicUri { get; set; }
 
-        public string BaseAuthedUri { get; set; }
+        /// <summary>
+        ///     Gets or sets the base URI used to access the authed CREST API. This should include a trailing backslash.
+        /// </summary>
+        public string BaseAuthUri { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the CREST Access Token
+        /// The Access Token is the final token acquired through the SSO login process, and should be managed by client code.
+        /// </summary>
         public string AccessToken { get; set; }
 
+        /// <summary>
+        /// Gets or sets the CREST access mode.
+        /// </summary>
         public CrestMode Mode { get; set; }
 
         /// <summary>
@@ -65,10 +89,22 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         public string ApiPath { get; set; }
 
+        /// <summary>
+        /// Loads a CREST resource.
+        /// </summary>
+        /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
+        /// <param name="uri">The Href that should be loaded</param>
+        /// <returns></returns>
         public async Task<T> Load<T>(CrestHref<T> uri) where T : ICrestResource {
             return await RequestHandler.RequestAsync<T>(new Uri(uri.Uri), AccessToken).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Loads a crest resource
+        /// </summary>
+        /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
+        /// <param name="entity">The entity that should be loaded</param>
+        /// <returns></returns>
         public async Task<T> Load<T>(ICrestLinkedEntity<T> entity) where T : ICrestResource {
             return await RequestHandler.RequestAsync<T>(new Uri(entity.Href.Uri), AccessToken).ConfigureAwait(false);
         }
@@ -417,9 +453,9 @@ namespace eZet.EveLib.Modules {
         /// <returns></returns>
         protected Task<T> requestAsync<T>(string relPath) where T : ICrestResource {
             if (Mode == CrestMode.Authenticated) {
-                return RequestHandler.RequestAsync<T>(new Uri(BaseAuthedUri + ApiPath + relPath), AccessToken);
+                return RequestHandler.RequestAsync<T>(new Uri(BaseAuthUri + ApiPath + relPath), AccessToken);
             }
-            return RequestHandler.RequestAsync<T>(new Uri(BaseUri + ApiPath + relPath), null);
+            return RequestHandler.RequestAsync<T>(new Uri(BasePublicUri + ApiPath + relPath), null);
         }
     }
 }

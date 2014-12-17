@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Entities {
     /// <summary>
     ///     Represents a CREST href object
     /// </summary>

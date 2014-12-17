@@ -111,6 +111,10 @@
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
     <Compile Include="Exceptions\CrestResourceDeprecatedException.cs" />
+    <Compile Include="Models\Resources\CrestTournamentTeamMember.cs" />
+    <Compile Include="Models\Shared\BanEntry.cs" />
+    <Compile Include="Models\Shared\CharacterEntry.cs" />
+    <Compile Include="Models\Shared\CorporationEntry.cs" />
     <Compile Include="Models\Resources\CrestConstellation.cs" />
     <Compile Include="Models\Resources\CrestItemCategory.cs" />
     <Compile Include="Models\Entities\CrestLinkedEntity.cs" />
@@ -120,6 +124,17 @@
     <Compile Include="Models\Resources\CrestIndustryTeam.cs" />
     <Compile Include="Models\Resources\CrestIndustryTeamAuction.cs" />
     <Compile Include="Models\Resources\CrestIndustryTeamCollection.cs" />
+    <Compile Include="Models\Resources\CrestPilotTournamentStats.cs" />
+    <Compile Include="Models\Resources\CrestTournament.cs" />
+    <Compile Include="Models\Resources\CrestTournamentCollection.cs" />
+    <Compile Include="Models\Resources\CrestTournamentMatch.cs" />
+    <Compile Include="Models\Resources\CrestTournamentMatchCollection.cs" />
+    <Compile Include="Models\Resources\CrestTournamentPilotStatsCollection.cs" />
+    <Compile Include="Models\Resources\CrestTournamentSeries.cs" />
+    <Compile Include="Models\Resources\CrestTournamentSeriesCollection.cs" />
+    <Compile Include="Models\Resources\CrestTournamentTeam.cs" />
+    <Compile Include="Models\Resources\CrestTournamentTeamMemberCollection.cs" />
+    <Compile Include="Models\Resources\CrestTournamentTypeBanCollection.cs" />
     <Compile Include="Models\Shared\CrestIndustryTeamWorker.cs" />
     <Compile Include="Models\Resources\CrestItemCategoryCollection.cs" />
     <Compile Include="Models\Resources\CrestItemGroup.cs" />

@@ -1,8 +1,10 @@
 ﻿using System.Runtime.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Entities {
     [DataContract]
     public class CrestLinkedEntity<T> : ICrestLinkedEntity<T> {
+
+        // TODO Extract ID from Href
 
         [DataMember(Name = "id")]
         public int Id { get; set; }

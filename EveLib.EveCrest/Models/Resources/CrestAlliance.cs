@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using eZet.EveLib.Modules.Models.Entities;
+using eZet.EveLib.Modules.Models.Shared;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Resources {
     /// <summary>
     ///     Represents a CREST /allliances/$allianceId/ reponse
     /// </summary>
@@ -78,33 +80,16 @@ namespace eZet.EveLib.Modules.Models {
         ///     The alliance creator character
         /// </summary>
         [DataMember(Name = "creatorCharacter")]
-        public Character CreatorCharacter { get; set; }
+        public CharacterEntry CreatorCharacter { get; set; }
 
         /// <summary>
         ///     A list of all corporations in the alliance
         /// </summary>
         [DataMember(Name = "corporations")]
-        public IList<Corporation> Corporations { get; set; }
+        public IList<CorporationEntry> Corporations { get; set; }
 
-        [DataContract]
-        public class Character : CrestLinkedEntity<CrestPlaceholderModel> {
-            [DataMember(Name = "isNPC")]
-            public bool IsNpc { get; set; }
 
-            [DataMember(Name = "capsuleer")]
-            public CrestLinkedEntity<CrestPlaceholderModel> Capsuleer { get; set; }
 
-            [DataMember(Name = "portrait")]
-            public CrestImageLink Portraits { get; set; }
-        }
-
-        [DataContract]
-        public class Corporation : CrestLinkedEntity<CrestPlaceholderModel> {
-            [DataMember(Name = "isNPC")]
-            public bool IsNpc { get; set; }
-
-            [DataMember(Name = "logo")]
-            public CrestImageLink Logo { get; set; }
-        }
+ 
     }
 }

@@ -120,6 +120,10 @@
       <Project>{91c78379-3d32-4131-8cd7-c1e8876d0933}</Project>
       <Name>EveLib.Element43</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveAuth\EveLib.EveAuth.csproj">
+      <Project>{66a526c4-ad56-42a1-a680-0d11a524ec40}</Project>
+      <Name>EveLib.EveAuth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EveLib.EveCentral\EveLib.EveCentral.csproj">
       <Project>{fcd48e90-6605-4bc1-b761-0b37df390990}</Project>
       <Name>EveLib.EveCentral</Name>

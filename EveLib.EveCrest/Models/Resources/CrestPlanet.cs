@@ -1,6 +1,8 @@
 ﻿using System.Runtime.Serialization;
+using eZet.EveLib.Modules.Models.Entities;
+using eZet.EveLib.Modules.Models.Shared;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Resources {
     [DataContract]
     public sealed class CrestPlanet : CrestResource {
         public CrestPlanet() {

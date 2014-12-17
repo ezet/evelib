@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using eZet.EveLib.Modules;
 using eZet.EveLib.Modules.Exceptions;
 using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Modules.Models.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

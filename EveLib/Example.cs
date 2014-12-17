@@ -5,6 +5,7 @@ using eZet.EveLib.Modules.Models;
 using eZet.EveLib.Modules.Models.Account;
 using eZet.EveLib.Modules.Models.Character;
 using eZet.EveLib.Modules.Models.Misc;
+using eZet.EveLib.Modules.Models.Resources;
 
 namespace eZet.EveLib {
     public class Example {

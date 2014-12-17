@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Resources {
     [DataContract]
     public sealed class CrestItemType : CrestResource {
         public CrestItemType() {

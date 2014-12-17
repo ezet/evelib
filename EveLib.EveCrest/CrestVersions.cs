@@ -18,6 +18,7 @@ namespace eZet.EveLib.Modules {
         }
 
         public static string Get<T>() where T : ICrestResource {
+            // TODO optional throw on missing version
             return Activator.CreateInstance<T>().Version;
             
             string version;

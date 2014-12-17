@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using eZet.EveLib.Modules.Models.Resources;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.Modules.Models.Entities {
     [DataContract]
     public class CrestLinkedResource<T> : ICrestLinkedEntity<T>, ICrestResource {
         /// <summary>
