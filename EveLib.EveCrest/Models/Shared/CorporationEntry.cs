@@ -1,14 +1,14 @@
 ﻿using System.Runtime.Serialization;
-using eZet.EveLib.Modules.Models.Entities;
-using eZet.EveLib.Modules.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Resources;
 
-namespace eZet.EveLib.Modules.Models.Shared {
+namespace eZet.EveLib.EveCrestModule.Models.Shared {
     [DataContract]
-    public class CorporationEntry : CrestLinkedEntity<CrestNotImplemented> {
+    public class CorporationEntry : LinkedEntity<NotImplemented> {
         [DataMember(Name = "isNPC")]
         public bool IsNpc { get; set; }
 
         [DataMember(Name = "logo")]
-        public CrestImageLink Logo { get; set; }
+        public ImageLink Logo { get; set; }
     }
 }

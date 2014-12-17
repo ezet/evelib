@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Character;
-using eZet.EveLib.Modules.Models.Corporation;
+using eZet.EveLib.EveOnlineModule;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Character;
+using eZet.EveLib.EveOnlineModule.Models.Corporation;
 using eZet.EveLib.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ContactList = eZet.EveLib.Modules.Models.Corporation.ContactList;
-using FactionWarfareStats = eZet.EveLib.Modules.Models.Corporation.FactionWarfareStats;
-using MedalList = eZet.EveLib.Modules.Models.Corporation.MedalList;
-using StandingsList = eZet.EveLib.Modules.Models.Corporation.StandingsList;
+using ContactList = eZet.EveLib.EveOnlineModule.Models.Corporation.ContactList;
+using FactionWarfareStats = eZet.EveLib.EveOnlineModule.Models.Corporation.FactionWarfareStats;
+using MedalList = eZet.EveLib.EveOnlineModule.Models.Corporation.MedalList;
+using StandingsList = eZet.EveLib.EveOnlineModule.Models.Corporation.StandingsList;
 
 namespace eZet.EveLib.Test {
     [TestClass]

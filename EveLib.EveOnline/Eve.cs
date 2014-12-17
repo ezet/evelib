@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Misc;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Misc;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveOnlineModule {
     /// <summary>
     ///     Provides access to API calls that do not require a valid API key or character/corporation ID, and are not covered
     ///     by Image or Map. Paths: /eve, /misc, /server, /api

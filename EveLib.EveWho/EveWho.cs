@@ -2,9 +2,9 @@
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.EveWhoModule.Models;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveWhoModule {
     public class EveWho : EveLibApiBase {
         /// <summary>
         ///     The default URI used to access the EveWho API.
@@ -22,49 +22,49 @@ namespace eZet.EveLib.Modules {
             ApiPath = DefaultApiPath;
         }
 
-        public Task<EveWhoResponse<EveWhoCharacter>> GetCharacterAsync(long characterId, int page = 0) {
+        public Task<EveWhoResponse<Character>> GetCharacterAsync(long characterId, int page = 0) {
             string relPath = "?type=character&id=" + characterId + "&page=" + page;
-            return requestAsync<EveWhoResponse<EveWhoCharacter>>(relPath);
+            return requestAsync<EveWhoResponse<Character>>(relPath);
         }
 
-        public EveWhoResponse<EveWhoCharacter> GetCharacter(long characterId, int page) {
+        public EveWhoResponse<Character> GetCharacter(long characterId, int page) {
             return GetCharacterAsync(characterId, page).Result;
         }
 
-        public Task<EveWhoResponse<EveWhoCorporation>> GetCorporationAsync(long corporationId, int page = 0) {
+        public Task<EveWhoResponse<Corporation>> GetCorporationAsync(long corporationId, int page = 0) {
             string relPath = "?type=corporation&id=" + corporationId + "&page=" + page;
-            return requestAsync<EveWhoResponse<EveWhoCorporation>>(relPath);
+            return requestAsync<EveWhoResponse<Corporation>>(relPath);
         }
 
-        public EveWhoResponse<EveWhoCorporation> GetCorporation(long corporationId, int page = 0) {
+        public EveWhoResponse<Corporation> GetCorporation(long corporationId, int page = 0) {
             return GetCorporationAsync(corporationId, page).Result;
         }
 
-        public Task<EveWhoResponse<EveWhoCorporationMembers>> GetCorporationMembersAsync(long corporationId,
+        public Task<EveWhoResponse<CorporationMembers>> GetCorporationMembersAsync(long corporationId,
             int page = 0) {
             string relPath = "?type=corplist&id=" + corporationId + "&page=" + page;
-            return requestAsync<EveWhoResponse<EveWhoCorporationMembers>>(relPath);
+            return requestAsync<EveWhoResponse<CorporationMembers>>(relPath);
         }
 
-        public EveWhoResponse<EveWhoCorporationMembers> GetCorporationMembers(long corporationId, int page = 0) {
+        public EveWhoResponse<CorporationMembers> GetCorporationMembers(long corporationId, int page = 0) {
             return GetCorporationMembersAsync(corporationId, page).Result;
         }
 
-        public Task<EveWhoResponse<EveWhoAlliance>> GetAllianceAsync(long allianceId, int page = 0) {
+        public Task<EveWhoResponse<Alliance>> GetAllianceAsync(long allianceId, int page = 0) {
             string relPath = "?type=allilist&id=" + allianceId + "&page=" + page;
-            return requestAsync<EveWhoResponse<EveWhoAlliance>>(relPath);
+            return requestAsync<EveWhoResponse<Alliance>>(relPath);
         }
 
-        public EveWhoResponse<EveWhoAlliance> GetAlliance(long allianceId, int page = 0) {
+        public EveWhoResponse<Alliance> GetAlliance(long allianceId, int page = 0) {
             return GetAllianceAsync(allianceId, page).Result;
         }
 
-        public Task<EveWhoResponse<EveWhoAllianceMembers>> GetAllianceMembersAsync(long allianceId, int page = 0) {
+        public Task<EveWhoResponse<AllianceMembers>> GetAllianceMembersAsync(long allianceId, int page = 0) {
             string relPath = "?type=allilist&id=" + allianceId + "&page=" + page;
-            return requestAsync<EveWhoResponse<EveWhoAllianceMembers>>(relPath);
+            return requestAsync<EveWhoResponse<AllianceMembers>>(relPath);
         }
 
-        public EveWhoResponse<EveWhoAllianceMembers> GetAllianceMembers(long allianceId, int page = 0) {
+        public EveWhoResponse<AllianceMembers> GetAllianceMembers(long allianceId, int page = 0) {
             return GetAllianceMembersAsync(allianceId, page).Result;
         }
     }

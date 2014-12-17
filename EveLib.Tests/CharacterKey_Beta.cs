@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Character;
+using eZet.EveLib.EveOnlineModule;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Character;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

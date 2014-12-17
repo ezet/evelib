@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace eZet.EveLib.EveAuth {
-    
+namespace eZet.EveLib.EveAuthModule {
     [JsonObject(MemberSerialization.OptOut)]
     public class AuthResponse {
-
         [JsonProperty("access_token")]
         public string AccessToken { get; set; }
 
@@ -16,6 +14,5 @@ namespace eZet.EveLib.EveAuth {
 
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; }
-
     }
 }

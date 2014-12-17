@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Map;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Map;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveOnlineModule {
     /// <summary>
     ///     Provides access to Map related requests.
     /// </summary>

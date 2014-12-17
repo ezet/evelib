@@ -1,5 +1,5 @@
-﻿using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models;
+﻿using eZet.EveLib.ZKillboardModule;
+using eZet.EveLib.ZKillboardModule.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

@@ -2,7 +2,7 @@
 using System.Net;
 using eZet.EveLib.Core.Exceptions;
 
-namespace eZet.EveLib.Modules.Exceptions {
+namespace eZet.EveLib.EveCrestModule.Exceptions {
     /// <summary>
     ///     Exception for EveCrest
     /// </summary>

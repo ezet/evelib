@@ -4,11 +4,11 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using eZet.EveLib.Modules.Exceptions;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Account;
+using eZet.EveLib.EveOnlineModule.Exceptions;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Account;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveOnlineModule {
     /// <summary>
     ///     Eve Online API Key Types
     /// </summary>

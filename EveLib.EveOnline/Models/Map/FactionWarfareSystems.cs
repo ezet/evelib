@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Modules.Models.Map {
+namespace eZet.EveLib.EveOnlineModule.Models.Map {
     /// <summary>
     ///     Class FactionWarfareSystems.
     /// </summary>

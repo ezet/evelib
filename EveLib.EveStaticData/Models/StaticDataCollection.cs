@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.StaticDataModule.Models {
     /// <summary>
     ///     Class StaticDataCollection.
     /// </summary>

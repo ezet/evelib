@@ -1,4 +1,4 @@
-﻿namespace eZet.EveLib.Modules.Models.Resources {
+﻿namespace eZet.EveLib.EveCrestModule.Models.Resources {
     public interface ICrestResource {
         bool IsDeprecated { get; set; }
 

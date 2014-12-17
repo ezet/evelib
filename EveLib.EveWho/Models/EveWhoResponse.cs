@@ -14,7 +14,7 @@
 
 using System.Runtime.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.EveWhoModule.Models {
     /// <summary>
     ///     Class EveWhoResponse.
     /// </summary>

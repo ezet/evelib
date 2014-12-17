@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.ZKillboardModule {
     /// <summary>
     ///     Represents options for ZKillboard requests
     /// </summary>

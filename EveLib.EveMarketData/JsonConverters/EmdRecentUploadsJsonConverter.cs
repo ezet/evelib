@@ -13,11 +13,11 @@
 // ***********************************************************************
 
 using System;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.EveMarketDataModule.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace eZet.EveLib.Modules.JsonConverters {
+namespace eZet.EveLib.EveMarketDataModule.JsonConverters {
     /// <summary>
     ///     Class EmdRecentUploadsJsonConverter.
     /// </summary>
@@ -43,11 +43,11 @@ namespace eZet.EveLib.Modules.JsonConverters {
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer) {
-            var result = new EmdRecentUploads();
+            var result = new RecentUploads();
             JObject json = JObject.Load(reader);
-            serializer.Converters.Add(new EmdRowSetCollectionJsonConverter<EmdRecentUploads.RecentUploadsEntry>());
+            serializer.Converters.Add(new EmdRowSetCollectionJsonConverter<RecentUploads.RecentUploadsEntry>());
             result.Uploads =
-                serializer.Deserialize<EveMarketDataRowCollection<EmdRecentUploads.RecentUploadsEntry>>(
+                serializer.Deserialize<EmdRowCollection<RecentUploads.RecentUploadsEntry>>(
                     json["rowset"].CreateReader());
 
             return result;

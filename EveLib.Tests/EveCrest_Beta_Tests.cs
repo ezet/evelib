@@ -1,4 +1,4 @@
-﻿using eZet.EveLib.Modules;
+﻿using eZet.EveLib.EveCrestModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

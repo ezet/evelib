@@ -18,7 +18,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.EveOnlineModule.Models {
     /// <summary>
     ///     Class EveOnlineRowCollection.
     /// </summary>

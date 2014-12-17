@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Character;
-using eZet.EveLib.Modules.Models.Corporation;
+using eZet.EveLib.EveOnlineModule;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Character;
+using eZet.EveLib.EveOnlineModule.Models.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ContactList = eZet.EveLib.Modules.Models.Corporation.ContactList;
-using MedalList = eZet.EveLib.Modules.Models.Corporation.MedalList;
-using StandingsList = eZet.EveLib.Modules.Models.Corporation.StandingsList;
+using ContactList = eZet.EveLib.EveOnlineModule.Models.Corporation.ContactList;
+using MedalList = eZet.EveLib.EveOnlineModule.Models.Corporation.MedalList;
+using StandingsList = eZet.EveLib.EveOnlineModule.Models.Corporation.StandingsList;
 
 namespace eZet.EveLib.Test {
     [TestClass]
@@ -19,7 +19,7 @@ namespace eZet.EveLib.Test {
         private const string CorpCode = "vJ3hUm3NsheYVVk5vH3UZNupbx9f1ahWO1BuIsdwi6ltUMMTyUAFQ3UQalmH8mjU";
 
         private readonly CorporationKey _validKey = new CorporationKey(CorpId, CorpCode);
-         
+
         [TestMethod]
         public void Corporation_ValidRequest_HasName() {
             Assert.IsNotNull(_validKey.Corporation.CorporationName);

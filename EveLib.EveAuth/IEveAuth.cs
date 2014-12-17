@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-namespace eZet.EveLib.EveAuth {
+namespace eZet.EveLib.EveAuthModule {
     /// <summary>
-    /// Interface IEveAuth
+    ///     Interface IEveAuth
     /// </summary>
     public interface IEveAuth {
-
         /// <summary>
-        /// Authenticates the specified encoded key.
+        ///     Authenticates the specified encoded key.
         /// </summary>
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="authCode">The authentication code.</param>
@@ -15,7 +14,7 @@ namespace eZet.EveLib.EveAuth {
         Task<AuthResponse> Authenticate(string encodedKey, string authCode);
 
         /// <summary>
-        /// Refreshes the specified encoded key.
+        ///     Refreshes the specified encoded key.
         /// </summary>
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="refreshToken">The refresh token.</param>

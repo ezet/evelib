@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.ZKillboardModule.Models {
     /// <summary>
     ///     Class ZkbResponse.
     /// </summary>

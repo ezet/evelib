@@ -14,11 +14,11 @@
 
 using System;
 using System.Linq;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.EveMarketDataModule.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace eZet.EveLib.Modules.JsonConverters {
+namespace eZet.EveLib.EveMarketDataModule.JsonConverters {
     /// <summary>
     ///     Class EmdRowCollectionJsonConverter.
     /// </summary>
@@ -45,7 +45,7 @@ namespace eZet.EveLib.Modules.JsonConverters {
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer) {
-            var result = new EveMarketDataRowCollection<T>();
+            var result = new EmdRowCollection<T>();
             JArray json = JArray.Load(reader);
             foreach (T a in json.Select(item => serializer.Deserialize<T>(item["row"].CreateReader()))) {
                 result.Add(a);
@@ -62,7 +62,7 @@ namespace eZet.EveLib.Modules.JsonConverters {
         ///     <c>false</c>.
         /// </returns>
         public override bool CanConvert(Type objectType) {
-            return objectType == typeof (EveMarketDataRowCollection<T>);
+            return objectType == typeof (EmdRowCollection<T>);
         }
     }
 }

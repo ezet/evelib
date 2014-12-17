@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.RequestHandlers;
+using eZet.EveLib.ZKillboardModule.Models;
+using eZet.EveLib.ZKillboardModule.RequestHandlers;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.ZKillboardModule {
     /// <summary>
     ///     Class for accessing the ZKillboard API
     /// </summary>

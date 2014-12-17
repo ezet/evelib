@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Account;
-using eZet.EveLib.Modules.Models.Character;
-using eZet.EveLib.Modules.Models.Misc;
+using eZet.EveLib.EveOnlineModule;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Account;
+using eZet.EveLib.EveOnlineModule.Models.Character;
+using eZet.EveLib.EveOnlineModule.Models.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FactionWarfareStats = eZet.EveLib.Modules.Models.Character.FactionWarfareStats;
+using FactionWarfareStats = eZet.EveLib.EveOnlineModule.Models.Character.FactionWarfareStats;
 
 namespace eZet.EveLib.Test {
     [TestClass]

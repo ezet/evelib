@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using eZet.EveLib.Modules.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Resources;
 
-namespace eZet.EveLib.Modules.Models.Shared {
+namespace eZet.EveLib.EveCrestModule.Models.Shared {
     /// <summary>
     ///     Represents a CREST exception
     /// </summary>

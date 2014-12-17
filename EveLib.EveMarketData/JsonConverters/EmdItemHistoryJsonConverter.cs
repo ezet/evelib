@@ -13,10 +13,10 @@
 // ***********************************************************************
 
 using System;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.EveMarketDataModule.Models;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.Modules.JsonConverters {
+namespace eZet.EveLib.EveMarketDataModule.JsonConverters {
     /// <summary>
     ///     Class EmdItemHistoryJsonConverter.
     /// </summary>
@@ -42,9 +42,9 @@ namespace eZet.EveLib.Modules.JsonConverters {
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer) {
-            var result = new EmdItemHistory();
-            serializer.Converters.Add(new EmdRowCollectionJsonConverter<EmdItemHistory.ItemHistoryEntry>());
-            result.History = serializer.Deserialize<EveMarketDataRowCollection<EmdItemHistory.ItemHistoryEntry>>(reader);
+            var result = new ItemHistory();
+            serializer.Converters.Add(new EmdRowCollectionJsonConverter<ItemHistory.ItemHistoryEntry>());
+            result.History = serializer.Deserialize<EmdRowCollection<ItemHistory.ItemHistoryEntry>>(reader);
             return result;
         }
 

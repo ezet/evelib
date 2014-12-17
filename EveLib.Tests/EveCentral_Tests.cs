@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.EveCentralModule;
+using eZet.EveLib.EveCentralModule.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -22,7 +22,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            EveCentralMarketStatResponse res = _api.GetMarketStat(_validOptions);
+            MarketStatResponse res = _api.GetMarketStat(_validOptions);
             EveCentralMarketStatItem entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.All.Average);
@@ -36,7 +36,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklook_ValidRequest_ValidReseponse() {
-            EveCentralQuickLookResponse res = _api.GetQuicklook(_validOptions);
+            QuickLookResponse res = _api.GetQuicklook(_validOptions);
             QuicklookResult entry = res.Result;
             EveCentralQuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
@@ -57,7 +57,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklookPath_ValidRequest_ValidResponse() {
-            EveCentralQuickLookResponse res = _api.GetQuicklookPath("Jita", "Amarr", 34, _validOptions);
+            QuickLookResponse res = _api.GetQuicklookPath("Jita", "Amarr", 34, _validOptions);
             QuicklookResult entry = res.Result;
             EveCentralQuicklookOrder order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);

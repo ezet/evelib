@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using eZet.EveLib.Modules.Models.Entities;
-using eZet.EveLib.Modules.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Resources;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace eZet.EveLib.Modules.Models.Shared {
+namespace eZet.EveLib.EveCrestModule.Models.Shared {
     /// <summary>
     ///     Represents a team worker
     /// </summary>
@@ -16,14 +16,12 @@ namespace eZet.EveLib.Modules.Models.Shared {
             /// <summary>
             ///     Material Efficency Bonus
             /// </summary>
-            [EnumMember(Value = "ME")]
-            Me,
+            [EnumMember(Value = "ME")] Me,
 
             /// <summary>
             ///     Production Efficiency Bonus
             /// </summary>
-            [EnumMember(Value = "TE")]
-            Te
+            [EnumMember(Value = "TE")] Te
         }
 
         /// <summary>
@@ -36,7 +34,7 @@ namespace eZet.EveLib.Modules.Models.Shared {
         ///     The worker specialization
         /// </summary>
         [DataMember(Name = "specialization")]
-        public CrestLinkedEntity<CrestIndustrySpeciality> Specialization { get; set; }
+        public LinkedEntity<IndustrySpeciality> Specialization { get; set; }
 
 
         /// <summary>
@@ -59,7 +57,7 @@ namespace eZet.EveLib.Modules.Models.Shared {
             ///     The bonus type
             /// </summary>
             [DataMember(Name = "bonusType")]
-            [JsonConverter(typeof(StringEnumConverter))]
+            [JsonConverter(typeof (StringEnumConverter))]
             public BonusType Type { get; set; }
         }
     }

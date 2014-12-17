@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Modules.Models.Account {
+namespace eZet.EveLib.EveOnlineModule.Models.Account {
     /// <summary>
     ///     Class CharacterList.
     /// </summary>

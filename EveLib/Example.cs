@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using eZet.EveLib.Modules;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Account;
-using eZet.EveLib.Modules.Models.Character;
-using eZet.EveLib.Modules.Models.Misc;
-using eZet.EveLib.Modules.Models.Resources;
+using eZet.EveLib.EveCrestModule;
+using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveOnlineModule;
+using eZet.EveLib.EveOnlineModule.Models.Account;
+using eZet.EveLib.EveOnlineModule.Models.Character;
+using eZet.EveLib.EveOnlineModule.Models.Misc;
 
 namespace eZet.EveLib {
     public class Example {
@@ -67,7 +67,7 @@ namespace eZet.EveLib {
 
         public void Crest() {
             var crest = new EveCrest();
-            CrestWar result = crest.GetWar(1);
+            War result = crest.GetWar(1);
         }
 
         public void test() {

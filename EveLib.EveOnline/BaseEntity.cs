@@ -19,10 +19,10 @@ using eZet.EveLib.Core;
 using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.RequestHandlers;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.RequestHandlers;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveOnlineModule {
     /// <summary>
     ///     Provides base properties and methods for Eve Online API classes.
     /// </summary>

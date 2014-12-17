@@ -41,7 +41,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Adds the post data.
+        ///     Adds the post data.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="postData">The post data.</param>
@@ -60,14 +60,15 @@ namespace eZet.EveLib.Core.Util {
         public static async Task<HttpWebResponse> GetResponseAsync(HttpWebRequest request) {
             HttpWebResponse response;
             try {
-                response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
+                response = (HttpWebResponse) await request.GetResponseAsync().ConfigureAwait(false);
                 if (response != null) {
                     Trace.TraceEvent(TraceEventType.Information, 0,
                         "Response status: " + response.StatusCode + ", " + response.StatusDescription);
                     Trace.TraceEvent(TraceEventType.Verbose, 0, "From cache: " + response.IsFromCache);
                 }
-            } catch (WebException e) {
-                response = (HttpWebResponse)e.Response;
+            }
+            catch (WebException e) {
+                response = (HttpWebResponse) e.Response;
                 if (response == null) throw;
                 Trace.TraceEvent(TraceEventType.Information, 0,
                     "Response status: " + response.StatusCode + ", " + response.StatusDescription);

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using eZet.EveLib.Modules.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Resources;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveCrestModule {
     public static class CrestModel {
         static CrestModel() {
             Register = new Dictionary<Type, string> {

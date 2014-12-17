@@ -112,7 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EveMarketData.cs" />
-    <Compile Include="EveMarketDataOptions.cs" />
+    <Compile Include="EmdOptions.cs" />
     <Compile Include="JsonConverters\EmdRecentUploadsJsonConverter.cs" />
     <Compile Include="JsonConverters\EmdRowSetCollectionJsonConverter.cs" />
     <Compile Include="JsonConverters\EmdStationRankJsonConverter.cs" />
@@ -121,13 +121,13 @@
     <Compile Include="JsonConverters\EmdItemPricesJsonConverter.cs" />
     <Compile Include="JsonConverters\EmdRowCollectionConverter.cs" />
     <Compile Include="NewtonSoftJsonSerializer.cs" />
-    <Compile Include="Models\EveMarketDataResponse.cs" />
-    <Compile Include="Models\EmdItemHistory.cs" />
-    <Compile Include="Models\EmdItemOrders.cs" />
-    <Compile Include="Models\EmdItemPrices.cs" />
-    <Compile Include="Models\EmdRecentUploads.cs" />
-    <Compile Include="Models\EveMarketDataRowCollection.cs" />
-    <Compile Include="Models\EmdStationRank.cs" />
+    <Compile Include="Models\EmdResponse.cs" />
+    <Compile Include="Models\ItemHistory.cs" />
+    <Compile Include="Models\ItemOrders.cs" />
+    <Compile Include="Models\ItemPrices.cs" />
+    <Compile Include="Models\RecentUploads.cs" />
+    <Compile Include="Models\EmdRowCollection.cs" />
+    <Compile Include="Models\StationRank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.Modules.Util;
+using eZet.EveLib.EveOnlineModule.Util;
 
-namespace eZet.EveLib.Modules.Models.Character {
+namespace eZet.EveLib.EveOnlineModule.Models.Character {
     /// <summary>
     ///     Class SkillQueue.
     /// </summary>

@@ -7,10 +7,10 @@ using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.Modules.Exceptions;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.EveOnlineModule.Exceptions;
+using eZet.EveLib.EveOnlineModule.Models;
 
-namespace eZet.EveLib.Modules.RequestHandlers {
+namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
     /// <summary>
     ///     Handles requests to the Eve API using a cache.
     /// </summary>

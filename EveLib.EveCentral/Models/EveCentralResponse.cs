@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Modules.Models {
+namespace eZet.EveLib.EveCentralModule.Models {
     /// <summary>
     ///     Class EveCentralResponse.
     /// </summary>

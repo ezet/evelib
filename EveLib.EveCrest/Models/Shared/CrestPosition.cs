@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace eZet.EveLib.Modules.Models.Shared {
+namespace eZet.EveLib.EveCrestModule.Models.Shared {
     [DataContract]
     public class CrestPosition {
         [DataMember(Name = "x")]

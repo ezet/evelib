@@ -19,9 +19,9 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.EveOnlineModule.Models;
 
-namespace eZet.EveLib.Modules.Util {
+namespace eZet.EveLib.EveOnlineModule.Util {
     /// <summary>
     ///     Provides utility methods for XML element classes.
     /// </summary>

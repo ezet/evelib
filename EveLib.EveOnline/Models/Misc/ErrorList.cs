@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Modules.Models.Misc {
+namespace eZet.EveLib.EveOnlineModule.Models.Misc {
     /// <summary>
     ///     Class ErrorList.
     /// </summary>

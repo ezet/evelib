@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveOnlineModule {
     /// <summary>
     ///     Static helper facade for accessing the Eve Online API.
     /// </summary>

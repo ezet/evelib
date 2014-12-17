@@ -5,12 +5,11 @@ using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.Modules.Exceptions;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Resources;
-using eZet.EveLib.Modules.Models.Shared;
+using eZet.EveLib.EveCrestModule.Exceptions;
+using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Shared;
 
-namespace eZet.EveLib.Modules.RequestHandlers {
+namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
@@ -61,7 +60,7 @@ namespace eZet.EveLib.Modules.RequestHandlers {
                     _trace.TraceEvent(TraceEventType.Warning, 0,
                         "This CREST resource is deprecated. Please update to the newest EveLib version or notify the developers.");
                     if (ThrowOnDeprecated) {
-                        throw new CrestResourceDeprecatedException("The CREST resource is deprecated.", response);
+                        throw new DeprecatedResourceException("The CREST resource is deprecated.", response);
                     }
                 }
                 data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);

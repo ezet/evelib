@@ -107,7 +107,7 @@
   <ItemGroup>
     <Compile Include="Element43Legacy.cs" />
     <Compile Include="Element43Options.cs" />
-    <Compile Include="Models\Element43MarketStatResponse.cs" />
+    <Compile Include="Models\MarketStatResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

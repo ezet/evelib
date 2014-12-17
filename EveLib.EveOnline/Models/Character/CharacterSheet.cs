@@ -17,9 +17,9 @@ using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.Modules.Util;
+using eZet.EveLib.EveOnlineModule.Util;
 
-namespace eZet.EveLib.Modules.Models.Character {
+namespace eZet.EveLib.EveOnlineModule.Models.Character {
     /// <summary>
     ///     Represents a Character Sheet
     /// </summary>

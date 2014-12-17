@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Modules.Models.Character {
+namespace eZet.EveLib.EveOnlineModule.Models.Character {
     /// <summary>
     ///     Class AssetList.
     /// </summary>

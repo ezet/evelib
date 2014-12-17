@@ -11,35 +11,36 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using System.Runtime.Serialization;
-using eZet.EveLib.Modules.Models.Entities;
-using eZet.EveLib.Modules.Models.Resources;
 
-namespace eZet.EveLib.Modules.Models.Shared {
+using System.Runtime.Serialization;
+using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Resources;
+
+namespace eZet.EveLib.EveCrestModule.Models.Shared {
     /// <summary>
-    /// Class CharacterEntry.
+    ///     Class CharacterEntry.
     /// </summary>
     [DataContract]
-    public class CharacterEntry : CrestLinkedEntity<CrestNotImplemented> {
+    public class CharacterEntry : LinkedEntity<NotImplemented> {
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is NPC.
+        ///     Gets or sets a value indicating whether this instance is NPC.
         /// </summary>
         /// <value><c>true</c> if this instance is NPC; otherwise, <c>false</c>.</value>
         [DataMember(Name = "isNPC")]
         public bool IsNpc { get; set; }
 
         /// <summary>
-        /// Gets or sets the capsuleer.
+        ///     Gets or sets the capsuleer.
         /// </summary>
         /// <value>The capsuleer.</value>
         [DataMember(Name = "capsuleer")]
-        public CrestLinkedEntity<CrestNotImplemented> Capsuleer { get; set; }
+        public LinkedEntity<NotImplemented> Capsuleer { get; set; }
 
         /// <summary>
-        /// Gets or sets the portraits.
+        ///     Gets or sets the portraits.
         /// </summary>
         /// <value>The portraits.</value>
         [DataMember(Name = "portrait")]
-        public CrestImageLink Portraits { get; set; }
+        public ImageLink Portraits { get; set; }
     }
 }

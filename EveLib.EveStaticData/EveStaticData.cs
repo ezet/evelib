@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.StaticDataModule.Models;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.StaticDataModule {
     /// <summary>
     ///     Class for accessing the static data API from Elemen43
     /// </summary>

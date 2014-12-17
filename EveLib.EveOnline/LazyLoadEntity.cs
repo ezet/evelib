@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveOnlineModule {
     /// <summary>
     ///     Class LazyLoadEntity.
     /// </summary>

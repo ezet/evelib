@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.Modules.Models.Corporation {
+namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
     /// <summary>
     ///     Class CorporationSheet.
     /// </summary>

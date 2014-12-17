@@ -20,9 +20,9 @@ using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.ZKillboardModule.Models;
 
-namespace eZet.EveLib.Modules.RequestHandlers {
+namespace eZet.EveLib.ZKillboardModule.RequestHandlers {
     /// <summary>
     ///     Class ZkbRequestHandler.
     /// </summary>

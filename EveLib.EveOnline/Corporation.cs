@@ -4,18 +4,18 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using eZet.EveLib.Modules.Models;
-using eZet.EveLib.Modules.Models.Account;
-using eZet.EveLib.Modules.Models.Character;
-using eZet.EveLib.Modules.Models.Corporation;
-using ContactList = eZet.EveLib.Modules.Models.Corporation.ContactList;
-using FactionWarfareStats = eZet.EveLib.Modules.Models.Corporation.FactionWarfareStats;
-using MedalList = eZet.EveLib.Modules.Models.Corporation.MedalList;
-using StandingsList = eZet.EveLib.Modules.Models.Corporation.StandingsList;
+using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveOnlineModule.Models.Account;
+using eZet.EveLib.EveOnlineModule.Models.Character;
+using eZet.EveLib.EveOnlineModule.Models.Corporation;
+using ContactList = eZet.EveLib.EveOnlineModule.Models.Corporation.ContactList;
+using FactionWarfareStats = eZet.EveLib.EveOnlineModule.Models.Corporation.FactionWarfareStats;
+using MedalList = eZet.EveLib.EveOnlineModule.Models.Corporation.MedalList;
+using StandingsList = eZet.EveLib.EveOnlineModule.Models.Corporation.StandingsList;
 
 [assembly: InternalsVisibleTo("EveLib.Test")]
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.EveOnlineModule {
     /// <summary>
     ///     Provides access to all API calls relating to a specific corporation, that is, all API paths starting with /corp in
     ///     CCPs API.

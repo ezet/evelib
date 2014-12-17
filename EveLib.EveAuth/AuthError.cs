@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace eZet.EveLib.EveAuth {
+namespace eZet.EveLib.EveAuthModule {
     /// <summary>
     ///     Represents a CREST exception
     /// </summary>

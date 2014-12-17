@@ -1,11 +1,12 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using eZet.EveLib.Core.Exceptions;
 
-namespace eZet.EveLib.Modules.Exceptions {
+namespace eZet.EveLib.EveOnlineModule.Exceptions {
     /// <summary>
     ///     Exception class for the Eve Online API.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
+    [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
     public class EveOnlineException : EveLibWebException {
         /// <summary>
         ///     Constructor

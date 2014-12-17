@@ -3,9 +3,9 @@ using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.Modules.Models;
+using eZet.EveLib.Element43Module.Models;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.Element43Module {
     /// <summary>
     ///     Class for accessing the Element43 Legacy API
     /// </summary>
@@ -38,7 +38,7 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
-        public Element43MarketStatResponse GetMarketStat(Element43Options options) {
+        public MarketStatResponse GetMarketStat(Element43Options options) {
             Contract.Requires(options != null);
             return GetMarketStatAsync(options).Result;
         }
@@ -48,12 +48,12 @@ namespace eZet.EveLib.Modules {
         /// </summary>
         /// <param name="options">Valid options; Items, HourLimit, MinQuantity, Regions, Systems</param>
         /// <returns></returns>
-        public Task<Element43MarketStatResponse> GetMarketStatAsync(Element43Options options) {
+        public Task<MarketStatResponse> GetMarketStatAsync(Element43Options options) {
             Contract.Requires(options != null, "Options cannot be null");
             Contract.Requires(options.Items.Count != 0, "You need to specify atleast one type.");
             const string relUri = "/market/api/marketstat";
             string queryString = options.GetRegionQuery("regionlimit") + options.GetItemQuery("typeid");
-            Task<Element43MarketStatResponse> res = requestAsync<Element43MarketStatResponse>(relUri, queryString);
+            Task<MarketStatResponse> res = requestAsync<MarketStatResponse>(relUri, queryString);
             return res;
         }
 

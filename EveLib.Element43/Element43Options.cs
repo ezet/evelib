@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace eZet.EveLib.Modules {
+namespace eZet.EveLib.Element43Module {
     /// <summary>
     ///     Provides a set of configurable options for EveCentral requests.
     /// </summary>
