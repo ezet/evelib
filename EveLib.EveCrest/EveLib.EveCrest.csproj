@@ -181,6 +181,10 @@
       <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
       <Name>EveLib.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveAuth\EveLib.EveAuth.csproj">
+      <Project>{66A526C4-AD56-42A1-A680-0D11A524EC40}</Project>
+      <Name>EveLib.EveAuth</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

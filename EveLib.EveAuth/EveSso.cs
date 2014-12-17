@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveAuth {
     /// <summary>
     /// Class EveSso. A helper class for Eve Online SSO authentication
     /// </summary>
-    public static class EveSso {
+    public class EveSso {
 
         /// <summary>
         /// Gets or sets the base URI.
@@ -29,7 +29,10 @@ namespace eZet.EveLib.EveAuth {
         /// <value>The base URI.</value>
         public static string BaseUri { get; set; }
 
-        static EveSso() {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EveSso"/> class.
+        /// </summary>
+        public EveSso() {
             BaseUri = "https://login.eveonline.com";
         }
 
@@ -52,7 +55,7 @@ namespace eZet.EveLib.EveAuth {
         /// <param name="redirectUri">The redirect URI.</param>
         /// <param name="crestScope">The crest scope.</param>
         /// <returns>System.String.</returns>
-        public static string CreateAuthLink(string clientId, string redirectUri, CrestScope crestScope) {
+        public string CreateAuthLink(string clientId, string redirectUri, CrestScope crestScope) {
             string url =
                 BaseUri + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + resolveScope(crestScope);
             return url;
@@ -64,7 +67,7 @@ namespace eZet.EveLib.EveAuth {
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="authCode">The authentication code.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        public static async Task<AuthResponse> Authenticate(string encodedKey, string authCode) {
+        public async Task<AuthResponse> Authenticate(string encodedKey, string authCode) {
             var request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/token"));
             request.Host = "login.eveonline.com";
             request.Headers.Add("Authorization", "Basic " + encodedKey);
@@ -81,7 +84,7 @@ namespace eZet.EveLib.EveAuth {
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="refreshToken">The refresh token.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        public static async Task<AuthResponse> Refresh(string encodedKey, string refreshToken) {
+        public async Task<AuthResponse> Refresh(string encodedKey, string refreshToken) {
             var request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/token"));
             request.Host = "login.eveonline.com";
             request.Headers.Add("Authorization", "Basic " + encodedKey);

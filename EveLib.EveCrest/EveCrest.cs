@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
+using eZet.EveLib.EveAuth;
 using eZet.EveLib.Modules.Models.Entities;
 using eZet.EveLib.Modules.Models.Resources;
 using eZet.EveLib.Modules.RequestHandlers;
@@ -23,7 +24,7 @@ namespace eZet.EveLib.Modules {
 
 
     /// <summary>
-    ///     Provides access to the Eve Online CREST API.
+    /// Provides access to the Eve Online CREST API.
     /// </summary>
     public class EveCrest {
         /// <summary>
@@ -54,6 +55,8 @@ namespace eZet.EveLib.Modules {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
             BasePublicUri = DefaultPublicUri;
             BaseAuthUri = DefaultAuthUri;
+            EveAuth = new EveSso();
+
         }
 
         /// <summary>
@@ -67,10 +70,44 @@ namespace eZet.EveLib.Modules {
         public string BaseAuthUri { get; set; }
 
         /// <summary>
+        /// Gets or sets the eve sso.
+        /// </summary>
+        /// <value>The eve sso.</value>
+        public EveSso EveAuth { get; set; }
+
+        /// <summary>
         /// Gets or sets the CREST Access Token
         /// The Access Token is the final token acquired through the SSO login process, and should be managed by client code.
         /// </summary>
         public string AccessToken { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the refresh token.
+        /// </summary>
+        /// <value>The refresh token.</value>
+        public string RefreshToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the encoded key. This is required to refresh access tokens.
+        /// </summary>
+        /// <value>The encoded key.</value>
+        public string EncodedKey { get; set; }
+
+        /// <summary>
+        /// Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
+        /// </summary>
+        public async void Refresh() {
+            var response = await EveAuth.Refresh(EncodedKey, RefreshToken).ConfigureAwait(false);
+            AccessToken = response.AccessToken;
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow the library to automatically refresh the access token.
+        /// </summary>
+        /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
+        public bool AllowAutomaticRefresh { get; set; }
+
 
         /// <summary>
         /// Gets or sets the CREST access mode.
