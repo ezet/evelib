@@ -15,7 +15,7 @@
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     /// <summary>
     ///     Class TournamentTeamMember. This class cannot be inherited.
     /// </summary>

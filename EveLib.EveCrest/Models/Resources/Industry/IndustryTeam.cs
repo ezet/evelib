@@ -18,7 +18,7 @@ using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     /// <summary>
     ///     Represents a CREST industry team
     /// </summary>

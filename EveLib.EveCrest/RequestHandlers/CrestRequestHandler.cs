@@ -15,9 +15,10 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// </summary>
     public class CrestRequestHandler : ICrestRequestHandler {
         /// <summary>
-        /// The token type
+        ///     The token type
         /// </summary>
         public const string TokenType = "Bearer";
+
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>

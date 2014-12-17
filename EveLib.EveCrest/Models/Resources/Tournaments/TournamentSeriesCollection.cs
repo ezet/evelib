@@ -6,7 +6,7 @@
 // Last Modified By : Lars Kristian
 // Last Modified On : 12-17-2014
 // ***********************************************************************
-// <copyright file="TournamentMatchCollection.cs" company="">
+// <copyright file="TournamentSeriesCollection.cs" company="">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -15,17 +15,17 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     /// <summary>
-    ///     Class TournamentMatchCollection. This class cannot be inherited.
+    ///     Class TournamentSeriesCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class TournamentMatchCollection : CollectionResource<TournamentMatchCollection> {
+    public sealed class TournamentSeriesCollection : CollectionResource<TournamentSeriesCollection> {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TournamentMatchCollection" /> class.
+        ///     Initializes a new instance of the <see cref="TournamentSeriesCollection" /> class.
         /// </summary>
-        public TournamentMatchCollection() {
-            Version = "application/vnd.ccp.eve.TournamentMatchCollection-v1+json";
+        public TournamentSeriesCollection() {
+            Version = "application/vnd.ccp.eve.TournamentSeriesCollection-v1+json";
         }
 
         /// <summary>
@@ -33,6 +33,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]
-        public IReadOnlyList<TournamentMatch> Items { get; set; }
+        public IReadOnlyCollection<TournamentSeries> Items { get; set; }
     }
 }

@@ -11,14 +11,15 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
-    /// Interface ILinkedEntity
+    ///     Interface ILinkedEntity
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface ILinkedEntity<T> {
         /// <summary>
-        /// Gets or sets the href.
+        ///     Gets or sets the href.
         /// </summary>
         /// <value>The href.</value>
         Href<T> Href { get; set; }

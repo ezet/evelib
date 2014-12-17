@@ -11,17 +11,18 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
-    /// Class LinkedIconEntity.
+    ///     Class LinkedIconEntity.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class LinkedIconEntity<T> : LinkedEntity<T> {
         /// <summary>
-        /// Gets or sets the icon.
+        ///     Gets or sets the icon.
         /// </summary>
         /// <value>The icon.</value>
         [DataMember(Name = "icon")]

@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
@@ -19,21 +20,21 @@ using eZet.EveLib.EveWhoModule.Models;
 
 namespace eZet.EveLib.EveWhoModule {
     /// <summary>
-    /// Class EveWho.
+    ///     Class EveWho.
     /// </summary>
     public class EveWho : EveLibApiBase {
         /// <summary>
-        /// The default URI used to access the EveWho API.
+        ///     The default URI used to access the EveWho API.
         /// </summary>
         public const string DefaultUri = "http://www.evewho.com/";
 
         /// <summary>
-        /// The default relative path to the API base.
+        ///     The default relative path to the API base.
         /// </summary>
         public const string DefaultApiPath = "api.php";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveWho"/> class.
+        ///     Initializes a new instance of the <see cref="EveWho" /> class.
         /// </summary>
         public EveWho() {
             RequestHandler = new RequestHandler(new JsonSerializer());
@@ -42,7 +43,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the character asynchronous.
+        ///     Gets the character asynchronous.
         /// </summary>
         /// <param name="characterId">The character identifier.</param>
         /// <param name="page">The page.</param>
@@ -53,7 +54,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the character.
+        ///     Gets the character.
         /// </summary>
         /// <param name="characterId">The character identifier.</param>
         /// <param name="page">The page.</param>
@@ -63,7 +64,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the corporation asynchronous.
+        ///     Gets the corporation asynchronous.
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
@@ -74,7 +75,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the corporation.
+        ///     Gets the corporation.
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
@@ -84,7 +85,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the corporation members asynchronous.
+        ///     Gets the corporation members asynchronous.
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
@@ -96,7 +97,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the corporation members.
+        ///     Gets the corporation members.
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
@@ -106,7 +107,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the alliance asynchronous.
+        ///     Gets the alliance asynchronous.
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>
@@ -117,7 +118,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the alliance.
+        ///     Gets the alliance.
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>
@@ -127,7 +128,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the alliance members asynchronous.
+        ///     Gets the alliance members asynchronous.
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>
@@ -138,7 +139,7 @@ namespace eZet.EveLib.EveWhoModule {
         }
 
         /// <summary>
-        /// Gets the alliance members.
+        ///     Gets the alliance members.
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>

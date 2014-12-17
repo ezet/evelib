@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// <summary>
     ///     Class MarketOrderCollection.
     /// </summary>

@@ -11,38 +11,39 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class CrestResource.
+    ///     Class CrestResource.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class CrestResource<T> : ICrestResource<T> where T : class, ICrestResource<T> {
-
         /// <summary>
-        /// Gets or sets the crest.
+        ///     Gets or sets the crest.
         /// </summary>
         /// <value>The crest.</value>
         public EveCrest Crest { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this resource is deprecated.
+        ///     Gets or sets a value indicating whether this resource is deprecated.
         /// </summary>
         /// <value><c>true</c> if this instance is deprecated; otherwise, <c>false</c>.</value>
         public virtual bool IsDeprecated { get; set; }
 
         /// <summary>
-        /// Gets or sets the version.
+        ///     Gets or sets the version.
         /// </summary>
         /// <value>The version.</value>
         public virtual string Version { get; protected set; }
 
 
         /// <summary>
-        /// Queries the resource asynchronous.
+        ///     Queries the resource asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -53,7 +54,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries the resource asynchronous.
+        ///     Queries the resource asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -61,6 +62,40 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Task<TOut> QueryAsync<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             return Crest.LoadAsync(objFunc.Invoke(this as T));
+        }
+
+        /// <summary>
+        ///     Queries the resource asynchronous.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        public Task<TOut[]> QueryAsync<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var list = new List<Task<TOut>>();
+            var items = objFunc.Invoke(this as T);
+            foreach (var item in items) {
+                list.Add(Crest.LoadAsync(item));
+            }
+            var task = Task.WhenAll(list);
+            return task;
+        }
+
+        /// <summary>
+        ///     Queries the resource asynchronous.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        public Task<TOut[]> QueryAsync<TOut>(Func<T, IEnumerable<LinkedEntity<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var list = new List<Task<TOut>>();
+            var items = objFunc.Invoke(this as T);
+            foreach (var item in items) {
+                list.Add(Crest.LoadAsync(item));
+            }
+            var task = Task.WhenAll(list);
+            return task;
         }
     }
 }

@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// <summary>
     ///     Represents a CREST market history response
     /// </summary>

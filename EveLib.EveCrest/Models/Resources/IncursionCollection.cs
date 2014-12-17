@@ -11,84 +11,85 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Represents a CREST /incursions/ response
+    ///     Represents a CREST /incursions/ response
     /// </summary>
     [DataContract]
     public sealed class IncursionCollection : CollectionResource<IncursionCollection> {
         /// <summary>
-        /// Represens the incursion states
+        ///     Represens the incursion states
         /// </summary>
         public enum IncursionState {
             /// <summary>
-            /// Established incursion
+            ///     Established incursion
             /// </summary>
             [DataMember(Name = "Established")] Established,
 
             /// <summary>
-            /// Mobilizing incursion
+            ///     Mobilizing incursion
             /// </summary>
             [DataMember(Name = "Mobilizing")] Mobilizing,
 
             /// <summary>
-            /// Withdrawing incursion
+            ///     Withdrawing incursion
             /// </summary>
             [DataMember(Name = "Withdrawing")] Withdrawing,
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IncursionCollection"/> class.
+        ///     Initializes a new instance of the <see cref="IncursionCollection" /> class.
         /// </summary>
         public IncursionCollection() {
             Version = "application/vnd.ccp.eve.IncursionCollection-v1+json";
         }
 
         /// <summary>
-        /// A list of incursions
+        ///     A list of incursions
         /// </summary>
         /// <value>The incursions.</value>
         [DataMember(Name = "items")]
         public IReadOnlyList<Incursion> Incursions { get; set; }
 
         /// <summary>
-        /// Represents an incursion
+        ///     Represents an incursion
         /// </summary>
         public class Incursion {
             /// <summary>
-            /// The incursion influence
+            ///     The incursion influence
             /// </summary>
             /// <value>The influence.</value>
             [DataMember(Name = "influence")]
             public double Influence { get; set; }
 
             /// <summary>
-            /// True if the incursion has a boss
+            ///     True if the incursion has a boss
             /// </summary>
             /// <value><c>true</c> if this instance has boss; otherwise, <c>false</c>.</value>
             [DataMember(Name = "hasBoss")]
             public bool HasBoss { get; set; }
 
             /// <summary>
-            /// The incursion state
+            ///     The incursion state
             /// </summary>
             /// <value>The state.</value>
             [DataMember(Name = "state")]
             public IncursionState State { get; set; }
 
             /// <summary>
-            /// The incursion's staging system
+            ///     The incursion's staging system
             /// </summary>
             /// <value>The staging solar system.</value>
             [DataMember(Name = "stagingSolarSystem")]
             public LinkedEntity<SolarSystem> StagingSolarSystem { get; set; }
 
             /// <summary>
-            /// The constellation
+            ///     The constellation
             /// </summary>
             /// <value>The constellation.</value>
             [DataMember(Name = "constellation")]

@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
+using eZet.EveLib.EveCrestModule.Models.Resources.Tournaments;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {

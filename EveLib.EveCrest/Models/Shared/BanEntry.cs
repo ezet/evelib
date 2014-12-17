@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Resources.Tournaments;
 
 namespace eZet.EveLib.EveCrestModule.Models.Shared {
     /// <summary>

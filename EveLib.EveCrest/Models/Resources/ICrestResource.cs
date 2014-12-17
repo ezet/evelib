@@ -11,36 +11,37 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Interface ICrestResource
+    ///     Interface ICrestResource
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface ICrestResource<out T> where T : class, ICrestResource<T> {
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is deprecated.
+        ///     Gets or sets a value indicating whether this instance is deprecated.
         /// </summary>
         /// <value><c>true</c> if this instance is deprecated; otherwise, <c>false</c>.</value>
         bool IsDeprecated { get; set; }
 
         /// <summary>
-        /// Gets the version.
+        ///     Gets the version.
         /// </summary>
         /// <value>The version.</value>
         string Version { get; }
 
         /// <summary>
-        /// Gets or sets the crest.
+        ///     Gets or sets the crest.
         /// </summary>
         /// <value>The crest.</value>
         EveCrest Crest { get; set; }
 
         /// <summary>
-        /// Queries the resource asynchronous.
+        ///     Queries the resource asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -49,7 +50,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries the resource asynchronous.
+        ///     Queries the resource asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>

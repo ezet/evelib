@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
+using eZet.EveLib.EveCrestModule.Models.Resources.Market;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -43,9 +45,14 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetRoot() {
-            await crest.GetAlliancesAsync();
             CrestRoot result = await crest.GetRootAsync();
-            var alliances = await result.QueryAsync(f => f.Alliances);
+
+            var regions = (await crest.GetRoot().QueryAsync(f => f.Regions));
+            regions.QueryAsync(f => f.Items.First());
+
+
+            //await crest.GetAlliancesAsync();
+            //AllianceCollection alliances = await result.QueryAsync(f => f.Alliances);
             //AllianceCollection test = await crest.LoadAsync(result.Alliances);
         }
 
@@ -101,7 +108,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EveCrestException))]
+        [ExpectedException(typeof (EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }

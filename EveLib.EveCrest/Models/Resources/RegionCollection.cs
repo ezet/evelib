@@ -11,25 +11,26 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class RegionCollection. This class cannot be inherited.
+    ///     Class RegionCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
     public sealed class RegionCollection : CollectionResource<RegionCollection> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RegionCollection" /> class.
+        ///     Initializes a new instance of the <see cref="RegionCollection" /> class.
         /// </summary>
         public RegionCollection() {
             Version = "application/vnd.ccp.eve.RegionCollection-v1+json";
         }
 
         /// <summary>
-        /// Gets or sets the items.
+        ///     Gets or sets the items.
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Properties;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
@@ -10,13 +9,13 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// </summary>
     public interface ICrestRequestHandler {
         /// <summary>
-        /// Gets or sets a value indicating whether [throw on deprecated].
+        ///     Gets or sets a value indicating whether [throw on deprecated].
         /// </summary>
         /// <value><c>true</c> if [throw on deprecated]; otherwise, <c>false</c>.</value>
         bool ThrowOnDeprecated { get; set; }
 
         /// <summary>
-        /// Gets or sets the serializer.
+        ///     Gets or sets the serializer.
         /// </summary>
         /// <value>The serializer.</value>
         ISerializer Serializer { get; set; }

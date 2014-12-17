@@ -15,7 +15,7 @@
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     /// <summary>
     ///     Class TournamentSeries.
     /// </summary>
@@ -142,7 +142,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// </summary>
             /// <value>The team.</value>
             [DataMember(Name = "team")]
-            public LinkedEntity<Resources.TournamentTeam> Team { get; set; }
+            public LinkedEntity<Tournaments.TournamentTeam> Team { get; set; }
 
             /// <summary>
             ///     Gets or sets a value indicating whether this instance is decided.

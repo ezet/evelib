@@ -11,18 +11,19 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Represents a CREST /killmails/ response
+    ///     Represents a CREST /killmails/ response
     /// </summary>
     [DataContract]
     public sealed class KillmailCollection : CollectionResource<KillmailCollection> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KillmailCollection" /> class.
+        ///     Initializes a new instance of the <see cref="KillmailCollection" /> class.
         /// </summary>
         public KillmailCollection() {
             Version = "application/vnd.ccp.eve.WarKillmails-v1+json";
@@ -30,7 +31,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
 
         /// <summary>
-        /// A list of killmails
+        ///     A list of killmails
         /// </summary>
         /// <value>The killmails.</value>
         [DataMember(Name = "items")]

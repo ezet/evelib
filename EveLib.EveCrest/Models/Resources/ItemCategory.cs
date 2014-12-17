@@ -11,39 +11,40 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class ItemCategory. This class cannot be inherited.
+    ///     Class ItemCategory. This class cannot be inherited.
     /// </summary>
     [DataContract]
     public sealed class ItemCategory : CrestResource<ItemCategory> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemCategory"/> class.
+        ///     Initializes a new instance of the <see cref="ItemCategory" /> class.
         /// </summary>
         public ItemCategory() {
             Version = "application/vnd.ccp.eve.ItemCategory-v1+json";
         }
 
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the groups.
+        ///     Gets or sets the groups.
         /// </summary>
         /// <value>The groups.</value>
         [DataMember(Name = "groups")]
         public IReadOnlyCollection<LinkedEntity<ItemGroup>> Groups { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="ItemCategory"/> is published.
+        ///     Gets or sets a value indicating whether this <see cref="ItemCategory" /> is published.
         /// </summary>
         /// <value><c>true</c> if published; otherwise, <c>false</c>.</value>
         [DataMember(Name = "published")]

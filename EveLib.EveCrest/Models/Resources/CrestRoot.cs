@@ -14,6 +14,9 @@
 
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
+using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
+using eZet.EveLib.EveCrestModule.Models.Resources.Market;
+using eZet.EveLib.EveCrestModule.Models.Resources.Tournaments;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>

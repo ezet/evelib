@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
-using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

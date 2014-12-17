@@ -11,13 +11,14 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule {
     /// <summary>
-    /// Class CrestModels.
+    ///     Class CrestModels.
     /// </summary>
     public static class CrestModels {
         static CrestModels() {
@@ -29,7 +30,7 @@ namespace eZet.EveLib.EveCrestModule {
         private static Dictionary<Type, string> Register { get; set; }
 
         /// <summary>
-        /// Gets this instance.
+        ///     Gets this instance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns>System.String.</returns>

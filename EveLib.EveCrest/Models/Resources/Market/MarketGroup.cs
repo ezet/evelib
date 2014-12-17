@@ -11,38 +11,39 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// <summary>
-    /// Class MarketGroup. This class cannot be inherited.
+    ///     Class MarketGroup. This class cannot be inherited.
     /// </summary>
     [DataContract]
     public sealed class MarketGroup : LinkedResource<MarketGroup> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarketGroup" /> class.
+        ///     Initializes a new instance of the <see cref="MarketGroup" /> class.
         /// </summary>
         public MarketGroup() {
             Version = "application/vnd.ccp.eve.MarketGroup-v1+json";
         }
 
         /// <summary>
-        /// Gets or sets the blueprints.
+        ///     Gets or sets the blueprints.
         /// </summary>
         /// <value>The blueprints.</value>
         [DataMember(Name = "name")]
         public string Blueprints { get; set; }
 
         /// <summary>
-        /// Gets or sets the description.
+        ///     Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the types.
+        ///     Gets or sets the types.
         /// </summary>
         /// <value>The types.</value>
         [DataMember(Name = "types")]

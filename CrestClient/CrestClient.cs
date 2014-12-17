@@ -11,33 +11,34 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveCrestModule.RequestHandlers;
 
 namespace eZet.EveLib.CrestClientModule {
     /// <summary>
-    /// Class CrestClient.
+    ///     Class CrestClient.
     /// </summary>
     public class CrestClient {
         /// <summary>
-        /// The default URI used to access the CREST API. This can be overridded by setting the BasePublicUri.
+        ///     The default URI used to access the CREST API. This can be overridded by setting the BasePublicUri.
         /// </summary>
         public const string DefaultUri = "http://public-crest.eveonline.com/";
 
         /// <summary>
-        /// The default URI used to access the authenticated CREST API. This can be overridded by setting the BasePublicUri.
+        ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the BasePublicUri.
         /// </summary>
         public const string AuthedUri = "https://crest-tq.eveonline.com/";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CrestClient"/> class.
+        ///     Initializes a new instance of the <see cref="CrestClient" /> class.
         /// </summary>
         public CrestClient() {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
         }
 
         /// <summary>
-        /// Gets or sets the request handler.
+        ///     Gets or sets the request handler.
         /// </summary>
         /// <value>The request handler.</value>
         public ICrestRequestHandler RequestHandler { get; set; }

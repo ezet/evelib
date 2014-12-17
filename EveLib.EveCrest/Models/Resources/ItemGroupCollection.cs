@@ -11,25 +11,26 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class ItemGroupCollection. This class cannot be inherited.
+    ///     Class ItemGroupCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
     public sealed class ItemGroupCollection : CollectionResource<ItemGroupCollection> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemGroupCollection"/> class.
+        ///     Initializes a new instance of the <see cref="ItemGroupCollection" /> class.
         /// </summary>
         public ItemGroupCollection() {
             Version = "application/vnd.ccp.eve.ItemGroupCollection-v1+json";
         }
 
         /// <summary>
-        /// Gets or sets the items.
+        ///     Gets or sets the items.
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]

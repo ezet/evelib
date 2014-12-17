@@ -11,22 +11,22 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
-    /// Class LinkedResource.
+    ///     Class LinkedResource.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DataContract]
-    public class LinkedResource<T> :  CrestResource<T>, ILinkedEntity<T> where T : class, ICrestResource<T> {
+    public class LinkedResource<T> : CrestResource<T>, ILinkedEntity<T> where T : class, ICrestResource<T> {
         /// <summary>
-        /// The entity href
+        ///     The entity href
         /// </summary>
         /// <value>The href.</value>
         [DataMember(Name = "href")]
         public Href<T> Href { get; set; }
-
     }
 }

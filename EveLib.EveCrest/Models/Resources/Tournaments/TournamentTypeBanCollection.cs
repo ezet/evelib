@@ -6,7 +6,7 @@
 // Last Modified By : Lars Kristian
 // Last Modified On : 12-17-2014
 // ***********************************************************************
-// <copyright file="TournamentSeriesCollection.cs" company="">
+// <copyright file="TournamentTypeBanCollection.cs" company="">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -14,18 +14,19 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using eZet.EveLib.EveCrestModule.Models.Shared;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     /// <summary>
-    ///     Class TournamentSeriesCollection. This class cannot be inherited.
+    ///     Class TournamentTypeBanCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class TournamentSeriesCollection : CollectionResource<TournamentSeriesCollection> {
+    public sealed class TournamentTypeBanCollection : CollectionResource<TournamentTypeBanCollection> {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TournamentSeriesCollection" /> class.
+        ///     Initializes a new instance of the <see cref="TournamentTypeBanCollection" /> class.
         /// </summary>
-        public TournamentSeriesCollection() {
-            Version = "application/vnd.ccp.eve.TournamentSeriesCollection-v1+json";
+        public TournamentTypeBanCollection() {
+            Version = "application/vnd.ccp.eve.TournamentTypeBanCollection-v1+json";
         }
 
         /// <summary>
@@ -33,6 +34,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]
-        public IReadOnlyCollection<TournamentSeries> Items { get; set; }
+        public IReadOnlyList<BanEntry> Items { get; set; }
     }
 }

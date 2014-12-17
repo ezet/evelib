@@ -11,25 +11,26 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// <summary>
-    /// Class MarketTypeCollection. This class cannot be inherited.
+    ///     Class MarketTypeCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
     public sealed class MarketTypeCollection : CollectionResource<MarketGroupCollection> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarketTypeCollection"/> class.
+        ///     Initializes a new instance of the <see cref="MarketTypeCollection" /> class.
         /// </summary>
         public MarketTypeCollection() {
             Version = "application/vnd.ccp.eve.MarketTypeCollection-v1+json";
         }
 
         /// <summary>
-        /// Gets or sets the items.
+        ///     Gets or sets the items.
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]
@@ -37,19 +38,19 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
 
         /// <summary>
-        /// Class Item.
+        ///     Class Item.
         /// </summary>
         [DataContract]
         public class Item {
             /// <summary>
-            /// Gets or sets the market group.
+            ///     Gets or sets the market group.
             /// </summary>
             /// <value>The market group.</value>
             [DataMember(Name = "marketGroup")]
             public LinkedEntity<MarketGroup> MarketGroup { get; set; }
 
             /// <summary>
-            /// Gets or sets the type.
+            ///     Gets or sets the type.
             /// </summary>
             /// <value>The type.</value>
             [DataMember(Name = "type")]
@@ -57,12 +58,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Class TypeItem.
+        ///     Class TypeItem.
         /// </summary>
         [DataContract]
         public class TypeItem : LinkedEntity<ItemType> {
             /// <summary>
-            /// Gets or sets the icon.
+            ///     Gets or sets the icon.
             /// </summary>
             /// <value>The icon.</value>
             [DataMember(Name = "icon")]

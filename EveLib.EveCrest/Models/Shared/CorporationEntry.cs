@@ -11,25 +11,26 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule.Models.Shared {
     /// <summary>
-    /// Class CorporationEntry.
+    ///     Class CorporationEntry.
     /// </summary>
     [DataContract]
     public class CorporationEntry : LinkedEntity<NotImplemented> {
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is NPC.
+        ///     Gets or sets a value indicating whether this instance is NPC.
         /// </summary>
         /// <value><c>true</c> if this instance is NPC; otherwise, <c>false</c>.</value>
         [DataMember(Name = "isNPC")]
         public bool IsNpc { get; set; }
 
         /// <summary>
-        /// Gets or sets the logo.
+        ///     Gets or sets the logo.
         /// </summary>
         /// <value>The logo.</value>
         [DataMember(Name = "logo")]

@@ -6,7 +6,7 @@
 // Last Modified By : Lars Kristian
 // Last Modified On : 12-17-2014
 // ***********************************************************************
-// <copyright file="WarCollection.cs" company="">
+// <copyright file="IndustrySpecialityCollection.cs" company="">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -14,26 +14,25 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     /// <summary>
-    ///     Represents a CREST collection of wars
+    ///     Represents a CREST /industry/specialities/ response
     /// </summary>
     [DataContract]
-    public sealed class WarCollection : CollectionResource<WarCollection> {
+    public sealed class IndustrySpecialityCollection : CollectionResource<IndustrySpecialityCollection> {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="WarCollection" /> class.
+        ///     Initializes a new instance of the <see cref="IndustrySpecialityCollection" /> class.
         /// </summary>
-        public WarCollection() {
-            Version = "application/vnd.ccp.eve.WarsCollection-v1+json";
+        public IndustrySpecialityCollection() {
+            Version = "application/vnd.ccp.eve.IndustrySpecialityCollection-v1+json";
         }
 
         /// <summary>
-        ///     A list of wars
+        ///     A list of specializations
         /// </summary>
-        /// <value>The items.</value>
+        /// <value>The specialities.</value>
         [DataMember(Name = "items")]
-        public IReadOnlyList<LinkedEntity<War>> Items { get; set; }
+        public IReadOnlyList<IndustrySpeciality> Specialities { get; set; }
     }
 }
