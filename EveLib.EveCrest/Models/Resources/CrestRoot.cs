@@ -68,7 +68,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The corporation roles.</value>
         [DataMember(Name = "corporationRoles")]
-        public CrestHref<CrestPlaceholderModel> CorporationRoles { get; set; }
+        public CrestHref<CrestNotImplemented> CorporationRoles { get; set; }
 
 
         /// <summary>
@@ -83,14 +83,14 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The channels.</value>
         [DataMember(Name = "channel")]
-        public CrestHref<CrestPlaceholderModel> Channels { get; set; }
+        public CrestHref<CrestNotImplemented> Channels { get; set; }
 
         /// <summary>
         /// Gets or sets the corporations.
         /// </summary>
         /// <value>The corporations.</value>
         [DataMember(Name = "corporations")]
-        public CrestHref<CrestPlaceholderModel> Corporations { get; set; }
+        public CrestHref<CrestNotImplemented> Corporations { get; set; }
 
         /// <summary>
         /// Gets or sets the alliances.
@@ -104,14 +104,14 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The decode.</value>
         [DataMember(Name = "decode")]
-        public CrestHref<CrestPlaceholderModel> Decode { get; set; }
+        public CrestHref<CrestNotImplemented> Decode { get; set; }
 
         /// <summary>
         /// Gets or sets the battle theatres.
         /// </summary>
         /// <value>The battle theatres.</value>
         [DataMember(Name = "battleTheatres")]
-        public CrestHref<CrestPlaceholderModel> BattleTheatres { get; set; }
+        public CrestHref<CrestNotImplemented> BattleTheatres { get; set; }
 
         /// <summary>
         /// Gets or sets the market prices.
@@ -132,7 +132,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The bloodlines.</value>
         [DataMember(Name = "bloodlines")]
-        public CrestHref<CrestPlaceholderModel> Bloodlines { get; set; }
+        public CrestHref<CrestNotImplemented> Bloodlines { get; set; }
 
         /// <summary>
         /// Gets or sets the market groups.
@@ -141,13 +141,29 @@ namespace eZet.EveLib.Modules.Models.Resources {
         [DataMember(Name = "marketGroups")]
         public CrestHref<CrestMarketGroupCollection> MarketGroups { get; set; }
 
+        /// <summary>
+        /// Gets or sets the tournaments.
+        /// </summary>
+        /// <value>The tournaments.</value>
         [DataMember(Name = "tournaments")]
         public CrestHref<CrestTournamentCollection> Tournaments { get; set; }
 
+        /// <summary>
+        /// Gets or sets the map.
+        /// </summary>
+        /// <value>The map.</value>
+        [DataMember(Name = "map")]
+        public CrestHref<CrestNotImplemented> Map { get; set; }
 
+        /// <summary>
+        /// Gets or sets the virtual good store.
+        /// </summary>
+        /// <value>The virtual good store.</value>
+        /// TODO Handle this better
+        [DataMember(Name = "virtualGoodStore")]
+        public CrestHref<CrestNotImplemented> VirtualGoodStore { get; set; }
 
-
-            /// <summary>
+        /// <summary>
         /// The server version
         /// </summary>
         /// <value>The server version.</value>
@@ -155,18 +171,36 @@ namespace eZet.EveLib.Modules.Models.Resources {
         public string ServerVersion { get; set; }
 
         /// <summary>
+        /// Gets or sets the wars.
+        /// </summary>
+        /// <value>The wars.</value>
+        [DataMember(Name = "wars")]
+        public CrestHref<CrestWarCollection> Wars { get; set; }
+
+        /// <summary>
+        /// Gets or sets the incursions.
+        /// </summary>
+        /// <value>The incursions.</value>
+        [DataMember(Name = "incursions")]
+        public CrestHref<CrestIncursionCollection> Incursions { get; set; }
+
+        [DataMember(Name = "races")]
+        public CrestHref<CrestNotImplemented> Races { get; set; }
+
+        // TODO handle this better
+        /// <summary>
+        /// Gets or sets the authentication endpoint.
+        /// </summary>
+        /// <value>The authentication endpoint.</value>
+        [DataMember(Name = "authEndpoint")]
+        public CrestHref<CrestNotImplemented> AuthEndpoint { get; set; }
+
+        /// <summary>
         /// The service status for all services
         /// </summary>
         /// <value>The service status.</value>
         [DataMember(Name = "serviceStatus")]
         public ServerStatus ServiceStatus { get; set; }
-
-        /// <summary>
-        /// The server name
-        /// </summary>
-        /// <value>The name of the server.</value>
-        [DataMember(Name = "serverName")]
-        public string ServerName { get; set; }
 
         /// <summary>
         /// The number of current users of services
@@ -178,16 +212,44 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// <summary>
         /// Current Time endpoint
         /// </summary>
+        /// <value>The industry.</value>
+        [DataMember(Name = "industry")]
+        public CrestIndustry Industry { get; set; }
+
+        [DataMember(Name = "clients")]
+        public ClientLinks Clients { get; set; }
+
+        /// <summary>
+        /// Current Time endpoint
+        /// </summary>
         /// <value>The time.</value>
         [DataMember(Name = "time")]
         public CrestHref<string> Time { get; set; }
 
         /// <summary>
-        /// Current Time endpoint
+        /// Gets or sets the market types.
         /// </summary>
-        /// <value>The industry.</value>
-        [DataMember(Name = "industry")]
-        public CrestIndustry Industry { get; set; }
+        /// <value>The market types.</value>
+        [DataMember(Name = "marketTypes")]
+        public CrestHref<CrestMarketTypeCollection> MarketTypes { get; set; }
+
+        /// <summary>
+        /// The server name
+        /// </summary>
+        /// <value>The name of the server.</value>
+        [DataMember(Name = "serverName")]
+        public string ServerName { get; set; }
+
+        [DataContract]
+        public class ClientLinks {
+
+            [DataMember(Name = "dust")]
+            public CrestHref<string> Dust { get; set; }
+
+            [DataMember(Name = "eve")]
+            public CrestHref<string> Eve { get; set; }
+        }
+
 
         /// <summary>
         /// Class CrestIndustry.
@@ -213,7 +275,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
             /// </summary>
             /// <value>The teams in auction.</value>
             [DataMember(Name = "teamsInAuction")]
-            public CrestHref<string> TeamsInAuction { get; set; }
+            public CrestHref<CrestIndustryTeamCollection> TeamsInAuction { get; set; }
 
             /// <summary>
             /// Gets or sets the systems.

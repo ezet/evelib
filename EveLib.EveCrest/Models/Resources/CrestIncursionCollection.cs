@@ -64,7 +64,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
             ///     The incursion's staging system
             /// </summary>
             [DataMember(Name = "stagingSolarSystem")]
-            public CrestLinkedEntity<CrestSolarSystem> StatingSolarSystem { get; set; }
+            public CrestLinkedEntity<CrestSolarSystem> StagingSolarSystem { get; set; }
 
             /// <summary>
             ///     The constellation

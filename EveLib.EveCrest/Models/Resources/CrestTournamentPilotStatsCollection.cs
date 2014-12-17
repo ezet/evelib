@@ -89,7 +89,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
             /// </summary>
             /// <value>The pilot.</value>
             [DataMember(Name = "pilot")]
-            public CrestLinkedIconEntity<CrestPlaceholderModel> Pilot { get; set; }
+            public CrestLinkedIconEntity<CrestNotImplemented> Pilot { get; set; }
 
         }
     }

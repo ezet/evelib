@@ -70,7 +70,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// <summary>
         ///     Represents an entity in a war
         /// </summary>
-        public class WarEntity : CrestLinkedIconEntity<CrestPlaceholderModel> {
+        public class WarEntity : CrestLinkedIconEntity<CrestNotImplemented> {
             /// <summary>
             ///     The number of ships killed
             /// </summary>

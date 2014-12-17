@@ -68,13 +68,13 @@ namespace eZet.EveLib.Modules.Models.Resources {
         ///     The alliance executor corporation
         /// </summary>
         [DataMember(Name = "executorCorporation")]
-        public CrestLinkedEntity<CrestPlaceholderModel> ExecutorCorporation { get; set; }
+        public CrestLinkedEntity<CrestNotImplemented> ExecutorCorporation { get; set; }
 
         /// <summary>
         ///     The alliance creator corporation
         /// </summary>
         [DataMember(Name = "creatorCorporation")]
-        public CrestLinkedEntity<CrestPlaceholderModel> CreatorCorporation { get; set; }
+        public CrestLinkedEntity<CrestNotImplemented> CreatorCorporation { get; set; }
 
         /// <summary>
         ///     The alliance creator character

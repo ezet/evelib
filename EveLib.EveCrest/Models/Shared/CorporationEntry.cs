@@ -4,7 +4,7 @@ using eZet.EveLib.Modules.Models.Resources;
 
 namespace eZet.EveLib.Modules.Models.Shared {
     [DataContract]
-    public class CorporationEntry : CrestLinkedEntity<CrestPlaceholderModel> {
+    public class CorporationEntry : CrestLinkedEntity<CrestNotImplemented> {
         [DataMember(Name = "isNPC")]
         public bool IsNpc { get; set; }
 

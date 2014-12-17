@@ -55,7 +55,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The pilots.</value>
         [DataMember(Name = "pilots")]
-        public IReadOnlyCollection<CrestLinkedIconEntity<CrestPlaceholderModel>> Pilots { get; set; }
+        public IReadOnlyCollection<CrestLinkedIconEntity<CrestNotImplemented>> Pilots { get; set; }
 
         /// <summary>
         /// Gets or sets the matches.
@@ -83,7 +83,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The captain.</value>
         [DataMember(Name = "captain")]
-        public CrestHref<CrestLinkedIconEntity<CrestPlaceholderModel>> Captain { get; set; }
+        public CrestHref<CrestLinkedIconEntity<CrestNotImplemented>> Captain { get; set; }
 
         /// <summary>
         /// Gets or sets the ban frequency against.

@@ -11,7 +11,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         }
 
         [DataMember(Name = "stats")]
-        public CrestHref<CrestPlaceholderModel> Stats { get; set; }
+        public CrestHref<CrestNotImplemented> Stats { get; set; }
 
         [DataMember(Name = "name")]
         public string Name { get; set; }

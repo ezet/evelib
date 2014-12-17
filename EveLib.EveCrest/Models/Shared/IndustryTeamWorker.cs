@@ -8,7 +8,7 @@ namespace eZet.EveLib.Modules.Models.Shared {
     /// <summary>
     ///     Represents a team worker
     /// </summary>
-    public class CrestIndustryTeamWorker {
+    public class IndustryTeamWorker {
         /// <summary>
         ///     Represents the worker bonus types
         /// </summary>

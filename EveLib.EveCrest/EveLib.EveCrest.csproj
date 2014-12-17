@@ -122,7 +122,6 @@
     <Compile Include="Models\Resources\CrestIndustrySpeciality.cs" />
     <Compile Include="Models\Resources\CrestIndustrySystemCollection.cs" />
     <Compile Include="Models\Resources\CrestIndustryTeam.cs" />
-    <Compile Include="Models\Resources\CrestIndustryTeamAuction.cs" />
     <Compile Include="Models\Resources\CrestIndustryTeamCollection.cs" />
     <Compile Include="Models\Resources\CrestPilotTournamentStats.cs" />
     <Compile Include="Models\Resources\CrestTournament.cs" />
@@ -135,7 +134,7 @@
     <Compile Include="Models\Resources\CrestTournamentTeam.cs" />
     <Compile Include="Models\Resources\CrestTournamentTeamMemberCollection.cs" />
     <Compile Include="Models\Resources\CrestTournamentTypeBanCollection.cs" />
-    <Compile Include="Models\Shared\CrestIndustryTeamWorker.cs" />
+    <Compile Include="Models\Shared\IndustryTeamWorker.cs" />
     <Compile Include="Models\Resources\CrestItemCategoryCollection.cs" />
     <Compile Include="Models\Resources\CrestItemGroup.cs" />
     <Compile Include="Models\Resources\CrestItemType.cs" />
@@ -148,7 +147,7 @@
     <Compile Include="Models\Resources\CrestMarketOrderCollection.cs" />
     <Compile Include="Models\Resources\CrestMarketTypeCollection.cs" />
     <Compile Include="Models\Resources\CrestMarketTypePriceCollection.cs" />
-    <Compile Include="Models\Resources\CrestPlaceholderModel.cs" />
+    <Compile Include="Models\Resources\CrestNotImplemented.cs" />
     <Compile Include="Models\Resources\CrestPlanet.cs" />
     <Compile Include="Models\Shared\CrestPosition.cs" />
     <Compile Include="Models\Resources\CrestRegion.cs" />

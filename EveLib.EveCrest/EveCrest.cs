@@ -7,6 +7,8 @@ using eZet.EveLib.Modules.RequestHandlers;
 
 namespace eZet.EveLib.Modules {
 
+    // TODO Convert decimal to double
+
 
     /// <summary>
     /// Enum Crest Access Mode
@@ -415,16 +417,16 @@ namespace eZet.EveLib.Modules {
         ///     Returns a list of all current industry team auctions
         /// </summary>
         /// <returns>A list of all current industry team auctions</returns>
-        public Task<CrestIndustryTeamAuction> GetIndustryTeamAuctionsAsync() {
+        public Task<CrestIndustryTeamCollection> GetIndustryTeamAuctionsAsync() {
             const string relPath = "industry/teams/auction/";
-            return requestAsync<CrestIndustryTeamAuction>(relPath);
+            return requestAsync<CrestIndustryTeamCollection>(relPath);
         }
 
         /// <summary>
         ///     Returns a list of all current industry team auctions
         /// </summary>
         /// <returns>A list of all current industry team auctions</returns>
-        public CrestIndustryTeamAuction GetIndustryTeamAuction() {
+        public CrestIndustryTeamCollection GetIndustryTeamAuction() {
             return GetIndustryTeamAuctionsAsync().Result;
         }
 

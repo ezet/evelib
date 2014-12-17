@@ -78,7 +78,7 @@ namespace eZet.EveLib.Modules.Models.Resources {
         /// </summary>
         /// <value>The character.</value>
         [DataMember(Name = "character")]
-        public CrestLinkedIconEntity<CrestPlaceholderModel> Character { get; set; }
+        public CrestLinkedIconEntity<CrestNotImplemented> Character { get; set; }
 
         /// <summary>
         /// Gets or sets the matches participated in.

@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace eZet.EveLib.Modules.Models.Resources {
-    public class CrestPlaceholderModel : CrestResource {
-        public CrestPlaceholderModel() {
+    public class CrestNotImplemented : CrestResource {
+        public CrestNotImplemented() {
             throw new NotImplementedException();
         }
     }

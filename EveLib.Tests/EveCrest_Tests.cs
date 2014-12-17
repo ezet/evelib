@@ -121,7 +121,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetIndustryTeamAuctions() {
-            CrestIndustryTeamAuction result = await EveCrest.GetIndustryTeamAuctionsAsync();
+            CrestIndustryTeamCollection result = await EveCrest.GetIndustryTeamAuctionsAsync();
         }
 
         [TestMethod]

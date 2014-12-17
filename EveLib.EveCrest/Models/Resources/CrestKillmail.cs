@@ -118,13 +118,13 @@ namespace eZet.EveLib.Modules.Models.Resources {
             ///     The character
             /// </summary>
             [DataMember(Name = "character")]
-            public CrestLinkedIconEntity<CrestPlaceholderModel> Character { get; set; }
+            public CrestLinkedIconEntity<CrestNotImplemented> Character { get; set; }
 
             /// <summary>
             ///     The corporation
             /// </summary>
             [DataMember(Name = "corporation")]
-            public CrestLinkedIconEntity<CrestPlaceholderModel> Corporation { get; set; }
+            public CrestLinkedIconEntity<CrestNotImplemented> Corporation { get; set; }
 
             /// <summary>
             ///     The alliance
