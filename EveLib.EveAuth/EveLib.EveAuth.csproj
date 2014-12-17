@@ -51,6 +51,7 @@
     <Compile Include="EveAuth.cs" />
     <Compile Include="IEveAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VerifyResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">

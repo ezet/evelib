@@ -31,6 +31,7 @@ namespace eZet.EveLib.Test {
             crest.EncodedKey = EncodedKey;
             crest.Mode = CrestMode.Authenticated;
             crest.RequestHandler.ThrowOnDeprecated = true;
+            crest.AllowAutomaticRefresh = true;
         }
 
         [TestMethod]
@@ -42,9 +43,10 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetRoot() {
+            await crest.GetAlliancesAsync();
             CrestRoot result = await crest.GetRootAsync();
-            AllianceCollection test = await crest.LoadAsync(result.Alliances);
             var alliances = await result.QueryAsync(f => f.Alliances);
+            //AllianceCollection test = await crest.LoadAsync(result.Alliances);
         }
 
 

@@ -22,7 +22,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void Authenticate() {
-            AuthResponse response = _eveAuth.Authenticate(EncodedKey, authCode).Result;
+            AuthResponse response = _eveAuth.AuthenticateAsync(EncodedKey, authCode).Result;
             Assert.AreEqual("Bearer", response.TokenType);
             Trace.WriteLine(response.AccessToken);
         }

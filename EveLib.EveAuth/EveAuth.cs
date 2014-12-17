@@ -42,20 +42,19 @@ namespace eZet.EveLib.EveAuthModule {
         /// <value>The base URI.</value>
         public static string BaseUri { get; set; }
 
-
         /// <summary>
         ///     Authenticates the specified encoded key.
         /// </summary>
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="authCode">The authentication code.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        public async Task<AuthResponse> Authenticate(string encodedKey, string authCode) {
+        public async Task<AuthResponse> AuthenticateAsync(string encodedKey, string authCode) {
             HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/token"));
             request.Host = "login.eveonline.com";
             request.Headers.Add("Authorization", "Basic " + encodedKey);
             request.Method = "POST";
             HttpRequestHelper.AddPostData(request, "grant_type=authorization_code&code=" + authCode);
-            string response = await HttpRequestHelper.GetResponseContentAsync(request);
+            string response = await requestAsync(request);
             var result = JsonConvert.DeserializeObject<AuthResponse>(response);
             return result;
         }
@@ -66,14 +65,24 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="refreshToken">The refresh token.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        public async Task<AuthResponse> Refresh(string encodedKey, string refreshToken) {
+        public async Task<AuthResponse> RefreshAsync(string encodedKey, string refreshToken) {
             HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/token"));
             request.Host = "login.eveonline.com";
             request.Headers.Add("Authorization", "Basic " + encodedKey);
             request.Method = "POST";
             HttpRequestHelper.AddPostData(request, "grant_type=refresh_token&refresh_token=" + refreshToken);
-            string response = await HttpRequestHelper.GetResponseContentAsync(request);
+            string response = await requestAsync(request);
             var result = JsonConvert.DeserializeObject<AuthResponse>(response);
+            return result;
+        }
+
+        public async Task<VerifyResponse> VerifyAsync(string accessToken) {
+            HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/verify"));
+            request.Host = "login.eveonline.com";
+            request.Headers.Add("Authorization", "Bearer " + accessToken);
+            request.Method = "GET";
+            string response = await requestAsync(request);
+            var result = JsonConvert.DeserializeObject<VerifyResponse>(response);
             return result;
         }
 
@@ -113,7 +122,7 @@ namespace eZet.EveLib.EveAuthModule {
             return Convert.ToBase64String(plainTextBytes);
         }
 
-        private async Task<string> request(HttpWebRequest request) {
+        private async Task<string> requestAsync(HttpWebRequest request) {
             try {
                 return await HttpRequestHelper.GetResponseContentAsync(request);
             }

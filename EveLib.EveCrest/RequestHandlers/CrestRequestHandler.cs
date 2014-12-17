@@ -46,7 +46,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             string data;
             try {
                 HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
-                if (!string.IsNullOrEmpty(accessToken)) {
+                if (accessToken != null) {
                     request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
                 }
                 request.Accept = CrestModel.Get<T>();

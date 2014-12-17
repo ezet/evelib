@@ -11,7 +11,7 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="authCode">The authentication code.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        Task<AuthResponse> Authenticate(string encodedKey, string authCode);
+        Task<AuthResponse> AuthenticateAsync(string encodedKey, string authCode);
 
         /// <summary>
         ///     Refreshes the specified encoded key.
@@ -19,6 +19,6 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="refreshToken">The refresh token.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        Task<AuthResponse> Refresh(string encodedKey, string refreshToken);
+        Task<AuthResponse> RefreshAsync(string encodedKey, string refreshToken);
     }
 }
