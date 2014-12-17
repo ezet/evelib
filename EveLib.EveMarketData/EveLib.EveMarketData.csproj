@@ -120,7 +120,7 @@
     <Compile Include="JsonConverters\EmdItemOrdersJsonConverter.cs" />
     <Compile Include="JsonConverters\EmdItemPricesJsonConverter.cs" />
     <Compile Include="JsonConverters\EmdRowCollectionConverter.cs" />
-    <Compile Include="NewtonSoftJsonSerializer.cs" />
+    <Compile Include="EmdSerializer.cs" />
     <Compile Include="Models\EmdResponse.cs" />
     <Compile Include="Models\ItemHistory.cs" />
     <Compile Include="Models\ItemOrders.cs" />

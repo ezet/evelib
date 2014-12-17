@@ -14,7 +14,7 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
@@ -22,7 +22,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class TournamentMatch. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class TournamentMatch : CrestResource {
+    public sealed class TournamentMatch : CrestResource<TournamentMatch> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TournamentMatch" /> class.
         /// </summary>

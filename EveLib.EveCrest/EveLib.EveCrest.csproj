@@ -117,7 +117,7 @@
     <Compile Include="Models\Shared\CorporationEntry.cs" />
     <Compile Include="Models\Resources\Constellation.cs" />
     <Compile Include="Models\Resources\ItemCategory.cs" />
-    <Compile Include="Models\Entities\LinkedEntity.cs" />
+    <Compile Include="Models\Links\LinkedEntity.cs" />
     <Compile Include="Models\Resources\IndustryFacilityCollection.cs" />
     <Compile Include="Models\Resources\IndustrySpeciality.cs" />
     <Compile Include="Models\Resources\IndustrySystemCollection.cs" />
@@ -138,10 +138,10 @@
     <Compile Include="Models\Resources\ItemCategoryCollection.cs" />
     <Compile Include="Models\Resources\ItemGroup.cs" />
     <Compile Include="Models\Resources\ItemType.cs" />
-    <Compile Include="Models\Entities\ImageLink.cs" />
+    <Compile Include="Models\Links\ImageLink.cs" />
     <Compile Include="Models\Resources\ItemTypeCollection.cs" />
-    <Compile Include="Models\Entities\LinkedResource.cs" />
-    <Compile Include="Models\Entities\LinkedIconEntity.cs" />
+    <Compile Include="Models\Links\LinkedResource.cs" />
+    <Compile Include="Models\Links\LinkedIconEntity.cs" />
     <Compile Include="Models\Resources\MarketGroup.cs" />
     <Compile Include="Models\Resources\MarketGroupCollection.cs" />
     <Compile Include="Models\Resources\MarketOrderCollection.cs" />
@@ -158,7 +158,7 @@
     <Compile Include="Models\Resources\AllianceCollection.cs" />
     <Compile Include="Models\Resources\CollectionResource.cs" />
     <Compile Include="Models\Shared\CrestError.cs" />
-    <Compile Include="Models\Entities\Href.cs" />
+    <Compile Include="Models\Links\Href.cs" />
     <Compile Include="Models\Resources\IncursionCollection.cs" />
     <Compile Include="Models\Resources\Killmail.cs" />
     <Compile Include="Models\Resources\KillmailCollection.cs" />
@@ -167,7 +167,7 @@
     <Compile Include="Models\Resources\War.cs" />
     <Compile Include="Models\Resources\WarCollection.cs" />
     <Compile Include="Models\Resources\CrestResource.cs" />
-    <Compile Include="Models\Entities\ILinkedEntity.cs" />
+    <Compile Include="Models\Links\ILinkedEntity.cs" />
     <Compile Include="Models\Resources\ICrestResource.cs" />
     <Compile Include="Models\Resources\ItemGroupCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

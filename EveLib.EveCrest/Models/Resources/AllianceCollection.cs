@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
@@ -16,7 +16,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     A list of alliances
         /// </summary>
         [DataMember(Name = "items")]
-        public List<Alliance> Alliances { get; set; }
+        public List<Alliance> Items { get; set; }
 
         public class Alliance : LinkedEntity<Resources.Alliance> {
             [DataMember(Name = "shortName")]

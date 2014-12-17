@@ -1,12 +1,12 @@
 ﻿using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Represents a CREST collection response
     /// </summary>
     [DataContract]
-    public abstract class CollectionResource<T> : ICrestResource {
+    public abstract class CollectionResource<T> : CrestResource<T> where T : class, ICrestResource<T> {
         /// <summary>
         ///     The total number of items in the collection
         /// </summary>
@@ -25,12 +25,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "previous")]
         public Href<T> Previous { get; set; }
 
-        //[DataMember(Name="totalCount_str")]
-        //public string TotalCountAsString { get; set; }
-
-        //[DataMember(Name="pageCount_str")]
-        //public string PageCounAsString { get; set; }
-        public virtual bool IsDeprecated { get; set; }
-        public virtual string Version { get; protected set; }
     }
 }

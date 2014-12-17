@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveAuthModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.RequestHandlers;
 
@@ -123,7 +123,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <summary>
         ///     Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
         /// </summary>
-        public async Task<AuthResponse> RefreshAccessToken() {
+        public async Task<AuthResponse> RefreshAccessTokenAsync() {
             AuthResponse response = await EveAuth.Refresh(EncodedKey, RefreshToken).ConfigureAwait(false);
             AccessToken = response.AccessToken;
             RefreshToken = response.RefreshToken;
@@ -136,7 +136,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="uri">The Href that should be loaded</param>
         /// <returns></returns>
-        public async Task<T> Load<T>(Href<T> uri) where T : ICrestResource {
+        public async Task<T> LoadAsync<T>(Href<T> uri) where T : class, ICrestResource<T> {
             return await RequestHandler.RequestAsync<T>(new Uri(uri.Uri), AccessToken).ConfigureAwait(false);
         }
 
@@ -146,7 +146,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="entity">The entity that should be loaded</param>
         /// <returns></returns>
-        public async Task<T> Load<T>(ILinkedEntity<T> entity) where T : ICrestResource {
+        public async Task<T> LoadAsync<T>(ILinkedEntity<T> entity) where T : class, ICrestResource<T> {
             return await RequestHandler.RequestAsync<T>(new Uri(entity.Href.Uri), AccessToken).ConfigureAwait(false);
         }
 
@@ -492,22 +492,29 @@ namespace eZet.EveLib.EveCrestModule {
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="relPath">Relative path</param>
         /// <returns></returns>
-        protected async Task<T> requestAsync<T>(string relPath) where T : ICrestResource {
+        protected async Task<T> requestAsync<T>(string relPath) where T : class, ICrestResource<T> {
+            T response;
             if (Mode == CrestMode.Authenticated) {
                 if (AllowAutomaticRefresh) {
                     try {
-                        return
+                        response =
                             await RequestHandler.RequestAsync<T>(new Uri(BaseAuthUri + ApiPath + relPath), AccessToken);
-                    }
-                    catch (EveCrestException) {
+                        response.Crest = this;
+                        return response;
+                    } catch (EveCrestException) {
                         _trace.TraceEvent(TraceEventType.Information, 0,
                             "Invalid AccessToken: Attempting automatic refresh");
                     }
-                    await RefreshAccessToken();
+                    await RefreshAccessTokenAsync();
+                    response = await RequestHandler.RequestAsync<T>(new Uri(BaseAuthUri + ApiPath + relPath), AccessToken);
+                    response.Crest = this;
+                    return response;
+
                 }
-                return await RequestHandler.RequestAsync<T>(new Uri(BaseAuthUri + ApiPath + relPath), AccessToken);
             }
-            return await RequestHandler.RequestAsync<T>(new Uri(BasePublicUri + ApiPath + relPath), null);
+            response = await RequestHandler.RequestAsync<T>(new Uri(BasePublicUri + ApiPath + relPath), null);
+            response.Crest = this;
+            return response;
         }
     }
 }

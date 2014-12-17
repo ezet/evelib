@@ -7,7 +7,7 @@ namespace eZet.EveLib.EveMarketDataModule {
     /// <summary>
     ///     JSON serializer
     /// </summary>
-    public sealed class NewtonSoftJsonSerializer : ISerializer {
+    public sealed class EmdSerializer : ISerializer {
         /// <summary>
         ///     Deserializes JSON using JSON.NET
         /// </summary>

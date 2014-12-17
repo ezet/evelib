@@ -12,7 +12,7 @@ namespace eZet.EveLib.EveCrestModule {
 
         private static Dictionary<Type, string> Register { get; set; }
 
-        public static string Get<T>() where T : ICrestResource {
+        public static string Get<T>() where T : class, ICrestResource<T> {
             // TODO optional throw on missing version
             var instance = Activator.CreateInstance<T>();
             if (String.IsNullOrEmpty(instance.Version)) {

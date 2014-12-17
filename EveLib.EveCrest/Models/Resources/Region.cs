@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     [DataContract]
-    public sealed class Region : CrestResource {
+    public sealed class Region : CrestResource<Region> {
         public Region() {
             Version = "application/vnd.ccp.eve.Region-v1+json";
         }

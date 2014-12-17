@@ -2,7 +2,7 @@
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     [DataContract]
-    public sealed class ItemType : CrestResource {
+    public sealed class ItemType : CrestResource<ItemType> {
         public ItemType() {
             Version = "application/vnd.ccp.eve.ItemType-v3+json";
         }

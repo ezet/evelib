@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     [DataContract]
-    public sealed class Constellation : CrestResource {
+    public sealed class Constellation : CrestResource<Constellation> {
         public Constellation() {
             Version = "application/vnd.ccp.eve.Constellation-v1+json";
         }

@@ -6,7 +6,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a speciality
     /// </summary>
     [DataContract]
-    public sealed class IndustrySpeciality : CrestResource {
+    public sealed class IndustrySpeciality : CrestResource<IndustrySpeciality> {
         public IndustrySpeciality() {
             Version = "application/vnd.ccp.eve.IndustrySpeciality-v1+json";
         }

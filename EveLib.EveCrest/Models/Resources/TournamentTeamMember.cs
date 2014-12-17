@@ -13,14 +13,14 @@
 // ***********************************************************************
 
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Class TournamentTeamMember. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class TournamentTeamMember : CrestResource {
+    public sealed class TournamentTeamMember : CrestResource<TournamentTeamMember> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TournamentTeamMember" /> class.
         /// </summary>

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Represents a CREST war
     /// </summary>
     [DataContract]
-    public sealed class War : CrestResource {
+    public sealed class War : CrestResource<War> {
         public War() {
             Version = "application/vnd.ccp.eve.War-v1+json";
         }

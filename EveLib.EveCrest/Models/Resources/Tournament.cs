@@ -15,14 +15,14 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Class Tournament.
     /// </summary>
     [DataContract]
-    public sealed class Tournament : CrestResource {
+    public sealed class Tournament : CrestResource<Tournament> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="Tournament" /> class.
         /// </summary>

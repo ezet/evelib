@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.Properties;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
@@ -19,6 +20,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The CREST access accessToken</param>
         /// <returns>T.</returns>
-        Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : ICrestResource;
+        Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
     }
 }

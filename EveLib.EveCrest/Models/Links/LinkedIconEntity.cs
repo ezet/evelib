@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace eZet.EveLib.EveCrestModule.Models.Entities {
+namespace eZet.EveLib.EveCrestModule.Models.Links {
     [DataContract]
     public class LinkedIconEntity<T> : LinkedEntity<T> {
         [DataMember(Name = "icon")]

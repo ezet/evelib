@@ -34,24 +34,25 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task RefreshAccessToken() {
+        public async Task RefreshAccessTokenAsync() {
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
-            await crest.RefreshAccessToken();
+            await crest.RefreshAccessTokenAsync();
         }
 
         [TestMethod]
         public async Task GetRoot() {
             CrestRoot result = await crest.GetRootAsync();
-            AllianceCollection test = await crest.Load(result.Alliances);
+            AllianceCollection test = await crest.LoadAsync(result.Alliances);
+            var alliances = await result.QueryAsync(f => f.Alliances);
         }
 
 
         [TestMethod]
         public async Task GetKillmail_NoErrors() {
             Killmail data = crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
-            SolarSystem system = await crest.Load(data.SolarSystem);
-            NotImplemented stats = await crest.Load(system.Stats);
+            SolarSystem system = await crest.LoadAsync(data.SolarSystem);
+            NotImplemented stats = await crest.LoadAsync(system.Stats);
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }
@@ -100,7 +101,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (EveCrestException))]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }

@@ -37,7 +37,7 @@ namespace eZet.EveLib.EveMarketDataModule {
             Format = format;
             Name = name;
             BaseUri = new Uri(DefaultUri);
-            RequestHandler = new RequestHandler(new NewtonSoftJsonSerializer());
+            RequestHandler = new RequestHandler(new EmdSerializer());
             setSerializer(format);
         }
 
@@ -310,7 +310,7 @@ namespace eZet.EveLib.EveMarketDataModule {
             if (format == DataFormat.Xml)
                 RequestHandler.Serializer = new XmlSerializer();
             else if (format == DataFormat.Json)
-                RequestHandler.Serializer = new NewtonSoftJsonSerializer();
+                RequestHandler.Serializer = new EmdSerializer();
         }
     }
 }

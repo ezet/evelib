@@ -6,7 +6,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
     ///     Represents a CREST exception
     /// </summary>
     [DataContract]
-    public class CrestError : CrestResource {
+    public class CrestError {
         /// <summary>
         ///     The error message
         /// </summary>

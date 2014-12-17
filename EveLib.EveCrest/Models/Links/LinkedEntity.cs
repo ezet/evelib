@@ -15,7 +15,7 @@
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace eZet.EveLib.EveCrestModule.Models.Entities {
+namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
     ///     Class LinkedEntity. A base class for linked resources that has a name and ID.
     /// </summary>

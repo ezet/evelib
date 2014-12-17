@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Represents a CREST collection of wars
     /// </summary>
     [DataContract]
-    public sealed class WarCollection : CollectionResource<War> {
+    public sealed class WarCollection : CollectionResource<WarCollection> {
         public WarCollection() {
             Version = "application/vnd.ccp.eve.WarsCollection-v1+json";
         }

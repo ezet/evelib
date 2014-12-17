@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     [DataContract]
-    public sealed class ItemCategory : CrestResource {
+    public sealed class ItemCategory : CrestResource<ItemCategory> {
         public ItemCategory() {
             Version = "application/vnd.ccp.eve.ItemCategory-v1+json";
         }

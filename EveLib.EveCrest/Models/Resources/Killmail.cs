@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Represents a CREST killmail
     /// </summary>
     [DataContract]
-    public sealed class Killmail : CrestResource {
+    public sealed class Killmail : CrestResource<Killmail> {
         public Killmail() {
             Version = "application/vnd.ccp.eve.Killmail-v1+json";
         }

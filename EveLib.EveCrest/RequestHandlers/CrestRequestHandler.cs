@@ -42,7 +42,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <param name="uri">URI to request</param>
         /// <param name="accessToken">CREST acces token</param>
         /// <returns></returns>
-        public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : ICrestResource {
+        public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
             string data;
             try {
                 HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);

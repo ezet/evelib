@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
@@ -9,7 +9,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST /allliances/$allianceId/ reponse
     /// </summary>
     [DataContract]
-    public sealed class Alliance : CrestResource {
+    public sealed class Alliance : CrestResource<Alliance> {
         public Alliance() {
             Version = "application/vnd.ccp.eve.Alliance-v1+json";
         }

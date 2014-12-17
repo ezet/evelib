@@ -13,14 +13,14 @@
 // ***********************************************************************
 
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Represents the root response for CREST
     /// </summary>
     [DataContract]
-    public sealed class CrestRoot : CrestResource {
+    public sealed class CrestRoot : CrestResource<CrestRoot> {
         /// <summary>
         ///     Represents the server status types
         /// </summary>

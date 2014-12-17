@@ -15,14 +15,14 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Entities;
+using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Represents a CREST industry team
     /// </summary>
-    public sealed class IndustryTeam : CrestResource {
+    public sealed class IndustryTeam : CrestResource<IndustryTeam> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustryTeam" /> class.
         /// </summary>

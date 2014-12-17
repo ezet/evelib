@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
-namespace eZet.EveLib.EveCrestModule.Models.Entities {
+namespace eZet.EveLib.EveCrestModule.Models.Links {
     [DataContract]
     public class ImageLink {
         [DataMember(Name = "32x32")]
