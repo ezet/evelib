@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -33,7 +34,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         public int Id {
             get {
                 if (!IsExplicitId)
-                    _id = inferId();
+                    inferId();
                 return _id;
             }
             set {
@@ -64,8 +65,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
 
         private int inferId() {
             int id;
-            if (!int.TryParse(Href.Uri.Split('/').Last(), out id))
+            var href = Href.Uri.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            if (!int.TryParse(href.Last(), out id))
                 id = -1;
+            _id = id;
             return id;
         }
     }
