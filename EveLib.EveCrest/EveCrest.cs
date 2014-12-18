@@ -13,7 +13,10 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveAuthModule;
@@ -35,7 +38,7 @@ namespace eZet.EveLib.EveCrestModule {
         Public,
 
         /// <summary>
-        ///     Authenticated CREST. This requires a valid AccessToken
+        ///     Authenticated CREST. This requires a valid AccessToken or a valid RefreshToken and EncryptedKey
         /// </summary>
         Authenticated
     }
@@ -56,7 +59,35 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         public const string DefaultAuthUri = "https://crest-tq.eveonline.com/";
 
+
+        /// <summary>
+        /// The default public rate per second
+        /// </summary>
+        public const int DefaultPublicRatePerSecond = 30;
+
+        /// <summary>
+        /// The default public burst size
+        /// </summary>
+        public const int DefaultPublicBurstSize = 100;
+
+        /// <summary>
+        /// The default authed rate per second
+        /// </summary>
+        public const int DefaultAuthedRatePerSecond = 30;
+
+        /// <summary>
+        /// The default authed burst size
+        /// </summary>
+        public const int DefaultAuthedBurstSize = 100;
+
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
+
+        private readonly Semaphore _publicBurstPool;
+        private readonly Semaphore _authedBurstPool;
+
+        private Semaphore _perSecondPool;
+
+
 
         /// <summary>
         ///     Constructor
@@ -69,23 +100,54 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        ///     Creates a new EveCrest object with a default request handler
+        ///     Creates a new EveCrest object with default configuration
         /// </summary>
         public EveCrest() {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
+            EveAuth = new EveAuth();
             BasePublicUri = DefaultPublicUri;
             BaseAuthUri = DefaultAuthUri;
-            EveAuth = new EveAuth();
+            PublicBurstSize = DefaultPublicBurstSize;
+            PublicRatePerSecond = DefaultPublicRatePerSecond;
+            AuthedBurstSize = DefaultAuthedBurstSize;
+            AuthedRatePerSecond = DefaultAuthedRatePerSecond;
+            _publicBurstPool = new Semaphore(PublicBurstSize, PublicBurstSize);
+            _authedBurstPool = new Semaphore(AuthedBurstSize, AuthedBurstSize);
+
         }
 
         /// <summary>
-        ///     Gets or sets the base URI used to access the public CREST API. This should include a trailing backslash.
+        /// Gets or sets the public rate per second.
+        /// </summary>
+        /// <value>The public rate per second.</value>
+        public int PublicRatePerSecond { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size of the public burst.
+        /// </summary>
+        /// <value>The size of the public burst.</value>
+        public int PublicBurstSize { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authed rate per second.
+        /// </summary>
+        /// <value>The authed rate per second.</value>
+        public int AuthedRatePerSecond { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size of the authed burst.
+        /// </summary>
+        /// <value>The size of the authed burst.</value>
+        public int AuthedBurstSize { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the root URI used to access the public CREST API. This should include a trailing backslash.
         /// </summary>
         /// <value>The base public URI.</value>
         public string BasePublicUri { get; set; }
 
         /// <summary>
-        ///     Gets or sets the base URI used to access the authed CREST API. This should include a trailing backslash.
+        ///     Gets or sets the root URI used to access the authed CREST API. This should include a trailing backslash.
         /// </summary>
         /// <value>The base authentication URI.</value>
         public string BaseAuthUri { get; set; }
@@ -98,7 +160,6 @@ namespace eZet.EveLib.EveCrestModule {
 
         /// <summary>
         ///     Gets or sets the CREST Access Token
-        ///     The Access Token is the final token acquired through the SSO login process, and should be managed by client code.
         /// </summary>
         /// <value>The access token.</value>
         public string AccessToken { get; set; }
@@ -167,10 +228,34 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Loads a crest resource
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
-        /// <param name="entity">The entity that should be loaded</param>
+        /// <param name="entity">The items that should be loaded</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public Task<T> LoadAsync<T>(ILinkedEntity<T> entity) where T : class, ICrestResource<T> {
             return requestAsync<T>(new Uri(entity.Href.Uri));
+        }
+
+
+        /// <summary>
+        /// Loads a crest resource collection.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items">The items.</param>
+        /// <returns>Task&lt;T[]&gt;.</returns>
+        public Task<T[]> LoadAsync<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
+            var list = items.Select(LoadAsync).ToList();
+            return Task.WhenAll(list);
+        }
+
+
+        /// <summary>
+        /// Loads a crest resource collection.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items">The items.</param>
+        /// <returns>Task&lt;T[]&gt;.</returns>
+        public Task<T[]> LoadAsync<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
+            var list = items.Select(LoadAsync).ToList();
+            return Task.WhenAll(list);
         }
 
 
@@ -528,29 +613,37 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;T&gt;.</returns>
         protected async Task<T> requestAsync<T>(Uri uri) where T : class, ICrestResource<T> {
-            T response;
+            T response = null;
             if (Mode == CrestMode.Authenticated) {
-                if (AllowAutomaticRefresh) {
-                    try {
-                        response =
-                            await RequestHandler.RequestAsync<T>(uri, AccessToken);
-                        response.Crest = this;
-                        return response;
-                    }
-                    catch (EveCrestException) {
-                        _trace.TraceEvent(TraceEventType.Information, 0,
-                            "Invalid AccessToken: Attempting automatic refresh");
-                    }
+                _authedBurstPool.WaitOne();
+                var retry = false;
+                try {
+                    response =
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken);
+
+                } catch (EveCrestException) {
+                    if (AllowAutomaticRefresh) retry = true;
+                    else throw;
+                }
+
+                if (retry) {
+                    _trace.TraceEvent(TraceEventType.Information, 0,
+                        "Invalid AccessToken: Attempting refresh");
                     await RefreshAccessTokenAsync();
                     _trace.TraceEvent(TraceEventType.Information, 0,
                         "Token refreshed");
+                    response =
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken);
                 }
-                response = await RequestHandler.RequestAsync<T>(uri, AccessToken);
-                response.Crest = this;
-                return response;
+                _authedBurstPool.Release();
+            } else {
+                _publicBurstPool.WaitOne();
+                response = await RequestHandler.RequestAsync<T>(uri, null);
+                _publicBurstPool.Release();
             }
-            response = await RequestHandler.RequestAsync<T>(uri, null);
+
             response.Crest = this;
+
             return response;
         }
     }

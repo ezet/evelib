@@ -65,37 +65,27 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        ///     Queries the resource asynchronous.
+        /// Queries a collection of resources asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;TOut&gt;.</returns>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
         public Task<TOut[]> QueryAsync<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var list = new List<Task<TOut>>();
             var items = objFunc.Invoke(this as T);
-            foreach (var item in items) {
-                list.Add(Crest.LoadAsync(item));
-            }
-            var task = Task.WhenAll(list);
-            return task;
+            return Crest.LoadAsync(items);
         }
 
         /// <summary>
-        ///     Queries the resource asynchronous.
+        /// Queries a collection of resources asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;TOut&gt;.</returns>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
         public Task<TOut[]> QueryAsync<TOut>(Func<T, IEnumerable<LinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var list = new List<Task<TOut>>();
             var items = objFunc.Invoke(this as T);
-            foreach (var item in items) {
-                list.Add(Crest.LoadAsync(item));
-            }
-            var task = Task.WhenAll(list);
-            return task;
+            return Crest.LoadAsync(items);
         }
     }
 }

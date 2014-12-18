@@ -48,12 +48,6 @@ namespace eZet.EveLib.Test {
             CrestRoot result = await crest.GetRootAsync();
 
             var regions = (await crest.GetRoot().QueryAsync(f => f.Regions));
-            regions.QueryAsync(f => f.Items.First());
-
-
-            //await crest.GetAlliancesAsync();
-            //AllianceCollection alliances = await result.QueryAsync(f => f.Alliances);
-            //AllianceCollection test = await crest.LoadAsync(result.Alliances);
         }
 
 

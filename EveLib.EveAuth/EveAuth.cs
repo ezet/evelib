@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveAuthModule {
     /// </summary>
     public enum CrestScope {
         /// <summary>
-        ///     The 360 noscope
+        ///     No scope
         /// </summary>
         None,
 
@@ -54,7 +54,7 @@ namespace eZet.EveLib.EveAuthModule {
         ///     Gets or sets the base URI.
         /// </summary>
         /// <value>The base URI.</value>
-        public static string BaseUri { get; set; }
+        public string BaseUri { get; set; }
 
         /// <summary>
         ///     Authenticates the specified encoded key.
