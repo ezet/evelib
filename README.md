@@ -174,8 +174,28 @@ Both methods access a link to a resource, or a collection of links, and will imm
     crest.AllowAutomaticTokenRefresh = true;
     // get root object
     var root = crest.GetRoot();
-    var regions = root.Query(root => root.Regions);
+    var regions = root.Query(r => r.Regions);
     var regionData = regions.Query(regions => regions.Where(region => region.Id == 1));
+    
+You can also chain it:
+
+    var regionData = crest.GetRoot().Query(r => r.Regions).Query(regions => regions.Items); // gets all data for all regions
+    
+Or preferrably use async:
+
+    var regionData = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Regions)).QueryAsync(regions => regions.Take(5));
+    
+## Collection Pagination
+All ResourceCollections can be paginated, and have the properties `PageCount` and `TotalCount`.
+Here's an example adding all MarketTypes to a list:
+
+    var types = root.Query(r => r.MarketTypes);
+    var list = types.Items.ToList();
+    // save data
+    while (types.Next != null)  {
+        types = types.Query(t => t.Next);
+        list.AddRange(types.Items);
+    }
     
 ## Authenticated Crest
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
@@ -184,11 +204,7 @@ You can provide these through their respective properties on the `EveCrest` obje
 To enable authenticated mode, set Mode to Authenticated. If you have set a RefreshToken and EncryptedKey, you can enable automatic token refreshes by setting AllowAutomaticTokenRefresh to true.
 
 ### Advanced settings
-
-
-    
-    
-    
+There are some more advanced settings available through the RequestHandler instance on your EveCrest object. You can change things such as the serializer, number of concurrent requests, and whether to throw an exception for deprecated or unknown resoruces.
 
 #### Exceptions
 All calls to the CREST API can throw `EveCrestException`, which inherits from `EveLibWebException`.  This additionaly exposes `Message`, `Key`, `ExceptionType` and `RefId` as returned by the API.
