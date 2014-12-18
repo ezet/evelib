@@ -161,7 +161,7 @@ Eve CREST endpoints can be called by instantating a new EveCrest object, and usi
     var result = crest.GetWar(1);
     
 
-## Query() and Load()
+#### Query() and Load()
 Query and Load lets you obtain data the way CREST is meant to be used, with no statically typed URIs.
 Every object returned by `EveCrest` has a Query() method, which can be used to query additinonal resources, which can be queried further. 
 `EveCrest` also has a Load() method, which is used by Query() internally, and can be used the same way.
@@ -185,7 +185,7 @@ Or preferrably use async:
 
     var regionData = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Regions)).QueryAsync(regions => regions.Take(5));
     
-## Collection Pagination
+#### Collection Pagination
 All ResourceCollections can be paginated, and have the properties `PageCount` and `TotalCount`.
 Here's an example adding all MarketTypes to a list:
 
@@ -197,13 +197,13 @@ Here's an example adding all MarketTypes to a list:
         list.AddRange(types.Items);
     }
     
-## Authenticated Crest
+#### Authenticated Crest
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
 If you want to utilize a refresh token you also need to provide the associated Base64 encrypted key.
 You can provide these through their respective properties on the `EveCrest` object.
 To enable authenticated mode, set Mode to Authenticated. If you have set a RefreshToken and EncryptedKey, you can enable automatic token refreshes by setting AllowAutomaticTokenRefresh to true.
 
-### Advanced settings
+#### Advanced settings
 There are some more advanced settings available through the RequestHandler instance on your EveCrest object. You can change things such as the serializer, number of concurrent requests, and whether to throw an exception for deprecated or unknown resoruces.
 
 #### Exceptions
