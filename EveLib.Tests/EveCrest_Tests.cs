@@ -32,11 +32,9 @@ namespace eZet.EveLib.Test {
             //    "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
-            //crest.Mode = CrestMode.Authenticated;
+            crest.Mode = CrestMode.Authenticated;
             crest.AllowAutomaticTokenRefresh = true;
-            //crest.RequestHandler.ThrowOnDeprecated = true;
-            crest.RequestHandler.AuthedMaxConcurrentRequests = 20;
-            crest.RequestHandler.PublicMaxConcurrentRequests = 10;
+            crest.RequestHandler.ThrowOnDeprecated = true;
         }
 
         [TestMethod]
@@ -52,8 +50,8 @@ namespace eZet.EveLib.Test {
             Debug.WriteLine(result.Regions.Uri);
             var regionsLinks = crest.GetRoot().Query(f => f.Regions);
             Debug.WriteLine(regionsLinks.Items.First().Id);
-            //var regionData = regionsLinks.Query(f => f.Items.Take(5));
-            //Debug.WriteLine(regionData.First().Name);
+            var regionData = regionsLinks.Query(f => f.Items);
+            Debug.WriteLine(regionData.First().Name);
         }
 
         [TestMethod]

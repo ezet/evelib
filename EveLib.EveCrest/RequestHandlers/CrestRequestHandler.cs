@@ -18,12 +18,12 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         ///     The default public max concurrent requests
         /// </summary>
-        public const int DefaultPublicMaxConcurrentRequests = 50;
+        public const int DefaultPublicMaxConcurrentRequests = 1;
 
         /// <summary>
         ///     The default authed max concurrent requests
         /// </summary>
-        public const int DefaultAuthedMaxConcurrentRequests = 100;
+        public const int DefaultAuthedMaxConcurrentRequests = 10;
 
         /// <summary>
         ///     The token type

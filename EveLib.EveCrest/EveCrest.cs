@@ -255,7 +255,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         /// <returns>CrestRoot.</returns>
         public CrestRoot GetRoot() {
-            return GetRootAsync().Result;
+            return GetRootAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <summary>
