@@ -156,11 +156,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
                 var response = (HttpWebResponse)e.Response;
 
-                if (response == null) throw;
                 Stream responseStream = response.GetResponseStream();
-                if (responseStream == null) throw;
+                if (responseStream == null) throw new EveCrestException("Undefined error", e);
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();
+                    if (response.StatusCode == HttpStatusCode.InternalServerError) throw new EveCrestException(data, e);
                     var error = Serializer.Deserialize<CrestError>(data);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
                         "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType, error.RefId);

@@ -149,7 +149,7 @@ namespace eZet.EveLib.EveAuthModule {
                 var response = (HttpWebResponse)e.Response;
 
                 Stream responseStream = response.GetResponseStream();
-                if (responseStream == null) throw;
+                if (responseStream == null) throw new EveAuthException("Undefined error", e);
                 using (var reader = new StreamReader(responseStream)) {
                     string data = reader.ReadToEnd();
                     if (response.StatusCode == HttpStatusCode.InternalServerError) throw new EveAuthException(data, e);
