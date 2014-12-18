@@ -6,7 +6,7 @@
 // Last Modified By : Lars Kristian
 // Last Modified On : 12-17-2014
 // ***********************************************************************
-// <copyright file="CrestModels.cs" company="">
+// <copyright file="ContentTypes.cs" company="">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -18,10 +18,10 @@ using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule {
     /// <summary>
-    ///     Class CrestModels.
+    ///     Class ContentTypes.
     /// </summary>
-    public static class CrestModels {
-        static CrestModels() {
+    public static class ContentTypes {
+        static ContentTypes() {
             Register = new Dictionary<Type, string> {
                 {typeof (CrestRoot), "application/vnd.ccp.eve.Api-v3+json"},
             };

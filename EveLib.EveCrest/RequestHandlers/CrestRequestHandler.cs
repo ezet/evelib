@@ -123,7 +123,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             string data;
             var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
-            request.Accept = CrestModels.Get<T>();
+            request.Accept = ContentTypes.Get<T>();
             _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
 
             if (mode == CrestMode.Authenticated) {
