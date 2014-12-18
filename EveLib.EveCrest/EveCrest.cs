@@ -60,34 +60,10 @@ namespace eZet.EveLib.EveCrestModule {
         public const string DefaultAuthUri = "https://crest-tq.eveonline.com/";
 
 
-        /// <summary>
-        /// The default public rate per second
-        /// </summary>
-        public const int DefaultPublicRatePerSecond = 30;
-
-        /// <summary>
-        /// The default public burst size
-        /// </summary>
-        public const int DefaultPublicMaxConcurrentRequests = 40;
-
-        /// <summary>
-        /// The default authed rate per second
-        /// </summary>
-        public const int DefaultAuthedRatePerSecond = 30;
-
-        /// <summary>
-        /// The default authed burst size
-        /// </summary>
-        public const int DefaultAuthedMaxConcurrentRequests = 100;
 
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
-        private Semaphore _publicPool;
-        private Semaphore _authedPool;
 
-        private Semaphore _perSecondPool;
-        private int _publicMaxConcurrentRequests;
-        private int _authedMaxConcurrentRequests;
 
 
         /// <summary>
@@ -104,53 +80,14 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Creates a new EveCrest object with default configuration
         /// </summary>
         public EveCrest() {
-            RequestHandler = new CrestRequestHandler(new JsonSerializer());
+            Serializer = new JsonSerializer();
+            RequestHandler = new CrestRequestHandler(Serializer);
             EveAuth = new EveAuth();
             BasePublicUri = DefaultPublicUri;
             BaseAuthUri = DefaultAuthUri;
-            PublicMaxConcurrentRequests = DefaultPublicMaxConcurrentRequests;
-            AuthedMaxConcurrentRequests = DefaultAuthedMaxConcurrentRequests;
-            PublicRatePerSecond = DefaultPublicRatePerSecond;
-            AuthedRatePerSecond = DefaultAuthedRatePerSecond;
-            _publicPool = new Semaphore(PublicMaxConcurrentRequests, PublicMaxConcurrentRequests);
-            _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
+
         }
 
-        /// <summary>
-        /// Gets or sets the public rate per second.
-        /// </summary>
-        /// <value>The public rate per second.</value>
-        public int PublicRatePerSecond { get; set; }
-
-        /// <summary>
-        /// Gets or sets the size of the public burst.
-        /// </summary>
-        /// <value>The size of the public burst.</value>
-        public int PublicMaxConcurrentRequests {
-            get { return _publicMaxConcurrentRequests; }
-            set {
-                _publicMaxConcurrentRequests = value;
-                _publicPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the authed rate per second.
-        /// </summary>
-        /// <value>The authed rate per second.</value>
-        public int AuthedRatePerSecond { get; set; }
-
-        /// <summary>
-        /// Gets or sets the size of the authed burst.
-        /// </summary>
-        /// <value>The size of the authed burst.</value>
-        public int AuthedMaxConcurrentRequests {
-            get { return _authedMaxConcurrentRequests; }
-            set {
-                _authedMaxConcurrentRequests = value;
-                _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
-            }
-        }
 
         /// <summary>
         ///     Gets or sets the root URI used to access the public CREST API. This should include a trailing backslash.
@@ -193,7 +130,7 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token.
         /// </summary>
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
-        public bool AllowAutomaticRefresh { get; set; }
+        public bool AllowAutomaticTokenRefresh { get; set; }
 
 
         /// <summary>
@@ -207,6 +144,12 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         /// <value>The request handler.</value>
         public ICrestRequestHandler RequestHandler { get; set; }
+
+        /// <summary>
+        /// Gets or sets the serializer used to deserialize CREST data.
+        /// </summary>
+        /// <value>The serializer.</value>
+        public ISerializer Serializer { get; set; }
 
 
         /// <summary>
@@ -625,16 +568,15 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;T&gt;.</returns>
         protected async Task<T> requestAsync<T>(Uri uri) where T : class, ICrestResource<T> {
-            T response = null;
+            string data = null;
             if (Mode == CrestMode.Authenticated) {
-                _authedPool.WaitOne();
                 var retry = false;
                 try {
-                    response =
+                    data =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken);
 
                 } catch (EveCrestException) {
-                    if (AllowAutomaticRefresh) retry = true;
+                    if (AllowAutomaticTokenRefresh) retry = true;
                     else throw;
                 }
 
@@ -644,18 +586,14 @@ namespace eZet.EveLib.EveCrestModule {
                     await RefreshAccessTokenAsync();
                     _trace.TraceEvent(TraceEventType.Information, 0,
                         "Token refreshed");
-                    response =
+                    data =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken);
                 }
-                _authedPool.Release();
             } else {
-                _publicPool.WaitOne();
-                response = await RequestHandler.RequestAsync<T>(uri, null);
-                _publicPool.Release();
+                data = await RequestHandler.RequestAsync<T>(uri, null);
             }
-
+            var response = Serializer.Deserialize<T>(data);
             response.Crest = this;
-
             return response;
         }
     }

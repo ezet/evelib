@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
@@ -14,6 +15,72 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
     public class CrestRequestHandler : ICrestRequestHandler {
+
+
+        /// <summary>
+        /// The default public rate per second
+        /// </summary>
+        public const int DefaultPublicRatePerSecond = 30;
+
+        /// <summary>
+        /// The default public burst size
+        /// </summary>
+        public const int DefaultPublicMaxConcurrentRequests = 40;
+
+        /// <summary>
+        /// The default authed rate per second
+        /// </summary>
+        public const int DefaultAuthedRatePerSecond = 30;
+
+        /// <summary>
+        /// The default authed burst size
+        /// </summary>
+        public const int DefaultAuthedMaxConcurrentRequests = 100;
+
+        private Semaphore _publicPool;
+        private Semaphore _authedPool;
+
+        private Semaphore _perSecondPool;
+        private int _publicMaxConcurrentRequests;
+        private int _authedMaxConcurrentRequests;
+
+
+        /// <summary>
+        /// Gets or sets the public rate per second.
+        /// </summary>
+        /// <value>The public rate per second.</value>
+        public int PublicRatePerSecond { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size of the public burst.
+        /// </summary>
+        /// <value>The size of the public burst.</value>
+        public int PublicMaxConcurrentRequests {
+            get { return _publicMaxConcurrentRequests; }
+            set {
+                _publicMaxConcurrentRequests = value;
+                _publicPool = new Semaphore(value, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the authed rate per second.
+        /// </summary>
+        /// <value>The authed rate per second.</value>
+        public int AuthedRatePerSecond { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size of the authed burst.
+        /// </summary>
+        /// <value>The size of the authed burst.</value>
+        public int AuthedMaxConcurrentRequests {
+            get { return _authedMaxConcurrentRequests; }
+            set {
+                _authedMaxConcurrentRequests = value;
+                _authedPool = new Semaphore(value, value);
+            }
+        }
+
         /// <summary>
         ///     The token type
         /// </summary>
@@ -27,6 +94,12 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <param name="serializer"></param>
         public CrestRequestHandler(ISerializer serializer) {
             Serializer = serializer;
+            PublicMaxConcurrentRequests = DefaultPublicMaxConcurrentRequests;
+            AuthedMaxConcurrentRequests = DefaultAuthedMaxConcurrentRequests;
+            PublicRatePerSecond = DefaultPublicRatePerSecond;
+            AuthedRatePerSecond = DefaultAuthedRatePerSecond;
+            _publicPool = new Semaphore(PublicMaxConcurrentRequests, PublicMaxConcurrentRequests);
+            _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
         }
 
         /// <summary>
@@ -35,7 +108,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public bool ThrowOnDeprecated { get; set; }
 
         /// <summary>
-        ///     Gets or sets the serialier used to deserialize responses
+        ///     Gets or sets the serializer used to deserialize CREST errors.
         /// </summary>
         public ISerializer Serializer { get; set; }
 
@@ -46,17 +119,21 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <param name="uri">URI to request</param>
         /// <param name="accessToken">CREST acces token</param>
         /// <returns></returns>
-        public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
+        public async Task<string> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
             string data;
+            var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
+            HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
+            request.Accept = CrestModels.Get<T>();
+            _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
+
+            if (mode == CrestMode.Authenticated) {
+                request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+                _authedPool.WaitOne();
+            } else {
+                _publicPool.WaitOne();
+            }
             try {
-                HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
-                if (accessToken != null) {
-                    request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
-                }
-                request.Accept = CrestModels.Get<T>();
-                _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
                 HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
-                _trace.TraceEvent(TraceEventType.Error, 0, "Request Complete");
 
                 string deprecated = response.GetResponseHeader("X-Deprecated");
 
@@ -68,10 +145,16 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                     }
                 }
                 data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-            }
-            catch (WebException e) {
+                // release semaphores
+                if (mode == CrestMode.Authenticated) _authedPool.Release();
+                else _publicPool.Release();
+            } catch (WebException e) {
+                // release semaphores
+                if (mode == CrestMode.Authenticated) _authedPool.Release();
+                else _publicPool.Release();
+
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
-                var response = (HttpWebResponse) e.Response;
+                var response = (HttpWebResponse)e.Response;
 
                 if (response == null) throw;
                 Stream responseStream = response.GetResponseStream();
@@ -84,8 +167,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
-
-            return Serializer.Deserialize<T>(data);
+            return data;
+            //return Serializer.Deserialize<T>(data);
         }
     }
 }

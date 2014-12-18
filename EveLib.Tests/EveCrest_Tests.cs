@@ -32,9 +32,9 @@ namespace eZet.EveLib.Test {
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
             crest.Mode = CrestMode.Authenticated;
+            crest.AllowAutomaticTokenRefresh = true;
             crest.RequestHandler.ThrowOnDeprecated = true;
-            crest.AllowAutomaticRefresh = true;
-            crest.AuthedMaxConcurrentRequests = 1;
+            crest.RequestHandler.AuthedMaxConcurrentRequests = 100;
         }
 
         [TestMethod]
