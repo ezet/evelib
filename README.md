@@ -217,12 +217,12 @@ This module provides access to all calls on the EveCentral api. All api calls ca
 
     var options = new EveCentralOptions() { HourLimit = 4, MinQuantity = 5 };
     options.Items.Add(34);
-    options.Regoins.Add(10000002);
+    options.Regions.Add(10000002);
     var eveCentral = new EveCentral();
-    EveCentralMarketStatResponse response = eveCentral.GetMarketStat(options);
+    MarketStatResponse response = eveCentral.GetMarketStat(options);
 
 
-Element43
+Element43 API
 -
 Similar to EveCentral API. Uses `Element43Options`.
 
@@ -232,8 +232,8 @@ Similar to EveCentral API. Uses `EveMarketDataOptions`.
 
 Zkillbord
 -
-Work in progress.
+Please read ZKillboard API documentation.
 
 EveWho
 -
-Work in progress.
+Please read EveWho API documentation.
