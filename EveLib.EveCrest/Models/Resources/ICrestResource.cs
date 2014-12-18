@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -21,7 +22,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Interface ICrestResource
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICrestResource<out T> where T : class, ICrestResource<T> {
+    public interface ICrestResource<T> where T : class, ICrestResource<T> {
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is deprecated.
         /// </summary>
@@ -56,6 +57,61 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut&gt;.</returns>
         Task<TOut> QueryAsync<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut>;
+
+
+        /// <summary>
+        ///     Queries the resource.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        TOut Query<TOut>(Func<T, Href<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut>;
+
+        /// <summary>
+        ///     Queries the resource.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        TOut Query<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut>;
+
+        /// <summary>
+        /// Queries a collection of resources asynchronous.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut>;
+
+        /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut>;
+
+        /// <summary>
+        /// Queries a collection of resources asynchronous.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<LinkedEntity<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut>;
+
+        /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<LinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut>;
     }
 }
