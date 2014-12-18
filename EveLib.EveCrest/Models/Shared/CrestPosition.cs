@@ -25,20 +25,20 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
         /// </summary>
         /// <value>The x.</value>
         [DataMember(Name = "x")]
-        public long X { get; set; }
+        public double X { get; set; }
 
         /// <summary>
         ///     Gets or sets the y.
         /// </summary>
         /// <value>The y.</value>
         [DataMember(Name = "y")]
-        public long Y { get; set; }
+        public double Y { get; set; }
 
         /// <summary>
         ///     Gets or sets the z.
         /// </summary>
         /// <value>The z.</value>
         [DataMember(Name = "z")]
-        public long Z { get; set; }
+        public double Z { get; set; }
     }
 }

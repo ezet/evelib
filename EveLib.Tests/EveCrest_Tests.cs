@@ -34,7 +34,7 @@ namespace eZet.EveLib.Test {
             crest.EncodedKey = EncodedKey;
             crest.Mode = CrestMode.Authenticated;
             crest.AllowAutomaticTokenRefresh = true;
-            crest.RequestHandler.ThrowOnDeprecated = true;
+            //crest.RequestHandler.ThrowOnDeprecated = true;
         }
 
         [TestMethod]
@@ -46,13 +46,11 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetRoot() {
-            CrestRoot result = crest.GetRoot();
-            Debug.WriteLine(result.Regions.Uri);
-            var regionsData = crest.GetRoot().Query(f => f.Regions).Query(regions => regions.Items);
-            var constellations = regionsData.Select(r => r.Query(f => f.Constellations));
-            foreach (var region in regionsData) {
-                region.Query(r => r.Constellations);
-            }
+            CrestRoot root = crest.GetRoot();
+            Debug.WriteLine(root.UserCounts.Dust);
+            Debug.WriteLine(root.ServerName);
+            //Debug.WriteLine(root.Regions.Uri);
+            //var regionsData = crest.GetRoot().Query(f => f.Regions).Query(regions => regions.Items);
         }
 
         public async Task GetRootAsync() {

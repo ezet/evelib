@@ -255,7 +255,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         /// <returns>CrestRoot.</returns>
         public CrestRoot GetRoot() {
-            return GetRootAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            return GetRootAsync().Result;
         }
 
         /// <summary>
@@ -603,8 +603,8 @@ namespace eZet.EveLib.EveCrestModule {
                 } catch (EveCrestException e) {
                     if (AllowAutomaticTokenRefresh) {
                         var error = e.WebException.Response as HttpWebResponse;
-                        if (error != null && error.StatusCode == HttpStatusCode.Unauthorized)
-                            retry = true;
+                        if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
+                        else throw;
                     } else throw;
                 }
                 if (retry) {

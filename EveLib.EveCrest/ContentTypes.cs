@@ -35,10 +35,10 @@ namespace eZet.EveLib.EveCrestModule {
         /// <typeparam name="T"></typeparam>
         /// <returns>System.String.</returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public static string Get<T>() where T : class, ICrestResource<T> {
+        public static string Get<T>(bool throwOnDeprecated) where T : class, ICrestResource<T> {
             // TODO optional throw on missing version
             var instance = Activator.CreateInstance<T>();
-            if (String.IsNullOrEmpty(instance.ContentType)) {
+            if (String.IsNullOrEmpty(instance.ContentType) && throwOnDeprecated) {
                 throw new NotImplementedException();
             }
             return instance.ContentType;

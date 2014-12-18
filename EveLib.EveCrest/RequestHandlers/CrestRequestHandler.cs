@@ -80,6 +80,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public bool ThrowOnDeprecated { get; set; }
 
         /// <summary>
+        ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource
+        /// </summary>
+        public bool ThrowOnNotImplemented { get; set; }
+
+        /// <summary>
         ///     Gets or sets the serializer used to deserialize CREST errors.
         /// </summary>
         public ISerializer Serializer { get; set; }
@@ -95,7 +100,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             string data;
             CrestMode mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
-            request.Accept = ContentTypes.Get<T>();
+            request.Accept = ContentTypes.Get<T>(ThrowOnNotImplemented);
             _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
 
             if (mode == CrestMode.Authenticated) {

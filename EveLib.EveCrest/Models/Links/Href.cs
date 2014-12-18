@@ -51,5 +51,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
             return new Href<T>(s);
         }
 
+        public override string ToString() {
+            return Uri;
+        }
     }
 }

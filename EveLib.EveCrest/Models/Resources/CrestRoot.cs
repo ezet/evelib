@@ -211,7 +211,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     The number of current users of services
         /// </summary>
         /// <value>The user counts.</value>
-        [DataMember(Name = "userCount")]
+        [DataMember(Name = "userCounts")]
         public UserCount UserCounts { get; set; }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The time.</value>
         [DataMember(Name = "time")]
-        public Href<string> Time { get; set; }
+        public Href<NotImplemented> Time { get; set; }
 
         /// <summary>
         ///     Gets or sets the market types.

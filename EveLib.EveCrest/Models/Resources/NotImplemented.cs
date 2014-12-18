@@ -12,7 +12,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <exception cref="System.NotImplementedException"></exception>
         public NotImplemented() {
-            throw new NotImplementedException();
         }
     }
 }
