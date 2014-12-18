@@ -191,11 +191,11 @@ Here's an example adding all MarketTypes to a list:
 
     var types = root.Query(r => r.MarketTypes);
     var list = types.Items.ToList();
-    // save data
     while (types.Next != null)  {
         types = types.Query(t => t.Next);
         list.AddRange(types.Items);
     }
+    // do work with list
     
 #### Authenticated Crest
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
