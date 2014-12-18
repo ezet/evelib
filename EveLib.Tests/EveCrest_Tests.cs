@@ -50,7 +50,7 @@ namespace eZet.EveLib.Test {
             Debug.WriteLine(result.Regions.Uri);
             var regionsLinks = crest.GetRoot().Query(f => f.Regions);
             Debug.WriteLine(regionsLinks.Items.First().Id);
-            var regionData = regionsLinks.Query(f => f.Items);
+            var regionData = regionsLinks.Query(f => f.Items.Take(5));
             Debug.WriteLine(regionData.First().Name);
         }
 

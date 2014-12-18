@@ -130,6 +130,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RequestHandlers\IImageRequestHandler.cs" />
     <Compile Include="RequestHandlers\ImageRequestHandler.cs" />
+    <Compile Include="Util\AsyncHelpers.cs" />
     <Compile Include="Util\AsyncLazy.cs" />
     <Compile Include="Serializers\JsonSerializer.cs" />
     <Compile Include="Util\EveLibApiBase.cs" />

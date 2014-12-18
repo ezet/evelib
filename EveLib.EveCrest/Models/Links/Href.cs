@@ -44,12 +44,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         public string Uri { get; set; }
 
         /// <summary>
-        ///     Gets or sets the type.
-        /// </summary>
-        /// <value>The type.</value>
-        public T Type { get; set; }
-
-        /// <summary>
         ///     Performs an implicit conversion from <see cref="System.String" /> to <see cref="Href{T}" />.
         /// </summary>
         /// <param name="s">The s.</param>
@@ -58,12 +52,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
             return new Href<T>(s);
         }
 
-        /// <summary>
-        ///     Returns the href as a string
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString() {
-            return Type.ToString();
-        }
     }
 }
