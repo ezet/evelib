@@ -51,6 +51,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The CREST access accessToken</param>
         /// <returns>T.</returns>
-        Task<string> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
+        Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
     }
 }

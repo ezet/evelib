@@ -7,6 +7,8 @@ namespace eZet.EveLib.Core.Util {
     ///     A base class for Eve Lib API modules.
     /// </summary>
     public abstract class EveLibApiBase {
+        private string _baseUri;
+
         /// <summary>
         ///     Constructor
         /// </summary>
@@ -21,6 +23,7 @@ namespace eZet.EveLib.Core.Util {
         protected EveLibApiBase(string uri, IRequestHandler requestHandler) {
             RequestHandler = requestHandler;
             BaseUri = uri;
+            ApiPath = "/";
         }
 
         /// <summary>
@@ -29,9 +32,12 @@ namespace eZet.EveLib.Core.Util {
         public IRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        ///     Gets or sets the base URI used to access this API. This should include a trailing backslash.
+        ///     Gets or sets the base URI used to access this API.
         /// </summary>
-        public string BaseUri { get; set; }
+        public string BaseUri {
+            get { return _baseUri; }
+            set { _baseUri = value.TrimEnd('/', '\\'); }
+        }
 
         /// <summary>
         ///     Gets or sets the relative path to the API base.
