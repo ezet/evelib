@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         /// The default public burst size
         /// </summary>
-        public const int DefaultPublicMaxConcurrentRequests = 40;
+        public const int DefaultPublicMaxConcurrentRequests = 50;
 
         /// <summary>
         /// The default authed rate per second
@@ -103,7 +103,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        ///     Sets or gets whether to throw an exception when requesting a deprecated resource
+        ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource
         /// </summary>
         public bool ThrowOnDeprecated { get; set; }
 
@@ -113,13 +113,13 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public ISerializer Serializer { get; set; }
 
         /// <summary>
-        ///     Performs a request, deserializes it, and returns the deserialized data.
+        ///     Performs a request, and returns the response content.
         /// </summary>
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="uri">URI to request</param>
         /// <param name="accessToken">CREST acces token</param>
         /// <returns></returns>
-        public async Task<string> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
+        public async Task<string> RequestAsync<T>(Uri uri, string accessToken = null) where T : class, ICrestResource<T> {
             string data;
             var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);

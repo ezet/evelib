@@ -152,17 +152,12 @@ namespace eZet.EveLib.EveAuthModule {
                 if (responseStream == null) throw;
                 using (var reader = new StreamReader(responseStream)) {
                     string data = reader.ReadToEnd();
-                    if (response.StatusCode != HttpStatusCode.InternalServerError) {
-                        var error = JsonConvert.DeserializeObject<AuthError>(data);
-                        _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
-                            "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
-                            error.RefId);
-                        throw new EveAuthException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
-                    } else {
-                        throw new EveAuthException(data, e);
-
-                    }
-
+                    if (response.StatusCode == HttpStatusCode.InternalServerError) throw new EveAuthException(data, e);
+                    var error = JsonConvert.DeserializeObject<AuthError>(data);
+                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
+                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
+                        error.RefId);
+                    throw new EveAuthException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
 
             }

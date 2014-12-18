@@ -45,7 +45,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         int AuthedMaxConcurrentRequests { get; set; }
 
         /// <summary>
-        ///     Requests a URI asynchronously, and returns the deserialized content.
+        ///     Requests a URI asynchronously, and returns the response content.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>

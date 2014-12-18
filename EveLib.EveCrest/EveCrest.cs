@@ -165,13 +165,23 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        ///     Loads a CREST resource.
+        ///     Loads a CREST resource async.
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="uri">The Href that should be loaded</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public Task<T> LoadAsync<T>(Href<T> uri) where T : class, ICrestResource<T> {
             return requestAsync<T>(new Uri(uri.Uri));
+        }
+
+        /// <summary>
+        ///     Loads a CREST resource async.
+        /// </summary>
+        /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
+        /// <param name="uri">The Href that should be loaded</param>
+        /// <returns>Task&lt;T&gt;.</returns>
+        public T Load<T>(Href<T> uri) where T : class, ICrestResource<T> {
+            return requestAsync<T>(new Uri(uri.Uri)).Result;
         }
 
         /// <summary>
@@ -182,6 +192,16 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Task&lt;T&gt;.</returns>
         public Task<T> LoadAsync<T>(ILinkedEntity<T> entity) where T : class, ICrestResource<T> {
             return requestAsync<T>(new Uri(entity.Href.Uri));
+        }
+
+        /// <summary>
+        ///     Loads a crest resource
+        /// </summary>
+        /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
+        /// <param name="entity">The items that should be loaded</param>
+        /// <returns>Task&lt;T&gt;.</returns>
+        public T Load<T>(ILinkedEntity<T> entity) where T : class, ICrestResource<T> {
+            return requestAsync<T>(new Uri(entity.Href.Uri)).Result;
         }
 
 
@@ -196,6 +216,17 @@ namespace eZet.EveLib.EveCrestModule {
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
 
+        /// <summary>
+        /// Loads a crest resource collection.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items">The items.</param>
+        /// <returns>Task&lt;T[]&gt;.</returns>
+        public IEnumerable<T> Load<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
+            var list = items.Select(LoadAsync).ToList();
+            return Task.WhenAll(list).Result.AsEnumerable();
+        }
+
 
         /// <summary>
         /// Loads a crest resource collection.
@@ -206,6 +237,17 @@ namespace eZet.EveLib.EveCrestModule {
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
             var list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
+        }
+
+        /// <summary>
+        /// Loads a crest resource collection.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items">The items.</param>
+        /// <returns>Task&lt;T[]&gt;.</returns>
+        public IEnumerable<T> Load<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
+            var list = items.Select(LoadAsync).ToList();
+            return Task.WhenAll(list).Result.AsEnumerable();
         }
 
 
