@@ -32,6 +32,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]
-        public IList<IndustryTeam> Items { get; set; }
+        public IReadOnlyList<IndustryTeam> Items { get; set; }
     }
 }

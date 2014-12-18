@@ -56,7 +56,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The attackers.</value>
         [DataMember(Name = "attackers")]
-        public IList<KillmailAttacker> Attackers { get; set; }
+        public IReadOnlyList<KillmailAttacker> Attackers { get; set; }
 
         /// <summary>
         ///     The number of attackers
@@ -191,7 +191,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// </summary>
             /// <value>The items.</value>
             [DataMember(Name = "items")]
-            public IList<Item> Items { get; set; }
+            public IReadOnlyList<Item> Items { get; set; }
         }
     }
 }

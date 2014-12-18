@@ -34,7 +34,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
         /// </summary>
         /// <value>The solar systems.</value>
         [DataMember(Name = "items")]
-        public List<SolarSystemEntry> SolarSystems { get; set; }
+        public IReadOnlyList<SolarSystemEntry> SolarSystems { get; set; }
 
         /// <summary>
         ///     Represesents a solar system for a SystemCostEntry
@@ -53,7 +53,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
             /// </summary>
             /// <value>The system cost indices.</value>
             [DataMember(Name = "systemCostIndices")]
-            public List<SystemCostEntry> SystemCostIndices { get; set; }
+            public IReadOnlyList<SystemCostEntry> SystemCostIndices { get; set; }
         }
 
         /// <summary>

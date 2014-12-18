@@ -34,6 +34,7 @@ namespace eZet.EveLib.Test {
             crest.Mode = CrestMode.Authenticated;
             crest.RequestHandler.ThrowOnDeprecated = true;
             crest.AllowAutomaticRefresh = true;
+            crest.AuthedMaxConcurrentRequests = 1;
         }
 
         [TestMethod]
@@ -46,8 +47,8 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetRoot() {
             CrestRoot result = await crest.GetRootAsync();
-
-            var regions = (await crest.GetRoot().QueryAsync(f => f.Regions));
+            var regionsLinks = (await crest.GetRoot().QueryAsync(f => f.Regions));
+            var regionData = await regionsLinks.QueryAsync(f => f.Items);
         }
 
 

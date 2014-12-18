@@ -34,7 +34,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]
-        public IList<MarketHistoryEntry> Items { get; set; }
+        public IReadOnlyList<MarketHistoryEntry> Items { get; set; }
 
         /// <summary>
         ///     Class MarketHistoryEntry.

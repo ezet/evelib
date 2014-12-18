@@ -34,7 +34,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
         /// </summary>
         /// <value>The facilities.</value>
         [DataMember(Name = "items")]
-        public List<FacilityEntry> Facilities { get; set; }
+        public IReadOnlyList<FacilityEntry> Facilities { get; set; }
 
         /// <summary>
         ///     Represents an industry facility

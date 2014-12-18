@@ -34,7 +34,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         /// </summary>
         /// <value>The prices.</value>
         [DataMember(Name = "items")]
-        public List<MarketPriceEntry> Prices { get; set; }
+        public IReadOnlyList<MarketPriceEntry> Prices { get; set; }
 
         /// <summary>
         ///     Represents an entry in the Market Price Response collection

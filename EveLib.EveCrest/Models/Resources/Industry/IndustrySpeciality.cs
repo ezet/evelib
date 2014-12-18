@@ -47,7 +47,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
         /// </summary>
         /// <value>The groups.</value>
         [DataMember(Name = "groups")]
-        public IList<Group> Groups { get; set; }
+        public IReadOnlyList<Group> Groups { get; set; }
     }
 
     /// <summary>

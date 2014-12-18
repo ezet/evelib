@@ -34,7 +34,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]
-        public List<Alliance> Items { get; set; }
+        public IReadOnlyList<Alliance> Items { get; set; }
 
         /// <summary>
         ///     Class Alliance.

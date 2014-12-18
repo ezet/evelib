@@ -14,6 +14,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Shared;
@@ -115,6 +117,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The corporations.</value>
         [DataMember(Name = "corporations")]
-        public IList<CorporationEntry> Corporations { get; set; }
+        public IReadOnlyList<CorporationEntry> Corporations { get; set; }
     }
 }
