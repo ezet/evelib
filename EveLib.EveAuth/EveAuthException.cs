@@ -25,6 +25,15 @@ namespace eZet.EveLib.EveAuthModule {
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="EveAuthException"/> class.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="innerException">The inner exception.</param>
+        public EveAuthException(string message, WebException innerException)
+            : base(message, innerException) {
+        }
+
+        /// <summary>
         ///     Gets the Eve CREST Exception key
         /// </summary>
         public string Key { get; private set; }

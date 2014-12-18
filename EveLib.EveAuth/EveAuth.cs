@@ -144,21 +144,27 @@ namespace eZet.EveLib.EveAuthModule {
         private async Task<string> requestAsync(HttpWebRequest request) {
             try {
                 return await HttpRequestHelper.GetResponseContentAsync(request);
-            }
-            catch (WebException e) {
+            } catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Auth failed.");
-                var response = (HttpWebResponse) e.Response;
+                var response = (HttpWebResponse)e.Response;
 
-                if (response == null) throw;
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw;
                 using (var reader = new StreamReader(responseStream)) {
                     string data = reader.ReadToEnd();
-                    var error = JsonConvert.DeserializeObject<AuthError>(data);
-                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
-                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType, error.RefId);
-                    throw new EveAuthException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
+                    if (response.StatusCode != HttpStatusCode.InternalServerError) {
+                        var error = JsonConvert.DeserializeObject<AuthError>(data);
+                        _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
+                            "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
+                            error.RefId);
+                        throw new EveAuthException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
+                    } else {
+                        throw new EveAuthException(data, e);
+
+                    }
+
                 }
+
             }
         }
     }

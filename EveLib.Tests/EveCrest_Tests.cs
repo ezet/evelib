@@ -29,8 +29,8 @@ namespace eZet.EveLib.Test {
         public EveCrest_Tests() {
             //crest.AccessToken =
             //    "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
-            crest.RefreshToken = RefreshToken;
-            crest.EncodedKey = EncodedKey;
+            //crest.RefreshToken = RefreshToken;
+            //crest.EncodedKey = EncodedKey;
             crest.Mode = CrestMode.Authenticated;
             crest.AllowAutomaticTokenRefresh = true;
             crest.RequestHandler.ThrowOnDeprecated = true;
@@ -48,7 +48,7 @@ namespace eZet.EveLib.Test {
         public async Task GetRoot() {
             CrestRoot result = await crest.GetRootAsync();
             var regionsLinks = (await crest.GetRoot().QueryAsync(f => f.Regions));
-            var regionData = await regionsLinks.QueryAsync(f => f.Items);
+            //var regionData = await regionsLinks.QueryAsync(f => f.Items.First());
         }
 
 

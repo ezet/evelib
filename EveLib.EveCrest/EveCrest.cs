@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
+using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveAuthModule;
@@ -59,12 +59,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         public const string DefaultAuthUri = "https://crest-tq.eveonline.com/";
 
-
-
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
-
-
-
 
         /// <summary>
         ///     Constructor
@@ -127,7 +122,7 @@ namespace eZet.EveLib.EveCrestModule {
         public string EncodedKey { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token.
+        ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This requires a valid RefreshToken and EncryptedKey to be set.
         /// </summary>
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
         public bool AllowAutomaticTokenRefresh { get; set; }
@@ -575,9 +570,12 @@ namespace eZet.EveLib.EveCrestModule {
                     data =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken);
 
-                } catch (EveCrestException) {
-                    if (AllowAutomaticTokenRefresh) retry = true;
-                    else throw;
+                } catch (EveCrestException e) {
+                    if (AllowAutomaticTokenRefresh) {
+                        var error = e.WebException.Response as HttpWebResponse;
+                        if (error != null && error.StatusCode == HttpStatusCode.Unauthorized)
+                            retry = true;
+                    } else throw;
                 }
 
                 if (retry) {
