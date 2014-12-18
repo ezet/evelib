@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="ItemCategoryCollection" /> class.
         /// </summary>
         public ItemCategoryCollection() {
-            Version = "application/vnd.ccp.eve.ItemCategoryCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.ItemCategoryCollection-v1+json";
         }
 
         /// <summary>

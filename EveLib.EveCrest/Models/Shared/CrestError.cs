@@ -29,5 +29,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
         /// </summary>
         [DataMember(Name = "refID")]
         public string RefId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is localized.
+        /// </summary>
+        /// <value><c>true</c> if this instance is localized; otherwise, <c>false</c>.</value>
+        [DataMember(Name = "isLocalized")]
+        public bool IsLocalized { get; set; }
     }
 }

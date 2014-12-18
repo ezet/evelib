@@ -46,7 +46,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="IncursionCollection" /> class.
         /// </summary>
         public IncursionCollection() {
-            Version = "application/vnd.ccp.eve.IncursionCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.IncursionCollection-v1+json";
         }
 
         /// <summary>

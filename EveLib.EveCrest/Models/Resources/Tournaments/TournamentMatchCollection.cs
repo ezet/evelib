@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
         ///     Initializes a new instance of the <see cref="TournamentMatchCollection" /> class.
         /// </summary>
         public TournamentMatchCollection() {
-            Version = "application/vnd.ccp.eve.TournamentMatchCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.TournamentMatchCollection-v1+json";
         }
 
         /// <summary>

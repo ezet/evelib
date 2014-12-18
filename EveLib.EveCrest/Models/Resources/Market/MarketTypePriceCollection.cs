@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         ///     Initializes a new instance of the <see cref="MarketTypePriceCollection" /> class.
         /// </summary>
         public MarketTypePriceCollection() {
-            Version = "application/vnd.ccp.eve.MarketTypePriceCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.MarketTypePriceCollection-v1+json";
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         ///     Initializes a new instance of the <see cref="MarketGroupCollection" /> class.
         /// </summary>
         public MarketGroupCollection() {
-            Version = "application/vnd.ccp.eve.MarketGroupCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.MarketGroupCollection-v1+json";
         }
 
         /// <summary>

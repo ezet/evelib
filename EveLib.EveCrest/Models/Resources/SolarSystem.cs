@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="SolarSystem" /> class.
         /// </summary>
         public SolarSystem() {
-            Version = "application/vnd.ccp.eve.System-v1+json";
+            ContentType = "application/vnd.ccp.eve.System-v1+json";
         }
 
         /// <summary>

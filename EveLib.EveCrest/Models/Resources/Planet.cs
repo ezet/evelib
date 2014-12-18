@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="Planet" /> class.
         /// </summary>
         public Planet() {
-            Version = "application/vnd.ccp.eve.Planet-v1+json";
+            ContentType = "application/vnd.ccp.eve.Planet-v1+json";
         }
 
         /// <summary>

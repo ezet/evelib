@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
         ///     Initializes a new instance of the <see cref="IndustrySpecialityCollection" /> class.
         /// </summary>
         public IndustrySpecialityCollection() {
-            Version = "application/vnd.ccp.eve.IndustrySpecialityCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.IndustrySpecialityCollection-v1+json";
         }
 
         /// <summary>

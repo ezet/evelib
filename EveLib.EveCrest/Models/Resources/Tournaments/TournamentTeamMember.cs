@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
         ///     Initializes a new instance of the <see cref="TournamentTeamMember" /> class.
         /// </summary>
         public TournamentTeamMember() {
-            Version = "application/vnd.ccp.eve.TournamentTeamMember-v1+json";
+            ContentType = "application/vnd.ccp.eve.TournamentTeamMember-v1+json";
         }
 
         // TODO CCP why is the Href encased in Self ?

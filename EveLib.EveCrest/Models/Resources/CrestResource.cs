@@ -39,7 +39,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Gets or sets the version.
         /// </summary>
         /// <value>The version.</value>
-        public virtual string Version { get; protected set; }
+        public virtual string ContentType { get; protected set; }
 
 
         /// <summary>

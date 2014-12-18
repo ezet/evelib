@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
         ///     Initializes a new instance of the <see cref="IndustryTeam" /> class.
         /// </summary>
         public IndustryTeam() {
-            Version = "application/vnd.ccp.eve.IndustryTeam-v1+json";
+            ContentType = "application/vnd.ccp.eve.IndustryTeam-v1+json";
         }
 
         /// <summary>

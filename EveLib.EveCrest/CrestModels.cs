@@ -38,10 +38,10 @@ namespace eZet.EveLib.EveCrestModule {
         public static string Get<T>() where T : class, ICrestResource<T> {
             // TODO optional throw on missing version
             var instance = Activator.CreateInstance<T>();
-            if (String.IsNullOrEmpty(instance.Version)) {
+            if (String.IsNullOrEmpty(instance.ContentType)) {
                 throw new NotImplementedException();
             }
-            return instance.Version;
+            return instance.ContentType;
         }
     }
 }

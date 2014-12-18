@@ -24,7 +24,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="ItemType" /> class.
         /// </summary>
         public ItemType() {
-            Version = "application/vnd.ccp.eve.ItemType-v3+json";
+            ContentType = "application/vnd.ccp.eve.ItemType-v3+json";
         }
 
         /// <summary>

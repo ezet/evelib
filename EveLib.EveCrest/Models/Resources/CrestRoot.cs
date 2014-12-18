@@ -48,7 +48,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="CrestRoot" /> class.
         /// </summary>
         public CrestRoot() {
-            Version = "application/vnd.ccp.eve.Api-v3+json";
+            ContentType = "application/vnd.ccp.eve.Api-v3+json";
         }
 
         /// <summary>

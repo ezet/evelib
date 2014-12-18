@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="Region" /> class.
         /// </summary>
         public Region() {
-            Version = "application/vnd.ccp.eve.Region-v1+json";
+            ContentType = "application/vnd.ccp.eve.Region-v1+json";
         }
 
         /// <summary>

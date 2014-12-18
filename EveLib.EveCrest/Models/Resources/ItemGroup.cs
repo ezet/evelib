@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="ItemGroup" /> class.
         /// </summary>
         public ItemGroup() {
-            Version = "application/vnd.ccp.eve.ItemCategory-v1+json";
+            ContentType = "application/vnd.ccp.eve.ItemCategory-v1+json";
         }
 
         /// <summary>

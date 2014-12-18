@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="RegionCollection" /> class.
         /// </summary>
         public RegionCollection() {
-            Version = "application/vnd.ccp.eve.RegionCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.RegionCollection-v1+json";
         }
 
         /// <summary>

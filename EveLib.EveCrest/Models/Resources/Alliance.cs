@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="Alliance" /> class.
         /// </summary>
         public Alliance() {
-            Version = "application/vnd.ccp.eve.Alliance-v1+json";
+            ContentType = "application/vnd.ccp.eve.Alliance-v1+json";
         }
 
         /// <summary>

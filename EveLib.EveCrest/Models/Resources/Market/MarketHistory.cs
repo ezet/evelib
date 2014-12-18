@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         ///     Initializes a new instance of the <see cref="MarketHistory" /> class.
         /// </summary>
         public MarketHistory() {
-            Version = "application/vnd.ccp.eve.MarketTypeHistoryCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.MarketTypeHistoryCollection-v1+json";
         }
 
         /// <summary>

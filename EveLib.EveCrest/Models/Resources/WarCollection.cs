@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="WarCollection" /> class.
         /// </summary>
         public WarCollection() {
-            Version = "application/vnd.ccp.eve.WarsCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.WarsCollection-v1+json";
         }
 
         /// <summary>

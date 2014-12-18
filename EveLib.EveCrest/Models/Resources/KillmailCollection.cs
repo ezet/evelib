@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="KillmailCollection" /> class.
         /// </summary>
         public KillmailCollection() {
-            Version = "application/vnd.ccp.eve.WarKillmails-v1+json";
+            ContentType = "application/vnd.ccp.eve.WarKillmails-v1+json";
         }
 
 

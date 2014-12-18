@@ -33,7 +33,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Gets the version.
         /// </summary>
         /// <value>The version.</value>
-        string Version { get; }
+        string ContentType { get; }
 
         /// <summary>
         ///     Gets or sets the crest.
