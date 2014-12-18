@@ -21,20 +21,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     ///     Represents CREST market prices
     /// </summary>
     [DataContract]
-    public sealed class MarketTypePriceCollection : CollectionResource<MarketTypePriceCollection> {
+    public sealed class MarketTypePriceCollection : CollectionResource<MarketTypePriceCollection, MarketTypePriceCollection.MarketPriceEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MarketTypePriceCollection" /> class.
         /// </summary>
         public MarketTypePriceCollection() {
             ContentType = "application/vnd.ccp.eve.MarketTypePriceCollection-v1+json";
         }
-
-        /// <summary>
-        ///     A list of market price entries
-        /// </summary>
-        /// <value>The prices.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<MarketPriceEntry> Prices { get; set; }
 
         /// <summary>
         ///     Represents an entry in the Market Price Response collection

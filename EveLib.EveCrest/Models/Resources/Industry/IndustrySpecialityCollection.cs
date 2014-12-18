@@ -20,7 +20,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     ///     Represents a CREST /industry/specialities/ response
     /// </summary>
     [DataContract]
-    public sealed class IndustrySpecialityCollection : CollectionResource<IndustrySpecialityCollection> {
+    public sealed class IndustrySpecialityCollection : CollectionResource<IndustrySpecialityCollection, IndustrySpeciality> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustrySpecialityCollection" /> class.
         /// </summary>
@@ -28,11 +28,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
             ContentType = "application/vnd.ccp.eve.IndustrySpecialityCollection-v1+json";
         }
 
-        /// <summary>
-        ///     A list of specializations
-        /// </summary>
-        /// <value>The specialities.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<IndustrySpeciality> Specialities { get; set; }
-    }
+  }
 }

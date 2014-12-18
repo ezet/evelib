@@ -21,20 +21,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST /killmails/ response
     /// </summary>
     [DataContract]
-    public sealed class KillmailCollection : CollectionResource<KillmailCollection> {
+    public sealed class KillmailCollection : CollectionResource<KillmailCollection, LinkedEntity<Killmail>> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="KillmailCollection" /> class.
         /// </summary>
         public KillmailCollection() {
             ContentType = "application/vnd.ccp.eve.WarKillmails-v1+json";
         }
-
-
-        /// <summary>
-        ///     A list of killmails
-        /// </summary>
-        /// <value>The killmails.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<LinkedEntity<Killmail>> Killmails { get; set; }
     }
 }

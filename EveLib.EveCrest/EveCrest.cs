@@ -349,9 +349,9 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
         /// <returns>Market history for the specified region and type.</returns>
-        public Task<MarketHistory> GetMarketHistoryAsync(int regionId, int typeId) {
+        public Task<MarketHistoryCollection> GetMarketHistoryAsync(int regionId, int typeId) {
             string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
-            return requestAsync<MarketHistory>(relPath);
+            return requestAsync<MarketHistoryCollection>(relPath);
         }
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
         /// <returns>Market history for the specified region and type.</returns>
-        public MarketHistory GetMarketHistory(int regionId, int typeId) {
+        public MarketHistoryCollection GetMarketHistory(int regionId, int typeId) {
             return GetMarketHistoryAsync(regionId, typeId).Result;
         }
 
@@ -598,7 +598,7 @@ namespace eZet.EveLib.EveCrestModule {
                 var retry = false;
                 try {
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken);
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
 
                 } catch (EveCrestException e) {
                     if (AllowAutomaticTokenRefresh) {
@@ -607,18 +607,17 @@ namespace eZet.EveLib.EveCrestModule {
                             retry = true;
                     } else throw;
                 }
-
                 if (retry) {
                     _trace.TraceEvent(TraceEventType.Information, 0,
                         "Invalid AccessToken: Attempting refresh");
-                    await RefreshAccessTokenAsync();
+                    await RefreshAccessTokenAsync().ConfigureAwait(false);
                     _trace.TraceEvent(TraceEventType.Information, 0,
                         "Token refreshed");
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken);
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
             } else {
-                response = await RequestHandler.RequestAsync<T>(uri, null);
+                response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
             }
             if (response != null) {
                 response.Crest = this;

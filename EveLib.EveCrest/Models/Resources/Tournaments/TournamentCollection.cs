@@ -7,19 +7,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     ///     Class TournamentCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class TournamentCollection : CollectionResource<TournamentCollection> {
+    public sealed class TournamentCollection : CollectionResource<TournamentCollection, LinkedEntity<Tournament>> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TournamentCollection" /> class.
         /// </summary>
         public TournamentCollection() {
             ContentType = "application/vnd.ccp.eve.TournamentCollection-v1+json";
         }
-
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<LinkedEntity<Tournament>> Items { get; set; }
     }
 }

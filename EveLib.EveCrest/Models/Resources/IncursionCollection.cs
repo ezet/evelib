@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST /incursions/ response
     /// </summary>
     [DataContract]
-    public sealed class IncursionCollection : CollectionResource<IncursionCollection> {
+    public sealed class IncursionCollection : CollectionResource<IncursionCollection, IncursionCollection.Incursion> {
         /// <summary>
         ///     Represens the incursion states
         /// </summary>
@@ -48,13 +48,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public IncursionCollection() {
             ContentType = "application/vnd.ccp.eve.IncursionCollection-v1+json";
         }
-
-        /// <summary>
-        ///     A list of incursions
-        /// </summary>
-        /// <value>The incursions.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<Incursion> Incursions { get; set; }
 
         /// <summary>
         ///     Represents an incursion

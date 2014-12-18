@@ -40,7 +40,7 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        ///     Gets or sets the relative path to the API base.
+        ///     Gets or sets the path to the API root relative to Host.
         /// </summary>
         public string ApiPath { get; set; }
 

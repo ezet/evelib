@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST collection of wars
     /// </summary>
     [DataContract]
-    public sealed class WarCollection : CollectionResource<WarCollection> {
+    public sealed class WarCollection : CollectionResource<WarCollection, LinkedEntity<War>> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="WarCollection" /> class.
         /// </summary>
@@ -29,11 +29,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.WarsCollection-v1+json";
         }
 
-        /// <summary>
-        ///     A list of wars
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<LinkedEntity<War>> Items { get; set; }
     }
 }

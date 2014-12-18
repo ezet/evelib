@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class ItemTypeCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class ItemTypeCollection : CollectionResource<ItemTypeCollection> {
+    public sealed class ItemTypeCollection : CollectionResource<ItemTypeCollection, LinkedEntity<ItemType>> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ItemTypeCollection" /> class.
         /// </summary>
@@ -29,11 +29,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.ItemTypeCollection-v1+json";
         }
 
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyCollection<LinkedEntity<ItemType>> Items { get; set; }
     }
 }

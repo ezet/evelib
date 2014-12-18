@@ -6,7 +6,7 @@
 // Last Modified By : Lars Kristian
 // Last Modified On : 12-17-2014
 // ***********************************************************************
-// <copyright file="MarketHistory.cs" company="">
+// <copyright file="MarketHistoryCollection.cs" company="">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -21,20 +21,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     ///     Represents a CREST market history response
     /// </summary>
     [DataContract]
-    public sealed class MarketHistory : CollectionResource<MarketHistory> {
+    public sealed class MarketHistoryCollection : CollectionResource<MarketHistoryCollection, MarketHistoryCollection.MarketHistoryEntry> {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MarketHistory" /> class.
+        ///     Initializes a new instance of the <see cref="MarketHistoryCollection" /> class.
         /// </summary>
-        public MarketHistory() {
+        public MarketHistoryCollection() {
             ContentType = "application/vnd.ccp.eve.MarketTypeHistoryCollection-v1+json";
         }
-
-        /// <summary>
-        ///     A list of market history entries
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<MarketHistoryEntry> Items { get; set; }
 
         /// <summary>
         ///     Class MarketHistoryEntry.

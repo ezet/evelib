@@ -19,7 +19,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     /// <summary>
     ///     Represents a CREST /industry/teams/ response
     /// </summary>
-    public sealed class IndustryTeamCollection : CollectionResource<IndustryTeamCollection> {
+    public sealed class IndustryTeamCollection : CollectionResource<IndustryTeamCollection, IndustryTeam> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustryTeamCollection" /> class.
         /// </summary>
@@ -27,11 +27,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
             ContentType = "application/vnd.ccp.eve.IndustryTeamCollection-v1+json";
         }
 
-        /// <summary>
-        ///     A list of the teams
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<IndustryTeam> Items { get; set; }
     }
 }

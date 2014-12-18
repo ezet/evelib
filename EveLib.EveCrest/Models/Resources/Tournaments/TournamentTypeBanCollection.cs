@@ -21,19 +21,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     ///     Class TournamentTypeBanCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class TournamentTypeBanCollection : CollectionResource<TournamentTypeBanCollection> {
+    public sealed class TournamentTypeBanCollection : CollectionResource<TournamentTypeBanCollection, BanEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TournamentTypeBanCollection" /> class.
         /// </summary>
         public TournamentTypeBanCollection() {
             ContentType = "application/vnd.ccp.eve.TournamentTypeBanCollection-v1+json";
         }
-
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<BanEntry> Items { get; set; }
     }
 }

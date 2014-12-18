@@ -21,20 +21,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     ///     Class MarketGroupCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class MarketGroupCollection : CollectionResource<MarketGroupCollection> {
+    public sealed class MarketGroupCollection : CollectionResource<MarketGroupCollection, MarketGroup> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MarketGroupCollection" /> class.
         /// </summary>
         public MarketGroupCollection() {
             ContentType = "application/vnd.ccp.eve.MarketGroupCollection-v1+json";
         }
-
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyCollection<MarketGroup> Items { get; set; }
 
         /// <summary>
         ///     Class MarketGroup.

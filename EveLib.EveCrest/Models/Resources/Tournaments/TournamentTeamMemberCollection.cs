@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     /// </summary>
     [DataContract]
     public sealed class TournamentTeamMemberCollection :
-        CollectionResource<TournamentTeamMemberCollection> {
+        CollectionResource<TournamentTeamMemberCollection, TournamentTeamMember> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TournamentTeamMemberCollection" /> class.
         /// </summary>
@@ -29,11 +29,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
             ContentType = "application/vnd.ccp.eve.TournamentTeamMemberCollection-v1+json";
         }
 
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<TournamentTeamMember> Items { get; set; }
     }
 }

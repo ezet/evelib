@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
@@ -29,12 +30,12 @@ namespace eZet.EveLib.Test {
         public EveCrest_Tests() {
             //crest.AccessToken =
             //    "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
-            crest.RefreshToken = RefreshToken;
-            crest.EncodedKey = EncodedKey;
-            crest.Mode = CrestMode.Authenticated;
-            crest.AllowAutomaticTokenRefresh = true;
-            crest.RequestHandler.ThrowOnDeprecated = true;
-            crest.RequestHandler.AuthedMaxConcurrentRequests = 100;
+            //crest.RefreshToken = RefreshToken;
+            //crest.EncodedKey = EncodedKey;
+            crest.Mode = CrestMode.Public;
+            //crest.AllowAutomaticTokenRefresh = true;
+            //crest.RequestHandler.ThrowOnDeprecated = true;
+            //crest.RequestHandler.AuthedMaxConcurrentRequests = 100;
         }
 
         [TestMethod]
@@ -45,10 +46,12 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task GetRoot() {
-            CrestRoot result = await crest.GetRootAsync();
-            var regionsLinks = (await crest.GetRoot().QueryAsync(f => f.Regions));
-            var regionData = await regionsLinks.QueryAsync(f => f.Items.First());
+        public void GetRoot() {
+            CrestRoot result = crest.GetRoot();
+            Debug.WriteLine(result.Regions.Uri);
+
+            //var regionsLinks = crest.GetRoot().Query(f => f.Regions);
+            //var regionData = regionsLinks.Query(f => f.Where(t => t.Id == 1));
         }
 
 
@@ -78,13 +81,13 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMarketHistory_NoErrors() {
-            MarketHistory data = crest.GetMarketHistory(RegionId, TypeId);
+            MarketHistoryCollection data = crest.GetMarketHistory(RegionId, TypeId);
         }
 
         [TestMethod]
         public async Task GetMarketPrices() {
             MarketTypePriceCollection result = await crest.GetMarketPricesAsync();
-            Console.WriteLine(result.Prices.Count);
+            Console.WriteLine(result.Items.Count);
         }
 
         [TestMethod]

@@ -163,7 +163,7 @@
     <Compile Include="Models\Resources\IncursionCollection.cs" />
     <Compile Include="Models\Resources\Killmail.cs" />
     <Compile Include="Models\Resources\KillmailCollection.cs" />
-    <Compile Include="Models\Resources\Market\MarketHistory.cs" />
+    <Compile Include="Models\Resources\Market\MarketHistoryCollection.cs" />
     <Compile Include="Models\Resources\SolarSystem.cs" />
     <Compile Include="Models\Resources\War.cs" />
     <Compile Include="Models\Resources\WarCollection.cs" />

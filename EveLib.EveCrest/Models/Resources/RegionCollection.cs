@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class RegionCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class RegionCollection : CollectionResource<RegionCollection> {
+    public sealed class RegionCollection : CollectionResource<RegionCollection, LinkedEntity<Region>> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="RegionCollection" /> class.
         /// </summary>
@@ -29,11 +29,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.RegionCollection-v1+json";
         }
 
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyCollection<LinkedEntity<Region>> Items { get; set; }
-    }
+  }
 }

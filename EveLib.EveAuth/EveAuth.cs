@@ -68,7 +68,7 @@ namespace eZet.EveLib.EveAuthModule {
             request.Headers.Add("Authorization", "Basic " + encodedKey);
             request.Method = "POST";
             HttpRequestHelper.AddPostData(request, "grant_type=authorization_code&code=" + authCode);
-            string response = await requestAsync(request);
+            string response = await requestAsync(request).ConfigureAwait(false);
             var result = JsonConvert.DeserializeObject<AuthResponse>(response);
             return result;
         }
@@ -85,7 +85,7 @@ namespace eZet.EveLib.EveAuthModule {
             request.Headers.Add("Authorization", "Basic " + encodedKey);
             request.Method = "POST";
             HttpRequestHelper.AddPostData(request, "grant_type=refresh_token&refresh_token=" + refreshToken);
-            string response = await requestAsync(request);
+            string response = await requestAsync(request).ConfigureAwait(false);
             var result = JsonConvert.DeserializeObject<AuthResponse>(response);
             return result;
         }
@@ -100,7 +100,7 @@ namespace eZet.EveLib.EveAuthModule {
             request.Host = "login.eveonline.com";
             request.Headers.Add("Authorization", "Bearer " + accessToken);
             request.Method = "GET";
-            string response = await requestAsync(request);
+            string response = await requestAsync(request).ConfigureAwait(false);
             var result = JsonConvert.DeserializeObject<VerifyResponse>(response);
             return result;
         }
@@ -143,7 +143,7 @@ namespace eZet.EveLib.EveAuthModule {
 
         private async Task<string> requestAsync(HttpWebRequest request) {
             try {
-                return await HttpRequestHelper.GetResponseContentAsync(request);
+                return await HttpRequestHelper.GetResponseContentAsync(request).ConfigureAwait(false);
             } catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Auth failed.");
                 var response = (HttpWebResponse)e.Response;

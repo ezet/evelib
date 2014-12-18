@@ -20,7 +20,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// Class MarketOrderCollection.
     /// </summary>
     [DataContract]
-    public sealed class MarketOrderCollection : CollectionResource<MarketOrderCollection> {
+    public sealed class MarketOrderCollection : CollectionResource<MarketOrderCollection, MarketOrder> {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MarketOrderCollection" /> class.
@@ -29,13 +29,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         public MarketOrderCollection() {
             ContentType = "application/vnd.ccp.eve.MarketOrderCollection-v1+json";
         }
-
-        /// <summary>
-        /// Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<MarketOrder> Items { get; set; }
-
     }
 }

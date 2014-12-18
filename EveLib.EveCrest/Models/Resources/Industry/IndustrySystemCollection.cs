@@ -21,20 +21,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     ///     Represents the response for Industry Systems in CREST
     /// </summary>
     [DataContract]
-    public sealed class IndustrySystemCollection : CollectionResource<IndustrySystemCollection> {
+    public sealed class IndustrySystemCollection : CollectionResource<IndustrySystemCollection, IndustrySystemCollection.SolarSystemEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustrySystemCollection" /> class.
         /// </summary>
         public IndustrySystemCollection() {
             ContentType = "application/vnd.ccp.eve.IndustrySystemCollection-v1+json";
         }
-
-        /// <summary>
-        ///     The solar system
-        /// </summary>
-        /// <value>The solar systems.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<SolarSystemEntry> SolarSystems { get; set; }
 
         /// <summary>
         ///     Represesents a solar system for a SystemCostEntry

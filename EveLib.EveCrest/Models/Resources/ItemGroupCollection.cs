@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class ItemGroupCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class ItemGroupCollection : CollectionResource<ItemGroupCollection> {
+    public sealed class ItemGroupCollection : CollectionResource<ItemGroupCollection, LinkedEntity<ItemGroup>> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ItemGroupCollection" /> class.
         /// </summary>
@@ -29,11 +29,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.ItemGroupCollection-v1+json";
         }
 
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<LinkedEntity<ItemGroup>> Items { get; set; }
     }
 }

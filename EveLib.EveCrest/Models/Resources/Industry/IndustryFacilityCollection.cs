@@ -21,20 +21,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     ///     Eve CREST Industry Facilities
     /// </summary>
     [DataContract]
-    public sealed class IndustryFacilityCollection : CollectionResource<IndustryFacilityCollection> {
+    public sealed class IndustryFacilityCollection : CollectionResource<IndustryFacilityCollection, IndustryFacilityCollection.FacilityEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustryFacilityCollection" /> class.
         /// </summary>
         public IndustryFacilityCollection() {
             ContentType = "application/vnd.ccp.eve.IndustryFacilityCollection-v1+json";
         }
-
-        /// <summary>
-        ///     A list of facilities
-        /// </summary>
-        /// <value>The facilities.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<FacilityEntry> Facilities { get; set; }
 
         /// <summary>
         ///     Represents an industry facility

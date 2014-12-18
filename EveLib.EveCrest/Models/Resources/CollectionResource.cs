@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -20,14 +22,22 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST collection response
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TCollection">The type of items in the collection</typeparam>
     [DataContract]
-    public abstract class CollectionResource<T> : CrestResource<T> where T : class, ICrestResource<T> {
+    public abstract class CollectionResource<T, TCollection> : CrestResource<T> where T : class, ICrestResource<T> {
         /// <summary>
         ///     The total number of items in the collection
         /// </summary>
         /// <value>The total count.</value>
         [DataMember(Name = "totalCount")]
         public int TotalCount { get; set; }
+
+        /// <summary>
+        ///     The items in the collection
+        /// </summary>
+        /// <value>The items.</value>
+        [DataMember(Name = "items")]
+        public IReadOnlyList<TCollection> Items { get; set; }
 
         /// <summary>
         ///     The number of pages in the collection
@@ -49,5 +59,29 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The previous.</value>
         [DataMember(Name = "previous")]
         public Href<T> Previous { get; set; }
+
+        /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public virtual IEnumerable<TOut> Query<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(Items);
+            return Crest.Load(items);
+        }
+
+        /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public virtual IEnumerable<TOut> Query<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<Href<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(Items);
+            return Crest.Load(items);
+        }
     }
 }

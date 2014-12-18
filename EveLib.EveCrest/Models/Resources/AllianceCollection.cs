@@ -21,20 +21,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST /alliances/ response
     /// </summary>
     [DataContract]
-    public sealed class AllianceCollection : CollectionResource<AllianceCollection> {
+    public sealed class AllianceCollection : CollectionResource<AllianceCollection, Alliance> {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="AllianceCollection" /> class.
         /// </summary>
         public AllianceCollection() {
             ContentType = "application/vnd.ccp.eve.AllianceCollection-v1+json";
         }
-
-        /// <summary>
-        ///     A list of alliances
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<Alliance> Items { get; set; }
 
         /// <summary>
         ///     Class Alliance.

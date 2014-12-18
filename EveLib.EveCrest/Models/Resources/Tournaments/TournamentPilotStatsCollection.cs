@@ -22,20 +22,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
     /// </summary>
     [DataContract]
     public sealed class TournamentPilotStatsCollection :
-        CollectionResource<TournamentPilotStatsCollection> {
+        CollectionResource<TournamentPilotStatsCollection, TournamentPilotStatsCollection.PilotStatsEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TournamentPilotStatsCollection" /> class.
         /// </summary>
         public TournamentPilotStatsCollection() {
             ContentType = "application/vnd.ccp.eve.TournamentPilotStatsCollection-v1+json";
         }
-
-        /// <summary>
-        ///     Gets or sets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        [DataMember(Name = "items")]
-        public IReadOnlyList<PilotStatsEntry> Items { get; set; }
 
         /// <summary>
         ///     Class PilotStatsEntry.
