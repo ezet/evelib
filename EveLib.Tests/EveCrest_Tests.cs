@@ -48,10 +48,15 @@ namespace eZet.EveLib.Test {
         public void GetRoot() {
             CrestRoot result = crest.GetRoot();
             Debug.WriteLine(result.Regions.Uri);
-            var regionsLinks = crest.GetRoot().Query(f => f.Regions);
-            Debug.WriteLine(regionsLinks.Items.First().Id);
-            var regionData = regionsLinks.Query(f => f.Items.Take(5));
-            Debug.WriteLine(regionData.First().Name);
+            var regionsData = crest.GetRoot().Query(f => f.Regions).Query(regions => regions.Items);
+            var constellations = regionsData.Select(r => r.Query(f => f.Constellations));
+            foreach (var region in regionsData) {
+                region.Query(r => r.Constellations);
+            }
+        }
+
+        public async Task GetRootAsync() {
+            var root = await crest.GetRootAsync();
         }
 
         [TestMethod]

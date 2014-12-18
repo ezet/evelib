@@ -35,7 +35,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
             Uri = href;
         }
 
-
         /// <summary>
         ///     The href object
         /// </summary>
