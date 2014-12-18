@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="EveCrest.cs" />
     <Compile Include="Exceptions\DeprecatedResourceException.cs" />
+    <Compile Include="Models\Resources\Market\MarketOrder.cs" />
     <Compile Include="Models\Resources\Tournaments\TournamentTeamMember.cs" />
     <Compile Include="Models\Shared\BanEntry.cs" />
     <Compile Include="Models\Shared\CharacterEntry.cs" />
