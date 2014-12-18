@@ -26,19 +26,19 @@ namespace eZet.EveLib.EveWhoModule {
         /// <summary>
         ///     The default URI used to access the EveWho API.
         /// </summary>
-        public const string DefaultUri = "http://www.evewho.com/";
+        public const string DefaultHost = "http://www.evewho.com";
 
         /// <summary>
         ///     The default relative path to the API base.
         /// </summary>
-        public const string DefaultApiPath = "api.php";
+        public const string DefaultApiPath = "/api.php";
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveWho" /> class.
         /// </summary>
         public EveWho() {
             RequestHandler = new RequestHandler(new JsonSerializer());
-            BaseUri = DefaultUri;
+            Host = DefaultHost;
             ApiPath = DefaultApiPath;
         }
 

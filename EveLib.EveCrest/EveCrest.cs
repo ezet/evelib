@@ -66,13 +66,11 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Creates a new EveCrest object with default configuration
         /// </summary>
         public EveCrest() {
-            Serializer = new JsonSerializer();
-            RequestHandler = new CrestRequestHandler(Serializer);
+            RequestHandler = new CrestRequestHandler(new JsonSerializer());
             EveAuth = new EveAuth();
             PublicHost = DefaultPublicHost;
             AuthedHost = DefaultAuthHost;
             ApiPath = "/";
-
         }
 
         /// <summary>
@@ -137,12 +135,6 @@ namespace eZet.EveLib.EveCrestModule {
         public ICrestRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        /// Gets or sets the serializer used to deserialize CREST data.
-        /// </summary>
-        /// <value>The serializer.</value>
-        public ISerializer Serializer { get; set; }
-
-        /// <summary>
         ///     Gets or sets the path to the API root relative to the host.
         /// </summary>
         /// <value>The API path.</value>
@@ -150,6 +142,7 @@ namespace eZet.EveLib.EveCrestModule {
 
         /// <summary>
         ///     Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
+        /// The EveCrest instance is updated with the new access token.
         /// </summary>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public async Task<AuthResponse> RefreshAccessTokenAsync() {
@@ -600,11 +593,11 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;T&gt;.</returns>
         private async Task<T> requestAsync<T>(Uri uri) where T : class, ICrestResource<T> {
-            string data = null;
+            T response = null;
             if (Mode == CrestMode.Authenticated) {
                 var retry = false;
                 try {
-                    data =
+                    response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken);
 
                 } catch (EveCrestException e) {
@@ -621,14 +614,15 @@ namespace eZet.EveLib.EveCrestModule {
                     await RefreshAccessTokenAsync();
                     _trace.TraceEvent(TraceEventType.Information, 0,
                         "Token refreshed");
-                    data =
+                    response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken);
                 }
             } else {
-                data = await RequestHandler.RequestAsync<T>(uri, null);
+                response = await RequestHandler.RequestAsync<T>(uri, null);
             }
-            var response = Serializer.Deserialize<T>(data);
-            response.Crest = this;
+            if (response != null) {
+                response.Crest = this;
+            }
             return response;
         }
     }
