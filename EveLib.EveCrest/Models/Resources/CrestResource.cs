@@ -54,6 +54,17 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
+        ///     Queries the resource.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        public TOut Query<TOut>(Func<T, Href<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            return Crest.Load(objFunc.Invoke(this as T));
+        }
+
+        /// <summary>
         ///     Queries the resource asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
@@ -62,6 +73,17 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Task<TOut> QueryAsync<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             return Crest.LoadAsync(objFunc.Invoke(this as T));
+        }
+
+        /// <summary>
+        ///     Queries the resource.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        public TOut Query<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            return Crest.Load(objFunc.Invoke(this as T));
         }
 
         /// <summary>
@@ -77,6 +99,18 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(this as T);
+            return Crest.Load(items);
+        }
+
+        /// <summary>
         /// Queries a collection of resources asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
@@ -86,6 +120,18 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut> {
             var items = objFunc.Invoke(this as T);
             return Crest.LoadAsync(items);
+        }
+
+        /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<LinkedEntity<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(this as T);
+            return Crest.Load(items);
         }
     }
 }
