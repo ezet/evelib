@@ -25,6 +25,7 @@ EveLib.NET is a open source library for accessing the Eve Online API, CREST, and
 * Element43 API `Element43`
 * ZKillboard API `ZKillBoard`
 * EveWho `EveWho`
+* EveAuth `EveAuth` (Eve SSO)
 * Eve Static Data (Element43) `EveStaticData` [partial]
 
 ### General information
@@ -158,9 +159,41 @@ Eve CREST endpoints can be called by instantating a new EveCrest object, and usi
 
     var crest = new EveCrest();
     var result = crest.GetWar(1);
+    
+
+## Query() and Load()
+Query and Load lets you obtain data the way CREST is meant to be used, with no statically typed URIs.
+Every object returned by `EveCrest` has a Query() method, which can be used to query additinonal resources, which can be queried further. 
+`EveCrest` also has a Load() method, which is used by Query() internally, and can be used the same way.
+Both methods access a link to a resource, or a collection of links, and will immediately request the data from CREST. By utilizing these methods you can navigate CREST from the root, by following the links to other resources. This is the preferred way to use CREST, since it will always remain in sync with the API.
+
+    // setup
+    var crest = new EveCrest();
+    crest.Mode = CrestMode.Authenticated;
+    crest.RefreshToken = "mytoken";
+    crest.AllowAutomaticTokenRefresh = true;
+    // get root object
+    var root = crest.GetRoot();
+    var regions = root.Query(root => root.Regions);
+    var regionData = regions.Query(regions => regions.Where(region => region.Id == 1));
+    
+## Authenticated Crest
+To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
+If you want to utilize a refresh token you also need to provide the associated Base64 encrypted key.
+You can provide these through their respective properties on the `EveCrest` object.
+To enable authenticated mode, set Mode to Authenticated. If you have set a RefreshToken and EncryptedKey, you can enable automatic token refreshes by setting AllowAutomaticTokenRefresh to true.
+
+### Advanced settings
+
+
+    
+    
+    
 
 #### Exceptions
 All calls to the CREST API can throw `EveCrestException`, which inherits from `EveLibWebException`.  This additionaly exposes `Message`, `Key`, `ExceptionType` and `RefId` as returned by the API.
+If using automatic token refresh, or refreshing it manually, `EveCrest` can throw a `EveAuthException`.
+When requesting a resource that isn't implemented, it will throw a standard `NotImplementedException`.
     
 EveCentral API
 -
