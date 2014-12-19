@@ -83,14 +83,14 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource
+        ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource. This will help discover outdated models.
         /// </summary>
         public bool ThrowOnDeprecated { get; set; }
 
         /// <summary>
-        ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource
+        ///     Sets or gets whether to throw a NotImplementedException when requesting a resource model with no ContentType. Used for debugging.
         /// </summary>
-        public bool ThrowNotImplementedException { get; set; }
+        public bool ThrowOnMissingContentType { get; set; }
 
         /// <summary>
         ///     Gets or sets the serializer used to deserialize CREST errors.
@@ -135,7 +135,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             // set up request
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            request.Accept = ContentTypes.Get<T>(ThrowNotImplementedException);
+            request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType);
             if (!String.IsNullOrEmpty(Charset)) request.Accept = request.Accept + "; " + Charset;
             if (!String.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!String.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;

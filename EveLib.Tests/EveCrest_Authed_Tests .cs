@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
@@ -31,7 +32,7 @@ namespace eZet.EveLib.Test {
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
             crest.RequestHandler.ThrowOnDeprecated = true;
-            //crest.RequestHandler.ThrowNotImplementedException = true;
+            crest.RequestHandler.ThrowOnMissingContentType = true;
         }
 
         [TestMethod]
@@ -97,6 +98,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task Decode() {
             var response = await crest.GetRoot().QueryAsync(r => r.Decode);
+            Debug.WriteLine(response.Character);
         }
 
         [TestMethod]

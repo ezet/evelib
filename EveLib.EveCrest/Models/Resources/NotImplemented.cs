@@ -7,7 +7,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a resource that isn't implemented. If this throws a NotImplementedException, please notify the
     ///     developer.
     /// </summary>
-    public class NotImplemented : CrestResource<NotImplemented> {
+    public sealed class NotImplemented : CrestResource<NotImplemented> {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotImplemented"/> class.
+        /// </summary>
+        public NotImplemented() {
+            ContentType = "NotImplemented";
+        }
 
         [OnDeserialized]
         internal void OnDeserializedMethod(StreamingContext context) {

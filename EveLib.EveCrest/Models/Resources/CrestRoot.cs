@@ -114,7 +114,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The decode.</value>
         [DataMember(Name = "decode")]
-        public Href<NotImplemented> Decode { get; set; }
+        public Href<TokenDecode> Decode { get; set; }
 
         /// <summary>
         ///     Gets or sets the battle theatres.
