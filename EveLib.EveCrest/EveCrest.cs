@@ -61,6 +61,11 @@ namespace eZet.EveLib.EveCrestModule {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
         private string _host;
 
+        /// <summary>
+        /// The CREST root if cached
+        /// </summary>
+        private CrestRoot _root;
+
         private const string ObsoleteMessage = "This method uses statically typed links, and is not how CREST is meant to be used. Please use GetRoot() or GetRootAsync() and navigate from there.";
 
 
@@ -72,6 +77,7 @@ namespace eZet.EveLib.EveCrestModule {
             ApiPath = "/";
             Host = DefaultPublicHost;
             Mode = CrestMode.Public;
+            AllowRootCache = true;
         }
 
         /// <summary>
@@ -84,6 +90,7 @@ namespace eZet.EveLib.EveCrestModule {
             Host = DefaultAuthHost;
             Mode = CrestMode.Public;
             EveAuth = new EveAuth();
+            AllowAutomaticTokenRefresh = true;
         }
 
         /// <summary>
@@ -98,6 +105,7 @@ namespace eZet.EveLib.EveCrestModule {
             Host = DefaultAuthHost;
             Mode = CrestMode.Public;
             EveAuth = new EveAuth();
+            AllowAutomaticTokenRefresh = true;
         }
 
 
@@ -115,6 +123,12 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         /// <value>The eve sso.</value>
         public IEveAuth EveAuth { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether EveCrest is allowed to cache the CrestRoot object. This is enabled by default.
+        /// </summary>
+        /// <value><c>true</c> if [allow root cache]; otherwise, <c>false</c>.</value>
+        public bool AllowRootCache { get; set; }
 
         /// <summary>
         ///     Gets or sets the CREST Access Token
@@ -135,18 +149,16 @@ namespace eZet.EveLib.EveCrestModule {
         public string EncodedKey { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This requires a valid RefreshToken and EncryptedKey to be set.
+        ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default.
         /// </summary>
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
         public bool AllowAutomaticTokenRefresh { get; set; }
-
 
         /// <summary>
         ///     Gets the CREST access mode.
         /// </summary>
         /// <value>The mode.</value>
         public CrestMode Mode { get; private set; }
-
 
         /// <summary>
         /// Gets or sets the request handler.
@@ -274,9 +286,11 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Returns the CREST root
         /// </summary>
         /// <returns>Task&lt;CrestRoot&gt;.</returns>
-        public Task<CrestRoot> GetRootAsync() {
+        public async Task<CrestRoot> GetRootAsync() {
             const string relPath = "";
-            return requestAsync<CrestRoot>(relPath);
+            if (_root == null || !AllowRootCache)
+                _root = await requestAsync<CrestRoot>(relPath).ConfigureAwait(false);
+            return _root;
         }
 
         /// <summary>
@@ -531,6 +545,7 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Returns a list of all industry teams
         /// </summary>
         /// <returns>A list of all industry teams</returns>
+        [Obsolete(ObsoleteMessage)]
         public IndustryTeamCollection GetIndustryTeams() {
             return GetIndustryTeamsAsync().Result;
         }

@@ -26,7 +26,10 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// </summary>
         public const int DefaultAuthedMaxConcurrentRequests = 10;
 
-        public const string DefualtCharset = "utf-8";
+        /// <summary>
+        /// The defualt charset
+        /// </summary>
+        public const string DefaultCharset = "utf-8";
 
         /// <summary>
         ///     The token type
@@ -52,6 +55,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             _publicPool = new Semaphore(PublicMaxConcurrentRequests, PublicMaxConcurrentRequests);
             _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
             UserAgent = Config.UserAgent;
+            Charset = DefaultCharset;
         }
 
         /// <summary>
@@ -128,15 +132,13 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             string data;
             CrestMode mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
 
+            // set up request
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = ContentTypes.Get<T>(ThrowOnNotImplemented);
             if (!String.IsNullOrEmpty(Charset)) request.Accept = request.Accept + "; " + Charset;
             if (!String.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!String.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
-
-            _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
-
             if (mode == CrestMode.Authenticated) {
                 request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
                 _authedPool.WaitOne();
@@ -144,6 +146,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 _publicPool.WaitOne();
             }
 
+            _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
             WebHeaderCollection header;
             try {
                 HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
