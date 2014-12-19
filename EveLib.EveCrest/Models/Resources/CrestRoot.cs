@@ -273,14 +273,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// </summary>
             /// <value>The dust.</value>
             [DataMember(Name = "dust")]
-            public Href<NotImplemented> Dust { get; set; }
+            public Href<DustRoot> Dust { get; set; }
 
             /// <summary>
             ///     Gets or sets the eve.
             /// </summary>
             /// <value>The eve.</value>
             [DataMember(Name = "eve")]
-            public Href<NotImplemented> Eve { get; set; }
+            public Href<EveRoot> Eve { get; set; }
         }
 
 
