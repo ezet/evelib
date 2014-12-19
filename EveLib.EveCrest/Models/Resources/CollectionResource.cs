@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -51,14 +52,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The next.</value>
         [DataMember(Name = "next")]
-        public Href<T> Next { get; set; }
+        public Href<CollectionResource<T, TCollection>> Next { get; set; }
 
         /// <summary>
         ///     Gets or sets the previous.
         /// </summary>
         /// <value>The previous.</value>
         [DataMember(Name = "previous")]
-        public Href<T> Previous { get; set; }
+        public Href<CollectionResource<T, TCollection>> Previous { get; set; }
 
         /// <summary>
         /// Queries a collection of resources.
@@ -83,5 +84,33 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             var items = objFunc.Invoke(Items);
             return Crest.Load(items);
         }
+
+        /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public TOut Query<TOut>(Func<IReadOnlyList<TCollection>, Href<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(Items);
+            return Crest.Load(items);
+        }
+
+        /// <summary>
+        /// Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public TOut Query<TOut>(Func<IReadOnlyList<TCollection>, LinkedEntity<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(Items);
+            return Crest.Load(items);
+        }
+
+
+
+
     }
 }

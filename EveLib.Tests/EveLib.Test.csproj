@@ -127,8 +127,8 @@
     <Compile Include="Character_StaticDeserializationTests.cs" />
     <Compile Include="CorporationKey_Beta.cs" />
     <Compile Include="EveAuth_Tests.cs" />
-    <Compile Include="EveCrest_Beta_Tests.cs" />
-    <Compile Include="EveCrest_Tests.cs" />
+    <Compile Include="EveCrest_Authed_Tests .cs" />
+    <Compile Include="EveCrest_Public_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
     <Compile Include="EveWho_Tests.cs" />
     <Compile Include="StaticData_Tests.cs" />

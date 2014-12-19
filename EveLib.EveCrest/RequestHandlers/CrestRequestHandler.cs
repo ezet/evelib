@@ -90,7 +90,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource
         /// </summary>
-        public bool ThrowOnNotImplemented { get; set; }
+        public bool ThrowNotImplementedException { get; set; }
 
         /// <summary>
         ///     Gets or sets the serializer used to deserialize CREST errors.
@@ -135,7 +135,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             // set up request
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            request.Accept = ContentTypes.Get<T>(ThrowOnNotImplemented);
+            request.Accept = ContentTypes.Get<T>(ThrowNotImplementedException);
             if (!String.IsNullOrEmpty(Charset)) request.Accept = request.Accept + "; " + Charset;
             if (!String.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!String.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
@@ -176,7 +176,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();
-                    if (response.StatusCode == HttpStatusCode.InternalServerError) throw new EveCrestException(data, e);
+                    if (response.StatusCode == HttpStatusCode.InternalServerError || response.StatusCode == HttpStatusCode.BadGateway) throw new EveCrestException(data, e);
                     var error = Serializer.Deserialize<CrestError>(data);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
                         "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType, error.RefId);

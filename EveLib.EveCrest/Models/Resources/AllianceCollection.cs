@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST /alliances/ response
     /// </summary>
     [DataContract]
-    public sealed class AllianceCollection : CollectionResource<AllianceCollection, Alliance> {
+    public sealed class AllianceCollection : CollectionResource<AllianceCollection, LinkedEntity<Alliance>> {
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AllianceCollection" /> class.
@@ -33,7 +33,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <summary>
         ///     Class Alliance.
         /// </summary>
-        public class Alliance : LinkedEntity<Resources.Alliance> {
+        public class Alliance : LinkedEntity<Alliance> {
             /// <summary>
             ///     Gets or sets the short name.
             /// </summary>

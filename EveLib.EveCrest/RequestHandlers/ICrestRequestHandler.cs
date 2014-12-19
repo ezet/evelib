@@ -17,7 +17,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource
         /// </summary>
-        bool ThrowOnNotImplemented { get; set; }
+        bool ThrowNotImplementedException { get; set; }
 
         /// <summary>
         ///     Gets or sets the serializer used to deserialize CREST errors.

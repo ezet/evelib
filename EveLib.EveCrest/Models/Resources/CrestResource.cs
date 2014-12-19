@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <typeparam name="T"></typeparam>
     public abstract class CrestResource<T> : ICrestResource<T> where T : class, ICrestResource<T> {
         /// <summary>
-        ///     Gets or sets the crest.
+        ///     Gets or sets the crest instance used to query resources.
         /// </summary>
         /// <value>The crest.</value>
         public EveCrest Crest { get; set; }
@@ -66,7 +66,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut&gt;.</returns>
-        public TOut Query<TOut>(Func<T, Href<TOut>> objFunc)
+        public virtual TOut Query<TOut>(Func<T, Href<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             return Crest.Load(objFunc.Invoke(this as T));
         }
@@ -88,7 +88,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut&gt;.</returns>
-        public TOut Query<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
+        public virtual TOut Query<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             return Crest.Load(objFunc.Invoke(this as T));
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using eZet.EveLib.EveCrestModule.Exceptions;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
@@ -6,12 +8,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     developer.
     /// </summary>
     public class NotImplemented : CrestResource<NotImplemented> {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="NotImplemented" /> class. This shouldn't happen unless a
-        ///     unsupported resource is requested.
-        /// </summary>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public NotImplemented() {
+
+        [OnDeserialized]
+        internal void OnDeserializedMethod(StreamingContext context) {
+            throw new ResourceNotSupportedException();
         }
     }
 }

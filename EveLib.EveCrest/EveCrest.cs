@@ -90,7 +90,7 @@ namespace eZet.EveLib.EveCrestModule {
             : this() {
             AccessToken = accessToken;
             Host = DefaultAuthHost;
-            Mode = CrestMode.Public;
+            Mode = CrestMode.Authenticated;
             EveAuth = new EveAuth();
             AllowAutomaticTokenRefresh = true;
         }
@@ -105,7 +105,7 @@ namespace eZet.EveLib.EveCrestModule {
             RefreshToken = refreshToken;
             EncodedKey = encodedKey;
             Host = DefaultAuthHost;
-            Mode = CrestMode.Public;
+            Mode = CrestMode.Authenticated;
             EveAuth = new EveAuth();
             AllowAutomaticTokenRefresh = true;
         }
@@ -310,7 +310,6 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
         /// <returns>Returns data for the specified killmail.</returns>
-        [Obsolete(ObsoleteMessage)]
         public Task<Killmail> GetKillmailAsync(long id, string hash) {
             string relPath = "killmails/" + id + "/" + hash + "/";
             return requestAsync<Killmail>(relPath);
@@ -322,7 +321,6 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
         /// <returns>Returns data for the specified killmail.</returns>
-        [Obsolete(ObsoleteMessage)]
         public Killmail GetKillmail(long id, string hash) {
             return GetKillmailAsync(id, hash).Result;
         }

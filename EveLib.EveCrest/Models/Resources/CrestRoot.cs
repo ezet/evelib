@@ -29,9 +29,9 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         public enum ServiceStatusType {
             /// <summary>
-            ///     Server is online
+            ///     Server is offline
             /// </summary>
-            [EnumMember(Value = "online")] Online,
+            [EnumMember(Value = "offline")] Offline,
 
             /// <summary>
             ///     Server is in VIP mode
@@ -39,9 +39,9 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [EnumMember(Value = "vip")] Vip,
 
             /// <summary>
-            ///     Server is offline
+            ///     Server is online
             /// </summary>
-            [EnumMember(Value = "offline")] Offline
+            [EnumMember(Value = "online")] Online,
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The crest endpoint.</value>
         [DataMember(Name = "crestEndpoint")]
-        public Href<CrestRoot> Endpoint { get; set; }
+        public Href<CrestRoot> CrestEndpoint { get; set; }
 
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Gets or sets the channels.
         /// </summary>
         /// <value>The channels.</value>
-        [DataMember(Name = "channel")]
+        [DataMember(Name = "channels")]
         public Href<NotImplemented> Channels { get; set; }
 
         /// <summary>
@@ -103,6 +103,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Href<AllianceCollection> Alliances { get; set; }
 
         /// <summary>
+        /// Gets or sets the item types.
+        /// </summary>
+        /// <value>The item types.</value>
+        [DataMember(Name = "itemTypes")]
+        public Href<ItemTypeCollection> ItemTypes { get; set; }
+
+            /// <summary>
         ///     Gets or sets the decode.
         /// </summary>
         /// <value>The decode.</value>
@@ -122,6 +129,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The market prices.</value>
         [DataMember(Name = "marketPrices")]
         public Href<MarketTypePriceCollection> MarketPrices { get; set; }
+
+        /// <summary>
+        /// Gets or sets the item categories.
+        /// </summary>
+        /// <value>The item categories.</value>
+        [DataMember(Name = "itemCategories")]
+        public Href<MarketTypePriceCollection> ItemCategories { get; set; }
 
         /// <summary>
         ///     Gets or sets the regions.
@@ -259,14 +273,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// </summary>
             /// <value>The dust.</value>
             [DataMember(Name = "dust")]
-            public Href<string> Dust { get; set; }
+            public Href<NotImplemented> Dust { get; set; }
 
             /// <summary>
             ///     Gets or sets the eve.
             /// </summary>
             /// <value>The eve.</value>
             [DataMember(Name = "eve")]
-            public Href<string> Eve { get; set; }
+            public Href<NotImplemented> Eve { get; set; }
         }
 
 
