@@ -92,7 +92,7 @@ namespace eZet.EveLib.EveCrestModule {
             Host = DefaultAuthHost;
             Mode = CrestMode.Authenticated;
             EveAuth = new EveAuth();
-            AllowAutomaticTokenRefresh = true;
+            AllowAutomaticTokenRefresh = false;
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace eZet.EveLib.EveCrestModule {
 
         /// <summary>
         ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This
-        ///     requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default.
+        ///     requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default if using the RefreshToken ctor.
         /// </summary>
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
         public bool AllowAutomaticTokenRefresh { get; set; }
@@ -214,7 +214,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="uri">The Href that should be loaded</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public Task<T> LoadAsync<T>(Href<T> uri) where T : class, ICrestResource<T> {
-            return requestAsync<T>(new Uri(uri.Uri));
+            return uri == null ? null : requestAsync<T>(new Uri(uri.Uri));
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="uri">The Href that should be loaded</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public T Load<T>(Href<T> uri) where T : class, ICrestResource<T> {
-            return requestAsync<T>(new Uri(uri.Uri)).Result;
+            return LoadAsync(uri).Result;
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="entity">The items that should be loaded</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public Task<T> LoadAsync<T>(ILinkedEntity<T> entity) where T : class, ICrestResource<T> {
-            return requestAsync<T>(new Uri(entity.Href.Uri));
+            return entity == null ? null : requestAsync<T>(new Uri(entity.Href.Uri));
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="entity">The items that should be loaded</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public T Load<T>(ILinkedEntity<T> entity) where T : class, ICrestResource<T> {
-            return requestAsync<T>(new Uri(entity.Href.Uri)).Result;
+            return LoadAsync(entity).Result;
         }
 
         /// <summary>
@@ -254,6 +254,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
+            if (items == null) return null;
             List<Task<T>> list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
@@ -265,8 +266,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public IEnumerable<T> Load<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
-            List<Task<T>> list = items.Select(LoadAsync).ToList();
-            return Task.WhenAll(list).Result.AsEnumerable();
+            return LoadAsync(items).Result;
         }
 
 
@@ -277,6 +277,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
+            if (items == null) return null;
             List<Task<T>> list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
@@ -288,8 +289,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public IEnumerable<T> Load<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
-            List<Task<T>> list = items.Select(LoadAsync).ToList();
-            return Task.WhenAll(list).Result.AsEnumerable();
+            return LoadAsync(items).Result;
         }
 
         /// <summary>
@@ -660,14 +660,12 @@ namespace eZet.EveLib.EveCrestModule {
                 try {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
-                }
-                catch (EveCrestException e) {
+                } catch (EveCrestException e) {
                     if (AllowAutomaticTokenRefresh) {
                         var error = e.WebException.Response as HttpWebResponse;
                         if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
                         else throw;
-                    }
-                    else throw;
+                    } else throw;
                 }
                 if (retry) {
                     _trace.TraceEvent(TraceEventType.Information, 0,
@@ -678,8 +676,7 @@ namespace eZet.EveLib.EveCrestModule {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
-            }
-            else {
+            } else {
                 response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
             }
             if (response != null) {
