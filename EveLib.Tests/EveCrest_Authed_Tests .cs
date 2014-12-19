@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
@@ -36,6 +37,25 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public void CollectionPaging_Automatic() {
+            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 99000738));
+            Debug.WriteLine(result.Name);
+        }
+
+        [TestMethod]
+        public void CollectionPaging_Manual() {
+            var allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+            var alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+            alliance = null;
+            allianceLinks.Query(f => alliance);
+            //while (alliance == null && allianceLinks != null) {
+            //    allianceLinks = allianceLinks.Query(f => f.Next);
+            //    alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+            //}
+            Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
+        }
+
+        [TestMethod]
         public async Task RefreshAccessTokenAsync() {
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
@@ -49,7 +69,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task GetKillmail_NoErrors() {
+        public void GetKillmail_NoErrors() {
             Killmail data = crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
@@ -88,11 +108,19 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task Alliances() {
             var response = await crest.GetRoot().QueryAsync(r => r.Alliances);
+            crest.GetRoot().Query(r => r.Alliances).Query(r => r.Items.Where(f => f.Id == 3));
+            crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(f => f.Id == 3));
         }
 
         [TestMethod]
         public async Task ItemTypes() {
             var response = await crest.GetRoot().QueryAsync(r => r.ItemTypes);
+            var types = crest.GetRoot().Query(r => r.MarketTypes);
+            var list = types.Items.ToList();
+            while (types.Next != null) {
+                types = types.Query(t => t.Next);
+                list.AddRange(types.Items);
+            }
         }
 
         [TestMethod]

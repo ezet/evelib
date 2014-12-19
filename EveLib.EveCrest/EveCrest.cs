@@ -158,6 +158,13 @@ namespace eZet.EveLib.EveCrestModule {
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
         public bool AllowAutomaticTokenRefresh { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow Query() methods to allow automatic paging. This may perform additional web requests.
+        /// </summary>
+        /// <value><c>true</c> if [allow automatic paging]; otherwise, <c>false</c>.</value>
+        public bool AllowAutomaticPaging { get; set; }
+
         /// <summary>
         ///     Gets the CREST access mode.
         /// </summary>
