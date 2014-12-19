@@ -59,7 +59,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
             /// </summary>
             /// <value>The icon.</value>
             [DataMember(Name = "icon")]
-            public ImageLink Icon { get; set; }
+            public ImageHref Icon { get; set; }
         }
     }
 }

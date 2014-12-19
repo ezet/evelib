@@ -34,6 +34,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
         /// </summary>
         /// <value>The logo.</value>
         [DataMember(Name = "logo")]
-        public ImageLink Logo { get; set; }
+        public ImageLinkCollection Logo { get; set; }
     }
 }

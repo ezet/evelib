@@ -39,7 +39,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void CollectionPaging_Automatic() {
-            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 99000738));
+            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 123));
             Debug.WriteLine(result.Name);
         }
 
@@ -47,7 +47,7 @@ namespace eZet.EveLib.Test {
         public void CollectionPaging_Manual() {
             var allianceLinks = crest.GetRoot().Query(r => r.Alliances);
             var alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
-            while (alliance == null && allianceLinks != null) {
+            while (alliance == null && allianceLinks.Next != null) {
                 allianceLinks = allianceLinks.Query(f => f.Next);
                 alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
             }
@@ -284,6 +284,8 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetWar_NoErrors() {
             War data = await crest.GetWarAsync(291410);
+            var image = crest.LoadImage(data.Aggressor.Icon);
+            Debug.WriteLine(image);
         }
 
         [TestMethod]

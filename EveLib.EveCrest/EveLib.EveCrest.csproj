@@ -112,6 +112,7 @@
     <Compile Include="EveCrest.cs" />
     <Compile Include="Exceptions\DeprecatedResourceException.cs" />
     <Compile Include="Exceptions\ResourceNotSupportedException.cs" />
+    <Compile Include="Models\Links\ImageHref.cs" />
     <Compile Include="Models\Resources\DustRoot.cs" />
     <Compile Include="Models\Resources\EveRoot.cs" />
     <Compile Include="Models\Resources\Market\MarketOrder.cs" />
@@ -143,7 +144,7 @@
     <Compile Include="Models\Resources\ItemCategoryCollection.cs" />
     <Compile Include="Models\Resources\ItemGroup.cs" />
     <Compile Include="Models\Resources\ItemType.cs" />
-    <Compile Include="Models\Links\ImageLink.cs" />
+    <Compile Include="Models\Links\ImageLinkCollection.cs" />
     <Compile Include="Models\Resources\ItemTypeCollection.cs" />
     <Compile Include="Models\Links\LinkedResource.cs" />
     <Compile Include="Models\Links\LinkedIconEntity.cs" />

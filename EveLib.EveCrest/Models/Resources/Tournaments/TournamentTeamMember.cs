@@ -55,6 +55,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
         /// </summary>
         /// <value>The icon.</value>
         [DataMember(Name = "icon")]
-        public ImageLink Icon { get; set; }
+        public ImageLinkCollection Icon { get; set; }
     }
 }

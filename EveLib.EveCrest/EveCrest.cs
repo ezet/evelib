@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveAuthModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
@@ -70,12 +71,12 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         private CrestRoot _root;
 
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Public mode.
         /// </summary>
         public EveCrest() {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
+            ImageRequestHandler = new ImageRequestHandler();
             ApiPath = "/";
             Host = DefaultPublicHost;
             Mode = CrestMode.Public;
@@ -179,6 +180,12 @@ namespace eZet.EveLib.EveCrestModule {
         public ICrestRequestHandler RequestHandler { get; set; }
 
         /// <summary>
+        /// Gets or sets the image request handler.
+        /// </summary>
+        /// <value>The image request handler.</value>
+        public IImageRequestHandler ImageRequestHandler { get; set; }
+
+        /// <summary>
         ///     Gets or sets the path to the API root relative to the host.
         /// </summary>
         /// <value>The API path.</value>
@@ -206,6 +213,26 @@ namespace eZet.EveLib.EveCrestModule {
             AccessToken = response.AccessToken;
             RefreshToken = response.RefreshToken;
             return response;
+        }
+
+        /// <summary>
+        /// Loads the image asynchronous.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="link">The link.</param>
+        /// <returns>Task&lt;System.Byte[]&gt;.</returns>
+        public Task<byte[]> LoadImageAsync(ImageHref link) {
+            return ImageRequestHandler.RequestImageDataAsync(new Uri(link.Uri));
+        }
+
+        /// <summary>
+        /// Loads the image.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="link">The link.</param>
+        /// <returns>Task&lt;System.Byte[]&gt;.</returns>
+        public byte[] LoadImage(ImageHref link) {
+            return LoadImageAsync(link).Result;
         }
 
         /// <summary>
