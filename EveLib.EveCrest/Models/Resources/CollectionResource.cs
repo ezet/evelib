@@ -62,16 +62,25 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "previous")]
         public Href<T> Previous { get; set; }
 
+
         /// <summary>
-        /// Queries a collection of resources for a collection of items.
+        /// Queries a collection of resources for a collection of items, async.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public virtual IEnumerable<TOut> Query<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
+        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var items = objFunc.Invoke(Items);
-            return Crest.Load(items);
+            var collection = this;
+            var list = collection.Items.ToList();
+            if (Crest.AllowAutomaticPaging) {
+                while (collection.Next != null) {
+                    collection = Crest.Load(collection.Next);
+                    list.AddRange(collection.Items);
+                }
+            }
+            var item = objFunc.Invoke(list);
+            return Crest.LoadAsync(item);
         }
 
         /// <summary>
@@ -80,10 +89,29 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
+        public virtual IEnumerable<TOut> Query<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var items = objFunc.Invoke(Items);
-            return Crest.LoadAsync(items);
+            return QueryAsync(objFunc).Result;
+        }
+
+        /// <summary>
+        /// Queries a collection of resources for a collection of items, async.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<Href<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var collection = this;
+            var list = collection.Items.ToList();
+            if (Crest.AllowAutomaticPaging) {
+                while (collection.Next != null) {
+                    collection = Crest.Load(collection.Next);
+                    list.AddRange(collection.Items);
+                }
+            }
+            var item = objFunc.Invoke(list);
+            return Crest.LoadAsync(item);
         }
 
         /// <summary>
@@ -94,38 +122,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut[]&gt;.</returns>
         public virtual IEnumerable<TOut> Query<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<Href<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var items = objFunc.Invoke(Items);
-            return Crest.Load(items);
-        }
-
-        /// <summary>
-        /// Queries a collection of resources for a collection of items.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<IReadOnlyList<TCollection>, IEnumerable<Href<TOut>>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            var items = objFunc.Invoke(Items);
-            return Crest.LoadAsync(items);
-        }
-
-        /// <summary>
-        /// Queries a collection of resources for a single item.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public TOut Query<TOut>(Func<IReadOnlyList<TCollection>, Href<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            var collection = this;
-            var item = objFunc.Invoke(collection.Items);
-            return Crest.Load(item);
+            return QueryAsync(objFunc).Result;
         }
 
 
         /// <summary>
-        /// Queries a collection of resources for a single item.
+        /// Queries a collection of resources for a single item, async.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -133,7 +135,46 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Task<TOut> QueryAsync<TOut>(Func<IReadOnlyList<TCollection>, Href<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             var collection = this;
-            var item = objFunc.Invoke(collection.Items);
+            var list = collection.Items.ToList();
+            if (Crest.AllowAutomaticPaging) {
+                while (collection.Next != null) {
+                    collection = Crest.Load(collection.Next);
+                    list.AddRange(collection.Items);
+                }
+            }
+            var item = objFunc.Invoke(list);
+            return Crest.LoadAsync(item);
+        }
+
+        /// <summary>
+        /// Queries a collection of resources for a single item, async.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public TOut Query<TOut>(Func<IReadOnlyList<TCollection>, Href<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            return QueryAsync(objFunc).Result;
+        }
+
+
+        /// <summary>
+        /// Queries a collection of resources for a single item, async.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public Task<TOut> QueryAsync<TOut>(Func<IReadOnlyList<TCollection>, LinkedEntity<TOut>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            var collection = this;
+            var list = collection.Items.ToList();
+            if (Crest.AllowAutomaticPaging) {
+                while (collection.Next != null) {
+                    collection = Crest.Load(collection.Next);
+                    list.AddRange(collection.Items);
+                }
+            }
+            var item = objFunc.Invoke(list);
             return Crest.LoadAsync(item);
         }
 
@@ -145,22 +186,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut[]&gt;.</returns>
         public TOut Query<TOut>(Func<IReadOnlyList<TCollection>, LinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var collection = this;
-            var item = objFunc.Invoke(collection.Items);
-            return Crest.Load(item);
+            return QueryAsync(objFunc).Result;
         }
 
-        /// <summary>
-        /// Queries a collection of resources for a single item.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public Task<TOut> QueryAsync<TOut>(Func<IReadOnlyList<TCollection>, LinkedEntity<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            var collection = this;
-            var item = objFunc.Invoke(collection.Items);
-            return Crest.LoadAsync(item);
-        }
     }
 }

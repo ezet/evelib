@@ -34,6 +34,7 @@ namespace eZet.EveLib.Test {
             crest.EncodedKey = EncodedKey;
             crest.RequestHandler.ThrowOnDeprecated = true;
             crest.RequestHandler.ThrowOnMissingContentType = true;
+            crest.AllowAutomaticPaging = true;
         }
 
         [TestMethod]
@@ -46,13 +47,19 @@ namespace eZet.EveLib.Test {
         public void CollectionPaging_Manual() {
             var allianceLinks = crest.GetRoot().Query(r => r.Alliances);
             var alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+            while (alliance == null && allianceLinks != null) {
+                allianceLinks = allianceLinks.Query(f => f.Next);
+                alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+            }
+            Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
+        }
+
+        [TestMethod]
+        public void CollectionPaging_Manual_NullReference() {
+            var allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+            var alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
             alliance = null;
             allianceLinks.Query(f => alliance);
-            //while (alliance == null && allianceLinks != null) {
-            //    allianceLinks = allianceLinks.Query(f => f.Next);
-            //    alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
-            //}
-            Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
         }
 
         [TestMethod]
