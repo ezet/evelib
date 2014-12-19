@@ -54,7 +54,7 @@ namespace eZet.EveLib.Test {
         }
 
         public async Task GetRootAsync() {
-            var root = await crest.GetRootAsync();
+            var root = await (await crest.GetRootAsync()).QueryAsync(r => r.MarketTypes);
         }
 
         [TestMethod]
@@ -108,7 +108,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (EveCrestException))]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }

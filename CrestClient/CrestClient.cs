@@ -21,12 +21,12 @@ namespace eZet.EveLib.CrestClientModule {
     /// </summary>
     public class CrestClient {
         /// <summary>
-        ///     The default URI used to access the CREST API. This can be overridded by setting the PublicHost.
+        ///     The default URI used to access the CREST API. This can be overridded by setting the Host.
         /// </summary>
         public const string DefaultUri = "http://public-crest.eveonline.com/";
 
         /// <summary>
-        ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the PublicHost.
+        ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the Host.
         /// </summary>
         public const string AuthedUri = "https://crest-tq.eveonline.com/";
 

@@ -49,49 +49,64 @@ namespace eZet.EveLib.EveCrestModule {
     /// </summary>
     public class EveCrest {
         /// <summary>
-        ///     The default URI used to access the public CREST API. This can be overridded by setting the PublicHost.
+        ///     The default URI used to access the public CREST API. This can be overridded by setting the Host.
         /// </summary>
         public const string DefaultPublicHost = "https://public-crest.eveonline.com";
 
         /// <summary>
-        ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the AuthedHost.
+        ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the Host.
         /// </summary>
         public const string DefaultAuthHost = "https://crest-tq.eveonline.com";
 
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
-        private string _publicHost;
-        private string _authedHost;
+        private string _host;
+
 
         /// <summary>
-        ///     Creates a new EveCrest object with default configuration
+        /// Initializes a new instance of the <see cref="EveCrest"/> class, in Public mode.
         /// </summary>
         public EveCrest() {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
             EveAuth = new EveAuth();
-            PublicHost = DefaultPublicHost;
-            AuthedHost = DefaultAuthHost;
+            Host = DefaultPublicHost;
             ApiPath = "/";
+            Mode = CrestMode.Public;
         }
 
         /// <summary>
-        ///     Gets or sets the root URI used to access the public CREST API.
+        /// Initializes a new instance of the <see cref="EveCrest"/> class, in Authenticated mode.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        public EveCrest(string accessToken) : this() {
+            AccessToken = accessToken;
+            Host = DefaultAuthHost;
+            Mode = CrestMode.Public;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EveCrest"/> class, in Authenticated mode.
+        /// </summary>
+        /// <param name="refreshToken">The refresh token.</param>
+        /// <param name="encodedKey">The encoded key.</param>
+        public EveCrest(string refreshToken, string encodedKey) : this() {
+            RefreshToken = refreshToken;
+            EncodedKey = encodedKey;
+            Host = DefaultAuthHost;
+            Mode = CrestMode.Public;
+
+        }
+
+
+        /// <summary>
+        ///     Gets or sets the host used to access the Crest API.
         /// </summary>
         /// <value>The base public URI.</value>
-        public string PublicHost {
-            get { return _publicHost; }
-            set { _publicHost = value.TrimEnd('/', '\\'); }
+        public string Host {
+            get { return _host; }
+            set { _host = value.TrimEnd('/', '\\'); }
         }
 
-        /// <summary>
-        ///     Gets or sets the root URI used to access the authed CREST API.
-        /// </summary>
-        /// <value>The base authentication URI.</value>
-        public string AuthedHost {
-            get { return _authedHost; }
-            set { _authedHost = value.TrimEnd('/', '\\'); }
-        }
-
-        /// <summary>
+  /// <summary>
         ///     Gets or sets the IEveAuth instance used for Eve SSO.
         /// </summary>
         /// <value>The eve sso.</value>
@@ -126,7 +141,7 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Gets or sets the CREST access mode.
         /// </summary>
         /// <value>The mode.</value>
-        public CrestMode Mode { get; set; }
+        public CrestMode Mode { get; private set; }
 
         /// <summary>
         ///     Gets or sets the request handler used by this instance
@@ -581,9 +596,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="relPath">Relative path</param>
         /// <returns></returns>
         private Task<T> requestAsync<T>(string relPath) where T : class, ICrestResource<T> {
-            var uri = Mode == CrestMode.Authenticated ? AuthedHost : PublicHost;
-
-            return requestAsync<T>(new Uri(uri + ApiPath + relPath));
+            return requestAsync<T>(new Uri(_host + ApiPath + relPath));
         }
 
         /// <summary>
