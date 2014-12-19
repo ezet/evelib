@@ -218,8 +218,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <summary>
         /// Loads the image asynchronous.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="link">The link.</param>
+        /// <param name="link">The image link.</param>
         /// <returns>Task&lt;System.Byte[]&gt;.</returns>
         public Task<byte[]> LoadImageAsync(ImageHref link) {
             return ImageRequestHandler.RequestImageDataAsync(new Uri(link.Uri));
@@ -228,8 +227,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <summary>
         /// Loads the image.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="link">The link.</param>
+        /// <param name="link">The image link</param>
         /// <returns>Task&lt;System.Byte[]&gt;.</returns>
         public byte[] LoadImage(ImageHref link) {
             return LoadImageAsync(link).Result;

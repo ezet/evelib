@@ -83,7 +83,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task Motd() {
+        public void Motd() {
             Assert.IsNotNull(crest.GetRoot().Motd.Eve.Uri);
         }
 
