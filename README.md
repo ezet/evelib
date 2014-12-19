@@ -155,11 +155,22 @@ All calls to the Eve Online API can throw `EveOnlineException`, which inherits f
     
 Eve CREST
 -
-Eve CREST endpoints can be called by instantating a new EveCrest object, and using it's methods.
+EveCrest supports both public and authenticated CREST. Authenticated mode provides much better performance due to a greater number of concurrent requests.
 
-    var crest = new EveCrest();
-    var result = crest.GetWar(1);
+To use public mode, simply create a new EveCrest object:
+
+    EveCrest crest = new EveCrest();
+
+To use authenticated mode, use one of the two parameterized constructors:
+
+    EveCrest crest = new EveCrest(accessToken);
+    EveCrest crest = new EveCrest(refreshToken, encodedKey);
     
+You can not change mode after creating the object. For authenticated mode, you can change the tokens and keys after creation if needed. Instances created with a refresh token have EnableAutomaticTokenRefresh enabled by default. 
+
+To request data, you will usually start by requesting the CREST root, and navigating using Query() from there:
+
+    var alliances = crest.GetRoot().Query(r => r.Alliances).
 
 #### Query() and Load()
 Query and Load lets you obtain data the way CREST is meant to be used, with no statically typed URIs.
@@ -168,10 +179,7 @@ Every object returned by `EveCrest` has a Query() method, which can be used to q
 Both methods access a link to a resource, or a collection of links, and will immediately request the data from CREST. By utilizing these methods you can navigate CREST from the root, by following the links to other resources. This is the preferred way to use CREST, since it will always remain in sync with the API.
 
     // setup
-    var crest = new EveCrest();
-    crest.Mode = CrestMode.Authenticated;
-    crest.RefreshToken = "mytoken";
-    crest.AllowAutomaticTokenRefresh = true;
+    var crest = new EveCrest(refreshToken, encodedKey);
     // get root object
     var root = crest.GetRoot();
     var regions = root.Query(r => r.Regions);
@@ -185,7 +193,8 @@ Or preferrably use async:
 
     var regionData = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Regions)).QueryAsync(regions => regions.Take(5));
     
-#### Collection Pagination
+#### Collection paging
+EveLib now supports automatic paging, see the secion below.
 All ResourceCollections can be paginated, and have the properties `PageCount` and `TotalCount`.
 Here's an example adding all MarketTypes to a list:
 
@@ -196,6 +205,16 @@ Here's an example adding all MarketTypes to a list:
         list.AddRange(types.Items);
     }
     // do work with list
+
+##### Automatic Paging
+Automatic Paging is enabled by default, and can be set through the AllowAutomaticPaging property.
+This will automatically perform additional requests for data when using any Query method to query resources.
+It is recommended to use Authenticated CREST for improved performance.
+Examples:
+
+    EveCrest crest = new EveCrest(accessToken);
+    var alliance = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 123));
+    var alliances = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Name.Contains("Brave")));
     
 #### Authenticated Crest
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
@@ -209,7 +228,8 @@ There are some more advanced settings available through the RequestHandler insta
 #### Exceptions
 All calls to the CREST API can throw `EveCrestException`, which inherits from `EveLibWebException`.  This additionaly exposes `Message`, `Key`, `ExceptionType` and `RefId` as returned by the API.
 If using automatic token refresh, or refreshing it manually, `EveCrest` can throw a `EveAuthException`.
-When requesting a resource that isn't implemented, it will throw a standard `NotImplementedException`.
+When requesting a resource that is live but not implemented yet, it will throw a `ResourceNotSupportedException`. If this happens, please notify a developer. If requesting a resource that isn't public yet, you will get a regular `EveCrestException`.
+If you set RequestHandler.ThrowOnDeprecated to true, you will get a `DeprecatedResourceException` when requesting a resource that has been marked by CCP as deprecated. This is mostly used for development.
     
 EveCentral API
 -
