@@ -176,6 +176,7 @@
     <Compile Include="RequestHandlers\CrestRequestHandler.cs" />
     <Compile Include="ContentTypes.cs" />
     <Compile Include="RequestHandlers\ICrestRequestHandler.cs" />
+    <Compile Include="ResponseHeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">

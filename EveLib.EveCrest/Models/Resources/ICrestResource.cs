@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -23,6 +24,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface ICrestResource<T> where T : class, ICrestResource<T> {
+
+        /// <summary>
+        /// Gets or sets the response headers.
+        /// </summary>
+        /// <value>The response headers.</value>
+        WebHeaderCollection ResponseHeaders { get; set; }
+
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is deprecated.
         /// </summary>

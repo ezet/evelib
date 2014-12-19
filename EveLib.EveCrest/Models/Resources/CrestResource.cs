@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -28,6 +29,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The crest.</value>
         public EveCrest Crest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the response headers.
+        /// </summary>
+        /// <value>The response headers.</value>
+        public WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this resource is deprecated.

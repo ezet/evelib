@@ -224,7 +224,6 @@ namespace eZet.EveLib.EveCrestModule {
             return requestAsync<T>(new Uri(entity.Href.Uri)).Result;
         }
 
-
         /// <summary>
         /// Loads a ILinkedEntity collection async.
         /// </summary>

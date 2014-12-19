@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using eZet.EveLib.Core;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveCrestModule.Exceptions;
@@ -24,6 +25,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         ///     The default authed max concurrent requests
         /// </summary>
         public const int DefaultAuthedMaxConcurrentRequests = 10;
+
+        public const string DefualtCharset = "utf-8";
 
         /// <summary>
         ///     The token type
@@ -48,6 +51,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             AuthedMaxConcurrentRequests = DefaultAuthedMaxConcurrentRequests;
             _publicPool = new Semaphore(PublicMaxConcurrentRequests, PublicMaxConcurrentRequests);
             _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
+            UserAgent = Config.UserAgent;
         }
 
         /// <summary>
@@ -90,29 +94,60 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public ISerializer Serializer { get; set; }
 
         /// <summary>
-        ///     Performs a request, and returns the response content.
+        /// Gets or sets the x requested with.
+        /// </summary>
+        /// <value>The x requested with.</value>
+        public string XRequestedWith { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user agent.
+        /// </summary>
+        /// <value>The user agent.</value>
+        public string UserAgent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the charset.
+        /// </summary>
+        /// <value>The charset.</value>
+        public string Charset { get; set; }
+
+        /// <summary>
+        /// Performs a request, and returns the response content.
         /// </summary>
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="uri">URI to request</param>
         /// <param name="accessToken">CREST acces token</param>
-        /// <returns></returns>
+        /// <returns>T.</returns>
+        /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
+        /// <exception cref="EveCrestException">
+        /// Undefined error
+        /// or
+        /// or
+        /// </exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
             string data;
             CrestMode mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
+
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = ContentTypes.Get<T>(ThrowOnNotImplemented);
+            if (!String.IsNullOrEmpty(Charset)) request.Accept = request.Accept + "; " + Charset;
+            if (!String.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
+            if (!String.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
+
             _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
 
             if (mode == CrestMode.Authenticated) {
                 request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
                 _authedPool.WaitOne();
-            }
-            else {
+            } else {
                 _publicPool.WaitOne();
             }
+
+            WebHeaderCollection header;
             try {
                 HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
-
+                header = response.Headers;
                 string deprecated = response.GetResponseHeader("X-Deprecated");
 
                 if (!String.IsNullOrEmpty(deprecated)) {
@@ -126,14 +161,13 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 // release semaphores
                 if (mode == CrestMode.Authenticated) _authedPool.Release();
                 else _publicPool.Release();
-            }
-            catch (WebException e) {
+            } catch (WebException e) {
                 // release semaphores
                 if (mode == CrestMode.Authenticated) _authedPool.Release();
                 else _publicPool.Release();
 
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
-                var response = (HttpWebResponse) e.Response;
+                var response = (HttpWebResponse)e.Response;
 
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
@@ -146,7 +180,9 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
-            return Serializer.Deserialize<T>(data);
+            var result = Serializer.Deserialize<T>(data);
+            result.ResponseHeaders = header;
+            return result;
         }
     }
 }
