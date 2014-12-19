@@ -207,7 +207,7 @@ Here's an example adding all MarketTypes to a list:
     // do work with list
 
 ##### Automatic Paging
-Automatic Paging is enabled by default, and can be set through the AllowAutomaticPaging property.
+Automatic Paging is enabled by default, and can be set through the EnableAutomaticPaging property.
 This will automatically perform additional requests for data when using any Query method to query resources.
 It is recommended to use Authenticated CREST for improved performance.
 Examples:
@@ -220,7 +220,7 @@ Examples:
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
 If you want to utilize a refresh token you also need to provide the associated Base64 encrypted key.
 You can provide these through their respective properties on the `EveCrest` object.
-To enable authenticated mode, set Mode to Authenticated. If you have set a RefreshToken and EncryptedKey, you can enable automatic token refreshes by setting AllowAutomaticTokenRefresh to true.
+To enable authenticated mode, set Mode to Authenticated. If you have set a RefreshToken and EncryptedKey, you can enable automatic token refreshes by setting EnableAutomaticTokenRefresh to true.
 
 #### Advanced settings
 There are some more advanced settings available through the RequestHandler instance on your EveCrest object. You can change things such as the serializer, number of concurrent requests, and whether to throw an exception for deprecated or unknown resoruces.
