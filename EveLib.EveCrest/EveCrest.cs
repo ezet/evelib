@@ -51,12 +51,12 @@ namespace eZet.EveLib.EveCrestModule {
         /// <summary>
         ///     The default URI used to access the public CREST API. This can be overridded by setting the Host.
         /// </summary>
-        public const string DefaultPublicHost = "https://public-crest.eveonline.com";
+        public const string DefaultPublicHost = "https://public-crest.eveonline.com/";
 
         /// <summary>
         ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the Host.
         /// </summary>
-        public const string DefaultAuthHost = "https://crest-tq.eveonline.com";
+        public const string DefaultAuthHost = "https://crest-tq.eveonline.com/";
 
         private const string ObsoleteMessage =
             "This method uses statically typed links, and is not how CREST is meant to be used. Please use GetRoot() or GetRootAsync() and navigate from there.";
