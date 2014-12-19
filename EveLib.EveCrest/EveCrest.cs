@@ -80,6 +80,7 @@ namespace eZet.EveLib.EveCrestModule {
             Host = DefaultPublicHost;
             Mode = CrestMode.Public;
             AllowRootCache = true;
+            AllowAutomaticPaging = true;
         }
 
         /// <summary>

@@ -62,7 +62,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "previous")]
         public Href<T> Previous { get; set; }
 
-
         /// <summary>
         /// Queries a collection of resources for a collection of items, async.
         /// </summary>
@@ -125,7 +124,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             return QueryAsync(objFunc).Result;
         }
 
-
         /// <summary>
         /// Queries a collection of resources for a single item, async.
         /// </summary>
@@ -157,7 +155,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             return QueryAsync(objFunc).Result;
         }
 
-
         /// <summary>
         /// Queries a collection of resources for a single item, async.
         /// </summary>
@@ -188,6 +185,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut> {
             return QueryAsync(objFunc).Result;
         }
-
     }
 }
