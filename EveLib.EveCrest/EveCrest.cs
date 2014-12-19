@@ -58,19 +58,21 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         public const string DefaultAuthHost = "https://crest-tq.eveonline.com";
 
+        private const string ObsoleteMessage =
+            "This method uses statically typed links, and is not how CREST is meant to be used. Please use GetRoot() or GetRootAsync() and navigate from there.";
+
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
+
         private string _host;
 
         /// <summary>
-        /// The CREST root if cached
+        ///     The CREST root if cached
         /// </summary>
         private CrestRoot _root;
 
-        private const string ObsoleteMessage = "This method uses statically typed links, and is not how CREST is meant to be used. Please use GetRoot() or GetRootAsync() and navigate from there.";
-
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveCrest"/> class, in Public mode.
+        ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Public mode.
         /// </summary>
         public EveCrest() {
             RequestHandler = new CrestRequestHandler(new JsonSerializer());
@@ -81,7 +83,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveCrest"/> class, in Authenticated mode.
+        ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Authenticated mode.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
         public EveCrest(string accessToken)
@@ -94,7 +96,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveCrest"/> class, in Authenticated mode.
+        ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Authenticated mode.
         /// </summary>
         /// <param name="refreshToken">The refresh token.</param>
         /// <param name="encodedKey">The encoded key.</param>
@@ -125,7 +127,8 @@ namespace eZet.EveLib.EveCrestModule {
         public IEveAuth EveAuth { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether EveCrest is allowed to cache the CrestRoot object. This is enabled by default.
+        ///     Gets or sets a value indicating whether EveCrest is allowed to cache the CrestRoot object. This is enabled by
+        ///     default.
         /// </summary>
         /// <value><c>true</c> if [allow root cache]; otherwise, <c>false</c>.</value>
         public bool AllowRootCache { get; set; }
@@ -149,7 +152,8 @@ namespace eZet.EveLib.EveCrestModule {
         public string EncodedKey { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default.
+        ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This
+        ///     requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default.
         /// </summary>
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
         public bool AllowAutomaticTokenRefresh { get; set; }
@@ -161,7 +165,7 @@ namespace eZet.EveLib.EveCrestModule {
         public CrestMode Mode { get; private set; }
 
         /// <summary>
-        /// Gets or sets the request handler.
+        ///     Gets or sets the request handler.
         /// </summary>
         /// <value>The request handler.</value>
         public ICrestRequestHandler RequestHandler { get; set; }
@@ -174,7 +178,7 @@ namespace eZet.EveLib.EveCrestModule {
 
         /// <summary>
         ///     Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
-        /// The EveCrest instance is updated with the new access token.
+        ///     The EveCrest instance is updated with the new access token.
         /// </summary>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public async Task<AuthResponse> RefreshAccessTokenAsync() {
@@ -186,7 +190,7 @@ namespace eZet.EveLib.EveCrestModule {
 
         /// <summary>
         ///     Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
-        /// The EveCrest instance is updated with the new access token.
+        ///     The EveCrest instance is updated with the new access token.
         /// </summary>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public AuthResponse RefreshAccessToken() {
@@ -237,50 +241,49 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity collection async.
+        ///     Loads a ILinkedEntity collection async.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
-            var list = items.Select(LoadAsync).ToList();
+            List<Task<T>> list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity collection.
+        ///     Loads a ILinkedEntity collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public IEnumerable<T> Load<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
-            var list = items.Select(LoadAsync).ToList();
+            List<Task<T>> list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).Result.AsEnumerable();
         }
 
 
         /// <summary>
-        /// Loads a Href collection async.
+        ///     Loads a Href collection async.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
-            var list = items.Select(LoadAsync).ToList();
+            List<Task<T>> list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
 
         /// <summary>
-        /// Loads a Href collection.
+        ///     Loads a Href collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public IEnumerable<T> Load<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
-            var list = items.Select(LoadAsync).ToList();
+            List<Task<T>> list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).Result.AsEnumerable();
         }
-
 
         /// <summary>
         ///     Returns the CREST root
@@ -648,17 +651,18 @@ namespace eZet.EveLib.EveCrestModule {
         private async Task<T> requestAsync<T>(Uri uri) where T : class, ICrestResource<T> {
             T response = null;
             if (Mode == CrestMode.Authenticated) {
-                var retry = false;
+                bool retry = false;
                 try {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
-
-                } catch (EveCrestException e) {
+                }
+                catch (EveCrestException e) {
                     if (AllowAutomaticTokenRefresh) {
                         var error = e.WebException.Response as HttpWebResponse;
                         if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
                         else throw;
-                    } else throw;
+                    }
+                    else throw;
                 }
                 if (retry) {
                     _trace.TraceEvent(TraceEventType.Information, 0,
@@ -669,7 +673,8 @@ namespace eZet.EveLib.EveCrestModule {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
-            } else {
+            }
+            else {
                 response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
             }
             if (response != null) {
