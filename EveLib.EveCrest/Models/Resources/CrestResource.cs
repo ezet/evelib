@@ -27,8 +27,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <summary>
         ///     Gets or sets the crest instance used to query resources.
         /// </summary>
-        /// <value>The crest.</value>
-        public EveCrest Crest { get; set; }
+        /// <value>The crest instance</value>
+        public EveCrest EveCrest { get; set; }
 
         /// <summary>
         /// Gets or sets the response headers.
@@ -57,7 +57,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut&gt;.</returns>
         public Task<TOut> QueryAsync<TOut>(Func<T, Href<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            return Crest.LoadAsync(objFunc.Invoke(this as T));
+            return EveCrest.LoadAsync(objFunc.Invoke(this as T));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut&gt;.</returns>
         public virtual TOut Query<TOut>(Func<T, Href<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            return Crest.Load(objFunc.Invoke(this as T));
+            return EveCrest.Load(objFunc.Invoke(this as T));
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut&gt;.</returns>
         public Task<TOut> QueryAsync<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            return Crest.LoadAsync(objFunc.Invoke(this as T));
+            return EveCrest.LoadAsync(objFunc.Invoke(this as T));
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut&gt;.</returns>
         public virtual TOut Query<TOut>(Func<T, LinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            return Crest.Load(objFunc.Invoke(this as T));
+            return EveCrest.Load(objFunc.Invoke(this as T));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             var items = objFunc.Invoke(this as T);
-            return Crest.LoadAsync(items);
+            return EveCrest.LoadAsync(items);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public virtual IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             var items = objFunc.Invoke(this as T);
-            return Crest.Load(items);
+            return EveCrest.Load(items);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<LinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             var items = objFunc.Invoke(this as T);
-            return Crest.LoadAsync(items);
+            return EveCrest.LoadAsync(items);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public virtual IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<LinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             var items = objFunc.Invoke(this as T);
-            return Crest.Load(items);
+            return EveCrest.Load(items);
         }
     }
 }

@@ -72,14 +72,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut> {
             var collection = this;
             var list = collection.Items.ToList();
-            if (Crest.AllowAutomaticPaging) {
+            if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
-                    collection = Crest.Load(collection.Next);
+                    collection = EveCrest.Load(collection.Next);
                     list.AddRange(collection.Items);
                 }
             }
             var item = objFunc.Invoke(list);
-            return Crest.LoadAsync(item);
+            return EveCrest.LoadAsync(item);
         }
 
         /// <summary>
@@ -103,14 +103,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut> {
             var collection = this;
             var list = collection.Items.ToList();
-            if (Crest.AllowAutomaticPaging) {
+            if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
-                    collection = Crest.Load(collection.Next);
+                    collection = EveCrest.Load(collection.Next);
                     list.AddRange(collection.Items);
                 }
             }
             var item = objFunc.Invoke(list);
-            return Crest.LoadAsync(item);
+            return EveCrest.LoadAsync(item);
         }
 
         /// <summary>
@@ -134,14 +134,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut> {
             var collection = this;
             var list = collection.Items.ToList();
-            if (Crest.AllowAutomaticPaging) {
+            if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
-                    collection = Crest.Load(collection.Next);
+                    collection = EveCrest.Load(collection.Next);
                     list.AddRange(collection.Items);
                 }
             }
             var item = objFunc.Invoke(list);
-            return Crest.LoadAsync(item);
+            return EveCrest.LoadAsync(item);
         }
 
         /// <summary>
@@ -165,14 +165,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut> {
             var collection = this;
             var list = collection.Items.ToList();
-            if (Crest.AllowAutomaticPaging) {
+            if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
-                    collection = Crest.Load(collection.Next);
+                    collection = EveCrest.Load(collection.Next);
                     list.AddRange(collection.Items);
                 }
             }
             var item = objFunc.Invoke(list);
-            return Crest.LoadAsync(item);
+            return EveCrest.LoadAsync(item);
         }
 
         /// <summary>

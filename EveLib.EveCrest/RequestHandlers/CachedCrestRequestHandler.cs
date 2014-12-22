@@ -1,21 +1,24 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
+using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.Models.Shared;
+using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
-    public class CrestRequestHandler : ICrestRequestHandler {
+    public class CachedCrestRequestHandler : ICachedCrestRequestHandler {
         /// <summary>
         ///     The default public max concurrent requests
         /// </summary>
@@ -38,17 +41,15 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
         private int _authedMaxConcurrentRequests;
-
-        private Semaphore _authedPool;
-
         private int _publicMaxConcurrentRequests;
+        private Semaphore _authedPool;
         private Semaphore _publicPool;
 
         /// <summary>
-        ///     Creates a new CrestRequestHandler
+        ///     Creates a new CachedCrestRequestHandler
         /// </summary>
         /// <param name="serializer"></param>
-        public CrestRequestHandler(ISerializer serializer) {
+        public CachedCrestRequestHandler(ISerializer serializer) {
             Serializer = serializer;
             PublicMaxConcurrentRequests = DefaultPublicMaxConcurrentRequests;
             AuthedMaxConcurrentRequests = DefaultAuthedMaxConcurrentRequests;
@@ -56,6 +57,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
             UserAgent = Config.UserAgent;
             Charset = DefaultCharset;
+            Cache = new EveLibFileCache(Config.AppData + Config.Separator + "EveCrestCache", "register");
+            EnableCache = true;
         }
 
         /// <summary>
@@ -129,10 +132,14 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// or
         /// </exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
-            string data;
-            CrestMode mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
+            string data = null;
+            if (EnableCache)
+                data = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            bool cached = data != null;
+            if (cached) return Serializer.Deserialize<T>(data);
 
             // set up request
+            CrestMode mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType);
@@ -176,16 +183,42 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();
-                    if (response.StatusCode == HttpStatusCode.InternalServerError || response.StatusCode == HttpStatusCode.BadGateway) throw new EveCrestException(data, e);
+                    if (response.StatusCode == HttpStatusCode.InternalServerError ||
+                        response.StatusCode == HttpStatusCode.BadGateway) throw new EveCrestException(data, e);
                     var error = Serializer.Deserialize<CrestError>(data);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
-                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType, error.RefId);
+                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
+                        error.RefId);
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
+            if (EnableCache)
+                await Cache.StoreAsync(uri, getCacheExpirationTime(header), data).ConfigureAwait(false);
             var result = Serializer.Deserialize<T>(data);
             result.ResponseHeaders = header;
             return result;
         }
+
+        private static DateTime getCacheExpirationTime(NameValueCollection header) {
+            var cache = header.Get("Cache-Control");
+            var str = cache.Substring(cache.IndexOf('=') + 1);
+            var sec = int.Parse(str);
+            return DateTime.UtcNow.AddSeconds(sec);
+        }
+
+        /// <summary>
+        /// Gets or sets the cache used by this request handler
+        /// </summary>
+        /// <value>The cache.</value>
+        public IEveLibCache Cache { get; set; }
+
+        public bool EnableCacheLoad { get; set; }
+        public bool EnableCacheStore { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [enable cache].
+        /// </summary>
+        /// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
+        public bool EnableCache { get; set; }
     }
 }

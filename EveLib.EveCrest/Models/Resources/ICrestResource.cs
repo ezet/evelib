@@ -47,7 +47,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Gets or sets the crest.
         /// </summary>
         /// <value>The crest.</value>
-        EveCrest Crest { get; set; }
+        EveCrest EveCrest { get; set; }
 
         /// <summary>
         ///     Queries the resource asynchronous.

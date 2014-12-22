@@ -15,35 +15,20 @@ namespace eZet.EveLib.Core {
         public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
-        ///     Path to ApplicationData folder.
+        ///     relCachePath to ApplicationData folder.
         /// </summary>
         public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                                 Separator;
 
         /// <summary>
-        ///     The cache factory
-        /// </summary>
-        public static Func<IEveLibCache> CacheFactory;
-
-        /// <summary>
-        ///     Filename for the Cache Register
-        /// </summary>
-        public static readonly string CacheRegisterFileName = "cache";
-
-        /// <summary>
-        ///     Path to cache directory
-        /// </summary>
-        public static readonly string CachePath;
-
-        /// <summary>
-        ///     Path to image directory
+        ///     relCachePath to image directory
         /// </summary>
         public static readonly string ImagePath;
 
         /// <summary>
-        ///     Full path to cache register file
+        ///     The cache factory
         /// </summary>
-        public static readonly string CacheRegister;
+        public static Func<IEveLibCache> CacheFactory;
 
         /// <summary>
         ///     UserAgent used for HTTP requests
@@ -54,11 +39,9 @@ namespace eZet.EveLib.Core {
             if (String.IsNullOrEmpty(UserAgent))
                 UserAgent = "EveLib";
             string appName = ConfigurationManager.AppSettings["eveLib.AppData"];
-            CacheFactory = () => new EveLibFileCache();
             AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
-            CachePath = AppData + Separator + "Cache";
             ImagePath = AppData + Separator + "Images";
-            CacheRegister = CachePath + Separator + CacheRegisterFileName;
+            CacheFactory = () => new EveLibFileCache(AppData + Separator + "EveApiCache", "register");
         }
     }
 }

@@ -32,7 +32,7 @@ namespace eZet.EveLib.Test {
             //    "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
-            crest.AllowAutomaticTokenRefresh = true;
+            crest.EnableAutomaticTokenRefresh = true;
             //crest.RequestHandler.ThrowOnDeprecated = true;
         }
 

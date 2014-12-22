@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.Properties;
 
 namespace eZet.EveLib.Core.Cache {
     /// <summary>
@@ -29,5 +30,6 @@ namespace eZet.EveLib.Core.Cache {
         /// <param name="value">A DateTime instance to store the date in.</param>
         /// <returns>True if an entry was retrieved, otherwise false.</returns>
         bool TryGetExpirationDate(Uri uri, out DateTime value);
+
     }
 }

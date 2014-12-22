@@ -48,27 +48,25 @@ namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
             if (EnableCacheLoad)
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
             bool cached = data != null;
-            if (!cached) {
-                try {
-                    data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
-                }
-                catch (WebException e) {
-                    _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
-                    var response = (HttpWebResponse) e.Response;
-                    if (response == null) throw;
-                    Stream responseStream = response.GetResponseStream();
-                    if (responseStream == null) throw;
-                    using (var reader = new StreamReader(responseStream)) {
-                        data = reader.ReadToEnd();
-                        var error = Serializer.Deserialize<EveApiError>(data);
-                        _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText,
-                            error.Error.ErrorCode);
-                        throw new EveOnlineException(error.Error.ErrorText, error.Error.ErrorCode, e);
-                    }
+            if (cached) return Serializer.Deserialize<T>(data);
+            try {
+                data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
+            } catch (WebException e) {
+                _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
+                var response = (HttpWebResponse)e.Response;
+                if (response == null) throw;
+                Stream responseStream = response.GetResponseStream();
+                if (responseStream == null) throw;
+                using (var reader = new StreamReader(responseStream)) {
+                    data = reader.ReadToEnd();
+                    var error = Serializer.Deserialize<EveApiError>(data);
+                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText,
+                        error.Error.ErrorCode);
+                    throw new EveOnlineException(error.Error.ErrorText, error.Error.ErrorCode, e);
                 }
             }
             var xml = Serializer.Deserialize<T>(data);
-            if (EnableCacheStore && !cached)
+            if (EnableCacheStore)
                 await Cache.StoreAsync(uri, getCacheExpirationTime(xml), data).ConfigureAwait(false);
             return xml;
         }

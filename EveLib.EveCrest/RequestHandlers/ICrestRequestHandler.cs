@@ -25,18 +25,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <value>The serializer.</value>
         ISerializer Serializer { get; set; }
 
-        ///// <summary>
-        ///// Gets or sets the public rate per second.
-        ///// </summary>
-        ///// <value>The public rate per second.</value>
-        //int PublicRatePerSecond { get; set; }
-
-        ///// <summary>
-        ///// Gets or sets the authed rate per second.
-        ///// </summary>
-        ///// <value>The authed rate per second.</value>
-        //int AuthedRatePerSecond { get; set; }
-
         /// <summary>
         /// Gets or sets the size of the public burst.
         /// </summary>
@@ -48,6 +36,24 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// </summary>
         /// <value>The size of the authed burst.</value>
         int AuthedMaxConcurrentRequests { get; set; }
+
+        /// <summary>
+        /// Gets or sets the x requested with.
+        /// </summary>
+        /// <value>The x requested with.</value>
+        string XRequestedWith { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user agent.
+        /// </summary>
+        /// <value>The user agent.</value>
+        string UserAgent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the charset.
+        /// </summary>
+        /// <value>The charset.</value>
+         string Charset { get; set; }
 
         /// <summary>
         ///     Requests a URI asynchronously, and returns the response content.

@@ -9,7 +9,7 @@ namespace eZet.EveLib.EveCrestModule.Exceptions {
     [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
     public class EveCrestException : EveLibWebException {
         /// <summary>
-        ///     Creates a new Eve Crest Exception
+        ///     Creates a new Eve EveCrest Exception
         /// </summary>
         /// <param name="message">Error message returned by CREST</param>
         /// <param name="innerException">The WebException that caused this exception</param>

@@ -30,7 +30,7 @@ using eZet.EveLib.EveCrestModule.RequestHandlers;
 
 namespace eZet.EveLib.EveCrestModule {
     /// <summary>
-    ///     Enum Crest Access Mode
+    ///     Enum EveCrest Access Mode
     /// </summary>
     public enum CrestMode {
         /// <summary>
@@ -75,13 +75,13 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Public mode.
         /// </summary>
         public EveCrest() {
-            RequestHandler = new CrestRequestHandler(new JsonSerializer());
+            RequestHandler = new CachedCrestRequestHandler(new JsonSerializer());
             ImageRequestHandler = new ImageRequestHandler();
             ApiPath = "/";
             Host = DefaultPublicHost;
             Mode = CrestMode.Public;
-            AllowRootCache = true;
-            AllowAutomaticPaging = true;
+            EnableRootCache = true;
+            EnableAutomaticPaging = true;
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace eZet.EveLib.EveCrestModule {
             Host = DefaultAuthHost;
             Mode = CrestMode.Authenticated;
             EveAuth = new EveAuth();
-            AllowAutomaticTokenRefresh = false;
+            EnableAutomaticTokenRefresh = false;
         }
 
         /// <summary>
@@ -109,12 +109,12 @@ namespace eZet.EveLib.EveCrestModule {
             Host = DefaultAuthHost;
             Mode = CrestMode.Authenticated;
             EveAuth = new EveAuth();
-            AllowAutomaticTokenRefresh = true;
+            EnableAutomaticTokenRefresh = true;
         }
 
 
         /// <summary>
-        ///     Gets or sets the host used to access the Crest API.
+        ///     Gets or sets the host used to access the EveCrest API.
         /// </summary>
         /// <value>The base public URI.</value>
         public string Host {
@@ -128,12 +128,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <value>The eve sso.</value>
         public IEveAuth EveAuth { get; set; }
 
-        /// <summary>
-        ///     Gets or sets a value indicating whether EveCrest is allowed to cache the CrestRoot object. This is enabled by
-        ///     default.
-        /// </summary>
-        /// <value><c>true</c> if [allow root cache]; otherwise, <c>false</c>.</value>
-        public bool AllowRootCache { get; set; }
+     
 
         /// <summary>
         ///     Gets or sets the CREST Access Token
@@ -154,18 +149,24 @@ namespace eZet.EveLib.EveCrestModule {
         public string EncodedKey { get; set; }
 
         /// <summary>
+        ///     Gets or sets a value indicating whether EveCrest is allowed to cache the CrestRoot object. This is enabled by
+        ///     default.
+        /// </summary>
+        /// <value><c>true</c> if [allow root cache]; otherwise, <c>false</c>.</value>
+        public bool EnableRootCache { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This
         ///     requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default if using the RefreshToken ctor.
         /// </summary>
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
-        public bool AllowAutomaticTokenRefresh { get; set; }
-
+        public bool EnableAutomaticTokenRefresh { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to allow Query() methods to allow automatic paging. This may perform additional web requests.
         /// </summary>
         /// <value><c>true</c> if [allow automatic paging]; otherwise, <c>false</c>.</value>
-        public bool AllowAutomaticPaging { get; set; }
+        public bool EnableAutomaticPaging { get; set; }
 
         /// <summary>
         ///     Gets the CREST access mode.
@@ -324,7 +325,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Task&lt;CrestRoot&gt;.</returns>
         public async Task<CrestRoot> GetRootAsync() {
             const string relPath = "";
-            if (_root == null || !AllowRootCache)
+            if (_root == null || !EnableRootCache)
                 _root = await requestAsync<CrestRoot>(relPath).ConfigureAwait(false);
             return _root;
         }
@@ -687,7 +688,7 @@ namespace eZet.EveLib.EveCrestModule {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 } catch (EveCrestException e) {
-                    if (AllowAutomaticTokenRefresh) {
+                    if (EnableAutomaticTokenRefresh) {
                         var error = e.WebException.Response as HttpWebResponse;
                         if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
                         else throw;
@@ -706,7 +707,7 @@ namespace eZet.EveLib.EveCrestModule {
                 response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
             }
             if (response != null) {
-                response.Crest = this;
+                response.EveCrest = this;
             }
             return response;
         }

@@ -34,7 +34,7 @@ namespace eZet.EveLib.CrestClientModule {
         ///     Initializes a new instance of the <see cref="CrestClient" /> class.
         /// </summary>
         public CrestClient() {
-            RequestHandler = new CrestRequestHandler(new JsonSerializer());
+            RequestHandler = new CachedCrestRequestHandler(new JsonSerializer());
         }
 
         /// <summary>

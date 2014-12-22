@@ -34,13 +34,13 @@ namespace eZet.EveLib.Test {
             crest.EncodedKey = EncodedKey;
             crest.RequestHandler.ThrowOnDeprecated = true;
             crest.RequestHandler.ThrowOnMissingContentType = true;
-            crest.AllowAutomaticPaging = true;
+            crest.EnableAutomaticPaging = true;
         }
 
         [TestMethod]
         public void CollectionPaging_Automatic() {
-            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 123));
-            Debug.WriteLine(result.Name);
+            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(f => f.Name.Contains("ff")));
+            Debug.WriteLine(result);
         }
 
         [TestMethod]
@@ -115,8 +115,6 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task Alliances() {
             var response = await crest.GetRoot().QueryAsync(r => r.Alliances);
-            crest.GetRoot().Query(r => r.Alliances).Query(r => r.Items.Where(f => f.Id == 3));
-            crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(f => f.Id == 3));
         }
 
         [TestMethod]
