@@ -196,7 +196,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
-            if (CacheLevel == CacheLevel.Default || CacheLevel ==CacheLevel.Refresh)
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
                 await Cache.StoreAsync(uri, getCacheExpirationTime(header), data).ConfigureAwait(false);
             var result = Serializer.Deserialize<T>(data);
             result.ResponseHeaders = header;

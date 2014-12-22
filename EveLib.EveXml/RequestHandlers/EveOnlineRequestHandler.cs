@@ -18,19 +18,11 @@ namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
-        ///     Gets or sets whether the handler can load data from the cache.
-        /// </summary>
-        public bool EnableCacheLoad { get; set; }
-
-        /// <summary>
-        ///     Gets or sets whether the handler can store data in cache.
-        /// </summary>
-        public bool EnableCacheStore { get; set; }
-
-        /// <summary>
         ///     Gets or sets the Cache.
         /// </summary>
         public IEveLibCache Cache { get; set; }
+
+        public CacheLevel CacheLevel { get; set; }
 
         /// <summary>
         ///     Gets or sets the serializer.
@@ -45,10 +37,11 @@ namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
         /// <returns></returns>
         public async Task<T> RequestAsync<T>(Uri uri) {
             string data = null;
-            if (EnableCacheLoad)
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
             bool cached = data != null;
             if (cached) return Serializer.Deserialize<T>(data);
+            if (CacheLevel == CacheLevel.CacheOnly) return default(T);
             try {
                 data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
             } catch (WebException e) {
@@ -66,7 +59,7 @@ namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
                 }
             }
             var xml = Serializer.Deserialize<T>(data);
-            if (EnableCacheStore)
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
                 await Cache.StoreAsync(uri, getCacheExpirationTime(xml), data).ConfigureAwait(false);
             return xml;
         }

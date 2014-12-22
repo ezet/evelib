@@ -11,13 +11,10 @@ namespace eZet.EveLib.Core.RequestHandlers {
         IEveLibCache Cache { get; set; }
 
         /// <summary>
-        ///     Enables or disables loading from cache
+        /// Gets or sets the cache level.
         /// </summary>
-        bool EnableCacheLoad { get; set; }
+        /// <value>The cache level.</value>
+        CacheLevel CacheLevel { get; set; }
 
-        /// <summary>
-        ///     Enables or disables storing to cache
-        /// </summary>
-        bool EnableCacheStore { get; set; }
     }
 }
