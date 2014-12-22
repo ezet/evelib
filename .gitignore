@@ -46,6 +46,7 @@ build/
 *.log
 *.scc
 
+
 # Visual C++ cache files
 ipch/
 *.aps
@@ -157,3 +158,5 @@ $RECYCLE.BIN/
 /packages/Newtonsoft.Json.6.0.3
 /.nuget/package
 /packages/Newtonsoft.Json.6.0.5
+
+*.nupkg
