@@ -18,12 +18,12 @@ EveLib.NET is a open source library for accessing the Eve Online API, CREST, and
 * A fairly comprehensive set of unit tests, including static xml tests for calls requiring authentication.
 
 ### Current Modules
-* Eve Online API `EveOnlineApi`
-* Eve CREST `EveCrest`
+* Eve Online XML API `EveXml` [cached]
+* Eve CREST `EveCrest` [cached]
 * Eve Central API `EveCentral`
 * Eve Marketdata API `EveMarketData`
 * Element43 API `Element43`
-* ZKillboard API `ZKillBoard`
+* ZKillboard API `ZKillBoard` [cached]
 * EveWho `EveWho`
 * EveAuth `EveAuth` (Eve SSO)
 * Eve Static Data (Element43) `EveStaticData` [partial]
@@ -55,7 +55,7 @@ For more information on using `TraceSource`, visit http://msdn.microsoft.com/en-
 
 
 #### Caching
-The EveOnline API module caches XML files to disk, adhering to the CachedUntil values provided by CCP on each request. The cache location can be configured in App.config. You can easily change this for your own implementation if you want. The other libraries do not use caching.
+Some modules support local cache, as indicated in the list of supported modules. You can change the CacheLevel property on the RequestHandlers to set the cache behaviour. You can replace the Cache instances with your own implementation or new EveLibCache instances with different settings if you need to eg. change the cache path.
 
 #### Async/Await
 All methods that access an API provide both a synchronous and an asynchronous. Asynchronous methods are postfixed with `Async`. Some classes provide lazily loaded properties, which will always be loaded synchronously if a new request has to be made. To load such properties asynchronously, call `InitAsync()` on the respective objects, before accessing it's properties. All such properties are documented as such in it's comments.
@@ -73,9 +73,9 @@ Because the synchronous methods use sync over async, they can throw multiple exc
 ##### Asynchronous
 When using async/await, the `AggregateException` is unwrapped and only the FIRST inner exception is thrown. The `AggregateException` is available through the Exception property on the Task that is awaited. Catch `InvalidRequestException` or any other specific exception, like normal, and check the `Exception` on the Task if you need to handle more than the first.
 
-EveOnline API
+EveXml
 -
-This library exposes all of CCPs Eve API calls through an easy to use API, using common .NEt an C# conventions. It uses a structure similar to how the API URIs are structured. See [APIv2] (http://wiki.eve-id.net/APIv2_Page_Index) for a reference. The basic structure is as follows:
+This library exposes all of CCPs Eve API calls through an easy to use API, using common .NET an C# conventions. It uses a structure similar to how the API URIs are structured. See [APIv2] (http://wiki.eve-id.net/APIv2_Page_Index) for a reference. The basic structure is as follows:
 * `CharacterKey`, `CorporationKey` and `ApiKey` exposes requests prefixed with /account/.
 * `Character` exposes all requests prefixed with /char/.
 * `Corporation` exposes all requests  prefixed with /corp/.
@@ -89,14 +89,14 @@ All basic functionality can be reached through a static facade class, EveOnlineA
 ##### Basic
 Eve, Map and Image do not require authentication, and can be accessed directly.
 
-    var result = EveOnlineApi.Map.GetFactionWarSystems();
+    var result = EveXml.Map.GetFactionWarSystems();
 
 ##### Keys
 The library has 3 different key classes, `CharacterKey`, `CorporationKey` and `ApiKey`. These represent actual Eve Online API keys, and are required to access any part of the API that requires authentication. The `ApiKey` can be used as a general key to access endpoints in the /account/ path, if you do not know which type of KeyID you have in advance.
 
-    ApiKey key = EveOnlineApi.CreateApiKey(id, vcode);
-    CharacterKey charKey = EveOnlineApi.CreateCharacterKey(id, vcode);
-    CorporationKey corpKey = EveOnlineApi.CreateCorporationKey(id, vcode);
+    ApiKey key = EveXml.CreateApiKey(id, vcode);
+    CharacterKey charKey = EveXml.CreateCharacterKey(id, vcode);
+    CorporationKey corpKey = EveXml.CreateCorporationKey(id, vcode);
     
 All keys have a few properties in common, such as `KeyType`, `ExpiryDate` and `AccessMask`. These properties will be lazily loaded, synchronously, the first time they are accessed. After one of them have been accessed once, they will be stored in the object. You can also load them explicitly by calling `Init()`, or asynchronously by calling `InitAsync()`.
 `CharacterKey` and `CorporationKey` also have additinal properties, `Characters` and `Corporation`, that are also lazily loaded in the same fashion. You can safely call `Init()` or `InitAsync()` repeatedly, if the object is already initialized it will return immediately.
@@ -120,7 +120,7 @@ EveLib also provides a method to detect and return the actual type of key, which
 
 Using any key, you can access all /account/* paths (note: Only `CharacterKey` provides `GetAccountInfo()`):
 
-    EveApiResponse<ApiKeyInfo> result = key.GetApiKeyInfo();
+    EveXmlResponse<ApiKeyInfo> result = key.GetApiKeyInfo();
     
 ##### Character and Corporation
 Character and Corporation classes provide access to endpoints in the /char/ and /corp/ paths respectively.
@@ -128,7 +128,7 @@ There are mainly two ways to instantiate the Character and Corporation classes.
 
 You can create a new object directly
 
-    Character character = EveOnlineApi.CreateNewCharacter(keyId, vCode, characterId); // using the static class
+    Character character = EveXml.CreateNewCharacter(keyId, vCode, characterId); // using the static class
     Corporation corporation = new Corporation(keyId, vCode, corporationId); // or using new
     
 Or you can get them from an existing key
@@ -142,15 +142,15 @@ The difference is, when creating an object directly, you will not know for sure 
 `Character` and `Corporation` objects are initialized the same ways keys are, using `Init()`, `InitAsync()` or by accessing a property. You can also call `Reset()` to reset all data. 
 
 #### Responses
-All API calls return results in the form of `EveApiResponse<T>` objects, where `T` is the specific type of response. These objects reflect the structure of the actual XML responses, with a few exceptions. All properties have been renamed in compliance with C# naming conventions, eg. 'characterID' is converted to CharacterId. Also, some properties have been renamed for clarity and consistency, where most changes are extensions of the original names.
+All API calls return results in the form of `EveXmlResponse<T>` objects, where `T` is the specific type of response. These objects reflect the structure of the actual XML responses, with a few exceptions. All properties have been renamed in compliance with C# naming conventions, eg. 'characterID' is converted to CharacterId. Also, some properties have been renamed for clarity and consistency, where most changes are extensions of the original names.
 
 Every XML response has a Version, CachedUntil and Result. Result is of type T, and contains all request specific data. 
 
-        EveApiResponse<ServerStatus> data = EveOnlineAPi.Eve.GetServerStatus();
+        EveXmlResponse<ServerStatus> data = EveXml.Eve.GetServerStatus();
         int players = data.Result.PlayersOnline;
         
 #### Exceptions
-All calls to the Eve Online API can throw `EveOnlineException`, which inherits from `EveLibWebException`. This additionaly exposes `Message` and `ErrorCode`, as returned by the API.
+All calls to the Eve Online API can throw `EveXmlException`, which inherits from `EveLibWebException`. This additionaly exposes `Message` and `ErrorCode`, as returned by the API.
 
     
 Eve CREST
@@ -214,7 +214,7 @@ Examples:
 
     EveCrest crest = new EveCrest(accessToken);
     var alliance = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 123));
-    var alliances = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Name.Contains("Brave")));
+    var alliances = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Id > 123));
     
 #### Authenticated Crest
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
