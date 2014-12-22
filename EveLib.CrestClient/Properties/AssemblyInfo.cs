@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("EveLib EveOnline")]
-[assembly: AssemblyDescription("Library for accessing the Eve Online API.")]
+[assembly: AssemblyTitle("EveLib.CrestClient")]
+[assembly: AssemblyDescription("Library for accessing Eve Online CREST.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EveLib EveOnline")]
+[assembly: AssemblyCompany("Lars Kristian Dahl")]
+[assembly: AssemblyProduct("EveLib")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("1b5e16c2-cb1f-411f-b386-cd8ca60e1772")]
+[assembly: Guid("2f7a58b5-ef0a-4eb4-bebe-4f8ed1fdba63")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -36,6 +36,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("2.1.0.0")]
-[assembly: AssemblyFileVersion("2.1.0.0")]
+[assembly: AssemblyVersion("3.0.0.0")]
+[assembly: AssemblyFileVersion("3.0.0.0")]
 [assembly: NeutralResourcesLanguage("en")]

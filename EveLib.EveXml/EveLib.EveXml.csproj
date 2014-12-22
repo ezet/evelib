@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>eZet.EveLib.EveOnlineModule</RootNamespace>
-    <AssemblyName>EveLib.EveOnline</AssemblyName>
+    <AssemblyName>EveLib.EveXml</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -56,7 +56,7 @@
     <CodeContractsRuntimeCheckingLevel>None</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
-    <DocumentationFile>bin\Release\EveLib.EveOnline.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\EveLib.EveXml.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -115,7 +115,7 @@
     <Compile Include="Eve.cs" />
     <Compile Include="Corporation.cs" />
     <Compile Include="CorporationKey.cs" />
-    <Compile Include="EveXml.cs" />
+    <Compile Include="EveOnlineApi.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="LazyLoadEntity.cs" />
     <Compile Include="Map.cs" />

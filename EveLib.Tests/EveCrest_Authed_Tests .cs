@@ -39,8 +39,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void CollectionPaging_Automatic() {
-            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(f => f.Name.Contains("ff")));
-            //Debug.WriteLine(result);
+            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(f => f.ShortName == "1"));
+            Debug.WriteLine(result.FirstOrDefault());
         }
 
         [TestMethod]

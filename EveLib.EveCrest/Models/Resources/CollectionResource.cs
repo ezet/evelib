@@ -79,8 +79,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
                 }
             }
             var items = objFunc.Invoke(list);
-            if (items.Any())
-                return null;
             return await EveCrest.LoadAsync(items).ConfigureAwait(false);
         }
 

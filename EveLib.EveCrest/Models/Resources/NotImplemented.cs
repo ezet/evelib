@@ -13,7 +13,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// Initializes a new instance of the <see cref="NotImplemented"/> class.
         /// </summary>
         public NotImplemented() {
-            ContentType = "NotImplemented";
+            ContentType = "";
         }
 
         [OnDeserialized]

@@ -238,10 +238,6 @@
       <Project>{185e2271-bba1-4071-ac46-bf47153bdb7a}</Project>
       <Name>EveLib.EveMarketData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveOnline\EveLib.EveOnline.csproj">
-      <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
-      <Name>EveLib.EveOnline</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EveLib.EveStaticData\EveLib.StaticData.csproj">
       <Project>{25A492FE-1004-4A0B-AAD3-B5395C2D47EA}</Project>
       <Name>EveLib.StaticData</Name>

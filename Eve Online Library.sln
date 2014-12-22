@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveCentral", "EveLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveMarketData", "EveLib.EveMarketData\EveLib.EveMarketData.csproj", "{185E2271-BBA1-4071-AC46-BF47153BDB7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveOnline", "EveLib.EveOnline\EveLib.EveOnline.csproj", "{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.Test", "EveLib.Tests\EveLib.Test.csproj", "{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.Element43", "EveLib.Element43\EveLib.Element43.csproj", "{91C78379-3D32-4131-8CD7-C1E8876D0933}"
@@ -35,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveAuth", "EveLib.EveAuth\EveLib.EveAuth.csproj", "{66A526C4-AD56-42A1-A680-0D11A524EC40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.CrestClient", "CrestClient\EveLib.CrestClient.csproj", "{AB71147C-2135-48F5-9501-F88BDE3360B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveXml", "EveLib.EveXml\EveLib.EveXml.csproj", "{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,16 +78,6 @@ Global
 		{185E2271-BBA1-4071-AC46-BF47153BDB7A}.Release|ARM.ActiveCfg = Release|Any CPU
 		{185E2271-BBA1-4071-AC46-BF47153BDB7A}.Release|x64.ActiveCfg = Release|Any CPU
 		{185E2271-BBA1-4071-AC46-BF47153BDB7A}.Release|x86.ActiveCfg = Release|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|ARM.ActiveCfg = Release|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x64.ActiveCfg = Release|Any CPU
-		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x86.ActiveCfg = Release|Any CPU
 		{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499BFDFF-A2DE-4980-9DA6-BC98E767CF35}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -178,6 +168,16 @@ Global
 		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|ARM.ActiveCfg = Release|Any CPU
 		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|x64.ActiveCfg = Release|Any CPU
 		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|ARM.ActiveCfg = Release|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x64.ActiveCfg = Release|Any CPU
+		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

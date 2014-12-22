@@ -3,10 +3,12 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Cache;
 using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
 using eZet.EveLib.Core.Cache;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveCrestModule.Exceptions;
@@ -15,6 +17,7 @@ using eZet.EveLib.EveCrestModule.Models.Shared;
 using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
+
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
@@ -58,7 +61,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             UserAgent = Config.UserAgent;
             Charset = DefaultCharset;
             Cache = new EveLibFileCache(Config.AppData + Config.Separator + "EveCrestCache", "register");
-            EnableCache = true;
+            CacheLevel = CacheLevel.Default;
         }
 
         /// <summary>
@@ -133,17 +136,18 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// </exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
             string data = null;
-            if (EnableCache)
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
             bool cached = data != null;
             if (cached) return Serializer.Deserialize<T>(data);
-
+            if (CacheLevel == CacheLevel.CacheOnly) return default(T);
             // set up request
             CrestMode mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType);
-            if (!String.IsNullOrEmpty(Charset)) request.Accept = request.Accept + "; " + Charset;
+            request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType) + ";";
+            request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
+            if (!String.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!String.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!String.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
             if (mode == CrestMode.Authenticated) {
@@ -192,7 +196,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
-            if (EnableCache)
+            if (CacheLevel == CacheLevel.Default || CacheLevel ==CacheLevel.Refresh)
                 await Cache.StoreAsync(uri, getCacheExpirationTime(header), data).ConfigureAwait(false);
             var result = Serializer.Deserialize<T>(data);
             result.ResponseHeaders = header;
@@ -207,18 +211,21 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
+        /// Gets or sets the cache mode.
+        /// </summary>
+        /// <value>The cache mode.</value>
+        public CacheLevel CacheLevel { get; set; }
+
+        /// <summary>
         /// Gets or sets the cache used by this request handler
         /// </summary>
         /// <value>The cache.</value>
         public IEveLibCache Cache { get; set; }
 
-        public bool EnableCacheLoad { get; set; }
-        public bool EnableCacheStore { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether [enable cache].
-        /// </summary>
-        /// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
-        public bool EnableCache { get; set; }
+        ///// <summary>
+        ///// Gets or sets a value indicating whether [enable cache].
+        ///// </summary>
+        ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
+        //public bool EnableCache { get; set; }
     }
 }

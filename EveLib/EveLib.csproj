@@ -108,7 +108,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Example.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,10 +134,6 @@
     <ProjectReference Include="..\EveLib.EveMarketData\EveLib.EveMarketData.csproj">
       <Project>{185e2271-bba1-4071-ac46-bf47153bdb7a}</Project>
       <Name>EveLib.EveMarketData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveOnline\EveLib.EveOnline.csproj">
-      <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
-      <Name>EveLib.EveOnline</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveLib.EveStaticData\EveLib.StaticData.csproj">
       <Project>{25a492fe-1004-4a0b-aad3-b5395c2d47ea}</Project>
