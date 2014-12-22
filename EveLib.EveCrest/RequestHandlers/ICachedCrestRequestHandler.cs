@@ -12,16 +12,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             /// </summary>
             IEveLibCache Cache { get; set; }
 
-            ///// <summary>
-            /////     Enables or disables loading from cache
-            ///// </summary>
-            //bool EnableCacheLoad { get; set; }
-
-            ///// <summary>
-            /////     Enables or disables storing to cache
-            ///// </summary>
-            //bool EnableCacheStore { get; set; }
-
             /// <summary>
             /// Gets or sets a value indicating whether [enable cache].
             /// </summary>

@@ -150,7 +150,7 @@ namespace eZet.EveLib.Core.Cache {
 
         private static string getHash(Uri uri) {
             //return uri.AbsoluteUri;
-            string fileName = uri.PathAndQuery;
+            string fileName = uri.AbsoluteUri;
             byte[] hash = Sha1.ComputeHash(Encoding.Unicode.GetBytes(fileName));
             return BitConverter.ToString(hash).Replace("-", "");
         }
@@ -173,10 +173,10 @@ namespace eZet.EveLib.Core.Cache {
                 string[] data = await
                     AsyncFileUtilities.ReadAllLinesAsync(CacheRegister).ConfigureAwait(false);
                 foreach (string entry in data) {
-                    string[] split = entry.Split(',');
+                    string[] split = entry.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     DateTime cacheValidUntil = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
                     string fileName = split[0];
-                    // if cache is still valid we insert it
+                    // if cache is still valid we register it
                     if (cacheValidUntil > DateTime.UtcNow)
                         _register[fileName] = cacheValidUntil;
                     else {
@@ -185,6 +185,11 @@ namespace eZet.EveLib.Core.Cache {
                             File.Delete(CachePath + Config.Separator + fileName);
                         }
                     }
+                }
+                // delete all files that aren't listed in the register file
+                var files = Directory.EnumerateFiles(CachePath);
+                foreach (var file in files.Where(file => !_register.ContainsKey(file.Replace(CachePath + Config.Separator, "")) && !file.Equals(CacheRegister))) {
+                    File.Delete(file);
                 }
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterLoaded");
             } catch (Exception) {

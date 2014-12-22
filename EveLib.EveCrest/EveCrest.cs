@@ -281,7 +281,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="items">The items.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
-            if (items == null) return Task.FromResult(new List<T>().AsEnumerable());
+            if (items == null || !items.Any()) return Task.FromResult(new List<T>().AsEnumerable());
             List<Task<T>> list = items.Select(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }

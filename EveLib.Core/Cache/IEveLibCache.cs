@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Properties;
 
 namespace eZet.EveLib.Core.Cache {
     /// <summary>

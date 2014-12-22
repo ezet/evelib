@@ -41,7 +41,7 @@ namespace eZet.EveLib.Core {
             string appName = ConfigurationManager.AppSettings["eveLib.AppData"];
             AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
             ImagePath = AppData + Separator + "Images";
-            CacheFactory = () => new EveLibFileCache(AppData + Separator + "EveApiCache", "register");
+            CacheFactory = () => new EveLibFileCache(AppData + Separator + "EveXmlCache", "register");
         }
     }
 }
