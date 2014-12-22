@@ -22,6 +22,10 @@ namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
         /// </summary>
         public IEveLibCache Cache { get; set; }
 
+        /// <summary>
+        /// Gets or sets the cache level.
+        /// </summary>
+        /// <value>The cache level.</value>
         public CacheLevel CacheLevel { get; set; }
 
         /// <summary>

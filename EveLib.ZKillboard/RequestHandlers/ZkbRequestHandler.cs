@@ -40,8 +40,6 @@ namespace eZet.EveLib.ZKillboardModule.RequestHandlers {
         public ZkbRequestHandler(ISerializer serializer, IEveLibCache cache) {
             Serializer = serializer;
             Cache = cache;
-            EnableCacheLoad = true;
-            EnableCacheStore = true;
         }
 
         /// <summary>
@@ -60,26 +58,26 @@ namespace eZet.EveLib.ZKillboardModule.RequestHandlers {
         public async Task<T> RequestAsync<T>(Uri uri) {
             _trace.TraceEvent(TraceEventType.Start, 0, "ZkbRequestHandler.RequestAsync(): {0}", uri);
             string data = null;
-            if (EnableCacheLoad) {
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
-            }
-            var cacheTime = new DateTime();
-            int requestCount = 0, maxRequests = 0;
             bool isCached = data != null;
-            if (!isCached) {
-                HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
+            if (isCached)
+                return Serializer.Deserialize<T>(data);
 
-                using (
-                    HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false)) {
-                    data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-                    cacheTime = DateTime.Parse(response.GetResponseHeader("Expires"));
-                    requestCount = int.Parse(response.GetResponseHeader("X-Bin-Request-Count"));
-                    maxRequests = int.Parse(response.GetResponseHeader("X-Bin-Max-Requests"));
-                }
+            if (CacheLevel == CacheLevel.CacheOnly) return default(T);
+            DateTime cacheTime;
+            int requestCount = 0, maxRequests = 0;
+            HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
+
+            using (
+                HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false)) {
+                data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+                cacheTime = DateTime.Parse(response.GetResponseHeader("Expires"));
+                requestCount = int.Parse(response.GetResponseHeader("X-Bin-Request-Count"));
+                maxRequests = int.Parse(response.GetResponseHeader("X-Bin-Max-Requests"));
             }
-            if (!isCached && EnableCacheStore) {
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
                 await Cache.StoreAsync(uri, cacheTime.ToUniversalTime(), data).ConfigureAwait(false);
-            }
             _trace.TraceEvent(TraceEventType.Stop, 0, "ZkbRequestHandler.RequestAsync()", uri);
             var result = Serializer.Deserialize<T>(data);
             var zkbResponse = result as ZkbResponse;
@@ -97,15 +95,9 @@ namespace eZet.EveLib.ZKillboardModule.RequestHandlers {
         public IEveLibCache Cache { get; set; }
 
         /// <summary>
-        ///     Enables or disables loading from cache
+        /// Gets or sets the cache level.
         /// </summary>
-        /// <value><c>true</c> if [enable cache load]; otherwise, <c>false</c>.</value>
-        public bool EnableCacheLoad { get; set; }
-
-        /// <summary>
-        ///     Enables or disables storing to cache
-        /// </summary>
-        /// <value><c>true</c> if [enable cache store]; otherwise, <c>false</c>.</value>
-        public bool EnableCacheStore { get; set; }
+        /// <value>The cache level.</value>
+        public CacheLevel CacheLevel { get; set; }
     }
 }

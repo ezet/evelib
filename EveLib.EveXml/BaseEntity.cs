@@ -41,17 +41,6 @@ namespace eZet.EveLib.EveOnlineModule {
             handler.Cache = Config.CacheFactory();
             RequestHandler = handler;
             BaseUri = DefaultUri;
-            EnableCacheLoad = true;
-            EnableCacheStore = true;
-        }
-
-        /// <summary>
-        ///     Gets or sets whether data can be loaded from the cache.
-        /// </summary>
-        /// <value><c>true</c> if [enable cache load]; otherwise, <c>false</c>.</value>
-        public bool EnableCacheLoad {
-            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheLoad; }
-            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheLoad = value; }
         }
 
         /// <summary>
@@ -59,15 +48,6 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <value>The type of the cache.</value>
         public CacheType CacheType { get; set; }
-
-        /// <summary>
-        ///     Gets or sets whether data can be stored in the cache.
-        /// </summary>
-        /// <value><c>true</c> if [enable cache store]; otherwise, <c>false</c>.</value>
-        public bool EnableCacheStore {
-            get { return cachedRequestHandler() != null && cachedRequestHandler().EnableCacheStore; }
-            set { if (cachedRequestHandler() != null) cachedRequestHandler().EnableCacheStore = value; }
-        }
 
         /// <summary>
         ///     Returns true if the current request handler supports caching.
