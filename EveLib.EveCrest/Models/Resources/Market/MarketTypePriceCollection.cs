@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -21,7 +20,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     ///     Represents CREST market prices
     /// </summary>
     [DataContract]
-    public sealed class MarketTypePriceCollection : CollectionResource<MarketTypePriceCollection, MarketTypePriceCollection.MarketPriceEntry> {
+    public sealed class MarketTypePriceCollection :
+        CollectionResource<MarketTypePriceCollection, MarketTypePriceCollection.MarketPriceEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MarketTypePriceCollection" /> class.
         /// </summary>

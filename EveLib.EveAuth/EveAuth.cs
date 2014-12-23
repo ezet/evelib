@@ -144,9 +144,10 @@ namespace eZet.EveLib.EveAuthModule {
         private async Task<string> requestAsync(HttpWebRequest request) {
             try {
                 return await HttpRequestHelper.GetResponseContentAsync(request).ConfigureAwait(false);
-            } catch (WebException e) {
+            }
+            catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Auth failed.");
-                var response = (HttpWebResponse)e.Response;
+                var response = (HttpWebResponse) e.Response;
 
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveAuthException("Undefined error", e);
@@ -159,7 +160,6 @@ namespace eZet.EveLib.EveAuthModule {
                         error.RefId);
                     throw new EveAuthException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
-
             }
         }
     }

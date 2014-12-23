@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
+using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
 using eZet.EveLib.EveCrestModule.Models.Resources.Market;
+using eZet.EveLib.EveCrestModule.Models.Resources.Tournaments;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // ReSharper disable UnusedVariable
+
 namespace eZet.EveLib.Test {
     [TestClass]
     public class EveCrest_Authed_Tests {
@@ -39,14 +44,15 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void CollectionPaging_Automatic() {
-            var result = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(f => f.ShortName == "1"));
+            IEnumerable<Alliance> result =
+                crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(f => f.ShortName == "1"));
             Debug.WriteLine(result.FirstOrDefault());
         }
 
         [TestMethod]
         public void CollectionPaging_Manual() {
-            var allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-            var alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+            AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+            AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
             while (alliance == null && allianceLinks.Next != null) {
                 allianceLinks = allianceLinks.Query(f => f.Next);
                 alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
@@ -56,8 +62,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void CollectionPaging_Manual_NullReference() {
-            var allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-            var alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+            AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+            AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
             alliance = null;
             allianceLinks.Query(f => alliance);
         }
@@ -89,39 +95,39 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task CrestEndpoint() {
-            var result = await crest.GetRootAsync();
+            CrestRoot result = await crest.GetRootAsync();
         }
 
         [TestMethod]
         public async Task CorporationRoles() {
-            var response = await crest.GetRoot().QueryAsync(r => r.CorporationRoles);
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.CorporationRoles);
         }
 
         [TestMethod]
         public async Task ItemGroups() {
-            var response = await crest.GetRoot().QueryAsync(r => r.ItemGroups);
+            ItemGroupCollection response = await crest.GetRoot().QueryAsync(r => r.ItemGroups);
         }
 
         [TestMethod]
         public async Task Channels() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Channels);
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.Channels);
         }
 
         [TestMethod]
         public async Task Corporations() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Corporations);
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.Corporations);
         }
 
         [TestMethod]
         public async Task Alliances() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Alliances);
+            AllianceCollection response = await crest.GetRoot().QueryAsync(r => r.Alliances);
         }
 
         [TestMethod]
         public async Task ItemTypes() {
-            var response = await crest.GetRoot().QueryAsync(r => r.ItemTypes);
-            var types = crest.GetRoot().Query(r => r.MarketTypes);
-            var list = types.Items.ToList();
+            ItemTypeCollection response = await crest.GetRoot().QueryAsync(r => r.ItemTypes);
+            MarketTypeCollection types = crest.GetRoot().Query(r => r.MarketTypes);
+            List<MarketTypeCollection.Item> list = types.Items.ToList();
             while (types.Next != null) {
                 types = types.Query(t => t.Next);
                 list.AddRange(types.Items);
@@ -130,48 +136,48 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task Decode() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Decode);
+            TokenDecode response = await crest.GetRoot().QueryAsync(r => r.Decode);
             Debug.WriteLine(response.Character);
         }
 
         [TestMethod]
         public async Task BattleTheatres() {
-            var response = await crest.GetRoot().QueryAsync(r => r.BattleTheatres);
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.BattleTheatres);
         }
 
         [TestMethod]
         public async Task MarketPrices() {
-            var response = await crest.GetRoot().QueryAsync(r => r.MarketPrices);
+            MarketTypePriceCollection response = await crest.GetRoot().QueryAsync(r => r.MarketPrices);
         }
 
         [TestMethod]
         public async Task ItemCategories() {
-            var response = await crest.GetRoot().QueryAsync(r => r.ItemCategories);
+            MarketTypePriceCollection response = await crest.GetRoot().QueryAsync(r => r.ItemCategories);
         }
 
         [TestMethod]
         public async Task Regions() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Regions);
+            RegionCollection response = await crest.GetRoot().QueryAsync(r => r.Regions);
         }
 
         [TestMethod]
         public async Task Bloodlines() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Bloodlines);
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.Bloodlines);
         }
 
         [TestMethod]
         public async Task MarketGroups() {
-            var response = await crest.GetRoot().QueryAsync(r => r.MarketGroups);
+            MarketGroupCollection response = await crest.GetRoot().QueryAsync(r => r.MarketGroups);
         }
 
         [TestMethod]
         public async Task Tournaments() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Tournaments);
+            TournamentCollection response = await crest.GetRoot().QueryAsync(r => r.Tournaments);
         }
 
         [TestMethod]
         public void Map() {
-            var response = crest.GetRoot().VirtualGoodStore;
+            Href<string> response = crest.GetRoot().VirtualGoodStore;
         }
 
         [TestMethod]
@@ -186,17 +192,17 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task Wars() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Wars);
+            WarCollection response = await crest.GetRoot().QueryAsync(r => r.Wars);
         }
 
         [TestMethod]
         public async Task Incursions() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Incursions);
+            IncursionCollection response = await crest.GetRoot().QueryAsync(r => r.Incursions);
         }
 
         [TestMethod]
         public async Task Races() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Races);
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.Races);
         }
 
         [TestMethod]
@@ -206,7 +212,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void ServiceStatis() {
-            var status = crest.GetRoot().ServiceStatus;
+            CrestRoot.ServerStatus status = crest.GetRoot().ServiceStatus;
             Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Dust);
             Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Eve);
             Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Server);
@@ -214,51 +220,51 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void UserCounts() {
-            var counts = crest.GetRoot().UserCounts;
+            CrestRoot.UserCount counts = crest.GetRoot().UserCounts;
             Assert.AreNotEqual(0, counts.Dust);
             Assert.AreNotEqual(0, counts.Eve);
         }
 
         [TestMethod]
         public async Task IndustryFacilities() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Industry.Facilities);
+            IndustryFacilityCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.Facilities);
         }
 
         [TestMethod]
         public async Task IndustrySpecialities() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Industry.Specialities);
+            IndustrySpecialityCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.Specialities);
         }
 
         [TestMethod]
         public async Task IndustryTeamsInAuction() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Industry.TeamsInAuction);
+            IndustryTeamCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.TeamsInAuction);
         }
 
         [TestMethod]
         public async Task IndustrySystems() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Industry.Systems);
+            IndustrySystemCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.Systems);
         }
 
         [TestMethod]
         public async Task IndustryTeams() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Industry.Teams);
+            IndustryTeamCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.Teams);
         }
 
         [TestMethod]
         public async Task Clients() {
-            var eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
-            var dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
+            EveRoot eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
+            DustRoot dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
         }
 
         [TestMethod]
         public async Task Time() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Time);
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.Time);
         }
 
 
         [TestMethod]
         public async Task MarketTypes() {
-            var response = await crest.GetRoot().QueryAsync(r => r.MarketTypes);
+            MarketTypeCollection response = await crest.GetRoot().QueryAsync(r => r.MarketTypes);
         }
 
         [TestMethod]
@@ -278,11 +284,10 @@ namespace eZet.EveLib.Test {
         }
 
 
-
         [TestMethod]
         public async Task GetWar_NoErrors() {
             War data = await crest.GetWarAsync(291410);
-            var image = crest.LoadImage(data.Aggressor.Icon);
+            byte[] image = crest.LoadImage(data.Aggressor.Icon);
             Debug.WriteLine(image);
         }
 
@@ -292,10 +297,9 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EveCrestException))]
+        [ExpectedException(typeof (EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }
-
     }
 }

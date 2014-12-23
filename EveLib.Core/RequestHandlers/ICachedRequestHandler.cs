@@ -11,10 +11,9 @@ namespace eZet.EveLib.Core.RequestHandlers {
         IEveLibCache Cache { get; set; }
 
         /// <summary>
-        /// Gets or sets the cache level.
+        ///     Gets or sets the cache level.
         /// </summary>
         /// <value>The cache level.</value>
         CacheLevel CacheLevel { get; set; }
-
     }
 }

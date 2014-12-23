@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.Exceptions {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveCrestException"/> class.
+        ///     Initializes a new instance of the <see cref="EveCrestException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>

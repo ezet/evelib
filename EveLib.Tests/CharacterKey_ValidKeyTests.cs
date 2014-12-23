@@ -6,8 +6,9 @@ using eZet.EveLib.EveXmlModule;
 using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Account;
 using eZet.EveLib.EveXmlModule.Models.Character;
+using eZet.EveLib.EveXmlModule.Models.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using FactionWarfareStats = eZet.EveLib.EveXmlModule.Models.Character.FactionWarfareStats;
 
 namespace eZet.EveLib.Test {
     [TestClass]
@@ -34,7 +35,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetCharacterInfo_ValidRequest_HasResult() {
-            var res = _validKey.Characters[0].GetCharacterInfo();
+            EveXmlResponse<CharacterInfo> res = _validKey.Characters[0].GetCharacterInfo();
             Assert.IsNotNull(res.Result);
         }
 

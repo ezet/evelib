@@ -95,7 +95,7 @@ namespace eZet.EveLib.ZKillboardModule.RequestHandlers {
         public IEveLibCache Cache { get; set; }
 
         /// <summary>
-        /// Gets or sets the cache level.
+        ///     Gets or sets the cache level.
         /// </summary>
         /// <value>The cache level.</value>
         public CacheLevel CacheLevel { get; set; }

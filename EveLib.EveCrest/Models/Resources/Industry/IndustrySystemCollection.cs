@@ -21,7 +21,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     ///     Represents the response for Industry Systems in CREST
     /// </summary>
     [DataContract]
-    public sealed class IndustrySystemCollection : CollectionResource<IndustrySystemCollection, IndustrySystemCollection.SolarSystemEntry> {
+    public sealed class IndustrySystemCollection :
+        CollectionResource<IndustrySystemCollection, IndustrySystemCollection.SolarSystemEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustrySystemCollection" /> class.
         /// </summary>

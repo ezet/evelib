@@ -11,19 +11,17 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
+
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// <summary>
-    /// Class MarketOrderCollection.
+    ///     Class MarketOrderCollection.
     /// </summary>
     [DataContract]
     public sealed class MarketOrderCollection : CollectionResource<MarketOrderCollection, MarketOrder> {
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarketOrderCollection" /> class.
+        ///     Initializes a new instance of the <see cref="MarketOrderCollection" /> class.
         /// </summary>
         /// <exception cref="System.NotImplementedException"></exception>
         public MarketOrderCollection() {

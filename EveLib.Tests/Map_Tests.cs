@@ -15,7 +15,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void TestFacWarSystems_ValidRequest_HasResult() {
-            var res = _api.GetFactionWarSystems();
+            EveXmlResponse<FactionWarfareSystems> res = _api.GetFactionWarSystems();
             Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 

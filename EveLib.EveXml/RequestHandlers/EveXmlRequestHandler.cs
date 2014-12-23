@@ -23,7 +23,7 @@ namespace eZet.EveLib.EveXmlModule.RequestHandlers {
         public IEveLibCache Cache { get; set; }
 
         /// <summary>
-        /// Gets or sets the cache level.
+        ///     Gets or sets the cache level.
         /// </summary>
         /// <value>The cache level.</value>
         public CacheLevel CacheLevel { get; set; }
@@ -48,9 +48,10 @@ namespace eZet.EveLib.EveXmlModule.RequestHandlers {
             if (CacheLevel == CacheLevel.CacheOnly) return default(T);
             try {
                 data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
-            } catch (WebException e) {
+            }
+            catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
-                var response = (HttpWebResponse)e.Response;
+                var response = (HttpWebResponse) e.Response;
                 if (response == null) throw;
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw;

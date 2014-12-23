@@ -128,7 +128,6 @@ namespace eZet.EveLib.EveCrestModule {
         /// <value>The eve sso.</value>
         public IEveAuth EveAuth { get; set; }
 
-     
 
         /// <summary>
         ///     Gets or sets the CREST Access Token
@@ -157,13 +156,15 @@ namespace eZet.EveLib.EveCrestModule {
 
         /// <summary>
         ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This
-        ///     requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default if using the RefreshToken ctor.
+        ///     requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default if using the RefreshToken
+        ///     ctor.
         /// </summary>
         /// <value><c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
         public bool EnableAutomaticTokenRefresh { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to allow Query() methods to allow automatic paging. This may perform additional web requests.
+        ///     Gets or sets a value indicating whether to allow Query() methods to allow automatic paging. This may perform
+        ///     additional web requests.
         /// </summary>
         /// <value><c>true</c> if [allow automatic paging]; otherwise, <c>false</c>.</value>
         public bool EnableAutomaticPaging { get; set; }
@@ -181,7 +182,7 @@ namespace eZet.EveLib.EveCrestModule {
         public ICrestRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        /// Gets or sets the image request handler.
+        ///     Gets or sets the image request handler.
         /// </summary>
         /// <value>The image request handler.</value>
         public IImageRequestHandler ImageRequestHandler { get; set; }
@@ -217,7 +218,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads the image asynchronous.
+        ///     Loads the image asynchronous.
         /// </summary>
         /// <param name="link">The image link.</param>
         /// <returns>Task&lt;System.Byte[]&gt;.</returns>
@@ -226,7 +227,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads the image.
+        ///     Loads the image.
         /// </summary>
         /// <param name="link">The image link</param>
         /// <returns>Task&lt;System.Byte[]&gt;.</returns>
@@ -282,7 +283,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Task&lt;T[]&gt;.</returns>
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<ILinkedEntity<T>> items) where T : class, ICrestResource<T> {
             if (items == null) return Task.FromResult(new List<T>().AsEnumerable());
-            List<Task<T>> list = items.Select(LoadAsync).ToList();
+            List<Task<T>> list = items.Select<ILinkedEntity<T>, Task<T>>(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
 
@@ -305,7 +306,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Task&lt;T[]&gt;.</returns>
         public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<Href<T>> items) where T : class, ICrestResource<T> {
             if (items == null) return Task.FromResult(new List<T>().AsEnumerable());
-            List<Task<T>> list = items.Select(LoadAsync).ToList();
+            List<Task<T>> list = items.Select<Href<T>, Task<T>>(LoadAsync).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
 
@@ -687,12 +688,14 @@ namespace eZet.EveLib.EveCrestModule {
                 try {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
-                } catch (EveCrestException e) {
+                }
+                catch (EveCrestException e) {
                     if (EnableAutomaticTokenRefresh) {
                         var error = e.WebException.Response as HttpWebResponse;
                         if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
                         else throw;
-                    } else throw;
+                    }
+                    else throw;
                 }
                 if (retry) {
                     _trace.TraceEvent(TraceEventType.Information, 0,
@@ -703,7 +706,8 @@ namespace eZet.EveLib.EveCrestModule {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
-            } else {
+            }
+            else {
                 response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
             }
             if (response != null) {

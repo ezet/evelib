@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ContactList = eZet.EveLib.EveXmlModule.Models.Corporation.ContactList;
 using FactionWarfareStats = eZet.EveLib.EveXmlModule.Models.Corporation.FactionWarfareStats;
 using MedalList = eZet.EveLib.EveXmlModule.Models.Corporation.MedalList;
-
+using StandingsList = eZet.EveLib.EveXmlModule.Models.Corporation.StandingsList;
 
 namespace eZet.EveLib.Test {
     [TestClass]
@@ -149,7 +149,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetStandings() {
-            var xml = _corp.GetStandings();
+            EveXmlResponse<StandingsList> xml = _corp.GetStandings();
             Assert.AreEqual(3009841, xml.Result.CorporationStandings.Agents.First().FromId);
         }
 

@@ -16,7 +16,7 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
-    /// Represents a CREST href object
+    ///     Represents a CREST href object
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DataContract]
@@ -36,7 +36,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         }
 
         /// <summary>
-        /// Gets or sets the URI.
+        ///     Gets or sets the URI.
         /// </summary>
         /// <value>The URI.</value>
         [DataMember(Name = "href")]
@@ -52,7 +52,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        ///     Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() {

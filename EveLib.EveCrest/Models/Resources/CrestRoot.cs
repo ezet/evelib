@@ -103,13 +103,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Href<AllianceCollection> Alliances { get; set; }
 
         /// <summary>
-        /// Gets or sets the item types.
+        ///     Gets or sets the item types.
         /// </summary>
         /// <value>The item types.</value>
         [DataMember(Name = "itemTypes")]
         public Href<ItemTypeCollection> ItemTypes { get; set; }
 
-            /// <summary>
+        /// <summary>
         ///     Gets or sets the decode.
         /// </summary>
         /// <value>The decode.</value>
@@ -131,7 +131,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Href<MarketTypePriceCollection> MarketPrices { get; set; }
 
         /// <summary>
-        /// Gets or sets the item categories.
+        ///     Gets or sets the item categories.
         /// </summary>
         /// <value>The item categories.</value>
         [DataMember(Name = "itemCategories")]

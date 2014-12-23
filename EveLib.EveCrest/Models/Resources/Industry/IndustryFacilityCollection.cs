@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -21,7 +20,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     ///     Eve CREST Industry Facilities
     /// </summary>
     [DataContract]
-    public sealed class IndustryFacilityCollection : CollectionResource<IndustryFacilityCollection, IndustryFacilityCollection.FacilityEntry> {
+    public sealed class IndustryFacilityCollection :
+        CollectionResource<IndustryFacilityCollection, IndustryFacilityCollection.FacilityEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustryFacilityCollection" /> class.
         /// </summary>

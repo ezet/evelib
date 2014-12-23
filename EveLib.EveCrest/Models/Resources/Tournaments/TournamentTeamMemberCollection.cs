@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
@@ -28,6 +27,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
         public TournamentTeamMemberCollection() {
             ContentType = "application/vnd.ccp.eve.TournamentTeamMemberCollection-v1+json";
         }
-
     }
 }

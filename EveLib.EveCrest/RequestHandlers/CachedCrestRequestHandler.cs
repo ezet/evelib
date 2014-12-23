@@ -17,7 +17,6 @@ using eZet.EveLib.EveCrestModule.Models.Shared;
 using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
-
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
@@ -33,7 +32,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public const int DefaultAuthedMaxConcurrentRequests = 20;
 
         /// <summary>
-        /// The defualt charset
+        ///     The defualt charset
         /// </summary>
         public const string DefaultCharset = "utf-8";
 
@@ -44,8 +43,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
         private int _authedMaxConcurrentRequests;
-        private int _publicMaxConcurrentRequests;
         private Semaphore _authedPool;
+        private int _publicMaxConcurrentRequests;
         private Semaphore _publicPool;
 
         /// <summary>
@@ -89,12 +88,14 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource. This will help discover outdated models.
+        ///     Sets or gets whether to throw a DeprecatedResourceException when requesting a deprecated resource. This will help
+        ///     discover outdated models.
         /// </summary>
         public bool ThrowOnDeprecated { get; set; }
 
         /// <summary>
-        ///     Sets or gets whether to throw a NotImplementedException when requesting a resource model with no ContentType. Used for debugging.
+        ///     Sets or gets whether to throw a NotImplementedException when requesting a resource model with no ContentType. Used
+        ///     for debugging.
         /// </summary>
         public bool ThrowOnMissingContentType { get; set; }
 
@@ -104,25 +105,25 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public ISerializer Serializer { get; set; }
 
         /// <summary>
-        /// Gets or sets the x requested with.
+        ///     Gets or sets the x requested with.
         /// </summary>
         /// <value>The x requested with.</value>
         public string XRequestedWith { get; set; }
 
         /// <summary>
-        /// Gets or sets the user agent.
+        ///     Gets or sets the user agent.
         /// </summary>
         /// <value>The user agent.</value>
         public string UserAgent { get; set; }
 
         /// <summary>
-        /// Gets or sets the charset.
+        ///     Gets or sets the charset.
         /// </summary>
         /// <value>The charset.</value>
         public string Charset { get; set; }
 
         /// <summary>
-        /// Performs a request, and returns the response content.
+        ///     Performs a request, and returns the response content.
         /// </summary>
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="uri">URI to request</param>
@@ -130,9 +131,9 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <returns>T.</returns>
         /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
         /// <exception cref="EveCrestException">
-        /// Undefined error
-        /// or
-        /// or
+        ///     Undefined error
+        ///     or
+        ///     or
         /// </exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
             string data = null;
@@ -153,7 +154,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             if (mode == CrestMode.Authenticated) {
                 request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
                 _authedPool.WaitOne();
-            } else {
+            }
+            else {
                 _publicPool.WaitOne();
             }
 
@@ -175,13 +177,14 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 // release semaphores
                 if (mode == CrestMode.Authenticated) _authedPool.Release();
                 else _publicPool.Release();
-            } catch (WebException e) {
+            }
+            catch (WebException e) {
                 // release semaphores
                 if (mode == CrestMode.Authenticated) _authedPool.Release();
                 else _publicPool.Release();
 
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
-                var response = (HttpWebResponse)e.Response;
+                var response = (HttpWebResponse) e.Response;
 
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
@@ -203,24 +206,24 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return result;
         }
 
-        private static DateTime getCacheExpirationTime(NameValueCollection header) {
-            var cache = header.Get("Cache-Control");
-            var str = cache.Substring(cache.IndexOf('=') + 1);
-            var sec = int.Parse(str);
-            return DateTime.UtcNow.AddSeconds(sec);
-        }
-
         /// <summary>
-        /// Gets or sets the cache mode.
+        ///     Gets or sets the cache mode.
         /// </summary>
         /// <value>The cache mode.</value>
         public CacheLevel CacheLevel { get; set; }
 
         /// <summary>
-        /// Gets or sets the cache used by this request handler
+        ///     Gets or sets the cache used by this request handler
         /// </summary>
         /// <value>The cache.</value>
         public IEveLibCache Cache { get; set; }
+
+        private static DateTime getCacheExpirationTime(NameValueCollection header) {
+            string cache = header.Get("Cache-Control");
+            string str = cache.Substring(cache.IndexOf('=') + 1);
+            int sec = int.Parse(str);
+            return DateTime.UtcNow.AddSeconds(sec);
+        }
 
         ///// <summary>
         ///// Gets or sets a value indicating whether [enable cache].

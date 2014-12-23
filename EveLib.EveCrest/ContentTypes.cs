@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveCrestModule {
     ///     Class ContentTypes.
     /// </summary>
     public static class ContentTypes {
-
         /// <summary>
         ///     Gets this instance.
         /// </summary>

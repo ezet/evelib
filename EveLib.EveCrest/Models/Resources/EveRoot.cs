@@ -11,19 +11,17 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class EveRoot. This class cannot be inherited.
+    ///     Class EveRoot. This class cannot be inherited.
     /// </summary>
     public sealed class EveRoot : CrestResource<EveRoot> {
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveRoot" /> class.
+        ///     Initializes a new instance of the <see cref="EveRoot" /> class.
         /// </summary>
         public EveRoot() {
             ContentType = "application/vnd.ccp.eve.EveRoot-v1+json";
         }
-
-
     }
 }

@@ -53,7 +53,7 @@ namespace eZet.EveLib.Test {
         }
 
         public async Task GetRootAsync() {
-            var root = await (await crest.GetRootAsync()).QueryAsync(r => r.MarketTypes);
+            MarketTypeCollection root = await (await crest.GetRootAsync()).QueryAsync(r => r.MarketTypes);
         }
 
         [TestMethod]
@@ -65,17 +65,17 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetIncursions_NoErrors() {
-            var response = crest.GetRoot().Query(r => r.Incursions);
+            IncursionCollection response = crest.GetRoot().Query(r => r.Incursions);
         }
 
         [TestMethod]
         public void GetAlliances_NoErrors() {
-            var response = crest.GetRoot().Query(r => r.Alliances);
+            AllianceCollection response = crest.GetRoot().Query(r => r.Alliances);
         }
 
         [TestMethod]
         public void GetAlliance_NoErrors() {
-            var response = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == AllianceId));
+            Alliance response = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == AllianceId));
         }
 
 
@@ -106,7 +106,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EveCrestException))]
+        [ExpectedException(typeof (EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }

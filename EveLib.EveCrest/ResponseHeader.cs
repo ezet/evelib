@@ -1,8 +1,7 @@
 ﻿namespace eZet.EveLib.EveCrestModule {
     /// <summary>
-    /// Class ResponseHeader.
+    ///     Class ResponseHeader.
     /// </summary>
     public class ResponseHeader {
-
     }
 }

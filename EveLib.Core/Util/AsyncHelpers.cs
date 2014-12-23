@@ -8,6 +8,7 @@
 // ***********************************************************************
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -15,24 +16,26 @@ using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
     /// <summary>
-    /// Class AsyncHelpers.
+    ///     Class AsyncHelpers.
     /// </summary>
     public static class AsyncHelpers {
         /// <summary>
-        /// Runs the synchronize.
+        ///     Runs the synchronize.
         /// </summary>
         /// <param name="task">The task.</param>
         public static void RunSync(Func<Task> task) {
-            var oldContext = SynchronizationContext.Current;
+            SynchronizationContext oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
             synch.Post(async _ => {
                 try {
                     await task();
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     synch.InnerException = e;
                     throw;
-                } finally {
+                }
+                finally {
                     synch.EndMessageLoop();
                 }
             }, null);
@@ -42,23 +45,25 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Runs the synchronize.
+        ///     Runs the synchronize.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="task">The task.</param>
         /// <returns>T.</returns>
         public static T RunSync<T>(Func<Task<T>> task) {
-            var oldContext = SynchronizationContext.Current;
+            SynchronizationContext oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
             T ret = default(T);
             synch.Post(async _ => {
                 try {
                     ret = await task();
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     synch.InnerException = e;
                     throw;
-                } finally {
+                }
+                finally {
                     synch.EndMessageLoop();
                 }
             }, null);
@@ -68,21 +73,24 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
-        /// Class ExclusiveSynchronizationContext.
+        ///     Class ExclusiveSynchronizationContext.
         /// </summary>
         private class ExclusiveSynchronizationContext : SynchronizationContext {
+            private readonly Queue<Tuple<SendOrPostCallback, object>> items =
+                new Queue<Tuple<SendOrPostCallback, object>>();
+
+            private readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
+
             private bool done;
+
             /// <summary>
-            /// Gets or sets the inner exception.
+            ///     Gets or sets the inner exception.
             /// </summary>
             /// <value>The inner exception.</value>
             public Exception InnerException { get; set; }
-            readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
-            readonly Queue<Tuple<SendOrPostCallback, object>> items =
-                new Queue<Tuple<SendOrPostCallback, object>>();
 
             /// <summary>
-            /// When overridden in a derived class, dispatches a synchronous message to a synchronization context.
+            ///     When overridden in a derived class, dispatches a synchronous message to a synchronization context.
             /// </summary>
             /// <param name="d">The <see cref="T:System.Threading.SendOrPostCallback" /> delegate to call.</param>
             /// <param name="state">The object passed to the delegate.</param>
@@ -92,7 +100,7 @@ namespace eZet.EveLib.Core.Util {
             }
 
             /// <summary>
-            /// When overridden in a derived class, dispatches an asynchronous message to a synchronization context.
+            ///     When overridden in a derived class, dispatches an asynchronous message to a synchronization context.
             /// </summary>
             /// <param name="d">The <see cref="T:System.Threading.SendOrPostCallback" /> delegate to call.</param>
             /// <param name="state">The object passed to the delegate.</param>
@@ -104,14 +112,14 @@ namespace eZet.EveLib.Core.Util {
             }
 
             /// <summary>
-            /// Ends the message loop.
+            ///     Ends the message loop.
             /// </summary>
             public void EndMessageLoop() {
                 Post(_ => done = true, null);
             }
 
             /// <summary>
-            /// Begins the message loop.
+            ///     Begins the message loop.
             /// </summary>
             /// <exception cref="System.AggregateException">AsyncHelpers.Run method threw an exception.</exception>
             public void BeginMessageLoop() {
@@ -128,14 +136,15 @@ namespace eZet.EveLib.Core.Util {
                         {
                             throw new AggregateException("AsyncHelpers.Run method threw an exception.", InnerException);
                         }
-                    } else {
+                    }
+                    else {
                         workItemsWaiting.WaitOne();
                     }
                 }
             }
 
             /// <summary>
-            /// When overridden in a derived class, creates a copy of the synchronization context.
+            ///     When overridden in a derived class, creates a copy of the synchronization context.
             /// </summary>
             /// <returns>A new <see cref="T:System.Threading.SynchronizationContext" /> object.</returns>
             public override SynchronizationContext CreateCopy() {

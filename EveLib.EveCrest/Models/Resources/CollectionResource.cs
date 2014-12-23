@@ -26,7 +26,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TCollection">The type of items in the collection</typeparam>
     [DataContract]
-    public abstract class CollectionResource<T, TCollection> : CrestResource<T> where T : CollectionResource<T, TCollection>, ICrestResource<T> {
+    public abstract class CollectionResource<T, TCollection> : CrestResource<T>
+        where T : CollectionResource<T, TCollection>, ICrestResource<T> {
         /// <summary>
         ///     The total number of items in the collection
         /// </summary>
@@ -62,28 +63,55 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "previous")]
         public Href<T> Previous { get; set; }
 
+
         /// <summary>
-        /// Queries a collection of resources for a collection of items, async.
+        /// Gets all items in the collection as an asynchronous operation.
         /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public async Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<IEnumerable<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            var collection = this;
-            var list = collection.Items.ToList();
+        /// <returns>Task&lt;IEnumerable&lt;TCollection&gt;&gt;.</returns>
+        public async Task<IEnumerable<TCollection>> AllItemsAsync() {
+            CollectionResource<T, TCollection> collection = this;
+            List<TCollection> list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            var items = objFunc.Invoke(list);
+            return list;
+        }
+
+
+        /// <summary>
+        /// Gets all the items in the collection.
+        /// </summary>
+        /// <returns>IEnumerable&lt;TCollection&gt;.</returns>
+        public IEnumerable<TCollection> AllItems() {
+            return AllItemsAsync().Result;
+        }
+
+        /// <summary>
+        ///     Queries a collection resource for a collection of items, async.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public async Task<IEnumerable<TOut>> QueryAsync<TOut>(
+            Func<IEnumerable<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
+            where TOut : class, ICrestResource<TOut> {
+            CollectionResource<T, TCollection> collection = this;
+            List<TCollection> list = collection.Items.ToList();
+            if (EveCrest.EnableAutomaticPaging) {
+                while (collection.Next != null) {
+                    collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
+                    list.AddRange(collection.Items);
+                }
+            }
+            IEnumerable<LinkedEntity<TOut>> items = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(items).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Queries a collection of resources for a collection of items.
+        ///     Queries a collection resource for a collection of items.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -94,27 +122,28 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries a collection of resources for a collection of items, async.
+        ///     Queries a collection resource for a collection of items, async.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public async Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<IEnumerable<TCollection>, IEnumerable<Href<TOut>>> objFunc)
+        public async Task<IEnumerable<TOut>> QueryAsync<TOut>(
+            Func<IEnumerable<TCollection>, IEnumerable<Href<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var collection = this;
-            var list = collection.Items.ToList();
+            CollectionResource<T, TCollection> collection = this;
+            List<TCollection> list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            var item = objFunc.Invoke(list);
+            IEnumerable<Href<TOut>> item = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(item).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Queries a collection of resources for a collection of items.
+        ///     Queries a collection resource for a collection of items.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -125,27 +154,27 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries a collection of resources for a single item, async.
+        ///     Queries a collection resource for a single item, async.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
         public async Task<TOut> QueryAsync<TOut>(Func<IEnumerable<TCollection>, Href<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var collection = this;
-            var list = collection.Items.ToList();
+            CollectionResource<T, TCollection> collection = this;
+            List<TCollection> list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            var item = objFunc.Invoke(list);
+            Href<TOut> item = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(item).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Queries a collection of resources for a single item, async.
+        ///     Queries a collection resource for a single item, async.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -156,27 +185,27 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries a collection of resources for a single item, async.
+        ///     Queries a collection resource for a single item, async.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
         public async Task<TOut> QueryAsync<TOut>(Func<IEnumerable<TCollection>, LinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            var collection = this;
-            var list = collection.Items.ToList();
+            CollectionResource<T, TCollection> collection = this;
+            List<TCollection> list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            var item = objFunc.Invoke(list);
+            LinkedEntity<TOut> item = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(item).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Queries a collection of resources for a single item.
+        ///     Queries a collection resource for a single item.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>

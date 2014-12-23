@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -22,7 +21,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// </summary>
     [DataContract]
     public sealed class AllianceCollection : CollectionResource<AllianceCollection, AllianceCollection.Alliance> {
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="AllianceCollection" /> class.
         /// </summary>

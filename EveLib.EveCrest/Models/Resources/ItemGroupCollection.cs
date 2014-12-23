@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
@@ -28,6 +27,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public ItemGroupCollection() {
             ContentType = "application/vnd.ccp.eve.ItemGroupCollection-v1+json";
         }
-
     }
 }

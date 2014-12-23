@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Exceptions;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
@@ -8,9 +7,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     developer.
     /// </summary>
     public sealed class NotImplemented : CrestResource<NotImplemented> {
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotImplemented"/> class.
+        ///     Initializes a new instance of the <see cref="NotImplemented" /> class.
         /// </summary>
         public NotImplemented() {
             ContentType = "";

@@ -12,8 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using eZet.EveLib.Core.Properties;
-
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
     ///     Interface ILinkedEntity
@@ -25,6 +23,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// </summary>
         /// <value>The href.</value>
         Href<T> Href { get; set; }
-
     }
 }

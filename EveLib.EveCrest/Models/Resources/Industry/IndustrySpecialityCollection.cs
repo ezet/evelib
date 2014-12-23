@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
@@ -20,13 +19,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     ///     Represents a CREST /industry/specialities/ response
     /// </summary>
     [DataContract]
-    public sealed class IndustrySpecialityCollection : CollectionResource<IndustrySpecialityCollection, IndustrySpeciality> {
+    public sealed class IndustrySpecialityCollection :
+        CollectionResource<IndustrySpecialityCollection, IndustrySpeciality> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="IndustrySpecialityCollection" /> class.
         /// </summary>
         public IndustrySpecialityCollection() {
             ContentType = "application/vnd.ccp.eve.IndustrySpecialityCollection-v1+json";
         }
-
-  }
+    }
 }

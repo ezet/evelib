@@ -12,9 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-
 namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
     /// <summary>
     ///     Represents a CREST /industry/teams/ response
@@ -26,6 +23,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Industry {
         public IndustryTeamCollection() {
             ContentType = "application/vnd.ccp.eve.IndustryTeamCollection-v1+json";
         }
-
     }
 }

@@ -24,9 +24,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface ICrestResource<T> where T : class, ICrestResource<T> {
-
         /// <summary>
-        /// Gets or sets the response headers.
+        ///     Gets or sets the response headers.
         /// </summary>
         /// <value>The response headers.</value>
         WebHeaderCollection ResponseHeaders { get; set; }
@@ -87,7 +86,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources asynchronous.
+        ///     Queries a collection of resources asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -96,7 +95,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources.
+        ///     Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -105,7 +104,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources asynchronous.
+        ///     Queries a collection of resources asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -114,7 +113,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources.
+        ///     Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>

@@ -13,7 +13,6 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
@@ -21,7 +20,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     ///     Represents a CREST market history response
     /// </summary>
     [DataContract]
-    public sealed class MarketHistoryCollection : CollectionResource<MarketHistoryCollection, MarketHistoryCollection.MarketHistoryEntry> {
+    public sealed class MarketHistoryCollection :
+        CollectionResource<MarketHistoryCollection, MarketHistoryCollection.MarketHistoryEntry> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MarketHistoryCollection" /> class.
         /// </summary>

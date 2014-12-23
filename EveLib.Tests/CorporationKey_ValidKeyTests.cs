@@ -7,9 +7,9 @@ using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Character;
 using eZet.EveLib.EveXmlModule.Models.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MedalList = eZet.EveLib.EveXmlModule.Models.Character.MedalList;
-using StandingsList = eZet.EveLib.EveXmlModule.Models.Character.StandingsList;
-
+using ContactList = eZet.EveLib.EveXmlModule.Models.Corporation.ContactList;
+using MedalList = eZet.EveLib.EveXmlModule.Models.Corporation.MedalList;
+using StandingsList = eZet.EveLib.EveXmlModule.Models.Corporation.StandingsList;
 
 namespace eZet.EveLib.Test {
     [TestClass]
@@ -39,7 +39,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetContactList_ValidRequest_HasResult() {
-            var res = _validKey.Corporation.GetContactList();
+            EveXmlResponse<ContactList> res = _validKey.Corporation.GetContactList();
             Assert.IsNotNull(res.Result);
         }
 
@@ -119,7 +119,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMedals_ValidRequest_HasResult() {
-            var res = _validKey.Corporation.GetMedals();
+            EveXmlResponse<MedalList> res = _validKey.Corporation.GetMedals();
             Assert.IsNotNull(res.Result);
         }
 
@@ -167,7 +167,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetStandings_ValidRequest_HasResult() {
-            var res = _validKey.Corporation.GetStandings();
+            EveXmlResponse<StandingsList> res = _validKey.Corporation.GetStandings();
             Assert.IsNotNull(res.Result);
         }
 

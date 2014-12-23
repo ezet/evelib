@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveAuthModule {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveAuthException"/> class.
+        ///     Initializes a new instance of the <see cref="EveAuthException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>

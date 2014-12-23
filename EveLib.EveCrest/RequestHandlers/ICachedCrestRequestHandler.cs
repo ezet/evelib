@@ -2,15 +2,13 @@
 using eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
-
     namespace eZet.EveLib.Core.RequestHandlers {
         /// <summary>
         ///     Interface for a cache enabled request handler
         /// </summary>
         public interface ICachedCrestRequestHandler : ICrestRequestHandler {
-
             /// <summary>
-            /// Gets or sets the cache mode.
+            ///     Gets or sets the cache mode.
             /// </summary>
             /// <value>The cache mode.</value>
             CacheLevel CacheLevel { get; set; }
@@ -27,5 +25,4 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             //bool EnableCache { get; set; }
         }
     }
-
 }

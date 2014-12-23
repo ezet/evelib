@@ -16,20 +16,19 @@ using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
-    /// Class ImageHref.
+    ///     Class ImageHref.
     /// </summary>
     [DataContract]
     public class ImageHref {
-
         /// <summary>
-        /// Gets or sets the URI.
+        ///     Gets or sets the URI.
         /// </summary>
         /// <value>The URI.</value>
         [DataMember(Name = "href")]
         public string Uri { get; set; }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        ///     Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString() {

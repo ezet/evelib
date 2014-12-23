@@ -26,34 +26,34 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         ISerializer Serializer { get; set; }
 
         /// <summary>
-        /// Gets or sets the size of the public burst.
+        ///     Gets or sets the size of the public burst.
         /// </summary>
         /// <value>The size of the public burst.</value>
         int PublicMaxConcurrentRequests { get; set; }
 
         /// <summary>
-        /// Gets or sets the size of the authed burst.
+        ///     Gets or sets the size of the authed burst.
         /// </summary>
         /// <value>The size of the authed burst.</value>
         int AuthedMaxConcurrentRequests { get; set; }
 
         /// <summary>
-        /// Gets or sets the x requested with.
+        ///     Gets or sets the x requested with.
         /// </summary>
         /// <value>The x requested with.</value>
         string XRequestedWith { get; set; }
 
         /// <summary>
-        /// Gets or sets the user agent.
+        ///     Gets or sets the user agent.
         /// </summary>
         /// <value>The user agent.</value>
         string UserAgent { get; set; }
 
         /// <summary>
-        /// Gets or sets the charset.
+        ///     Gets or sets the charset.
         /// </summary>
         /// <value>The charset.</value>
-         string Charset { get; set; }
+        string Charset { get; set; }
 
         /// <summary>
         ///     Requests a URI asynchronously, and returns the response content.
