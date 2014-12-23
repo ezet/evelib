@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class TitleList.
     /// </summary>
@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The titles.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Title> Titles { get; set; }
+        public EveXmlRowCollection<Title> Titles { get; set; }
 
         /// <summary>
         ///     Class Role.
@@ -85,56 +85,56 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
             /// </summary>
             /// <value>The roles.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> Roles { get; set; }
+            public EveXmlRowCollection<Role> Roles { get; set; }
 
             /// <summary>
             ///     Gets or sets the grantable roles.
             /// </summary>
             /// <value>The grantable roles.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> GrantableRoles { get; set; }
+            public EveXmlRowCollection<Role> GrantableRoles { get; set; }
 
             /// <summary>
             ///     Gets or sets the roles at hq.
             /// </summary>
             /// <value>The roles at hq.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> RolesAtHq { get; set; }
+            public EveXmlRowCollection<Role> RolesAtHq { get; set; }
 
             /// <summary>
             ///     Gets or sets the grantable roles at hq.
             /// </summary>
             /// <value>The grantable roles at hq.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> GrantableRolesAtHq { get; set; }
+            public EveXmlRowCollection<Role> GrantableRolesAtHq { get; set; }
 
             /// <summary>
             ///     Gets or sets the roles at base.
             /// </summary>
             /// <value>The roles at base.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> RolesAtBase { get; set; }
+            public EveXmlRowCollection<Role> RolesAtBase { get; set; }
 
             /// <summary>
             ///     Gets or sets the grantable roles at base.
             /// </summary>
             /// <value>The grantable roles at base.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> GrantableRolesAtBase { get; set; }
+            public EveXmlRowCollection<Role> GrantableRolesAtBase { get; set; }
 
             /// <summary>
             ///     Gets or sets the roles at other.
             /// </summary>
             /// <value>The roles at other.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> RolesAtOther { get; set; }
+            public EveXmlRowCollection<Role> RolesAtOther { get; set; }
 
             /// <summary>
             ///     Gets or sets the grantable roles at other.
             /// </summary>
             /// <value>The grantable roles at other.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Role> GrantableRolesAtOther { get; set; }
+            public EveXmlRowCollection<Role> GrantableRolesAtOther { get; set; }
 
             /// <summary>
             ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return

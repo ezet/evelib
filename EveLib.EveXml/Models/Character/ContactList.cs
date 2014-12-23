@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class ContactList.
     /// </summary>
@@ -30,21 +30,21 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The personal contacts.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Contact> PersonalContacts { get; set; }
+        public EveXmlRowCollection<Contact> PersonalContacts { get; set; }
 
         /// <summary>
         ///     Gets or sets the corporation contacts.
         /// </summary>
         /// <value>The corporation contacts.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Contact> CorporationContacts { get; set; }
+        public EveXmlRowCollection<Contact> CorporationContacts { get; set; }
 
         /// <summary>
         ///     Gets or sets the alliance contacts.
         /// </summary>
         /// <value>The alliance contacts.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Contact> AllianceContacts { get; set; }
+        public EveXmlRowCollection<Contact> AllianceContacts { get; set; }
 
         /// <summary>
         ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return

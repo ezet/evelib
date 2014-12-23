@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using eZet.EveLib.EveOnlineModule;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.Models.Character;
+using eZet.EveLib.EveXmlModule;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.Models.Character;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -21,7 +21,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetBlueprints() {
-            EveApiResponse<BlueprintList> result = await _sisiKey.Corporation.GetBlueprintsAsync();
+            EveXmlResponse<BlueprintList> result = await _sisiKey.Corporation.GetBlueprintsAsync();
         }
     }
 }

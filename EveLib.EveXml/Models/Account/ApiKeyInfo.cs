@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Account {
+namespace eZet.EveLib.EveXmlModule.Models.Account {
     /// <summary>
     ///     Class ApiKeyInfo.
     /// </summary>
@@ -39,7 +39,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Account {
             /// </summary>
             /// <value>The key entities.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<ApiKeyEntity> KeyEntities { get; set; }
+            public EveXmlRowCollection<ApiKeyEntity> KeyEntities { get; set; }
 
             /// <summary>
             ///     Gets or sets the access mask.

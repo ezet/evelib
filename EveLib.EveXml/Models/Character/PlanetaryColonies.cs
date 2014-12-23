@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class PlanetaryColonies.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The colonies.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<PlanetaryColony> Colonies { get; set; }
+        public EveXmlRowCollection<PlanetaryColony> Colonies { get; set; }
 
         /// <summary>
         ///     Class PlanetaryColony.

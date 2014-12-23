@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class MailingLists.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The lists.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<List> Lists { get; set; }
+        public EveXmlRowCollection<List> Lists { get; set; }
 
         /// <summary>
         ///     Class List.

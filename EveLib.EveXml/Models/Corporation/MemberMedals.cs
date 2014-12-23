@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class MemberMedals.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The medals.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Medal> Medals { get; set; }
+        public EveXmlRowCollection<Medal> Medals { get; set; }
 
 
         /// <summary>

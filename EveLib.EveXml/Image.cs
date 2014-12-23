@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core;
 using eZet.EveLib.Core.RequestHandlers;
 
-namespace eZet.EveLib.EveOnlineModule {
+namespace eZet.EveLib.EveXmlModule {
     /// <summary>
     ///     Provides access to all image related requests.
     /// </summary>

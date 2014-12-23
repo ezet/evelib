@@ -17,9 +17,9 @@ using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Represents a Character Sheet
     /// </summary>
@@ -284,70 +284,70 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The implants.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Implant> Implants { get; set; }
+        public EveXmlRowCollection<Implant> Implants { get; set; }
 
         /// <summary>
         ///     Gets or sets the jump clones.
         /// </summary>
         /// <value>The jump clones.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<JumpClone> JumpClones { get; set; }
+        public EveXmlRowCollection<JumpClone> JumpClones { get; set; }
 
         /// <summary>
         ///     Gets or sets the jump clone implants.
         /// </summary>
         /// <value>The jump clone implants.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<JumpCloneImplant> JumpCloneImplants { get; set; }
+        public EveXmlRowCollection<JumpCloneImplant> JumpCloneImplants { get; set; }
 
         /// <summary>
         ///     Gets or sets the skills.
         /// </summary>
         /// <value>The skills.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Skill> Skills { get; set; }
+        public EveXmlRowCollection<Skill> Skills { get; set; }
 
         /// <summary>
         ///     Gets or sets the certificates.
         /// </summary>
         /// <value>The certificates.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Certificate> Certificates { get; set; }
+        public EveXmlRowCollection<Certificate> Certificates { get; set; }
 
         /// <summary>
         ///     Gets or sets CorporationRoles
         /// </summary>
         /// <value>The corporation roles.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Role> CorporationRoles { get; set; }
+        public EveXmlRowCollection<Role> CorporationRoles { get; set; }
 
         /// <summary>
         ///     Gets or sets Corporation roles at Hq
         /// </summary>
         /// <value>The corporation roles at hq.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Role> CorporationRolesAtHq { get; set; }
+        public EveXmlRowCollection<Role> CorporationRolesAtHq { get; set; }
 
         /// <summary>
         ///     Gets or sets Corporation Roles At Base
         /// </summary>
         /// <value>The corporation roles at base.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Role> CorporationRolesAtBase { get; set; }
+        public EveXmlRowCollection<Role> CorporationRolesAtBase { get; set; }
 
         /// <summary>
         ///     Gets or sets the corporation roles at other.
         /// </summary>
         /// <value>The corporation roles at other.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Role> CorporationRolesAtOther { get; set; }
+        public EveXmlRowCollection<Role> CorporationRolesAtOther { get; set; }
 
         /// <summary>
         ///     Gets or sets the corporation titles.
         /// </summary>
         /// <value>The corporation titles.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Title> CorporationTitles { get; set; }
+        public EveXmlRowCollection<Title> CorporationTitles { get; set; }
 
 
         /// <summary>

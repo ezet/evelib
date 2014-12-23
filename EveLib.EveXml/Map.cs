@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.Models.Map;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.Models.Map;
 
-namespace eZet.EveLib.EveOnlineModule {
+namespace eZet.EveLib.EveXmlModule {
     /// <summary>
     ///     Provides access to Map related requests.
     /// </summary>
@@ -12,7 +12,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of contestable solarsystems and the NPC faction currently occupying them.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<FactionWarfareSystems> GetFactionWarSystems() {
+        public EveXmlResponse<FactionWarfareSystems> GetFactionWarSystems() {
             return GetFactionWarSystemsAsync().Result;
         }
 
@@ -20,7 +20,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of contestable solarsystems and the NPC faction currently occupying them.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<FactionWarfareSystems>> GetFactionWarSystemsAsync() {
+        public Task<EveXmlResponse<FactionWarfareSystems>> GetFactionWarSystemsAsync() {
             const string path = "/map/FacWarSystems.xml.aspx";
             return requestAsync<FactionWarfareSystems>(path);
         }
@@ -29,7 +29,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns all possible stargate jumps.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<Jumps> GetJumps() {
+        public EveXmlResponse<Jumps> GetJumps() {
             return GetJumpsAsync().Result;
         }
 
@@ -37,7 +37,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns all possible stargate jumps.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<Jumps>> GetJumpsAsync() {
+        public Task<EveXmlResponse<Jumps>> GetJumpsAsync() {
             const string path = "/map/Jumps.xml.aspx";
             return requestAsync<Jumps>(path);
         }
@@ -47,7 +47,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     listed.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<Kills> GetKills() {
+        public EveXmlResponse<Kills> GetKills() {
             return GetKillsAsync().Result;
         }
 
@@ -56,7 +56,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     listed.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<Kills>> GetKillsAsync() {
+        public Task<EveXmlResponse<Kills>> GetKillsAsync() {
             const string path = "/map/Kills.xml.aspx";
             return requestAsync<Kills>(path);
         }
@@ -65,7 +65,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of solarsystems and what faction or alliance controls them.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<Sovereignty> GetSovereignty() {
+        public EveXmlResponse<Sovereignty> GetSovereignty() {
             return GetSovereigntyAsync().Result;
         }
 
@@ -73,7 +73,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of solarsystems and what faction or alliance controls them.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<Sovereignty>> GetSovereigntyAsync() {
+        public Task<EveXmlResponse<Sovereignty>> GetSovereigntyAsync() {
             const string path = "/map/Sovereignty.xml.aspx";
             return requestAsync<Sovereignty>(path);
         }

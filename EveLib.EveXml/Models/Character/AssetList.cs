@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class AssetList.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The items.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Item> Items { get; set; }
+        public EveXmlRowCollection<Item> Items { get; set; }
 
         /// <summary>
         ///     Returns a flat list of all assets.
@@ -116,7 +116,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
             /// </summary>
             /// <value>The items.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Item> Items { get; set; }
+            public EveXmlRowCollection<Item> Items { get; set; }
         }
     }
 }

@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Map {
+namespace eZet.EveLib.EveXmlModule.Models.Map {
     /// <summary>
     ///     Class Kills.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Map {
         /// </summary>
         /// <value>The solar systems.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<SolarSystem> SolarSystems { get; set; }
+        public EveXmlRowCollection<SolarSystem> SolarSystems { get; set; }
 
 
         /// <summary>

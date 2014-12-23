@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using eZet.EveLib.EveOnlineModule;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.Models.Map;
+using eZet.EveLib.EveXmlModule;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.Models.Map;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -15,25 +15,25 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void TestFacWarSystems_ValidRequest_HasResult() {
-            EveApiResponse<FactionWarfareSystems> res = _api.GetFactionWarSystems();
+            var res = _api.GetFactionWarSystems();
             Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestJumps_ValidRequest_HasResult() {
-            EveApiResponse<Jumps> res = _api.GetJumps();
+            EveXmlResponse<Jumps> res = _api.GetJumps();
             Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestKills_ValidRequest_HasResult() {
-            EveApiResponse<Kills> res = _api.GetKills();
+            EveXmlResponse<Kills> res = _api.GetKills();
             Assert.AreNotEqual(0, res.Result.SolarSystems.First());
         }
 
         [TestMethod]
         public void TestSovereignty_ValidRequest_HasResult() {
-            EveApiResponse<Sovereignty> res = _api.GetSovereignty();
+            EveXmlResponse<Sovereignty> res = _api.GetSovereignty();
             Assert.IsNotNull(res.Result.SolarSystems.First());
         }
 

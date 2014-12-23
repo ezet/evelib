@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class ContainerLog.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The log entries.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<LogEntry> LogEntries { get; set; }
+        public EveXmlRowCollection<LogEntry> LogEntries { get; set; }
 
         /// <summary>
         ///     Class LogEntry.

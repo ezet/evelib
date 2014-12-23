@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class CertificateTree.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The categories.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<CertificateCategory> Categories { get; set; }
+        public EveXmlRowCollection<CertificateCategory> Categories { get; set; }
 
         /// <summary>
         ///     Class Certificate.
@@ -68,7 +68,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The required skills.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Skill> RequiredSkills { get; set; }
+            public EveXmlRowCollection<Skill> RequiredSkills { get; set; }
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The classes.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CertificateClass> Classes { get; set; }
+            public EveXmlRowCollection<CertificateClass> Classes { get; set; }
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The certificates.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Certificate> Certificates { get; set; }
+            public EveXmlRowCollection<Certificate> Certificates { get; set; }
         }
 
         /// <summary>

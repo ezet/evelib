@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class CharacterInfo.
     /// </summary>
@@ -167,7 +167,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The employment history.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Employment> EmploymentHistory { get; set; }
+        public EveXmlRowCollection<Employment> EmploymentHistory { get; set; }
 
         /// <summary>
         ///     Represents a employment entry

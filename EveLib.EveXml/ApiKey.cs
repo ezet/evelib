@@ -4,11 +4,11 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Exceptions;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.Models.Account;
+using eZet.EveLib.EveXmlModule.Exceptions;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.Models.Account;
 
-namespace eZet.EveLib.EveOnlineModule {
+namespace eZet.EveLib.EveXmlModule {
     /// <summary>
     ///     Eve Online API Key Types
     /// </summary>
@@ -163,7 +163,7 @@ namespace eZet.EveLib.EveOnlineModule {
         }
 
         private async Task ensureInitialized() {
-            EveApiResponse<ApiKeyInfo> result = await GetApiKeyInfoAsync().ConfigureAwait(false);
+            EveXmlResponse<ApiKeyInfo> result = await GetApiKeyInfoAsync().ConfigureAwait(false);
             LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref _lazyLoadLock,
                 () => result.Result.Key);
         }
@@ -172,7 +172,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns api key info. Calling Init() or InitAsync() will store all information from this endpoint in the key.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<ApiKeyInfo> GetApiKeyInfo() {
+        public EveXmlResponse<ApiKeyInfo> GetApiKeyInfo() {
             return GetApiKeyInfoAsync().Result;
         }
 
@@ -181,7 +181,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns api key info. Calling Init() or InitAsync() will store all information from this endpoint in the key.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<ApiKeyInfo>> GetApiKeyInfoAsync() {
+        public Task<EveXmlResponse<ApiKeyInfo>> GetApiKeyInfoAsync() {
             //const int mask = 0;
             const string uri = "/account/APIKeyInfo.xml.aspx";
             return requestAsync<ApiKeyInfo>(uri, this);
@@ -191,7 +191,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of all characters on this account.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<CharacterList> GetCharacterList() {
+        public EveXmlResponse<CharacterList> GetCharacterList() {
             return GetCharacterListAsync().Result;
         }
 
@@ -199,7 +199,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of all characters on this account.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<CharacterList>> GetCharacterListAsync() {
+        public Task<EveXmlResponse<CharacterList>> GetCharacterListAsync() {
             //const int mask = 0;
             const string uri = "/account/Characters.xml.aspx";
             return requestAsync<CharacterList>(uri, this);
@@ -217,8 +217,8 @@ namespace eZet.EveLib.EveOnlineModule {
                 Init();
             }
             catch (AggregateException e) {
-                if (e.InnerException.GetType() == typeof (EveOnlineException)) {
-                    var ire = (EveOnlineException) e.InnerException;
+                if (e.InnerException.GetType() == typeof (EveXmlException)) {
+                    var ire = (EveXmlException) e.InnerException;
                     if (((HttpWebResponse) ire.WebException.Response).StatusCode == HttpStatusCode.Forbidden) {
                         _isValidKey = false;
                     }
@@ -238,7 +238,7 @@ namespace eZet.EveLib.EveOnlineModule {
             try {
                 await InitAsync().ConfigureAwait(false);
             }
-            catch (EveOnlineException e) {
+            catch (EveXmlException e) {
                 if (((HttpWebResponse) e.WebException.Response).StatusCode == HttpStatusCode.Forbidden) {
                     _isValidKey = false;
                 }

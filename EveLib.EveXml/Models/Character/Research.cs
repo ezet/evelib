@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Research.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The entries.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<ResearchEntry> Entries { get; set; }
+        public EveXmlRowCollection<ResearchEntry> Entries { get; set; }
 
         /// <summary>
         ///     Class ResearchEntry.

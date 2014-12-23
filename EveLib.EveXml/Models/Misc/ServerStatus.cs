@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ServerStatus.
     /// </summary>

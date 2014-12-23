@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class ContractBids.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The bids.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Bid> Bids { get; set; }
+        public EveXmlRowCollection<Bid> Bids { get; set; }
 
         /// <summary>
         ///     Class Bid.

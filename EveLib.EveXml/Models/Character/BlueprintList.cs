@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Eve Online Blueprint response
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The blueprints.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Blueprint> Blueprints { get; set; }
+        public EveXmlRowCollection<Blueprint> Blueprints { get; set; }
 
         /// <summary>
         ///     Represents a blueprint

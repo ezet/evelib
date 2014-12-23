@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ErrorList.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The errors.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Error> Errors { get; set; }
+        public EveXmlRowCollection<Error> Errors { get; set; }
 
         /// <summary>
         ///     Class Error.

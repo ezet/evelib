@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Represents the skill tree
     /// </summary>
@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The groups.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<SkillGroup> Groups { get; set; }
+        public EveXmlRowCollection<SkillGroup> Groups { get; set; }
 
         /// <summary>
         ///     Class RequiredAttribute.
@@ -134,14 +134,14 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The required skills.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<RequiredSkill> RequiredSkills { get; set; }
+            public EveXmlRowCollection<RequiredSkill> RequiredSkills { get; set; }
 
             /// <summary>
             ///     Gets or sets the skill bonuses.
             /// </summary>
             /// <value>The skill bonuses.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<SkillBonus> SkillBonuses { get; set; }
+            public EveXmlRowCollection<SkillBonus> SkillBonuses { get; set; }
 
             /// <summary>
             ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
@@ -232,7 +232,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The skills.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Skill> Skills { get; set; }
+            public EveXmlRowCollection<Skill> Skills { get; set; }
         }
     }
 }

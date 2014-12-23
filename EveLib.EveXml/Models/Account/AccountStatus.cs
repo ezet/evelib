@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Account {
+namespace eZet.EveLib.EveXmlModule.Models.Account {
     /// <summary>
     ///     Account Status
     /// </summary>
@@ -76,7 +76,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Account {
         /// </summary>
         /// <value>The multi character training.</value>
         [XmlElement("multiCharacterTraining")]
-        public EveOnlineRowCollection<MultiCharacterTraining> MultiCharacterTraining { get; set; }
+        public EveXmlRowCollection<MultiCharacterTraining> MultiCharacterTraining { get; set; }
     }
 
 

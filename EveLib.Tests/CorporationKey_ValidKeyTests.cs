@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eZet.EveLib.EveOnlineModule;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.Models.Character;
-using eZet.EveLib.EveOnlineModule.Models.Corporation;
+using eZet.EveLib.EveXmlModule;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.Models.Character;
+using eZet.EveLib.EveXmlModule.Models.Corporation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ContactList = eZet.EveLib.EveOnlineModule.Models.Corporation.ContactList;
-using MedalList = eZet.EveLib.EveOnlineModule.Models.Corporation.MedalList;
-using StandingsList = eZet.EveLib.EveOnlineModule.Models.Corporation.StandingsList;
+using MedalList = eZet.EveLib.EveXmlModule.Models.Character.MedalList;
+using StandingsList = eZet.EveLib.EveXmlModule.Models.Character.StandingsList;
+
 
 namespace eZet.EveLib.Test {
     [TestClass]
@@ -27,31 +27,31 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetAccountBalance_ValidRequest_HasResult() {
-            EveApiResponse<AccountBalance> res = _validKey.Corporation.GetAccountBalance();
+            EveXmlResponse<AccountBalance> res = _validKey.Corporation.GetAccountBalance();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetAssetList_ValidRequest_HasResult() {
-            EveApiResponse<AssetList> res = _validKey.Corporation.GetAssetList();
+            EveXmlResponse<AssetList> res = _validKey.Corporation.GetAssetList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContactList_ValidRequest_HasResult() {
-            EveApiResponse<ContactList> res = _validKey.Corporation.GetContactList();
+            var res = _validKey.Corporation.GetContactList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContainerLog_ValidRequest_HasResult() {
-            EveApiResponse<ContainerLog> res = _validKey.Corporation.GetContainerLog();
+            EveXmlResponse<ContainerLog> res = _validKey.Corporation.GetContainerLog();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetContracts_ValidRequest_HasResult() {
-            EveApiResponse<ContractList> res = _validKey.Corporation.GetContracts();
+            EveXmlResponse<ContractList> res = _validKey.Corporation.GetContracts();
             Assert.IsNotNull(res.Result);
         }
 
@@ -64,13 +64,13 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetContractBids_ValidRequest_HasResult() {
-            EveApiResponse<ContractBids> res = _validKey.Corporation.GetContractBids();
+            EveXmlResponse<ContractBids> res = _validKey.Corporation.GetContractBids();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetCorporationSheet_ValidRequest_HasResult() {
-            EveApiResponse<CorporationSheet> res = _validKey.Corporation.GetCorporationSheet();
+            EveXmlResponse<CorporationSheet> res = _validKey.Corporation.GetCorporationSheet();
             Assert.IsNotNull(res.Result);
         }
 
@@ -85,22 +85,22 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetIndustryJobs_NoErrors() {
-            EveApiResponse<IndustryJobs> result = await _validKey.Corporation.GetIndustryJobsAsync();
+            EveXmlResponse<IndustryJobs> result = await _validKey.Corporation.GetIndustryJobsAsync();
         }
 
         [TestMethod]
         public async Task GetIndustryJobsHistory_NoErrors() {
-            EveApiResponse<IndustryJobs> result = await _validKey.Corporation.GetIndustryJobsAsync();
+            EveXmlResponse<IndustryJobs> result = await _validKey.Corporation.GetIndustryJobsAsync();
         }
 
         [TestMethod]
         public async Task GetFacilities_NoErrors() {
-            EveApiResponse<Facilities> result = await _validKey.Corporation.GetFacilitiesAsync();
+            EveXmlResponse<Facilities> result = await _validKey.Corporation.GetFacilitiesAsync();
         }
 
         [TestMethod]
         public void GetKillLog_ValidRequest_HasResult() {
-            EveApiResponse<KillLog> res = _validKey.Corporation.GetKillLog();
+            EveXmlResponse<KillLog> res = _validKey.Corporation.GetKillLog();
             Assert.IsNotNull(res.Result);
             // TODO Test this further
         }
@@ -113,43 +113,43 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMarketOrders_ValidRequest_HasResult() {
-            EveApiResponse<MarketOrders> res = _validKey.Corporation.GetMarketOrders();
+            EveXmlResponse<MarketOrders> res = _validKey.Corporation.GetMarketOrders();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMedals_ValidRequest_HasResult() {
-            EveApiResponse<MedalList> res = _validKey.Corporation.GetMedals();
+            var res = _validKey.Corporation.GetMedals();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberMedals_ValidRequest_HasResult() {
-            EveApiResponse<MemberMedals> res = _validKey.Corporation.GetMemberMedals();
+            EveXmlResponse<MemberMedals> res = _validKey.Corporation.GetMemberMedals();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberSecurity_ValidRequest_HasResult() {
-            EveApiResponse<MemberSecurity> res = _validKey.Corporation.GetMemberSecurity();
+            EveXmlResponse<MemberSecurity> res = _validKey.Corporation.GetMemberSecurity();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberSecurityLog_ValidRequest_HasResult() {
-            EveApiResponse<MemberSecurityLog> res = _validKey.Corporation.GetMemberSecurityLog();
+            EveXmlResponse<MemberSecurityLog> res = _validKey.Corporation.GetMemberSecurityLog();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetMemberTracking_ValidRequest_HasResult() {
-            EveApiResponse<MemberTracking> res = _validKey.Corporation.GetMemberTracking(true);
+            EveXmlResponse<MemberTracking> res = _validKey.Corporation.GetMemberTracking(true);
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetOutpostList_ValidRequest_HasResult() {
-            EveApiResponse<OutpostList> res = _validKey.Corporation.GetOutpostList();
+            EveXmlResponse<OutpostList> res = _validKey.Corporation.GetOutpostList();
             Assert.IsNotNull(res.Result);
         }
 
@@ -161,13 +161,13 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetShareholders_ValidRequest_HasResult() {
-            EveApiResponse<ShareholderList> res = _validKey.Corporation.GetShareholders();
+            EveXmlResponse<ShareholderList> res = _validKey.Corporation.GetShareholders();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetStandings_ValidRequest_HasResult() {
-            EveApiResponse<StandingsList> res = _validKey.Corporation.GetStandings();
+            var res = _validKey.Corporation.GetStandings();
             Assert.IsNotNull(res.Result);
         }
 
@@ -180,19 +180,19 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetStarbaseList_ValidRequest_HasResult() {
-            EveApiResponse<StarbaseList> res = _validKey.Corporation.GetStarbaseList();
+            EveXmlResponse<StarbaseList> res = _validKey.Corporation.GetStarbaseList();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetTitles_ValidRequest_HasResult() {
-            EveApiResponse<TitleList> res = _validKey.Corporation.GetTitles();
+            EveXmlResponse<TitleList> res = _validKey.Corporation.GetTitles();
             Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetWalletJournal_ValidRequest_HasResult() {
-            EveApiResponse<WalletJournal> res = _validKey.Corporation.GetWalletJournal(1001, 5);
+            EveXmlResponse<WalletJournal> res = _validKey.Corporation.GetWalletJournal(1001, 5);
             Assert.IsNotNull(res.Result);
         }
 
@@ -204,7 +204,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetWalletTransactions_ValidRequest_HasResult() {
-            EveApiResponse<WalletTransactions> res = _validKey.Corporation.GetWalletTransactions(50);
+            EveXmlResponse<WalletTransactions> res = _validKey.Corporation.GetWalletTransactions(50);
             Assert.IsNotNull(res.Result);
         }
 
@@ -216,12 +216,12 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetCustomsOffices_ValidRequest_HasResult() {
-            EveApiResponse<CustomsOffices> res = _validKey.Corporation.GetCustomsOffices();
+            EveXmlResponse<CustomsOffices> res = _validKey.Corporation.GetCustomsOffices();
         }
 
         [TestMethod]
         public async Task GetCustomsOfficesAsync_ValidRequest_HasResult() {
-            EveApiResponse<CustomsOffices> res = await _validKey.Corporation.GetCustomsOfficesAsync();
+            EveXmlResponse<CustomsOffices> res = await _validKey.Corporation.GetCustomsOfficesAsync();
         }
 
         [TestMethod]

@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class CorporationSheet.
     /// </summary>
@@ -132,7 +132,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The divisions.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Division> Divisions { get; set; }
+        public EveXmlRowCollection<Division> Divisions { get; set; }
 
         /// <summary>
         ///     Gets or sets the logo.

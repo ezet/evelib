@@ -15,14 +15,14 @@ namespace eZet.EveLib.ZKillboardModule {
         /// <summary>
         ///     Default base URI.
         /// </summary>
-        public const string DefaultUri = "https://zkillboard.com";
+        public const string DefaultHost = "https://zkillboard.com";
 
         /// <summary>
         ///     Default constructor
         /// </summary>
         public ZKillboard() {
             RequestHandler = new ZkbRequestHandler(new JsonSerializer(), Config.CacheFactory());
-            BaseUri = new Uri(DefaultUri);
+            Host = new Uri(DefaultHost);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace eZet.EveLib.ZKillboardModule {
         /// <summary>
         ///     Gets or sets the default base URI
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public Uri Host { get; set; }
 
         /// <summary>
         ///     Gets or sets the request handler
@@ -65,7 +65,7 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/kills";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(BaseUri, relPath));
+            return requestAsync(new Uri(Host, relPath));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/losses";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(BaseUri, relPath));
+            return requestAsync(new Uri(Host, relPath));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(BaseUri, relPath));
+            return requestAsync(new Uri(Host, relPath));
         }
 
         private Task<ZkbResponse> requestAsync(Uri uri) {

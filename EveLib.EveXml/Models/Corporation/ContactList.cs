@@ -17,9 +17,9 @@ using System.Diagnostics.Contracts;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class ContactList.
     /// </summary>
@@ -31,14 +31,14 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The corporation contacts.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Contact> CorporationContacts { get; set; }
+        public EveXmlRowCollection<Contact> CorporationContacts { get; set; }
 
         /// <summary>
         ///     Gets or sets the alliance contacts.
         /// </summary>
         /// <value>The alliance contacts.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Contact> AllianceContacts { get; set; }
+        public EveXmlRowCollection<Contact> AllianceContacts { get; set; }
 
 
         /// <summary>

@@ -19,7 +19,7 @@
 //        }
 
 //        /// <summary>
-//        ///     Performs a request to the specified URI and returns an EveApiResponse of specified type.
+//        ///     Performs a request to the specified URI and returns an EveXmlResponse of specified type.
 //        /// </summary>
 //        /// <typeparam name="T">The type parameter for the xml response.</typeparam>
 //        /// <param name="uri">The URI to request.</param>
@@ -43,7 +43,7 @@
 //                if (responseStream == null) throw;
 //                using (var reader = new StreamReader(responseStream)) {
 //                    data = reader.ReadToEnd();
-//                    var error = Serializer.Deserialize<EveApiError>(data);
+//                    var error = Serializer.Deserialize<EveXmlError>(data);
 //                    Debug.WriteLine("Error: " + error.Error.ErrorCode + ", " + error.Error.ErrorText);
 //                    throw new InvalidRequestException(error.Error.ErrorText, error.Error.ErrorCode, e);
 //                }

@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class StarbaseList.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The starbases.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Starbase> Starbases { get; set; }
+        public EveXmlRowCollection<Starbase> Starbases { get; set; }
 
 
         /// <summary>

@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class PlanetaryPins.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The pins.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<PlanetaryPin> Pins { get; set; }
+        public EveXmlRowCollection<PlanetaryPin> Pins { get; set; }
 
         /// <summary>
         ///     Class PlanetaryPin.

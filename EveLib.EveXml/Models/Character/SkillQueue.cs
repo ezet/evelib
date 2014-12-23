@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class SkillQueue.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The queue.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Skill> Queue { get; set; }
+        public EveXmlRowCollection<Skill> Queue { get; set; }
 
         /// <summary>
         ///     Class Skill.

@@ -6,7 +6,7 @@
 // Last Modified By : Lars Kristian
 // Last Modified On : 06-19-2014
 // ***********************************************************************
-// <copyright file="EveApiError.cs" company="">
+// <copyright file="EveXmlError.cs" company="">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -14,15 +14,15 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models {
+namespace eZet.EveLib.EveXmlModule.Models {
     /// <summary>
-    ///     Class EveApiError.
+    ///     Class EveXmlError.
     /// </summary>
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
-    public class EveApiError {
+    public class EveXmlError {
         /// <summary>
         ///     Gets the current time.
         /// </summary>

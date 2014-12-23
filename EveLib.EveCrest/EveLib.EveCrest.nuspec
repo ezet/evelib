@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>eZet.EveLib.EveCrest</id>
-    <version>3.0.0-rc1</version>
+    <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release of separated libraries.</releaseNotes>
+    <releaseNotes>EveCrest 3.0 adds complete support for authenticated and public crest, and supports all CREST resources that are currently available.</releaseNotes>
     <tags>EveLib EveCrest API EveOnline Eve Online Crest</tags>
   </metadata>
 </package>

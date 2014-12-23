@@ -2,19 +2,19 @@
 using System.Net;
 using eZet.EveLib.Core.Exceptions;
 
-namespace eZet.EveLib.EveOnlineModule.Exceptions {
+namespace eZet.EveLib.EveXmlModule.Exceptions {
     /// <summary>
     ///     Exception class for the Eve Online API.
     /// </summary>
     [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
-    public class EveOnlineException : EveLibWebException {
+    public class EveXmlException : EveLibWebException {
         /// <summary>
         ///     Constructor
         /// </summary>
         /// <param name="message">Messaged returned by the Eve Online API</param>
         /// <param name="code">Error code returned by the Eve Online API</param>
         /// <param name="iException">The WebException thrown by the request</param>
-        public EveOnlineException(string message, int code, WebException iException)
+        public EveXmlException(string message, int code, WebException iException)
             : base(message, iException) {
             ErrorCode = code;
         }

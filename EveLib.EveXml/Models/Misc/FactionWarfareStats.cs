@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class FactionWarfareStats.
     /// </summary>
@@ -37,14 +37,14 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The factions.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<FactionWarfareEntry> Factions { get; set; }
+        public EveXmlRowCollection<FactionWarfareEntry> Factions { get; set; }
 
         /// <summary>
         ///     Gets or sets the faction wars.
         /// </summary>
         /// <value>The faction wars.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<FactionWarfareEntry> FactionWars { get; set; }
+        public EveXmlRowCollection<FactionWarfareEntry> FactionWars { get; set; }
 
 
         /// <summary>

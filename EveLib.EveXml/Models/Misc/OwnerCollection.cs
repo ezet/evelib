@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class OwnerCollection.
     /// </summary>
@@ -57,7 +57,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The owners.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Owner> Owners { get; set; }
+        public EveXmlRowCollection<Owner> Owners { get; set; }
 
         /// <summary>
         ///     Class Owner.

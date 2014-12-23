@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Map {
+namespace eZet.EveLib.EveXmlModule.Models.Map {
     /// <summary>
     ///     Class SovereigntyStatus.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Map {
         /// </summary>
         /// <value>The structures.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Structure> Structures { get; set; }
+        public EveXmlRowCollection<Structure> Structures { get; set; }
 
         /// <summary>
         ///     Class Structure.

@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class ShareholderList.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The shareholders.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Shareholder> Shareholders { get; set; }
+        public EveXmlRowCollection<Shareholder> Shareholders { get; set; }
 
 
         /// <summary>

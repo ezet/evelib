@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class OutpostList.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The outposts.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Outpost> Outposts { get; set; }
+        public EveXmlRowCollection<Outpost> Outposts { get; set; }
 
         /// <summary>
         ///     Class Outpost.

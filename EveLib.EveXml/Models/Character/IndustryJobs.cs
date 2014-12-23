@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Represents a IndustryJobs response
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The jobs.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<NewIndustryJob> Jobs { get; set; }
+        public EveXmlRowCollection<NewIndustryJob> Jobs { get; set; }
 
         /// <summary>
         ///     Represents a industry job

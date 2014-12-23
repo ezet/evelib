@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class MailBodies.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The messages.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Message> Messages { get; set; }
+        public EveXmlRowCollection<Message> Messages { get; set; }
 
         /// <summary>
         ///     Gets or sets the missing message ids.

@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class AllianceList.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The alliances.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<AllianceData> Alliances { get; set; }
+        public EveXmlRowCollection<AllianceData> Alliances { get; set; }
 
         /// <summary>
         ///     Class AllianceData.
@@ -93,7 +93,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The corporations.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CorporationData> Corporations { get; set; }
+            public EveXmlRowCollection<CorporationData> Corporations { get; set; }
         }
 
         /// <summary>

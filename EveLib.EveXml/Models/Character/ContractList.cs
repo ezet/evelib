@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class ContractList.
     /// </summary>
@@ -98,7 +98,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The contracts.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Contract> Contracts { get; set; }
+        public EveXmlRowCollection<Contract> Contracts { get; set; }
 
         /// <summary>
         ///     Class Contract.

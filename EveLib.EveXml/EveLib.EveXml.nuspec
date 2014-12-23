@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>eZet.EveLib.EveXml</id>
-    <version>3.0.0</version>
+    <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release of separated libraries.</releaseNotes>
+    <releaseNotes>Renamed namespace eZet.EveLib.EveOnlineModule to eZet.EveLib.EveXmlModule</releaseNotes>
     <tags>EveLib EveXml API EveOnline Eve Online</tags>
   </metadata>
 </package>

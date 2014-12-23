@@ -19,10 +19,10 @@ using eZet.EveLib.Core;
 using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.RequestHandlers;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.RequestHandlers;
 
-namespace eZet.EveLib.EveOnlineModule {
+namespace eZet.EveLib.EveXmlModule {
     /// <summary>
     ///     Provides base properties and methods for Eve Online API classes.
     /// </summary>
@@ -36,7 +36,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Default constructor
         /// </summary>
         protected BaseEntity() {
-            var handler = new EveOnlineRequestHandler();
+            var handler = new EveXmlRequestHandler();
             handler.Serializer = new XmlSerializer();
             handler.Cache = Config.CacheFactory();
             RequestHandler = handler;
@@ -83,12 +83,19 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
         /// <param name="args">Arguments for the request.</param>
-        /// <returns>Task&lt;EveApiResponse&lt;T&gt;&gt;.</returns>
-        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, params object[] args) where T : new() {
+        /// <returns>Task&lt;EveXmlResponse&lt;T&gt;&gt;.</returns>
+        protected Task<EveXmlResponse<T>> requestAsync<T>(string relUri, params object[] args) where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
             var uri = new Uri(BaseUri + relUri + generateQueryString(null, args));
-            return RequestHandler.RequestAsync<EveApiResponse<T>>(uri);
+            return RequestHandler.RequestAsync<EveXmlResponse<T>>(uri);
+        }
+
+        protected async Task<T> requestAsyncTest<T>(string relUri, params object[] args) where T : EveXmlResponse<T> {
+            Contract.Requires(BaseUri != null);
+            Contract.Requires(args != null);
+            var uri = new Uri(BaseUri + relUri + generateQueryString(null, args));
+            return await RequestHandler.RequestAsync<EveXmlResponse<T>>(uri) as T;
         }
 
         /// <summary>
@@ -97,11 +104,11 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <typeparam name="T">The type used for response deserialization.</typeparam>
         /// <param name="relUri">A relative path to the resource to be requested.</param>
         /// <param name="key">An API Key to be used with this request.</param>
-        /// <returns>Task&lt;EveApiResponse&lt;T&gt;&gt;.</returns>
-        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, ApiKey key) where T : new() {
+        /// <returns>Task&lt;EveXmlResponse&lt;T&gt;&gt;.</returns>
+        protected Task<EveXmlResponse<T>> requestAsync<T>(string relUri, ApiKey key) where T : new() {
             Contract.Requires(BaseUri != null);
             var uri = new Uri(BaseUri + relUri + generateQueryString(key));
-            return RequestHandler.RequestAsync<EveApiResponse<T>>(uri);
+            return RequestHandler.RequestAsync<EveXmlResponse<T>>(uri);
         }
 
         /// <summary>
@@ -111,13 +118,13 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <param name="relUri">A relative path to the resource to be requested.</param>
         /// <param name="key">An API Key to be used with this request.</param>
         /// <param name="args">Arguments for the request.</param>
-        /// <returns>Task&lt;EveApiResponse&lt;T&gt;&gt;.</returns>
-        protected Task<EveApiResponse<T>> requestAsync<T>(string relUri, ApiKey key, params object[] args)
+        /// <returns>Task&lt;EveXmlResponse&lt;T&gt;&gt;.</returns>
+        protected Task<EveXmlResponse<T>> requestAsync<T>(string relUri, ApiKey key, params object[] args)
             where T : new() {
             Contract.Requires(BaseUri != null);
             Contract.Requires(args != null);
             var uri = new Uri(BaseUri + relUri + generateQueryString(key, args));
-            return RequestHandler.RequestAsync<EveApiResponse<T>>(uri);
+            return RequestHandler.RequestAsync<EveXmlResponse<T>>(uri);
         }
 
         /// <summary>

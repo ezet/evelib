@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class NotificationTexts.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The notifications.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Notification> Notifications { get; set; }
+        public EveXmlRowCollection<Notification> Notifications { get; set; }
 
         /// <summary>
         ///     Gets or sets the missing ids.

@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class MarketOrders.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The orders.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<MarketOrder> Orders { get; set; }
+        public EveXmlRowCollection<MarketOrder> Orders { get; set; }
 
         /// <summary>
         ///     Class MarketOrder.

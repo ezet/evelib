@@ -7,14 +7,14 @@ using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
-using eZet.EveLib.EveOnlineModule.Exceptions;
-using eZet.EveLib.EveOnlineModule.Models;
+using eZet.EveLib.EveXmlModule.Exceptions;
+using eZet.EveLib.EveXmlModule.Models;
 
-namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
+namespace eZet.EveLib.EveXmlModule.RequestHandlers {
     /// <summary>
     ///     Handles requests to the Eve API using a cache.
     /// </summary>
-    public class EveOnlineRequestHandler : ICachedRequestHandler {
+    public class EveXmlRequestHandler : ICachedRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
@@ -56,10 +56,10 @@ namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
                 if (responseStream == null) throw;
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();
-                    var error = Serializer.Deserialize<EveApiError>(data);
+                    var error = Serializer.Deserialize<EveXmlError>(data);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText,
                         error.Error.ErrorCode);
-                    throw new EveOnlineException(error.Error.ErrorText, error.Error.ErrorCode, e);
+                    throw new EveXmlException(error.Error.ErrorText, error.Error.ErrorCode, e);
                 }
             }
             var xml = Serializer.Deserialize<T>(data);
@@ -69,7 +69,7 @@ namespace eZet.EveLib.EveOnlineModule.RequestHandlers {
         }
 
         /// <summary>
-        ///     Gets the CachedUntil value from a EveApiResponse object.
+        ///     Gets the CachedUntil value from a EveXmlResponse object.
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>

@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class FactionWarTopStats.
     /// </summary>
@@ -76,42 +76,42 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The kills yesterday.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterEntry> KillsYesterday { get; set; }
+            public EveXmlRowCollection<CharacterEntry> KillsYesterday { get; set; }
 
             /// <summary>
             ///     Gets or sets the kills last week.
             /// </summary>
             /// <value>The kills last week.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterEntry> KillsLastWeek { get; set; }
+            public EveXmlRowCollection<CharacterEntry> KillsLastWeek { get; set; }
 
             /// <summary>
             ///     Gets or sets the kills total.
             /// </summary>
             /// <value>The kills total.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterEntry> KillsTotal { get; set; }
+            public EveXmlRowCollection<CharacterEntry> KillsTotal { get; set; }
 
             /// <summary>
             ///     Gets or sets the victory points yesterday.
             /// </summary>
             /// <value>The victory points yesterday.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterEntry> VictoryPointsYesterday { get; set; }
+            public EveXmlRowCollection<CharacterEntry> VictoryPointsYesterday { get; set; }
 
             /// <summary>
             ///     Gets or sets the victory points last week.
             /// </summary>
             /// <value>The victory points last week.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterEntry> VictoryPointsLastWeek { get; set; }
+            public EveXmlRowCollection<CharacterEntry> VictoryPointsLastWeek { get; set; }
 
             /// <summary>
             ///     Gets or sets the victory points total.
             /// </summary>
             /// <value>The victory points total.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CharacterEntry> VictoryPointsTotal { get; set; }
+            public EveXmlRowCollection<CharacterEntry> VictoryPointsTotal { get; set; }
 
             /// <summary>
             ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
@@ -190,42 +190,42 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
             /// </summary>
             /// <value>The kills yesterday.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CorporationEntry> KillsYesterday { get; set; }
+            public EveXmlRowCollection<CorporationEntry> KillsYesterday { get; set; }
 
             /// <summary>
             ///     Gets or sets the kills last week.
             /// </summary>
             /// <value>The kills last week.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CorporationEntry> KillsLastWeek { get; set; }
+            public EveXmlRowCollection<CorporationEntry> KillsLastWeek { get; set; }
 
             /// <summary>
             ///     Gets or sets the kills total.
             /// </summary>
             /// <value>The kills total.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CorporationEntry> KillsTotal { get; set; }
+            public EveXmlRowCollection<CorporationEntry> KillsTotal { get; set; }
 
             /// <summary>
             ///     Gets or sets the victory points yesterday.
             /// </summary>
             /// <value>The victory points yesterday.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CorporationEntry> VictoryPointsYesterday { get; set; }
+            public EveXmlRowCollection<CorporationEntry> VictoryPointsYesterday { get; set; }
 
             /// <summary>
             ///     Gets or sets the victory points last week.
             /// </summary>
             /// <value>The victory points last week.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CorporationEntry> VictoryPointsLastWeek { get; set; }
+            public EveXmlRowCollection<CorporationEntry> VictoryPointsLastWeek { get; set; }
 
             /// <summary>
             ///     Gets or sets the victory points total.
             /// </summary>
             /// <value>The victory points total.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<CorporationEntry> VictoryPointsTotal { get; set; }
+            public EveXmlRowCollection<CorporationEntry> VictoryPointsTotal { get; set; }
 
             /// <summary>
             ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return

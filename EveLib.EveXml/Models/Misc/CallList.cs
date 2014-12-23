@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class CallList.
     /// </summary>
@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The call groups.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<CallGroup> CallGroups { get; set; }
+        public EveXmlRowCollection<CallGroup> CallGroups { get; set; }
 
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The calls.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Call> Calls { get; set; }
+        public EveXmlRowCollection<Call> Calls { get; set; }
 
 
         /// <summary>

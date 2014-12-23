@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class MemberSecurityLog.
     /// </summary>
@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The role history.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<LogEntry> RoleHistory { get; set; }
+        public EveXmlRowCollection<LogEntry> RoleHistory { get; set; }
 
         /// <summary>
         ///     Class LogEntry.
@@ -95,14 +95,14 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
             /// </summary>
             /// <value>The old roles.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<MemberSecurity.Role> OldRoles { get; set; }
+            public EveXmlRowCollection<MemberSecurity.Role> OldRoles { get; set; }
 
             /// <summary>
             ///     Gets or sets the new roles.
             /// </summary>
             /// <value>The new roles.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<MemberSecurity.Role> NewRoles { get; set; }
+            public EveXmlRowCollection<MemberSecurity.Role> NewRoles { get; set; }
 
             /// <summary>
             ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return

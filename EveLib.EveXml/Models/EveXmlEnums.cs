@@ -14,7 +14,7 @@
 
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models {
+namespace eZet.EveLib.EveXmlModule.Models {
     /// <summary>
     ///     Enum OrderType
     /// </summary>

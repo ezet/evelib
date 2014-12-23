@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Account {
+namespace eZet.EveLib.EveXmlModule.Models.Account {
     /// <summary>
     ///     Class CharacterList.
     /// </summary>
@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Account {
         /// <summary>
         ///     The characters
         /// </summary>
-        [XmlElement("rowset")] public EveOnlineRowCollection<CharacterInfo> Characters;
+        [XmlElement("rowset")] public EveXmlRowCollection<CharacterInfo> Characters;
 
         /// <summary>
         ///     Class CharacterInfo.

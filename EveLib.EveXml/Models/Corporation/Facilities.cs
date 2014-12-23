@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class Facilities.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The facility entries.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Facility> FacilityEntries { get; set; }
+        public EveXmlRowCollection<Facility> FacilityEntries { get; set; }
 
         /// <summary>
         ///     Class Facility.

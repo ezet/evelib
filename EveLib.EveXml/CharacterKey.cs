@@ -2,10 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.Models.Account;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.Models.Account;
 
-namespace eZet.EveLib.EveOnlineModule {
+namespace eZet.EveLib.EveXmlModule {
     /// <summary>
     ///     Provides access to Character objects and related API calls.
     /// </summary>
@@ -57,7 +57,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     In the case of game time code accounts it will also look for available offers of time codes.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<AccountStatus> GetAccountStatus() {
+        public EveXmlResponse<AccountStatus> GetAccountStatus() {
             return GetAccountStatusAsync().Result;
         }
 
@@ -68,7 +68,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     In the case of game time code accounts it will also look for available offers of time codes.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<AccountStatus>> GetAccountStatusAsync() {
+        public Task<EveXmlResponse<AccountStatus>> GetAccountStatusAsync() {
             //const int mask = 33554432;
             const string uri = "/account/AccountStatus.xml.aspx";
             return requestAsync<AccountStatus>(uri, this);

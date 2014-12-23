@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class TypeName.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The types.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<TypeData> Types { get; set; }
+        public EveXmlRowCollection<TypeData> Types { get; set; }
 
         /// <summary>
         ///     Class TypeData.

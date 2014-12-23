@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class StandingsList.
     /// </summary>
@@ -70,21 +70,21 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
             /// </summary>
             /// <value>The agents.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<StandingEntry> Agents { get; set; }
+            public EveXmlRowCollection<StandingEntry> Agents { get; set; }
 
             /// <summary>
             ///     Gets or sets the corporations.
             /// </summary>
             /// <value>The corporations.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<StandingEntry> Corporations { get; set; }
+            public EveXmlRowCollection<StandingEntry> Corporations { get; set; }
 
             /// <summary>
             ///     Gets or sets the factions.
             /// </summary>
             /// <value>The factions.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<StandingEntry> Factions { get; set; }
+            public EveXmlRowCollection<StandingEntry> Factions { get; set; }
 
             /// <summary>
             ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return

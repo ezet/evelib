@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ConquerableStations.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The stations.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<StationData> Stations { get; set; }
+        public EveXmlRowCollection<StationData> Stations { get; set; }
 
         /// <summary>
         ///     Class StationData.

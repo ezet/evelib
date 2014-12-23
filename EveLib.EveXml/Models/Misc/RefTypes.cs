@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Misc {
+namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ReferenceTypes.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Misc {
         /// </summary>
         /// <value>The reference types.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<ReferenceType> RefTypes { get; set; }
+        public EveXmlRowCollection<ReferenceType> RefTypes { get; set; }
 
         /// <summary>
         ///     Class ReferenceType.

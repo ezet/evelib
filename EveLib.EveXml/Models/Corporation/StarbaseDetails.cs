@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
+namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class StarbaseDetails.
     /// </summary>
@@ -76,7 +76,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Corporation {
         /// </summary>
         /// <value>The fuel.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<FuelEntry> Fuel { get; set; }
+        public EveXmlRowCollection<FuelEntry> Fuel { get; set; }
 
 
         /// <summary>

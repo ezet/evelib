@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>eZet.EveLib.EveAuth</id>
-    <version>3.0.0</version>
+    <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

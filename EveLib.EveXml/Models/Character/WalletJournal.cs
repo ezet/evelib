@@ -14,9 +14,9 @@
 
 using System;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class WalletJournal.
     /// </summary>
@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The journal.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<JournalEntry> Journal { get; set; }
+        public EveXmlRowCollection<JournalEntry> Journal { get; set; }
 
         /// <summary>
         ///     Class JournalEntry.

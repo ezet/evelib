@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("EveLib.EveOnline")]
+[assembly: AssemblyTitle("EveLib.EveXml")]
 [assembly: AssemblyDescription("Library for accessing the Eve Online XML API.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lars Kristian Dahl")]
-[assembly: AssemblyProduct("EveLib EveOnline")]
+[assembly: AssemblyProduct("EveLib")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -36,6 +36,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("3.0.0.0")]
-[assembly: AssemblyFileVersion("3.0.0.0")]
+[assembly: AssemblyVersion("3.0.1.2")]
+[assembly: AssemblyFileVersion("3.0.1.2")]
 [assembly: NeutralResourcesLanguage("en")]

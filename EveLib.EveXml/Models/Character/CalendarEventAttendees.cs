@@ -15,7 +15,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class CalendarEventAttendees.
     /// </summary>
@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The attendees.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Attendee> Attendees { get; set; }
+        public EveXmlRowCollection<Attendee> Attendees { get; set; }
 
 
         /// <summary>

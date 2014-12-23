@@ -6,7 +6,7 @@
 // Last Modified By : Lars Kristian
 // Last Modified On : 06-19-2014
 // ***********************************************************************
-// <copyright file="EveApiResponse.cs" company="">
+// <copyright file="EveXmlResponse.cs" company="">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -16,16 +16,16 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models {
+namespace eZet.EveLib.EveXmlModule.Models {
     /// <summary>
-    ///     Class EveApiResponse.
+    ///     Class EveXmlResponse.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
-    public class EveApiResponse<T> : IXmlSerializable {
+    public class EveXmlResponse<T> : IXmlSerializable {
         /// <summary>
         ///     Gets the current time.
         /// </summary>

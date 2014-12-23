@@ -4,18 +4,18 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using eZet.EveLib.EveOnlineModule.Models;
-using eZet.EveLib.EveOnlineModule.Models.Account;
-using eZet.EveLib.EveOnlineModule.Models.Character;
-using eZet.EveLib.EveOnlineModule.Models.Corporation;
-using ContactList = eZet.EveLib.EveOnlineModule.Models.Corporation.ContactList;
-using FactionWarfareStats = eZet.EveLib.EveOnlineModule.Models.Corporation.FactionWarfareStats;
-using MedalList = eZet.EveLib.EveOnlineModule.Models.Corporation.MedalList;
-using StandingsList = eZet.EveLib.EveOnlineModule.Models.Corporation.StandingsList;
+using eZet.EveLib.EveXmlModule.Models;
+using eZet.EveLib.EveXmlModule.Models.Account;
+using eZet.EveLib.EveXmlModule.Models.Character;
+using eZet.EveLib.EveXmlModule.Models.Corporation;
+using ContactList = eZet.EveLib.EveXmlModule.Models.Corporation.ContactList;
+using FactionWarfareStats = eZet.EveLib.EveXmlModule.Models.Corporation.FactionWarfareStats;
+using MedalList = eZet.EveLib.EveXmlModule.Models.Corporation.MedalList;
+using StandingsList = eZet.EveLib.EveXmlModule.Models.Corporation.StandingsList;
 
 [assembly: InternalsVisibleTo("EveLib.Test")]
 
-namespace eZet.EveLib.EveOnlineModule {
+namespace eZet.EveLib.EveXmlModule {
     /// <summary>
     ///     Provides access to all API calls relating to a specific corporation, that is, all API paths starting with /corp in
     ///     CCPs API.
@@ -193,7 +193,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the ISK balance of a corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<AccountBalance> GetAccountBalance() {
+        public EveXmlResponse<AccountBalance> GetAccountBalance() {
             return GetAccountBalanceAsync().Result;
         }
 
@@ -201,7 +201,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the ISK balance of a corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<AccountBalance>> GetAccountBalanceAsync() {
+        public Task<EveXmlResponse<AccountBalance>> GetAccountBalanceAsync() {
             const string relPath = "/corp/AccountBalance.xml.aspx";
             return requestAsync<AccountBalance>(relPath, ApiKey);
         }
@@ -210,7 +210,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of assets owned by a corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<AssetList> GetAssetList() {
+        public EveXmlResponse<AssetList> GetAssetList() {
             return GetAssetListAsync().Result;
         }
 
@@ -218,7 +218,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of assets owned by a corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<AssetList>> GetAssetListAsync() {
+        public Task<EveXmlResponse<AssetList>> GetAssetListAsync() {
             const string relPath = "/corp/AssetList.xml.aspx";
             return requestAsync<AssetList>(relPath, ApiKey);
         }
@@ -227,7 +227,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the corporation and the alliance contact lists. This is accessible by any character in any corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<ContactList> GetContactList() {
+        public EveXmlResponse<ContactList> GetContactList() {
             return GetContactListAsync().Result;
         }
 
@@ -236,7 +236,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the corporation and the alliance contact lists. This is accessible by any character in any corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<ContactList>> GetContactListAsync() {
+        public Task<EveXmlResponse<ContactList>> GetContactListAsync() {
             const string relPath = "/corp/ContactList.xml.aspx";
             return requestAsync<ContactList>(relPath, ApiKey);
         }
@@ -245,7 +245,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Shows corporation container audit log.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<ContainerLog> GetContainerLog() {
+        public EveXmlResponse<ContainerLog> GetContainerLog() {
             return GetContainerLogAsync().Result;
         }
 
@@ -253,7 +253,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Shows corporation container audit log.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<ContainerLog>> GetContainerLogAsync() {
+        public Task<EveXmlResponse<ContainerLog>> GetContainerLogAsync() {
             const string relPath = "/corp/ContainerLog.xml.aspx";
             return requestAsync<ContainerLog>(relPath, ApiKey);
         }
@@ -262,7 +262,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Lists the contracts for the corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<ContractList> GetContracts() {
+        public EveXmlResponse<ContractList> GetContracts() {
             return GetContractsAsync().Result;
         }
 
@@ -270,7 +270,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Lists the contracts for the corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<ContractList>> GetContractsAsync() {
+        public Task<EveXmlResponse<ContractList>> GetContractsAsync() {
             const string relPath = "/corp/Contracts.xml.aspx";
             return requestAsync<ContractList>(relPath, ApiKey);
         }
@@ -280,7 +280,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="contractId">A contract itemId.</param>
         /// <returns></returns>
-        public EveApiResponse<ContractItems> GetContractItems(long contractId) {
+        public EveXmlResponse<ContractItems> GetContractItems(long contractId) {
             return GetContractItemsAsync(contractId).Result;
         }
 
@@ -289,7 +289,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="contractId">A contract itemId.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<ContractItems>> GetContractItemsAsync(long contractId) {
+        public Task<EveXmlResponse<ContractItems>> GetContractItemsAsync(long contractId) {
             const string relPath = "/corp/ContractItems.xml.aspx";
             return requestAsync<ContractItems>(relPath, ApiKey, "contractID", contractId);
         }
@@ -298,7 +298,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Lists the latest bids that have been made to any recent auctions.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<ContractBids> GetContractBids() {
+        public EveXmlResponse<ContractBids> GetContractBids() {
             return GetContractBidsAsync().Result;
         }
 
@@ -307,7 +307,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Lists the latest bids that have been made to any recent auctions.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<ContractBids>> GetContractBidsAsync() {
+        public Task<EveXmlResponse<ContractBids>> GetContractBidsAsync() {
             const string relPath = "/corp/ContractBids.xml.aspx";
             return requestAsync<ContractBids>(relPath, ApiKey);
         }
@@ -316,7 +316,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns attributes relating to a specific corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<CorporationSheet> GetCorporationSheet() {
+        public EveXmlResponse<CorporationSheet> GetCorporationSheet() {
             return GetCorporationSheetAsync().Result;
         }
 
@@ -325,7 +325,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns attributes relating to a specific corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<CorporationSheet>> GetCorporationSheetAsync() {
+        public Task<EveXmlResponse<CorporationSheet>> GetCorporationSheetAsync() {
             const string relPath = "/corp/CorporationSheet.xml.aspx";
             return requestAsync<CorporationSheet>(relPath, ApiKey);
         }
@@ -334,7 +334,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     If the corporation is enlisted in Factional Warfare, this will return the faction warfare statistics.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<FactionWarfareStats> GetFactionWarfareStats() {
+        public EveXmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
             return GetFactionWarfareStatsAsync().Result;
         }
 
@@ -343,7 +343,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     If the corporation is enlisted in Factional Warfare, this will return the faction warfare statistics.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<FactionWarfareStats>> GetFactionWarfareStatsAsync() {
+        public Task<EveXmlResponse<FactionWarfareStats>> GetFactionWarfareStatsAsync() {
             const string relPath = "/corp/FacWarStats.xml.aspx";
             return requestAsync<FactionWarfareStats>(relPath, ApiKey);
         }
@@ -352,7 +352,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the currently running industry jobs.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<IndustryJobs>> GetIndustryJobsAsync() {
+        public Task<EveXmlResponse<IndustryJobs>> GetIndustryJobsAsync() {
             const string relPath = "/corp/IndustryJobs.xml.aspx";
             return requestAsync<IndustryJobs>(relPath, ApiKey);
         }
@@ -361,7 +361,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the currently running industry jobs.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<IndustryJobs> GetIndustryJobs() {
+        public EveXmlResponse<IndustryJobs> GetIndustryJobs() {
             return GetIndustryJobsAsync().Result;
         }
 
@@ -369,7 +369,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns currently running and ended industry jobs.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<IndustryJobs>> GetIndustryJobsHistoryAsync() {
+        public Task<EveXmlResponse<IndustryJobs>> GetIndustryJobsHistoryAsync() {
             const string relPath = "/corp/IndustryJobsHistory.xml.aspx";
             return requestAsync<IndustryJobs>(relPath, ApiKey);
         }
@@ -378,7 +378,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns currently running and ended industry jobs.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<IndustryJobs> GetIndustryHistoryJobs() {
+        public EveXmlResponse<IndustryJobs> GetIndustryHistoryJobs() {
             return GetIndustryJobsHistoryAsync().Result;
         }
 
@@ -389,7 +389,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="killId">Optional; if present, return the most recent kills before the specified killID.</param>
         /// <returns></returns>
-        public EveApiResponse<KillLog> GetKillLog(long killId = 0) {
+        public EveXmlResponse<KillLog> GetKillLog(long killId = 0) {
             return GetKillLogAsync(killId).Result;
         }
 
@@ -400,7 +400,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="killId">Optional; if present, return the most recent kills before the specified killID.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<KillLog>> GetKillLogAsync(long killId = 0) {
+        public Task<EveXmlResponse<KillLog>> GetKillLogAsync(long killId = 0) {
             // TODO Add walking
             const string relPath = "/corp/Killlog.xml.aspx";
             return killId == 0
@@ -416,7 +416,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
-        public EveApiResponse<Locations> GetLocations(params long[] list) {
+        public EveXmlResponse<Locations> GetLocations(params long[] list) {
             Contract.Requires(list != null);
             return GetLocationsAsync(list).Result;
         }
@@ -429,7 +429,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="list">A list of item ids.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<Locations>> GetLocationsAsync(params long[] list) {
+        public Task<EveXmlResponse<Locations>> GetLocationsAsync(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/corp/Locations.xml.aspx";
             string ids = String.Join(",", list);
@@ -441,7 +441,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="orderId">Optional; market order ID to fetch an order that is no longer open.</param>
         /// <returns></returns>
-        public EveApiResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
+        public EveXmlResponse<MarketOrders> GetMarketOrders(long orderId = 0) {
             return GetMarketOrdersAsync(orderId).Result;
         }
 
@@ -451,7 +451,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="orderId">Optional; market order ID to fetch an order that is no longer open.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<MarketOrders>> GetMarketOrdersAsync(long orderId = 0) {
+        public Task<EveXmlResponse<MarketOrders>> GetMarketOrdersAsync(long orderId = 0) {
             const string relPath = "/corp/MarketOrders.xml.aspx";
             return orderId == 0
                 ? requestAsync<MarketOrders>(relPath, ApiKey)
@@ -462,7 +462,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of medals created by this corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<MedalList> GetMedals() {
+        public EveXmlResponse<MedalList> GetMedals() {
             return GetMedalsAsync().Result;
         }
 
@@ -470,7 +470,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of medals created by this corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<MedalList>> GetMedalsAsync() {
+        public Task<EveXmlResponse<MedalList>> GetMedalsAsync() {
             const string relPath = "/corp/Medals.xml.aspx";
             return requestAsync<MedalList>(relPath, ApiKey);
         }
@@ -479,7 +479,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of medals issued to members.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<MemberMedals> GetMemberMedals() {
+        public EveXmlResponse<MemberMedals> GetMemberMedals() {
             return GetMemberMedalsAsync().Result;
         }
 
@@ -487,7 +487,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of medals issued to members.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<MemberMedals>> GetMemberMedalsAsync() {
+        public Task<EveXmlResponse<MemberMedals>> GetMemberMedalsAsync() {
             const string relPath = "/corp/MemberMedals.xml.aspx";
             return requestAsync<MemberMedals>(relPath, ApiKey);
         }
@@ -496,7 +496,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the security roles of members in a corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<MemberSecurity> GetMemberSecurity() {
+        public EveXmlResponse<MemberSecurity> GetMemberSecurity() {
             return GetMemberSecurityAsync().Result;
         }
 
@@ -504,7 +504,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the security roles of members in a corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<MemberSecurity>> GetMemberSecurityAsync() {
+        public Task<EveXmlResponse<MemberSecurity>> GetMemberSecurityAsync() {
             const string relPath = "/corp/MemberSecurity.xml.aspx";
             return requestAsync<MemberSecurity>(relPath, ApiKey);
         }
@@ -513,7 +513,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns info about corporation role changes for members and who did it.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<MemberSecurityLog> GetMemberSecurityLog() {
+        public EveXmlResponse<MemberSecurityLog> GetMemberSecurityLog() {
             return GetMemberSecurityLogAsync().Result;
         }
 
@@ -521,7 +521,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns info about corporation role changes for members and who did it.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<MemberSecurityLog>> GetMemberSecurityLogAsync() {
+        public Task<EveXmlResponse<MemberSecurityLog>> GetMemberSecurityLogAsync() {
             const string relPath = "/corp/MemberSecurityLog.xml.aspx";
             return requestAsync<MemberSecurityLog>(relPath, ApiKey);
         }
@@ -531,7 +531,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="extended">Optional; true for extended version</param>
         /// <returns></returns>
-        public EveApiResponse<MemberTracking> GetMemberTracking(bool extended = false) {
+        public EveXmlResponse<MemberTracking> GetMemberTracking(bool extended = false) {
             return GetMemberTrackingAsync(extended).Result;
         }
 
@@ -540,7 +540,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="extended">Optional; true for extended version</param>
         /// <returns></returns>
-        public Task<EveApiResponse<MemberTracking>> GetMemberTrackingAsync(bool extended = false) {
+        public Task<EveXmlResponse<MemberTracking>> GetMemberTrackingAsync(bool extended = false) {
             const string relPath = "/corp/MemberTracking.xml.aspx";
             return extended
                 ? requestAsync<MemberTracking>(relPath, ApiKey, "extended", 1)
@@ -551,7 +551,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns information about the corporation's outposts.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<OutpostList> GetOutpostList() {
+        public EveXmlResponse<OutpostList> GetOutpostList() {
             return GetOutpostListAsync().Result;
         }
 
@@ -559,7 +559,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns information about the corporation's outposts.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<OutpostList>> GetOutpostListAsync() {
+        public Task<EveXmlResponse<OutpostList>> GetOutpostListAsync() {
             // TODO Link to OutpostServiceDetails
             const string relPath = "/corp/OutpostList.xml.aspx";
             return requestAsync<OutpostList>(relPath, ApiKey);
@@ -570,7 +570,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="itemId">Item ID of an outpost listed in OutpostList API call.</param>
         /// <returns></returns>
-        public EveApiResponse<OutpostServiceDetails> GetOutpostServiceDetails(long itemId) {
+        public EveXmlResponse<OutpostServiceDetails> GetOutpostServiceDetails(long itemId) {
             return GetOutpostServiceDetailsAsync(itemId).Result;
         }
 
@@ -580,7 +580,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="itemId">Item ID of an outpost listed in OutpostList API call.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<OutpostServiceDetails>> GetOutpostServiceDetailsAsync(long itemId) {
+        public Task<EveXmlResponse<OutpostServiceDetails>> GetOutpostServiceDetailsAsync(long itemId) {
             const string relPath = "/corp/OutpostServiceDetail.xml.aspx";
             return requestAsync<OutpostServiceDetails>(relPath, ApiKey, "itemID", itemId);
         }
@@ -589,7 +589,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the character and corporation share holders of a corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<ShareholderList> GetShareholders() {
+        public EveXmlResponse<ShareholderList> GetShareholders() {
             return GetShareholdersAsync().Result;
         }
 
@@ -598,7 +598,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the character and corporation share holders of a corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<ShareholderList>> GetShareholdersAsync() {
+        public Task<EveXmlResponse<ShareholderList>> GetShareholdersAsync() {
             const string relPath = "/corp/Shareholders.xml.aspx";
             return requestAsync<ShareholderList>(relPath, ApiKey);
         }
@@ -607,7 +607,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the standings from NPC corporations and factions as well as agents.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<StandingsList> GetStandings() {
+        public EveXmlResponse<StandingsList> GetStandings() {
             return GetStandingsAsync().Result;
         }
 
@@ -616,7 +616,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the standings from NPC corporations and factions as well as agents.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<StandingsList>> GetStandingsAsync() {
+        public Task<EveXmlResponse<StandingsList>> GetStandingsAsync() {
             const string relPath = "/corp/Standings.xml.aspx";
             return requestAsync<StandingsList>(relPath, ApiKey);
         }
@@ -626,7 +626,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="itemId">itemId of a starbase from StarbaseList</param>
         /// <returns></returns>
-        public EveApiResponse<StarbaseDetails> GetStarbaseDetails(long itemId) {
+        public EveXmlResponse<StarbaseDetails> GetStarbaseDetails(long itemId) {
             return GetStarbaseDetailsAsync(itemId).Result;
         }
 
@@ -635,7 +635,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// </summary>
         /// <param name="itemId">itemId of a starbase from StarbaseList</param>
         /// <returns></returns>
-        public Task<EveApiResponse<StarbaseDetails>> GetStarbaseDetailsAsync(long itemId) {
+        public Task<EveXmlResponse<StarbaseDetails>> GetStarbaseDetailsAsync(long itemId) {
             // TODO CombatSettings
             const string relPath = "/corp/StarbaseDetail.xml.aspx";
             return requestAsync<StarbaseDetails>(relPath, ApiKey, "itemID", itemId);
@@ -645,7 +645,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the list and states of POS'es.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<StarbaseList> GetStarbaseList() {
+        public EveXmlResponse<StarbaseList> GetStarbaseList() {
             return GetStarbaseListAsync().Result;
         }
 
@@ -654,7 +654,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the list and states of POS'es.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<StarbaseList>> GetStarbaseListAsync() {
+        public Task<EveXmlResponse<StarbaseList>> GetStarbaseListAsync() {
             const string relPath = "/corp/StarbaseList.xml.aspx";
             return requestAsync<StarbaseList>(relPath, ApiKey);
         }
@@ -663,7 +663,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the titles in the corporation.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<TitleList> GetTitles() {
+        public EveXmlResponse<TitleList> GetTitles() {
             return GetTitlesAsync().Result;
         }
 
@@ -671,7 +671,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the titles in the corporation.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<TitleList>> GetTitlesAsync() {
+        public Task<EveXmlResponse<TitleList>> GetTitlesAsync() {
             const string relPath = "/corp/Titles.xml.aspx";
             return requestAsync<TitleList>(relPath, ApiKey);
         }
@@ -683,7 +683,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public EveApiResponse<WalletJournal> GetWalletJournal(int division = 1000, int count = 50, long fromId = 0) {
+        public EveXmlResponse<WalletJournal> GetWalletJournal(int division = 1000, int count = 50, long fromId = 0) {
             return GetWalletJournalAsync(division, count, fromId).Result;
         }
 
@@ -695,7 +695,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<WalletJournal>> GetWalletJournalAsync(int division = 1000, int count = 50,
+        public Task<EveXmlResponse<WalletJournal>> GetWalletJournalAsync(int division = 1000, int count = 50,
             long fromId = 0) {
             const string relPath = "/corp/WalletJournal.xml.aspx";
             return fromId == 0
@@ -713,7 +713,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <returns></returns>
         public async Task<List<WalletJournal.JournalEntry>> GetWalletJournalUntilAsync(long untilId, int division = 1000,
             long fromId = 0) {
-            EveApiResponse<WalletJournal> res =
+            EveXmlResponse<WalletJournal> res =
                 await GetWalletJournalAsync(division, 2560, fromId).ConfigureAwait(false);
             var list = new List<WalletJournal.JournalEntry>();
             while (res.Result.Journal.Any()) {
@@ -748,7 +748,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public EveApiResponse<WalletTransactions> GetWalletTransactions(int division = 1000, int count = 1000,
+        public EveXmlResponse<WalletTransactions> GetWalletTransactions(int division = 1000, int count = 1000,
             long fromId = 0) {
             return GetWalletTransactionsAsync(division, count, fromId).Result;
         }
@@ -760,7 +760,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <param name="count">Optional; Used for specifying the amount of rows to return. Default is 50. Maximum is 2560.</param>
         /// <param name="fromId">Optional; Used for walking the journal backwards to get more entries.</param>
         /// <returns></returns>
-        public Task<EveApiResponse<WalletTransactions>> GetWalletTransactionsAsync(int division = 1000, int count = 1000,
+        public Task<EveXmlResponse<WalletTransactions>> GetWalletTransactionsAsync(int division = 1000, int count = 1000,
             long fromId = 0) {
             const string relPath = "/corp/WalletTransactions.xml.aspx";
             return fromId == 0
@@ -778,7 +778,7 @@ namespace eZet.EveLib.EveOnlineModule {
         /// <returns></returns>
         public async Task<List<WalletTransactions.Transaction>> GetWalletTransactionsUntilAsync(long untilId,
             int division = 1000, long fromId = 0) {
-            EveApiResponse<WalletTransactions> res =
+            EveXmlResponse<WalletTransactions> res =
                 await GetWalletTransactionsAsync(division, 2560, fromId).ConfigureAwait(false);
             var list = new List<WalletTransactions.Transaction>();
             while (res.Result.Transactions.Any()) {
@@ -815,7 +815,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of owned Customs Offices
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<CustomsOffices>> GetCustomsOfficesAsync() {
+        public Task<EveXmlResponse<CustomsOffices>> GetCustomsOfficesAsync() {
             const string relPath = "/corp/CustomsOffices.xml.aspx";
             return requestAsync<CustomsOffices>(relPath, ApiKey);
         }
@@ -824,7 +824,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a list of owned Customs Offices
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<CustomsOffices> GetCustomsOffices() {
+        public EveXmlResponse<CustomsOffices> GetCustomsOffices() {
             return GetCustomsOfficesAsync().Result;
         }
 
@@ -832,7 +832,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a listing all of a corporations facilities, including POS and Outposts.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<Facilities>> GetFacilitiesAsync() {
+        public Task<EveXmlResponse<Facilities>> GetFacilitiesAsync() {
             const string relPath = "/corp/Facilities.xml.aspx";
             return requestAsync<Facilities>(relPath, ApiKey);
         }
@@ -841,7 +841,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns a listing all of a corporations facilities, including POS and Outposts.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<Facilities> GetFacilities() {
+        public EveXmlResponse<Facilities> GetFacilities() {
             return GetFacilitiesAsync().Result;
         }
 
@@ -849,7 +849,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the blueprints owned by this character.
         /// </summary>
         /// <returns></returns>
-        public Task<EveApiResponse<BlueprintList>> GetBlueprintsAsync() {
+        public Task<EveXmlResponse<BlueprintList>> GetBlueprintsAsync() {
             const string relPath = "/corp/Blueprints.xml.aspx";
             return requestAsync<BlueprintList>(relPath, ApiKey, "characterID", CorporationId);
         }
@@ -858,7 +858,7 @@ namespace eZet.EveLib.EveOnlineModule {
         ///     Returns the blueprints owned by this character.
         /// </summary>
         /// <returns></returns>
-        public EveApiResponse<BlueprintList> GetBlueprints() {
+        public EveXmlResponse<BlueprintList> GetBlueprints() {
             return GetBlueprintsAsync().Result;
         }
     }

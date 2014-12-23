@@ -16,9 +16,9 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using eZet.EveLib.EveOnlineModule.Util;
+using eZet.EveLib.EveXmlModule.Util;
 
-namespace eZet.EveLib.EveOnlineModule.Models.Character {
+namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class KillLog.
     /// </summary>
@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
         /// </summary>
         /// <value>The kills.</value>
         [XmlElement("rowset")]
-        public EveOnlineRowCollection<Kill> Kills { get; set; }
+        public EveXmlRowCollection<Kill> Kills { get; set; }
 
         /// <summary>
         ///     Class Attacker.
@@ -169,7 +169,7 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
             /// </summary>
             /// <value>The items.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Item> Items { get; set; }
+            public EveXmlRowCollection<Item> Items { get; set; }
         }
 
         /// <summary>
@@ -228,14 +228,14 @@ namespace eZet.EveLib.EveOnlineModule.Models.Character {
             /// </summary>
             /// <value>The attackers.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Attacker> Attackers { get; set; }
+            public EveXmlRowCollection<Attacker> Attackers { get; set; }
 
             /// <summary>
             ///     Gets or sets the items.
             /// </summary>
             /// <value>The items.</value>
             [XmlElement("rowset")]
-            public EveOnlineRowCollection<Item> Items { get; set; }
+            public EveXmlRowCollection<Item> Items { get; set; }
 
             /// <summary>
             ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return

@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace eZet.EveLib.EveOnlineModule {
+namespace eZet.EveLib.EveXmlModule {
     /// <summary>
     ///     Static helper facade for accessing the Eve Online API.
     /// </summary>
-    public static class EveOnlineApi {
+    public static class EveXml {
         private static readonly Lazy<Eve> _eve;
         private static readonly Lazy<Image> _image;
         private static readonly Lazy<Map> _map;
 
-        static EveOnlineApi() {
+        static EveXml() {
             _eve = new Lazy<Eve>();
             _image = new Lazy<Image>();
             _map = new Lazy<Map>();
