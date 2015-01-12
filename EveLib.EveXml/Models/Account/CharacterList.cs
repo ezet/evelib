@@ -37,7 +37,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
             ///     Gets or sets the name of the character.
             /// </summary>
             /// <value>The name of the character.</value>
-            [XmlAttribute("characterName")]
+            [XmlAttribute("name")]
             public string CharacterName { get; set; }
 
             /// <summary>
