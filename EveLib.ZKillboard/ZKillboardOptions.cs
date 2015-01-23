@@ -196,7 +196,7 @@ namespace eZet.EveLib.ZKillboardModule {
         public bool Solo { get; set; }
 
         /// <summary>
-        ///     Set tot true to only return wspace kills
+        ///     Set to true to only return wspace kills
         /// </summary>
         public bool WSpace { get; set; }
 
