@@ -226,9 +226,9 @@ namespace eZet.EveLib.ZKillboardModule {
             if (GroupId.Count != 0)
                 queryString += "/groupID/" + string.Join(",", GroupId);
             if (SolarsystemId.Count != 0)
-                queryString += "solarSystemID/" + string.Join(",", SolarsystemId);
+                queryString += "/solarSystemID/" + string.Join(",", SolarsystemId);
             if (RegionId.Count != 0)
-                queryString += "regionID/" + string.Join(",", RegionId);
+                queryString += "/regionID/" + string.Join(",", RegionId);
 
             if (StartTime != null)
                 queryString += "/startTime/" + StartTime.Value.ToString("yyyyMMddHHmm");
