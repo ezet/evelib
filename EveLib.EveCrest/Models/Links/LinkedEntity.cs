@@ -23,31 +23,27 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class LinkedEntity<T> : ILinkedEntity<T> {
-        private int _id;
+        private int _inferredId;
+
 
         /// <summary>
-        ///     Gets or sets the identifier. If the ID is not returned explicitly by the API, it will try to infer the ID from the
-        ///     Href. See IsExplicitId. If the ID is negative, it failed to infer the ID.
+        /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
-        public int Id {
-            get {
-                if (!IsExplicitId)
-                    inferId();
-                return _id;
-            }
-            set {
-                _id = value;
-                IsExplicitId = true;
-            }
-        }
+        public int Id { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this instance has an explicit identifier.
+        /// Gets or sets the inferred identifier.
         /// </summary>
-        /// <value><c>true</c> if this instance has explicit identifier; otherwise, <c>false</c>.</value>
-        public bool IsExplicitId { get; set; }
+        /// <value>The inferred identifier.</value>
+        public int InferredId {
+            get {
+                if (_inferredId == 0)
+                    _inferredId = inferId();
+                return _inferredId; }
+            set { _inferredId = value; }
+        }
 
         /// <summary>
         ///     Gets or sets the name.
@@ -66,9 +62,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         private int inferId() {
             int id;
             string[] href = Href.Uri.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
-            if (!int.TryParse(href.Last(), out id))
-                id = -1;
-            _id = id;
+            int.TryParse(href.Last(), out id);
+                //id = -1;
             return id;
         }
     }

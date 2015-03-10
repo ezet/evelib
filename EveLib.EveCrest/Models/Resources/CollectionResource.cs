@@ -36,7 +36,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public int TotalCount { get; set; }
 
         /// <summary>
-        ///     The items in the collection
+        ///     The items on this page in the collection
         /// </summary>
         /// <value>The items.</value>
         [DataMember(Name = "items")]
@@ -96,7 +96,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
         public async Task<IEnumerable<TOut>> QueryAsync<TOut>(
-            Func<IEnumerable<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
+            Func<IEnumerable<TCollection>, IEnumerable<ILinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             CollectionResource<T, TCollection> collection = this;
             List<TCollection> list = collection.Items.ToList();
@@ -106,7 +106,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
                     list.AddRange(collection.Items);
                 }
             }
-            IEnumerable<LinkedEntity<TOut>> items = objFunc.Invoke(list);
+            IEnumerable<ILinkedEntity<TOut>> items = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(items).ConfigureAwait(false);
         }
 
@@ -116,7 +116,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public IEnumerable<TOut> Query<TOut>(Func<IEnumerable<TCollection>, IEnumerable<LinkedEntity<TOut>>> objFunc)
+        public IEnumerable<TOut> Query<TOut>(Func<IEnumerable<TCollection>, IEnumerable<ILinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             return QueryAsync(objFunc).Result;
         }
@@ -190,7 +190,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public async Task<TOut> QueryAsync<TOut>(Func<IEnumerable<TCollection>, LinkedEntity<TOut>> objFunc)
+        public async Task<TOut> QueryAsync<TOut>(Func<IEnumerable<TCollection>, ILinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             CollectionResource<T, TCollection> collection = this;
             List<TCollection> list = collection.Items.ToList();
@@ -200,7 +200,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
                     list.AddRange(collection.Items);
                 }
             }
-            LinkedEntity<TOut> item = objFunc.Invoke(list);
+            ILinkedEntity<TOut> item = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(item).ConfigureAwait(false);
         }
 
@@ -210,7 +210,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public TOut Query<TOut>(Func<IEnumerable<TCollection>, LinkedEntity<TOut>> objFunc)
+        public TOut Query<TOut>(Func<IEnumerable<TCollection>, ILinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             return QueryAsync(objFunc).Result;
         }

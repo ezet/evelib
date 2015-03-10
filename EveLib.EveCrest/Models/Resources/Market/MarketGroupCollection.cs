@@ -13,7 +13,6 @@
 // ***********************************************************************
 
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// <summary>
@@ -28,23 +27,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
             ContentType = "application/vnd.ccp.eve.MarketGroupCollection-v1+json";
         }
 
-        /// <summary>
-        ///     Class MarketGroup.
-        /// </summary>
-        public class MarketGroup : LinkedEntity<MarketGroup> {
-            /// <summary>
-            ///     Gets or sets the description.
-            /// </summary>
-            /// <value>The description.</value>
-            [DataMember(Name = "description")]
-            public string Description { get; set; }
-
-            /// <summary>
-            ///     Gets or sets the types.
-            /// </summary>
-            /// <value>The types.</value>
-            [DataMember(Name = "types")]
-            public LinkedEntity<MarketTypeCollection> Types { get; set; }
-        }
     }
 }

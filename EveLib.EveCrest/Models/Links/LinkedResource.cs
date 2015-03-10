@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+using System.Linq;
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
@@ -28,5 +30,43 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// <value>The href.</value>
         [DataMember(Name = "href")]
         public Href<T> Href { get; set; }
+
+        private int _inferredId;
+
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        [DataMember(Name = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the inferred identifier.
+        /// </summary>
+        /// <value>The inferred identifier.</value>
+        public int InferredId {
+            get {
+                if (_inferredId == 0)
+                    _inferredId = inferId();
+                return _inferredId;
+            }
+            set { _inferredId = value; }
+        }
+
+
+        private int inferId() {
+            int id;
+            string[] href = Href.Uri.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            int.TryParse(href.Last(), out id);
+            //id = -1;
+            return id;
+        }
     }
 }

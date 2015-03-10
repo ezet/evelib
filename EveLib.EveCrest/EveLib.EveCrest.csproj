@@ -113,6 +113,7 @@
     <Compile Include="Exceptions\DeprecatedResourceException.cs" />
     <Compile Include="Exceptions\ResourceNotSupportedException.cs" />
     <Compile Include="Models\CrestCollection.cs" />
+    <Compile Include="Models\IInferrableId.cs" />
     <Compile Include="Models\Links\ImageHref.cs" />
     <Compile Include="Models\Resources\DustRoot.cs" />
     <Compile Include="Models\Resources\EveRoot.cs" />

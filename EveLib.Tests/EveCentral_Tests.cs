@@ -22,7 +22,9 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            MarketStatResponse res = _api.GetMarketStat(_validOptions);
+            var options = new EveCentralOptions() {System = 30000142};
+            options.Items.Add(34);
+            MarketStatResponse res = _api.GetMarketStat(options);
             EveCentralMarketStatItem entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.All.Average);

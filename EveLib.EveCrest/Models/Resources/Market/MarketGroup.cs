@@ -29,13 +29,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         }
 
         /// <summary>
-        ///     Gets or sets the blueprints.
-        /// </summary>
-        /// <value>The blueprints.</value>
-        [DataMember(Name = "name")]
-        public string Blueprints { get; set; }
-
-        /// <summary>
         ///     Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
@@ -48,5 +41,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         /// <value>The types.</value>
         [DataMember(Name = "types")]
         public Href<MarketTypeCollection> Types { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parent group.
+        /// </summary>
+        /// <value>The parent group.</value>
+        [DataMember(Name = "parentGroup")]
+        public Href<MarketGroup> ParentGroup { get; set; }
     }
 }
