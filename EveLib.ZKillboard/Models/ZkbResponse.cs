@@ -40,7 +40,7 @@ namespace eZet.EveLib.ZKillboardModule.Models {
         ///     Class ZkbAttacker.
         /// </summary>
         [DataContract]
-        public class ZkbAttacker {
+        public class ZkbAttacker : ZkbEntity {
             /// <summary>
             ///     Gets or sets the damage done.
             /// </summary>
