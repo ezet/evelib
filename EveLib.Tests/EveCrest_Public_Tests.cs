@@ -14,7 +14,7 @@ namespace eZet.EveLib.Test {
     public class EveCrest_Public_Tests {
         private const int AllianceId = 434243723; // C C P Alliance
 
-        private const int RegionId = 10000002; // The Forge
+        private const int RegionId = 10000002; // The Forge 
 
         private const int TypeId = 34; // Tritanium
 
@@ -71,12 +71,25 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetAlliances_NoErrors() {
             AllianceCollection response = crest.GetRoot().Query(r => r.Alliances);
+            Console.WriteLine(response);
         }
 
-        [TestMethod]
-        public void GetAlliance_NoErrors() {
-            Alliance response = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == AllianceId));
-        }
+        //[TestMethod]
+        //public void GetAlliance_NoErrors() {
+        //    Alliance response = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == AllianceId));
+        //    Console.WriteLine(response.Name);
+        //}
+
+        //[TestMethod]
+        //public void CollectionPaging_Manual() {
+        //    AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+        //    AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == AllianceId);
+        //    while (alliance == null && allianceLinks.Next != null) {
+        //        allianceLinks = allianceLinks.Query(f => f.Next);
+        //        alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == AllianceId);
+        //    }
+        //    Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
+        //}
 
 
         [TestMethod]
@@ -125,6 +138,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetIndustryTeams() {
             IndustryTeamCollection result = await crest.GetIndustryTeamsAsync();
+            Console.Write(result);
         }
 
         [TestMethod]
@@ -136,6 +150,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetIndustrySystemsAsync() {
             IndustrySystemCollection result = await crest.GetIndustrySystemsAsync();
+            Console.Write(result);
         }
 
         [TestMethod]

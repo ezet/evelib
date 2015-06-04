@@ -42,31 +42,31 @@ namespace eZet.EveLib.Test {
             crest.EnableAutomaticPaging = true;
         }
 
-        [TestMethod]
-        public void CollectionPaging_Automatic() {
-            IEnumerable<Alliance> result =
-                crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(f => f.ShortName == "1"));
-            Debug.WriteLine(result.FirstOrDefault());
-        }
+        //[TestMethod]
+        //public void CollectionPaging_Automatic() {
+        //    IEnumerable<Alliance> result =
+        //        crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(f => f.Name == "Brave Collective"));
+        //    Debug.WriteLine(result.FirstOrDefault());
+        //}
 
-        [TestMethod]
-        public void CollectionPaging_Manual() {
-            AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-            AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
-            while (alliance == null && allianceLinks.Next != null) {
-                allianceLinks = allianceLinks.Query(f => f.Next);
-                alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
-            }
-            Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
-        }
+        //[TestMethod]
+        //public void CollectionPaging_Manual() {
+        //    AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+        //    AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+        //    while (alliance == null && allianceLinks.Next != null) {
+        //        allianceLinks = allianceLinks.Query(f => f.Next);
+        //        alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+        //    }
+        //    Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
+        //}
 
-        [TestMethod]
-        public void CollectionPaging_Manual_NullReference() {
-            AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-            AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
-            alliance = null;
-            allianceLinks.Query(f => alliance);
-        }
+        //[TestMethod]
+        //public void CollectionPaging_Manual_NullReference() {
+        //    AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+        //    AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+        //    alliance = null;
+        //    allianceLinks.Query(f => alliance);
+        //}
 
         [TestMethod]
         public async Task RefreshAccessTokenAsync() {

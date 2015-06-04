@@ -16,6 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using eZet.EveLib.Core.Converters;
+using Newtonsoft.Json;
 
 namespace eZet.EveLib.ZKillboardModule.Models {
     /// <summary>
@@ -55,19 +57,21 @@ namespace eZet.EveLib.ZKillboardModule.Models {
             [DataMember(Name = "securityStatus")]
             public double SecurityStatus { get; set; }
 
-            /// <summary>
-            ///     Sets the final blow string.
-            /// </summary>
-            /// <value>The final blow string.</value>
-            [DataMember(Name = "finalBlow")]
-            public string FinalBlowString {
-                set { FinalBlow = value == "1"; }
-            }
+            ///// <summary>
+            /////     Sets the final blow string.
+            ///// </summary>
+            ///// <value>The final blow string.</value>
+            //[DataMember(Name = "finalBlow")]
+            //public string FinalBlowString {
+            //    set { FinalBlow = value == "1"; }
+            //}
 
             /// <summary>
             ///     Gets or sets a value indicating whether [final blow].
             /// </summary>
             /// <value><c>true</c> if [final blow]; otherwise, <c>false</c>.</value>
+            [DataMember(Name = "finalBlow")]
+            [JsonConverter(typeof(BoolConverter))]
             public bool FinalBlow { get; set; }
 
             /// <summary>
@@ -77,12 +81,12 @@ namespace eZet.EveLib.ZKillboardModule.Models {
             [DataMember(Name = "weaponTypeID")]
             public int WeaponTypeId { get; set; }
 
-            /// <summary>
-            ///     Gets or sets the ship type identifier.
-            /// </summary>
-            /// <value>The ship type identifier.</value>
-            [DataMember(Name = "shipTypeID")]
-            public int ShipTypeId { get; set; }
+            ///// <summary>
+            /////     Gets or sets the ship type identifier.
+            ///// </summary>
+            ///// <value>The ship type identifier.</value>
+            //[DataMember(Name = "shipTypeID")]
+            //public int ShipTypeId { get; set; }
         }
 
 
