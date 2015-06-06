@@ -636,7 +636,6 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="itemId">itemId of a starbase from StarbaseList</param>
         /// <returns></returns>
         public Task<EveXmlResponse<StarbaseDetails>> GetStarbaseDetailsAsync(long itemId) {
-            // TODO CombatSettings
             const string relPath = "/corp/StarbaseDetail.xml.aspx";
             return requestAsync<StarbaseDetails>(relPath, ApiKey, "itemID", itemId);
         }

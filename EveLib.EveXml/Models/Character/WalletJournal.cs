@@ -130,7 +130,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             [XmlAttribute("reason")]
             public string Reason { get; set; }
 
-            // TODO Convert to long
             /// <summary>
             ///     Gets or sets the tax receiver identifier.
             /// </summary>
@@ -138,7 +137,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             [XmlAttribute("taxReceiverID")]
             public string TaxReceiverId { get; set; }
 
-            // TODO Convert to decimal
             /// <summary>
             ///     Gets or sets the tax amount.
             /// </summary>

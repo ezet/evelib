@@ -76,7 +76,6 @@ namespace eZet.EveLib.EveXmlModule.RequestHandlers {
         /// <returns></returns>
         private DateTime getCacheExpirationTime(dynamic xml) {
             //if (o.GetType().Is) throw new System.Exception("Should never occur.");
-            // TODO type check
             return xml.CachedUntil;
         }
     }
