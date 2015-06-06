@@ -85,7 +85,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             [XmlAttribute("startTime")]
             public string StartTimeAsString {
                 get { return StartTime.ToString(XmlHelper.DateFormat); }
-                set { StartTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+                set { StartTime = value != "" ? DateTime.ParseExact(value, XmlHelper.DateFormat, null) : default(DateTime); }
             }
 
             /// <summary>
@@ -102,7 +102,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             [XmlAttribute("endTime")]
             public string EndTimeAsString {
                 get { return EndTime.ToString(XmlHelper.DateFormat); }
-                set { EndTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+                set { EndTime = value != "" ? DateTime.ParseExact(value, XmlHelper.DateFormat, null) : default(DateTime); }
             }
         }
     }

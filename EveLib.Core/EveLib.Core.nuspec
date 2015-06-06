@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release of separated libraries.</releaseNotes>
+    <releaseNotes>Added a integer to bool converter for JSON.net</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>EveLib Core EveOnline Eve Online</tags>
 	<dependencies>

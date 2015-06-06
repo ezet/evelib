@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Renamed namespace eZet.EveLib.EveOnlineModule to eZet.EveLib.EveXmlModule</releaseNotes>
+    <releaseNotes>Fixed a parsing error for AccountStatus/MultiCharacterTraining.</releaseNotes>
     <tags>EveLib EveXml API EveOnline Eve Online</tags>
   </metadata>
 </package>
