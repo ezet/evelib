@@ -66,7 +66,7 @@ namespace eZet.EveLib.ZKillboardModule.RequestHandlers {
 
             if (CacheLevel == CacheLevel.CacheOnly) return default(T);
             DateTime cacheTime;
-            int requestCount = 0, maxRequests = 0;
+            int requestCount, maxRequests;
             HttpWebRequest request = HttpRequestHelper.CreateRequest(uri);
 
             using (

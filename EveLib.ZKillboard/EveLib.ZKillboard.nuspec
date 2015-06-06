@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Implemented CacheLevel setting.</releaseNotes>
+    <releaseNotes>Fixed some bugs that would cause SystemFormat exceptions.</releaseNotes>
     <tags>EveLib ZKillboard API EveOnline Eve Online</tags>
   </metadata>
 </package>
