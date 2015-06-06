@@ -7,9 +7,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class ApiKey_Tests {
-        private const int KeyId = 3120814;
+        private const int KeyId = 4438372;
 
-        private const string VCode = "L7jbIZe6EPxRgz0kIv64jym4zvwNAmEf36zMZlRA2c8obMlWC9DFEmdytdQP4N0l";
+        private const string VCode = "v7NFEMJ8tMb74tN5XYPUZ5LwZuFlnFEbLCv2WhtH1UxYoDMrvEQkNljcI2hdBgjl";
 
         private readonly ApiKey _validKey = new ApiKey(KeyId, VCode);
 
