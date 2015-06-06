@@ -75,7 +75,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
         ///     Gets or sets the MultiCharacterTraining row set
         /// </summary>
         /// <value>The multi character training.</value>
-        [XmlElement("multiCharacterTraining")]
+        [XmlElement("rowset")]
         public EveXmlRowCollection<MultiCharacterTraining> MultiCharacterTraining { get; set; }
     }
 
@@ -84,6 +84,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
     ///     Multi Character Training
     /// </summary>
     [Serializable]
+    [XmlRoot("row", IsNullable = false)]
     public class MultiCharacterTraining {
         /// <summary>
         ///     Gets or sets TrainingEnd
@@ -97,7 +98,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
         /// </summary>
         /// <value>The creation date as string.</value>
         [XmlElement("trainingEnd")]
-        public string CreationDateAsString {
+        public string TrainingEndAsString {
             get { return TrainingEnd.ToString(XmlHelper.DateFormat); }
             set { TrainingEnd = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
