@@ -174,9 +174,9 @@ To request data, you will usually start by requesting the CREST root, and naviga
 
 #### Query() and Load()
 Query and Load lets you obtain data the way CREST is meant to be used, with no statically typed URIs.
-Every object returned by `EveCrest` has a Query() method, which can be used to query additinonal resources, which can be queried further. 
+Every object returned by `EveCrest` has a Query() method, which can be used to query additional resources, which can then also be queried.
 `EveCrest` also has a Load() method, which is used by Query() internally, and can be used the same way.
-Both methods access a link to a resource, or a collection of links, and will immediately request the data from CREST. By utilizing these methods you can navigate CREST from the root, by following the links to other resources. This is the preferred way to use CREST, since it will always remain in sync with the API.
+Both methods access a link to a resource, or a collection of links, and will immediately request the data from CREST. By utilizing these methods you can navigate CREST from the root, by following the links to other resources. This is the preferred way to use CREST, since it will always remain in sync with the API design.
 
     // setup
     var crest = new EveCrest(refreshToken, encodedKey);
@@ -187,9 +187,9 @@ Both methods access a link to a resource, or a collection of links, and will imm
     
 You can also chain it:
 
-    var regionData = crest.GetRoot().Query(r => r.Regions).Query(regions => regions.Items); // gets all data for all regions
+    var regionData = crest.GetRoot().Query(root => root.Regions).Query(regions => regions.Items); // gets all data for all regions
     
-Or preferrably use async:
+Or async:
 
     var regionData = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Regions)).QueryAsync(regions => regions.Take(5));
     
@@ -209,7 +209,7 @@ Here's an example adding all MarketTypes to a list:
 ##### Automatic Paging
 Automatic Paging is enabled by default, and can be set through the EnableAutomaticPaging property.
 This will automatically perform additional requests for data when using any Query method to query resources.
-It is recommended to use Authenticated CREST for improved performance.
+It is recommended to use Authenticated CREST for best performance.
 Examples:
 
     EveCrest crest = new EveCrest(accessToken);
