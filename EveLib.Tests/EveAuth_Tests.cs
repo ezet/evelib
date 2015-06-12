@@ -11,13 +11,13 @@ namespace eZet.EveLib.Test {
         private const string EncodedKey =
             "NDZkYWEyYjM3OGJkNGJjMTg5ZGY0YzNhNzNhZjIyNmE6SzhHY1dBRGxqZ25MWnlyS0dGZmlxekhWdlZpR2hhcE9ZU0NFeTgzaA==";
 
-        private const string AuthCode = "8nOSjSN0p1LfNee1Rs6cgaui6nRESMiwKP75rN5TjTUd9YeqorYxZqPJWzEwdc4T0";
+        private const string AuthCode = "ty2wPC3x81YD5CzU6tM8p2TnvT4uJ8vjqLoSyQEvuFNV6SzzG70gvkVIptFk-7fe0";
 
-        private const string RefreshToken = "ldF1J8ny_fEjLKyyG4yixGjU8Hi4XCA-5cAdDCzlzNw1";
+        private const string RefreshToken = "E9nZjXvx_tFu-PdpTC6yT_j4FupJ-84ybEtNsE8iMko1";
         private readonly EveAuth _eveAuth = new EveAuth();
 
         [TestMethod]
-        public void GetAuthorizatinLink() {
+        public void GetAuthorizationLink() {
             string response = _eveAuth.CreateAuthLink(ClientId, "/", CrestScope.PublicData);
             Trace.WriteLine(response);
         }
@@ -26,14 +26,16 @@ namespace eZet.EveLib.Test {
         public void Authenticate() {
             AuthResponse response = _eveAuth.AuthenticateAsync(EncodedKey, AuthCode).Result;
             Assert.AreEqual("Bearer", response.TokenType);
-            Trace.WriteLine(response.AccessToken);
+            Trace.WriteLine("Access Token: " + response.AccessToken);
+            Trace.WriteLine("Refresh Token: " + response.RefreshToken);
         }
 
         [TestMethod]
         public async Task Refresh() {
             AuthResponse response = await _eveAuth.RefreshAsync(EncodedKey, RefreshToken);
             Assert.AreEqual("Bearer", response.TokenType);
-            Trace.WriteLine(response.AccessToken);
+            Trace.WriteLine("Access Token: " + response.AccessToken);
+            Trace.WriteLine("Refresh Token: " + response.RefreshToken);
         }
     }
 }

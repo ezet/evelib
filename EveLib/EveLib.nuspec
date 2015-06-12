@@ -1,21 +1,31 @@
 <?xml version="1.0"?>
-<package >
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>eZet.EveLib.Core</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>eZet.EveLib</id>
+    <version>3.0.0.0</version>
+    <title>EveLib.NET</title>
+    <authors>eZet</authors>
+    <owners>eZet</owners>
     <licenseUrl>https://raw.githubusercontent.com/ezet/evelib/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ezet/evelib</projectUrl>
-      <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>Initial release of separated libraries.</releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <description>Library for accessing common Eve Online APIs.</description>
+    <releaseNotes>Warning: This is not fully backwards compatible with version 2.x!
+	Initial release of separated libraries. This is an all-in-one package, containing all available modules.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
     <tags>EveLib Core EveOnline Eve Online</tags>
-	<dependencies>
+    <dependencies>
       <dependency id="Newtonsoft.Json" version="6.0.0" />
+      <dependency id="eZet.EveLib.Core" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.Element43" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.EveAuth" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.EveCentral" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.EveCrest" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.EveMarketData" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.StaticData" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.EveWho" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.EveXml" version="3.0.0.0" />
+      <dependency id="eZet.EveLib.ZKillboard" version="3.0.0.0" />
     </dependencies>
   </metadata>
 </package>

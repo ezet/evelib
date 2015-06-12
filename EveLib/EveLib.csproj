@@ -143,6 +143,10 @@
       <Project>{a11f0424-9183-4c54-9d0e-ad82bc9d6923}</Project>
       <Name>EveLib.EveWho</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EveLib.EveXml\EveLib.EveXml.csproj">
+      <Project>{655ca737-cd94-4128-b2b5-dce37ea6e7f8}</Project>
+      <Name>EveLib.EveXml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EveLib.ZKillboard\Evelib.ZKillboard.csproj">
       <Project>{741bdd36-b71c-4abe-9b03-185fbd6767f4}</Project>
       <Name>Evelib.ZKillboard</Name>

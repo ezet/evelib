@@ -1,2 +1,2 @@
-nuget pack EveLib.csproj -IncludeReferencedProjects -Prop Configuration=Release -S
+nuget pack EveLib.csproj -IncludeReferencedProjects -S
 pause

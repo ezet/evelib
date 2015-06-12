@@ -220,6 +220,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
         private static DateTime getCacheExpirationTime(NameValueCollection header) {
             string cache = header.Get("Cache-Control");
+            if (cache == null) return DateTime.UtcNow;
             string str = cache.Substring(cache.IndexOf('=') + 1);
             int sec = int.Parse(str);
             return DateTime.UtcNow.AddSeconds(sec);

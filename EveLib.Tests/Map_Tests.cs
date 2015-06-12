@@ -43,7 +43,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void TestSovereigntyStatus_ValidRequest_HasResult() {
             //Assert.Inconclusive("Disabled by CCP.");
-            //var res = api.GetSovereigntyStatus();
+            //var res = _api.GetSovereigntyStatus();
         }
     }
 }
