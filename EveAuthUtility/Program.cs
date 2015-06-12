@@ -6,11 +6,13 @@ namespace eZet.EveLib.EveAuthUtility {
 
         static public EveAuth Auth = new EveAuth();
         static void Main(string[] args) {
-            Console.WriteLine("Tool for obtaining access and refresh tokens from the Eve Online SSO.");
-            Console.WriteLine("No information is stored, some data is exchanged with Eve SSO.");
+            Console.WriteLine("Simple tool for obtaining access and refresh tokens from the Eve Online SSO.");
+            Console.WriteLine("No information is stored, some data is exchanged with the eve login servers.");
             Console.WriteLine("The sourcecode is available here: https://github.com/ezet/evelib");
             Console.WriteLine("You need to register an application at https://developers.eveonline.com, \nthe callback URL can be set to '/'.");
             Console.WriteLine("Your client ID and secret key will be provided by \nhttps://developers.eveonline.com after registering an application.\n");
+
+            Console.WriteLine("For easier editing, rightclick the title bar for the console window, \nthen go to Properties -> Options -> enable QuickEdit mode.\n");
             Console.Write("Enter your client ID: ");
             string clientId = Console.ReadLine();
             //string clientId = "46daa2b378bd4bc189df4c3a73af226a";
@@ -20,10 +22,10 @@ namespace eZet.EveLib.EveAuthUtility {
             string encodedKey = EveAuth.Encode(clientId, secret);
             //Console.WriteLine("Encoded key: " + encodedKey);
             string authLink = Auth.CreateAuthLink(clientId, "/", CrestScope.PublicData);
-            Console.WriteLine("Please log in using the following link");
+            Console.WriteLine("Please log in using the following link: ");
             Console.WriteLine(authLink);
             Console.WriteLine("After logging in, copy the full URL from your browser.");
-            Console.WriteLine("Enter the full URL after logging in: ");
+            Console.WriteLine("Enter the full URL: ");
             string url = Console.ReadLine();
             string authCode = "";
             try {
@@ -47,6 +49,7 @@ namespace eZet.EveLib.EveAuthUtility {
             Console.WriteLine("Authentication successfull!");
             Console.WriteLine("Access token: " + response.AccessToken);
             Console.WriteLine("Refresh token: " + response.RefreshToken);
+            Console.WriteLine("\nStore the refresh token, it can be used indefinitely with eg. EveCrest.");
             Console.ReadKey();
         }
     }
