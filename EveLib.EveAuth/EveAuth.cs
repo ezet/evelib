@@ -122,11 +122,12 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="clientId">The client identifier.</param>
         /// <param name="redirectUri">The redirect URI.</param>
         /// <param name="crestScope">The crest scope.</param>
+        /// <param name="state"></param>
         /// <returns>System.String.</returns>
-        public string CreateAuthLink(string clientId, string redirectUri, CrestScope crestScope) {
+        public string CreateAuthLink(string clientId, string redirectUri, CrestScope crestScope, string state = "defaultState") {
             string url =
                 BaseUri + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId +
-                "&scope=" + resolveScope(crestScope);
+                "&scope=" + resolveScope(crestScope) + "&state=" + state;
             return url;
         }
 

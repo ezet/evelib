@@ -15,12 +15,9 @@ namespace eZet.EveLib.EveAuthUtility {
             Console.WriteLine("For easier editing, rightclick the title bar for the console window, \nthen go to Properties -> Options -> enable QuickEdit mode.\n");
             Console.Write("Enter your client ID: ");
             string clientId = Console.ReadLine();
-            //string clientId = "46daa2b378bd4bc189df4c3a73af226a";
             Console.Write("Enter your secret key: ");
             string secret = Console.ReadLine();
-            //string secret = "K8GcWADljgnLZyrKGFfiqzHVvViGhapOYSCEy83h";
             string encodedKey = EveAuth.Encode(clientId, secret);
-            //Console.WriteLine("Encoded key: " + encodedKey);
             string authLink = Auth.CreateAuthLink(clientId, "/", CrestScope.PublicData);
             Console.WriteLine("Please log in using the following link: ");
             Console.WriteLine(authLink);
@@ -47,9 +44,9 @@ namespace eZet.EveLib.EveAuthUtility {
                 return;
             }
             Console.WriteLine("Authentication successfull!");
-            Console.WriteLine("Access token: " + response.AccessToken);
-            Console.WriteLine("Refresh token: " + response.RefreshToken);
-            Console.WriteLine("\nStore the refresh token, it can be used indefinitely with eg. EveCrest.");
+            Console.WriteLine("\nAccess token:\n" + response.AccessToken);
+            Console.WriteLine("\nRefresh token:\n" + response.RefreshToken);
+            Console.WriteLine("\nEncoded key:\n" + encodedKey);
             Console.ReadKey();
         }
     }
