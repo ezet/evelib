@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveXml", "EveLib.Eve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.CrestClient", "EveLib.CrestClient\EveLib.CrestClient.csproj", "{AB71147C-2135-48F5-9501-F88BDE3360B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveAuthUtility", "EveAuthUtility\EveAuthUtility.csproj", "{76B260AD-310B-4B8E-BFFF-124877BF692C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -178,6 +180,16 @@ Global
 		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|ARM.ActiveCfg = Release|Any CPU
 		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|x64.ActiveCfg = Release|Any CPU
 		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|x64.ActiveCfg = Release|Any CPU
+		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
