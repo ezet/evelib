@@ -213,8 +213,9 @@ It is recommended to use Authenticated CREST for best performance.
 Examples:
 
     EveCrest crest = new EveCrest(accessToken);
-    var alliance = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 123));
-    var alliances = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Id > 123));
+    var itemGroups = crest.GetRoot().Query(r => r.ItemGroups);
+    var group = itemGroups.Query(r => r.Single(a => a.Id == 123));
+    var groups = itemGroups.Query(r => r.Where(a => a.Id > 123));
     
 #### Authenticated Crest
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
