@@ -24,7 +24,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         ///     The default public max concurrent requests
         /// </summary>
-        public const int DefaultPublicMaxConcurrentRequests = 1;
+        public const int DefaultPublicMaxConcurrentRequests = 10;
 
         /// <summary>
         ///     The default authed max concurrent requests

@@ -9,5 +9,7 @@
         /// </summary>
         /// <value>The inferred identifier.</value>
         int InferredId { get; set; }
+
+
     }
 }

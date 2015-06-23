@@ -24,7 +24,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
     [DataContract]
     public class Href<T> : IInferrableId {
 
-        private int _inferredId;
+        private int _inferredId = -1;
 
         /// <summary>
         /// Gets or sets the inferred identifier.
@@ -32,7 +32,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// <value>The inferred identifier.</value>
         public int InferredId {
             get {
-                if (_inferredId == 0)
+                if (_inferredId < 0)
                     _inferredId = inferId();
                 return _inferredId;
             }
@@ -70,7 +70,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         public override string ToString() {
             return Uri;
         }
-
 
         private int inferId() {
             int id;

@@ -50,14 +50,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public int PageCount { get; set; }
 
         /// <summary>
-        ///     Gets or sets the next.
+        ///     Gets or sets the next page.
         /// </summary>
         /// <value>The next.</value>
         [DataMember(Name = "next")]
         public Href<T> Next { get; set; }
 
         /// <summary>
-        ///     Gets or sets the previous.
+        ///     Gets or sets the previous page.
         /// </summary>
         /// <value>The previous.</value>
         [DataMember(Name = "previous")]

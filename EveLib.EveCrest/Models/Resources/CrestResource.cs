@@ -51,7 +51,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public virtual string ContentType { get; protected set; }
 
         /// <summary>
-        ///     Queries the resource asynchronous.
+        ///     Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -73,7 +73,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        ///     Queries the resource asynchronous.
+        ///     Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -95,7 +95,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        ///     Queries a collection of resources asynchronous.
+        ///     Queries a collection of resources asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -119,7 +119,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        ///     Queries a collection of resources asynchronous.
+        ///     Queries a collection of resources asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>

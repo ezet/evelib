@@ -20,27 +20,12 @@ namespace eZet.EveLib.Test {
 
         private const string Killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
 
-        private const string RefreshToken = "ldF1J8ny_fEjLKyyG4yixGjU8Hi4XCA-5cAdDCzlzNw1";
-
-        private const string EncodedKey =
-            "NDZkYWEyYjM3OGJkNGJjMTg5ZGY0YzNhNzNhZjIyNmE6SzhHY1dBRGxqZ25MWnlyS0dGZmlxekhWdlZpR2hhcE9ZU0NFeTgzaA==";
 
         private readonly EveCrest crest = new EveCrest();
 
         public EveCrest_Public_Tests() {
-            //crest.AccessToken =
-            //    "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
-            crest.RefreshToken = RefreshToken;
-            crest.EncodedKey = EncodedKey;
             crest.EnableAutomaticTokenRefresh = true;
-            //crest.RequestHandler.ThrowOnDeprecated = true;
-        }
-
-        [TestMethod]
-        public async Task RefreshAccessTokenAsync() {
-            crest.RefreshToken = RefreshToken;
-            crest.EncodedKey = EncodedKey;
-            await crest.RefreshAccessTokenAsync();
+            crest.RequestHandler.ThrowOnDeprecated = true;
         }
 
         [TestMethod]
@@ -48,12 +33,6 @@ namespace eZet.EveLib.Test {
             CrestRoot root = crest.GetRoot();
             Debug.WriteLine(root.UserCounts.Dust);
             Debug.WriteLine(root.ServerName);
-            //Debug.WriteLine(root.Regions.Uri);
-            //var regionsData = crest.GetRoot().Query(f => f.Regions).Query(regions => regions.Items);
-        }
-
-        public async Task GetRootAsync() {
-            MarketTypeCollection root = await (await crest.GetRootAsync()).QueryAsync(r => r.MarketTypes);
         }
 
         [TestMethod]
@@ -65,7 +44,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetIncursions_NoErrors() {
-            IncursionCollection response = crest.GetRoot().Query(r => r.Incursions);
+            IncursionCollection incursionCollection = crest.GetRoot().Query(r => r.Incursions);
         }
 
         [TestMethod]
@@ -76,17 +55,21 @@ namespace eZet.EveLib.Test {
 
         //[TestMethod]
         //public void GetAlliance_NoErrors() {
-        //    Alliance response = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == AllianceId));
-        //    Console.WriteLine(response.Name);
+        //    AllianceCollection allianceCollection = crest.GetRoot().Query(r => r.Alliances);
+        //    var all = allianceCollection.Query(f => f.Single(a => a.Id == AllianceId));
+        //    var alliance = allianceCollection.AllItems().Where(f => f.Id == AllianceId);
+        //    Console.WriteLine(alliance.First().Alliance.Name);
         //}
 
         //[TestMethod]
         //public void CollectionPaging_Manual() {
         //    AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-        //    AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == AllianceId);
+        //    AllianceCollection.Alliance alliance =
+        //        allianceLinks.Items.SingleOrDefault(f => f.Alliance.Id == AllianceId).Alliance;
         //    while (alliance == null && allianceLinks.Next != null) {
         //        allianceLinks = allianceLinks.Query(f => f.Next);
-        //        alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == AllianceId);
+        //        alliance =
+        //        allianceLinks.Items.SingleOrDefault(f => f.Alliance.Id == AllianceId).Alliance;
         //    }
         //    Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
         //}
@@ -110,7 +93,9 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetWar_NoErrors() {
-            War data = crest.GetWar(291410);
+            var warCollection = crest.GetRoot().Query(r => r.Wars);
+            var data = warCollection.Query(f => f.Single(w => w.Id == 291410));
+            Debug.WriteLine(data.Id);
         }
 
         [TestMethod]
@@ -161,6 +146,13 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetIndustryFacilities() {
             IndustryFacilityCollection result = await crest.GetIndustryFacilitiesAsync();
+        }
+
+        [TestMethod]
+        public async Task ItemGroups() {
+            ItemGroupCollection itemGroups = await crest.GetRoot().QueryAsync(r => r.ItemGroups);
+            var group = itemGroups.Query(f => f.Single(g => g.Id == 354753));
+            Console.WriteLine(group.Name);
         }
     }
 }

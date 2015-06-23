@@ -23,7 +23,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class LinkedEntity<T> : ILinkedEntity<T> {
-        private int _inferredId;
+        private int _inferredId = -1;
+        private int _id = -1;
 
 
         /// <summary>
@@ -31,7 +32,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
-        public int Id { get; set; }
+        public int Id {
+            get { return _id >= 0 ? _id : InferredId; }
+            set { _id = value; }
+        }
 
         /// <summary>
         /// Gets or sets the inferred identifier.
@@ -39,7 +43,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// <value>The inferred identifier.</value>
         public int InferredId {
             get {
-                if (_inferredId == 0)
+                if (_inferredId < 0)
                     _inferredId = inferId();
                 return _inferredId; }
             set { _inferredId = value; }
@@ -63,7 +67,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
             int id;
             string[] href = Href.Uri.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
             int.TryParse(href.Last(), out id);
-                //id = -1;
             return id;
         }
     }
