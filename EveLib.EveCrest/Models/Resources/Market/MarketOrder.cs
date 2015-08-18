@@ -97,7 +97,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
     }
 }
