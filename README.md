@@ -183,6 +183,7 @@ Both methods access a link to a resource, or a collection of links, and will imm
     // get root object
     var root = crest.GetRoot();
     var regions = root.Query(r => r.Regions);
+    // or: var regions = crest.Load(root.Regions);
     var regionData = regions.Query(regions => regions.Where(region => region.Id == 1));
     
 You can also chain it:
@@ -193,9 +194,15 @@ Or async:
 
     var regionData = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Regions)).QueryAsync(regions => regions.Take(5));
     
-#### Collection paging
-EveLib now supports automatic paging, see the secion below.
-All ResourceCollections can be paginated, and have the properties `PageCount` and `TotalCount`.
+#### Loading Images
+To load images linked from CREST, pass the `ImageHref` object to `LoadImage` available on the `EveCrest` object, similar to how you can pass a regular `Href` to `Load`.
+
+    var crest = new EveCrest();
+    byte[] imageData = crest.LoadImage(someImageHref);
+
+    
+#### Explicit Collection Paging
+All ResourceCollections results can be paginated, and have the properties `PageCount` and `TotalCount`.
 Here's an example adding all MarketTypes to a list:
 
     var types = root.Query(r => r.MarketTypes);
@@ -206,15 +213,21 @@ Here's an example adding all MarketTypes to a list:
     }
     // do work with list
 
-##### Automatic Paging
+You can also use the built in function `AllItems`, available on collection resources.
+
+    var types = root.Query(r => r.MarketTypes);
+    var list = types.AllItems();
+
+
+##### Automatic Collection Paging on Query
 Automatic Paging is enabled by default, and can be set through the EnableAutomaticPaging property.
-This will automatically perform additional requests for data when using any Query method to query resources.
-It is recommended to use Authenticated CREST for best performance.
+This will automatically perform additional requests for data when using any Query method to query resources, if the resource you are performing a query on has multiple pages.
 Examples:
 
     EveCrest crest = new EveCrest(accessToken);
-    var alliance = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Single(a => a.Id == 123));
-    var alliances = crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Id > 123));
+    var itemGroups = crest.GetRoot().Query(r => r.ItemGroups);
+    var group = itemGroups.Query(r => r.Single(a => a.Id == 123));
+    var groups = itemGroups.Query(r => r.Where(a => a.Id > 123));
     
 #### Authenticated Crest
 To use authenticated CREST, you need to obtain either an Access Token or a Refresh Token and Encrypted Key. `EveCrest` can not acquire these tokens, and you will have to use `EveAuth` or some other external method. To learn more about acquiring these tokens, visit https://developers.eveonline.com/resource/single-sign-on. 
