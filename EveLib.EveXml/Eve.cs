@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Misc;
+using eZet.EveLib.EveXmlModule.Models.Corporation;
 
 namespace eZet.EveLib.EveXmlModule {
     /// <summary>
@@ -39,7 +40,6 @@ namespace eZet.EveLib.EveXmlModule {
         public EveXmlResponse<CertificateTree> GetCertificateTree() {
             return GetCertificateTreeAsync().Result;
         }
-
 
         /// <summary>
         ///     Returns a list of certificates in eve.
@@ -208,7 +208,7 @@ namespace eZet.EveLib.EveXmlModule {
         ///     Returns global stats on the factions in factional warfare
         /// </summary>
         /// <returns></returns>
-        public EveXmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
+        public EveXmlResponse<Models.Misc.FactionWarfareStats> GetFactionWarfareStats() {
             return GetFactionWarfareStatsAsync().Result;
         }
 
@@ -216,9 +216,9 @@ namespace eZet.EveLib.EveXmlModule {
         ///     Returns global stats on the factions in factional warfare
         /// </summary>
         /// <returns></returns>
-        public Task<EveXmlResponse<FactionWarfareStats>> GetFactionWarfareStatsAsync() {
+        public Task<EveXmlResponse<Models.Misc.FactionWarfareStats>> GetFactionWarfareStatsAsync() {
             const string relPath = "/eve/FacWarStats.xml.aspx";
-            return requestAsync<FactionWarfareStats>(relPath);
+            return requestAsync<Models.Misc.FactionWarfareStats>(relPath);
         }
 
         /// <summary>
@@ -348,6 +348,26 @@ namespace eZet.EveLib.EveXmlModule {
             const string relpath = "/eve/OwnerID.xml.aspx";
             string names = String.Join(",", list);
             return requestAsync<OwnerCollection>(relpath, "names", names);
+        }
+
+        /// <summary>
+        ///     Returns public information about a corporation.
+        /// </summary>
+        /// <param name="corporationId">A corporation ID</param>
+        /// <returns></returns>
+        public EveXmlResponse<CorporationSheet> GetCorporationSheet(long corporationId) {
+            return GetCorporationSheetAsync(corporationId).Result;
+        }
+
+
+        /// <summary>
+        ///     Returns public information about a corporation.
+        /// </summary>
+        /// <param name="corporationId">A corporation ID</param>
+        /// <returns></returns>
+        public Task<EveXmlResponse<CorporationSheet>> GetCorporationSheetAsync(long corporationId) {
+            const string relPath = "/corp/CorporationSheet.xml.aspx";
+            return requestAsync<CorporationSheet>(relPath, null, "corporationId", corporationId);
         }
     }
 }

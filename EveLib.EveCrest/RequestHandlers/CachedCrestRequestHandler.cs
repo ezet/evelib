@@ -29,7 +29,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         ///     The default authed max concurrent requests
         /// </summary>
-        public const int DefaultAuthedMaxConcurrentRequests = 20;
+        public const int DefaultAuthedMaxConcurrentRequests = 10;
 
         /// <summary>
         ///     The defualt charset

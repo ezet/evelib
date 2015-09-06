@@ -92,12 +92,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         [DataMember(Name = "volume")]
         public int Volume { get; set; }
 
-        /// <summary>
-        /// Gets or sets the order identifier.
-        /// </summary>
-        /// <value>The identifier.</value>
-        [DataMember(Name = "id")]
-        public int Id { get; set; }
-
     }
 }

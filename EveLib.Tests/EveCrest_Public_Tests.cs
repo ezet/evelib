@@ -152,6 +152,7 @@ namespace eZet.EveLib.Test {
         public async Task ItemGroups() {
             ItemGroupCollection itemGroups = await crest.GetRoot().QueryAsync(r => r.ItemGroups);
             var group = itemGroups.Query(f => f.Single(g => g.Id == 354753));
+
             Console.WriteLine(group.Name);
         }
     }

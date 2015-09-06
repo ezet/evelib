@@ -3,6 +3,7 @@ using eZet.EveLib.EveXmlModule;
 using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using eZet.EveLib.EveXmlModule.Models.Corporation;
 
 namespace eZet.EveLib.Test {
     [TestClass]
@@ -68,7 +69,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetFactionWarfareStats_ValidRequest_HasResult() {
-            EveXmlResponse<FactionWarfareStats> xml = api.GetFactionWarfareStats();
+            EveXmlResponse<EveXmlModule.Models.Misc.FactionWarfareStats> xml = api.GetFactionWarfareStats();
             Assert.IsNotNull(xml.Result.Factions.First().FactionName);
         }
 
@@ -115,5 +116,13 @@ namespace eZet.EveLib.Test {
             Assert.IsNotNull(xml.Result.Owners.First());
             Assert.AreEqual(CharId, xml.Result.Owners.First().OwnerId);
         }
+
+        [TestMethod]
+        public void GetCorporationSheet_ValidRequest_HasResult() {
+            EveXmlResponse<CorporationSheet> xml = api.GetCorporationSheet(109299958);
+            Assert.AreEqual("C C P", xml.Result.CorporationName);
+        }
+
+
     }
 }

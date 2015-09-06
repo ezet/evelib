@@ -20,7 +20,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Represents a CREST /alliances/ response
     /// </summary>
     [DataContract]
-    public sealed class AllianceCollection : CollectionResource<AllianceCollection, AllianceCollection.Alliance> {
+    // TODO Remove HrefWrapper, implement customized json parsing 
+    public sealed class AllianceCollection : CollectionResource<AllianceCollection, AllianceCollection.HrefWrapper> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="AllianceCollection" /> class.
         /// </summary>
