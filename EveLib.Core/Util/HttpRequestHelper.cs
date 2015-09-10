@@ -41,6 +41,20 @@ namespace eZet.EveLib.Core.Util {
         }
 
         /// <summary>
+        ///     Performs a web request against the specified URI, and returns the response content
+        /// </summary>
+        /// <param name="uri">URI to request</param>
+        /// <param name="postData"></param>
+        /// <returns>The response content</returns>
+        public static Task<string> PostRequestAsync(Uri uri, string postData) {
+            HttpWebRequest request = CreateRequest(uri);
+            request.Method = "POST";
+            AddPostData(request, postData);
+            return GetResponseContentAsync(request);
+        }
+
+
+        /// <summary>
         ///     Adds the post data.
         /// </summary>
         /// <param name="request">The request.</param>

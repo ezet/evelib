@@ -12,10 +12,13 @@ namespace eZet.EveLib.EveCentralModule {
     public class EveCentral {
         private const string DefaultUri = "http://api.eve-central.com";
 
+        public string HttpMethod { get; set; }
+
         /// <summary>
         ///     Creates a new EveCentral object, with a default base uri and request handler.
         /// </summary>
         public EveCentral() {
+            HttpMethod = "POST";
             BaseUri = new Uri(DefaultUri);
             RequestHandler = new RequestHandler(new XmlSerializer());
         }
@@ -28,7 +31,7 @@ namespace eZet.EveLib.EveCentralModule {
         /// <summary>
         ///     Gets or sets the RequestHandler used to perform requests.
         /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
+        public IPostRequestHandler RequestHandler { get; set; }
 
         /// <summary>
         ///     Returns aggregate statistics for the items specified.
@@ -114,9 +117,9 @@ namespace eZet.EveLib.EveCentralModule {
             Contract.Requires(options != null, "Options cannot be null.");
             Contract.Requires(startSystem != null, "Start system cannot be null.");
             Contract.Requires(endSystem != null, "End system cannot be null.");
-            string relUri = "/api/quicklook/onpath";
+            var relUri = "/api/quicklook/onpath";
             relUri += "/from/" + startSystem + "/to/" + endSystem + "/fortype/" + typeId;
-            string queryString = options.GetHourQuery("sethours");
+            var queryString = options.GetHourQuery("sethours");
             queryString += options.GetMinQuantityQuery("setminQ");
             return requestAsync<QuickLookResponse>(relUri, queryString);
         }
@@ -130,8 +133,13 @@ namespace eZet.EveLib.EveCentralModule {
         }
 
         private async Task<T> requestAsync<T>(string relUri, string queryString) {
-            var uri = new Uri(BaseUri, relUri + "?" + queryString);
-            return await RequestHandler.RequestAsync<T>(uri).ConfigureAwait(false);
+            if (HttpMethod == "POST") {
+                return await RequestHandler.PostRequestAsync<T>(new Uri(BaseUri, relUri), queryString).ConfigureAwait(false);
+            }
+            else {
+                var uri = new Uri(BaseUri, relUri + "?" + queryString);
+                return await RequestHandler.RequestAsync<T>(uri).ConfigureAwait(false);
+            }
         }
     }
 }

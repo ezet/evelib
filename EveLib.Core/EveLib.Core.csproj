@@ -132,6 +132,7 @@
     <Compile Include="RequestHandlers\CacheLevel.cs" />
     <Compile Include="RequestHandlers\IImageRequestHandler.cs" />
     <Compile Include="RequestHandlers\ImageRequestHandler.cs" />
+    <Compile Include="RequestHandlers\IPostRequestHandler.cs" />
     <Compile Include="Util\AsyncHelpers.cs" />
     <Compile Include="Util\AsyncLazy.cs" />
     <Compile Include="Serializers\JsonSerializer.cs" />

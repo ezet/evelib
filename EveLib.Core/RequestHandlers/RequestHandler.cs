@@ -10,7 +10,7 @@ namespace eZet.EveLib.Core.RequestHandlers {
     /// <summary>
     ///     A basic RequestHandler with no special handling.
     /// </summary>
-    public class RequestHandler : IRequestHandler {
+    public class RequestHandler : IPostRequestHandler {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
@@ -37,6 +37,27 @@ namespace eZet.EveLib.Core.RequestHandlers {
             string data;
             try {
                 data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
+            }
+            catch (WebException e) {
+                throw new EveLibWebException("A request caused a WebException.", e.InnerException as WebException);
+            }
+            var val = Serializer.Deserialize<T>(data);
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "RequestHandler.Deserialize:Complete");
+            return val;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="postData"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public async Task<T> PostRequestAsync<T>(Uri uri, string postData) {
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "RequestHandler.Deserialize:Start");
+            string data;
+            try {
+                data = await HttpRequestHelper.PostRequestAsync(uri, postData).ConfigureAwait(false);
             }
             catch (WebException e) {
                 throw new EveLibWebException("A request caused a WebException.", e.InnerException as WebException);
