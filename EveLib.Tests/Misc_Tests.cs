@@ -17,6 +17,7 @@ namespace eZet.EveLib.Test {
         public void GetAllianceList_ValidRequest_HasResult() {
             EveXmlResponse<AllianceList> xml = api.GetAllianceList();
             Assert.IsNotNull(xml.Result.Alliances.First());
+            Assert.IsNotNull(xml.Result.Alliances.First().Corporations);
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     ///     Class AllianceList.
     /// </summary>
     [Serializable]
-    [XmlRoot("result", IsNullable = false)]
+    [XmlRoot("result")]
     public class AllianceList {
         /// <summary>
         ///     Gets or sets the alliances.

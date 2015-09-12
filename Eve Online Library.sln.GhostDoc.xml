@@ -1,4 +1,8 @@
 <GhostDoc>
+<IgnoreFilePatterns>
+  <IgnoreFilePattern>*.min.js</IgnoreFilePattern>
+  <IgnoreFilePattern>jquery*.js</IgnoreFilePattern>
+</IgnoreFilePatterns>
   <SpellChecker>
     <IncludeExtensions>
     </IncludeExtensions>
@@ -23,6 +27,7 @@
       <Protected>false</Protected>
       <Private>false</Private>
       <Inherited>true</Inherited>
+      <InheritedFromReferences>true</InheritedFromReferences>
       <EnableTags>false</EnableTags>
       <TagList />
     </IncludeScopes>
