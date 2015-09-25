@@ -156,7 +156,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
             /// </returns>
             /// <exception cref="System.NotImplementedException"></exception>
             public XmlSchema GetSchema() {
-                throw new NotImplementedException();
+                return null;
             }
 
             /// <summary>

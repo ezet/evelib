@@ -92,5 +92,11 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         [DataMember(Name = "volume")]
         public int Volume { get; set; }
 
+        /// Gets or sets the order identifier.
+        /// 
+        /// The identifier.
+        [DataMember(Name = "id")]
+        public new long Id { get; set; }
+
     }
 }

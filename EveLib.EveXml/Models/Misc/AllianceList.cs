@@ -71,6 +71,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
             [XmlAttribute("memberCount")]
             public int MemberCount { get; set; }
 
+
             /// <summary>
             ///     Gets the start date.
             /// </summary>
@@ -94,6 +95,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
             /// <value>The corporations.</value>
             [XmlElement("rowset")]
             public EveXmlRowCollection<CorporationData> Corporations { get; set; }
+
         }
 
         /// <summary>
@@ -102,6 +104,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         [Serializable]
         [XmlRoot("row")]
         public class CorporationData {
+
             /// <summary>
             ///     Gets or sets the corporation identifier.
             /// </summary>
@@ -125,6 +128,8 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
                 get { return StartDate.ToString(XmlHelper.DateFormat); }
                 set { StartDate = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
             }
+
         }
+
     }
 }

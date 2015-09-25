@@ -20,7 +20,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     ///     Class CertificateTree.
     /// </summary>
     [Serializable]
-    [XmlRoot("result", IsNullable = false)]
+    [XmlRoot("result")]
     public class CertificateTree {
         /// <summary>
         ///     Gets or sets the categories.
