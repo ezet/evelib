@@ -76,6 +76,27 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
             /// <value>The name of the corporation.</value>
             [XmlAttribute("corporationName")]
             public string CorporationName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the x.
+            /// </summary>
+            /// <value>The x.</value>
+            [XmlAttribute("x")]
+            public long X { get; set; }
+
+            /// <summary>
+            /// Gets or sets the y.
+            /// </summary>
+            /// <value>The y.</value>
+            [XmlAttribute("y")]
+            public long Y { get; set; }
+
+            /// <summary>
+            /// Gets or sets the z.
+            /// </summary>
+            /// <value>The z.</value>
+            [XmlAttribute("z")]
+            public long Z { get; set; }
         }
     }
 }

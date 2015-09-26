@@ -51,9 +51,9 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void GetContactList() {
             EveXmlResponse<ContactList> xml = _character.GetContactList();
-            Assert.AreEqual(3010913, xml.Result.PersonalContacts.First().ContactId);
-            Assert.AreEqual(797400947, xml.Result.CorporationContacts.First().ContactId);
-            Assert.AreEqual(797400947, xml.Result.AllianceContacts.First().ContactId);
+            Assert.AreEqual(90000002, xml.Result.PersonalContacts.First().ContactId);
+            Assert.AreEqual(90000002, xml.Result.CorporationContacts.First().ContactId);
+            Assert.AreEqual(90000002, xml.Result.AllianceContacts.First().ContactId);
         }
 
         [TestMethod]
