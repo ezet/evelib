@@ -246,5 +246,11 @@ namespace eZet.EveLib.Test {
         public async Task GetBlueprints_ValidRequest_HasResult() {
             BlueprintList res = (await _validKey.Characters[0].GetBlueprintsAsync()).Result;
         }
+
+        [TestMethod]
+        public void GetChatChannels_ValidRequest_Hasresult() {
+            var res = _validKey.Characters[0].GetChatChannels();
+
+        }
     }
 }

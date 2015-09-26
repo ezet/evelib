@@ -189,5 +189,12 @@ namespace eZet.EveLib.Test {
             EveXmlResponse<WalletTransactions> xml = _character.GetWalletTransactions();
             Assert.AreEqual(1309776438, xml.Result.Transactions.First().TransactionId);
         }
+
+        [TestMethod]
+        public void GetChatChannels_ValidRequest_Hasresult() {
+            var res = _character.GetChatChannels();
+            Assert.AreEqual(92168909, res.Result.Channels.First().Operators.First().AccessorId);
+
+        }
     }
 }

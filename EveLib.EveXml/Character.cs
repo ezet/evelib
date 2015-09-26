@@ -948,5 +948,15 @@ namespace eZet.EveLib.EveXmlModule {
         public EveXmlResponse<BlueprintList> GetBlueprints() {
             return GetBlueprintsAsync().Result;
         }
+
+        public EveXmlResponse<ChatChannels> GetChatChannels() {
+            return GetChatChannelsAsync().Result;
+
+        }
+
+        public Task<EveXmlResponse<ChatChannels>> GetChatChannelsAsync() {
+            const string relPath = "/char/ChatChannels.xml.aspx";
+            return requestAsync<ChatChannels>(relPath, ApiKey);
+        }
     }
 }
