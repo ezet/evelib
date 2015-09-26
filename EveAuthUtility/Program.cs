@@ -5,11 +5,14 @@ namespace eZet.EveLib.EveAuthUtility {
     public class EveAuthUtility {
 
         static public EveAuth Auth = new EveAuth();
+
+        [STAThread]
         static void Main(string[] args) {
             Console.WriteLine("Simple tool for obtaining access and refresh tokens from the Eve Online SSO.");
             Console.WriteLine("No information is stored, some data is exchanged with the eve login servers.");
             Console.WriteLine("The sourcecode is available here: https://github.com/ezet/evelib");
             Console.WriteLine("You need to register an application at https://developers.eveonline.com, \nthe callback URL can be set to '/'.");
+            Console.WriteLine("Make sure you enable CREST and add the publicData scope for your application!\n");
             Console.WriteLine("Your client ID and secret key will be provided by \nhttps://developers.eveonline.com after registering an application.\n");
 
             Console.WriteLine("For easier editing, rightclick the title bar for the console window, \nthen go to Properties -> Options -> enable QuickEdit mode.\n");
@@ -19,7 +22,8 @@ namespace eZet.EveLib.EveAuthUtility {
             string secret = Console.ReadLine();
             string encodedKey = EveAuth.Encode(clientId, secret);
             string authLink = Auth.CreateAuthLink(clientId, "/", CrestScope.PublicData);
-            Console.WriteLine("Please log in using the following link: ");
+            System.Windows.Forms.Clipboard.SetText(authLink);
+            Console.WriteLine("Please log in using the following link (already copied to your clipboard): ");
             Console.WriteLine(authLink);
             Console.WriteLine("After logging in, copy the full URL from your browser.");
             Console.WriteLine("Enter the full URL: ");
