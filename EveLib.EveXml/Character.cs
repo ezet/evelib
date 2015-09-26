@@ -949,14 +949,39 @@ namespace eZet.EveLib.EveXmlModule {
             return GetBlueprintsAsync().Result;
         }
 
+        /// <summary>
+        /// Gets the chat channels.
+        /// </summary>
+        /// <returns>EveXmlResponse&lt;ChatChannels&gt;.</returns>
         public EveXmlResponse<ChatChannels> GetChatChannels() {
             return GetChatChannelsAsync().Result;
 
         }
 
+        /// <summary>
+        /// Gets the chat channels asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;EveXmlResponse&lt;ChatChannels&gt;&gt;.</returns>
         public Task<EveXmlResponse<ChatChannels>> GetChatChannelsAsync() {
             const string relPath = "/char/ChatChannels.xml.aspx";
             return requestAsync<ChatChannels>(relPath, ApiKey);
+        }
+
+        /// <summary>
+        /// Gets the bookmarks.
+        /// </summary>
+        /// <returns>EveXmlResponse&lt;Bookmarks&gt;.</returns>
+        public EveXmlResponse<Bookmarks> GetBookmarks() {
+            return GetBookmarksAsync().Result;
+        }
+
+        /// <summary>
+        /// Gets the bookmarks asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;EveXmlResponse&lt;Bookmarks&gt;&gt;.</returns>
+        public Task<EveXmlResponse<Bookmarks>> GetBookmarksAsync() {
+            const string relPath = "/char/Bookmarks.xml.aspx";
+            return requestAsync<Bookmarks>(relPath, ApiKey);
         }
     }
 }

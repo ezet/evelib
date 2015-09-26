@@ -110,21 +110,21 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
             /// </summary>
             /// <value>The x.</value>
             [XmlAttribute("x")]
-            public long X { get; set; }
+            public float X { get; set; }
 
             /// <summary>
             /// Gets or sets the y.
             /// </summary>
             /// <value>The y.</value>
             [XmlAttribute("y")]
-            public long Y { get; set; }
+            public float Y { get; set; }
 
             /// <summary>
             /// Gets or sets the z.
             /// </summary>
             /// <value>The z.</value>
             [XmlAttribute("z")]
-            public long Z { get; set; }
+            public float Z { get; set; }
         }
     }
 }

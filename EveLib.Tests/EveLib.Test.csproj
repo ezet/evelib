@@ -150,6 +150,7 @@
     <Content Include="Xml\account\APIKeyInfo.xml" />
     <Content Include="Xml\char\AccountBalance.xml" />
     <Content Include="Xml\char\AssetList.xml" />
+    <Content Include="Xml\char\Bookmarks.xml" />
     <Content Include="Xml\char\CalendarEventAttendees.xml" />
     <Content Include="Xml\char\CharacterSheet.xml" />
     <Content Include="Xml\char\ContactList.xml" />
@@ -181,6 +182,7 @@
     <Content Include="Xml\char\WalletTransactions.xml" />
     <Content Include="Xml\corp\AccountBalance.xml" />
     <Content Include="Xml\corp\AssetList.xml" />
+    <Content Include="Xml\corp\Bookmarks.xml" />
     <Content Include="Xml\corp\ContactList.xml" />
     <Content Include="Xml\corp\ContainerLog.xml" />
     <Content Include="Xml\corp\ContractBids.xml" />

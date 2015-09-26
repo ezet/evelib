@@ -860,5 +860,22 @@ namespace eZet.EveLib.EveXmlModule {
         public EveXmlResponse<BlueprintList> GetBlueprints() {
             return GetBlueprintsAsync().Result;
         }
+
+        /// <summary>
+        /// Gets the bookmarks.
+        /// </summary>
+        /// <returns>EveXmlResponse&lt;Bookmarks&gt;.</returns>
+        public EveXmlResponse<Bookmarks> GetBookmarks() {
+            return GetBookmarksAsync().Result;
+        }
+
+        /// <summary>
+        /// Gets the bookmarks asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;EveXmlResponse&lt;Bookmarks&gt;&gt;.</returns>
+        public Task<EveXmlResponse<Bookmarks>> GetBookmarksAsync() {
+            const string relPath = "/char/Bookmarks.xml.aspx";
+            return requestAsync<Bookmarks>(relPath, ApiKey);
+        }
     }
 }

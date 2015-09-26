@@ -481,7 +481,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// </summary>
         /// <value>The location identifier.</value>
         [XmlAttribute("locationID")]
-        public int LocationId { get; set; }
+        public long LocationId { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the clone.

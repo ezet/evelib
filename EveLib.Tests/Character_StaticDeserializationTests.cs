@@ -194,7 +194,12 @@ namespace eZet.EveLib.Test {
         public void GetChatChannels_ValidRequest_Hasresult() {
             var res = _character.GetChatChannels();
             Assert.AreEqual(92168909, res.Result.Channels.First().Operators.First().AccessorId);
+        }
 
+        [TestMethod]
+        public void GetBookmarks_ValidRequest_Hasresult() {
+            var res = _character.GetBookmarks();
+            Assert.AreEqual(0, res.Result.Folders.First().FolderId);
         }
     }
 }
