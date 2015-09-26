@@ -1,18 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
+﻿<?xml version='1.0' encoding='UTF-8'?>
 <eveapi version="2">
-  <currentTime>2010-05-29 22:35:46</currentTime>
+  <currentTime>2015-07-13 12:23:12</currentTime>
   <result>
-    <rowset name="contactList" key="contactID" columns="contactID,contactName,inWatchlist,standing">
-      <row contactID="3010913" contactName="Hirento Raikkanen" inWatchlist="False" standing="0" />
-      <row contactID="797400947" contactName="CCP Garthagk" inWatchlist="True" standing="10" />
+    <rowset name="contactList" key="contactID" columns="contactID,contactName,standing,contactTypeID,labelMask,inWatchlist">
+      <row contactID="90000002" contactName="Hemisphere" standing="10" contactTypeID="1385" labelMask="67108867" inWatchlist="True" />
+      <row contactID="90000004" contactName="Comet" standing="5" contactTypeID="1379" labelMask="2097153" inWatchlist="True" />
     </rowset>
-    <rowset name="corporateContactList" key="contactID" columns="contactID,contactName,standing">
-      <row contactID="797400947" contactName="CCP Garthagk" standing="-10" />
+    <rowset name="contactLabels" key="labelID" columns="name">
+      <row labelID="1" name="Alts" />
+      <row labelID="2" name="Evil Twins" />
+      <row labelID="4" name="Label 1" />
+      <row labelID="8" name="Label 2" />
+      <row labelID="16" name="aoeu" />
+      <row labelID="2097152" name="Label 20" />
+      <row labelID="67108864" name="Label 25" />
+      <row labelID="2199023255552" name="Label 40" />
+      <row labelID="36028797018963968" name="Label 54" />
+      <row labelID="4611686018427387904" name="Label 61" />
     </rowset>
-    <rowset name="allianceContactList" key="contactID" columns="contactID,contactName,standing">
-      <row contactID="797400947" contactName="CCP Garthagk" standing="5" />
+    <rowset name="corporateContactList" key="contactID" columns="contactID,contactName,standing,contactTypeID,labelMask">
+      <row contactID="90000002" contactName="Hemisphere" standing="-5" contactTypeID="1385" labelMask="1" />
+    </rowset>
+    <rowset name="corporateContactLabels" key="labelID" columns="name">
+      <row labelID="1" name="Corp Spies!" />
+    </rowset>
+    <rowset name="allianceContactList" key="contactID" columns="contactID,contactName,standing,contactTypeID,labelMask">
+      <row contactID="90000002" contactName="Hemisphere" standing="5" contactTypeID="1385" labelMask="0" />
+      <row contactID="90000003" contactName="Cosmos" standing="0" contactTypeID="1376" labelMask="1" />
+      <row contactID="90000004" contactName="Comet" standing="-10" contactTypeID="1379" labelMask="3" />
+    </rowset>
+    <rowset name="allianceContactLabels" key="labelID" columns="name">
+      <row labelID="1" name="Alliance Friend" />
+      <row labelID="2" name="Stupid" />
     </rowset>
   </result>
-  <cachedUntil>2010-05-29 22:50:46</cachedUntil>
+  <cachedUntil>2015-07-13 12:25:12</cachedUntil>
 </eveapi>
