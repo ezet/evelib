@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release of separated libraries.</releaseNotes>
+    <releaseNotes>Fixed breaking bugs in all API calls. Verified that all calls are working correctly. Renamed and simplified the response types.</releaseNotes>
     <tags>EveLib EveWho API EveOnline Eve Online</tags>
   </metadata>
 </package>
