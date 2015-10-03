@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveXmlModule {
             /// <summary>
             ///     128x128
             /// </summary>
-            X128 = 128,
+            X128 = 128
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace eZet.EveLib.EveXmlModule {
             /// <summary>
             ///     256x256
             /// </summary>
-            X256 = 256,
+            X256 = 256
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace eZet.EveLib.EveXmlModule {
             /// <summary>
             ///     512x512
             /// </summary>
-            X512 = 512,
+            X512 = 512
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace eZet.EveLib.EveXmlModule {
             /// <summary>
             ///     64x64
             /// </summary>
-            X64 = 64,
+            X64 = 64
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <summary>
         ///     Gets or sets the base URI.
         /// </summary>
-        public String BaseUri { get; set; }
+        public string BaseUri { get; set; }
 
         /// <summary>
         ///     Gets or sets the RequestHandler
@@ -332,15 +332,15 @@ namespace eZet.EveLib.EveXmlModule {
         }
 
         private Task<byte[]> requestImageDataAsync(string relPath, long id, int size, string extension) {
-            string fileName = id + "_" + size + extension;
+            var fileName = id + "_" + size + extension;
             var uri = new Uri(BaseUri + relPath + Config.Separator + fileName);
             return RequestHandler.RequestImageDataAsync(uri);
         }
 
         private async Task<string> requestImageAsync(string relUri, long id, int size, string extension, string path) {
-            string fileName = id + "_" + size + extension;
+            var fileName = id + "_" + size + extension;
             var uri = new Uri(BaseUri + relUri + Config.Separator + fileName);
-            string file = path + Config.Separator + fileName;
+            var file = path + Config.Separator + fileName;
             await RequestHandler.RequestImageAsync(uri, file).ConfigureAwait(false);
             return file;
         }

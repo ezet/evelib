@@ -33,7 +33,8 @@ namespace eZet.EveLib.EveAuthUtility {
                 int start = url.IndexOf("?code=", System.StringComparison.Ordinal);
                 int end = url.IndexOf("&state", System.StringComparison.Ordinal);
                 authCode = url.Substring(start + 6, end - start - 6);
-            } catch (Exception) {
+            }
+            catch (Exception) {
                 Console.WriteLine("Unable to locate authentication code, please try again.");
                 Console.ReadKey();
                 return;
@@ -43,7 +44,8 @@ namespace eZet.EveLib.EveAuthUtility {
             AuthResponse response;
             try {
                 response = Auth.AuthenticateAsync(encodedKey, authCode).Result;
-            } catch (Exception) {
+            }
+            catch (Exception) {
                 Console.WriteLine("Authentication unsuccessfull, please try again.");
                 return;
             }

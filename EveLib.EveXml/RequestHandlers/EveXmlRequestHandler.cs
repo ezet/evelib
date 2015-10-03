@@ -43,7 +43,7 @@ namespace eZet.EveLib.EveXmlModule.RequestHandlers {
             string data = null;
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
-            bool cached = data != null;
+            var cached = data != null;
             if (cached) return Serializer.Deserialize<T>(data);
             if (CacheLevel == CacheLevel.CacheOnly) return default(T);
             try {
@@ -53,7 +53,7 @@ namespace eZet.EveLib.EveXmlModule.RequestHandlers {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
                 var response = (HttpWebResponse) e.Response;
                 if (response == null) throw;
-                Stream responseStream = response.GetResponseStream();
+                var responseStream = response.GetResponseStream();
                 if (responseStream == null) throw;
                 using (var reader = new StreamReader(responseStream)) {
                     data = reader.ReadToEnd();

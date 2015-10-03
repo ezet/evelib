@@ -82,7 +82,6 @@ namespace eZet.EveLib.EveXmlModule {
         ///     Returns a list of all sovereignty structures in EVE.
         /// </summary>
         public void GetSovereigntyStatus() {
-
             throw new NotImplementedException();
             // Temporarily disabled by CCP
         }

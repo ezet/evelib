@@ -78,21 +78,21 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
             public string CorporationName { get; set; }
 
             /// <summary>
-            /// Gets or sets the x.
+            ///     Gets or sets the x.
             /// </summary>
             /// <value>The x.</value>
             [XmlAttribute("x")]
             public float X { get; set; }
 
             /// <summary>
-            /// Gets or sets the y.
+            ///     Gets or sets the y.
             /// </summary>
             /// <value>The y.</value>
             [XmlAttribute("y")]
             public float Y { get; set; }
 
             /// <summary>
-            /// Gets or sets the z.
+            ///     Gets or sets the z.
             /// </summary>
             /// <value>The z.</value>
             [XmlAttribute("z")]

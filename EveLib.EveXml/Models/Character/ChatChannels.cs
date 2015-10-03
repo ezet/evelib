@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Xml;
 using System.Xml.Schema;
@@ -18,16 +19,14 @@ using System.Xml.Serialization;
 using eZet.EveLib.EveXmlModule.Util;
 
 namespace eZet.EveLib.EveXmlModule.Models.Character {
-
     /// <summary>
-    /// Class ChatChannels.
+    ///     Class ChatChannels.
     /// </summary>
     [Serializable]
     [XmlRoot("result")]
     public class ChatChannels {
-
         /// <summary>
-        /// Gets or sets the channels.
+        ///     Gets or sets the channels.
         /// </summary>
         /// <value>The channels.</value>
         [XmlElement("rowset")]
@@ -35,91 +34,90 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
 
 
         /// <summary>
-        /// Class Channel.
+        ///     Class Channel.
         /// </summary>
         [Serializable]
         [XmlRoot("row")]
         public class Channel : IXmlSerializable {
-
             /// <summary>
-            /// Gets or sets the channel identifier.
+            ///     Gets or sets the channel identifier.
             /// </summary>
             /// <value>The channel identifier.</value>
             [XmlAttribute("channelID")]
             public long ChannelId { get; set; }
 
             /// <summary>
-            /// Gets or sets the owner identifier.
+            ///     Gets or sets the owner identifier.
             /// </summary>
             /// <value>The owner identifier.</value>
             [XmlAttribute("ownerID")]
             public long OwnerId { get; set; }
 
             /// <summary>
-            /// Gets or sets the name of the owner.
+            ///     Gets or sets the name of the owner.
             /// </summary>
             /// <value>The name of the owner.</value>
             [XmlAttribute("ownerName")]
             public string OwnerName { get; set; }
 
             /// <summary>
-            /// Gets or sets the display name.
+            ///     Gets or sets the display name.
             /// </summary>
             /// <value>The display name.</value>
             [XmlAttribute("displayName")]
             public string DisplayName { get; set; }
 
             /// <summary>
-            /// Gets or sets the comparison key.
+            ///     Gets or sets the comparison key.
             /// </summary>
             /// <value>The comparison key.</value>
             [XmlAttribute("comparisonKey")]
             public string ComparisonKey { get; set; }
 
             /// <summary>
-            /// Gets or sets a value indicating whether this instance has password.
+            ///     Gets or sets a value indicating whether this instance has password.
             /// </summary>
             /// <value><c>true</c> if this instance has password; otherwise, <c>false</c>.</value>
             [XmlAttribute("hasPassword")]
             public bool HasPassword { get; set; }
 
             /// <summary>
-            /// Gets or sets the motd.
+            ///     Gets or sets the motd.
             /// </summary>
             /// <value>The motd.</value>
             [XmlAttribute("motd")]
             public string Motd { get; set; }
 
             /// <summary>
-            /// Gets or sets the allowed.
+            ///     Gets or sets the allowed.
             /// </summary>
             /// <value>The allowed.</value>
             [XmlAttribute("rowset")]
             public EveXmlRowCollection<Accessor> Allowed { get; set; }
 
             /// <summary>
-            /// Gets or sets the blocked.
+            ///     Gets or sets the blocked.
             /// </summary>
             /// <value>The blocked.</value>
             [XmlElement("rowset")]
             public EveXmlRowCollection<Accessor> Blocked { get; set; }
 
             /// <summary>
-            /// Gets or sets the muted.
+            ///     Gets or sets the muted.
             /// </summary>
             /// <value>The muted.</value>
             [XmlElement("rowset")]
             public EveXmlRowCollection<Accessor> Muted { get; set; }
 
             /// <summary>
-            /// Gets or sets the operators.
+            ///     Gets or sets the operators.
             /// </summary>
             /// <value>The operators.</value>
             [XmlElement("rowset")]
             public EveXmlRowCollection<Accessor> Operators { get; set; }
 
             /// <summary>
-            /// Gets the schema.
+            ///     Gets the schema.
             /// </summary>
             /// <returns>XmlSchema.</returns>
             public XmlSchema GetSchema() {
@@ -127,7 +125,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             }
 
             /// <summary>
-            /// Reads the XML.
+            ///     Reads the XML.
             /// </summary>
             /// <param name="reader">The reader.</param>
             public void ReadXml(XmlReader reader) {
@@ -146,47 +144,44 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             }
 
             /// <summary>
-            /// Writes the XML.
+            ///     Writes the XML.
             /// </summary>
             /// <param name="writer">The writer.</param>
             /// <exception cref="System.NotImplementedException"></exception>
             public void WriteXml(XmlWriter writer) {
                 throw new NotImplementedException();
             }
-
         }
-
     }
 
     /// <summary>
-    /// Class Accessor.
+    ///     Class Accessor.
     /// </summary>
     [Serializable]
     [XmlRoot("row")]
     public class Accessor {
-
         /// <summary>
-        /// Gets or sets the accessor identifier.
+        ///     Gets or sets the accessor identifier.
         /// </summary>
         /// <value>The accessor identifier.</value>
         [XmlAttribute("accessorID")]
         public long AccessorId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the accessor.
+        ///     Gets or sets the name of the accessor.
         /// </summary>
         /// <value>The name of the accessor.</value>
         [XmlAttribute("accessorName")]
         public string AccessorName { get; set; }
 
         /// <summary>
-        /// Gets or sets the until when.
+        ///     Gets or sets the until when.
         /// </summary>
         /// <value>The until when.</value>
         public DateTime UntilWhen { get; set; }
 
         /// <summary>
-        /// Gets or sets the until when string.
+        ///     Gets or sets the until when string.
         /// </summary>
         /// <value>The until when string.</value>
         [XmlAttribute("untilWhen")]
@@ -196,7 +191,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         }
 
         /// <summary>
-        /// Gets or sets the reason.
+        ///     Gets or sets the reason.
         /// </summary>
         /// <value>The reason.</value>
         [XmlAttribute("reason")]

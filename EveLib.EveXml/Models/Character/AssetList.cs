@@ -47,10 +47,10 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             var list = new List<Item>();
             var stack = new Stack<Item>(items);
             while (stack.Count > 0) {
-                Item current = stack.Pop();
+                var current = stack.Pop();
                 list.Add(current);
                 if (current.Items == null) continue;
-                foreach (Item child in current.Items)
+                foreach (var child in current.Items)
                     stack.Push(child);
             }
             return list;

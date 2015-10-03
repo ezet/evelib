@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -72,13 +71,13 @@ namespace eZet.EveLib.EveXmlModule {
         /// <summary>
         ///     Gets the CorporationKey for this Corporation.
         /// </summary>
-        public CorporationKey ApiKey { get; private set; }
+        public CorporationKey ApiKey { get; }
 
 
         /// <summary>
         ///     Gets the Corporation ID.
         /// </summary>
-        public long CorporationId { get; private set; }
+        public long CorporationId { get; }
 
         /// <summary>
         ///     Gets the Corporation name. Note: If this object has not already been initialized, this will send a web request to
@@ -179,7 +178,7 @@ namespace eZet.EveLib.EveXmlModule {
             if (_isInitialized) return;
             lock (_lazyLoadLock) {
                 if (_isInitialized) return;
-                Corporation corp = ApiKey.Corporation;
+                var corp = ApiKey.Corporation;
                 _corporationName = corp.CorporationName;
                 _allianceId = corp.AllianceId;
                 _allianceName = corp.AllianceName;
@@ -432,7 +431,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<Locations>> GetLocationsAsync(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/corp/Locations.xml.aspx";
-            string ids = String.Join(",", list);
+            var ids = string.Join(",", list);
             return requestAsync<Locations>(relPath, ApiKey, "IDs", ids);
         }
 
@@ -712,13 +711,13 @@ namespace eZet.EveLib.EveXmlModule {
         /// <returns></returns>
         public async Task<List<WalletJournal.JournalEntry>> GetWalletJournalUntilAsync(long untilId, int division = 1000,
             long fromId = 0) {
-            EveXmlResponse<WalletJournal> res =
+            var res =
                 await GetWalletJournalAsync(division, 2560, fromId).ConfigureAwait(false);
             var list = new List<WalletJournal.JournalEntry>();
             while (res.Result.Journal.Any()) {
-                IOrderedEnumerable<WalletJournal.JournalEntry> sortedList =
+                var sortedList =
                     res.Result.Journal.OrderByDescending(f => f.RefId);
-                foreach (WalletJournal.JournalEntry entry in sortedList) {
+                foreach (var entry in sortedList) {
                     if (entry.RefId == untilId) {
                         return list;
                     }
@@ -777,13 +776,13 @@ namespace eZet.EveLib.EveXmlModule {
         /// <returns></returns>
         public async Task<List<WalletTransactions.Transaction>> GetWalletTransactionsUntilAsync(long untilId,
             int division = 1000, long fromId = 0) {
-            EveXmlResponse<WalletTransactions> res =
+            var res =
                 await GetWalletTransactionsAsync(division, 2560, fromId).ConfigureAwait(false);
             var list = new List<WalletTransactions.Transaction>();
             while (res.Result.Transactions.Any()) {
-                IOrderedEnumerable<WalletTransactions.Transaction> sortedList =
+                var sortedList =
                     res.Result.Transactions.OrderByDescending(f => f.TransactionId);
-                foreach (WalletTransactions.Transaction entry in sortedList) {
+                foreach (var entry in sortedList) {
                     if (entry.TransactionId <= untilId) {
                         return list;
                     }
@@ -862,7 +861,7 @@ namespace eZet.EveLib.EveXmlModule {
         }
 
         /// <summary>
-        /// Gets the bookmarks.
+        ///     Gets the bookmarks.
         /// </summary>
         /// <returns>EveXmlResponse&lt;Bookmarks&gt;.</returns>
         public EveXmlResponse<Bookmarks> GetBookmarks() {
@@ -870,7 +869,7 @@ namespace eZet.EveLib.EveXmlModule {
         }
 
         /// <summary>
-        /// Gets the bookmarks asynchronous.
+        ///     Gets the bookmarks asynchronous.
         /// </summary>
         /// <returns>Task&lt;EveXmlResponse&lt;Bookmarks&gt;&gt;.</returns>
         public Task<EveXmlResponse<Bookmarks>> GetBookmarksAsync() {

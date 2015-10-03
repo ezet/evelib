@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -73,12 +72,12 @@ namespace eZet.EveLib.EveXmlModule {
         /// <summary>
         ///     Gets the CharacterKey for this Character.
         /// </summary>
-        public CharacterKey ApiKey { get; private set; }
+        public CharacterKey ApiKey { get; }
 
         /// <summary>
         ///     Gets the Character ID.
         /// </summary>
-        public long CharacterId { get; private set; }
+        public long CharacterId { get; }
 
         /// <summary>
         ///     Gets the name of this character. Note: If this object has not already been initialized, this will send a web
@@ -201,7 +200,7 @@ namespace eZet.EveLib.EveXmlModule {
             if (_isInitialized) return;
             lock (_lazyLoadLock) {
                 if (_isInitialized) return;
-                Character character = ApiKey.Characters.Single(c => c.CharacterId == CharacterId);
+                var character = ApiKey.Characters.Single(c => c.CharacterId == CharacterId);
                 _characterName = character.CharacterName;
                 _corporationId = character.CorporationId;
                 _corporationName = character.CorporationName;
@@ -509,7 +508,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<Locations>> GetLocationsAsync(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/char/Locations.xml.aspx";
-            string ids = String.Join(",", list);
+            var ids = string.Join(",", list);
             return requestAsync<Locations>(relPath, ApiKey, "characterId", CharacterId, "IDs", ids);
         }
 
@@ -537,7 +536,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<MailBodies>> GetMailBodiesAsync(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/char/MailBodies.xml.aspx";
-            string ids = String.Join(",", list);
+            var ids = string.Join(",", list);
             return requestAsync<MailBodies>(relPath, ApiKey, "characterId", CharacterId, "IDs", ids);
         }
 
@@ -649,7 +648,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<NotificationTexts>> GetNotificationTextsAsync(params long[] ids) {
             Contract.Requires(ids != null);
             const string relPath = "/char/NotificationTexts.xml.aspx";
-            string idList = string.Join(",", ids);
+            var idList = string.Join(",", ids);
             return requestAsync<NotificationTexts>(relPath, ApiKey, "characterId", CharacterId, "IDs", idList);
         }
 
@@ -771,12 +770,12 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="fromId">Optional; The forward-limiting ID</param>
         /// <returns></returns>
         public async Task<List<WalletJournal.JournalEntry>> GetWalletJournalUntilAsync(long untilId, long fromId = 0) {
-            EveXmlResponse<WalletJournal> res = await GetWalletJournalAsync(2560, fromId).ConfigureAwait(false);
+            var res = await GetWalletJournalAsync(2560, fromId).ConfigureAwait(false);
             var list = new List<WalletJournal.JournalEntry>();
             while (res.Result.Journal.Any()) {
-                IOrderedEnumerable<WalletJournal.JournalEntry> sortedList =
+                var sortedList =
                     res.Result.Journal.OrderByDescending(f => f.RefId);
-                foreach (WalletJournal.JournalEntry entry in sortedList) {
+                foreach (var entry in sortedList) {
                     if (entry.RefId == untilId) {
                         return list;
                     }
@@ -830,13 +829,13 @@ namespace eZet.EveLib.EveXmlModule {
         /// <returns></returns>
         public async Task<List<WalletTransactions.Transaction>> GetWalletTransactionsUntilAsync(long untilId,
             long fromId = 0) {
-            EveXmlResponse<WalletTransactions> res =
+            var res =
                 await GetWalletTransactionsAsync(2560, fromId).ConfigureAwait(false);
             var list = new List<WalletTransactions.Transaction>();
             while (res.Result.Transactions.Any()) {
-                IOrderedEnumerable<WalletTransactions.Transaction> sortedList =
+                var sortedList =
                     res.Result.Transactions.OrderByDescending(f => f.TransactionId);
-                foreach (WalletTransactions.Transaction entry in sortedList) {
+                foreach (var entry in sortedList) {
                     if (entry.TransactionId <= untilId) {
                         return list;
                     }
@@ -950,16 +949,15 @@ namespace eZet.EveLib.EveXmlModule {
         }
 
         /// <summary>
-        /// Gets the chat channels.
+        ///     Gets the chat channels.
         /// </summary>
         /// <returns>EveXmlResponse&lt;ChatChannels&gt;.</returns>
         public EveXmlResponse<ChatChannels> GetChatChannels() {
             return GetChatChannelsAsync().Result;
-
         }
 
         /// <summary>
-        /// Gets the chat channels asynchronous.
+        ///     Gets the chat channels asynchronous.
         /// </summary>
         /// <returns>Task&lt;EveXmlResponse&lt;ChatChannels&gt;&gt;.</returns>
         public Task<EveXmlResponse<ChatChannels>> GetChatChannelsAsync() {
@@ -968,7 +966,7 @@ namespace eZet.EveLib.EveXmlModule {
         }
 
         /// <summary>
-        /// Gets the bookmarks.
+        ///     Gets the bookmarks.
         /// </summary>
         /// <returns>EveXmlResponse&lt;Bookmarks&gt;.</returns>
         public EveXmlResponse<Bookmarks> GetBookmarks() {
@@ -976,7 +974,7 @@ namespace eZet.EveLib.EveXmlModule {
         }
 
         /// <summary>
-        /// Gets the bookmarks asynchronous.
+        ///     Gets the bookmarks asynchronous.
         /// </summary>
         /// <returns>Task&lt;EveXmlResponse&lt;Bookmarks&gt;&gt;.</returns>
         public Task<EveXmlResponse<Bookmarks>> GetBookmarksAsync() {

@@ -2,6 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
+using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.ZKillboardModule.Models;
@@ -21,7 +22,7 @@ namespace eZet.EveLib.ZKillboardModule {
         ///     Default constructor
         /// </summary>
         public ZKillboard() {
-            RequestHandler = new ZkbRequestHandler(new JsonSerializer(), Config.CacheFactory());
+            RequestHandler = new ZkbRequestHandler(new JsonSerializer(), Config.CacheFactory("ZKillboard"));
             Host = new Uri(DefaultHost);
         }
 

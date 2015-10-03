@@ -9,6 +9,9 @@ namespace eZet.EveLib.Core.Serializers {
     public sealed class JsonSerializer : ISerializer {
         private readonly TraceSource _trace = new TraceSource("EveLib");
 
+        /// <summary>
+        /// The date format
+        /// </summary>
         public string DateFormat = "yyyy-MM-dd HH:mm:ss";
 
         /// <summary>

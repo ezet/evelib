@@ -163,7 +163,7 @@ namespace eZet.EveLib.EveXmlModule {
         }
 
         private async Task ensureInitialized() {
-            EveXmlResponse<ApiKeyInfo> result = await GetApiKeyInfoAsync().ConfigureAwait(false);
+            var result = await GetApiKeyInfoAsync().ConfigureAwait(false);
             LazyInitializer.EnsureInitialized(ref _apiKeyInfo, ref _isInitialized, ref _lazyLoadLock,
                 () => result.Result.Key);
         }

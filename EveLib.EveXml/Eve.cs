@@ -1,9 +1,9 @@
-﻿using System;
-using System.Diagnostics.Contracts;
+﻿using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.EveXmlModule.Models;
-using eZet.EveLib.EveXmlModule.Models.Misc;
 using eZet.EveLib.EveXmlModule.Models.Corporation;
+using eZet.EveLib.EveXmlModule.Models.Misc;
+using FactionWarfareStats = eZet.EveLib.EveXmlModule.Models.Misc.FactionWarfareStats;
 
 namespace eZet.EveLib.EveXmlModule {
     /// <summary>
@@ -70,7 +70,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<CharacterAffiliation>> GetCharacterAffiliationAsync(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/CharacterAffiliation.xml.aspx";
-            string ids = String.Join(",", list);
+            var ids = string.Join(",", list);
             return requestAsync<CharacterAffiliation>(relPath, "IDs", ids);
         }
 
@@ -94,7 +94,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<CharacterNameId>> GetCharacterIdAsync(params string[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/CharacterID.xml.aspx";
-            string names = String.Join(",", list);
+            var names = string.Join(",", list);
             return requestAsync<CharacterNameId>(relPath, "names", names);
         }
 
@@ -155,7 +155,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<CharacterNameId>> GetCharacterNameAsync(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/CharacterName.xml.aspx";
-            string ids = String.Join(",", list);
+            var ids = string.Join(",", list);
             return requestAsync<CharacterNameId>(relPath, "IDs", ids);
         }
 
@@ -208,7 +208,7 @@ namespace eZet.EveLib.EveXmlModule {
         ///     Returns global stats on the factions in factional warfare
         /// </summary>
         /// <returns></returns>
-        public EveXmlResponse<Models.Misc.FactionWarfareStats> GetFactionWarfareStats() {
+        public EveXmlResponse<FactionWarfareStats> GetFactionWarfareStats() {
             return GetFactionWarfareStatsAsync().Result;
         }
 
@@ -216,9 +216,9 @@ namespace eZet.EveLib.EveXmlModule {
         ///     Returns global stats on the factions in factional warfare
         /// </summary>
         /// <returns></returns>
-        public Task<EveXmlResponse<Models.Misc.FactionWarfareStats>> GetFactionWarfareStatsAsync() {
+        public Task<EveXmlResponse<FactionWarfareStats>> GetFactionWarfareStatsAsync() {
             const string relPath = "/eve/FacWarStats.xml.aspx";
-            return requestAsync<Models.Misc.FactionWarfareStats>(relPath);
+            return requestAsync<FactionWarfareStats>(relPath);
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<TypeName>> GetTypeNameAsync(params long[] list) {
             Contract.Requires(list != null);
             const string relPath = "/eve/TypeName.xml.aspx";
-            string ids = String.Join(",", list);
+            var ids = string.Join(",", list);
             return requestAsync<TypeName>(relPath, "IDs", ids);
         }
 
@@ -346,7 +346,7 @@ namespace eZet.EveLib.EveXmlModule {
         public Task<EveXmlResponse<OwnerCollection>> GetOwnerIdAsync(params string[] list) {
             Contract.Requires(list != null);
             const string relpath = "/eve/OwnerID.xml.aspx";
-            string names = String.Join(",", list);
+            var names = string.Join(",", list);
             return requestAsync<OwnerCollection>(relpath, "names", names);
         }
 

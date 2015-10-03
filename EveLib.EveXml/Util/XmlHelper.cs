@@ -60,7 +60,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>EveXmlRowCollection&lt;T&gt;.</returns>
         public virtual EveXmlRowCollection<T> deserializeRowSet<T>(string name) {
-            XmlReader reader = getRowSetReader(name);
+            var reader = getRowSetReader(name);
             if (reader == null) return default(EveXmlRowCollection<T>);
             reader.ReadToDescendant("rowset");
             var serializer = new XmlSerializer(typeof (EveXmlRowCollection<T>));
@@ -75,7 +75,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>T.</returns>
         public T deserialize<T>(string name) {
-            XmlReader reader = getReader(name);
+            var reader = getReader(name);
             if (reader == null) return default(T);
             var serializer = new XmlSerializer(typeof (T));
             return (T) serializer.Deserialize(reader);
@@ -87,7 +87,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>XmlReader.</returns>
         public XmlReader getReader(string name) {
-            XElement el = list.FirstOrDefault(x => x.Name == name);
+            var el = list.FirstOrDefault(x => x.Name == name);
             return el != null ? el.CreateReader() : null;
         }
 
@@ -97,7 +97,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>XmlReader.</returns>
         public XmlReader getRowSetReader(string name) {
-            XElement rowset = list.Where(x => x.Name == "rowset").FirstOrDefault(r => r.Attribute("name").Value == name);
+            var rowset = list.Where(x => x.Name == "rowset").FirstOrDefault(r => r.Attribute("name").Value == name);
             return rowset != null ? rowset.CreateReader() : null;
         }
 
@@ -107,7 +107,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>System.Int64.</returns>
         public long getLong(string name) {
-            XElement val = list.FirstOrDefault(x => x.Name == name);
+            var val = list.FirstOrDefault(x => x.Name == name);
             return val != null ? long.Parse(val.Value) : 0;
         }
 
@@ -117,7 +117,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>System.String.</returns>
         public string getString(string name) {
-            XElement val = list.SingleOrDefault(x => x.Name == name);
+            var val = list.SingleOrDefault(x => x.Name == name);
             return val != null ? val.Value : "";
         }
 
@@ -127,7 +127,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>System.Int32.</returns>
         public int getInt(string name) {
-            XElement val = list.FirstOrDefault(x => x.Name == name);
+            var val = list.FirstOrDefault(x => x.Name == name);
             return val != null ? int.Parse(val.Value) : 0;
         }
 
@@ -137,7 +137,7 @@ namespace eZet.EveLib.EveXmlModule.Util {
         /// <param name="name">The name.</param>
         /// <returns>System.Decimal.</returns>
         public decimal getDecimal(string name) {
-            XElement val = list.FirstOrDefault(x => x.Name == name);
+            var val = list.FirstOrDefault(x => x.Name == name);
             return val != null ? decimal.Parse(list.First(x => x.Name == name).Value, CultureInfo.InvariantCulture) : 0;
         }
 

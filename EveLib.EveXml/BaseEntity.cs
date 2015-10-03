@@ -38,7 +38,7 @@ namespace eZet.EveLib.EveXmlModule {
         protected BaseEntity() {
             var handler = new EveXmlRequestHandler();
             handler.Serializer = new XmlSerializer();
-            handler.Cache = Config.CacheFactory();
+            handler.Cache = Config.CacheFactory("EveXml");
             RequestHandler = handler;
             BaseUri = DefaultUri;
         }
@@ -91,13 +91,6 @@ namespace eZet.EveLib.EveXmlModule {
             return RequestHandler.RequestAsync<EveXmlResponse<T>>(uri);
         }
 
-        protected async Task<T> requestAsyncTest<T>(string relUri, params object[] args) where T : EveXmlResponse<T> {
-            Contract.Requires(BaseUri != null);
-            Contract.Requires(args != null);
-            var uri = new Uri(BaseUri + relUri + generateQueryString(null, args));
-            return await RequestHandler.RequestAsync<EveXmlResponse<T>>(uri) as T;
-        }
-
         /// <summary>
         ///     Performs a request on the requester, using the provided arguments.
         /// </summary>
@@ -135,10 +128,10 @@ namespace eZet.EveLib.EveXmlModule {
         /// <returns>System.String.</returns>
         protected string generateQueryString(ApiKey key = null, params object[] args) {
             Contract.Requires(args != null);
-            string queryString = "?";
+            var queryString = "?";
             if (key != null)
                 queryString = "?keyID=" + key.KeyId + "&vCode=" + key.VCode + "&";
-            for (int i = 0; i < args.Length; i += 2) {
+            for (var i = 0; i < args.Length; i += 2) {
                 queryString += args[i] + "=" + args[i + 1] + "&";
             }
             return queryString;

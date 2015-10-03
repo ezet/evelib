@@ -20,15 +20,23 @@ namespace eZet.EveLib.Core {
         public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                                 Separator;
 
+
         /// <summary>
-        ///     relCachePath to image directory
+        /// Gets or sets the image path.
         /// </summary>
-        public static readonly string ImagePath;
+        /// <value>The image path.</value>
+        public static string ImagePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the cache path.
+        /// </summary>
+        /// <value>The cache path.</value>
+        public static string CachePath { get; set; }
 
         /// <summary>
         ///     The cache factory
         /// </summary>
-        public static Func<IEveLibCache> CacheFactory;
+        public static Func<string, IEveLibCache> CacheFactory { get; set; }
 
         /// <summary>
         ///     UserAgent used for HTTP requests
@@ -41,7 +49,8 @@ namespace eZet.EveLib.Core {
             string appName = ConfigurationManager.AppSettings["eveLib.AppData"];
             AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
             ImagePath = AppData + Separator + "Images";
-            CacheFactory = () => new EveLibFileCache(AppData + Separator + "EveXmlCache", "register");
+            CachePath = AppData + Separator + "Cache";
+            CacheFactory = module => new EveLibFileCache(CachePath + Separator + module, "register");
         }
     }
 }
