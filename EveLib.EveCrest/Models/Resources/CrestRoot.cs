@@ -282,7 +282,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// </summary>
             /// <value>The campaigns.</value>
             [DataMember(Name = "campaigns")]
-            public Href<NotImplemented> Campaigns { get; set; }
+            public Href<SovCampaignsCollection> Campaigns { get; set; }
 
             /// <summary>
             /// Gets or sets the structures.

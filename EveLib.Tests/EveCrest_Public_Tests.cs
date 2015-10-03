@@ -160,5 +160,11 @@ namespace eZet.EveLib.Test {
         public async Task GetSovereigntyStructures() {
             var response = await crest.GetRoot().QueryAsync(r => r.Sovereignty.Structures);
         }
+
+        [TestMethod]
+        public async Task GetSovereigntyCampaigns() {
+            var response = await crest.GetRoot().QueryAsync(r => r.Sovereignty.Campaigns);
+        }
+
     }
 }
