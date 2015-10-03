@@ -118,6 +118,7 @@
     <Compile Include="Models\Resources\DustRoot.cs" />
     <Compile Include="Models\Resources\EveRoot.cs" />
     <Compile Include="Models\Resources\Market\MarketOrder.cs" />
+    <Compile Include="Models\Resources\SovStructureCollection.cs" />
     <Compile Include="Models\Resources\TokenDecode.cs" />
     <Compile Include="Models\Resources\Tournaments\TournamentTeamMember.cs" />
     <Compile Include="Models\Shared\BanEntry.cs" />

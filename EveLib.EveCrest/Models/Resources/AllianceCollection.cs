@@ -26,7 +26,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Initializes a new instance of the <see cref="AllianceCollection" /> class.
         /// </summary>
         public AllianceCollection() {
-            ContentType = "application/vnd.ccp.eve.AllianceCollection-v1+json";
+            ContentType = "application/vnd.ccp.eve.AllianceCollection-v2+json";
         }
 
         /// <summary>
@@ -40,6 +40,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <value>The short name.</value>
             [DataMember(Name = "shortName")]
             public string ShortName { get; set; }
+
+
 
         }
 

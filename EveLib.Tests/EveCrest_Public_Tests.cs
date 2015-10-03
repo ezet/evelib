@@ -155,5 +155,10 @@ namespace eZet.EveLib.Test {
 
             Console.WriteLine(group.Name);
         }
+
+        [TestMethod]
+        public async Task GetSovereigntyStructures() {
+            var response = await crest.GetRoot().QueryAsync(r => r.Sovereignty.Structures);
+        }
     }
 }

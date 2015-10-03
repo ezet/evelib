@@ -665,6 +665,8 @@ namespace eZet.EveLib.EveCrestModule {
             return GetIndustryFacilitiesAsync().Result;
         }
 
+
+
         /// <summary>
         ///     Performs a request using the request handler.
         /// </summary>

@@ -29,7 +29,6 @@ namespace eZet.EveLib.EveWhoModule.Models {
         [DataMember(Name = "info")]
         public AllianceMembersInfo Info { get; set; }
 
-
         /// <summary>
         ///     Gets or sets the members.
         /// </summary>
