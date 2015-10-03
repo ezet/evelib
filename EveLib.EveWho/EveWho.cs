@@ -47,10 +47,10 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="characterId">The character identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>Task&lt;EveWhoResponse&lt;Character&gt;&gt;.</returns>
-        public Task<EveWhoResponse<Character>> GetCharacterAsync(long characterId, int page = 0) {
+        /// <returns>Task&lt;EveWhoResponse&lt;CharacterResponse&gt;&gt;.</returns>
+        public Task<CharacterResponse> GetCharacterAsync(long characterId, int page = 0) {
             string relPath = "?type=character&id=" + characterId + "&page=" + page;
-            return requestAsync<EveWhoResponse<Character>>(relPath);
+            return requestAsync<CharacterResponse>(relPath);
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="characterId">The character identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>EveWhoResponse&lt;Character&gt;.</returns>
-        public EveWhoResponse<Character> GetCharacter(long characterId, int page) {
+        /// <returns>EveWhoResponse&lt;CharacterResponse&gt;.</returns>
+        public CharacterResponse GetCharacter(long characterId, int page) {
             return GetCharacterAsync(characterId, page).Result;
         }
 
@@ -68,10 +68,10 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>Task&lt;EveWhoResponse&lt;Corporation&gt;&gt;.</returns>
-        public Task<EveWhoResponse<Corporation>> GetCorporationAsync(long corporationId, int page = 0) {
+        /// <returns>Task&lt;EveWhoResponse&lt;CorporationResponse&gt;&gt;.</returns>
+        public Task<CorporationResponse> GetCorporationAsync(long corporationId, int page = 0) {
             string relPath = "?type=corporation&id=" + corporationId + "&page=" + page;
-            return requestAsync<EveWhoResponse<Corporation>>(relPath);
+            return requestAsync<CorporationResponse>(relPath);
         }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>EveWhoResponse&lt;Corporation&gt;.</returns>
-        public EveWhoResponse<Corporation> GetCorporation(long corporationId, int page = 0) {
+        /// <returns>EveWhoResponse&lt;CorporationResponse&gt;.</returns>
+        public CorporationResponse GetCorporation(long corporationId, int page = 0) {
             return GetCorporationAsync(corporationId, page).Result;
         }
 
@@ -89,11 +89,11 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>Task&lt;EveWhoResponse&lt;CorporationMembers&gt;&gt;.</returns>
-        public Task<EveWhoResponse<CorporationMembers>> GetCorporationMembersAsync(long corporationId,
+        /// <returns>Task&lt;EveWhoResponse&lt;CorporationMembersResponse&gt;&gt;.</returns>
+        public Task<CorporationMembersResponse> GetCorporationMembersAsync(long corporationId,
             int page = 0) {
             string relPath = "?type=corplist&id=" + corporationId + "&page=" + page;
-            return requestAsync<EveWhoResponse<CorporationMembers>>(relPath);
+            return requestAsync<CorporationMembersResponse>(relPath);
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="corporationId">The corporation identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>EveWhoResponse&lt;CorporationMembers&gt;.</returns>
-        public EveWhoResponse<CorporationMembers> GetCorporationMembers(long corporationId, int page = 0) {
+        /// <returns>EveWhoResponse&lt;CorporationMembersResponse&gt;.</returns>
+        public CorporationMembersResponse GetCorporationMembers(long corporationId, int page = 0) {
             return GetCorporationMembersAsync(corporationId, page).Result;
         }
 
@@ -111,10 +111,10 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>Task&lt;EveWhoResponse&lt;Alliance&gt;&gt;.</returns>
-        public Task<EveWhoResponse<Alliance>> GetAllianceAsync(long allianceId, int page = 0) {
-            string relPath = "?type=allilist&id=" + allianceId + "&page=" + page;
-            return requestAsync<EveWhoResponse<Alliance>>(relPath);
+        /// <returns>Task&lt;EveWhoResponse&lt;AllianceResponse&gt;&gt;.</returns>
+        public Task<AllianceResponse> GetAllianceAsync(long allianceId, int page = 0) {
+            string relPath = "?type=alliance&id=" + allianceId + "&page=" + page;
+            return requestAsync<AllianceResponse>(relPath);
         }
 
         /// <summary>
@@ -122,8 +122,8 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>EveWhoResponse&lt;Alliance&gt;.</returns>
-        public EveWhoResponse<Alliance> GetAlliance(long allianceId, int page = 0) {
+        /// <returns>EveWhoResponse&lt;AllianceResponse&gt;.</returns>
+        public AllianceResponse GetAlliance(long allianceId, int page = 0) {
             return GetAllianceAsync(allianceId, page).Result;
         }
 
@@ -132,10 +132,10 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>Task&lt;EveWhoResponse&lt;AllianceMembers&gt;&gt;.</returns>
-        public Task<EveWhoResponse<AllianceMembers>> GetAllianceMembersAsync(long allianceId, int page = 0) {
+        /// <returns>Task&lt;EveWhoResponse&lt;AllianceMembersResponse&gt;&gt;.</returns>
+        public Task<AllianceMembersResponse> GetAllianceMembersAsync(long allianceId, int page = 0) {
             string relPath = "?type=allilist&id=" + allianceId + "&page=" + page;
-            return requestAsync<EveWhoResponse<AllianceMembers>>(relPath);
+            return requestAsync<AllianceMembersResponse>(relPath);
         }
 
         /// <summary>
@@ -143,8 +143,8 @@ namespace eZet.EveLib.EveWhoModule {
         /// </summary>
         /// <param name="allianceId">The alliance identifier.</param>
         /// <param name="page">The page.</param>
-        /// <returns>EveWhoResponse&lt;AllianceMembers&gt;.</returns>
-        public EveWhoResponse<AllianceMembers> GetAllianceMembers(long allianceId, int page = 0) {
+        /// <returns>EveWhoResponse&lt;AllianceMembersResponse&gt;.</returns>
+        public AllianceMembersResponse GetAllianceMembers(long allianceId, int page = 0) {
             return GetAllianceMembersAsync(allianceId, page).Result;
         }
     }

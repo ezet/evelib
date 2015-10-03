@@ -110,13 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EveWho.cs" />
-    <Compile Include="Models\Alliance.cs" />
-    <Compile Include="Models\AllianceMembers.cs" />
-    <Compile Include="Models\Character.cs" />
-    <Compile Include="Models\Corporation.cs" />
-    <Compile Include="Models\CorporationMembers.cs" />
+    <Compile Include="Models\AllianceResponse.cs" />
+    <Compile Include="Models\AllianceMembersResponse.cs" />
+    <Compile Include="Models\CharacterResponse.cs" />
+    <Compile Include="Models\CorporationResponse.cs" />
+    <Compile Include="Models\CorporationMembersResponse.cs" />
     <Compile Include="Models\Member.cs" />
-    <Compile Include="Models\EveWhoResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
