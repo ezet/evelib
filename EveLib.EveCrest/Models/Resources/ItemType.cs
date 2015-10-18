@@ -40,5 +40,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The description.</value>
         [DataMember(Name = "description")]
         public string Description { get; set; }
+        
+        /// <summary>
+        ///     Gets or sets the volume.
+        /// </summary>
+        /// <value>The description.</value>
+        [DataMember(Name = "volume")]
+        public string Volume { get; set; }
     }
 }
