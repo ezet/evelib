@@ -31,6 +31,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is from cache.
+        /// </summary>
+        /// <value><c>true</c> if this instance is from cache; otherwise, <c>false</c>.</value>
+        bool IsFromCache { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether this instance is deprecated.
         /// </summary>
         /// <value><c>true</c> if this instance is deprecated; otherwise, <c>false</c>.</value>

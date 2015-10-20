@@ -24,7 +24,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         ///     The default public max concurrent requests
         /// </summary>
-        public const int DefaultPublicMaxConcurrentRequests = 10;
+        public const int DefaultPublicMaxConcurrentRequests = 20;
 
         /// <summary>
         ///     The default authed max concurrent requests
@@ -140,7 +140,12 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
                 data = await Cache.LoadAsync(uri).ConfigureAwait(false);
             bool cached = data != null;
-            if (cached) return Serializer.Deserialize<T>(data);
+            T result;
+            if (cached) {
+                result = Serializer.Deserialize<T>(data);
+                result.IsFromCache = true;
+                return result;
+            }
             if (CacheLevel == CacheLevel.CacheOnly) return default(T);
             // set up request
             CrestMode mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
@@ -201,7 +206,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             }
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
                 await Cache.StoreAsync(uri, getCacheExpirationTime(header), data).ConfigureAwait(false);
-            var result = Serializer.Deserialize<T>(data);
+            result = Serializer.Deserialize<T>(data);
             result.ResponseHeaders = header;
             return result;
         }
