@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>EveCrest 3.0 adds complete support for authenticated and public crest, and supports all CREST resources that are currently available.</releaseNotes>
+    <releaseNotes>Changed MarketOrder ID from int to long. Added support for sovereignty/campaigns/ and sovereignty/structures/.</releaseNotes>
     <tags>EveLib EveCrest API EveOnline Eve Online Crest</tags>
   </metadata>
 </package>

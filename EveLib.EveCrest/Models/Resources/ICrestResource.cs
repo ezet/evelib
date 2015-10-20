@@ -20,10 +20,10 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    ///     Interface ICrestResource
+    /// Interface ICrestResource
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICrestResource<T> where T : class, ICrestResource<T> {
+    public interface ICrestResource<out T> where T : class, ICrestResource<T> {
         /// <summary>
         ///     Gets or sets the response headers.
         /// </summary>

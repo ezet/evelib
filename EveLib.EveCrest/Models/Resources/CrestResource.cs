@@ -20,7 +20,7 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    ///     Class CrestResource.
+    ///     Base class for all CREST resouces.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class CrestResource<T> : ICrestResource<T> where T : class, ICrestResource<T> {
@@ -31,7 +31,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The crest instance</value>
         public EveCrest EveCrest { get; set; }
 
-  
         /// <summary>
         ///     Gets or sets the response headers.
         /// </summary>
