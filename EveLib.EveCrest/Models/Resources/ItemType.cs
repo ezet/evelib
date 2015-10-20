@@ -96,7 +96,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The graphic identifier.</value>
         [DataMember(Name = "graphicID")]
-        public GraphicId GraphicId { get; set; }
+        public Shared.GraphicId GraphicId { get; set; }
 
    
     }

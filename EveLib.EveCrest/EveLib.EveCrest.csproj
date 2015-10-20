@@ -145,6 +145,7 @@
     <Compile Include="Models\Resources\Tournaments\TournamentTeam.cs" />
     <Compile Include="Models\Resources\Tournaments\TournamentTeamMemberCollection.cs" />
     <Compile Include="Models\Resources\Tournaments\TournamentTypeBanCollection.cs" />
+    <Compile Include="Models\Shared\GraphicId.cs" />
     <Compile Include="Models\Shared\IndustryTeamWorker.cs" />
     <Compile Include="Models\Resources\ItemCategoryCollection.cs" />
     <Compile Include="Models\Resources\ItemGroup.cs" />

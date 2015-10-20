@@ -607,7 +607,6 @@ namespace eZet.EveLib.EveCrestModule {
             return GetIndustryTeamAsync(teamId).Result;
         }
 
-
         /// <summary>
         ///     Returns a list of industry systems and prices
         /// </summary>
@@ -665,8 +664,6 @@ namespace eZet.EveLib.EveCrestModule {
             return GetIndustryFacilitiesAsync().Result;
         }
 
-
-
         /// <summary>
         ///     Performs a request using the request handler.
         /// </summary>
@@ -686,7 +683,7 @@ namespace eZet.EveLib.EveCrestModule {
         private async Task<T> requestAsync<T>(Uri uri) where T : class, ICrestResource<T> {
             T response = null;
             if (Mode == CrestMode.Authenticated) {
-                bool retry = false;
+                var retry = false;
                 try {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);

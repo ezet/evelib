@@ -1,4 +1,4 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : EveLib.EveCrest
 // Author           : larsd
 // Created          : 10-20-2015
@@ -7,26 +7,21 @@
 // Last Modified On : 10-20-2015
 // ***********************************************************************
 // <copyright file="GraphicId.cs" company="Lars Kristian Dahl">
-//     Copyright �  2015
+//     Copyright ©  2015
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models.Shared {
+
     /// <summary>
     /// Class GraphicId.
     /// </summary>
     [DataContract]
-    public sealed class GraphicId : CrestResource<GraphicId> {
+    public class GraphicId : LinkedEntity<GraphicId> {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GraphicId"/> class.
-        /// </summary>
-        public GraphicId() {
-            ContentType = "application/vnd.ccp.eve.GraphicID-v1+json; charset=utf-8";
-        }
 
         /// <summary>
         /// Gets or sets the graphic file.
@@ -69,7 +64,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The isis icon path.</value>
         [DataMember(Name = "isisIconPath")]
         public string IsisIconPath { get; set; }
-
- 
     }
 }

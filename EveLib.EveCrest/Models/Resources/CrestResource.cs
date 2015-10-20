@@ -38,6 +38,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is from cache.
+        /// </summary>
+        /// <value><c>true</c> if this instance is from cache; otherwise, <c>false</c>.</value>
+        public bool IsFromCache { get;  set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether this resource is deprecated.
         /// </summary>
         /// <value><c>true</c> if this instance is deprecated; otherwise, <c>false</c>.</value>
@@ -48,6 +54,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The version.</value>
         public virtual string ContentType { get; protected set; }
+
+
 
         /// <summary>
         ///     Queries the resource asynchronously.
