@@ -10,6 +10,7 @@ using eZet.EveLib.EveCrestModule.Models.Resources.Market;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
+
     [TestClass]
     public class EveCrest_Public_Tests {
         private const int AllianceId = 434243723; // C C P Alliance
@@ -104,7 +105,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (EveCrestException))]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }
@@ -173,5 +174,16 @@ namespace eZet.EveLib.Test {
             Assert.IsNotNull(type.GraphicId);
         }
 
+        [TestMethod]
+        public async Task GetBuyOrderWith() {
+            var orders =
+                (await
+                    (await
+                        (await crest.GetRootAsync())
+                    .QueryAsync(r => r.Regions))
+                .QueryAsync(x => x.Single(r => r.Name == "The Forge")))
+                .Query(r => r.MarketBuyOrders, "type",
+                            "https://public-crest.eveonline.com/types/34/");
+        }
     }
 }
