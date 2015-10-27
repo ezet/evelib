@@ -23,18 +23,33 @@ using Newtonsoft.Json;
 
 namespace eZet.EveLib.EveAuthModule {
     /// <summary>
-    ///     Enum CrestScope
+    /// Enum CrestScope
     /// </summary>
     public enum CrestScope {
         /// <summary>
-        ///     No scope
-        /// </summary>
-        None,
-
-        /// <summary>
         ///     The publicData scope
         /// </summary>
-        PublicData
+        PublicData,
+
+        /// <summary>
+        /// The character statistics read
+        /// </summary>
+        CharacterStatisticsRead,
+
+        /// <summary>
+        /// The character contacts read
+        /// </summary>
+        CharacterContactsRead,
+
+        /// <summary>
+        /// The character fittings read
+        /// </summary>
+        CharacterFittingsRead,
+
+        /// <summary>
+        /// The character fittings write
+        /// </summary>
+        CharacterFittingsWrite,
     }
 
     /// <summary>
@@ -47,14 +62,17 @@ namespace eZet.EveLib.EveAuthModule {
         ///     Initializes a new instance of the <see cref="EveAuth" /> class.
         /// </summary>
         public EveAuth() {
-            BaseUri = "https://login.eveonline.com";
+            Host = "login.eveonline.com";
+            Protocol = "https://";
         }
+
+        public string Protocol { get; set; }
 
         /// <summary>
         ///     Gets or sets the base URI.
         /// </summary>
         /// <value>The base URI.</value>
-        public string BaseUri { get; set; }
+        public string Host { get; set; }
 
         /// <summary>
         ///     Authenticates the specified encoded key.
@@ -63,8 +81,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="authCode">The authentication code.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public async Task<AuthResponse> AuthenticateAsync(string encodedKey, string authCode) {
-            HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/token"));
-            request.Host = "login.eveonline.com";
+            HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(Protocol + Host + "/oauth/token"));
+            request.Host = Host;
             request.Headers.Add("Authorization", "Basic " + encodedKey);
             request.Method = "POST";
             HttpRequestHelper.AddPostData(request, "grant_type=authorization_code&code=" + authCode);
@@ -80,8 +98,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="refreshToken">The refresh token.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public async Task<AuthResponse> RefreshAsync(string encodedKey, string refreshToken) {
-            HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/token"));
-            request.Host = "login.eveonline.com";
+            HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(Protocol + Host + "/oauth/token"));
+            request.Host = Host;
             request.Headers.Add("Authorization", "Basic " + encodedKey);
             request.Method = "POST";
             HttpRequestHelper.AddPostData(request, "grant_type=refresh_token&refresh_token=" + refreshToken);
@@ -96,8 +114,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="accessToken">The access token.</param>
         /// <returns>Task&lt;VerifyResponse&gt;.</returns>
         public async Task<VerifyResponse> VerifyAsync(string accessToken) {
-            HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(BaseUri + "/oauth/verify"));
-            request.Host = "login.eveonline.com";
+            HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(Protocol + Host + "/oauth/verify"));
+            request.Host = Host;
             request.Headers.Add("Authorization", "Bearer " + accessToken);
             request.Method = "GET";
             string response = await requestAsync(request).ConfigureAwait(false);
@@ -105,14 +123,27 @@ namespace eZet.EveLib.EveAuthModule {
             return result;
         }
 
-        private static string resolveScope(CrestScope crestScope) {
+        private static string resolveScope(params CrestScope[] crestScopes) {
+            string scope = "";
+            foreach (var crestScope in crestScopes)
             switch (crestScope) {
-                case CrestScope.None:
-                    return "";
                 case CrestScope.PublicData:
-                    return "publicData";
+                    scope += "publicData ";
+                    break;
+                case CrestScope.CharacterFittingsRead:
+                    scope += "characterFittingsRead ";
+                    break;
+                case CrestScope.CharacterContactsRead:
+                    scope += "characterContactsRead ";
+                    break;
+                case CrestScope.CharacterStatisticsRead:
+                    scope += "characterStatisticsRead ";
+                    break;
+                case CrestScope.CharacterFittingsWrite:
+                    scope += "characterFittingsWrite ";
+                    break;
             }
-            return "";
+            return scope;
         }
 
 
@@ -124,10 +155,26 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="crestScope">The crest scope.</param>
         /// <param name="state"></param>
         /// <returns>System.String.</returns>
-        public string CreateAuthLink(string clientId, string redirectUri, CrestScope crestScope, string state = "defaultState") {
+        public string CreateAuthLink(string clientId, string redirectUri, string state, params CrestScope[] crestScope) {
             string url =
-                BaseUri + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId +
+                Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId +
                 "&scope=" + resolveScope(crestScope) + "&state=" + state;
+            return url;
+        }
+
+
+        /// <summary>
+        /// Creates the authentication link.
+        /// </summary>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="redirectUri">The redirect URI.</param>
+        /// <param name="state">The state.</param>
+        /// <param name="scopes">The scopes.</param>
+        /// <returns>System.String.</returns>
+        public string CreateAuthLink(string clientId, string redirectUri, string state, string scopes) {
+            string url =
+                Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId +
+                "&scope=" + scopes + "&state=" + state;
             return url;
         }
 

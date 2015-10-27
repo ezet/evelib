@@ -16,12 +16,19 @@ namespace eZet.EveLib.EveAuthUtility {
             Console.WriteLine("Your client ID and secret key will be provided by \nhttps://developers.eveonline.com after registering an application.\n");
 
             Console.WriteLine("For easier editing, rightclick the title bar for the console window, \nthen go to Properties -> Options -> enable QuickEdit mode.\n");
-            Console.Write("Enter your client ID: ");
-            string clientId = Console.ReadLine();
-            Console.Write("Enter your secret key: ");
-            string secret = Console.ReadLine();
+            Console.Write("Please select SSO server: (1) Tranquility or (2) Singularity: ");
+            var server = Console.ReadLine();
+            if (server == "2") Auth.Host = "sisilogin.testeveonline.com";
+            Console.WriteLine("Enter your client ID: ");
+            var clientId = Console.ReadLine();
+            //string clientId = "cefe601d9f5a444183f8c732676709fb";
+            Console.WriteLine("Enter your secret key: ");
+            var secret = Console.ReadLine();
+            //string secret = "Gwg3JNT8V0DLZwb7ZmRke9zJDYp1ePnUm9V5zvjY";
             string encodedKey = EveAuth.Encode(clientId, secret);
-            string authLink = Auth.CreateAuthLink(clientId, "/", CrestScope.PublicData);
+            Console.WriteLine("Please enter your request scopes as a space delimited string: ");
+            string scopes = Console.ReadLine();
+            string authLink = Auth.CreateAuthLink(clientId, "/", "default", scopes);
             System.Windows.Forms.Clipboard.SetText(authLink);
             Console.WriteLine("Please log in using the following link (already copied to your clipboard): ");
             Console.WriteLine(authLink);
@@ -53,7 +60,7 @@ namespace eZet.EveLib.EveAuthUtility {
             Console.WriteLine("\nAccess token:\n" + response.AccessToken);
             Console.WriteLine("\nRefresh token:\n" + response.RefreshToken);
             Console.WriteLine("\nEncoded key:\n" + encodedKey);
-            Console.ReadKey();
+            Console.ReadLine();
         }
     }
 }
