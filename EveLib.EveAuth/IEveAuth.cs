@@ -20,5 +20,17 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="refreshToken">The refresh token.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         Task<AuthResponse> RefreshAsync(string encodedKey, string refreshToken);
+
+        /// <summary>
+        /// Gets or sets the host.
+        /// </summary>
+        /// <value>The host.</value>
+        string Host { get; set; }
+
+        /// <summary>
+        /// Gets or sets the protocol.
+        /// </summary>
+        /// <value>The protocol.</value>
+        string Protocol { get; set; }
     }
 }

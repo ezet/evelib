@@ -20,15 +20,17 @@ namespace eZet.EveLib.EveAuthUtility {
             var server = Console.ReadLine();
             if (server == "2") Auth.Host = "sisilogin.testeveonline.com";
             Console.WriteLine("Enter your client ID: ");
-            var clientId = Console.ReadLine();
-            //string clientId = "cefe601d9f5a444183f8c732676709fb";
+            //var clientId = Console.ReadLine();
+            var clientId = "cefe601d9f5a444183f8c732676709fb";
             Console.WriteLine("Enter your secret key: ");
-            var secret = Console.ReadLine();
-            //string secret = "Gwg3JNT8V0DLZwb7ZmRke9zJDYp1ePnUm9V5zvjY";
-            string encodedKey = EveAuth.Encode(clientId, secret);
+            //var secret = Console.ReadLine();
+            var secret = "Gwg3JNT8V0DLZwb7ZmRke9zJDYp1ePnUm9V5zvjY";
+            var encodedKey = EveAuth.Encode(clientId, secret);
             Console.WriteLine("Please enter your request scopes as a space delimited string: ");
-            string scopes = Console.ReadLine();
-            string authLink = Auth.CreateAuthLink(clientId, "/", "default", scopes);
+            //string scopes = Console.ReadLine();
+            var scopes =
+                "publicData characterFittingsRead characterFittingsWrite characterStatisticsRead characterContactsRead";
+            var authLink = Auth.CreateAuthLink(clientId, "/", "default", scopes);
             System.Windows.Forms.Clipboard.SetText(authLink);
             Console.WriteLine("Please log in using the following link (already copied to your clipboard): ");
             Console.WriteLine(authLink);

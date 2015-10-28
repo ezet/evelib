@@ -116,7 +116,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -130,6 +132,7 @@
     <Compile Include="EveCrest_Authed_Tests .cs" />
     <Compile Include="EveCrest_Public_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
+    <Compile Include="EveCrest_Singularity_Tests.cs" />
     <Compile Include="EveWho_Tests.cs" />
     <Compile Include="StaticData_Tests.cs" />
     <Compile Include="Misc_Tests.cs" />

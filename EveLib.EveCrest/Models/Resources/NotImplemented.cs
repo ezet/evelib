@@ -3,7 +3,7 @@ using eZet.EveLib.EveCrestModule.Exceptions;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    ///     Represents a resource that isn't implemented. If this throws a NotImplementedException, please notify the
+    ///     Represents a resource that isn't implemented. If this throws a ResourceNotSupportedException, please notify the
     ///     developer.
     /// </summary>
     public sealed class NotImplemented : CrestResource<NotImplemented> {

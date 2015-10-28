@@ -27,6 +27,7 @@ using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
 using eZet.EveLib.EveCrestModule.Models.Resources.Market;
 using eZet.EveLib.EveCrestModule.RequestHandlers;
+using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.EveCrestModule {
     /// <summary>
@@ -179,7 +180,7 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Gets or sets the request handler.
         /// </summary>
         /// <value>The request handler.</value>
-        public ICrestRequestHandler RequestHandler { get; set; }
+        public ICachedCrestRequestHandler RequestHandler { get; set; }
 
         /// <summary>
         ///     Gets or sets the image request handler.

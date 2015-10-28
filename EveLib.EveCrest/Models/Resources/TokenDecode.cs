@@ -33,6 +33,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The character.</value>
         [DataMember(Name = "character")]
-        public Href<NotImplemented> Character { get; set; }
+        public Href<Character> Character { get; set; }
     }
 }
