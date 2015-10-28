@@ -38,6 +38,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public class Fitting {
 
             /// <summary>
+            /// Gets or sets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            [DataMember(Name = "name")]
+            public string Name { get; set; }
+
+            /// <summary>
             /// Gets or sets the description.
             /// </summary>
             /// <value>The description.</value>
