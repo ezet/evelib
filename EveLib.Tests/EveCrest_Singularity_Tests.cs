@@ -51,6 +51,12 @@ namespace eZet.EveLib.Test {
                 await (await (await (await Crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Fittings);
         }
 
+        [TestMethod]
+        public async Task GetContacts() {
+            var contacts =
+                await (await (await (await Crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
+        }
+
 
 
 

@@ -45,7 +45,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Href<FittingCollection> Fittings { get; set; }
 
         [DataMember(Name = "contacts")]
-        public Href<NotImplemented> Contacts { get; set; }
+        public Href<ContactCollection> Contacts { get; set; }
 
         [DataMember(Name = "corporation")]
         public CorporationEntry Corporation { get; set; }

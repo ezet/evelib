@@ -115,6 +115,7 @@
     <Compile Include="Models\IInferrableId.cs" />
     <Compile Include="Models\Links\ImageHref.cs" />
     <Compile Include="Models\Resources\Character.cs" />
+    <Compile Include="Models\Resources\ContactCollection.cs" />
     <Compile Include="Models\Resources\DustRoot.cs" />
     <Compile Include="Models\Resources\EveRoot.cs" />
     <Compile Include="Models\Resources\FittingCollection.cs" />
