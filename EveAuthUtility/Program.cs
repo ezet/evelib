@@ -21,15 +21,17 @@ namespace eZet.EveLib.EveAuthUtility {
             if (server == "2") Auth.Host = "sisilogin.testeveonline.com";
             Console.WriteLine("Enter your client ID: ");
             //var clientId = Console.ReadLine();
-            var clientId = "cefe601d9f5a444183f8c732676709fb";
+            // var clientId = "cefe601d9f5a444183f8c732676709fb"; // SISI
+            var clientId = "46daa2b378bd4bc189df4c3a73af226a"; // TRANQ
             Console.WriteLine("Enter your secret key: ");
             //var secret = Console.ReadLine();
-            var secret = "Gwg3JNT8V0DLZwb7ZmRke9zJDYp1ePnUm9V5zvjY";
+            //var secret = "Gwg3JNT8V0DLZwb7ZmRke9zJDYp1ePnUm9V5zvjY"; // SISI
+            var secret = "K8GcWADljgnLZyrKGFfiqzHVvViGhapOYSCEy83h";  // TRANQ
             var encodedKey = EveAuth.Encode(clientId, secret);
             Console.WriteLine("Please enter your request scopes as a space delimited string: ");
             //string scopes = Console.ReadLine();
             var scopes =
-                "publicData characterFittingsRead characterFittingsWrite characterStatisticsRead characterContactsRead";
+                "publicData characterFittingsRead characterFittingsWrite characterContactsRead characterContactsWrite characterLocationRead characterNavigationWrite";
             var authLink = Auth.CreateAuthLink(clientId, "/", "default", scopes);
             System.Windows.Forms.Clipboard.SetText(authLink);
             Console.WriteLine("Please log in using the following link (already copied to your clipboard): ");
@@ -54,8 +56,10 @@ namespace eZet.EveLib.EveAuthUtility {
             try {
                 response = Auth.AuthenticateAsync(encodedKey, authCode).Result;
             }
-            catch (Exception) {
+            catch (Exception e) {
                 Console.WriteLine("Authentication unsuccessfull, please try again.");
+                Console.WriteLine(e.Message);
+                Console.ReadLine();
                 return;
             }
             Console.WriteLine("Authentication successfull!");

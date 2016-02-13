@@ -534,86 +534,86 @@ namespace eZet.EveLib.EveCrestModule {
             return GetWarKillmailsAsync(warId).Result;
         }
 
-        /// <summary>
-        ///     Returns a list of all industry specialities
-        /// </summary>
-        /// <returns>A list of all industry specialities</returns>
-        [Obsolete(ObsoleteMessage)]
-        public Task<IndustrySpecialityCollection> GetSpecialitiesAsync() {
-            const string relPath = "industry/specialities/";
-            return requestAsync<IndustrySpecialityCollection>(relPath);
-        }
+        ///// <summary>
+        /////     Returns a list of all industry specialities
+        ///// </summary>
+        ///// <returns>A list of all industry specialities</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public Task<IndustrySpecialityCollection> GetSpecialitiesAsync() {
+        //    const string relPath = "industry/specialities/";
+        //    return requestAsync<IndustrySpecialityCollection>(relPath);
+        //}
 
-        /// <summary>
-        ///     Returns a list of all industry specialities
-        /// </summary>
-        /// <returns>A list of all industry specialities</returns>
-        [Obsolete(ObsoleteMessage)]
-        public IndustrySpecialityCollection GetSpecialities() {
-            return GetSpecialitiesAsync().Result;
-        }
+        ///// <summary>
+        /////     Returns a list of all industry specialities
+        ///// </summary>
+        ///// <returns>A list of all industry specialities</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public IndustrySpecialityCollection GetSpecialities() {
+        //    return GetSpecialitiesAsync().Result;
+        //}
 
-        /// <summary>
-        ///     Returns details for the requested speciality
-        /// </summary>
-        /// <param name="specialityId">Speciality ID</param>
-        /// <returns>Task&lt;IndustrySpeciality&gt;.</returns>
-        [Obsolete(ObsoleteMessage)]
-        public Task<IndustrySpeciality> GetSpecialityAsync(int specialityId) {
-            string relPath = "industry/specialities/" + specialityId + "/";
-            return requestAsync<IndustrySpeciality>(relPath);
-        }
+        ///// <summary>
+        /////     Returns details for the requested speciality
+        ///// </summary>
+        ///// <param name="specialityId">Speciality ID</param>
+        ///// <returns>Task&lt;IndustrySpeciality&gt;.</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public Task<IndustrySpeciality> GetSpecialityAsync(int specialityId) {
+        //    string relPath = "industry/specialities/" + specialityId + "/";
+        //    return requestAsync<IndustrySpeciality>(relPath);
+        //}
 
-        /// <summary>
-        ///     Returns details for the requested speciality
-        /// </summary>
-        /// <param name="specialityId">Speciality ID</param>
-        /// <returns>IndustrySpeciality.</returns>
-        [Obsolete(ObsoleteMessage)]
-        public IndustrySpeciality GetSpeciality(int specialityId) {
-            return GetSpecialityAsync(specialityId).Result;
-        }
+        ///// <summary>
+        /////     Returns details for the requested speciality
+        ///// </summary>
+        ///// <param name="specialityId">Speciality ID</param>
+        ///// <returns>IndustrySpeciality.</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public IndustrySpeciality GetSpeciality(int specialityId) {
+        //    return GetSpecialityAsync(specialityId).Result;
+        //}
 
 
-        /// <summary>
-        ///     Returns a list of all industry teams
-        /// </summary>
-        /// <returns>A list of all industry teams</returns>
-        [Obsolete(ObsoleteMessage)]
-        public Task<IndustryTeamCollection> GetIndustryTeamsAsync() {
-            const string relPath = "industry/teams/";
-            return requestAsync<IndustryTeamCollection>(relPath);
-        }
+        ///// <summary>
+        /////     Returns a list of all industry teams
+        ///// </summary>
+        ///// <returns>A list of all industry teams</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public Task<IndustryTeamCollection> GetIndustryTeamsAsync() {
+        //    const string relPath = "industry/teams/";
+        //    return requestAsync<IndustryTeamCollection>(relPath);
+        //}
 
-        /// <summary>
-        ///     Returns a list of all industry teams
-        /// </summary>
-        /// <returns>A list of all industry teams</returns>
-        [Obsolete(ObsoleteMessage)]
-        public IndustryTeamCollection GetIndustryTeams() {
-            return GetIndustryTeamsAsync().Result;
-        }
+        ///// <summary>
+        /////     Returns a list of all industry teams
+        ///// </summary>
+        ///// <returns>A list of all industry teams</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public IndustryTeamCollection GetIndustryTeams() {
+        //    return GetIndustryTeamsAsync().Result;
+        //}
 
-        /// <summary>
-        ///     Returns data for the specified industry team
-        /// </summary>
-        /// <param name="teamId">The team ID</param>
-        /// <returns>Task&lt;IndustryTeam&gt;.</returns>
-        [Obsolete(ObsoleteMessage)]
-        public Task<IndustryTeam> GetIndustryTeamAsync(int teamId) {
-            string relPath = "industry/teams/" + teamId + "/";
-            return requestAsync<IndustryTeam>(relPath);
-        }
+        ///// <summary>
+        /////     Returns data for the specified industry team
+        ///// </summary>
+        ///// <param name="teamId">The team ID</param>
+        ///// <returns>Task&lt;IndustryTeam&gt;.</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public Task<IndustryTeam> GetIndustryTeamAsync(int teamId) {
+        //    string relPath = "industry/teams/" + teamId + "/";
+        //    return requestAsync<IndustryTeam>(relPath);
+        //}
 
-        /// <summary>
-        ///     Returns data for the specified industry team
-        /// </summary>
-        /// <param name="teamId">The team ID</param>
-        /// <returns>IndustryTeam.</returns>
-        [Obsolete(ObsoleteMessage)]
-        public IndustryTeam GetIndustryTeam(int teamId) {
-            return GetIndustryTeamAsync(teamId).Result;
-        }
+        ///// <summary>
+        /////     Returns data for the specified industry team
+        ///// </summary>
+        ///// <param name="teamId">The team ID</param>
+        ///// <returns>IndustryTeam.</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public IndustryTeam GetIndustryTeam(int teamId) {
+        //    return GetIndustryTeamAsync(teamId).Result;
+        //}
 
         /// <summary>
         ///     Returns a list of industry systems and prices
@@ -634,24 +634,24 @@ namespace eZet.EveLib.EveCrestModule {
             return GetIndustrySystemsAsync().Result;
         }
 
-        /// <summary>
-        ///     Returns a list of all current industry team auctions
-        /// </summary>
-        /// <returns>A list of all current industry team auctions</returns>
-        [Obsolete(ObsoleteMessage)]
-        public Task<IndustryTeamCollection> GetIndustryTeamAuctionsAsync() {
-            const string relPath = "industry/teams/auction/";
-            return requestAsync<IndustryTeamCollection>(relPath);
-        }
+        ///// <summary>
+        /////     Returns a list of all current industry team auctions
+        ///// </summary>
+        ///// <returns>A list of all current industry team auctions</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public Task<IndustryTeamCollection> GetIndustryTeamAuctionsAsync() {
+        //    const string relPath = "industry/teams/auction/";
+        //    return requestAsync<IndustryTeamCollection>(relPath);
+        //}
 
-        /// <summary>
-        ///     Returns a list of all current industry team auctions
-        /// </summary>
-        /// <returns>A list of all current industry team auctions</returns>
-        [Obsolete(ObsoleteMessage)]
-        public IndustryTeamCollection GetIndustryTeamAuction() {
-            return GetIndustryTeamAuctionsAsync().Result;
-        }
+        ///// <summary>
+        /////     Returns a list of all current industry team auctions
+        ///// </summary>
+        ///// <returns>A list of all current industry team auctions</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public IndustryTeamCollection GetIndustryTeamAuction() {
+        //    return GetIndustryTeamAuctionsAsync().Result;
+        //}
 
         /// <summary>
         ///     Returns a collection of all industry facilities

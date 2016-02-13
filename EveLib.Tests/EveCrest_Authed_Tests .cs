@@ -25,7 +25,7 @@ namespace eZet.EveLib.Test {
 
         private const string Killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
 
-        private const string RefreshToken = "E9nZjXvx_tFu-PdpTC6yT_j4FupJ-84ybEtNsE8iMko1";
+        private const string RefreshToken = "g92QOVphazTOcNhV9hpq22eoo3cK7oBrLOHdBc71cFl76OHZ-3DRAR6bnAn7orMprjJN05pjgWHvCTIWwQ_hVA2";
 
         private const string EncodedKey =
             "NDZkYWEyYjM3OGJkNGJjMTg5ZGY0YzNhNzNhZjIyNmE6SzhHY1dBRGxqZ25MWnlyS0dGZmlxekhWdlZpR2hhcE9ZU0NFeTgzaA==";
@@ -79,6 +79,28 @@ namespace eZet.EveLib.Test {
         public void GetRoot() {
             CrestRoot root = crest.GetRoot();
             Assert.AreEqual(EveCrest.DefaultAuthHost, root.CrestEndpoint.Uri);
+        }
+
+        [TestMethod]
+        public async Task GetContacts() {
+            var contacts =
+                  await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
+            Assert.AreNotEqual(0, contacts.Items.Count);
+            var first = contacts.Items.First();
+            Console.WriteLine(first.Contact);
+        }
+
+        [TestMethod]
+        public async Task GetFittings() {
+            var fittings =
+                await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Fittings);
+        }
+
+        [TestMethod]
+        public async Task GetLocation() {
+            var location = await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Location);
+            Assert.IsNotNull(location);
+
         }
 
         [TestMethod]
@@ -211,7 +233,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void ServiceStatis() {
+        public void ServiceStatus() {
             CrestRoot.ServerStatus status = crest.GetRoot().ServiceStatus;
             Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Dust);
             Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Eve);
@@ -231,25 +253,10 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task IndustrySpecialities() {
-            IndustrySpecialityCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.Specialities);
-        }
-
-        [TestMethod]
-        public async Task IndustryTeamsInAuction() {
-            IndustryTeamCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.TeamsInAuction);
-        }
-
-        [TestMethod]
         public async Task IndustrySystems() {
             IndustrySystemCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.Systems);
         }
-
-        [TestMethod]
-        public async Task IndustryTeams() {
-            IndustryTeamCollection response = await crest.GetRoot().QueryAsync(r => r.Industry.Teams);
-        }
-
+        
         [TestMethod]
         public async Task Clients() {
             EveRoot eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
@@ -301,5 +308,7 @@ namespace eZet.EveLib.Test {
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }
+
+
     }
 }

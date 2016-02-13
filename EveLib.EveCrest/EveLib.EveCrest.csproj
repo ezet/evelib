@@ -122,6 +122,7 @@
     <Compile Include="Models\Resources\FittingCollection.cs" />
     <Compile Include="Models\Resources\GraphicId.cs" />
     <Compile Include="Models\Resources\GraphicIdCollection.cs" />
+    <Compile Include="Models\Resources\CharacterLocation.cs" />
     <Compile Include="Models\Resources\Market\MarketOrder.cs" />
     <Compile Include="Models\Resources\SystemCollection.cs" />
     <Compile Include="Models\Resources\SovCampaignsCollection.cs" />

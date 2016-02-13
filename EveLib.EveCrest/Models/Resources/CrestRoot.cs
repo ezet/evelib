@@ -342,19 +342,19 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "facilities")]
             public Href<IndustryFacilityCollection> Facilities { get; set; }
 
-            /// <summary>
-            /// Gets or sets the specialities.
-            /// </summary>
-            /// <value>The specialities.</value>
-            [DataMember(Name = "specialities")]
-            public Href<IndustrySpecialityCollection> Specialities { get; set; }
+            ///// <summary>
+            ///// Gets or sets the specialities.
+            ///// </summary>
+            ///// <value>The specialities.</value>
+            //[DataMember(Name = "specialities")]
+            //public Href<IndustrySpecialityCollection> Specialities { get; set; }
 
-            /// <summary>
-            /// Gets or sets the teams in auction.
-            /// </summary>
-            /// <value>The teams in auction.</value>
-            [DataMember(Name = "teamsInAuction")]
-            public Href<IndustryTeamCollection> TeamsInAuction { get; set; }
+            ///// <summary>
+            ///// Gets or sets the teams in auction.
+            ///// </summary>
+            ///// <value>The teams in auction.</value>
+            //[DataMember(Name = "teamsInAuction")]
+            //public Href<IndustryTeamCollection> TeamsInAuction { get; set; }
 
             /// <summary>
             /// Gets or sets the systems.
@@ -363,12 +363,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "systems")]
             public Href<IndustrySystemCollection> Systems { get; set; }
 
-            /// <summary>
-            /// Gets or sets the teams.
-            /// </summary>
-            /// <value>The teams.</value>
-            [DataMember(Name = "teams")]
-            public Href<IndustryTeamCollection> Teams { get; set; }
+            ///// <summary>
+            ///// Gets or sets the teams.
+            ///// </summary>
+            ///// <value>The teams.</value>
+            //[DataMember(Name = "teams")]
+            //public Href<IndustryTeamCollection> Teams { get; set; }
         }
 
 

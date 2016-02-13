@@ -60,7 +60,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
             set { _inferredId = value; }
         }
 
-
         private int inferId() {
             int id;
             string[] href = Href.Uri.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);

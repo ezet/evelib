@@ -109,42 +109,16 @@ namespace eZet.EveLib.Test {
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }
-
+        
         [TestMethod]
-        public async Task GetSpecialities() {
-            IndustrySpecialityCollection result = await crest.GetSpecialitiesAsync();
-        }
-
-        [TestMethod]
-        public async Task GetSpeciality() {
-            IndustrySpeciality result = await crest.GetSpecialityAsync(10);
-        }
-
-
-        [TestMethod]
-        public async Task GetIndustryTeams() {
-            IndustryTeamCollection result = await crest.GetIndustryTeamsAsync();
-            Console.Write(result);
-        }
-
-        [TestMethod]
-        public async Task GetIndustryTeam() {
-            IndustryTeamCollection teams = await crest.GetIndustryTeamsAsync();
-            IndustryTeam result = await crest.GetIndustryTeamAsync(teams.Items.Last().Id);
-        }
-
-        [TestMethod]
+        // TODO Test this properly
         public async Task GetIndustrySystemsAsync() {
             IndustrySystemCollection result = await crest.GetIndustrySystemsAsync();
             Console.Write(result);
         }
 
         [TestMethod]
-        public async Task GetIndustryTeamAuctions() {
-            IndustryTeamCollection result = await crest.GetIndustryTeamAuctionsAsync();
-        }
-
-        [TestMethod]
+        // TODO Test this properly
         public async Task GetIndustryFacilities() {
             IndustryFacilityCollection result = await crest.GetIndustryFacilitiesAsync();
         }
@@ -153,7 +127,6 @@ namespace eZet.EveLib.Test {
         public async Task ItemGroups() {
             ItemGroupCollection itemGroups = await crest.GetRoot().QueryAsync(r => r.ItemGroups);
             var group = itemGroups.Query(f => f.Single(g => g.Id == 354753));
-
             Console.WriteLine(group.Name);
         }
 
