@@ -54,18 +54,18 @@ namespace eZet.EveLib.Test {
             Console.WriteLine(response);
         }
 
-        //[TestMethod]
-        //public void GetAlliance_NoErrors() {
-        //    AllianceCollection allianceCollection = crest.GetRoot().Query(r => r.Alliances);
-        //    var all = allianceCollection.Query(f => f.Single(a => a.Id == AllianceId));
-        //    var alliance = allianceCollection.AllItems().Where(f => f.Id == AllianceId);
-        //    Console.WriteLine(alliance.First().Alliance.Name);
-        //}
+        [TestMethod]
+        public void GetAlliance_NoErrors() {
+            AllianceCollection allianceCollection = crest.GetRoot().Query(r => r.Alliances);
+            //var all = AllianceCollectionV1.Query(f => f.Single(a => a.Id == AllianceId));
+            //var alliance = AllianceCollectionV1.AllItems().Where(f => f.Id == AllianceId);
+            //Console.WriteLine(alliance.First().Alliance.Name);
+        }
 
         //[TestMethod]
         //public void CollectionPaging_Manual() {
-        //    AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-        //    AllianceCollection.Alliance alliance =
+        //    AllianceCollectionV1 allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+        //    AllianceCollectionV1.Alliance alliance =
         //        allianceLinks.Items.SingleOrDefault(f => f.Alliance.Id == AllianceId).Alliance;
         //    while (alliance == null && allianceLinks.Next != null) {
         //        allianceLinks = allianceLinks.Query(f => f.Next);

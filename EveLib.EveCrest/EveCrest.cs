@@ -27,7 +27,6 @@ using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
 using eZet.EveLib.EveCrestModule.Models.Resources.Market;
 using eZet.EveLib.EveCrestModule.RequestHandlers;
-using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.EveCrestModule {
     /// <summary>
@@ -180,7 +179,7 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Gets or sets the request handler.
         /// </summary>
         /// <value>The request handler.</value>
-        public ICachedCrestRequestHandler RequestHandler { get; set; }
+        public ICrestRequestHandler RequestHandler { get; set; }
 
         /// <summary>
         ///     Gets or sets the image request handler.
@@ -244,7 +243,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public Task<T> LoadAsync<T>(Href<T> uri, params string[] parameters) where T : class, ICrestResource<T> {
-            return uri == null ? Task.FromResult(default(T)) : requestAsync<T>(new Uri(uri.Uri + getQueryString(parameters)));
+            return uri == null ? Task.FromResult(default(T)) : requestAsync<T>(new Uri(uri.Uri + buildQueryString(parameters)));
         }
 
         /// <summary>
@@ -326,6 +325,14 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Task&lt;T[]&gt;.</returns>
         public IEnumerable<T> Load<T>(IEnumerable<Href<T>> items, params string[] parameters) where T : class, ICrestResource<T> {
             return LoadAsync(items, parameters).Result;
+        }
+
+        public void Delete<T>(ILinkedEntity<T> entity) {
+            var result = requestAsync<FittingDelete>(new Uri(entity.Href.Uri), "DELETE").Result;
+        }
+
+        public async Task PostAsync<TEntity,TResource>(ILinkedEntity<TEntity> entity, Href<TResource> resource) {
+            var result = await postAsync(new Uri(resource.Uri), entity);
         }
 
         /// <summary>
@@ -683,18 +690,60 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        ///     Performs a request using the request handler.
+        /// request as an asynchronous operation.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
+        /// <param name="httpMethod">The HTTP method.</param>
         /// <returns>Task&lt;T&gt;.</returns>
-        private async Task<T> requestAsync<T>(Uri uri) where T : class, ICrestResource<T> {
+        private async Task<T> postAsync<T>(Uri uri, ILinkedEntity<T> entity) {
+            T response = default(T);
+            if (Mode == CrestMode.Authenticated) {
+                var retry = false;
+                try {
+                    await RequestHandler.PostAsync<T>(uri, entity,  AccessToken).ConfigureAwait(false);
+                }
+                catch (EveCrestException e) {
+                    if (EnableAutomaticTokenRefresh) {
+                        var error = e.WebException.Response as HttpWebResponse;
+                        if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
+                        else throw;
+                    }
+                    else throw;
+                }
+                if (retry) {
+                    _trace.TraceEvent(TraceEventType.Information, 0,
+                        "Invalid AccessToken: Attempting refresh");
+                    await RefreshAccessTokenAsync().ConfigureAwait(false);
+                    _trace.TraceEvent(TraceEventType.Information, 0,
+                        "Token refreshed");
+                    await RequestHandler.PostAsync<T>(uri, entity, AccessToken).ConfigureAwait(false);
+                }
+            }
+            else {
+                await RequestHandler.PostAsync<T>(uri, entity, AccessToken).ConfigureAwait(false);
+            }
+            if (response != null) {
+                
+            }
+            return response;
+        }
+
+
+        /// <summary>
+        /// request as an asynchronous operation.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri">The URI.</param>
+        /// <param name="httpMethod">The HTTP method.</param>
+        /// <returns>Task&lt;T&gt;.</returns>
+        private async Task<T> requestAsync<T>(Uri uri, string httpMethod = "GET") where T : class, ICrestResource<T> {
             T response = null;
             if (Mode == CrestMode.Authenticated) {
                 var retry = false;
                 try {
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken, httpMethod).ConfigureAwait(false);
                 }
                 catch (EveCrestException e) {
                     if (EnableAutomaticTokenRefresh) {
@@ -711,21 +760,26 @@ namespace eZet.EveLib.EveCrestModule {
                     _trace.TraceEvent(TraceEventType.Information, 0,
                         "Token refreshed");
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken, httpMethod).ConfigureAwait(false);
                 }
             }
             else {
-                response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
+                response = await RequestHandler.RequestAsync<T>(uri, null, httpMethod).ConfigureAwait(false);
             }
             if (response != null) {
                 response.EveCrest = this;
             }
             return response;
         }
-        private string getQueryString(params string[] parameters) {
+
+        /// <summary>
+        /// Gets the query string.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>System.String.</returns>
+        private static string buildQueryString(params string[] parameters) {
             var p = "?";
             var iter = parameters.GetEnumerator();
-
             while (iter.MoveNext()) {
                 p += iter.Current;
                 iter.MoveNext();

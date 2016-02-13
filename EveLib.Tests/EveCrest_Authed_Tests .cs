@@ -51,8 +51,8 @@ namespace eZet.EveLib.Test {
 
         //[TestMethod]
         //public void CollectionPaging_Manual() {
-        //    AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-        //    AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+        //    AllianceCollectionV1 allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+        //    AllianceCollectionV1.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
         //    while (alliance == null && allianceLinks.Next != null) {
         //        allianceLinks = allianceLinks.Query(f => f.Next);
         //        alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
@@ -62,8 +62,8 @@ namespace eZet.EveLib.Test {
 
         //[TestMethod]
         //public void CollectionPaging_Manual_NullReference() {
-        //    AllianceCollection allianceLinks = crest.GetRoot().Query(r => r.Alliances);
-        //    AllianceCollection.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
+        //    AllianceCollectionV1 allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+        //    AllianceCollectionV1.Alliance alliance = allianceLinks.Items.SingleOrDefault(f => f.Id == 99000738);
         //    alliance = null;
         //    allianceLinks.Query(f => alliance);
         //}
