@@ -175,6 +175,18 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetConstellations() {
+            var response = await crest.GetRoot().QueryAsync(r => r.Constellations);
+            Assert.AreNotEqual(0, response.Items.Count);
+        }
+
+        [TestMethod]
+        public async Task GetSystems() {
+            var response = await crest.GetRoot().QueryAsync(r => r.Systems);
+            Assert.AreNotEqual(0, response.Items.Count);
+        }
+
+        [TestMethod]
         public async Task GetBuyOrderWith() {
             var orders =
                 (await

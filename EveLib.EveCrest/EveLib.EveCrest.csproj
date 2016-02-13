@@ -115,6 +115,7 @@
     <Compile Include="Models\IInferrableId.cs" />
     <Compile Include="Models\Links\ImageHref.cs" />
     <Compile Include="Models\Resources\Character.cs" />
+    <Compile Include="Models\Resources\ConstellationCollection.cs" />
     <Compile Include="Models\Resources\ContactCollection.cs" />
     <Compile Include="Models\Resources\DustRoot.cs" />
     <Compile Include="Models\Resources\EveRoot.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Models\Resources\GraphicId.cs" />
     <Compile Include="Models\Resources\GraphicIdCollection.cs" />
     <Compile Include="Models\Resources\Market\MarketOrder.cs" />
+    <Compile Include="Models\Resources\SystemCollection.cs" />
     <Compile Include="Models\Resources\SovCampaignsCollection.cs" />
     <Compile Include="Models\Resources\SovStructureCollection.cs" />
     <Compile Include="Models\Resources\TokenDecode.cs" />

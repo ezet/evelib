@@ -31,17 +31,20 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <summary>
             /// Server is offline
             /// </summary>
-            [EnumMember(Value = "offline")] Offline,
+            [EnumMember(Value = "offline")]
+            Offline,
 
             /// <summary>
             /// Server is in VIP mode
             /// </summary>
-            [EnumMember(Value = "vip")] Vip,
+            [EnumMember(Value = "vip")]
+            Vip,
 
             /// <summary>
             /// Server is online
             /// </summary>
-            [EnumMember(Value = "online")] Online,
+            [EnumMember(Value = "online")]
+            Online,
         }
 
         /// <summary>
@@ -73,6 +76,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "corporationRoles")]
         public Href<NotImplemented> CorporationRoles { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets the constellations.
+        /// </summary>
+        /// <value>The constellations.</value>
+        [DataMember(Name = "constellations")]
+        public Href<ConstellationCollection> Constellations { get; set; }
 
         /// <summary>
         /// Gets or sets the item groups.
@@ -157,6 +167,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The market groups.</value>
         [DataMember(Name = "marketGroups")]
         public Href<MarketGroupCollection> MarketGroups { get; set; }
+
+        /// <summary>
+        /// Gets or sets the systems.
+        /// </summary>
+        /// <value>The systems.</value>
+        [DataMember(Name = "systems")]
+        public Href<SystemCollection> Systems { get; set; }
 
         /// <summary>
         /// Gets or sets the sovereignty.
