@@ -13,6 +13,7 @@ namespace eZet.EveLib.Test {
 
     [TestClass]
     public class EveCrest_Public_Tests {
+
         private const int AllianceId = 434243723; // C C P Alliance
 
         private const int RegionId = 10000002; // The Forge 
@@ -20,7 +21,6 @@ namespace eZet.EveLib.Test {
         private const int TypeId = 34; // Tritanium
 
         private const string Killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
-
 
         private readonly EveCrest crest = new EveCrest();
 
@@ -131,6 +131,18 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task MarketGroups() {
+            var result = await crest.GetRoot().QueryAsync(r => r.MarketGroups);
+            var first = result.Items.First();
+        }
+
+        [TestMethod]
+        public async Task MarketTypes() {
+            var result = await crest.GetRoot().QueryAsync(r => r.MarketTypes);
+            var first = result.Items.First();
+        }
+
+        [TestMethod]
         public async Task GetSovereigntyStructures() {
             var response = await crest.GetRoot().QueryAsync(r => r.Sovereignty.Structures);
         }
@@ -157,6 +169,31 @@ namespace eZet.EveLib.Test {
         public async Task GetSystems() {
             var response = await crest.GetRoot().QueryAsync(r => r.Systems);
             Assert.AreNotEqual(0, response.Items.Count);
+        }
+
+        [TestMethod]
+        public async Task GetDogmaAttributes() {
+            var response = await crest.GetRoot().QueryAsync(r => r.Dogma.Attributes);
+            Assert.AreNotEqual(0, response.Items.Count);
+            var item = response.Items.First();
+            Assert.AreEqual(2, item.Id);
+            Assert.AreEqual("isOnline", item.Name);
+            Assert.AreEqual("https://public-crest.eveonline.com/dogma/attributes/2/", item.Href.ToString());
+            
+        }
+
+        [TestMethod]
+        public async Task GetDogmaAttribute() {
+            var response =
+                await (await (crest.GetRoot().QueryAsync(r => r.Dogma.Attributes))).QueryAsync(r => r.Items.First());
+            Assert.AreEqual(2, response.Id);
+            Assert.AreEqual("", response.DisplayName);
+            Assert.AreEqual("isOnline", response.Name);
+            Assert.AreEqual(0, response.DefaultValue);
+            Assert.AreEqual(false, response.Published);
+            Assert.AreEqual(true, response.HighIsGood);
+            Assert.AreEqual(true, response.Stackable);
+            Assert.AreEqual("Boolean to store status of online effect", response.Description);
         }
 
         [TestMethod]

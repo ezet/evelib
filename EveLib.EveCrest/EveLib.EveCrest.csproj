@@ -112,6 +112,8 @@
     <Compile Include="EveCrest.cs" />
     <Compile Include="Exceptions\DeprecatedResourceException.cs" />
     <Compile Include="Exceptions\ResourceNotSupportedException.cs" />
+    <Compile Include="Models\DogmaAttribute.cs" />
+    <Compile Include="Models\DogmaAttributeCollection.cs" />
     <Compile Include="Models\IInferrableId.cs" />
     <Compile Include="Models\Links\ImageHref.cs" />
     <Compile Include="Models\Resources\Character.cs" />

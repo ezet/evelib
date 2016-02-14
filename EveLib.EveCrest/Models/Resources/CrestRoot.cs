@@ -226,6 +226,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Href<IncursionCollection> Incursions { get; set; }
 
         /// <summary>
+        /// Gets or sets the dogma.
+        /// </summary>
+        /// <value>The dogma.</value>
+        [DataMember(Name = "dogma")]
+        public DogmaCategory Dogma { get; set; }
+
+        /// <summary>
         /// Gets or sets the races.
         /// </summary>
         /// <value>The races.</value>
@@ -444,5 +451,25 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "eve")]
             public int Eve { get; set; }
         }
+
+        /// <summary>
+        /// Class DogmaCategory.
+        /// </summary>
+        [DataContract]
+        public class DogmaCategory {
+
+            /// <summary>
+            /// Gets or sets the attributes.
+            /// </summary>
+            /// <value>The attributes.</value>
+            [DataMember(Name = "attributes")]
+            public Href<DogmaAttributeCollection> Attributes { get; set; }
+
+            [DataMember(Name = "effects")]
+            public Href<NotImplemented> Effects { get; set; }
+
+        }
     }
+
+
 }
