@@ -58,7 +58,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         public int MinVolume { get; set; }
 
         /// <summary>
-        /// Gets or sets the volume entered.
+        ///     Gets or sets the volume entered.
         /// </summary>
         /// <value>The volume entered.</value>
         [DataMember(Name = "volumeEntered")]
@@ -97,6 +97,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         /// The identifier.
         [DataMember(Name = "id")]
         public new long Id { get; set; }
-
     }
 }

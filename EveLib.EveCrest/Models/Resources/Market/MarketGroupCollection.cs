@@ -26,6 +26,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         public MarketGroupCollection() {
             ContentType = "application/vnd.ccp.eve.MarketGroupCollection-v1+json";
         }
-
     }
 }

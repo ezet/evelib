@@ -24,6 +24,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class LinkedResource<T> : CrestResource<T>, ILinkedEntity<T> where T : class, ICrestResource<T> {
+        private int _inferredId;
+
         /// <summary>
         ///     The entity href
         /// </summary>
@@ -31,24 +33,22 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         [DataMember(Name = "href")]
         public Href<T> Href { get; set; }
 
-        private int _inferredId;
-
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the inferred identifier.
+        ///     Gets or sets the inferred identifier.
         /// </summary>
         /// <value>The inferred identifier.</value>
         public int InferredId {
@@ -62,7 +62,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
 
         private int inferId() {
             int id;
-            string[] href = Href.Uri.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            var href = Href.Uri.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
             int.TryParse(href.Last(), out id);
             //id = -1;
             return id;

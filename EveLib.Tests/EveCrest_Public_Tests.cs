@@ -157,9 +157,8 @@ namespace eZet.EveLib.Test {
             var response = await crest.GetRoot().QueryAsync(r => r.ItemTypes);
             var type = response.Query(r => r.Items.Single(t => t.Id == 200));
             Assert.IsNotNull(type.GraphicId);
-            Assert.IsNotNull(type.Dogma.Attributes);
-            Assert.IsNotNull(type.Dogma.Effects);
-
+            Assert.AreNotEqual(0, type.Dogma.Attributes.Count);
+            Assert.AreNotEqual(0, type.Dogma.Effects.Count);
         }
 
         [TestMethod]

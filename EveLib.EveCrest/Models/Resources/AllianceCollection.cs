@@ -39,11 +39,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <value>The short name.</value>
             [DataMember(Name = "shortName")]
             public string ShortName { get; set; }
-
         }
-
-   
-
-        
     }
 }

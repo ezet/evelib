@@ -41,18 +41,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// </summary>
         public const string TokenType = "Bearer";
 
-        /// <summary>
-        ///     Gets or sets the cache mode.
-        /// </summary>
-        /// <value>The cache mode.</value>
-        public CacheLevel CacheLevel { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the cache used by this request handler
-        /// </summary>
-        /// <value>The cache.</value>
-        public IEveLibCache Cache { get; set; }
-
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
         private int _authedMaxConcurrentRequests;
         private Semaphore _authedPool;
@@ -74,6 +62,18 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             Cache = new EveLibFileCache(Config.AppData + Config.Separator + "EveCrestCache", "register");
             CacheLevel = CacheLevel.Default;
         }
+
+        /// <summary>
+        ///     Gets or sets the cache mode.
+        /// </summary>
+        /// <value>The cache mode.</value>
+        public CacheLevel CacheLevel { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the cache used by this request handler
+        /// </summary>
+        /// <value>The cache.</value>
+        public IEveLibCache Cache { get; set; }
 
         /// <summary>
         ///     Gets or sets the size of the public burst.
@@ -235,10 +235,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return DateTime.UtcNow.AddSeconds(sec);
         }
 
-        ///// <summary>
-        ///// Gets or sets a value indicating whether [enable cache].
-        ///// </summary>
-        ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
         //public bool EnableCache { get; set; }
+        ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
+        ///// </summary>
+        ///// Gets or sets a value indicating whether [enable cache].
+
+        ///// <summary>
     }
 }

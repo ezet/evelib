@@ -17,13 +17,13 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class ConstellationCollection.
+    ///     Class ConstellationCollection.
     /// </summary>
     [DataContract]
-    public sealed class ConstellationCollection : CollectionResource<ConstellationCollection, LinkedEntity<Constellation>> {
-
+    public sealed class ConstellationCollection :
+        CollectionResource<ConstellationCollection, LinkedEntity<Constellation>> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConstellationCollection"/> class.
+        ///     Initializes a new instance of the <see cref="ConstellationCollection" /> class.
         /// </summary>
         public ConstellationCollection() {
             ContentType = "application/vnd.ccp.eve.ConstellationCollection-v1+json";

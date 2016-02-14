@@ -30,7 +30,7 @@ namespace eZet.EveLib.EveCrestModule {
             // TODO optional throw on missing version
             var instance = Activator.CreateInstance<T>();
             var implemented = instance as NotImplemented;
-            if (String.IsNullOrEmpty(instance.ContentType) && throwOnMissingContentType && implemented == null) {
+            if (string.IsNullOrEmpty(instance.ContentType) && throwOnMissingContentType && implemented == null) {
                 throw new NotImplementedException();
             }
             return instance.ContentType;

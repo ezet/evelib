@@ -12,9 +12,9 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Runtime.Serialization;
 using System;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
@@ -23,21 +23,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class Href<T> : IInferrableId {
-
         private int _inferredId = -1;
-
-        /// <summary>
-        /// Gets or sets the inferred identifier.
-        /// </summary>
-        /// <value>The inferred identifier.</value>
-        public int InferredId {
-            get {
-                if (_inferredId < 0)
-                    _inferredId = inferId();
-                return _inferredId;
-            }
-            set { _inferredId = value; }
-        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Href{T}" /> class.
@@ -53,6 +39,19 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// <value>The URI.</value>
         [DataMember(Name = "href")]
         public string Uri { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the inferred identifier.
+        /// </summary>
+        /// <value>The inferred identifier.</value>
+        public int InferredId {
+            get {
+                if (_inferredId < 0)
+                    _inferredId = inferId();
+                return _inferredId;
+            }
+            set { _inferredId = value; }
+        }
 
         /// <summary>
         ///     Performs an implicit conversion from <see cref="System.String" /> to <see cref="Href{T}" />.
@@ -73,7 +72,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
 
         private int inferId() {
             int id;
-            string[] href = Uri.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            var href = Uri.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
             int.TryParse(href.Last(), out id);
             return id;
         }

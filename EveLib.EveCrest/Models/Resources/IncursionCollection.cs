@@ -38,7 +38,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <summary>
             ///     Withdrawing incursion
             /// </summary>
-            [DataMember(Name = "Withdrawing")] Withdrawing,
+            [DataMember(Name = "Withdrawing")] Withdrawing
         }
 
         /// <summary>

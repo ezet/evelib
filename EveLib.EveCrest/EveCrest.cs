@@ -174,7 +174,7 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Gets the CREST access mode.
         /// </summary>
         /// <value>The mode.</value>
-        public CrestMode Mode { get; private set; }
+        public CrestMode Mode { get; }
 
         /// <summary>
         ///     Gets or sets the request handler.
@@ -192,7 +192,7 @@ namespace eZet.EveLib.EveCrestModule {
         ///     Gets or sets the path to the API root relative to the host.
         /// </summary>
         /// <value>The API path.</value>
-        public string ApiPath { get; private set; }
+        public string ApiPath { get; }
 
         /// <summary>
         ///     Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
@@ -200,7 +200,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public async Task<AuthResponse> RefreshAccessTokenAsync() {
-            AuthResponse response = await EveAuth.RefreshAsync(EncodedKey, RefreshToken).ConfigureAwait(false);
+            var response = await EveAuth.RefreshAsync(EncodedKey, RefreshToken).ConfigureAwait(false);
             AccessToken = response.AccessToken;
             RefreshToken = response.RefreshToken;
             return response;
@@ -212,7 +212,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// </summary>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public AuthResponse RefreshAccessToken() {
-            AuthResponse response = EveAuth.RefreshAsync(EncodedKey, RefreshToken).Result;
+            var response = EveAuth.RefreshAsync(EncodedKey, RefreshToken).Result;
             AccessToken = response.AccessToken;
             RefreshToken = response.RefreshToken;
             return response;
@@ -237,18 +237,20 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a Href async.
+        ///     Loads a Href async.
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="uri">The Href that should be loaded</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;T&gt;.</returns>
         public Task<T> LoadAsync<T>(Href<T> uri, params string[] parameters) where T : class, ICrestResource<T> {
-            return uri == null ? Task.FromResult(default(T)) : requestAsync<T>(new Uri(uri.Uri + getQueryString(parameters)));
+            return uri == null
+                ? Task.FromResult(default(T))
+                : requestAsync<T>(new Uri(uri.Uri + getQueryString(parameters)));
         }
 
         /// <summary>
-        /// Loads a Href
+        ///     Loads a Href
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="uri">The Href that should be loaded</param>
@@ -259,18 +261,19 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity async
+        ///     Loads a ILinkedEntity async
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="entity">The items that should be loaded</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;T&gt;.</returns>
-        public Task<T> LoadAsync<T>(ILinkedEntity<T> entity, params string[] parameters) where T : class, ICrestResource<T> {
+        public Task<T> LoadAsync<T>(ILinkedEntity<T> entity, params string[] parameters)
+            where T : class, ICrestResource<T> {
             return entity == null ? Task.FromResult(default(T)) : LoadAsync(entity.Href, parameters);
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity
+        ///     Loads a ILinkedEntity
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="entity">The items that should be loaded</param>
@@ -281,50 +284,54 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity collection async.
+        ///     Loads a ILinkedEntity collection async.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
-        public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<ILinkedEntity<T>> items, params string[] parameters) where T : class, ICrestResource<T> {
+        public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<ILinkedEntity<T>> items, params string[] parameters)
+            where T : class, ICrestResource<T> {
             if (items == null) return Task.FromResult(new List<T>().AsEnumerable());
             return LoadAsync(items.Select(r => r.Href), parameters);
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity collection.
+        ///     Loads a ILinkedEntity collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
-        public IEnumerable<T> Load<T>(IEnumerable<ILinkedEntity<T>> items, params string[] parameters) where T : class, ICrestResource<T> {
+        public IEnumerable<T> Load<T>(IEnumerable<ILinkedEntity<T>> items, params string[] parameters)
+            where T : class, ICrestResource<T> {
             return LoadAsync(items, parameters).Result;
         }
 
 
         /// <summary>
-        /// Loads a Href collection async.
+        ///     Loads a Href collection async.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
-        public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<Href<T>> items, params string[] parameters) where T : class, ICrestResource<T> {
+        public Task<IEnumerable<T>> LoadAsync<T>(IEnumerable<Href<T>> items, params string[] parameters)
+            where T : class, ICrestResource<T> {
             if (items == null) return Task.FromResult(new List<T>().AsEnumerable());
             var list = items.Select(self => LoadAsync(self, parameters)).ToList();
             return Task.WhenAll(list).ContinueWith(task => task.Result.AsEnumerable());
         }
 
         /// <summary>
-        /// Loads a Href collection.
+        ///     Loads a Href collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;T[]&gt;.</returns>
-        public IEnumerable<T> Load<T>(IEnumerable<Href<T>> items, params string[] parameters) where T : class, ICrestResource<T> {
+        public IEnumerable<T> Load<T>(IEnumerable<Href<T>> items, params string[] parameters)
+            where T : class, ICrestResource<T> {
             return LoadAsync(items, parameters).Result;
         }
 
@@ -354,7 +361,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="hash">Killmail hash</param>
         /// <returns>Returns data for the specified killmail.</returns>
         public Task<Killmail> GetKillmailAsync(long id, string hash) {
-            string relPath = "killmails/" + id + "/" + hash + "/";
+            var relPath = "killmails/" + id + "/" + hash + "/";
             return requestAsync<Killmail>(relPath);
         }
 
@@ -394,7 +401,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>A list of all alliances.</returns>
         [Obsolete(ObsoleteMessage)]
         public Task<AllianceCollection> GetAlliancesAsync(int page = 1) {
-            string relPath = "alliances/?page=" + page;
+            var relPath = "alliances/?page=" + page;
             return requestAsync<AllianceCollection>(relPath);
         }
 
@@ -415,7 +422,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Data for specified alliance</returns>
         [Obsolete(ObsoleteMessage)]
         public Task<Alliance> GetAllianceAsync(long allianceId) {
-            string relPath = "alliances/" + allianceId + "/";
+            var relPath = "alliances/" + allianceId + "/";
             return requestAsync<Alliance>(relPath);
         }
 
@@ -437,7 +444,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Market history for the specified region and type.</returns>
         [Obsolete(ObsoleteMessage)]
         public Task<MarketHistoryCollection> GetMarketHistoryAsync(int regionId, int typeId) {
-            string relPath = "market/" + regionId + "/types/" + typeId + "/history/";
+            var relPath = "market/" + regionId + "/types/" + typeId + "/history/";
             return requestAsync<MarketHistoryCollection>(relPath);
         }
 
@@ -478,7 +485,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>A list of all wars.</returns>
         [Obsolete(ObsoleteMessage)]
         public Task<WarCollection> GetWarsAsync(int page = 1) {
-            string relPath = "wars/?page=" + page;
+            var relPath = "wars/?page=" + page;
             return requestAsync<WarCollection>(relPath);
         }
 
@@ -499,7 +506,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Data for the specified war.</returns>
         [Obsolete(ObsoleteMessage)]
         public Task<War> GetWarAsync(int warId) {
-            string relPath = "wars/" + warId + "/";
+            var relPath = "wars/" + warId + "/";
             return requestAsync<War>(relPath);
         }
 
@@ -520,7 +527,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>A list of all killmails related to the specified war.</returns>
         [Obsolete(ObsoleteMessage)]
         public Task<KillmailCollection> GetWarKillmailsAsync(int warId) {
-            string relPath = "wars/" + warId + "/killmails/all/";
+            var relPath = "wars/" + warId + "/killmails/all/";
             return requestAsync<KillmailCollection>(relPath);
         }
 
@@ -722,6 +729,7 @@ namespace eZet.EveLib.EveCrestModule {
             }
             return response;
         }
+
         private string getQueryString(params string[] parameters) {
             var p = "?";
             var iter = parameters.GetEnumerator();

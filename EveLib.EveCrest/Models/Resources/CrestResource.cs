@@ -24,7 +24,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class CrestResource<T> : ICrestResource<T> where T : class, ICrestResource<T> {
-
         /// <summary>
         ///     Gets or sets the crest instance used to query resources.
         /// </summary>
@@ -38,10 +37,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is from cache.
+        ///     Gets or sets a value indicating whether this instance is from cache.
         /// </summary>
         /// <value><c>true</c> if this instance is from cache; otherwise, <c>false</c>.</value>
-        public bool IsFromCache { get;  set; }
+        public bool IsFromCache { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this resource is deprecated.
@@ -56,7 +55,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public virtual string ContentType { get; protected set; }
 
         /// <summary>
-        /// Queries the resource asynchronously.
+        ///     Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -68,7 +67,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries the resource.
+        ///     Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -80,7 +79,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries the resource asynchronously.
+        ///     Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -92,7 +91,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries the resource.
+        ///     Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -104,56 +103,59 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Queries a collection of resources asynchronously.
+        ///     Queries a collection of resources asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc, params string[] parameters)
-            where TOut : class, ICrestResource<TOut> {
-            IEnumerable<Href<TOut>> items = objFunc.Invoke(this as T);
-            return EveCrest.LoadAsync(items, parameters);
-        }
-
-        /// <summary>
-        /// Queries a collection of resources.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public virtual IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc, params string[] parameters)
-            where TOut : class, ICrestResource<TOut> {
-            IEnumerable<Href<TOut>> items = objFunc.Invoke(this as T);
-            return EveCrest.Load(items, parameters);
-        }
-
-        /// <summary>
-        /// Queries a collection of resources asynchronously.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<ILinkedEntity<TOut>>> objFunc, params string[] parameters)
+        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc,
+            params string[] parameters)
             where TOut : class, ICrestResource<TOut> {
             var items = objFunc.Invoke(this as T);
             return EveCrest.LoadAsync(items, parameters);
         }
 
         /// <summary>
-        /// Queries a collection of resources.
+        ///     Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        public virtual IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<ILinkedEntity<TOut>>> objFunc, params string[] parameters)
+        public virtual IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<Href<TOut>>> objFunc,
+            params string[] parameters)
             where TOut : class, ICrestResource<TOut> {
             var items = objFunc.Invoke(this as T);
             return EveCrest.Load(items, parameters);
         }
 
+        /// <summary>
+        ///     Queries a collection of resources asynchronously.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public virtual Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<ILinkedEntity<TOut>>> objFunc,
+            params string[] parameters)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(this as T);
+            return EveCrest.LoadAsync(items, parameters);
+        }
+
+        /// <summary>
+        ///     Queries a collection of resources.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>Task&lt;TOut[]&gt;.</returns>
+        public virtual IEnumerable<TOut> Query<TOut>(Func<T, IEnumerable<ILinkedEntity<TOut>>> objFunc,
+            params string[] parameters)
+            where TOut : class, ICrestResource<TOut> {
+            var items = objFunc.Invoke(this as T);
+            return EveCrest.Load(items, parameters);
+        }
     }
 }

@@ -11,16 +11,16 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class DogmaEffectCollection. This class cannot be inherited.
+    ///     Class DogmaEffectCollection. This class cannot be inherited.
     /// </summary>
     public sealed class DogmaEffectCollection : CollectionResource<DogmaEffectCollection, LinkedEntity<DogmaEffect>> {
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="DogmaEffectCollection" /> class.
+        ///     Initializes a new instance of the <see cref="DogmaEffectCollection" /> class.
         /// </summary>
         public DogmaEffectCollection() {
             ContentType = "application/vnd.ccp.eve.DogmaEffectCollection-v1+json";

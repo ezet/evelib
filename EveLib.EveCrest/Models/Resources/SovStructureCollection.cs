@@ -18,13 +18,17 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class SovStructureCollection.
+    ///     Class SovStructureCollection.
     /// </summary>
     [DataContract]
-    public sealed class SovStructureCollection : CollectionResource<SovStructureCollection, SovStructureCollection.Structure> {
+    public sealed class SovStructureCollection :
+        CollectionResource<SovStructureCollection, SovStructureCollection.Structure> {
+        public SovStructureCollection() {
+            ContentType = "application/vnd.ccp.eve.SovStructureCollection-v1+json; charset=utf-8";
+        }
+
         [DataContract]
         public class Structure {
-
             [DataMember(Name = "alliance")]
             public LinkedEntity<Alliance> Alliance { get; set; }
 
@@ -46,10 +50,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "solarSystem")]
             public LinkedEntity<SolarSystem> SolarSystem { get; set; }
         }
-
-        public SovStructureCollection() {
-            ContentType = "application/vnd.ccp.eve.SovStructureCollection-v1+json; charset=utf-8";
-        }
-
     }
 }

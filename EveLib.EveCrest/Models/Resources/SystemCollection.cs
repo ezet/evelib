@@ -17,16 +17,13 @@ using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
-
     /// <summary>
-    /// Class SystemCollection. This class cannot be inherited.
+    ///     Class SystemCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
     public sealed class SystemCollection : CollectionResource<SystemCollection, LinkedEntity<SolarSystem>> {
-
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="SystemCollection"/> class.
+        ///     Initializes a new instance of the <see cref="SystemCollection" /> class.
         /// </summary>
         public SystemCollection() {
             ContentType = "application/vnd.ccp.eve.SystemCollection-v1+json";

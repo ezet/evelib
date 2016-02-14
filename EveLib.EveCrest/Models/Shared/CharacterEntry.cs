@@ -44,7 +44,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
         public ImageLinkCollection Portraits { get; set; }
 
         /// <summary>
-        /// Gets or sets the corporation.
+        ///     Gets or sets the corporation.
         /// </summary>
         /// <value>The corporation.</value>
         [DataMember(Name = "corporation")]

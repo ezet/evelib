@@ -43,7 +43,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
         public Href<MarketTypeCollection> Types { get; set; }
 
         /// <summary>
-        /// Gets or sets the parent group.
+        ///     Gets or sets the parent group.
         /// </summary>
         /// <value>The parent group.</value>
         [DataMember(Name = "parentGroup")]

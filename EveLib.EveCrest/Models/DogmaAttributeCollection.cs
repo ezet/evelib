@@ -11,20 +11,20 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule.Models {
-
     /// <summary>
-    /// Class DogmaAttributeCollection. This class cannot be inherited.
+    ///     Class DogmaAttributeCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class DogmaAttributeCollection : CollectionResource<DogmaAttributeCollection, LinkedEntity<DogmaAttribute>> {
-
+    public sealed class DogmaAttributeCollection :
+        CollectionResource<DogmaAttributeCollection, LinkedEntity<DogmaAttribute>> {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DogmaAttributeCollection"/> class.
+        ///     Initializes a new instance of the <see cref="DogmaAttributeCollection" /> class.
         /// </summary>
         public DogmaAttributeCollection() {
             ContentType = "application/vnd.ccp.eve.DogmaAttributeCollection-v1+json";

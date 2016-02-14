@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         Href<T> Href { get; set; }
 
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         int Id { get; set; }
@@ -36,6 +36,5 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// </summary>
         /// <value>The name.</value>
         string Name { get; set; }
-
     }
 }

@@ -65,12 +65,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
 
         /// <summary>
-        /// Gets all items in the collection as an asynchronous operation.
+        ///     Gets all items in the collection as an asynchronous operation.
         /// </summary>
         /// <returns>Task&lt;IEnumerable&lt;TCollection&gt;&gt;.</returns>
         public async Task<IEnumerable<TCollection>> AllItemsAsync() {
-            CollectionResource<T, TCollection> collection = this;
-            List<TCollection> list = collection.Items.ToList();
+            var collection = this;
+            var list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
@@ -82,7 +82,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
 
         /// <summary>
-        /// Gets all the items in the collection.
+        ///     Gets all the items in the collection.
         /// </summary>
         /// <returns>IEnumerable&lt;TCollection&gt;.</returns>
         public IEnumerable<TCollection> AllItems() {
@@ -98,15 +98,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public async Task<IEnumerable<TOut>> QueryAsync<TOut>(
             Func<IEnumerable<TCollection>, IEnumerable<ILinkedEntity<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            CollectionResource<T, TCollection> collection = this;
-            List<TCollection> list = collection.Items.ToList();
+            var collection = this;
+            var list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            IEnumerable<ILinkedEntity<TOut>> items = objFunc.Invoke(list);
+            var items = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(items).ConfigureAwait(false);
         }
 
@@ -130,15 +130,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public async Task<IEnumerable<TOut>> QueryAsync<TOut>(
             Func<IEnumerable<TCollection>, IEnumerable<Href<TOut>>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            CollectionResource<T, TCollection> collection = this;
-            List<TCollection> list = collection.Items.ToList();
+            var collection = this;
+            var list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            IEnumerable<Href<TOut>> item = objFunc.Invoke(list);
+            var item = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(item).ConfigureAwait(false);
         }
 
@@ -161,15 +161,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut[]&gt;.</returns>
         public async Task<TOut> QueryAsync<TOut>(Func<IEnumerable<TCollection>, Href<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            CollectionResource<T, TCollection> collection = this;
-            List<TCollection> list = collection.Items.ToList();
+            var collection = this;
+            var list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            Href<TOut> item = objFunc.Invoke(list);
+            var item = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(item).ConfigureAwait(false);
         }
 
@@ -192,15 +192,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <returns>Task&lt;TOut[]&gt;.</returns>
         public async Task<TOut> QueryAsync<TOut>(Func<IEnumerable<TCollection>, ILinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
-            CollectionResource<T, TCollection> collection = this;
-            List<TCollection> list = collection.Items.ToList();
+            var collection = this;
+            var list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
                 while (collection.Next != null) {
                     collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
                     list.AddRange(collection.Items);
                 }
             }
-            ILinkedEntity<TOut> item = objFunc.Invoke(list);
+            var item = objFunc.Invoke(list);
             return await EveCrest.LoadAsync(item).ConfigureAwait(false);
         }
 

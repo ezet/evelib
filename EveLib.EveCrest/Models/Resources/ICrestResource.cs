@@ -20,7 +20,7 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Interface ICrestResource
+    ///     Interface ICrestResource
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface ICrestResource<out T> where T : class, ICrestResource<T> {
@@ -31,7 +31,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is from cache.
+        ///     Gets or sets a value indicating whether this instance is from cache.
         /// </summary>
         /// <value><c>true</c> if this instance is from cache; otherwise, <c>false</c>.</value>
         bool IsFromCache { get; set; }
@@ -55,7 +55,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         EveCrest EveCrest { get; set; }
 
         /// <summary>
-        /// Queries the resource asynchronous.
+        ///     Queries the resource asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -65,7 +65,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries the resource asynchronous.
+        ///     Queries the resource asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -76,7 +76,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
 
         /// <summary>
-        /// Queries the resource.
+        ///     Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -86,7 +86,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries the resource.
+        ///     Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -96,7 +96,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources asynchronous.
+        ///     Queries a collection of resources asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -106,7 +106,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources.
+        ///     Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -116,17 +116,18 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources asynchronous.
+        ///     Queries a collection of resources asynchronous.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
         /// <param name="parameters">The parameters.</param>
         /// <returns>Task&lt;TOut[]&gt;.</returns>
-        Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<ILinkedEntity<TOut>>> objFunc, params string[] parameters)
+        Task<IEnumerable<TOut>> QueryAsync<TOut>(Func<T, IEnumerable<ILinkedEntity<TOut>>> objFunc,
+            params string[] parameters)
             where TOut : class, ICrestResource<TOut>;
 
         /// <summary>
-        /// Queries a collection of resources.
+        ///     Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>

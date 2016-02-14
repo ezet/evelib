@@ -4,8 +4,8 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     [DataContract]
-    public sealed class SovCampaignsCollection : CollectionResource<SovCampaignsCollection, SovCampaignsCollection.Campaign> {
-
+    public sealed class SovCampaignsCollection :
+        CollectionResource<SovCampaignsCollection, SovCampaignsCollection.Campaign> {
         public SovCampaignsCollection() {
             ContentType = "application/vnd.ccp.eve.SovCampaignsCollection-v1+json; charset=utf-8";
         }
@@ -13,9 +13,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
         [DataContract]
         public class Campaign {
-            
             [DataMember(Name = "eventType")]
-            public int eventType { get; set; } 
+            public int eventType { get; set; }
 
             [DataMember(Name = "campaignID")]
             public int CampaignId { get; set; }
@@ -41,13 +40,11 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
         [DataContract]
         public class DefenderEntity {
-            
             [DataMember(Name = "defender")]
             public LinkedEntity<Alliance> Defender { get; set; }
 
             [DataMember(Name = "score")]
             public float Score { get; set; }
-
         }
 
         [DataContract]
