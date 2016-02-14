@@ -465,8 +465,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "attributes")]
             public Href<DogmaAttributeCollection> Attributes { get; set; }
 
+            /// <summary>
+            /// Gets or sets the effects.
+            /// </summary>
+            /// <value>The effects.</value>
             [DataMember(Name = "effects")]
-            public Href<NotImplemented> Effects { get; set; }
+            public Href<DogmaEffectCollection> Effects { get; set; }
 
         }
     }

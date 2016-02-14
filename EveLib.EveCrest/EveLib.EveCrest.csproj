@@ -119,6 +119,8 @@
     <Compile Include="Models\Resources\Character.cs" />
     <Compile Include="Models\Resources\ConstellationCollection.cs" />
     <Compile Include="Models\Resources\ContactCollection.cs" />
+    <Compile Include="Models\Resources\DogmaEffect.cs" />
+    <Compile Include="Models\Resources\DogmaEffectCollection.cs" />
     <Compile Include="Models\Resources\DustRoot.cs" />
     <Compile Include="Models\Resources\EveRoot.cs" />
     <Compile Include="Models\Resources\FittingCollection.cs" />

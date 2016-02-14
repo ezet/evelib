@@ -31,7 +31,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Gets or sets the display name.
@@ -52,7 +52,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// </summary>
         /// <value>The default value.</value>
         [DataMember(Name = "defaultValue")]
-        public double DefaultValue { get; set; }
+        public float DefaultValue { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="DogmaAttribute"/> is published.

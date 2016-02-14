@@ -179,21 +179,52 @@ namespace eZet.EveLib.Test {
             Assert.AreEqual(2, item.Id);
             Assert.AreEqual("isOnline", item.Name);
             Assert.AreEqual("https://public-crest.eveonline.com/dogma/attributes/2/", item.Href.ToString());
-            
         }
 
         [TestMethod]
         public async Task GetDogmaAttribute() {
-            var response =
+            var item =
                 await (await (crest.GetRoot().QueryAsync(r => r.Dogma.Attributes))).QueryAsync(r => r.Items.First());
-            Assert.AreEqual(2, response.Id);
-            Assert.AreEqual("", response.DisplayName);
-            Assert.AreEqual("isOnline", response.Name);
-            Assert.AreEqual(0, response.DefaultValue);
-            Assert.AreEqual(false, response.Published);
-            Assert.AreEqual(true, response.HighIsGood);
-            Assert.AreEqual(true, response.Stackable);
-            Assert.AreEqual("Boolean to store status of online effect", response.Description);
+            Assert.AreEqual(2, item.Id);
+            Assert.AreEqual("", item.DisplayName);
+            Assert.AreEqual("isOnline", item.Name);
+            Assert.AreEqual(0, item.DefaultValue);
+            Assert.AreEqual(false, item.Published);
+            Assert.AreEqual(true, item.HighIsGood);
+            Assert.AreEqual(true, item.Stackable);
+            Assert.AreEqual("Boolean to store status of online effect", item.Description);
+        }
+
+        [TestMethod]
+        public async Task GetDogmaEffects() {
+            var response = await crest.GetRoot().QueryAsync(r => r.Dogma.Effects);
+            Assert.AreNotEqual(0, response.Items.Count);
+            var item = response.Items.First();
+            Assert.AreEqual(4, item.Id);
+            Assert.AreEqual("shieldBoosting", item.Name);
+            Assert.AreEqual("https://public-crest.eveonline.com/dogma/effects/4/", item.Href.ToString());
+        }
+
+        [TestMethod]
+        public async Task GetDogmaEffect() {
+            var item =
+                await (await (crest.GetRoot().QueryAsync(r => r.Dogma.Effects))).QueryAsync(r => r.Items.First());
+            Assert.AreEqual(4, item.Id);
+            Assert.AreEqual("", item.DisplayName);
+            Assert.AreEqual("shieldBoosting", item.Name);
+            Assert.AreEqual(false, item.Published);
+            Assert.AreEqual(1, item.EffectCategory);
+            Assert.AreEqual(131, item.PostExpression);
+            Assert.AreEqual(false, item.IsAssistance);
+            Assert.AreEqual(false, item.IsOffensive);
+            Assert.AreEqual(false, item.DisallowAutoRepeat);
+            Assert.AreEqual(true, item.IsWarpSafe);
+            Assert.AreEqual(false, item.ElectronicChance);
+            Assert.AreEqual(false, item.RangeChange);
+            Assert.AreEqual(183, item.PreExpression);
+            Assert.AreEqual(6, item.DischargeAttributeId.Id);
+            Assert.AreEqual(73, item.DurationAttributeId.Id);
+            Assert.AreEqual("", item.Description);
         }
 
         [TestMethod]
