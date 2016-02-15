@@ -31,9 +31,14 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetRoot() {
-            CrestRoot root = crest.GetRoot();
-            Debug.WriteLine(root.UserCounts.Dust);
-            Debug.WriteLine(root.ServerName);
+        var root = crest.GetRoot();
+        }
+
+        [TestMethod]
+        public void GetNext() {
+            var root = crest.GetRoot();
+            var items = root.Query(r => r.ItemTypes);
+            items.Query(i => i.Next);
         }
 
         [TestMethod]
@@ -109,7 +114,7 @@ namespace eZet.EveLib.Test {
         public async Task GetWar_InvalidId_EveCrestException() {
             War data = await crest.GetWarAsync(999999999);
         }
-        
+
         [TestMethod]
         // TODO Test this properly
         public async Task GetIndustrySystemsAsync() {

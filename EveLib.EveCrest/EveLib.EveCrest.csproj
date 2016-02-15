@@ -101,8 +101,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Eve Profiteer\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -112,8 +112,8 @@
     <Compile Include="EveCrest.cs" />
     <Compile Include="Exceptions\DeprecatedResourceException.cs" />
     <Compile Include="Exceptions\ResourceNotSupportedException.cs" />
-    <Compile Include="Models\DogmaAttribute.cs" />
-    <Compile Include="Models\DogmaAttributeCollection.cs" />
+    <Compile Include="Models\Resources\DogmaAttribute.cs" />
+    <Compile Include="Models\Resources\DogmaAttributeCollection.cs" />
     <Compile Include="Models\IInferrableId.cs" />
     <Compile Include="Models\Links\ImageHref.cs" />
     <Compile Include="Models\Resources\Character.cs" />
@@ -202,7 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
-      <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
+      <Project>{aa85978c-2bf5-419f-9f8e-b70162e83f34}</Project>
       <Name>EveLib.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveLib.EveAuth\EveLib.EveAuth.csproj">
@@ -210,7 +210,9 @@
       <Name>EveLib.EveAuth</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -87,13 +87,14 @@ namespace eZet.EveLib.Test {
                   await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
             Assert.AreNotEqual(0, contacts.Items.Count);
             var first = contacts.Items.First();
-            Console.WriteLine(first.Contact);
+            Console.WriteLine(first.Contact.Name);
         }
 
         [TestMethod]
         public async Task GetFittings() {
             var fittings =
                 await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Fittings);
+            Console.WriteLine(fittings.Items.First().Name);
         }
 
         [TestMethod]

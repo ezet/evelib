@@ -246,7 +246,7 @@ namespace eZet.EveLib.EveCrestModule {
         public Task<T> LoadAsync<T>(Href<T> uri, params string[] parameters) where T : class, ICrestResource<T> {
             return uri == null
                 ? Task.FromResult(default(T))
-                : requestAsync<T>(new Uri(uri.Uri + getQueryString(parameters)));
+                : requestAsync<T>((createQueryString(uri.Uri, parameters)));
         }
 
         /// <summary>
@@ -730,16 +730,15 @@ namespace eZet.EveLib.EveCrestModule {
             return response;
         }
 
-        private string getQueryString(params string[] parameters) {
-            var p = "?";
+        private static Uri createQueryString(string uriBase, params string[] parameters) {
+            var p = uriBase.Contains('?') ? "&" : "?";
             var iter = parameters.GetEnumerator();
-
             while (iter.MoveNext()) {
                 p += iter.Current;
                 iter.MoveNext();
-                p += "=" + iter.Current;
+                p += "=" + iter.Current + "&";
             }
-            return p;
+            return new Uri(uriBase + p);
         }
     }
 }
