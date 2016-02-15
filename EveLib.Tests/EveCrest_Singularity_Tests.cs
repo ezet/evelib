@@ -14,9 +14,6 @@ namespace eZet.EveLib.Test {
     [TestClass]
     public class EveCrest_Singularity_Tests {
 
-        private string accessToken =
-            "ujBFKrtM80XwqTaFX_TgHtAX25wDEoCNzA6wxMs25av_YMuQ6ixsrmJCxr918vBw0UXLDDQeyPA79gPx0Vz4fA2";
-
         private string refreshToken = "UHtPutexwinz1u6xWC5S2Dj39GTDLgnLgUTQSyTvM1nTryMU7NbsmKWL9I32vTPd0";
 
         private string encodedKey =

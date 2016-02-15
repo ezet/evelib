@@ -4,7 +4,7 @@
 // Created          : 02-13-2016
 //
 // Last Modified By : larsd
-// Last Modified On : 02-13-2016
+// Last Modified On : 02-15-2016
 // ***********************************************************************
 // <copyright file="CharacterLocation.cs" company="Lars Kristian Dahl">
 //     Copyright ©  2015
@@ -17,17 +17,21 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    ///     Class CharacterLocation. This class cannot be inherited.
+    /// Class CharacterLocation. This class cannot be inherited.
     /// </summary>
     [DataContract]
     public sealed class CharacterLocation : CrestResource<CharacterLocation> {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CharacterLocation" /> class.
+        /// Initializes a new instance of the <see cref="CharacterLocation" /> class.
         /// </summary>
         public CharacterLocation() {
             ContentType = "application/vnd.ccp.eve.CharacterLocation-v1+json";
         }
 
+        /// <summary>
+        /// Gets or sets the solar system.
+        /// </summary>
+        /// <value>The solar system.</value>
         [DataMember(Name = "solarSystem")]
         public LinkedEntity<SolarSystem> SolarSystem { get; set; }
     }

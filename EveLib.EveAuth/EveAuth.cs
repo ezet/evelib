@@ -66,6 +66,10 @@ namespace eZet.EveLib.EveAuthModule {
             Protocol = "https://";
         }
 
+        /// <summary>
+        /// Gets or sets the protocol.
+        /// </summary>
+        /// <value>The protocol.</value>
         public string Protocol { get; set; }
 
         /// <summary>

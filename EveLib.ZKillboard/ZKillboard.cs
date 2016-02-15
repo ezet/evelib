@@ -2,7 +2,6 @@
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
-using eZet.EveLib.Core.Cache;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.ZKillboardModule.Models;
