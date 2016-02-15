@@ -31,7 +31,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetRoot() {
-        var root = crest.GetRoot();
+        var  root = crest.GetRoot();
         }
 
         [TestMethod]
@@ -39,6 +39,28 @@ namespace eZet.EveLib.Test {
             var root = crest.GetRoot();
             var items = root.Query(r => r.ItemTypes);
             items.Query(i => i.Next);
+        }
+
+        [TestMethod]
+        public void GetRegions() {
+            var root = crest.GetRoot();
+            var regions = root.Query(r => r.Regions);
+            var region = regions.Items.First();
+            Assert.AreNotEqual(0, region);
+            Assert.AreNotEqual("", region.Name);
+            Assert.AreNotEqual("", region.Href);
+        }
+
+        [TestMethod]
+        public void GetRegion() {
+            var root = crest.GetRoot();
+            var region = root.Query(r => r.Regions).Query(r => r.Items.First());
+            Assert.AreNotEqual(0, region.Id);
+            Assert.AreNotEqual("", region.Name);
+            Assert.AreNotEqual(0, region.Constellations.Count);
+            Assert.AreNotEqual("", region.MarketBuyOrders);
+            Assert.AreNotEqual("", region.MarketSellOrders);
+
         }
 
         [TestMethod]
@@ -171,6 +193,8 @@ namespace eZet.EveLib.Test {
             var response = await crest.GetRoot().QueryAsync(r => r.Constellations);
             Assert.AreNotEqual(0, response.Items.Count);
         }
+
+
 
         [TestMethod]
         public async Task GetSystems() {

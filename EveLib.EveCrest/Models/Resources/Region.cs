@@ -31,6 +31,13 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        [DataMember(Name = "id")]
+        public long Id { get; set; }
+
+        /// <summary>
         ///     Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
