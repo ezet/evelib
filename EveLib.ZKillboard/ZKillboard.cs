@@ -28,9 +28,7 @@ namespace eZet.EveLib.ZKillboardModule {
         /// <summary>
         ///     Returns true if the current request handler supports caching.
         /// </summary>
-        public bool IsCacheHandler {
-            get { return cachedRequestHandler() != null; }
-        }
+        public bool IsCacheHandler => cachedRequestHandler() != null;
 
         /// <summary>
         ///     Gets or sets the default base URI
@@ -100,6 +98,12 @@ namespace eZet.EveLib.ZKillboardModule {
             return GetAllAsync(options).Result;
         }
 
+        /// <summary>
+        /// Gets the stats asynchronous.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ZkbStatResponse&gt;.</returns>
         public Task<ZkbStatResponse> GetStatsAsync(EntityType type, long id) {
             var relPath = "/api/stats/";
             var t = type.ToString();
@@ -119,6 +123,12 @@ namespace eZet.EveLib.ZKillboardModule {
             return requestAsync<ZkbResponse>(new Uri(Host, relPath));
         }
 
+        /// <summary>
+        /// Requests the asynchronous.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri">The URI.</param>
+        /// <returns>Task&lt;T&gt;.</returns>
         private Task<T> requestAsync<T>(Uri uri) {
             return RequestHandler.RequestAsync<T>(uri);
         }
