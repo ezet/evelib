@@ -101,7 +101,7 @@ namespace eZet.EveLib.ZKillboardModule {
 
         // TODO: Implement TopAlltime
         [DataMember(Name = "topAllTime")]
-        public ZkbTopAllTime TopAllTime { get; set; }
+        public Collection<ZkbTopAllTime> TopAllTime { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
@@ -127,20 +127,15 @@ namespace eZet.EveLib.ZKillboardModule {
             [DataMember(Name = "type")]
             public string Type { get; set; }
 
-            //[DataMember(Name = "data")]
-            //public Collection<> Data { get; set; }
+            [DataMember(Name = "data")]
+            public Collection<ZkbData> Data { get; set; }
         }
 
         [DataContract]
-        public class ZkbDataCorporation {
+        public class ZkbData {
 
             [DataMember(Name = "kills")]
             public int Kills { get; set; }
-
-            [DataMember(Name = "corporationID")]
-            public long CorporationId { get; set; }
-
-
 
         }
 
