@@ -11,6 +11,8 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.ZKillboardModule {
@@ -98,7 +100,8 @@ namespace eZet.EveLib.ZKillboardModule {
         public long ShipsLost { get; set; }
 
         // TODO: Implement TopAlltime
-        //[DataMember(Name = "topAllTime")]
+        [DataMember(Name = "topAllTime")]
+        public ZkbTopAllTime TopAllTime { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
@@ -107,8 +110,9 @@ namespace eZet.EveLib.ZKillboardModule {
         [DataMember(Name = "type")]
         public string Type { get; set; }
 
-        // TODO: Implement this
-        // [DataMember(Name = "activepvp")]
+        // TODO: Test ActivePvp for all entity types
+        [DataMember(Name = "activepvp")]
+        public ZkbActivePvp ActivePvp { get; set; }
 
         /// <summary>
         /// Gets or sets the information.
@@ -116,6 +120,62 @@ namespace eZet.EveLib.ZKillboardModule {
         /// <value>The information.</value>
         [DataMember(Name = "info")]
         public ZkbStatInfo Info { get; set; }
+
+        [DataContract]
+        public class ZkbTopAllTime {
+
+            [DataMember(Name = "type")]
+            public string Type { get; set; }
+
+            //[DataMember(Name = "data")]
+            //public Collection<> Data { get; set; }
+        }
+
+        [DataContract]
+        public class ZkbDataCorporation {
+
+            [DataMember(Name = "kills")]
+            public int Kills { get; set; }
+
+            [DataMember(Name = "corporationID")]
+            public long CorporationId { get; set; }
+
+
+
+        }
+
+
+        [DataContract]
+        public class ZkbActivePvp {
+
+            [DataMember(Name = "characters")]
+            public ZkbActivePvpStat Characters { get; set; }
+
+            [DataMember(Name = "ships")]
+            public ZkbActivePvpStat Ships { get; set; }
+
+            [DataMember(Name = "systems")]
+            public ZkbActivePvpStat Systems { get; set; }
+
+            [DataMember(Name = "regions")]
+            public ZkbActivePvpStat Regions { get; set; }
+
+            [DataMember(Name = "kills")]
+            public ZkbActivePvpStat Kills { get; set; }
+            
+        }
+
+        [DataContract]
+        public class ZkbActivePvpStat {
+            
+            [DataMember(Name = "type")]
+            public string Type { get; set; }
+
+            [DataMember(Name = "count")]
+            public int Count { get; set; }
+
+        }
+
 
         /// <summary>
         /// Class ZkbStatInfo.
