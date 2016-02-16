@@ -65,7 +65,7 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/kills";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(Host, relPath));
+            return requestAsync<ZkbResponse>(new Uri(Host, relPath));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/losses";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(Host, relPath));
+            return requestAsync<ZkbResponse>(new Uri(Host, relPath));
         }
 
         /// <summary>
@@ -100,6 +100,13 @@ namespace eZet.EveLib.ZKillboardModule {
             return GetAllAsync(options).Result;
         }
 
+        public Task<ZkbStatResponse> GetStatsAsync(EntityType type, long id) {
+            var relPath = "/api/stats/";
+            var t = type.ToString();
+            relPath += t.Substring(0, 1).ToLower() + t.Substring(1, t.Length - 2) + t.Substring(t.Length - 1).ToUpper() + '/' + id + '/';
+            return requestAsync<ZkbStatResponse>(new Uri(Host, relPath));
+        }
+
         /// <summary>
         ///     Returns both Kill and loss mails
         /// </summary>
@@ -109,11 +116,11 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(Host, relPath));
+            return requestAsync<ZkbResponse>(new Uri(Host, relPath));
         }
 
-        private Task<ZkbResponse> requestAsync(Uri uri) {
-            return RequestHandler.RequestAsync<ZkbResponse>(uri);
+        private Task<T> requestAsync<T>(Uri uri) {
+            return RequestHandler.RequestAsync<T>(uri);
         }
     }
 }

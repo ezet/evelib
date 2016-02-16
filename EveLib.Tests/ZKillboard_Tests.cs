@@ -1,4 +1,5 @@
-﻿using eZet.EveLib.ZKillboardModule;
+﻿using System.Threading.Tasks;
+using eZet.EveLib.ZKillboardModule;
 using eZet.EveLib.ZKillboardModule.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -30,6 +31,11 @@ namespace eZet.EveLib.Test {
         public void GetAll_ValidRequest_NoErrors() {
             ZkbResponse result = Api.GetLosses(Options);
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task GetStats() {
+            var response = await Api.GetStatsAsync(EntityType.CorporationId, 98330748);
         }
     }
 }

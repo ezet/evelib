@@ -109,8 +109,10 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityType.cs" />
     <Compile Include="Models\ZkbResponse.cs" />
     <Compile Include="RequestHandlers\ZkbRequestHandler.cs" />
+    <Compile Include="ZkbStatResponse.cs" />
     <Compile Include="ZKillboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZKillboardOptions.cs" />
