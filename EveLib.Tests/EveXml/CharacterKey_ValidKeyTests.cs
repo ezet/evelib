@@ -244,12 +244,20 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetBlueprints_ValidRequest_HasResult() {
-            BlueprintList res = (await _validKey.Characters[0].GetBlueprintsAsync()).Result;
+            var res = (await _validKey.Characters[0].GetBlueprintsAsync());
+            Assert.IsNotNull(res.Result);
         }
 
         [TestMethod]
         public void GetChatChannels_ValidRequest_Hasresult() {
             var res = _validKey.Characters[0].GetChatChannels();
+            Assert.IsNotNull(res.Result);
+        }
+
+        [TestMethod]
+        public async Task GetBookmarks() {
+            var res = await _validKey.Characters[0].GetBookmarksAsync();
+            Assert.IsNotNull(res.Result);
 
         }
     }
