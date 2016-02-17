@@ -13,8 +13,12 @@
 // ***********************************************************************
 
 using System;
+using System.CodeDom;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,6 +79,19 @@ namespace eZet.EveLib.EveAuthModule {
             Host = "login.eveonline.com";
             Protocol = "https://";
         }
+
+        /// <summary>
+        /// Initializes static members of the <see cref="EveAuth"/> class.
+        /// </summary>
+        static EveAuth() {
+            AllCrestScopes = Enum.GetValues(typeof (CrestScope)).Cast<CrestScope>().ToArray();
+        }
+
+        /// <summary>
+        /// Gets all crest scopes.
+        /// </summary>
+        /// <value>All crest scopes.</value>
+        public static CrestScope[] AllCrestScopes { get; }
 
         /// <summary>
         /// Gets or sets the protocol.
@@ -215,7 +232,7 @@ namespace eZet.EveLib.EveAuthModule {
             }
             catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Auth failed.");
-                var response = (HttpWebResponse) e.Response;
+                var response = (HttpWebResponse)e.Response;
 
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveAuthException("Undefined error", e);

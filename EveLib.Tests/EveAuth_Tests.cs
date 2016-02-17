@@ -23,8 +23,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetAuthorizationLink() {
-            string response = _eveAuth.CreateAuthLink(ClientId, "/", "default", CrestScope.PublicData, CrestScope.CharacterLocationRead, CrestScope.CharacterNavigationWrite,
-                CrestScope.CharactersContactsWrite, CrestScope.CharacterContactsRead, CrestScope.CharacterFittingsRead, CrestScope.CharacterFittingsWrite);
+            string response = _eveAuth.CreateAuthLink(ClientId, "/", "default", EveAuth.AllCrestScopes);
             Trace.WriteLine(response);
         }
 
