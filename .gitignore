@@ -155,7 +155,13 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+<<<<<<< 502c12cf2ea8fe2d3edca0d082de7c262b4b427a
 /.nuget/package
 /packages/
+=======
+/packages/
+/.nuget/package
+
+>>>>>>> gitignore
 
 *.nupkg
