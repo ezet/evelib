@@ -99,7 +99,11 @@ namespace eZet.EveLib.ZKillboardModule {
         [DataMember(Name = "shipsLost")]
         public long ShipsLost { get; set; }
 
-        // TODO: Implement TopAlltime
+        // TODO: Implement rest of TopAlltime. Need to find a way to deserialize correctly.
+        /// <summary>
+        /// Gets or sets the top all time.
+        /// </summary>
+        /// <value>The top all time.</value>
         [DataMember(Name = "topAllTime")]
         public Collection<ZkbTopAllTime> TopAllTime { get; set; }
 
@@ -111,6 +115,10 @@ namespace eZet.EveLib.ZKillboardModule {
         public string Type { get; set; }
 
         // TODO: Test ActivePvp for all entity types
+        /// <summary>
+        /// Gets or sets the active PVP.
+        /// </summary>
+        /// <value>The active PVP.</value>
         [DataMember(Name = "activepvp")]
         public ZkbActivePvp ActivePvp { get; set; }
 
