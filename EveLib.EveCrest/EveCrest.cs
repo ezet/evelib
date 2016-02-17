@@ -442,7 +442,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
         /// <returns>Market history for the specified region and type.</returns>
-        [Obsolete(ObsoleteMessage)]
+        //[Obsolete(ObsoleteMessage)]
         public Task<MarketHistoryCollection> GetMarketHistoryAsync(int regionId, int typeId) {
             var relPath = "market/" + regionId + "/types/" + typeId + "/history/";
             return requestAsync<MarketHistoryCollection>(relPath);
@@ -454,7 +454,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
         /// <returns>Market history for the specified region and type.</returns>
-        [Obsolete(ObsoleteMessage)]
+        //[Obsolete(ObsoleteMessage)]
         public MarketHistoryCollection GetMarketHistory(int regionId, int typeId) {
             return GetMarketHistoryAsync(regionId, typeId).Result;
         }
