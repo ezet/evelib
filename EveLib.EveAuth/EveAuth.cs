@@ -3,8 +3,8 @@
 // Author           : Lars Kristian
 // Created          : 12-10-2014
 //
-// Last Modified By : Lars Kristian
-// Last Modified On : 12-17-2014
+// Last Modified By : Maikel van der Knaap
+// Last Modified On : 16-02-2016
 // ***********************************************************************
 // <copyright file="EveAuth.cs" company="">
 //     Copyright (c) . All rights reserved.
@@ -50,6 +50,11 @@ namespace eZet.EveLib.EveAuthModule {
         /// The character fittings write
         /// </summary>
         CharacterFittingsWrite,
+
+        /// <summary>
+        /// The character location read
+        /// </summary>
+        CharacterLocationRead
     }
 
     /// <summary>
@@ -145,6 +150,9 @@ namespace eZet.EveLib.EveAuthModule {
                     break;
                 case CrestScope.CharacterFittingsWrite:
                     scope += "characterFittingsWrite ";
+                    break;
+                case CrestScope.CharacterLocationRead:
+                    scope += "characterLocationRead ";
                     break;
             }
             return scope;
