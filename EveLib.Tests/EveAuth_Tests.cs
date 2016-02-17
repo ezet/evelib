@@ -23,11 +23,12 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetAuthorizationLink() {
-            string response = _eveAuth.CreateAuthLink(ClientId, "/", "default", CrestScope.PublicData);
+            string response = _eveAuth.CreateAuthLink(ClientId, "/", "default", CrestScope.PublicData, CrestScope.CharacterLocationRead, CrestScope.CharacterNavigationWrite,
+                CrestScope.CharactersContactsWrite, CrestScope.CharacterContactsRead, CrestScope.CharacterFittingsRead, CrestScope.CharacterFittingsWrite);
             Trace.WriteLine(response);
         }
 
-        [TestMethod]
+   [TestMethod]
         public void Authenticate() {
             AuthResponse response = _eveAuth.AuthenticateAsync(EncodedKey, AuthCode).Result;
             Assert.AreEqual("Bearer", response.TokenType);
@@ -45,7 +46,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task Verify() {
-            _eveAuth.Host = "sisilogin.testeveonline.com";
+            //_eveAuth.Host = "sisilogin.testeveonline.com";
             var result = await _eveAuth.RefreshAsync(encodedKeySingularity, refreshTokenSingularity);
             var response = await _eveAuth.VerifyAsync(result.AccessToken);
         }

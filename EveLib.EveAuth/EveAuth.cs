@@ -32,14 +32,14 @@ namespace eZet.EveLib.EveAuthModule {
         PublicData,
 
         /// <summary>
-        /// The character statistics read
-        /// </summary>
-        CharacterStatisticsRead,
-
-        /// <summary>
         /// The character contacts read
         /// </summary>
         CharacterContactsRead,
+
+        /// <summary>
+        /// The characters contacts write
+        /// </summary>
+        CharactersContactsWrite,
 
         /// <summary>
         /// The character fittings read
@@ -50,6 +50,16 @@ namespace eZet.EveLib.EveAuthModule {
         /// The character fittings write
         /// </summary>
         CharacterFittingsWrite,
+
+        /// <summary>
+        /// The character location read
+        /// </summary>
+        CharacterLocationRead,
+
+        /// <summary>
+        /// The character navigation write
+        /// </summary>
+        CharacterNavigationWrite
     }
 
     /// <summary>
@@ -128,26 +138,36 @@ namespace eZet.EveLib.EveAuthModule {
         }
 
         private static string resolveScope(params CrestScope[] crestScopes) {
-            string scope = "";
-            foreach (var crestScope in crestScopes)
-            switch (crestScope) {
-                case CrestScope.PublicData:
-                    scope += "publicData ";
-                    break;
-                case CrestScope.CharacterFittingsRead:
-                    scope += "characterFittingsRead ";
-                    break;
-                case CrestScope.CharacterContactsRead:
-                    scope += "characterContactsRead ";
-                    break;
-                case CrestScope.CharacterStatisticsRead:
-                    scope += "characterStatisticsRead ";
-                    break;
-                case CrestScope.CharacterFittingsWrite:
-                    scope += "characterFittingsWrite ";
-                    break;
+            var scope = "";
+            foreach (var crestScope in crestScopes) {
+                switch (crestScope) {
+                    case CrestScope.PublicData:
+                        scope += "publicData";
+                        break;
+                    case CrestScope.CharacterContactsRead:
+                        scope += "characterContactsRead";
+                        break;
+                    case CrestScope.CharactersContactsWrite:
+                        scope += "characterContactsWrite";
+                        break;
+                    case CrestScope.CharacterFittingsRead:
+                        scope += "characterFittingsRead";
+                        break;
+                    case CrestScope.CharacterFittingsWrite:
+                        scope += "characterFittingsWrite";
+                        break;
+                    case CrestScope.CharacterLocationRead:
+                        scope += "characterLocationRead";
+                        break;
+                    case CrestScope.CharacterNavigationWrite:
+                        scope += "characterNavigationWrite";
+                        break;
+                    default:
+                        break;
+                }
+                scope += " ";
             }
-            return scope;
+            return crestScopes.Length > 0 ? scope.Substring(0, scope.Length - 1) : scope;
         }
 
 
@@ -160,9 +180,7 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="state"></param>
         /// <returns>System.String.</returns>
         public string CreateAuthLink(string clientId, string redirectUri, string state, params CrestScope[] crestScope) {
-            string url =
-                Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId +
-                "&scope=" + resolveScope(crestScope) + "&state=" + state;
+            string url = Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + resolveScope(crestScope) + "&state=" + state;
             return url;
         }
 
@@ -176,9 +194,7 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="scopes">The scopes.</param>
         /// <returns>System.String.</returns>
         public string CreateAuthLink(string clientId, string redirectUri, string state, string scopes) {
-            string url =
-                Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId +
-                "&scope=" + scopes + "&state=" + state;
+            string url = Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + scopes + "&state=" + state;
             return url;
         }
 
@@ -207,9 +223,7 @@ namespace eZet.EveLib.EveAuthModule {
                     string data = reader.ReadToEnd();
                     if (response.StatusCode == HttpStatusCode.InternalServerError) throw new EveAuthException(data, e);
                     var error = JsonConvert.DeserializeObject<AuthError>(data);
-                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
-                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
-                        error.RefId);
+                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}", "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType, error.RefId);
                     throw new EveAuthException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
