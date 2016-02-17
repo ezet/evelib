@@ -196,6 +196,7 @@
     <Compile Include="Exceptions\EveCrestException.cs" />
     <Compile Include="RequestHandlers\CachedCrestRequestHandler.cs" />
     <Compile Include="ContentTypes.cs" />
+    <Compile Include="RequestHandlers\CrestRequest.cs" />
     <Compile Include="RequestHandlers\ICachedCrestRequestHandler.cs" />
     <Compile Include="RequestHandlers\ICrestRequestHandler.cs" />
     <Compile Include="ResponseHeader.cs" />

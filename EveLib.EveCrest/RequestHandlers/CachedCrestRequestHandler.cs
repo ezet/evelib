@@ -142,10 +142,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <param name="accessToken">CREST acces token</param>
         /// <returns>T.</returns>
         /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
-        /// <exception cref="EveCrestException">
-        ///     Undefined error
-        ///     or
-        ///     or
+        /// <exception cref="EveCrestException">Undefined error
         /// </exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
             string data = null;

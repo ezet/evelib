@@ -60,6 +60,8 @@ namespace eZet.EveLib.Test {
             Console.WriteLine(first.Contact.Name);
         }
 
+
+
         [TestMethod]
         public async Task GetFittings() {
             var fittings =
@@ -76,6 +78,26 @@ namespace eZet.EveLib.Test {
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Location);
             Assert.IsNotNull(location);
+<<<<<<< 572bc18c901d290395e758c80aa7a8dc2d1934e2
+=======
+        }
+
+        [TestMethod]
+        public void GetKillmail_NoErrors() {
+            Killmail data = crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+            Assert.AreEqual(30000131, data.SolarSystem.Id);
+            Assert.AreEqual(99000652, data.Victim.Alliance.Id);
+        }
+
+        [TestMethod]
+        public void Motd() {
+            Assert.IsNotNull(crest.GetRoot().Motd.Eve.Uri);
+        }
+
+        [TestMethod]
+        public async Task CrestEndpoint() {
+            CrestRoot result = await crest.GetRootAsync();
+>>>>>>> Started implementing CrestRequest
         }
 
         [TestMethod]
@@ -99,5 +121,58 @@ namespace eZet.EveLib.Test {
             var eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
             var dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
         }
+<<<<<<< 572bc18c901d290395e758c80aa7a8dc2d1934e2
+=======
+
+        [TestMethod]
+        public async Task Time() {
+            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.Time);
+        }
+
+
+        [TestMethod]
+        public async Task MarketTypes() {
+            MarketTypeCollection response = await crest.GetRoot().QueryAsync(r => r.MarketTypes);
+            //response.Items.
+        }
+
+        [TestMethod]
+        public void ServerName() {
+            Assert.AreEqual("TRANQUILITY", crest.GetRoot().ServerName);
+        }
+
+        [TestMethod]
+        public async Task GetMarketHistory_NoErrors() {
+            MarketHistoryCollection data = await crest.GetMarketHistoryAsync(RegionId, TypeId);
+
+        }
+
+        [TestMethod]
+        public async Task GetMarketPrices() {
+            MarketTypePriceCollection result = await crest.GetMarketPricesAsync();
+            Console.WriteLine(result.Items.Count);
+        }
+
+
+        [TestMethod]
+        public async Task GetWar_NoErrors() {
+            War data = await crest.GetWarAsync(291410);
+            byte[] image = crest.LoadImage(data.Aggressor.Icon);
+            Debug.WriteLine(image);
+        }
+
+        [TestMethod]
+        public async Task GetWarKillmails_NoErrors() {
+            KillmailCollection data = await crest.GetWarKillmailsAsync(1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (EveCrestException))]
+        public async Task GetWar_InvalidId_EveCrestException() {
+            War data = await crest.GetWarAsync(999999999);
+        }
+
+
+>>>>>>> Started implementing CrestRequest
     }
 }
