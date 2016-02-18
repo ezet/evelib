@@ -112,6 +112,10 @@
     <Compile Include="EveCrest.cs" />
     <Compile Include="Exceptions\DeprecatedResourceException.cs" />
     <Compile Include="Exceptions\ResourceNotSupportedException.cs" />
+    <Compile Include="Models\Empty.cs" />
+    <Compile Include="Models\ICrestEntity.cs" />
+    <Compile Include="Models\CrestWriteable.cs" />
+    <Compile Include="Models\ICrestWriteable.cs" />
     <Compile Include="Models\Resources\DogmaAttribute.cs" />
     <Compile Include="Models\Resources\DogmaAttributeCollection.cs" />
     <Compile Include="Models\IInferrableId.cs" />

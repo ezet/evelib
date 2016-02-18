@@ -60,6 +60,32 @@ namespace eZet.EveLib.Test {
             Console.WriteLine(first.Contact.Name);
         }
 
+        [TestMethod]
+        public async Task UpdateContact() {
+            var contacts =
+          await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
+            Assert.AreNotEqual(0, contacts.Items.Count);
+            var contact = contacts.Items[1];
+            contact.Standing += 1;
+            await crest.UpdateAsync(contact);
+        }
+
+        [TestMethod]
+        public async Task AddContact() {
+            var character =
+         (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
+            var contact = new ContactCollection.ContactItem();
+            contact.Href = character.Contacts.Uri;
+            contact.Contact = new ContactCollection.ContactItem.ContactData();
+            contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
+            contact.Contact.Name = "test";
+            contact.Contact.Id = 99000006;
+            contact.Contact.IdStr = "99000006";
+            contact.ContactType = "Alliance";
+            contact.Standing = 0;
+            await crest.AddAsync(contact);
+        }
+
 
 
         [TestMethod]
@@ -78,8 +104,6 @@ namespace eZet.EveLib.Test {
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Location);
             Assert.IsNotNull(location);
-<<<<<<< 572bc18c901d290395e758c80aa7a8dc2d1934e2
-=======
         }
 
         [TestMethod]
@@ -97,7 +121,6 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task CrestEndpoint() {
             CrestRoot result = await crest.GetRootAsync();
->>>>>>> Started implementing CrestRequest
         }
 
         [TestMethod]
@@ -121,8 +144,6 @@ namespace eZet.EveLib.Test {
             var eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
             var dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
         }
-<<<<<<< 572bc18c901d290395e758c80aa7a8dc2d1934e2
-=======
 
         [TestMethod]
         public async Task Time() {
@@ -173,6 +194,5 @@ namespace eZet.EveLib.Test {
         }
 
 
->>>>>>> Started implementing CrestRequest
     }
 }

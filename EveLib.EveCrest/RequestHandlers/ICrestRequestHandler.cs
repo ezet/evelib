@@ -56,12 +56,14 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         string Charset { get; set; }
 
         /// <summary>
-        ///     Requests a URI asynchronously, and returns the response content.
+        /// Requests a URI asynchronously, and returns the response content.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The CREST access accessToken</param>
+        /// <param name="method">The method.</param>
+        /// <param name="postData">The post data.</param>
         /// <returns>T.</returns>
-        Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
+        Task<T> RequestAsync<T>(Uri uri, string accessToken, string method = "GET", string postData = null) where T : class, ICrestResource<T>;
     }
 }

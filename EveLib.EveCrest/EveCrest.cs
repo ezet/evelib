@@ -22,6 +22,7 @@ using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveAuthModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
+using eZet.EveLib.EveCrestModule.Models;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
@@ -354,6 +355,18 @@ namespace eZet.EveLib.EveCrestModule {
             return GetRootAsync().Result;
         }
 
+        public async Task DeleteAsync(ICrestWriteable entity) {
+            
+        }
+
+        public async Task UpdateAsync<T>(T entity) where T : class, ICrestWriteable {
+            await postAsync(entity);
+        }
+
+        public async Task AddAsync<T>(T entity) where T : class, ICrestWriteable {
+            await postAsync(entity);
+        }
+
         /// <summary>
         ///     Returns data on the specified killmail.
         /// </summary>
@@ -679,6 +692,14 @@ namespace eZet.EveLib.EveCrestModule {
             return GetIndustryFacilitiesAsync().Result;
         }
 
+        private async Task postAsync<T>(T entity) where T : class, ICrestWriteable {
+            var data = RequestHandler.Serializer.Serialize<T>(entity);
+            //data = "{\"standing\": 10, \"contactType\": \"Alliance\" \"contact\": { \"id_str\": \"99000003\", \"href\": \"http://crest.regner.dev/alliances/99000003/\", \"name\": \"One One Corporation Alliance\", \"id\": 99000003 }, }";
+            await requestAsync<Empty>(new Uri(entity.Href), "POST", data);
+        }
+
+
+
         /// <summary>
         ///     Performs a request using the request handler.
         /// </summary>
@@ -695,13 +716,13 @@ namespace eZet.EveLib.EveCrestModule {
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;T&gt;.</returns>
-        private async Task<T> requestAsync<T>(Uri uri) where T : class, ICrestResource<T> {
+        private async Task<T> requestAsync<T>(Uri uri, string method = "GET", string data = null) where T : class, ICrestResource<T> {
             T response = null;
             if (Mode == CrestMode.Authenticated) {
                 var retry = false;
                 try {
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken, method, data).ConfigureAwait(false);
                 }
                 catch (EveCrestException e) {
                     if (EnableAutomaticTokenRefresh) {
@@ -718,11 +739,11 @@ namespace eZet.EveLib.EveCrestModule {
                     _trace.TraceEvent(TraceEventType.Information, 0,
                         "Token refreshed");
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.RequestAsync<T>(uri, AccessToken, method, data).ConfigureAwait(false);
                 }
             }
             else {
-                response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
+                response = await RequestHandler.RequestAsync<T>(uri, null, method, data).ConfigureAwait(false);
             }
             if (response != null) {
                 response.EveCrest = this;

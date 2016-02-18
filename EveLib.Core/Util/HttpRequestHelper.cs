@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
@@ -23,11 +24,12 @@ namespace eZet.EveLib.Core.Util {
         /// <returns>The HttpWebRequest</returns>
         public static HttpWebRequest CreateRequest(Uri uri) {
             HttpWebRequest request = WebRequest.CreateHttp(uri);
-            request.Proxy = null;
+            //request.Proxy = null;
             request.UserAgent = Config.UserAgent;
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.GZip;
-            request.ContentType = ContentType;
-            return request;
+            //request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.GZip;
+            request.ContentType = "application/json";
+
+                return request;
         }
 
         /// <summary>
@@ -59,10 +61,16 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="request">The request.</param>
         /// <param name="postData">The post data.</param>
         public static void AddPostData(HttpWebRequest request, string postData) {
-            request.ContentLength = postData.Length;
-            using (var writer = new StreamWriter(request.GetRequestStream())) {
-                writer.Write(postData);
+            if (postData == null) return;
+            byte[] data = Encoding.UTF8.GetBytes(postData);
+            request.ContentLength = data.Length;
+            using (var dataStream = request.GetRequestStream()) {
+                dataStream.Write(data, 0, data.Length);
             }
+            request.ContentType = ContentType;
+            //using (var writer = new StreamWriter(request.GetRequestStream())) {
+            //    writer.Write(postData);
+            //}
         }
 
         /// <summary>

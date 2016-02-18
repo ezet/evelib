@@ -24,7 +24,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <summary>
         ///     The default public max concurrent requests
         /// </summary>
-        public const int DefaultPublicMaxConcurrentRequests = 20;
+        public const int DefaultPublicMaxConcurrentRequests = 30;
 
         /// <summary>
         ///     The default authed max concurrent requests
@@ -135,23 +135,24 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public string Charset { get; set; }
 
         /// <summary>
-        ///     Performs a request, and returns the response content.
+        /// Performs a request, and returns the response content.
         /// </summary>
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="uri">URI to request</param>
         /// <param name="accessToken">CREST acces token</param>
+        /// <param name="method">The method.</param>
+        /// <param name="postData">The post data.</param>
         /// <returns>T.</returns>
         /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
-        /// <exception cref="EveCrestException">Undefined error
-        /// </exception>
-        public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
-            string data = null;
+        /// <exception cref="EveCrestException">Undefined error</exception>
+        public async Task<T> RequestAsync<T>(Uri uri, string accessToken, string method = "GET", string postData = null) where T : class, ICrestResource<T> {
+            string responseContent = null;
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
-                data = await Cache.LoadAsync(uri).ConfigureAwait(false);
-            var cached = data != null;
+                responseContent = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            var cached = responseContent != null;
             T result;
             if (cached) {
-                result = Serializer.Deserialize<T>(data);
+                result = Serializer.Deserialize<T>(responseContent);
                 result.IsFromCache = true;
                 return result;
             }
@@ -162,6 +163,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType) + ";";
             request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
+            request.Method = method;
+            HttpRequestHelper.AddPostData(request, postData);
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
@@ -187,16 +190,9 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                         throw new DeprecatedResourceException("The CREST resource is deprecated.", response);
                     }
                 }
-                data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-                // release semaphores
-                if (mode == CrestMode.Authenticated) _authedPool.Release();
-                else _publicPool.Release();
-            }
+                responseContent = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+     }
             catch (WebException e) {
-                // release semaphores
-                if (mode == CrestMode.Authenticated) _authedPool.Release();
-                else _publicPool.Release();
-
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
                 if (e.Response == null) {
                     throw new EveCrestException(e.Message, e);
@@ -206,19 +202,25 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 var responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
                 using (var reader = new StreamReader(responseStream)) {
-                    data = reader.ReadToEnd();
+                    responseContent = reader.ReadToEnd();
                     if (response.StatusCode == HttpStatusCode.InternalServerError ||
-                        response.StatusCode == HttpStatusCode.BadGateway) throw new EveCrestException(data, e);
-                    var error = Serializer.Deserialize<CrestError>(data);
+                        response.StatusCode == HttpStatusCode.BadGateway)
+                        throw new EveCrestException(responseContent, e);
+                    var error = Serializer.Deserialize<CrestError>(responseContent);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
                         "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
                         error.RefId);
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
+            finally {
+                // release semaphores
+                if (mode == CrestMode.Authenticated) _authedPool.Release();
+                else _publicPool.Release();
+            }
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
-                await Cache.StoreAsync(uri, getCacheExpirationTime(header), data).ConfigureAwait(false);
-            result = Serializer.Deserialize<T>(data);
+                await Cache.StoreAsync(uri, getCacheExpirationTime(header), responseContent).ConfigureAwait(false);
+            result = Serializer.Deserialize<T>(responseContent);
             result.ResponseHeaders = header;
             return result;
         }

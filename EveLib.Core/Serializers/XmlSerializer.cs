@@ -28,5 +28,9 @@ namespace eZet.EveLib.Core.Serializers {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "XmlSerializer.Deserialize:Complete");
             return xmlResponse;
         }
+
+        public string Serialize<T>(T entity) {
+            throw new NotImplementedException();
+        }
     }
 }

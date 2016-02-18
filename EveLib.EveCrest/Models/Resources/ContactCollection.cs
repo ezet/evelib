@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class ContactCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class ContactCollection : CollectionResource<ContactCollection, ContactCollection.ListItem> {
+    public sealed class ContactCollection : CollectionResource<ContactCollection, ContactCollection.ContactItem> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContactCollection" /> class.
         /// </summary>
@@ -30,10 +30,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        ///     Class ListItem.
+        ///     Class ContactItem.
         /// </summary>
         [DataContract]
-        public class ListItem {
+        public class ContactItem : CrestWriteable {
             /// <summary>
             ///     Gets or sets the standing.
             /// </summary>
@@ -42,25 +42,43 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             public long Standing { get; set; }
 
             /// <summary>
-            ///     Gets or sets the href.
-            /// </summary>
-            /// <value>The href.</value>
-            [DataMember(Name = "href")]
-            public Href<NotImplemented> Href { get; set; }
-
-            /// <summary>
             ///     Gets or sets the character.
             /// </summary>
             /// <value>The character.</value>
             [DataMember(Name = "character")]
             public CharacterEntry Character { get; set; }
 
+            public bool ShouldSerializeCharacter() => false;
+
+            public bool ShouldSerializeAlliance() => false;
+
+            public bool ShouldSerializeCorporation() => false;
+
+            public bool ShouldSerializeBlocked() => false;
+
+            public bool ShouldSerializeWatched() => false;
+
+            /// <summary>
+            /// Gets or sets the alliance.
+            /// </summary>
+            /// <value>The alliance.</value>
+            [DataMember(Name = "alliance")]
+            public LinkedEntity<Alliance> Alliance { get; set; }
+
+            /// <summary>
+            /// Gets or sets the alliance.
+            /// </summary>
+            /// <value>The alliance.</value>
+            [DataMember(Name = "corporation")]
+            public CorporationEntry Corporation { get; set; }
+
             /// <summary>
             ///     Gets or sets the contact.
             /// </summary>
             /// <value>The contact.</value>
+            /// TODO: Implement Contact properly, as LinkedEntity
             [DataMember(Name = "contact")]
-            public LinkedEntity<Character> Contact { get; set; }
+            public ContactData Contact { get; set; }
 
             /// <summary>
             ///     Gets or sets the type of the contact.
@@ -70,18 +88,34 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             public string ContactType { get; set; }
 
             /// <summary>
-            ///     Gets or sets a value indicating whether this <see cref="ListItem" /> is watched.
+            ///     Gets or sets a value indicating whether this <see cref="ContactItem" /> is watched.
             /// </summary>
             /// <value><c>true</c> if watched; otherwise, <c>false</c>.</value>
             [DataMember(Name = "watched")]
             public bool Watched { get; set; }
 
             /// <summary>
-            ///     Gets or sets a value indicating whether this <see cref="ListItem" /> is blocked.
+            ///     Gets or sets a value indicating whether this <see cref="ContactItem" /> is blocked.
             /// </summary>
             /// <value><c>true</c> if blocked; otherwise, <c>false</c>.</value>
             [DataMember(Name = "blocked")]
             public bool Blocked { get; set; }
+
+            [DataContract]
+            public class ContactData {
+                [DataMember(Name = "id")]
+                public long Id { get; set; }
+
+                [DataMember(Name = "id_str")]
+                public string IdStr { get; set; }
+
+                [DataMember(Name = "href")]
+                public string Href { get; set; }
+
+                [DataMember(Name = "name")]
+                public string Name { get; set; }
+
+            }
         }
     }
 }

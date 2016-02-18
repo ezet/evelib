@@ -5,5 +5,9 @@ namespace eZet.EveLib.Test.Mocks {
         public T Deserialize<T>(string data) {
             return default(T);
         }
+
+        public string Serialize<T>(T entity) {
+            throw new System.NotImplementedException();
+        }
     }
 }
