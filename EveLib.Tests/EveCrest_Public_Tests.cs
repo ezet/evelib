@@ -161,12 +161,18 @@ namespace eZet.EveLib.Test {
         public async Task MarketGroups() {
             var result = await crest.GetRoot().QueryAsync(r => r.MarketGroups);
             var first = result.Items.First();
+            Assert.IsNotNull(first.Types);
+            Assert.IsNotNull(first.Description);
+            Assert.AreNotEqual(0, first.Id);
         }
 
         [TestMethod]
         public async Task MarketTypes() {
             var result = await crest.GetRoot().QueryAsync(r => r.MarketTypes);
             var first = result.Items.First();
+            Assert.IsNotNull(first.MarketGroup);
+            Assert.IsNotNull(first.Type);
+
         }
 
         [TestMethod]
