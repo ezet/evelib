@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
@@ -31,7 +33,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetRoot() {
-        var  root = crest.GetRoot();
+            var root = crest.GetRoot();
         }
 
         [TestMethod]
@@ -168,12 +170,78 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task MarketTypes() {
-            var result = await crest.GetRoot().QueryAsync(r => r.MarketTypes);
-            var first = result.Items.First();
-            Assert.IsNotNull(first.MarketGroup);
-            Assert.IsNotNull(first.Type);
-
+            var result =
+                await crest.GetRoot().QueryAsync(r => r.MarketTypes);
+            var item = result.Items.First();
+            Assert.IsNotNull(item.MarketGroup);
+            Assert.IsNotNull(item.Type);
         }
+
+
+        [TestMethod]
+        public void ThreadTest() {
+            EveCrest ec = new EveCrest();
+            //ec.EnableRootCache = false;
+            var list = new List<Thread>();
+            var allregions = ec.GetRoot().Query(r => r.Regions);
+            foreach (var regionLink in allregions.AllItems()) {
+                list.Add(new Thread(() => {
+                    Console.WriteLine("Starting Thread");
+                    EveCrest ecT = new EveCrest();
+                    //ecT.EnableRootCache = false;
+
+                    //ERROR spawning here
+                    var region = ecT.Load(regionLink);
+                    foreach (var cons in region.Constellations) {
+                        var constellation = ecT.Load(
+                            cons);
+                        foreach (var sys in constellation.Systems) {
+                            var system = ecT.Load(sys);
+                            foreach (var pl in system.Planets) {
+                                var planet = ecT.Load(pl);
+                            }
+                        }
+                    }
+                }));
+            }
+            foreach (var thread in list) {
+                thread.Start();
+            }
+            foreach (var thread in list)
+                thread.Join();
+        }
+
+        [TestMethod]
+        public void Update() {
+            eZet.EveLib.EveCrestModule.EveCrest ec = new eZet.EveLib.EveCrestModule.EveCrest();
+            ec.EnableRootCache = false;
+            var allregions = ec.GetRoot().Query(r => r.Regions);
+            foreach (var item in allregions.AllItems()) {
+                eZet.EveLib.EveCrestModule.Models.Links.Href<eZet.EveLib.EveCrestModule.Models.Resources.Region>
+                    regionHref = item.Href;
+                new Thread(() => {
+                    Console.WriteLine("Starting Thread");
+                    eZet.EveLib.EveCrestModule.EveCrest ecT = new eZet.EveLib.EveCrestModule.EveCrest();
+                    ecT.EnableRootCache = false;
+
+                    //ERROR spawning here
+                    var region = ecT.Load(regionHref, new string[] {});
+                    foreach (var cons in region.Constellations) {
+                        var constellation = ecT.Load<eZet.EveLib.EveCrestModule.Models.Resources.Constellation>(
+                            cons.Uri, new string[] {});
+                        foreach (var sys in constellation.Systems) {
+                            var system = ecT.Load<eZet.EveLib.EveCrestModule.Models.Resources.SolarSystem>(sys.Uri,
+                                new string[] {});
+                            foreach (var pl in system.Planets) {
+                                var planet = ecT.Load<eZet.EveLib.EveCrestModule.Models.Resources.Planet>(pl.Uri,
+                                    new string[] {});
+                            }
+                        }
+                    }
+                }).Start();
+            }
+        }
+
 
         [TestMethod]
         public async Task GetSovereigntyStructures() {
