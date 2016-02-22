@@ -14,6 +14,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
 
+    /// <summary>
+    /// Class EveCrest_Public_Tests.
+    /// </summary>
     [TestClass]
     public class EveCrest_Public_Tests {
 
@@ -25,28 +28,37 @@ namespace eZet.EveLib.Test {
 
         private const string Killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
 
-        private readonly EveCrest crest = new EveCrest();
+        private readonly EveCrest _crest = new EveCrest();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EveCrest_Public_Tests"/> class.
+        /// </summary>
         public EveCrest_Public_Tests() {
-            crest.EnableAutomaticTokenRefresh = true;
-            crest.RequestHandler.ThrowOnDeprecated = true;
+            _crest.EnableAutomaticTokenRefresh = true;
+            _crest.RequestHandler.ThrowOnDeprecated = true;
         }
 
         [TestMethod]
         public void GetRoot() {
-            var root = crest.GetRoot();
+            var root = _crest.GetRoot();
+        }
+
+        [TestMethod]
+        public async Task GetIcon() {
+            var item = (await _crest.GetRoot().QueryAsync(r => r.MarketTypes)).Items.First();
+            var icon = _crest.LoadImage(item.Type.Icon);
         }
 
         [TestMethod]
         public void GetNext() {
-            var root = crest.GetRoot();
+            var root = _crest.GetRoot();
             var items = root.Query(r => r.ItemTypes);
             items.Query(i => i.Next);
         }
 
         [TestMethod]
         public void GetRegions() {
-            var root = crest.GetRoot();
+            var root = _crest.GetRoot();
             var regions = root.Query(r => r.Regions);
             var region = regions.Items.First();
             Assert.AreNotEqual(0, region);
@@ -56,7 +68,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetRegion() {
-            var root = crest.GetRoot();
+            var root = _crest.GetRoot();
             var region = root.Query(r => r.Regions).Query(r => r.Items.First());
             Assert.AreNotEqual(0, region.Id);
             Assert.AreNotEqual("", region.Name);
@@ -68,25 +80,25 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetKillmail_NoErrors() {
-            Killmail data = crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+            Killmail data = _crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }
 
         [TestMethod]
         public void GetIncursions_NoErrors() {
-            IncursionCollection incursionCollection = crest.GetRoot().Query(r => r.Incursions);
+            IncursionCollection incursionCollection = _crest.GetRoot().Query(r => r.Incursions);
         }
 
         [TestMethod]
         public void GetAlliances_NoErrors() {
-            AllianceCollection response = crest.GetRoot().Query(r => r.Alliances);
+            AllianceCollection response = _crest.GetRoot().Query(r => r.Alliances);
             Console.WriteLine(response);
         }
 
         [TestMethod]
         public void GetAlliance_NoErrors() {
-            AllianceCollection allianceCollection = crest.GetRoot().Query(r => r.Alliances);
+            AllianceCollection allianceCollection = _crest.GetRoot().Query(r => r.Alliances);
             //var all = AllianceCollectionV1.Query(f => f.Single(a => a.Id == AllianceId));
             //var alliance = AllianceCollectionV1.AllItems().Where(f => f.Id == AllianceId);
             //Console.WriteLine(alliance.First().Alliance.Name);
@@ -107,62 +119,66 @@ namespace eZet.EveLib.Test {
 
 
         [TestMethod]
-        public void GetMarketHistory_NoErrors() {
-            MarketHistoryCollection data = crest.GetMarketHistory(RegionId, TypeId);
+        public async Task GetMarketHistory_NoErrors() {
+            var data = await _crest.GetMarketHistoryAsync(RegionId, TypeId);
         }
 
         [TestMethod]
         public async Task GetMarketPrices() {
-            MarketTypePriceCollection result = await crest.GetMarketPricesAsync();
+            var result = (await (await _crest.GetRootAsync()).QueryAsync(r => r.MarketPrices));
             Console.WriteLine(result.Items.Count);
         }
 
         [TestMethod]
-        public void GetWars_NoErrors() {
-            WarCollection data = crest.GetWars();
+        public async Task GetWars_NoErrors() {
+            var result = (await(await _crest.GetRootAsync()).QueryAsync(r => r.Wars));
+            testLinkedEntity(result.Items.First());
+
         }
 
         [TestMethod]
-        public void GetWar_NoErrors() {
-            var warCollection = crest.GetRoot().Query(r => r.Wars);
-            var data = warCollection.Query(f => f.Single(w => w.Id == 291410));
-            Debug.WriteLine(data.Id);
+        public async Task GetWar_NoErrors() {
+            var result = (await(await _crest.GetRootAsync()).QueryAsync(r => r.Wars));
+            var data = await result.QueryAsync(f => f.First());
         }
 
         [TestMethod]
-        public void GetWarKillmails_NoErrors() {
-            KillmailCollection data = crest.GetWarKillmails(1);
+        public async Task GetWarKillmails_NoErrors() {
+            var result = await (await(await _crest.GetRootAsync()).QueryAsync(r => r.Wars)).QueryAsync(r => r.First());
+            var data = result.QueryAsync(r => r.Ki)
+            KillmailCollection data = _crest.GetWarKillmails(1);
+
         }
 
         [TestMethod]
         [ExpectedException(typeof(EveCrestException))]
         public async Task GetWar_InvalidId_EveCrestException() {
-            War data = await crest.GetWarAsync(999999999);
+            War data = await _crest.GetWarAsync(999999999);
         }
 
         [TestMethod]
         // TODO Test this properly
         public async Task GetIndustrySystemsAsync() {
-            IndustrySystemCollection result = await crest.GetIndustrySystemsAsync();
+            var result = (await (await _crest.GetRootAsync()).QueryAsync(r => r.Industry.Systems));
             Console.Write(result);
         }
 
         [TestMethod]
         // TODO Test this properly
         public async Task GetIndustryFacilities() {
-            IndustryFacilityCollection result = await crest.GetIndustryFacilitiesAsync();
+            var result = (await (await _crest.GetRootAsync()).QueryAsync(r => r.Industry.Facilities));
         }
 
         [TestMethod]
         public async Task ItemGroups() {
-            ItemGroupCollection itemGroups = await crest.GetRoot().QueryAsync(r => r.ItemGroups);
+            ItemGroupCollection itemGroups = await _crest.GetRoot().QueryAsync(r => r.ItemGroups);
             var group = itemGroups.Query(f => f.Single(g => g.Id == 354753));
             Console.WriteLine(group.Name);
         }
 
         [TestMethod]
         public async Task MarketGroups() {
-            var result = await crest.GetRoot().QueryAsync(r => r.MarketGroups);
+            var result = await _crest.GetRoot().QueryAsync(r => r.MarketGroups);
             var first = result.Items.First();
             Assert.IsNotNull(first.Types);
             Assert.IsNotNull(first.Description);
@@ -172,7 +188,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task MarketTypes() {
             var result =
-                await crest.GetRoot().QueryAsync(r => r.MarketTypes);
+                await _crest.GetRoot().QueryAsync(r => r.MarketTypes);
             var item = result.Items.First();
             Assert.IsNotNull(item.MarketGroup);
             Assert.IsNotNull(item.Type);
@@ -214,25 +230,25 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetSovereigntyStructures() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Sovereignty.Structures);
+            var response = await _crest.GetRoot().QueryAsync(r => r.Sovereignty.Structures);
 
         }
 
         [TestMethod]
         public async Task GetSovereigntyCampaigns() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Sovereignty.Campaigns);
+            var response = await _crest.GetRoot().QueryAsync(r => r.Sovereignty.Campaigns);
         }
 
         [TestMethod]
         public async Task GetItemTypes() {
-            var response = await crest.GetRoot().QueryAsync(r => r.ItemTypes);
+            var response = await _crest.GetRoot().QueryAsync(r => r.ItemTypes);
             Assert.AreNotEqual(0, response.Items.Count);
             testLinkedEntity(response.Items.First());
         }
 
         [TestMethod]
         public async Task GetItemType() {
-            var response = await crest.GetRoot().QueryAsync(r => r.ItemTypes);
+            var response = await _crest.GetRoot().QueryAsync(r => r.ItemTypes);
             var type = response.Query(r => r.Items.Single(t => t.Id == 200));
             Assert.IsNotNull(type.GraphicId);
             Assert.AreNotEqual(0, type.Dogma.Attributes.Count);
@@ -245,7 +261,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetConstellations() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Constellations);
+            var response = await _crest.GetRoot().QueryAsync(r => r.Constellations);
             Assert.AreNotEqual(0, response.Items.Count);
             testLinkedEntity(response.Items.First());
         }
@@ -254,14 +270,14 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetSystems() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Systems);
+            var response = await _crest.GetRoot().QueryAsync(r => r.Systems);
             Assert.AreNotEqual(0, response.Items.Count);
             testLinkedEntity(response.Items.First());
         }
 
         [TestMethod]
         public async Task GetDogmaAttributes() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Dogma.Attributes);
+            var response = await _crest.GetRoot().QueryAsync(r => r.Dogma.Attributes);
             Assert.AreNotEqual(0, response.Items.Count);
             var item = response.Items.First();
             testLinkedEntity(item);
@@ -270,14 +286,14 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetDogmaAttribute() {
             var item =
-                await (await (crest.GetRoot().QueryAsync(r => r.Dogma.Attributes))).QueryAsync(r => r.Items.First());
+                await (await (_crest.GetRoot().QueryAsync(r => r.Dogma.Attributes))).QueryAsync(r => r.Items.First());
             Assert.IsNotNull(item.DisplayName);
             Assert.IsNotNull(item.Description);
         }
 
         [TestMethod]
         public async Task GetDogmaEffects() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Dogma.Effects);
+            var response = await _crest.GetRoot().QueryAsync(r => r.Dogma.Effects);
             Assert.AreNotEqual(0, response.Items.Count);
             var item = response.Items.First();
             testLinkedEntity(item);
@@ -286,7 +302,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetDogmaEffect() {
             var item =
-                await (await (crest.GetRoot().QueryAsync(r => r.Dogma.Effects))).QueryAsync(r => r.Items.First());
+                await (await (_crest.GetRoot().QueryAsync(r => r.Dogma.Effects))).QueryAsync(r => r.Items.First());
             Assert.IsNotNull(item.Description);
         }
 
@@ -295,7 +311,7 @@ namespace eZet.EveLib.Test {
             var orders =
                 (await
                     (await
-                        (await crest.GetRootAsync())
+                        (await _crest.GetRootAsync())
                     .QueryAsync(r => r.Regions))
                 .QueryAsync(x => x.Single(r => r.Name == "The Forge")))
                 .Query(r => r.MarketBuyOrders, "type",
