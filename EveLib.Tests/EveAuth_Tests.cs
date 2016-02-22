@@ -14,22 +14,23 @@ namespace eZet.EveLib.Test {
         private const string AuthCode = "ty2wPC3x81YD5CzU6tM8p2TnvT4uJ8vjqLoSyQEvuFNV6SzzG70gvkVIptFk-7fe0";
 
         private const string RefreshToken = "E9nZjXvx_tFu-PdpTC6yT_j4FupJ-84ybEtNsE8iMko1";
-
-        private string refreshTokenSingularity = "UHtPutexwinz1u6xWC5S2Dj39GTDLgnLgUTQSyTvM1nTryMU7NbsmKWL9I32vTPd0";
-
-        private string encodedKeySingularity =
-            "Y2VmZTYwMWQ5ZjVhNDQ0MTgzZjhjNzMyNjc2NzA5ZmI6R3dnM0pOVDhWMERMWndiN1ptUmtlOXpKRFlwMWVQblVtOVY1enZqWQ==";
         private readonly EveAuth _eveAuth = new EveAuth();
+
+        private readonly string encodedKeySingularity =
+            "Y2VmZTYwMWQ5ZjVhNDQ0MTgzZjhjNzMyNjc2NzA5ZmI6R3dnM0pOVDhWMERMWndiN1ptUmtlOXpKRFlwMWVQblVtOVY1enZqWQ==";
+
+        private readonly string refreshTokenSingularity =
+            "UHtPutexwinz1u6xWC5S2Dj39GTDLgnLgUTQSyTvM1nTryMU7NbsmKWL9I32vTPd0";
 
         [TestMethod]
         public void GetAuthorizationLink() {
-            string response = _eveAuth.CreateAuthLink(ClientId, "/", "default", EveAuth.AllCrestScopes);
+            var response = _eveAuth.CreateAuthLink(ClientId, "/", "default", EveAuth.AllCrestScopes);
             Trace.WriteLine(response);
         }
 
-   [TestMethod]
+        [TestMethod]
         public void Authenticate() {
-            AuthResponse response = _eveAuth.AuthenticateAsync(EncodedKey, AuthCode).Result;
+            var response = _eveAuth.AuthenticateAsync(EncodedKey, AuthCode).Result;
             Assert.AreEqual("Bearer", response.TokenType);
             Trace.WriteLine("Access Token: " + response.AccessToken);
             Trace.WriteLine("Refresh Token: " + response.RefreshToken);
@@ -37,7 +38,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task Refresh() {
-            AuthResponse response = await _eveAuth.RefreshAsync(EncodedKey, RefreshToken);
+            var response = await _eveAuth.RefreshAsync(EncodedKey, RefreshToken);
             Assert.AreEqual("Bearer", response.TokenType);
             Trace.WriteLine("Access Token: " + response.AccessToken);
             Trace.WriteLine("Refresh Token: " + response.RefreshToken);

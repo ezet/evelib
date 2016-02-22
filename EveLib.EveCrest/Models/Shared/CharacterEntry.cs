@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
     ///     Class CharacterEntry.
     /// </summary>
     [DataContract]
-    public class CharacterEntry : LinkedEntity<NotImplemented> {
+    public class CharacterEntry : LinkedEntity<Character> {
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is NPC.
         /// </summary>

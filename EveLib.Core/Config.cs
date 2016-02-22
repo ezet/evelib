@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Globalization;
 using System.IO;
 using eZet.EveLib.Core.Cache;
+using static System.String;
 
 namespace eZet.EveLib.Core {
     /// <summary>
@@ -14,11 +15,33 @@ namespace eZet.EveLib.Core {
         /// </summary>
         public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>
-        ///     relCachePath to ApplicationData folder.
-        /// </summary>
-        public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                                Separator;
+        private static string _appData;
+        public static string AppData {
+            get {
+                if (IsNullOrWhiteSpace(_appData)) {
+                    _appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Separator;
+                }
+                return _appData;
+            }
+
+            set {
+                _appData = value;
+                SetConfig();
+            }
+        }
+
+
+        static Config() {
+            if (IsNullOrEmpty(UserAgent))
+                UserAgent = "EveLib";
+            SetConfig();
+        }
+
+        private static void SetConfig() {
+            CachePath = AppData + Separator + "Cache";
+            ImagePath = AppData + Separator + "Images";
+            CacheFactory = module => new EveLibFileCache(Path.Combine(CachePath, module), "register");
+        }
 
 
         /// <summary>
@@ -43,14 +66,5 @@ namespace eZet.EveLib.Core {
         /// </summary>
         public static readonly string UserAgent = ConfigurationManager.AppSettings["eveLib.UserAgent"];
 
-        static Config() {
-            if (String.IsNullOrEmpty(UserAgent))
-                UserAgent = "EveLib";
-            string appName = ConfigurationManager.AppSettings["eveLib.AppData"];
-            AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
-            ImagePath = AppData + Separator + "Images";
-            CachePath = AppData + Separator + "Cache";
-            CacheFactory = module => new EveLibFileCache(CachePath + Separator + module, "register");
-        }
     }
 }

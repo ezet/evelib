@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using eZet.EveLib.EveWhoModule;
-using eZet.EveLib.EveWhoModule.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

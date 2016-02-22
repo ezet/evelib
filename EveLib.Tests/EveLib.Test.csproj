@@ -123,11 +123,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ApiKey_Tests.cs" />
-    <Compile Include="CharacterKey_Beta.cs" />
-    <Compile Include="CharacterKey_ValidKeyTests.cs" />
-    <Compile Include="Character_StaticDeserializationTests.cs" />
-    <Compile Include="CorporationKey_Beta.cs" />
+    <Compile Include="EveXml\ApiKey_Tests.cs" />
+    <Compile Include="EveXml\CharacterKey_Beta.cs" />
+    <Compile Include="EveXml\CharacterKey_ValidKeyTests.cs" />
+    <Compile Include="EveXml\Character_StaticDeserializationTests.cs" />
+    <Compile Include="EveXml\CorporationKey_Beta.cs" />
     <Compile Include="EveAuth_Tests.cs" />
     <Compile Include="EveCrest_Authed_Tests .cs" />
     <Compile Include="EveCrest_Public_Tests.cs" />
@@ -136,7 +136,7 @@
     <Compile Include="EveWho_Tests.cs" />
     <Compile Include="StaticData_Tests.cs" />
     <Compile Include="Misc_Tests.cs" />
-    <Compile Include="Corporation_StaticDeserializationTests.cs" />
+    <Compile Include="EveXml\Corporation_StaticDeserializationTests.cs" />
     <Compile Include="EveCentral_Tests.cs" />
     <Compile Include="EveMarketData_Tests.cs" />
     <Compile Include="Image_Tests.cs" />
@@ -144,7 +144,7 @@
     <Compile Include="Mocks\StaticXmlRequestHandler.cs" />
     <Compile Include="Mocks\NullSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CorporationKey_ValidKeyTests.cs" />
+    <Compile Include="EveXml\CorporationKey_ValidKeyTests.cs" />
     <Compile Include="ZKillboard_Tests.cs" />
   </ItemGroup>
   <ItemGroup>

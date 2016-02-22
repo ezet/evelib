@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using eZet.EveLib.EveCentralModule;
-using eZet.EveLib.EveCentralModule.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -22,10 +21,10 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            var options = new EveCentralOptions() {System = 30000142};
+            var options = new EveCentralOptions {System = 30000142};
             options.Items.Add(34);
-            MarketStatResponse res = _api.GetMarketStat(options);
-            EveCentralMarketStatItem entry = res.Result.First();
+            var res = _api.GetMarketStat(options);
+            var entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.All.Average);
             Assert.AreNotEqual(0, entry.All.Volume);
@@ -38,9 +37,9 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklook_ValidRequest_ValidReseponse() {
-            QuickLookResponse res = _api.GetQuicklook(_validOptions);
-            QuicklookResult entry = res.Result;
-            EveCentralQuicklookOrder order = entry.BuyOrders.First();
+            var res = _api.GetQuicklook(_validOptions);
+            var entry = res.Result;
+            var order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual("Tritanium", entry.TypeName);
             Assert.AreEqual(HourLimit, entry.HourLimit);
@@ -59,9 +58,9 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetQuicklookPath_ValidRequest_ValidResponse() {
-            QuickLookResponse res = _api.GetQuicklookPath("Jita", "Amarr", 34, _validOptions);
-            QuicklookResult entry = res.Result;
-            EveCentralQuicklookOrder order = entry.BuyOrders.First();
+            var res = _api.GetQuicklookPath("Jita", "Amarr", 34, _validOptions);
+            var entry = res.Result;
+            var order = entry.BuyOrders.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreEqual("Tritanium", entry.TypeName);
             Assert.AreEqual(HourLimit, entry.HourLimit);

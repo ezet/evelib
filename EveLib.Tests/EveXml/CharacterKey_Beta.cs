@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.EveXmlModule;
-using eZet.EveLib.EveXmlModule.Models;
-using eZet.EveLib.EveXmlModule.Models.Character;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -22,7 +20,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetBlueprints() {
-            EveXmlResponse<BlueprintList> result = await _sisiKey.Characters.First().GetBlueprintsAsync();
+            var result = await _sisiKey.Characters.First().GetBlueprintsAsync();
         }
     }
 }

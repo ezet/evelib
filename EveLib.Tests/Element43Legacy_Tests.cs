@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using eZet.EveLib.Element43Module;
-using eZet.EveLib.Element43Module.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -20,8 +19,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetMarketStat_ValidRequest_ValidResponse() {
-            MarketStatResponse res = _api.GetMarketStat(_validOptions);
-            Element43MarketStatItem entry = res.Result.First();
+            var res = _api.GetMarketStat(_validOptions);
+            var entry = res.Result.First();
             Assert.AreEqual(TypeId, entry.TypeId);
             Assert.AreNotEqual(0, entry.SellOrders.Average);
             Assert.AreNotEqual(0, entry.SellOrders.Volume);

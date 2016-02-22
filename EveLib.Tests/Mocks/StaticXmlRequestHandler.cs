@@ -14,17 +14,17 @@ namespace eZet.EveLib.Test.Mocks {
         public ISerializer Serializer { get; set; }
 
         public async Task<T> RequestAsync<T>(Uri uri) {
-            DirectoryInfo directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
+            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo != null) {
-                string baseDir = directoryInfo.FullName;
-                string path = uri.PathAndQuery;
-                string relPath =
+                var baseDir = directoryInfo.FullName;
+                var path = uri.PathAndQuery;
+                var relPath =
                     path.Substring(path.Remove(path.LastIndexOf("/", StringComparison.Ordinal))
                         .LastIndexOf("/", StringComparison.Ordinal));
                 relPath = relPath.Remove(relPath.LastIndexOf(".aspx", StringComparison.Ordinal)).Replace("/", "\\");
                 relPath = baseDir + "\\Xml" + relPath;
-                using (StreamReader reader = (File.OpenText(relPath))) {
-                    string data = await reader.ReadToEndAsync().ConfigureAwait(false);
+                using (var reader = (File.OpenText(relPath))) {
+                    var data = await reader.ReadToEndAsync().ConfigureAwait(false);
                     return Serializer.Deserialize<T>(data);
                 }
             }
