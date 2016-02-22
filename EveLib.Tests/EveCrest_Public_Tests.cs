@@ -31,8 +31,8 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetRoot() {
-            var root = _crest.GetRoot();
+        public async Task GetRoot() {
+            var root = await _crest.GetRootAsync();
         }
 
         [TestMethod]
@@ -42,16 +42,16 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetNext() {
-            var root = _crest.GetRoot();
-            var items = root.Query(r => r.ItemTypes);
-            items.Query(i => i.Next);
+        public async Task GetNext() {
+            var root = await _crest.GetRootAsync();
+            var items = await root.QueryAsync(r => r.ItemTypes);
+            await items.QueryAsync(i => i.Next);
         }
 
         [TestMethod]
-        public void GetRegions() {
-            var root = _crest.GetRoot();
-            var regions = root.Query(r => r.Regions);
+        public async Task GetRegions() {
+            var root = await _crest.GetRootAsync();
+            var regions = await root.QueryAsync(r => r.Regions);
             var region = regions.Items.First();
             Assert.AreNotEqual(0, region);
             Assert.AreNotEqual("", region.Name);
@@ -59,37 +59,37 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetRegion() {
-            var root = _crest.GetRoot();
-            var region = root.Query(r => r.Regions).Query(r => r.Items.First());
+        public async Task GetRegion() {
+            var root = await _crest.GetRootAsync();
+            var region = await (await root.QueryAsync(r => r.Regions)).QueryAsync(r => r.Items.First());
             Assert.AreNotEqual(0, region.Id);
-            Assert.AreNotEqual("", region.Name);
+            Assert.IsNotNull(region.Name);
             Assert.AreNotEqual(0, region.Constellations.Count);
-            Assert.AreNotEqual("", region.MarketBuyOrders);
-            Assert.AreNotEqual("", region.MarketSellOrders);
+            Assert.IsNotNull(region.MarketBuyOrders);
+            Assert.IsNotNull(region.MarketSellOrders);
         }
 
         [TestMethod]
-        public void GetKillmail_NoErrors() {
-            var data = _crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
+        public async Task GetKillmail_NoErrors() {
+            var data = await _crest.GetKillmailAsync(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
             Assert.AreEqual(30000131, data.SolarSystem.Id);
             Assert.AreEqual(99000652, data.Victim.Alliance.Id);
         }
 
         [TestMethod]
-        public void GetIncursions_NoErrors() {
-            var incursionCollection = _crest.GetRoot().Query(r => r.Incursions);
+        public async Task GetIncursions_NoErrors() {
+            var incursionCollection = await (await _crest.GetRootAsync()).QueryAsync(r => r.Incursions);
         }
 
         [TestMethod]
-        public void GetAlliances_NoErrors() {
-            var response = _crest.GetRoot().Query(r => r.Alliances);
+        public async Task GetAlliances_NoErrors() {
+            var response = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
             Console.WriteLine(response);
         }
 
         [TestMethod]
-        public void GetAlliance_NoErrors() {
-            var allianceCollection = _crest.GetRoot().Query(r => r.Alliances);
+        public async Task GetAlliance_NoErrors() {
+            var allianceCollection = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
             //var all = AllianceCollectionV1.Query(f => f.Single(a => a.Id == AllianceId));
             //var alliance = AllianceCollectionV1.AllItems().Where(f => f.Id == AllianceId);
             //Console.WriteLine(alliance.First().Alliance.Name);
@@ -369,9 +369,9 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void ServiceStatus() {
             var status = _crest.GetRoot().ServiceStatus;
-            Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Dust);
-            Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Eve);
-            Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Server);
+            //Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Dust);
+            //Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Eve);
+            //Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Server);
         }
 
         [TestMethod]
