@@ -118,14 +118,35 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// </summary>
             /// <value>The attributes.</value>
             [DataMember(Name = "attributes")]
-            public IReadOnlyList<LinkedEntity<DogmaAttribute>> Attributes { get; set; }
+            public IReadOnlyList<DogmaAttribute> Attributes { get; set; }
 
             /// <summary>
             ///     Gets or sets the effects.
             /// </summary>
             /// <value>The effects.</value>
             [DataMember(Name = "effects")]
-            public IReadOnlyList<LinkedEntity<DogmaEffect>> Effects { get; set; }
+            public IReadOnlyList<DogmaEffect> Effects { get; set; }
+        }
+
+        [DataContract]
+        public class DogmaAttribute {
+
+            [DataMember(Name = "attribute")]
+            public LinkedEntity<DogmaAttribute> Attribute { get; set; }
+
+            [DataMember(Name = "value")]
+            public float Value { get; set; }
+
+        }
+
+        [DataContract]
+        public class DogmaEffect {
+            
+            [DataMember(Name = "effect")]
+            public LinkedEntity<DogmaEffect> Effect { get; set; }
+
+            [DataMember(Name = "isDefault")]
+            public bool IsDefault { get; set; }
         }
     }
 }
