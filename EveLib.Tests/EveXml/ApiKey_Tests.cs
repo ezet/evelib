@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using eZet.EveLib.EveXmlModule;
-using eZet.EveLib.EveXmlModule.Models;
-using eZet.EveLib.EveXmlModule.Models.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -15,22 +13,22 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void Init_NoExceptions() {
-            ApiKey res = _validKey.Init();
+            var res = _validKey.Init();
         }
 
         [TestMethod]
         public async Task InitAsync_NoExceptions() {
-            ApiKey res = await _validKey.InitAsync();
+            var res = await _validKey.InitAsync();
         }
 
         [TestMethod]
         public void GetApiKeyInfo_NoExceptions() {
-            EveXmlResponse<ApiKeyInfo> res = _validKey.GetApiKeyInfoAsync().Result;
+            var res = _validKey.GetApiKeyInfoAsync().Result;
         }
 
         [TestMethod]
         public void GetCharacterList_NoExceptions() {
-            EveXmlResponse<CharacterList> res = _validKey.GetCharacterListAsync().Result;
+            var res = _validKey.GetCharacterListAsync().Result;
         }
 
         [TestMethod]

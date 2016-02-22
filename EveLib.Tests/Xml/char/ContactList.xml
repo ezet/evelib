@@ -1,10 +1,14 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
+
 <eveapi version="2">
   <currentTime>2015-07-13 12:23:12</currentTime>
   <result>
-    <rowset name="contactList" key="contactID" columns="contactID,contactName,standing,contactTypeID,labelMask,inWatchlist">
-      <row contactID="90000002" contactName="Hemisphere" standing="10" contactTypeID="1385" labelMask="67108867" inWatchlist="True" />
-      <row contactID="90000004" contactName="Comet" standing="5" contactTypeID="1379" labelMask="2097153" inWatchlist="True" />
+    <rowset name="contactList" key="contactID"
+            columns="contactID,contactName,standing,contactTypeID,labelMask,inWatchlist">
+      <row contactID="90000002" contactName="Hemisphere" standing="10" contactTypeID="1385" labelMask="67108867"
+           inWatchlist="True" />
+      <row contactID="90000004" contactName="Comet" standing="5" contactTypeID="1379" labelMask="2097153"
+           inWatchlist="True" />
     </rowset>
     <rowset name="contactLabels" key="labelID" columns="name">
       <row labelID="1" name="Alts" />
@@ -18,7 +22,8 @@
       <row labelID="36028797018963968" name="Label 54" />
       <row labelID="4611686018427387904" name="Label 61" />
     </rowset>
-    <rowset name="corporateContactList" key="contactID" columns="contactID,contactName,standing,contactTypeID,labelMask">
+    <rowset name="corporateContactList" key="contactID"
+            columns="contactID,contactName,standing,contactTypeID,labelMask">
       <row contactID="90000002" contactName="Hemisphere" standing="-5" contactTypeID="1385" labelMask="1" />
     </rowset>
     <rowset name="corporateContactLabels" key="labelID" columns="name">
