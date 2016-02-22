@@ -18,9 +18,9 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             /// </summary>
             IEveLibCache Cache { get; set; }
 
-            ///// Gets or sets a value indicating whether [enable cache].
-
             ///// <summary>
+
+            ///// Gets or sets a value indicating whether [enable cache].
             ///// </summary>
             ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
             //bool EnableCache { get; set; }

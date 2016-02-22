@@ -118,14 +118,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public IReadOnlyList<CorporationEntry> Corporations { get; set; }
 
         /// <summary>
-        /// Gets or sets the capital system.
+        ///     Gets or sets the capital system.
         /// </summary>
         /// <value>The capital system.</value>
         [DataMember(Name = "capitalSystem")]
         public LinkedEntity<SolarSystem> CapitalSystem { get; set; }
 
         /// <summary>
-        /// Gets or sets the prime hour.
+        ///     Gets or sets the prime hour.
         /// </summary>
         /// <value>The prime hour.</value>
         [DataMember(Name = "primeHour")]

@@ -130,18 +130,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
         [DataContract]
         public class DogmaAttribute {
-
             [DataMember(Name = "attribute")]
             public LinkedEntity<DogmaAttribute> Attribute { get; set; }
 
             [DataMember(Name = "value")]
             public float Value { get; set; }
-
         }
 
         [DataContract]
         public class DogmaEffect {
-            
             [DataMember(Name = "effect")]
             public LinkedEntity<DogmaEffect> Effect { get; set; }
 
