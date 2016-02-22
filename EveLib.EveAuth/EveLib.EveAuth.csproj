@@ -31,6 +31,10 @@
     <DocumentationFile>bin\Release\EveLib.EveAuth.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EveLib.Core, Version=3.0.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\eZet.EveLib.Core.3.0.2.1\lib\net45\EveLib.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -54,12 +58,7 @@
     <Compile Include="VerifyResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
-      <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
-      <Name>EveLib.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

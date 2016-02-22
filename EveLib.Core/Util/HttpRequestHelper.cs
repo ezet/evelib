@@ -53,7 +53,6 @@ namespace eZet.EveLib.Core.Util {
             return GetResponseContentAsync(request);
         }
 
-
         /// <summary>
         ///     Adds the post data.
         /// </summary>
