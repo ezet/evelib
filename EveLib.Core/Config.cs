@@ -16,6 +16,10 @@ namespace eZet.EveLib.Core {
         public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
         private static string _appData;
+        /// <summary>
+        /// Gets or sets the application data.
+        /// </summary>
+        /// <value>The application data.</value>
         public static string AppData {
             get {
                 if (IsNullOrWhiteSpace(_appData)) {

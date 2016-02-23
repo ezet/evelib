@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// </summary>
     [DataContract]
     public sealed class MarketGroupCollection :
-        CollectionResource<MarketGroupCollection, MarketGroupCollection.MarketGroupItem> {
+        CollectionResource<MarketGroupCollection, MarketGroup> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MarketGroupCollection" /> class.
         /// </summary>
@@ -29,24 +29,31 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
             ContentType = "application/vnd.ccp.eve.MarketGroupCollection-v1+json";
         }
 
-        /// <summary>
-        ///     Class MarketGroupItem.
-        /// </summary>
-        [DataContract]
-        public class MarketGroupItem : LinkedEntity<MarketGroup> {
-            /// <summary>
-            ///     Gets or sets the types.
-            /// </summary>
-            /// <value>The types.</value>
-            [DataMember(Name = "types")]
-            public Href<MarketTypeCollection> Types { get; set; }
+        ///// <summary>
+        /////     Class MarketGroupItem.
+        ///// </summary>
+        //[DataContract]
+        //public class MarketGroupItem : LinkedEntity<MarketGroup> {
+        //    /// <summary>
+        //    ///     Gets or sets the types.
+        //    /// </summary>
+        //    /// <value>The types.</value>
+        //    [DataMember(Name = "types")]
+        //    public Href<MarketTypeCollection> Types { get; set; }
 
-            /// <summary>
-            ///     Gets or sets the description.
-            /// </summary>
-            /// <value>The description.</value>
-            [DataMember(Name = "description")]
-            public string Description { get; set; }
-        }
+        //    /// <summary>
+        //    ///     Gets or sets the description.
+        //    /// </summary>
+        //    /// <value>The description.</value>
+        //    [DataMember(Name = "description")]
+        //    public string Description { get; set; }
+
+        //    /// <summary>
+        //    ///     Gets or sets the parent group.
+        //    /// </summary>
+        //    /// <value>The parent group.</value>
+        //    [DataMember(Name = "parentGroup")]
+        //    public Href<MarketGroup> ParentGroup { get; set; }
+        //}
     }
 }
