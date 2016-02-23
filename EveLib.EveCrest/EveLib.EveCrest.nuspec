@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveCrest_v3.2.2</releaseNotes>
+    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveCrest_v3.2.3</releaseNotes>
     <tags>EveLib EveCrest API EveOnline Eve Online Crest</tags>
   </metadata>
 </package>
