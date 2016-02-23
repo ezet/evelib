@@ -13,5 +13,8 @@
     <description>$description$</description>
     <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveCrest_v3.2.3</releaseNotes>
     <tags>EveLib EveCrest API EveOnline Eve Online Crest</tags>
+	<dependencies>
+      <dependency id="Newtonsoft.Json" version="6.0.0" />
+    </dependencies>
   </metadata>
 </package>

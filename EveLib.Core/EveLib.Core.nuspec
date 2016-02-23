@@ -11,8 +11,8 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Made it easier to set your own paths in Config.</releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <releaseNotes>https://github.com/ezet/evelib/releases/tag/Core_v3.0.3</releaseNotes>
+    <copyright>Copyright 2016</copyright>
     <tags>EveLib Core EveOnline Eve Online</tags>
 	<dependencies>
       <dependency id="Newtonsoft.Json" version="6.0.0" />
