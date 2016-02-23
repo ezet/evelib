@@ -202,7 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
-      <Project>{aa85978c-2bf5-419f-9f8e-b70162e83f34}</Project>
+      <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
       <Name>EveLib.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\EveLib.EveAuth\EveLib.EveAuth.csproj">

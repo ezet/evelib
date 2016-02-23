@@ -93,6 +93,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "aggressor")]
         public WarEntity Aggressor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the killmails.
+        /// </summary>
+        /// <value>The killmails.</value>
         [DataMember(Name = "killmail")]
         public LinkedEntity<KillmailCollection> Killmails { get; set; }
 
