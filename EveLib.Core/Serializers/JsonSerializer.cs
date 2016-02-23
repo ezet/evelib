@@ -12,7 +12,8 @@ namespace eZet.EveLib.Core.Serializers {
         /// <summary>
         /// The date format
         /// </summary>
-        public string DateFormat = "yyyy-MM-dd HH:mm:ss";
+        public string DateFormat1 = "yyyy-MM-dd HH:mm:ss";
+        public string DateFormat2 = "yyyy.MM.dd HH:mm:ss";
 
         /// <summary>
         ///     Deserializes JSON
@@ -21,7 +22,7 @@ namespace eZet.EveLib.Core.Serializers {
         /// <returns></returns>
         T ISerializer.Deserialize<T>(string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Start");
-            var result = JsonConvert.DeserializeObject<T>(data, new IsoDateTimeConverter { DateTimeFormat = DateFormat });
+            var result = JsonConvert.DeserializeObject<T>(data, new IsoDateTimeConverter { DateTimeFormat = DateFormat1 }, new IsoDateTimeConverter { DateTimeFormat = DateFormat2 });
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Complete");
             return result;
         }
