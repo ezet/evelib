@@ -13,7 +13,7 @@ namespace eZet.EveLib.Core {
         /// <summary>
         ///     Directory Separator
         /// </summary>
-        public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
+        public static string Separator { get; set; }
 
         private static string _appData;
         /// <summary>
@@ -36,6 +36,7 @@ namespace eZet.EveLib.Core {
 
 
         static Config() {
+            Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
             if (IsNullOrEmpty(UserAgent))
                 UserAgent = "EveLib";
             SetConfig();

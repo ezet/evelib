@@ -13,6 +13,9 @@ namespace eZet.EveLib.Core.Serializers {
         /// The date format
         /// </summary>
         public string DateFormat1 = "yyyy-MM-dd HH:mm:ss";
+        /// <summary>
+        /// The date format2
+        /// </summary>
         public string DateFormat2 = "yyyy.MM.dd HH:mm:ss";
 
         /// <summary>
