@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added support for all the newest changes implemented by CCP. This includes two new endpoints, Bookmarks and ChatChannels, and changes to existing ones.</releaseNotes>
+    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveXml_v3.0.3</releaseNotes>
     <tags>EveLib EveXml API EveOnline Eve Online</tags>
   </metadata>
 </package>
