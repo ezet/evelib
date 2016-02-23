@@ -59,7 +59,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
             UserAgent = Config.UserAgent;
             Charset = DefaultCharset;
-            Cache = new EveLibFileCache(Config.AppData + Config.Separator + "EveCrestCache", "register");
+            Cache = Config.CacheFactory("EveCrestCache");
             CacheLevel = CacheLevel.Default;
         }
 

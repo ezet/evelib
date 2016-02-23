@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using eZet.EveLib.Core;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Links;
@@ -22,6 +23,11 @@ namespace eZet.EveLib.Test {
         private const string Killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
 
         private readonly EveCrest _crest = new EveCrest();
+
+        static EveCrest_Public_Tests() {
+            Config.AppData = "test";
+            Console.WriteLine(Config.CachePath);
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveCrest_Public_Tests" /> class.
