@@ -43,8 +43,8 @@ namespace eZet.EveLib.Core {
         }
 
         private static void SetConfig() {
-            CachePath = AppData + Separator + "Cache";
-            ImagePath = AppData + Separator + "Images";
+            CachePath = Path.Combine(AppData, "Cache");
+            ImagePath = Path.Combine(AppData, "Images");
             CacheFactory = module => new EveLibFileCache(Path.Combine(CachePath, module), "register");
         }
 
