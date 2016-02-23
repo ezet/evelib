@@ -93,5 +93,11 @@ namespace eZet.EveLib.Test {
             var response = await crest.GetRoot().QueryAsync(r => r.Decode);
             Debug.WriteLine(response.Character);
         }
+
+        [TestMethod]
+        public async Task Clients() {
+            var eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
+            var dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
+        }
     }
 }

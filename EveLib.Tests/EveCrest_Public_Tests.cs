@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
+using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -122,14 +123,20 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetWars_NoErrors() {
-            var wars = (await (await _crest.GetRootAsync()).QueryAsync(r => r.Wars));
-            testLinkedEntity(wars.Items.First());
+            var wars = await (await _crest.GetRootAsync()).QueryAsync(r => r.Wars);
+            var war = wars.Items.First();
+            Assert.IsNotNull(war);
+            Assert.AreNotEqual(0, war.Id);
+            Assert.IsNotNull(war.Href);
         }
 
         [TestMethod]
         public async Task GetWar_NoErrors() {
             var wars = (await (await _crest.GetRootAsync()).QueryAsync(r => r.Wars));
             var war = await wars.QueryAsync(f => f.First());
+            Assert.IsNotNull(war.TimeDeclared);
+            Assert.IsNotNull(war.TimeFinished);
+            Assert.IsNotNull(war.TimeStarted);
             testLinkedEntity(war.Aggressor);
             testLinkedEntity(war.Defender);
         }
@@ -226,7 +233,7 @@ namespace eZet.EveLib.Test {
         public async Task GetItemTypes() {
             var response = await _crest.GetRoot().QueryAsync(r => r.ItemTypes);
             Assert.AreNotEqual(0, response.Items.Count);
-            testLinkedEntity(response.Items.First());
+            testLinkedEntity(response.Items[1]);
         }
 
         [TestMethod]
@@ -308,12 +315,14 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task Clients() {
             var eve = await _crest.GetRoot().QueryAsync(r => r.Clients.Eve);
             var dust = await _crest.GetRoot().QueryAsync(r => r.Clients.Dust);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task Time() {
             var response = await _crest.GetRoot().QueryAsync(r => r.Time);
         }
@@ -337,6 +346,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task Races() {
             var response = await _crest.GetRoot().QueryAsync(r => r.Races);
         }
@@ -375,6 +385,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task Bloodlines() {
             var response = await _crest.GetRoot().QueryAsync(r => r.Bloodlines);
         }
@@ -385,11 +396,13 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task BattleTheatres() {
             var response = await _crest.GetRoot().QueryAsync(r => r.BattleTheatres);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(EveCrestException))]
         public async Task Channels() {
             var response = await _crest.GetRoot().QueryAsync(r => r.Channels);
         }
