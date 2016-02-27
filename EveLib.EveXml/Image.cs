@@ -174,7 +174,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <summary>
         ///     Saves the image to disk , and returns the path to the image.
         /// </summary>
-        public string GetCharacterPortrait(long characterId, CharacterPortraitSize size, string path) {
+        public string GetCharacterPortrait(long characterId, Image.CharacterPortraitSize size, string path) {
             return GetCharacterPortraitAsync(characterId, size, path).Result;
         }
 
