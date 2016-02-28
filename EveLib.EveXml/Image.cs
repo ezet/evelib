@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using eZet.EveLib.Core;
 using eZet.EveLib.Core.RequestHandlers;
 
 namespace eZet.EveLib.EveXmlModule {

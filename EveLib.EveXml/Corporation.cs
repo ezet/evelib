@@ -873,7 +873,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// </summary>
         /// <returns>Task&lt;EveXmlResponse&lt;Bookmarks&gt;&gt;.</returns>
         public Task<EveXmlResponse<Bookmarks>> GetBookmarksAsync() {
-            const string relPath = "/char/Bookmarks.xml.aspx";
+            const string relPath = "/corp/Bookmarks.xml.aspx";
             return requestAsync<Bookmarks>(relPath, ApiKey);
         }
     }
