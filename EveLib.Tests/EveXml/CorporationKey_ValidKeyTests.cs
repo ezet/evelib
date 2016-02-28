@@ -7,11 +7,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace eZet.EveLib.Test {
     [TestClass]
     public class CorporationKey_ValidKeyTests {
-        private const int CorpId = 3282771;
 
-        private const string CorpCode = "vJ3hUm3NsheYVVk5vH3UZNupbx9f1ahWO1BuIsdwi6ltUMMTyUAFQ3UQalmH8mjU";
+        // Cindy Goods
+        private const int keyId = 5085488;
+        private const string vCode = "IlYfO0vw8XglmJ3eq6k9PcV3PXIBMGe96wiiWW0iRMZbBgvM8Q8n1EZFruzassS2";
 
-        private readonly CorporationKey _validKey = new CorporationKey(CorpId, CorpCode);
+        private readonly CorporationKey _validKey = new CorporationKey(keyId, vCode);
 
         [TestMethod]
         public void Corporation_ValidRequest_HasName() {
@@ -227,6 +228,12 @@ namespace eZet.EveLib.Test {
         public async Task GetBlueprints_ValidRequest_HasResult() {
             var res = (await _validKey.Corporation.GetBlueprintsAsync()).Result;
             Assert.IsTrue(res.Blueprints.Any());
+        }
+
+        [TestMethod]
+        public async Task GetBookmarks() {
+            var res = await _validKey.Corporation.GetBookmarksAsync();
+            Assert.IsTrue(res.Result.Folders.Any());
         }
     }
 }
