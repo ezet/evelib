@@ -21,19 +21,27 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class FittingCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class FittingCollection : CollectionResource<FittingCollection, FittingCollection.Fitting> {
+    public sealed class FittingCollection : EditableCollectionResource<FittingCollection, FittingCollection.Fitting> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="FittingCollection" /> class.
         /// </summary>
         public FittingCollection() {
             ContentType = "application/vnd.ccp.eve.FittingCollection-v1+json";
+
         }
 
         /// <summary>
         ///     Class Fitting.
         /// </summary>
         [DataContract]
-        public class Fitting {
+        public class Fitting : EditableEntity {
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Fitting"/> class.
+            /// </summary>
+            public Fitting() {
+                Items = new List<FittingItem>();
+            }
             /// <summary>
             ///     Gets or sets the name.
             /// </summary>
@@ -56,11 +64,20 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             public long FittingId { get; set; }
 
             /// <summary>
+            /// Gets or sets the ship.
+            /// </summary>
+            /// <value>The ship.</value>
+            [DataMember(Name = "ship")]
+            public LinkedEntity<ItemType> Ship { get; set; }
+
+                /// <summary>
             ///     Gets or sets the items.
             /// </summary>
             /// <value>The items.</value>
             [DataMember(Name = "items")]
-            public IReadOnlyCollection<FittingItem> Items { get; set; }
+            public ICollection<FittingItem> Items { get; set; }
+
+
         }
 
         /// <summary>
