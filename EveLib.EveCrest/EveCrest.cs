@@ -356,7 +356,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         public async Task DeleteAsync(ICrestWriteable entity) {
-            
+
         }
 
         public async Task UpdateAsync<T>(T entity) where T : class, ICrestWriteable {
@@ -693,12 +693,31 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         private async Task postAsync<T>(T entity) where T : class, ICrestWriteable {
-            var data = RequestHandler.Serializer.Serialize<T>(entity);
+            var data = RequestHandler.Serializer.Serialize(entity);
+            var retry = false;
+            //await RequestHandler.PostAsync(new Uri("http://localhost:8888"), AccessToken, data);
             //data = "{\"standing\": 10, \"contactType\": \"Alliance\" \"contact\": { \"id_str\": \"99000003\", \"href\": \"http://crest.regner.dev/alliances/99000003/\", \"name\": \"One One Corporation Alliance\", \"id\": 99000003 }, }";
-            await requestAsync<Empty>(new Uri(entity.Href), "POST", data);
+
+            try {
+                await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data);
+            }
+            catch (EveCrestException e) {
+                if (EnableAutomaticTokenRefresh) {
+                    var error = e.WebException.Response as HttpWebResponse;
+                    if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
+                    else throw;
+                }
+                else throw;
+            }
+            if (retry) {
+                _trace.TraceEvent(TraceEventType.Information, 0,
+                    "Invalid AccessToken: Attempting refresh");
+                await RefreshAccessTokenAsync().ConfigureAwait(false);
+                _trace.TraceEvent(TraceEventType.Information, 0,
+                    "Token refreshed");
+                await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data);
+            }
         }
-
-
 
         /// <summary>
         ///     Performs a request using the request handler.

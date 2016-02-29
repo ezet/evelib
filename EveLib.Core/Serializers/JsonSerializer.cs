@@ -32,7 +32,7 @@ namespace eZet.EveLib.Core.Serializers {
 
         public string Serialize<T>(T entity) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Serialize:Start");
-            var data = JsonConvert.SerializeObject(entity, new IsoDateTimeConverter { DateTimeFormat = DateFormat });
+            var data = JsonConvert.SerializeObject(entity, new IsoDateTimeConverter { DateTimeFormat = DateFormat1 });
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Serialize:Complete");
             return data;
         }

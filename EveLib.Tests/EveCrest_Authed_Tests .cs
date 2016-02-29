@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
+using eZet.EveLib.EveCrestModule.Exceptions;
+using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models.Resources.Market;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // ReSharper disable UnusedVariable

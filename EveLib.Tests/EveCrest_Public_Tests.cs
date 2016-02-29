@@ -5,7 +5,6 @@ using eZet.EveLib.Core;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Links;
-using eZet.EveLib.EveCrestModule.Models.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

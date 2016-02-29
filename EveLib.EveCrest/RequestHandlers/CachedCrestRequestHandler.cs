@@ -134,6 +134,21 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <value>The charset.</value>
         public string Charset { get; set; }
 
+
+        public async Task PostAsync(Uri uri, string accessToken, string postData) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+            request.Method = WebRequestMethods.Http.Post;
+            request.ContentType = "application/json";
+            request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+            if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
+            if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
+            if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
+            HttpRequestHelper.AddPostData(request, postData);
+            var response = await HttpRequestHelper.GetResponseAsync(request);
+            var content = HttpRequestHelper.GetResponseContentAsync(response);
+        }
+
         /// <summary>
         /// Performs a request, and returns the response content.
         /// </summary>
@@ -146,6 +161,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
         /// <exception cref="EveCrestException">Undefined error</exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken, string method = "GET", string postData = null) where T : class, ICrestResource<T> {
+            var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             string responseContent = null;
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
                 responseContent = await Cache.LoadAsync(uri).ConfigureAwait(false);
@@ -158,7 +174,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             }
             if (CacheLevel == CacheLevel.CacheOnly) return default(T);
             // set up request
-            var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             var request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType) + ";";
