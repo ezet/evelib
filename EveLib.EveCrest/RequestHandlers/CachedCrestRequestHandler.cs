@@ -135,7 +135,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public string Charset { get; set; }
 
 
-        public async Task PostAsync(Uri uri, string accessToken, string postData) {
+        public async Task<string> PostAsync(Uri uri, string accessToken, string postData) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Method = WebRequestMethods.Http.Post;
@@ -144,9 +144,34 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
+            string retval = null;
             HttpRequestHelper.AddPostData(request, postData);
+            try {
+                var response = await HttpRequestHelper.GetResponseAsync(request);
+                var content = HttpRequestHelper.GetResponseContentAsync(response);
+                if (response.StatusCode == HttpStatusCode.Created) {
+                    retval = response.GetResponseHeader("Location");
+                }
+            }
+            catch (Exception e) {
+                
+            }
+            return retval;
+        }
+
+        public async Task<bool> DeleteAsync(Uri uri, string accessToken) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+            request.Method = WebRequestMethods.Ftp.DeleteFile;
+            //request.ContentType = "application/json";
+            request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+            if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
+            if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
+            if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
             var response = await HttpRequestHelper.GetResponseAsync(request);
             var content = HttpRequestHelper.GetResponseContentAsync(response);
+            var retval = response.StatusCode == HttpStatusCode.OK;
+            return retval;
         }
 
         /// <summary>

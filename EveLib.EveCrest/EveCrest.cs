@@ -247,7 +247,7 @@ namespace eZet.EveLib.EveCrestModule {
         public Task<T> LoadAsync<T>(Href<T> uri, params string[] parameters) where T : class, ICrestResource<T> {
             return uri == null
                 ? Task.FromResult(default(T))
-                : requestAsync<T>((createQueryString(uri.Uri, parameters)));
+                : getAsync<T>((createQueryString(uri.Uri, parameters)));
         }
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace eZet.EveLib.EveCrestModule {
         public async Task<CrestRoot> GetRootAsync() {
             const string relPath = "";
             if (_root == null || !EnableRootCache)
-                _root = await requestAsync<CrestRoot>(relPath).ConfigureAwait(false);
+                _root = await getAsync<CrestRoot>(relPath).ConfigureAwait(false);
             return _root;
         }
 
@@ -355,7 +355,8 @@ namespace eZet.EveLib.EveCrestModule {
             return GetRootAsync().Result;
         }
 
-        public async Task DeleteAsync(ICrestWriteable entity) {
+        public async Task<bool> DeleteAsync(ICrestWriteable entity) {
+            return await deleteAsync(entity);
 
         }
 
@@ -363,8 +364,8 @@ namespace eZet.EveLib.EveCrestModule {
             await postAsync(entity);
         }
 
-        public async Task AddAsync<T>(T entity) where T : class, ICrestWriteable {
-            await postAsync(entity);
+        public async Task<string> AddAsync<T>(T entity) where T : class, ICrestWriteable {
+            return await postAsync(entity);
         }
 
         /// <summary>
@@ -375,7 +376,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>Returns data for the specified killmail.</returns>
         public Task<Killmail> GetKillmailAsync(long id, string hash) {
             var relPath = "killmails/" + id + "/" + hash + "/";
-            return requestAsync<Killmail>(relPath);
+            return getAsync<Killmail>(relPath);
         }
 
         /// <summary>
@@ -395,7 +396,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<IncursionCollection> GetIncursionsAsync() {
             const string relPath = "incursions/";
-            return requestAsync<IncursionCollection>(relPath);
+            return getAsync<IncursionCollection>(relPath);
         }
 
         /// <summary>
@@ -415,7 +416,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<AllianceCollection> GetAlliancesAsync(int page = 1) {
             var relPath = "alliances/?page=" + page;
-            return requestAsync<AllianceCollection>(relPath);
+            return getAsync<AllianceCollection>(relPath);
         }
 
         /// <summary>
@@ -436,7 +437,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<Alliance> GetAllianceAsync(long allianceId) {
             var relPath = "alliances/" + allianceId + "/";
-            return requestAsync<Alliance>(relPath);
+            return getAsync<Alliance>(relPath);
         }
 
         /// <summary>
@@ -458,7 +459,7 @@ namespace eZet.EveLib.EveCrestModule {
         //[Obsolete(ObsoleteMessage)]
         public Task<MarketHistoryCollection> GetMarketHistoryAsync(int regionId, int typeId) {
             var relPath = "market/" + regionId + "/types/" + typeId + "/history/";
-            return requestAsync<MarketHistoryCollection>(relPath);
+            return getAsync<MarketHistoryCollection>(relPath);
         }
 
         /// <summary>
@@ -479,7 +480,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<MarketTypePriceCollection> GetMarketPricesAsync() {
             const string relpath = "market/prices/";
-            return requestAsync<MarketTypePriceCollection>(relpath);
+            return getAsync<MarketTypePriceCollection>(relpath);
         }
 
         /// <summary>
@@ -499,7 +500,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<WarCollection> GetWarsAsync(int page = 1) {
             var relPath = "wars/?page=" + page;
-            return requestAsync<WarCollection>(relPath);
+            return getAsync<WarCollection>(relPath);
         }
 
         /// <summary>
@@ -520,7 +521,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<War> GetWarAsync(int warId) {
             var relPath = "wars/" + warId + "/";
-            return requestAsync<War>(relPath);
+            return getAsync<War>(relPath);
         }
 
         /// <summary>
@@ -541,7 +542,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<KillmailCollection> GetWarKillmailsAsync(int warId) {
             var relPath = "wars/" + warId + "/killmails/all/";
-            return requestAsync<KillmailCollection>(relPath);
+            return getAsync<KillmailCollection>(relPath);
         }
 
         /// <summary>
@@ -561,7 +562,7 @@ namespace eZet.EveLib.EveCrestModule {
         //[Obsolete(ObsoleteMessage)]
         //public Task<IndustrySpecialityCollection> GetSpecialitiesAsync() {
         //    const string relPath = "industry/specialities/";
-        //    return requestAsync<IndustrySpecialityCollection>(relPath);
+        //    return getAsync<IndustrySpecialityCollection>(relPath);
         //}
 
         ///// <summary>
@@ -581,7 +582,7 @@ namespace eZet.EveLib.EveCrestModule {
         //[Obsolete(ObsoleteMessage)]
         //public Task<IndustrySpeciality> GetSpecialityAsync(int specialityId) {
         //    string relPath = "industry/specialities/" + specialityId + "/";
-        //    return requestAsync<IndustrySpeciality>(relPath);
+        //    return getAsync<IndustrySpeciality>(relPath);
         //}
 
         ///// <summary>
@@ -602,7 +603,7 @@ namespace eZet.EveLib.EveCrestModule {
         //[Obsolete(ObsoleteMessage)]
         //public Task<IndustryTeamCollection> GetIndustryTeamsAsync() {
         //    const string relPath = "industry/teams/";
-        //    return requestAsync<IndustryTeamCollection>(relPath);
+        //    return getAsync<IndustryTeamCollection>(relPath);
         //}
 
         ///// <summary>
@@ -622,7 +623,7 @@ namespace eZet.EveLib.EveCrestModule {
         //[Obsolete(ObsoleteMessage)]
         //public Task<IndustryTeam> GetIndustryTeamAsync(int teamId) {
         //    string relPath = "industry/teams/" + teamId + "/";
-        //    return requestAsync<IndustryTeam>(relPath);
+        //    return getAsync<IndustryTeam>(relPath);
         //}
 
         ///// <summary>
@@ -642,7 +643,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<IndustrySystemCollection> GetIndustrySystemsAsync() {
             const string relPath = "industry/systems/";
-            return requestAsync<IndustrySystemCollection>(relPath);
+            return getAsync<IndustrySystemCollection>(relPath);
         }
 
         /// <summary>
@@ -661,7 +662,7 @@ namespace eZet.EveLib.EveCrestModule {
         //[Obsolete(ObsoleteMessage)]
         //public Task<IndustryTeamCollection> GetIndustryTeamAuctionsAsync() {
         //    const string relPath = "industry/teams/auction/";
-        //    return requestAsync<IndustryTeamCollection>(relPath);
+        //    return getAsync<IndustryTeamCollection>(relPath);
         //}
 
         ///// <summary>
@@ -680,7 +681,7 @@ namespace eZet.EveLib.EveCrestModule {
         [Obsolete(ObsoleteMessage)]
         public Task<IndustryFacilityCollection> GetIndustryFacilitiesAsync() {
             const string relPath = "industry/facilities/";
-            return requestAsync<IndustryFacilityCollection>(relPath);
+            return getAsync<IndustryFacilityCollection>(relPath);
         }
 
         /// <summary>
@@ -692,41 +693,39 @@ namespace eZet.EveLib.EveCrestModule {
             return GetIndustryFacilitiesAsync().Result;
         }
 
-        private async Task postAsync<T>(T entity) where T : class, ICrestWriteable {
-            var data = RequestHandler.Serializer.Serialize(entity);
-            var retry = false;
-            //await RequestHandler.PostAsync(new Uri("http://localhost:8888"), AccessToken, data);
-            //data = "{\"standing\": 10, \"contactType\": \"Alliance\" \"contact\": { \"id_str\": \"99000003\", \"href\": \"http://crest.regner.dev/alliances/99000003/\", \"name\": \"One One Corporation Alliance\", \"id\": 99000003 }, }";
+        private Task tryRefreshTokenAsync(EveCrestException e) {
+            if (!EnableAutomaticTokenRefresh) throw e;
+            var error = e.WebException.Response as HttpWebResponse;
+            if (error == null || error.StatusCode != HttpStatusCode.Unauthorized) throw e;
+            return RefreshAccessTokenAsync();
+        }
 
+        private async Task<bool> updateAsync<T>(T entity) where T : ICrestWriteable {
+            var retval = false;
+
+            return retval;
+        }
+
+
+        private async Task<bool> deleteAsync<T>(T entity) where T : ICrestWriteable {
             try {
-                await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data);
+                return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
             }
             catch (EveCrestException e) {
-                if (EnableAutomaticTokenRefresh) {
-                    var error = e.WebException.Response as HttpWebResponse;
-                    if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
-                    else throw;
-                }
-                else throw;
-            }
-            if (retry) {
-                _trace.TraceEvent(TraceEventType.Information, 0,
-                    "Invalid AccessToken: Attempting refresh");
-                await RefreshAccessTokenAsync().ConfigureAwait(false);
-                _trace.TraceEvent(TraceEventType.Information, 0,
-                    "Token refreshed");
-                await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data);
+                await tryRefreshTokenAsync(e).ConfigureAwait(false);
+                return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
             }
         }
 
-        /// <summary>
-        ///     Performs a request using the request handler.
-        /// </summary>
-        /// <typeparam name="T">Response type</typeparam>
-        /// <param name="relPath">Relative path</param>
-        /// <returns></returns>
-        private Task<T> requestAsync<T>(string relPath) where T : class, ICrestResource<T> {
-            return requestAsync<T>(new Uri(_host + ApiPath + relPath));
+        private async Task<string> postAsync<T>(T entity) where T : class, ICrestWriteable {
+            var data = RequestHandler.Serializer.Serialize(entity);
+            try {
+                return await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
+            }
+            catch (EveCrestException e) {
+                await tryRefreshTokenAsync(e).ConfigureAwait(false);
+                return await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
+            }
         }
 
         /// <summary>
@@ -735,28 +734,16 @@ namespace eZet.EveLib.EveCrestModule {
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;T&gt;.</returns>
-        private async Task<T> requestAsync<T>(Uri uri, string method = "GET", string data = null) where T : class, ICrestResource<T> {
+        private async Task<T> getAsync<T>(string relPath, string method = "GET", string data = null) where T : class, ICrestResource<T> {
             T response = null;
+            var uri = new Uri(_host + ApiPath + relPath);
             if (Mode == CrestMode.Authenticated) {
-                var retry = false;
                 try {
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken, method, data).ConfigureAwait(false);
                 }
                 catch (EveCrestException e) {
-                    if (EnableAutomaticTokenRefresh) {
-                        var error = e.WebException.Response as HttpWebResponse;
-                        if (error != null && error.StatusCode == HttpStatusCode.Unauthorized) retry = true;
-                        else throw;
-                    }
-                    else throw;
-                }
-                if (retry) {
-                    _trace.TraceEvent(TraceEventType.Information, 0,
-                        "Invalid AccessToken: Attempting refresh");
-                    await RefreshAccessTokenAsync().ConfigureAwait(false);
-                    _trace.TraceEvent(TraceEventType.Information, 0,
-                        "Token refreshed");
+                    await tryRefreshTokenAsync(e).ConfigureAwait(false);
                     response =
                         await RequestHandler.RequestAsync<T>(uri, AccessToken, method, data).ConfigureAwait(false);
                 }
@@ -770,7 +757,7 @@ namespace eZet.EveLib.EveCrestModule {
             return response;
         }
 
-        private static Uri createQueryString(string uriBase, params string[] parameters) {
+        private static string createQueryString(string uriBase, params string[] parameters) {
             var p = uriBase.Contains('?') ? "&" : "?";
             var iter = parameters.GetEnumerator();
             while (iter.MoveNext()) {
@@ -778,7 +765,7 @@ namespace eZet.EveLib.EveCrestModule {
                 iter.MoveNext();
                 p += "=" + iter.Current + "&";
             }
-            return new Uri(uriBase + p);
+            return uriBase + p;
         }
     }
 }
