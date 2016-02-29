@@ -1,16 +1,17 @@
 ﻿// ***********************************************************************
 // Assembly         : EveLib.EveCrest
-// Author           : Lars Kristian
-// Created          : 05-05-2014
+// Author           : larsd
+// Created          : 08-09-2015
 //
-// Last Modified By : Lars Kristian
-// Last Modified On : 12-17-2014
+// Last Modified By : larsd
+// Last Modified On : 02-29-2016
 // ***********************************************************************
-// <copyright file="EveCrest.cs" company="">
-//     Copyright (c) . All rights reserved.
+// <copyright file="EveCrest.cs" company="Lars Kristian Dahl">
+//     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 
 using System;
 using System.Collections.Generic;
@@ -641,6 +642,25 @@ namespace eZet.EveLib.EveCrestModule {
         //    return GetIndustryTeamAsync(teamId).Result;
         //}
 
+        ///// <summary>
+        /////     Returns a list of all current industry team auctions
+        ///// </summary>
+        ///// <returns>A list of all current industry team auctions</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public Task<IndustryTeamCollection> GetIndustryTeamAuctionsAsync() {
+        //    const string relPath = "industry/teams/auction/";
+        //    return getAsync<IndustryTeamCollection>(relPath);
+        //}
+
+        ///// <summary>
+        /////     Returns a list of all current industry team auctions
+        ///// </summary>
+        ///// <returns>A list of all current industry team auctions</returns>
+        //[Obsolete(ObsoleteMessage)]
+        //public IndustryTeamCollection GetIndustryTeamAuction() {
+        //    return GetIndustryTeamAuctionsAsync().Result;
+        //}
+
         /// <summary>
         ///     Returns a list of industry systems and prices
         /// </summary>
@@ -660,24 +680,7 @@ namespace eZet.EveLib.EveCrestModule {
             return GetIndustrySystemsAsync().Result;
         }
 
-        ///// <summary>
-        /////     Returns a list of all current industry team auctions
-        ///// </summary>
-        ///// <returns>A list of all current industry team auctions</returns>
-        //[Obsolete(ObsoleteMessage)]
-        //public Task<IndustryTeamCollection> GetIndustryTeamAuctionsAsync() {
-        //    const string relPath = "industry/teams/auction/";
-        //    return getAsync<IndustryTeamCollection>(relPath);
-        //}
 
-        ///// <summary>
-        /////     Returns a list of all current industry team auctions
-        ///// </summary>
-        ///// <returns>A list of all current industry team auctions</returns>
-        //[Obsolete(ObsoleteMessage)]
-        //public IndustryTeamCollection GetIndustryTeamAuction() {
-        //    return GetIndustryTeamAuctionsAsync().Result;
-        //}
 
         /// <summary>
         ///     Returns a collection of all industry facilities
@@ -761,7 +764,7 @@ namespace eZet.EveLib.EveCrestModule {
             else {
                 response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
             }
-            response?.Register(this);
+            response?.Inject(this);
             return response;
         }
 

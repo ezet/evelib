@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Resources;
-using eZet.EveLib.EveCrestModule.Models.Resources.Market;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // ReSharper disable UnusedVariable
@@ -40,7 +39,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task RefreshAccessTokenAsync() {
+        public async Task RefreshAccessToken() {
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
             await crest.RefreshAccessTokenAsync();
@@ -67,33 +66,38 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task AddContact() {
             var character =
-         (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
+                (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
             var contact = character.Contacts.Create();
             contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
             contact.Contact.Name = "test";
             contact.Contact.Id = 99000006;
             contact.ContactType = ContactCollection.ContactType.Alliance;
             contact.Standing = 0;
-            await contact.SaveAsync();
-            //Assert.IsNotNull(result);
+            var result = await contact.SaveAsync();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public async Task UpdateContact() {
             var contacts =
-          await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
             var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
             contact.Standing += 1;
-            await contact.SaveAsync();
+            var result = await contact.SaveAsync();
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public async Task DeleteContact() {
             var contacts =
-          await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
             var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
 
-            bool result = await contact.DeleteAsync();
+            var result = await contact.DeleteAsync();
             Assert.IsTrue(result);
         }
 
@@ -107,29 +111,44 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task AddFitting() {
+            var fit =
+                (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                    .Fittings.Create();
+            var result = await fit.SaveAsync();
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task EditFitting() {
+            var fittings =
+    await
+        (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+            .QueryAsync(r => r.Fittings);
+            var fit = fittings.Items.First();
+            fit.Name = "Test";
+            var result = await fit.SaveAsync();
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task DeleteFitting() {
+            var fittings =
+           await
+               (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                   .QueryAsync(r => r.Fittings);
+            var fit = fittings.Items.First();
+            var result = await fit.DeleteAsync();
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
         public async Task GetLocation() {
             var location =
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Location);
             Assert.IsNotNull(location);
-        }
-
-        [TestMethod]
-        public void GetKillmail_NoErrors() {
-            Killmail data = crest.GetKillmail(28694894, "3d9702696cf8e75d6168734ad26a772e17efc9ba");
-            Assert.AreEqual(30000131, data.SolarSystem.Id);
-            Assert.AreEqual(99000652, data.Victim.Alliance.Id);
-        }
-
-        [TestMethod]
-        public void Motd() {
-            Assert.IsNotNull(crest.GetRoot().Motd.Eve.Uri);
-        }
-
-        [TestMethod]
-        public async Task CrestEndpoint() {
-            CrestRoot result = await crest.GetRootAsync();
         }
 
         [TestMethod]
@@ -156,52 +175,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task Time() {
-            NotImplemented response = await crest.GetRoot().QueryAsync(r => r.Time);
+            var response = await crest.GetRoot().QueryAsync(r => r.Time);
         }
-
-
-        [TestMethod]
-        public async Task MarketTypes() {
-            MarketTypeCollection response = await crest.GetRoot().QueryAsync(r => r.MarketTypes);
-            //response.Items.
-        }
-
-        [TestMethod]
-        public void ServerName() {
-            Assert.AreEqual("TRANQUILITY", crest.GetRoot().ServerName);
-        }
-
-        [TestMethod]
-        public async Task GetMarketHistory_NoErrors() {
-            MarketHistoryCollection data = await crest.GetMarketHistoryAsync(RegionId, TypeId);
-
-        }
-
-        [TestMethod]
-        public async Task GetMarketPrices() {
-            MarketTypePriceCollection result = await crest.GetMarketPricesAsync();
-            Console.WriteLine(result.Items.Count);
-        }
-
-
-        [TestMethod]
-        public async Task GetWar_NoErrors() {
-            War data = await crest.GetWarAsync(291410);
-            byte[] image = crest.LoadImage(data.Aggressor.Icon);
-            Debug.WriteLine(image);
-        }
-
-        [TestMethod]
-        public async Task GetWarKillmails_NoErrors() {
-            KillmailCollection data = await crest.GetWarKillmailsAsync(1);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (EveCrestException))]
-        public async Task GetWar_InvalidId_EveCrestException() {
-            War data = await crest.GetWarAsync(999999999);
-        }
-
 
     }
 }

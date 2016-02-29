@@ -33,9 +33,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// Registers the specified crest.
         /// </summary>
         /// <param name="crest">The crest.</param>
-        override public void Register(EveCrest crest) {
-            base.Register(crest);
+        override public void Inject(EveCrest crest) {
+            base.Inject(crest);
             Contacts.EveCrest = crest;
+            Fittings.EveCrest = crest;
         }
 
         /// <summary>
@@ -80,8 +81,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "contacts")]
         public WritableHref<ContactCollection, ContactCollection.ContactItem> Contacts { get; set; }
 
-    
-
         /// <summary>
         ///     Gets or sets the corporation.
         /// </summary>
@@ -108,7 +107,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The fittings.</value>
         [DataMember(Name = "fittings")]
-        public Href<FittingCollection> Fittings { get; set; }
+        public WritableHref<FittingCollection, FittingCollection.Fitting> Fittings { get; set; }
 
         /// <summary>
         ///     Gets or sets the gender.

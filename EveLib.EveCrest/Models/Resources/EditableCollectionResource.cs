@@ -2,15 +2,14 @@
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     public class EditableCollectionResource<T, TCollection> : CollectionResource<T, TCollection>, IEditableCollectionResource<T, TCollection> where T : CollectionResource<T, TCollection> where TCollection : class, IEditableEntity, new() {
-  
 
-        [OnDeserialized]
-        public void OnDeserialized(StreamingContext context) {
+
+        public override void Inject(EveCrest crest) {
+            base.Inject(crest);
             foreach (var item in Items) {
                 item.EveCrest = EveCrest;
                 item.IsNew = false;
-            } 
+            }
         }
-
     }
 }

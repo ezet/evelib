@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using eZet.EveLib.Core.Properties;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
@@ -55,12 +54,11 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The crest.</value>
         EveCrest EveCrest { get; set; }
 
-
         /// <summary>
-        /// Registers the specified crest.
+        /// Injects the specified instance.
         /// </summary>
-        /// <param name="crest">The crest.</param>
-        void Register(EveCrest crest);
+        /// <param name="instance">The instance.</param>
+        void Inject(EveCrest instance);
 
         /// <summary>
         ///     Queries the resource asynchronous.

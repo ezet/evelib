@@ -26,7 +26,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TCollection">The type of items in the collection</typeparam>
     [DataContract]
-    public abstract class CollectionResource<T, TCollection> : CrestResource<T>, ICollectionResource<T, TCollection> where T : CollectionResource<T, TCollection>, ICrestResource<T> {
+    public abstract class CollectionResource<T, TCollection> : CrestResource<T>, ICollectionResource<T, TCollection>
+        where T : CollectionResource<T, TCollection>, ICrestResource<T> {
         /// <summary>
         ///     The total number of items in the collection
         /// </summary>

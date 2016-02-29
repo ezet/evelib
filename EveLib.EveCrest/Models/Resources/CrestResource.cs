@@ -54,7 +54,11 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The version.</value>
         public virtual string ContentType { get; protected set; }
 
-        public virtual void Register(EveCrest crest) {
+        /// <summary>
+        /// Injects the specified crest.
+        /// </summary>
+        /// <param name="crest">The crest.</param>
+        public virtual void Inject(EveCrest crest) {
             EveCrest = crest;
         }
 
