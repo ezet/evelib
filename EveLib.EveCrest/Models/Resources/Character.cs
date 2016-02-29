@@ -30,6 +30,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
+        /// Registers the specified crest.
+        /// </summary>
+        /// <param name="crest">The crest.</param>
+        override public void Register(EveCrest crest) {
+            base.Register(crest);
+            Contacts.EveCrest = crest;
+        }
+
+        /// <summary>
         ///     Gets or sets the accounts.
         /// </summary>
         /// <value>The accounts.</value>
@@ -69,7 +78,9 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The contacts.</value>
         [DataMember(Name = "contacts")]
-        public Href<ContactCollection> Contacts { get; set; }
+        public WritableHref<ContactCollection, ContactCollection.ContactItem> Contacts { get; set; }
+
+    
 
         /// <summary>
         ///     Gets or sets the corporation.

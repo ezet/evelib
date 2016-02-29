@@ -114,8 +114,10 @@
     <Compile Include="Exceptions\ResourceNotSupportedException.cs" />
     <Compile Include="Models\Empty.cs" />
     <Compile Include="Models\ICrestEntity.cs" />
-    <Compile Include="Models\CrestWriteable.cs" />
-    <Compile Include="Models\ICrestWriteable.cs" />
+    <Compile Include="Models\EditableEntity.cs" />
+    <Compile Include="Models\IEditableEntity.cs" />
+    <Compile Include="Models\IEditableCollectionResource.cs" />
+    <Compile Include="Models\Links\WritableHref.cs" />
     <Compile Include="Models\Resources\DogmaAttribute.cs" />
     <Compile Include="Models\Resources\DogmaAttributeCollection.cs" />
     <Compile Include="Models\IInferrableId.cs" />
@@ -126,11 +128,13 @@
     <Compile Include="Models\Resources\DogmaEffect.cs" />
     <Compile Include="Models\Resources\DogmaEffectCollection.cs" />
     <Compile Include="Models\Resources\DustRoot.cs" />
+    <Compile Include="Models\Resources\EditableCollectionResource.cs" />
     <Compile Include="Models\Resources\EveRoot.cs" />
     <Compile Include="Models\Resources\FittingCollection.cs" />
     <Compile Include="Models\Resources\GraphicId.cs" />
     <Compile Include="Models\Resources\GraphicIdCollection.cs" />
     <Compile Include="Models\Resources\CharacterLocation.cs" />
+    <Compile Include="Models\Resources\ICollectionResource.cs" />
     <Compile Include="Models\Resources\Market\MarketOrder.cs" />
     <Compile Include="Models\Resources\SystemCollection.cs" />
     <Compile Include="Models\Resources\SovCampaignsCollection.cs" />

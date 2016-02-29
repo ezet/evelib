@@ -21,7 +21,19 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class ContactCollection. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class ContactCollection : CollectionResource<ContactCollection, ContactCollection.ContactItem> {
+    public sealed class ContactCollection : EditableCollectionResource<ContactCollection, ContactCollection.ContactItem> {
+        /// <summary>
+        /// Enum ContactType
+        /// </summary>
+        public enum ContactType {
+            [EnumMember(Value = "character")]
+            Character,
+            [EnumMember(Value = "corporation")]
+            Corporation,
+            [EnumMember(Value = "alliance")]
+            Alliance
+        }
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContactCollection" /> class.
         /// </summary>
@@ -33,7 +45,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Class ContactItem.
         /// </summary>
         [DataContract]
-        public class ContactItem : CrestWriteable {
+        public class ContactItem : EditableEntity {
+
+            public ContactItem() {
+                Contact = new ContactData();
+            }
+
             /// <summary>
             ///     Gets or sets the standing.
             /// </summary>
@@ -85,7 +102,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// </summary>
             /// <value>The type of the contact.</value>
             [DataMember(Name = "contactType")]
-            public string ContactType { get; set; }
+            public ContactType ContactType { get; set; }
 
             /// <summary>
             ///     Gets or sets a value indicating whether this <see cref="ContactItem" /> is watched.

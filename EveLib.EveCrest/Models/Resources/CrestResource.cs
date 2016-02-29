@@ -54,6 +54,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The version.</value>
         public virtual string ContentType { get; protected set; }
 
+        public virtual void Register(EveCrest crest) {
+            EveCrest = crest;
+        }
+
         /// <summary>
         ///     Queries the resource asynchronously.
         /// </summary>

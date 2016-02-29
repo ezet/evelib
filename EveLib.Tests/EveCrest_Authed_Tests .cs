@@ -61,32 +61,30 @@ namespace eZet.EveLib.Test {
             Assert.AreNotEqual(0, contacts.Items.Count);
             var first = contacts.Items.First();
             Console.WriteLine(first.Contact.Name);
-        }
-
-        [TestMethod]
-        public async Task UpdateContact() {
-            var contacts =
-          await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
-            Assert.AreNotEqual(0, contacts.Items.Count);
-            var contact = new ContactCollection.ContactItem();
-            contact.Standing += 1;
-            await crest.UpdateAsync(contact);
+            Console.WriteLine(first.ContactType);
         }
 
         [TestMethod]
         public async Task AddContact() {
             var character =
          (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
-            var contact = new ContactCollection.ContactItem();
-            contact.Href = character.Contacts.Uri;
-            contact.Contact = new ContactCollection.ContactItem.ContactData();
+            var contact = character.Contacts.Create();
             contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
             contact.Contact.Name = "test";
             contact.Contact.Id = 99000006;
-            //contact.Contact.IdStr = "99000006";
-            contact.ContactType = "Alliance";
+            contact.ContactType = ContactCollection.ContactType.Alliance;
             contact.Standing = 0;
-            await crest.AddAsync(contact);
+            await contact.SaveAsync();
+            //Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task UpdateContact() {
+            var contacts =
+          await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
+            contact.Standing += 1;
+            await contact.SaveAsync();
         }
 
         [TestMethod]
@@ -94,10 +92,10 @@ namespace eZet.EveLib.Test {
             var contacts =
           await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
             var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
-            crest.DeleteAsync(contact);
+
+            bool result = await contact.DeleteAsync();
+            Assert.IsTrue(result);
         }
-
-
 
         [TestMethod]
         public async Task GetFittings() {

@@ -154,7 +154,29 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 }
             }
             catch (Exception e) {
-                
+            }
+            return retval;
+        }
+
+        public async Task<string> PutAsync(Uri uri, string accessToken, string postData) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+            request.Method = WebRequestMethods.Http.Put;
+            request.ContentType = "application/json";
+            request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+            if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
+            if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
+            if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
+            string retval = null;
+            HttpRequestHelper.AddPostData(request, postData);
+            try {
+                var response = await HttpRequestHelper.GetResponseAsync(request);
+                var content = HttpRequestHelper.GetResponseContentAsync(response);
+                if (response.StatusCode == HttpStatusCode.Created) {
+                    retval = response.GetResponseHeader("Location");
+                }
+            }
+            catch (Exception e) {
             }
             return retval;
         }
@@ -162,8 +184,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public async Task<bool> DeleteAsync(Uri uri, string accessToken) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            request.Method = WebRequestMethods.Ftp.DeleteFile;
-            //request.ContentType = "application/json";
+            request.Method = "DELETE";
+            request.ContentType = "application/json";
             request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
@@ -175,7 +197,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        /// Performs a request, and returns the response content.
+        ///     Performs a request, and returns the response content.
         /// </summary>
         /// <typeparam name="T">Response type</typeparam>
         /// <param name="uri">URI to request</param>
@@ -185,7 +207,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <returns>T.</returns>
         /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
         /// <exception cref="EveCrestException">Undefined error</exception>
-        public async Task<T> RequestAsync<T>(Uri uri, string accessToken, string method = "GET", string postData = null) where T : class, ICrestResource<T> {
+        public async Task<T> RequestAsync<T>(Uri uri, string accessToken, string method = "GET", string postData = null)
+            where T : class, ICrestResource<T> {
             var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             string responseContent = null;
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
@@ -231,7 +254,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                     }
                 }
                 responseContent = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-     }
+            }
             catch (WebException e) {
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
                 if (e.Response == null) {
@@ -274,11 +297,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return DateTime.UtcNow.AddSeconds(sec);
         }
 
-        ///// <summary>
-        ///// Gets or sets a value indicating whether [enable cache].
-        ///// </summary>
-        ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
-
         //public bool EnableCache { get; set; }
+        ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
+        ///// </summary>
+        ///// Gets or sets a value indicating whether [enable cache].
+
+        ///// <summary>
     }
 }

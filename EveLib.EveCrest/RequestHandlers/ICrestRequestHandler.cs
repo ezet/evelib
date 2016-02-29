@@ -68,6 +68,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
         Task<string> PostAsync(Uri uri, string accesstoken, string postData);
 
+        Task<string> PutAsync(Uri uri, string accesstoken, string postData);
+
         Task<bool> DeleteAsync(Uri uri, string accessToken);
     }
 }
