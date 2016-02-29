@@ -68,7 +68,7 @@ namespace eZet.EveLib.Test {
             var contacts =
           await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
             Assert.AreNotEqual(0, contacts.Items.Count);
-            var contact = contacts.Items[1];
+            var contact = new ContactCollection.ContactItem();
             contact.Standing += 1;
             await crest.UpdateAsync(contact);
         }
@@ -83,10 +83,18 @@ namespace eZet.EveLib.Test {
             contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
             contact.Contact.Name = "test";
             contact.Contact.Id = 99000006;
-            contact.Contact.IdStr = "99000006";
+            //contact.Contact.IdStr = "99000006";
             contact.ContactType = "Alliance";
             contact.Standing = 0;
             await crest.AddAsync(contact);
+        }
+
+        [TestMethod]
+        public async Task DeleteContact() {
+            var contacts =
+          await (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
+            crest.DeleteAsync(contact);
         }
 
 
