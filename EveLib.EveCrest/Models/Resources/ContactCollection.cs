@@ -59,6 +59,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
 
             public bool ShouldSerializeBlocked() => false;
 
+            public bool ShouldSerializeContactType() => false;
+
             //public bool ShouldSerializeWatched() => false;
 
             /// <summary>
@@ -118,17 +120,35 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "blocked")]
             public bool Blocked { get; set; }
 
+            /// <summary>
+            /// Class ContactData.
+            /// </summary>
             [DataContract]
             public class ContactData {
+
+                public bool ShouldSerializeName() => false;
+
+                public bool ShouldSerializeId() => false;
+
+
+                /// <summary>
+                /// Gets or sets the identifier.
+                /// </summary>
+                /// <value>The identifier.</value>
                 [DataMember(Name = "id")]
                 public long Id { get; set; }
 
-                [DataMember(Name = "id_str")]
-                public string IdStr { get; set; }
-
+                /// <summary>
+                /// Gets or sets the href.
+                /// </summary>
+                /// <value>The href.</value>
                 [DataMember(Name = "href")]
                 public string Href { get; set; }
 
+                /// <summary>
+                /// Gets or sets the name.
+                /// </summary>
+                /// <value>The name.</value>
                 [DataMember(Name = "name")]
                 public string Name { get; set; }
 

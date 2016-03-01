@@ -14,12 +14,6 @@ namespace eZet.EveLib.Test {
     public class EveCrest_Authed_Tests {
         private const int AllianceId = 99000006;
 
-        private const int RegionId = 10000002; // The Forge
-
-        private const int TypeId = 34; // Tritanium
-
-        private const string Killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
-
         private const string RefreshToken =
             "g92QOVphazTOcNhV9hpq22eoo3cK7oBrLOHdBc71cFl76OHZ-3DRAR6bnAn7orMprjJN05pjgWHvCTIWwQ_hVA2";
 
@@ -36,6 +30,7 @@ namespace eZet.EveLib.Test {
             crest.RequestHandler.ThrowOnDeprecated = true;
             crest.RequestHandler.ThrowOnMissingContentType = true;
             crest.EnableAutomaticPaging = true;
+            crest.RequestHandler.CacheLevel = CacheLevel.BypassCache;
         }
 
         [TestMethod]
@@ -64,48 +59,69 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task AddContact() {
+        public async Task AddCharacterContact() {
+            var character =
+     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
+            var contact = character.Contacts.Create();
+            contact.Contact.Href = "https://crest-tq.eveonline.com/characters/157924121/";
+            contact.Watched = false;
+            contact.Standing = 0;
+            Assert.IsTrue(await contact.SaveAsync());
+        }
+
+        [TestMethod]
+        public async Task UpdateCharacterContact() {
+            var contacts =
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 157924121);
+            contact.Standing = 10;
+            Assert.IsTrue(await contact.SaveAsync());
+        }
+
+        [TestMethod]
+        public async Task DeleteCharacterContact() {
+            var contacts =
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 157924121);
+            Assert.IsTrue(await contact.DeleteAsync());
+        }
+
+        [TestMethod]
+        public async Task AddCorporationContact() {
             var character =
                 (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
             var contact = character.Contacts.Create();
             contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
-            contact.Contact.Name = "test";
-            //contact.Contact.Id = 99000006;
-            contact.ContactType = ContactCollection.ContactType.Alliance;
-            contact.Blocked = false;
-            contact.Watched = true;
-            contact.Standing = 0;
-            var result = await contact.SaveAsync();
-            Assert.IsNotNull(result);
+            contact.Standing = 10;
+            Assert.IsTrue(await contact.SaveAsync());
             Assert.AreEqual("https://crest-tq.eveonline.com/characters/157924121/contacts/99000006/", contact.Href);
         }
 
+
+
         [TestMethod]
-        public async Task UpdateContact() {
-            crest.RequestHandler.CacheLevel = CacheLevel.BypassCache;
+        public async Task UpdateCorpprationContact() {
             var contacts =
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
             var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
-            //contact.Standing = contact.Standing < 10 ? contact.Standing + 1 : 0;
-            //contact.Standing = -500;
-            contact.Contact.Name = "TooLoonoooooooooooooo";
-            var result = await contact.SaveAsync();
-            Assert.IsTrue(result);
+            contact.Standing = 10;
+            Assert.IsTrue(await contact.SaveAsync());
         }
 
         [TestMethod]
-        public async Task DeleteContact() {
-            crest.RequestHandler.CacheLevel = CacheLevel.BypassCache;
+        public async Task DeleteCorporationContact() {
             var contacts =
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
             var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
-
-            var result = await contact.DeleteAsync();
-            Assert.IsTrue(result);
+            Assert.IsTrue(await contact.DeleteAsync());
         }
 
         [TestMethod]

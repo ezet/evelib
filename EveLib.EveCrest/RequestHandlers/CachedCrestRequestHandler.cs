@@ -140,7 +140,9 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             request.Method = WebRequestMethods.Http.Post;
             request.ContentType = "application/json";
             string retval = null;
+            request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
             HttpRequestHelper.AddPostData(request, postData);
+
             var response = await requestAsync(request, accessToken);
             if (response.StatusCode == HttpStatusCode.Created) {
                 retval = response.GetResponseHeader("Location");
@@ -152,6 +154,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = WebRequestMethods.Http.Put;
             request.ContentType = "application/json";
+            request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
             HttpRequestHelper.AddPostData(request, postData);
             var response = await requestAsync(request, accessToken);
             var retval = response.StatusCode == HttpStatusCode.OK;
@@ -211,7 +214,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         private async Task<HttpWebResponse> requestAsync(HttpWebRequest request, string accessToken) {
-            var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
+            var mode = (string.IsNullOrEmpty(accessToken)) ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebResponse response;
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
