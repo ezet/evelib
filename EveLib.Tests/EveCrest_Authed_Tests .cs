@@ -136,10 +136,13 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task AddFitting() {
             var fit =
+            (await
                 (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
-                    .Fittings.Create();
-            var result = await fit.SaveAsync();
-            Assert.IsTrue(result);
+                    .QueryAsync(r => r.Fittings)).Items.First();
+            fit.Name = "test";
+            fit.Href = "https://crest-tq.eveonline.com/characters/157924121/fittings/";
+            fit.IsNew = true;
+            Assert.IsTrue(await fit.SaveAsync());
         }
 
         [TestMethod]

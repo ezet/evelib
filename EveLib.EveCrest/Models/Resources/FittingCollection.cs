@@ -42,6 +42,9 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             public Fitting() {
                 Items = new List<FittingItem>();
             }
+
+            public bool ShouldSerializeFittingId() => false;
+
             /// <summary>
             ///     Gets or sets the name.
             /// </summary>

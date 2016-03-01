@@ -15,13 +15,36 @@
 using System;
 using System.Linq;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
+
+    public class HrefConverter : JsonConverter {
+        public override bool CanConvert(Type objectType) {
+            return (objectType == typeof(Href<>));
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
+            var token = JToken.ReadFrom(reader);
+            while (token.HasValues) {
+                token = token.First;
+            }
+            return Activator.CreateInstance(objectType, token.ToString());
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
+            var val = JToken.FromObject(value.ToString());
+            val.WriteTo(writer);
+        }
+    }
+
     /// <summary>
     ///     Represents a CREST href object
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DataContract]
+    [JsonConverter(typeof(HrefConverter))]
     public class Href<T> : IInferrableId {
         private int _inferredId = -1;
 
