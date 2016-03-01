@@ -29,14 +29,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.Character-v3+json";
         }
 
+
         /// <summary>
-        /// Registers the specified crest.
+        /// Injects the specified instance.
         /// </summary>
-        /// <param name="crest">The crest.</param>
-        override public void Inject(EveCrest crest) {
-            base.Inject(crest);
-            Contacts.EveCrest = crest;
-            Fittings.EveCrest = crest;
+        /// <param name="instance">The instance.</param>
+        override public void Inject(EveCrest instance) {
+            base.Inject(instance);
+            Contacts.EveCrest = instance;
+            Fittings.EveCrest = instance;
         }
 
         /// <summary>

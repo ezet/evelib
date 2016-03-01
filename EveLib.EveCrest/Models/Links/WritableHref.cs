@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// </summary>
         /// <returns>TCollection.</returns>
         public TCollection Create() {
-            return new TCollection {CollectionHref = Uri, IsNew = true, EveCrest = EveCrest};
+            return new TCollection {Href = Uri, IsNew = true, EveCrest = EveCrest};
         }
     }
 }

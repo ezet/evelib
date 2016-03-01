@@ -4,7 +4,7 @@
 // Created          : 10-28-2015
 //
 // Last Modified By : larsd
-// Last Modified On : 10-28-2015
+// Last Modified On : 03-01-2016
 // ***********************************************************************
 // <copyright file="FittingCollection.cs" company="Lars Kristian Dahl">
 //     Copyright ©  2015
@@ -76,7 +76,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <value>The items.</value>
             [DataMember(Name = "items")]
             public ICollection<FittingItem> Items { get; set; }
-
 
         }
 

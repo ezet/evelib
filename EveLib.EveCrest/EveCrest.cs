@@ -359,7 +359,9 @@ namespace eZet.EveLib.EveCrestModule {
         public async Task<bool> SaveAsync(IEditableEntity entity) {
             if (!entity.IsNew) return await UpdateAsync(entity).ConfigureAwait(false);
             entity.IsNew = false;
-            return await (AddAsync(entity).ConfigureAwait(false)) != null;
+            var uri = await postAsync(entity).ConfigureAwait(false);
+            if (uri != null) entity.Href = uri;
+            return uri != null;
         }
 
         public async Task<bool> DeleteAsync(IEditableEntity entity) {
@@ -370,8 +372,10 @@ namespace eZet.EveLib.EveCrestModule {
             return await (putAsync(entity).ConfigureAwait(false)) != null;
         }
 
-        public Task<string> AddAsync<T>(T entity) where T : class, IEditableEntity {
-            return postAsync(entity);
+        public async Task<bool> AddAsync<T>(T entity) where T : class, IEditableEntity {
+            var uri = await postAsync(entity).ConfigureAwait(false);
+            if (uri != null) entity.Href = uri;
+            return uri != null;
         }
 
         /// <summary>
@@ -708,7 +712,7 @@ namespace eZet.EveLib.EveCrestModule {
             return RefreshAccessTokenAsync();
         }
 
-        private async Task<string> putAsync<T>(T entity) where T : class, IEditableEntity {
+        private async Task<bool> putAsync<T>(T entity) where T : class, IEditableEntity {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
                 return await RequestHandler.PutAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
@@ -733,11 +737,11 @@ namespace eZet.EveLib.EveCrestModule {
         private async Task<string> postAsync<T>(T entity) where T : class, IEditableEntity {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
-                return await RequestHandler.PostAsync(new Uri(entity.CollectionHref), AccessToken, data).ConfigureAwait(false);
+                return await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
             }
             catch (EveCrestException e) {
                 await tryRefreshTokenAsync(e).ConfigureAwait(false);
-                return await RequestHandler.PostAsync(new Uri(entity.CollectionHref), AccessToken, data).ConfigureAwait(false);
+                return await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
             }
         }
 
@@ -753,16 +757,16 @@ namespace eZet.EveLib.EveCrestModule {
             if (Mode == CrestMode.Authenticated) {
                 try {
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.GetAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
                 catch (EveCrestException e) {
                     await tryRefreshTokenAsync(e).ConfigureAwait(false);
                     response =
-                        await RequestHandler.RequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.GetAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
             }
             else {
-                response = await RequestHandler.RequestAsync<T>(uri, null).ConfigureAwait(false);
+                response = await RequestHandler.GetAsync<T>(uri, null).ConfigureAwait(false);
             }
             response?.Inject(this);
             return response;

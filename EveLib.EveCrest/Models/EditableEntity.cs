@@ -1,4 +1,17 @@
-﻿using System.Runtime.Serialization;
+﻿// ***********************************************************************
+// Assembly         : EveLib.EveCrest
+// Author           : larsd
+// Created          : 02-28-2016
+//
+// Last Modified By : larsd
+// Last Modified On : 03-01-2016
+// ***********************************************************************
+// <copyright file="EditableEntity.cs" company="Lars Kristian Dahl">
+//     Copyright ©  2016
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.EveCrestModule.Models {
@@ -21,12 +34,6 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// <value>The href.</value>
         [DataMember(Name = "href")]
         public string Href { get; set; }
-
-        /// <summary>
-        /// Gets or sets the collection href.
-        /// </summary>
-        /// <value>The collection href.</value>
-        public string CollectionHref { get; set; }
 
         /// <summary>
         /// Saves this instance.

@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
-using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -70,27 +70,34 @@ namespace eZet.EveLib.Test {
             var contact = character.Contacts.Create();
             contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
             contact.Contact.Name = "test";
-            contact.Contact.Id = 99000006;
+            //contact.Contact.Id = 99000006;
             contact.ContactType = ContactCollection.ContactType.Alliance;
+            contact.Blocked = false;
+            contact.Watched = true;
             contact.Standing = 0;
             var result = await contact.SaveAsync();
             Assert.IsNotNull(result);
+            Assert.AreEqual("https://crest-tq.eveonline.com/characters/157924121/contacts/99000006/", contact.Href);
         }
 
         [TestMethod]
         public async Task UpdateContact() {
+            crest.RequestHandler.CacheLevel = CacheLevel.BypassCache;
             var contacts =
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
             var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
-            contact.Standing += 1;
+            //contact.Standing = contact.Standing < 10 ? contact.Standing + 1 : 0;
+            //contact.Standing = -500;
+            contact.Contact.Name = "TooLoonoooooooooooooo";
             var result = await contact.SaveAsync();
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public async Task DeleteContact() {
+            crest.RequestHandler.CacheLevel = CacheLevel.BypassCache;
             var contacts =
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))

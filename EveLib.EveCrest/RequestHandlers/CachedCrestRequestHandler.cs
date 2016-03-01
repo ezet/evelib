@@ -158,7 +158,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return retval;
         }
 
-        public async Task<string> PutAsync(Uri uri, string accessToken, string postData) {
+        public async Task<bool> PutAsync(Uri uri, string accessToken, string postData) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Method = WebRequestMethods.Http.Put;
@@ -167,14 +167,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
-            string retval = null;
+            var retval = false;
             HttpRequestHelper.AddPostData(request, postData);
             try {
                 var response = await HttpRequestHelper.GetResponseAsync(request);
-                var content = HttpRequestHelper.GetResponseContentAsync(response);
-                if (response.StatusCode == HttpStatusCode.Created) {
-                    retval = response.GetResponseHeader("Location");
-                }
+                retval = response.StatusCode == HttpStatusCode.OK;
             }
             catch (Exception e) {
             }
@@ -191,7 +188,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
             var response = await HttpRequestHelper.GetResponseAsync(request);
-            var content = HttpRequestHelper.GetResponseContentAsync(response);
             var retval = response.StatusCode == HttpStatusCode.OK;
             return retval;
         }
@@ -207,7 +203,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <returns>T.</returns>
         /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
         /// <exception cref="EveCrestException">Undefined error</exception>
-        public async Task<T> RequestAsync<T>(Uri uri, string accessToken, string method = "GET", string postData = null)
+        public async Task<T> GetAsync<T>(Uri uri, string accessToken)
             where T : class, ICrestResource<T> {
             var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             string responseContent = null;
@@ -226,8 +222,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType) + ";";
             request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
-            request.Method = method;
-            HttpRequestHelper.AddPostData(request, postData);
+            request.Method = WebRequestMethods.Http.Post;
+            //HttpRequestHelper.AddPostData(request, postData);
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
@@ -260,7 +256,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 if (e.Response == null) {
                     throw new EveCrestException(e.Message, e);
                 }
-                var response = (HttpWebResponse) e.Response;
+                var response = (HttpWebResponse)e.Response;
 
                 var responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
@@ -286,6 +282,51 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             result = Serializer.Deserialize<T>(responseContent);
             result.ResponseHeaders = header;
             return result;
+        }
+
+        private async Task<HttpWebResponse> requestAsync(HttpWebRequest request, CrestMode mode) {
+            WebHeaderCollection header;
+            var responseContent = "";
+            HttpWebResponse response;
+            try {
+                response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
+                var deprecated = response.GetResponseHeader("X-Deprecated");
+                if (!string.IsNullOrEmpty(deprecated)) {
+                    _trace.TraceEvent(TraceEventType.Warning, 0,
+                        "This CREST resource is deprecated. Please update to the newest EveLib version or notify the developers.");
+                    if (ThrowOnDeprecated) {
+                        throw new DeprecatedResourceException("The CREST resource is deprecated.", response);
+                    }
+                }
+                responseContent = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+            }
+            catch (WebException e) {
+                _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
+                if (e.Response == null) {
+                    throw new EveCrestException(e.Message, e);
+                }
+                response = (HttpWebResponse)e.Response;
+
+                var responseStream = response.GetResponseStream();
+                if (responseStream == null) throw new EveCrestException("Undefined error", e);
+                using (var reader = new StreamReader(responseStream)) {
+                    responseContent = reader.ReadToEnd();
+                    if (response.StatusCode == HttpStatusCode.InternalServerError ||
+                        response.StatusCode == HttpStatusCode.BadGateway)
+                        throw new EveCrestException(responseContent, e);
+                    var error = Serializer.Deserialize<CrestError>(responseContent);
+                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
+                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
+                        error.RefId);
+                    throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
+                }
+            }
+            finally {
+                // release semaphores
+                if (mode == CrestMode.Authenticated) _authedPool.Release();
+                else _publicPool.Release();
+            }
+            return response;
         }
 
 

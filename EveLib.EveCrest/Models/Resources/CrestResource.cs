@@ -4,9 +4,9 @@
 // Created          : 12-16-2014
 //
 // Last Modified By : Lars Kristian
-// Last Modified On : 12-17-2014
+// Last Modified On : 03-01-2016
 // ***********************************************************************
-// <copyright file="CrestResource.cs" company="">
+// <copyright file="CrestResource.cs" company="Lars Kristian Dahl">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>

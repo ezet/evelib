@@ -64,11 +64,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <param name="method">The method.</param>
         /// <param name="postData">The post data.</param>
         /// <returns>T.</returns>
-        Task<T> RequestAsync<T>(Uri uri, string accessToken, string method = "GET", string postData = null) where T : class, ICrestResource<T>;
+        Task<T> GetAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
 
         Task<string> PostAsync(Uri uri, string accesstoken, string postData);
 
-        Task<string> PutAsync(Uri uri, string accesstoken, string postData);
+        Task<bool> PutAsync(Uri uri, string accesstoken, string postData);
 
         Task<bool> DeleteAsync(Uri uri, string accessToken);
     }

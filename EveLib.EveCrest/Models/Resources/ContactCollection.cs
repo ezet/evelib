@@ -51,6 +51,16 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
                 Contact = new ContactData();
             }
 
+            public bool ShouldSerializeCharacter() => false;
+
+            public bool ShouldSerializeAlliance() => false;
+
+            public bool ShouldSerializeCorporation() => false;
+
+            public bool ShouldSerializeBlocked() => false;
+
+            //public bool ShouldSerializeWatched() => false;
+
             /// <summary>
             ///     Gets or sets the standing.
             /// </summary>
@@ -64,16 +74,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <value>The character.</value>
             [DataMember(Name = "character")]
             public CharacterEntry Character { get; set; }
-
-            public bool ShouldSerializeCharacter() => false;
-
-            public bool ShouldSerializeAlliance() => false;
-
-            public bool ShouldSerializeCorporation() => false;
-
-            public bool ShouldSerializeBlocked() => false;
-
-            public bool ShouldSerializeWatched() => false;
 
             /// <summary>
             /// Gets or sets the alliance.

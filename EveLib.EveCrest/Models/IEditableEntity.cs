@@ -25,12 +25,6 @@ namespace eZet.EveLib.EveCrestModule.Models {
         string Href { get; set; }
 
         /// <summary>
-        /// Gets or sets the collection href.
-        /// </summary>
-        /// <value>The collection href.</value>
-        string CollectionHref { get; set; }
-
-        /// <summary>
         /// Saves this instance.
         /// </summary>
         /// <returns>Task.</returns>
