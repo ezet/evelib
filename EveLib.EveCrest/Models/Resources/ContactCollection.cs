@@ -45,10 +45,11 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         ///     Class ContactItem.
         /// </summary>
         [DataContract]
+        // TODO: Add generic type for Contact property
         public class ContactItem : EditableEntity {
 
             public ContactItem() {
-                Contact = new ContactData();
+                Contact = new LinkedEntity<string>();
             }
 
             public bool ShouldSerializeCharacter() => false;
@@ -97,7 +98,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <value>The contact.</value>
             /// TODO: Implement Contact properly, as LinkedEntity
             [DataMember(Name = "contact")]
-            public ContactData Contact { get; set; }
+            public LinkedEntity<string> Contact { get; set; }
 
             /// <summary>
             ///     Gets or sets the type of the contact.
@@ -129,7 +130,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
                 public bool ShouldSerializeName() => false;
 
                 public bool ShouldSerializeId() => false;
-
 
                 /// <summary>
                 /// Gets or sets the identifier.

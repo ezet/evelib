@@ -227,8 +227,10 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 else {
                     await _publicPool.WaitAsync().ConfigureAwait(false);
                 }
-      
                 response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
+                //if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.Created && response.StatusCode != HttpStatusCode.Accepted) {
+                //    await throwCrestException(response);
+                //}
                 var deprecated = response.GetResponseHeader("X-Deprecated");
                 if (!string.IsNullOrEmpty(deprecated)) {
                     _trace.TraceEvent(TraceEventType.Warning, 0,
@@ -267,6 +269,15 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 else _publicPool.Release();
             }
             return response;
+        }
+
+        private async Task throwCrestException(HttpWebResponse response) {
+            var responseContent = await HttpRequestHelper.GetResponseContentAsync(response);
+            var error = Serializer.Deserialize<CrestError>(responseContent);
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
+                "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
+                error.RefId);
+            throw new EveCrestException(error.Message, null, error.Key, error.ExceptionType, error.RefId);
         }
 
 

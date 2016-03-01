@@ -130,7 +130,8 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Fittings);
-            Console.WriteLine(fittings.Items.First().Name);
+            var fit = fittings.Items.Single(f => f.Name == "test123123");
+            Console.WriteLine(fit.Name);
         }
 
         [TestMethod]
@@ -139,7 +140,7 @@ namespace eZet.EveLib.Test {
             (await
                 (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                     .QueryAsync(r => r.Fittings)).Items.First();
-            fit.Name = "test";
+            fit.Name = "test123123";
             fit.Href = "https://crest-tq.eveonline.com/characters/157924121/fittings/";
             fit.IsNew = true;
             Assert.IsTrue(await fit.SaveAsync());
@@ -152,7 +153,7 @@ namespace eZet.EveLib.Test {
         (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
             .QueryAsync(r => r.Fittings);
             var fit = fittings.Items.First();
-            fit.Name = "Test";
+            fit.Name = "Test123123";
             var result = await fit.SaveAsync();
             Assert.IsTrue(result);
         }
@@ -163,7 +164,7 @@ namespace eZet.EveLib.Test {
            await
                (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                    .QueryAsync(r => r.Fittings);
-            var fit = fittings.Items.First();
+            var fit = fittings.Items.Last();
             var result = await fit.DeleteAsync();
             Assert.IsTrue(result);
         }

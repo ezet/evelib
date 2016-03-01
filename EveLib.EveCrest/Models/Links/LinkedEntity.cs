@@ -26,6 +26,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         private int _id = -1;
         private int _inferredId = -1;
 
+        public LinkedEntity() {
+            Name = "";
+        }
+
 
         /// <summary>
         ///     Gets or sets the identifier.
