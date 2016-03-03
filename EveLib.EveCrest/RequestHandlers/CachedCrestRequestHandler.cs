@@ -184,6 +184,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public async Task<T> GetAsync<T>(Uri uri, string accessToken)
             where T : class, ICrestResource<T> {
             string responseContent = null;
+
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
                 responseContent = await Cache.LoadAsync(uri).ConfigureAwait(false);
             var cached = responseContent != null;

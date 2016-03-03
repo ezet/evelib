@@ -33,7 +33,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
 
         public bool SetSerializeName { private get; set; }
 
-        public bool ShouldSerializeName() => !SetSerializeName;
+        public bool ShouldSerializeName() => SetSerializeName;
 
         /// <summary>
         ///     Gets or sets the identifier.
