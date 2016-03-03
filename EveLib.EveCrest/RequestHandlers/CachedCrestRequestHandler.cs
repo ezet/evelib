@@ -144,8 +144,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
         /// <exception cref="EveCrestException">
         ///     Undefined error
-        ///     or
-        ///     or
         /// </exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
             string data = null;

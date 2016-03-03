@@ -7,7 +7,7 @@ using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Account;
 using eZet.EveLib.EveXmlModule.Models.Character;
 using eZet.EveLib.EveXmlModule.Models.Corporation;
-using ContactList = eZet.EveLib.EveXmlModule.Models.Corporation.ContactList;
+using ContactList = eZet.EveLib.EveXmlModule.Models.Character.ContactList;
 using FactionWarfareStats = eZet.EveLib.EveXmlModule.Models.Corporation.FactionWarfareStats;
 using MedalList = eZet.EveLib.EveXmlModule.Models.Corporation.MedalList;
 using StandingsList = eZet.EveLib.EveXmlModule.Models.Corporation.StandingsList;
@@ -229,7 +229,6 @@ namespace eZet.EveLib.EveXmlModule {
         public EveXmlResponse<ContactList> GetContactList() {
             return GetContactListAsync().Result;
         }
-
 
         /// <summary>
         ///     Returns the corporation and the alliance contact lists. This is accessible by any character in any corporation.
