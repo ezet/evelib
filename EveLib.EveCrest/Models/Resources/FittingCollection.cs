@@ -27,7 +27,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         public FittingCollection() {
             ContentType = "application/vnd.ccp.eve.FittingCollection-v1+json";
-
         }
 
         /// <summary>
@@ -35,15 +34,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         [DataContract]
         public class Fitting : EditableEntity {
-
             /// <summary>
-            /// Initializes a new instance of the <see cref="Fitting"/> class.
+            ///     Initializes a new instance of the <see cref="Fitting" /> class.
             /// </summary>
             public Fitting() {
                 Items = new List<FittingItem>();
             }
-
-            public bool ShouldSerializeFittingId() => false;
 
             /// <summary>
             ///     Gets or sets the name.
@@ -67,19 +63,24 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             public long FittingId { get; set; }
 
             /// <summary>
-            /// Gets or sets the ship.
+            ///     Gets or sets the ship.
             /// </summary>
             /// <value>The ship.</value>
             [DataMember(Name = "ship")]
             public LinkedEntity<ItemType> Ship { get; set; }
 
-                /// <summary>
+            /// <summary>
             ///     Gets or sets the items.
             /// </summary>
             /// <value>The items.</value>
             [DataMember(Name = "items")]
             public ICollection<FittingItem> Items { get; set; }
 
+            /// <summary>
+            ///     Shoulds the serialize fitting identifier.
+            /// </summary>
+            /// <returns>System.Boolean.</returns>
+            public bool ShouldSerializeFittingId() => false;
         }
 
         /// <summary>

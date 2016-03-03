@@ -27,7 +27,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <summary>
         ///     Represens the incursion states
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof (StringEnumConverter))]
         public enum IncursionState {
             /// <summary>
             ///     Established incursion
@@ -46,19 +46,19 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Enum Type
+        ///     Enum Type
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof (StringEnumConverter))]
         public enum Type {
             /// <summary>
-            /// The incursion
+            ///     The incursion
             /// </summary>
             [EnumMember(Value = "Incursion")] Incursion,
+
             /// <summary>
-            /// The spreading incursion
+            ///     The spreading incursion
             /// </summary>
             [EnumMember(Value = "Spreading Incursion")] SpreadingIncursion
-
         }
 
         /// <summary>
@@ -68,34 +68,34 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.IncursionCollection-v1+json";
         }
 
+
         /// <summary>
-        /// Represents an incursion
+        ///     Class Incursion.
         /// </summary>
         [DataContract]
         public class Incursion {
-
             /// <summary>
-            /// Gets or sets the aggression faction.
+            ///     Gets or sets the aggression faction.
             /// </summary>
             /// <value>The aggression faction.</value>
             [DataMember(Name = "aggressorFactionID")]
             public LinkedEntity<Alliance> AggressorFaction { get; set; }
 
             /// <summary>
-            /// Gets or sets the type of the incursion.
+            ///     Gets or sets the type of the incursion.
             /// </summary>
             /// <value>The type of the incursion.</value>
             [DataMember(Name = "incursionType")]
             public Type IncursionType { get; set; }
 
             /// <summary>
-            /// Gets or sets the infested solar systems.
+            ///     Gets or sets the infested solar systems.
             /// </summary>
             /// <value>The infested solar systems.</value>
             [DataMember(Name = "infestedSolarSystems")]
             public IReadOnlyCollection<LinkedEntity<SolarSystem>> InfestedSolarSystems { get; set; }
 
-                /// <summary>
+            /// <summary>
             ///     The incursion influence
             /// </summary>
             /// <value>The influence.</value>

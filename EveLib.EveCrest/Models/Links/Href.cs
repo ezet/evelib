@@ -4,9 +4,9 @@
 // Created          : 12-16-2014
 //
 // Last Modified By : Lars Kristian
-// Last Modified On : 12-17-2014
+// Last Modified On : 03-03-2016
 // ***********************************************************************
-// <copyright file="Href.cs" company="">
+// <copyright file="Href.cs" company="Lars Kristian Dahl">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -15,37 +15,20 @@
 using System;
 using System.Linq;
 using System.Runtime.Serialization;
+using eZet.EveLib.EveCrestModule.JsonConverters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
-
-    public class HrefConverter : JsonConverter {
-        public override bool CanConvert(Type objectType) {
-            return (objectType == typeof(Href<>));
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-            var token = JToken.ReadFrom(reader);
-            while (token.HasValues) {
-                token = token.First;
-            }
-            return Activator.CreateInstance(objectType, token.ToString());
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            var val = JToken.FromObject(value.ToString());
-            val.WriteTo(writer);
-        }
-    }
-
     /// <summary>
     ///     Represents a CREST href object
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DataContract]
-    [JsonConverter(typeof(HrefConverter))]
+    [JsonConverter(typeof (HrefConverter))]
     public class Href<T> : IInferrableId {
+        /// <summary>
+        ///     The _inferred identifier
+        /// </summary>
         private int _inferredId = -1;
 
         /// <summary>
@@ -93,6 +76,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
             return Uri;
         }
 
+        /// <summary>
+        ///     Infers the identifier.
+        /// </summary>
+        /// <returns>System.Int32.</returns>
         private int inferId() {
             int id;
             var href = Uri.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);

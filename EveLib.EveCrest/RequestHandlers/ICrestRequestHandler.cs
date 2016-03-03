@@ -1,6 +1,21 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EveLib.EveCrest
+// Author           : larsd
+// Created          : 08-09-2015
+//
+// Last Modified By : larsd
+// Last Modified On : 03-03-2016
+// ***********************************************************************
+// <copyright file="ICrestRequestHandler.cs" company="Lars Kristian Dahl">
+//     Copyright ©  2016
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
+using eZet.EveLib.EveCrestModule.Models;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
@@ -56,20 +71,39 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         string Charset { get; set; }
 
         /// <summary>
-        /// Requests a URI asynchronously, and returns the response content.
+        ///     Gets the request asynchronous.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
-        /// <param name="accessToken">The CREST access accessToken</param>
-        /// <param name="method">The method.</param>
-        /// <param name="postData">The post data.</param>
+        /// <param name="accessToken">The access token.</param>
         /// <returns>T.</returns>
-        Task<T> GetAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
+        Task<T> GetRequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
 
-        Task<string> PostAsync(Uri uri, string accesstoken, string postData);
+        /// <summary>
+        ///     Posts the request asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accesstoken">The accesstoken.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        Task<string> PostRequestAsync(Uri uri, string accesstoken, string postData);
 
-        Task<bool> PutAsync(Uri uri, string accesstoken, string postData);
+        /// <summary>
+        ///     Puts the request asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accesstoken">The accesstoken.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        Task<bool> PutRequestAsync(Uri uri, string accesstoken, string postData);
 
-        Task<bool> DeleteAsync(Uri uri, string accessToken);
-    }
+        /// <summary>
+        ///     Deletes the request asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        Task<bool> DeleteRequestAsync(Uri uri, string accessToken);
+
+        Task<CrestOptions> OptionsRequestAsync(Uri uri);
 }

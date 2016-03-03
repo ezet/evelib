@@ -94,7 +94,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public WarEntity Aggressor { get; set; }
 
         /// <summary>
-        /// Gets or sets the killmails.
+        ///     Gets or sets the killmails.
         /// </summary>
         /// <value>The killmails.</value>
         [DataMember(Name = "killmail")]

@@ -18,8 +18,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
+using eZet.EveLib.EveCrestModule.Models.Resources;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
     ///     Represents a CREST collection response
     /// </summary>

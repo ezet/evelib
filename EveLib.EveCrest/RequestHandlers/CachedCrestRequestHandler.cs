@@ -12,6 +12,7 @@ using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveCrestModule.Exceptions;
+using eZet.EveLib.EveCrestModule.Models;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
@@ -135,7 +136,14 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public string Charset { get; set; }
 
 
-        public async Task<string> PostAsync(Uri uri, string accessToken, string postData) {
+        /// <summary>
+        ///     post as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        public async Task<string> PostRequestAsync(Uri uri, string accessToken, string postData) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = WebRequestMethods.Http.Post;
             request.ContentType = "application/json";
@@ -150,7 +158,14 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return retval;
         }
 
-        public async Task<bool> PutAsync(Uri uri, string accessToken, string postData) {
+        /// <summary>
+        ///     put as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        public async Task<bool> PutRequestAsync(Uri uri, string accessToken, string postData) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = WebRequestMethods.Http.Put;
             request.ContentType = "application/json";
@@ -161,7 +176,13 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return retval;
         }
 
-        public async Task<bool> DeleteAsync(Uri uri, string accessToken) {
+        /// <summary>
+        ///     delete as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        public async Task<bool> DeleteRequestAsync(Uri uri, string accessToken) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = "DELETE";
             request.ContentType = "application/json";
@@ -170,18 +191,24 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return retval;
         }
 
+        public async Task<CrestOptions> OptionsRequestAsync(Uri uri) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.Method = "OPTIONS";
+            var response = await requestAsync(request, null).ConfigureAwait(false);
+            var content = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+            var result = Serializer.Deserialize<CrestOptions>(content);
+            result.ResponseHeaders = response.Headers;
+            return result;
+        }
+
         /// <summary>
-        ///     Performs a request, and returns the response content.
+        ///     get request as an asynchronous operation.
         /// </summary>
-        /// <typeparam name="T">Response type</typeparam>
-        /// <param name="uri">URI to request</param>
-        /// <param name="accessToken">CREST acces token</param>
-        /// <param name="method">The method.</param>
-        /// <param name="postData">The post data.</param>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
         /// <returns>T.</returns>
-        /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
-        /// <exception cref="EveCrestException">Undefined error</exception>
-        public async Task<T> GetAsync<T>(Uri uri, string accessToken)
+        public async Task<T> GetRequestAsync<T>(Uri uri, string accessToken)
             where T : class, ICrestResource<T> {
             string responseContent = null;
 
@@ -202,7 +229,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
             request.Method = WebRequestMethods.Http.Get;
             _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
-            var response = await requestAsync(request, accessToken);
+            var response = await requestAsync(request, accessToken).ConfigureAwait(false);
 
             // handle response
             var header = response.Headers;
@@ -214,6 +241,18 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return result;
         }
 
+        /// <summary>
+        ///     request as an asynchronous operation.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;HttpWebResponse&gt;.</returns>
+        /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
+        /// <exception cref="EveCrestException">
+        ///     Undefined error
+        ///     or
+        ///     or
+        /// </exception>
         private async Task<HttpWebResponse> requestAsync(HttpWebRequest request, string accessToken) {
             var mode = (string.IsNullOrEmpty(accessToken)) ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebResponse response;
@@ -248,7 +287,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 if (e.Response == null) {
                     throw new EveCrestException(e.Message, e);
                 }
-                response = (HttpWebResponse)e.Response;
+                response = (HttpWebResponse) e.Response;
 
                 var responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
@@ -272,6 +311,12 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return response;
         }
 
+        /// <summary>
+        ///     Throws the crest exception.
+        /// </summary>
+        /// <param name="response">The response.</param>
+        /// <returns>Task.</returns>
+        /// <exception cref="EveCrestException">null</exception>
         private async Task throwCrestException(HttpWebResponse response) {
             var responseContent = await HttpRequestHelper.GetResponseContentAsync(response);
             var error = Serializer.Deserialize<CrestError>(responseContent);
@@ -282,6 +327,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
 
+        /// <summary>
+        ///     Gets the cache expiration time.
+        /// </summary>
+        /// <param name="header">The header.</param>
+        /// <returns>DateTime.</returns>
         private static DateTime getCacheExpirationTime(NameValueCollection header) {
             var cache = header.Get("Cache-Control");
             if (cache == null) return DateTime.UtcNow;
@@ -289,6 +339,5 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             var sec = int.Parse(str);
             return DateTime.UtcNow.AddSeconds(sec);
         }
-
     }
 }

@@ -1,3 +1,17 @@
+// ***********************************************************************
+// Assembly         : EveLib.EveCrest
+// Author           : larsd
+// Created          : 03-03-2016
+//
+// Last Modified By : larsd
+// Last Modified On : 03-03-2016
+// ***********************************************************************
+// <copyright file="ICollectionResource.cs" company="Lars Kristian Dahl">
+//     Copyright ©  2016
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -5,6 +19,11 @@ using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
+    /// <summary>
+    ///     Interface ICollectionResource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TCollection">The type of the t collection.</typeparam>
     public interface ICollectionResource<T, TCollection> where T : CollectionResource<T, TCollection>, ICrestResource<T> {
         /// <summary>
         ///     The total number of items in the collection

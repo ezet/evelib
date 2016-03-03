@@ -17,21 +17,21 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
-    /// Class AutopilotWaypoint.
+    ///     Class AutopilotWaypoint.
     /// </summary>
     [DataContract]
     public class AutopilotWaypoint : EditableEntity {
         private LinkedEntity<SolarSystem> _solarSystem;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutopilotWaypoint"/> class.
+        ///     Initializes a new instance of the <see cref="AutopilotWaypoint" /> class.
         /// </summary>
         public AutopilotWaypoint() {
             SolarSystem = new LinkedEntity<SolarSystem>();
         }
 
         /// <summary>
-        /// Gets or sets the solar system.
+        ///     Gets or sets the solar system.
         /// </summary>
         /// <value>The solar system.</value>
         [DataMember(Name = "solarSystem")]
@@ -44,18 +44,17 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="AutopilotWaypoint"/> is first.
+        ///     Gets or sets a value indicating whether this <see cref="AutopilotWaypoint" /> is first.
         /// </summary>
         /// <value><c>true</c> if first; otherwise, <c>false</c>.</value>
         [DataMember(Name = "first")]
         public bool First { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [clear other waypoints].
+        ///     Gets or sets a value indicating whether [clear other waypoints].
         /// </summary>
         /// <value><c>true</c> if [clear other waypoints]; otherwise, <c>false</c>.</value>
         [DataMember(Name = "clearOtherWaypoints")]
         public bool ClearOtherWaypoints { get; set; }
-         
     }
 }

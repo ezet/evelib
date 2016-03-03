@@ -129,19 +129,19 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Class DogmaAttribute.
+        ///     Class DogmaAttribute.
         /// </summary>
         [DataContract]
         public class DogmaAttribute {
             /// <summary>
-            /// Gets or sets the attribute.
+            ///     Gets or sets the attribute.
             /// </summary>
             /// <value>The attribute.</value>
             [DataMember(Name = "attribute")]
             public LinkedEntity<DogmaAttribute> Attribute { get; set; }
 
             /// <summary>
-            /// Gets or sets the value.
+            ///     Gets or sets the value.
             /// </summary>
             /// <value>The value.</value>
             [DataMember(Name = "value")]
@@ -149,19 +149,19 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        /// Class DogmaEffect.
+        ///     Class DogmaEffect.
         /// </summary>
         [DataContract]
         public class DogmaEffect {
             /// <summary>
-            /// Gets or sets the effect.
+            ///     Gets or sets the effect.
             /// </summary>
             /// <value>The effect.</value>
             [DataMember(Name = "effect")]
             public LinkedEntity<DogmaEffect> Effect { get; set; }
 
             /// <summary>
-            /// Gets or sets a value indicating whether this instance is default.
+            ///     Gets or sets a value indicating whether this instance is default.
             /// </summary>
             /// <value><c>true</c> if this instance is default; otherwise, <c>false</c>.</value>
             [DataMember(Name = "isDefault")]

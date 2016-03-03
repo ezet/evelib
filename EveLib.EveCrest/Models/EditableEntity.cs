@@ -11,36 +11,37 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
-    /// Class EditableEntity.
+    ///     Class EditableEntity.
     /// </summary>
     [DataContract]
     public class EditableEntity : IEditableEntity {
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is new.
+        ///     Gets or sets a value indicating whether this instance is new.
         /// </summary>
         /// <value><c>true</c> if this instance is new; otherwise, <c>false</c>.</value>
         public bool SaveAsNew { get; set; }
 
         /// <summary>
-        /// Gets or sets the eve crest.
+        ///     Gets or sets the eve crest.
         /// </summary>
         /// <value>The eve crest.</value>
         public EveCrest EveCrest { get; set; }
 
         /// <summary>
-        /// Gets or sets the href.
+        ///     Gets or sets the href.
         /// </summary>
         /// <value>The href.</value>
         [DataMember(Name = "href")]
         public string Href { get; set; }
 
         /// <summary>
-        /// Saves this instance.
+        ///     Saves this instance.
         /// </summary>
         /// <returns>Task.</returns>
         public Task<bool> SaveAsync() {
@@ -48,7 +49,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Saves this instance.
+        ///     Saves this instance.
         /// </summary>
         /// <returns>System.Boolean.</returns>
         public bool Save() {
@@ -56,7 +57,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Deletes this instance.
+        ///     Deletes this instance.
         /// </summary>
         /// <returns>Task.</returns>
         public Task<bool> DeleteAsync() {
@@ -64,7 +65,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Deletes this instance.
+        ///     Deletes this instance.
         /// </summary>
         /// <returns>System.Boolean.</returns>
         public bool Delete() {
@@ -72,7 +73,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Should the serialize href.
+        ///     Should the serialize href.
         /// </summary>
         /// <returns>System.Boolean.</returns>
         public bool ShouldSerializeHref() => false;

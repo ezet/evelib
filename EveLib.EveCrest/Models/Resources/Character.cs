@@ -29,18 +29,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.Character-v3+json";
         }
 
-
-        /// <summary>
-        /// Injects the specified instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        override public void Inject(EveCrest instance) {
-            base.Inject(instance);
-            Contacts.EveCrest = instance;
-            Fittings.EveCrest = instance;
-            Waypoints.EveCrest = instance;
-        }
-
         /// <summary>
         ///     Gets or sets the accounts.
         /// </summary>
@@ -203,5 +191,17 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The waypoints.</value>
         [DataMember(Name = "waypoints")]
         public WritableHref<string, AutopilotWaypoint> Waypoints { get; set; }
+
+
+        /// <summary>
+        ///     Injects the specified instance.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        public override void Inject(EveCrest instance) {
+            base.Inject(instance);
+            Contacts.EveCrest = instance;
+            Fittings.EveCrest = instance;
+            Waypoints.EveCrest = instance;
+        }
     }
 }
