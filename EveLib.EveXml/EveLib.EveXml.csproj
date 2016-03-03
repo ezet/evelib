@@ -173,7 +173,6 @@
     <Compile Include="Models\Misc\ServerStatus.cs" />
     <Compile Include="Models\Misc\SkillTree.cs" />
     <Compile Include="Models\Misc\TypeName.cs" />
-    <Compile Include="Models\Corporation\ContactList.cs" />
     <Compile Include="Models\Corporation\ContainerLog.cs" />
     <Compile Include="Models\Corporation\CorporationSheet.cs" />
     <Compile Include="Models\Corporation\FactionWarfareStats.cs" />
