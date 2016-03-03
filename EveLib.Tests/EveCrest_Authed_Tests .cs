@@ -63,6 +63,7 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
+            contacts.
             Assert.AreNotEqual(0, contacts.Items.Count);
             var first = contacts.Items.First();
             Console.WriteLine(first.Contact.Name);
