@@ -177,6 +177,13 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             /// <value>The label mask.</value>
             [XmlAttribute("labelMask")]
             public int LabelMask { get; set; }
+
+            /// <summary>
+            /// Gets or sets the contact type identifier.
+            /// </summary>
+            /// <value>The contact type identifier.</value>
+            [XmlAttribute("contactTypeID")]
+            public long ContactTypeId { get; set; }
         }
     }
 }

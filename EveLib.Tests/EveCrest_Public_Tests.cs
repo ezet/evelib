@@ -23,10 +23,6 @@ namespace eZet.EveLib.Test {
 
         private readonly EveCrest _crest = new EveCrest();
 
-        static EveCrest_Public_Tests() {
-            Config.AppData = "test";
-            Console.WriteLine(Config.CachePath);
-        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveCrest_Public_Tests" /> class.
@@ -84,7 +80,10 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetIncursions_NoErrors() {
-            var incursionCollection = await (await _crest.GetRootAsync()).QueryAsync(r => r.Incursions);
+            var res = await (await _crest.GetRootAsync()).QueryAsync(r => r.Incursions);
+            var inc = res.Items.First();
+            Assert.IsTrue(inc.InfestedSolarSystems.Any());
+            Assert.IsNotNull(inc.AggressorFaction);
         }
 
         [TestMethod]

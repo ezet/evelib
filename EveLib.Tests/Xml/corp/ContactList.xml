@@ -1,14 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <eveapi version="2">
-  <currentTime>2010-05-29 22:35:46</currentTime>
+  <currentTime>2016-03-03 16:49:34</currentTime>
   <result>
-    <rowset name="corporateContactList" key="contactID" columns="contactID,contactName,standing">
-      <row contactID="797400947" contactName="CCP Garthagk" standing="-10" />
+    <rowset name="corporateContactList" key="contactID" columns="contactID,contactName,standing,contactTypeID,labelMask">
+      <row contactID="98195908" contactName="Whore and Peace" standing="5" contactTypeID="2" labelMask="0"/>
+      <row contactID="98319972" contactName="Catastrophic Overview Failure" standing="5" contactTypeID="2" labelMask="0"/>
+      <row contactID="99003763" contactName="The Pursuit of Happiness" standing="-10" contactTypeID="16159" labelMask="0"/>
+      <row contactID="463986243" contactName="Crumb Rus" standing="10" contactTypeID="1383" labelMask="0"/>
+      <row contactID="937872513" contactName="Ivy League" standing="10" contactTypeID="16159" labelMask="0"/>
+      <row contactID="1680888152" contactName="The Marmite Collective" standing="-5" contactTypeID="16159" labelMask="0"/>
     </rowset>
-    <rowset name="allianceContactList" key="contactID" columns="contactID,contactName,standing">
-      <row contactID="797400947" contactName="CCP Garthagk" standing="5" />
-    </rowset>
+    <rowset name="corporateContactLabels" key="labelID" columns="labelID,name"/>
+    <rowset name="allianceContactList" key="contactID" columns="contactID,contactName,standing,contactTypeID,labelMask"/>
+    <rowset name="allianceContactLabels" key="labelID" columns="labelID,name"/>
   </result>
-  <cachedUntil>2010-05-29 22:50:46</cachedUntil>
+  <cachedUntil>2016-03-03 17:03:00</cachedUntil>
 </eveapi>
