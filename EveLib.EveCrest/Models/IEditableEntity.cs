@@ -31,10 +31,22 @@ namespace eZet.EveLib.EveCrestModule.Models {
         Task<bool> SaveAsync();
 
         /// <summary>
+        /// Saves this instance.
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        bool Save();
+
+        /// <summary>
         /// Deletes this instance.
         /// </summary>
         /// <returns>Task.</returns>
         Task<bool> DeleteAsync();
+
+        /// <summary>
+        /// Deletes this instance.
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        bool Delete();
 
 
     }

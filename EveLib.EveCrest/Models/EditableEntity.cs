@@ -48,11 +48,27 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
+        /// Saves this instance.
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        public bool Save() {
+            return SaveAsync().Result;
+        }
+
+        /// <summary>
         /// Deletes this instance.
         /// </summary>
         /// <returns>Task.</returns>
         public Task<bool> DeleteAsync() {
             return EveCrest.DeleteEntityAsync(this);
+        }
+
+        /// <summary>
+        /// Deletes this instance.
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        public bool Delete() {
+            return DeleteAsync().Result;
         }
 
         /// <summary>
