@@ -10,7 +10,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// Gets or sets a value indicating whether this instance is new.
         /// </summary>
         /// <value><c>true</c> if this instance is new; otherwise, <c>false</c>.</value>
-        bool IsNew { get; set; }
+        bool SaveAsNew { get; set; }
 
         /// <summary>
         /// Gets or sets the eve crest.

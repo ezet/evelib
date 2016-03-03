@@ -8,7 +8,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             base.Inject(crest);
             foreach (var item in Items) {
                 item.EveCrest = EveCrest;
-                item.IsNew = false;
+                item.SaveAsNew = false;
             }
         }
     }

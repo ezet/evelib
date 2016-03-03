@@ -38,6 +38,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             base.Inject(instance);
             Contacts.EveCrest = instance;
             Fittings.EveCrest = instance;
+            Waypoints.EveCrest = instance;
         }
 
         /// <summary>
@@ -201,6 +202,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The waypoints.</value>
         [DataMember(Name = "waypoints")]
-        public Href<NotImplemented> Waypoints { get; set; }
+        public WritableHref<string, AutopilotWaypoint> Waypoints { get; set; }
     }
 }

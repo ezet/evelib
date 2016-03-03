@@ -118,6 +118,7 @@
     <Compile Include="Models\IEditableEntity.cs" />
     <Compile Include="Models\IEditableCollectionResource.cs" />
     <Compile Include="Models\Links\WritableHref.cs" />
+    <Compile Include="Models\Resources\AutopilotWaypoint.cs" />
     <Compile Include="Models\Resources\DogmaAttribute.cs" />
     <Compile Include="Models\Resources\DogmaAttributeCollection.cs" />
     <Compile Include="Models\IInferrableId.cs" />

@@ -28,8 +28,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
 
         public LinkedEntity() {
             Name = "";
+            SetSerializeName = true;
         }
 
+        public bool SetSerializeName { private get; set; }
+
+        public bool ShouldSerializeName() => !SetSerializeName;
 
         /// <summary>
         ///     Gets or sets the identifier.

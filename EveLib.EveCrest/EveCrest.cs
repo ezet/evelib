@@ -356,26 +356,51 @@ namespace eZet.EveLib.EveCrestModule {
             return GetRootAsync().Result;
         }
 
-        public async Task<bool> SaveAsync(IEditableEntity entity) {
-            if (!entity.IsNew) return await UpdateAsync(entity).ConfigureAwait(false);
-            entity.IsNew = false;
+
+        /// <summary>
+        /// save entity as an asynchronous operation.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        public async Task<bool> SaveEntityAsync(IEditableEntity entity) {
+            if (!entity.SaveAsNew) return await UpdateEntityAsync(entity).ConfigureAwait(false);
+            entity.SaveAsNew = false;
             var uri = await postAsync(entity).ConfigureAwait(false);
             if (uri != null) entity.Href = uri;
-            return uri != null;
+            return true;
         }
 
-        public async Task<bool> DeleteAsync(IEditableEntity entity) {
-            return await deleteAsync(entity);
+        public bool SaveEntity(IEditableEntity entity) {
+            return SaveEntityAsync(entity).Result;
         }
 
-        public async Task<bool> UpdateAsync<T>(T entity) where T : class, IEditableEntity {
-            return await (putAsync(entity).ConfigureAwait(false)) != null;
+
+        public Task<bool> DeleteEntityAsync(IEditableEntity entity) {
+            return deleteAsync(entity);
         }
 
-        public async Task<bool> AddAsync<T>(T entity) where T : class, IEditableEntity {
+
+        public bool DeleteEntity(IEditableEntity entity) {
+            return DeleteEntityAsync(entity).Result;
+        }
+
+        public Task<bool> UpdateEntityAsync(IEditableEntity entity) {
+            return putAsync(entity);
+        }
+
+        public bool UpdateEntity(IEditableEntity entity) {
+            return UpdateEntityAsync(entity).Result;
+
+        }
+
+        public async Task<bool> AddEntityAsync(IEditableEntity entity) {
             var uri = await postAsync(entity).ConfigureAwait(false);
             if (uri != null) entity.Href = uri;
-            return uri != null;
+            return true;
+        }
+
+        public bool AddEntity(IEditableEntity entity) {
+            return AddEntityAsync(entity).Result;
         }
 
         /// <summary>
@@ -712,7 +737,7 @@ namespace eZet.EveLib.EveCrestModule {
             return RefreshAccessTokenAsync();
         }
 
-        private async Task<bool> putAsync<T>(T entity) where T : class, IEditableEntity {
+        private async Task<bool> putAsync(IEditableEntity entity) {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
                 return await RequestHandler.PutAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
@@ -724,7 +749,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
 
-        private async Task<bool> deleteAsync<T>(T entity) where T : IEditableEntity {
+        private async Task<bool> deleteAsync(IEditableEntity entity) {
             try {
                 return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
             }
@@ -734,7 +759,7 @@ namespace eZet.EveLib.EveCrestModule {
             }
         }
 
-        private async Task<string> postAsync<T>(T entity) where T : class, IEditableEntity {
+        private async Task<string> postAsync(IEditableEntity entity) {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
                 return await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);

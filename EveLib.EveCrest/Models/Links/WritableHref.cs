@@ -1,14 +1,11 @@
-﻿using eZet.EveLib.EveCrestModule.Models.Resources;
-
-namespace eZet.EveLib.EveCrestModule.Models.Links {
+﻿namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
     /// Class WritableHref.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="TCollection">The type of the t collection.</typeparam>
-    public class WritableHref<T, TCollection> : Href<T>
-        where T : CollectionResource<T, TCollection>, IEditableCollectionResource<T, TCollection>
-        where TCollection : IEditableEntity, new() {
+    /// <typeparam name="TResource"></typeparam>
+    /// <typeparam name="TEditable">The type of the t collection.</typeparam>
+    public class WritableHref<TResource, TEditable> : Href<TResource>
+        where TEditable : IEditableEntity, new() {
         /// <summary>
         /// Initializes a new instance of the <see cref="Href{T}" /> class.
         /// </summary>
@@ -26,8 +23,8 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// Creates this instance.
         /// </summary>
         /// <returns>TCollection.</returns>
-        public TCollection Create() {
-            return new TCollection {Href = Uri, IsNew = true, EveCrest = EveCrest};
+        public TEditable Create() {
+            return new TEditable {Href = Uri, SaveAsNew = true, EveCrest = EveCrest};
         }
     }
 }

@@ -41,11 +41,22 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void GetRoot() {
-            var root = crest.GetRoot();
+        public async Task GetRoot() {
+            var root = await crest.GetRootAsync();
             Assert.AreEqual(EveCrest.DefaultAuthHost, root.CrestEndpoint.Uri);
         }
 
+        [TestMethod]
+        public async Task AddAutopilotWaypoint() {
+            var c = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character);
+            var wp = c.Waypoints.Create();
+            var system = crest.GetRoot().Query(r => r.Systems).Items.Single(s => s.Name == "Jita");
+            wp.SolarSystem = system;
+            wp.First = true;
+            wp.ClearOtherWaypoints = true;
+            Assert.IsTrue(await wp.SaveAsync());
+        }
+            
         [TestMethod]
         public async Task GetContacts() {
             var contacts =
@@ -142,7 +153,7 @@ namespace eZet.EveLib.Test {
                     .QueryAsync(r => r.Fittings)).Items.First();
             fit.Name = "test123123";
             fit.Href = "https://crest-tq.eveonline.com/characters/157924121/fittings/";
-            fit.IsNew = true;
+            fit.SaveAsNew = true;
             Assert.IsTrue(await fit.SaveAsync());
         }
 
@@ -153,7 +164,9 @@ namespace eZet.EveLib.Test {
         (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
             .QueryAsync(r => r.Fittings);
             var fit = fittings.Items.First();
+            Assert.IsTrue(await fit.DeleteAsync());
             fit.Name = "Test123123";
+            fit.SaveAsNew = true;
             var result = await fit.SaveAsync();
             Assert.IsTrue(result);
         }
