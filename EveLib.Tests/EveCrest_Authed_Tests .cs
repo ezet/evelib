@@ -47,6 +47,11 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetIncursions_NoErrors() {
+            var incursionCollection = await (await crest.GetRootAsync()).QueryAsync(r => r.Incursions);
+        }
+
+        [TestMethod]
         public async Task AddAutopilotWaypoint() {
             var c = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character);
             var wp = c.Waypoints.Create();
@@ -63,7 +68,6 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
-            contacts.
             Assert.AreNotEqual(0, contacts.Items.Count);
             var first = contacts.Items.First();
             Console.WriteLine(first.Contact.Name);

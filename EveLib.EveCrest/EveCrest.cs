@@ -33,58 +33,58 @@ using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandler
 
 namespace eZet.EveLib.EveCrestModule {
     /// <summary>
-    /// Enum EveCrest Access Mode
+    ///     Enum EveCrest Access Mode
     /// </summary>
     public enum CrestMode {
         /// <summary>
-        /// Public CREST
+        ///     Public CREST
         /// </summary>
         Public,
 
         /// <summary>
-        /// Authenticated CREST. This requires a valid AccessToken or a valid RefreshToken and EncryptedKey
+        ///     Authenticated CREST. This requires a valid AccessToken or a valid RefreshToken and EncryptedKey
         /// </summary>
         Authenticated
     }
 
 
     /// <summary>
-    /// Provides access to the Eve Online CREST API.
+    ///     Provides access to the Eve Online CREST API.
     /// </summary>
     public class EveCrest {
         /// <summary>
-        /// The default URI used to access the public CREST API. This can be overridded by setting the Host.
+        ///     The default URI used to access the public CREST API. This can be overridded by setting the Host.
         /// </summary>
         public const string DefaultPublicHost = "https://public-crest.eveonline.com/";
 
         /// <summary>
-        /// The default URI used to access the authenticated CREST API. This can be overridded by setting the Host.
+        ///     The default URI used to access the authenticated CREST API. This can be overridded by setting the Host.
         /// </summary>
         public const string DefaultAuthHost = "https://crest-tq.eveonline.com/";
 
         /// <summary>
-        /// The obsolete message
+        ///     The obsolete message
         /// </summary>
         private const string ObsoleteMessage =
-                    "This method uses statically typed links, and is not how CREST is meant to be used. Please use GetRoot() or GetRootAsync() and navigate from there.";
+            "This method uses statically typed links, and is not how CREST is meant to be used. Please use GetRoot() or GetRootAsync() and navigate from there.";
 
         /// <summary>
-        /// The _trace
+        ///     The _trace
         /// </summary>
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
-        /// The _host
+        ///     The _host
         /// </summary>
         private string _host;
 
         /// <summary>
-        /// The CREST root if cached
+        ///     The CREST root if cached
         /// </summary>
         private CrestRoot _root;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveCrest" /> class, in Public mode.
+        ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Public mode.
         /// </summary>
         public EveCrest() {
             RequestHandler = new CachedCrestRequestHandler(new JsonSerializer());
@@ -97,7 +97,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveCrest" /> class, in Authenticated mode.
+        ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Authenticated mode.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
         public EveCrest(string accessToken)
@@ -110,7 +110,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EveCrest" /> class, in Authenticated mode.
+        ///     Initializes a new instance of the <see cref="EveCrest" /> class, in Authenticated mode.
         /// </summary>
         /// <param name="refreshToken">The refresh token.</param>
         /// <param name="encodedKey">The encoded key.</param>
@@ -126,7 +126,7 @@ namespace eZet.EveLib.EveCrestModule {
 
 
         /// <summary>
-        /// Gets or sets the host used to access the EveCrest API.
+        ///     Gets or sets the host used to access the EveCrest API.
         /// </summary>
         /// <value>The base public URI.</value>
         public string Host {
@@ -135,82 +135,85 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Gets or sets the IEveAuth instance used for Eve SSO.
+        ///     Gets or sets the IEveAuth instance used for Eve SSO.
         /// </summary>
         /// <value>The eve sso.</value>
         public IEveAuth EveAuth { get; set; }
 
 
         /// <summary>
-        /// Gets or sets the CREST Access Token
+        ///     Gets or sets the CREST Access Token
         /// </summary>
         /// <value>The access token.</value>
         public string AccessToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the refresh token.
+        ///     Gets or sets the refresh token.
         /// </summary>
         /// <value>The refresh token.</value>
         public string RefreshToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the encoded key. This is required to refresh access tokens.
+        ///     Gets or sets the encoded key. This is required to refresh access tokens.
         /// </summary>
         /// <value>The encoded key.</value>
         public string EncodedKey { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether EveCrest is allowed to cache the CrestRoot object. This is enabled by
-        /// default.
+        ///     Gets or sets a value indicating whether EveCrest is allowed to cache the CrestRoot object. This is enabled by
+        ///     default.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [allow root cache]; otherwise, <c>false</c>.</value>
+        ///     <c>true</c> if [allow root cache]; otherwise, <c>false</c>.
+        /// </value>
         public bool EnableRootCache { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This
-        /// requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default if using the RefreshToken
-        /// ctor.
+        ///     Gets or sets a value indicating whether to allow the library to automatically refresh the access token. This
+        ///     requires a valid RefreshToken and EncryptedKey to be set. This is enabled by default if using the RefreshToken
+        ///     ctor.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.</value>
+        ///     <c>true</c> if [allow automatic refresh]; otherwise, <c>false</c>.
+        /// </value>
         public bool EnableAutomaticTokenRefresh { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to allow Query() methods to allow automatic paging. This may perform
-        /// additional web requests.
+        ///     Gets or sets a value indicating whether to allow Query() methods to allow automatic paging. This may perform
+        ///     additional web requests.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [allow automatic paging]; otherwise, <c>false</c>.</value>
+        ///     <c>true</c> if [allow automatic paging]; otherwise, <c>false</c>.
+        /// </value>
         public bool EnableAutomaticPaging { get; set; }
 
         /// <summary>
-        /// Gets the CREST access mode.
+        ///     Gets the CREST access mode.
         /// </summary>
         /// <value>The mode.</value>
         public CrestMode Mode { get; }
 
         /// <summary>
-        /// Gets or sets the request handler.
+        ///     Gets or sets the request handler.
         /// </summary>
         /// <value>The request handler.</value>
         public ICachedCrestRequestHandler RequestHandler { get; set; }
 
         /// <summary>
-        /// Gets or sets the image request handler.
+        ///     Gets or sets the image request handler.
         /// </summary>
         /// <value>The image request handler.</value>
         public IImageRequestHandler ImageRequestHandler { get; set; }
 
         /// <summary>
-        /// Gets or sets the path to the API root relative to the host.
+        ///     Gets or sets the path to the API root relative to the host.
         /// </summary>
         /// <value>The API path.</value>
-        public string ApiPath { get; }
+        public string ApiPath { get; set; }
 
         /// <summary>
-        /// Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
-        /// The EveCrest instance is updated with the new access token.
+        ///     Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
+        ///     The EveCrest instance is updated with the new access token.
         /// </summary>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public async Task<AuthResponse> RefreshAccessTokenAsync() {
@@ -221,8 +224,8 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
-        /// The EveCrest instance is updated with the new access token.
+        ///     Refreshes the access token. This requires a valid RefreshToken and EncodedKey to have been set.
+        ///     The EveCrest instance is updated with the new access token.
         /// </summary>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
         public AuthResponse RefreshAccessToken() {
@@ -233,7 +236,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads the image asynchronous.
+        ///     Loads the image asynchronous.
         /// </summary>
         /// <param name="link">The image link.</param>
         /// <returns>Task&lt;System.Byte[]&gt;.</returns>
@@ -242,7 +245,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads the image.
+        ///     Loads the image.
         /// </summary>
         /// <param name="link">The image link</param>
         /// <returns>Task&lt;System.Byte[]&gt;.</returns>
@@ -251,7 +254,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a Href async.
+        ///     Loads a Href async.
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="uri">The Href that should be loaded</param>
@@ -264,7 +267,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a Href
+        ///     Loads a Href
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="uri">The Href that should be loaded</param>
@@ -275,7 +278,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity async
+        ///     Loads a ILinkedEntity async
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="entity">The items that should be loaded</param>
@@ -287,7 +290,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity
+        ///     Loads a ILinkedEntity
         /// </summary>
         /// <typeparam name="T">The resource type, usually inferred from the parameter</typeparam>
         /// <param name="entity">The items that should be loaded</param>
@@ -298,7 +301,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity collection async.
+        ///     Loads a ILinkedEntity collection async.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
@@ -311,7 +314,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a ILinkedEntity collection.
+        ///     Loads a ILinkedEntity collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
@@ -324,7 +327,7 @@ namespace eZet.EveLib.EveCrestModule {
 
 
         /// <summary>
-        /// Loads a Href collection async.
+        ///     Loads a Href collection async.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
@@ -338,7 +341,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Loads a Href collection.
+        ///     Loads a Href collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">The items.</param>
@@ -350,18 +353,17 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns the CREST root
+        ///     Returns the CREST root
         /// </summary>
         /// <returns>Task&lt;CrestRoot&gt;.</returns>
         public async Task<CrestRoot> GetRootAsync() {
-            const string relPath = "";
             if (_root == null || !EnableRootCache)
-                _root = await getAsync<CrestRoot>(relPath).ConfigureAwait(false);
+                _root = await getAsync<CrestRoot>(Host).ConfigureAwait(false);
             return _root;
         }
 
         /// <summary>
-        /// Returns the CREST root
+        ///     Returns the CREST root
         /// </summary>
         /// <returns>CrestRoot.</returns>
         public CrestRoot GetRoot() {
@@ -370,7 +372,7 @@ namespace eZet.EveLib.EveCrestModule {
 
 
         /// <summary>
-        /// save entity as an asynchronous operation.
+        ///     save entity as an asynchronous operation.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
@@ -383,7 +385,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Saves the entity.
+        ///     Saves the entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Boolean.</returns>
@@ -393,7 +395,7 @@ namespace eZet.EveLib.EveCrestModule {
 
 
         /// <summary>
-        /// Deletes the entity asynchronous.
+        ///     Deletes the entity asynchronous.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
@@ -403,7 +405,7 @@ namespace eZet.EveLib.EveCrestModule {
 
 
         /// <summary>
-        /// Deletes the entity.
+        ///     Deletes the entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Boolean.</returns>
@@ -412,7 +414,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Updates the entity asynchronous.
+        ///     Updates the entity asynchronous.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
@@ -421,17 +423,16 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Updates the entity.
+        ///     Updates the entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Boolean.</returns>
         public bool UpdateEntity(IEditableEntity entity) {
             return UpdateEntityAsync(entity).Result;
-
         }
 
         /// <summary>
-        /// Adds the entity asynchronous.
+        ///     Adds the entity asynchronous.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
@@ -442,7 +443,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Adds the entity.
+        ///     Adds the entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Boolean.</returns>
@@ -451,7 +452,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns data on the specified killmail.
+        ///     Returns data on the specified killmail.
         /// </summary>
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
@@ -462,7 +463,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns data on the specified killmail.
+        ///     Returns data on the specified killmail.
         /// </summary>
         /// <param name="id">Killmail ID</param>
         /// <param name="hash">Killmail hash</param>
@@ -472,7 +473,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all active incursions.
+        ///     Returns a list of all active incursions.
         /// </summary>
         /// <returns>A list of all active incursions.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -482,7 +483,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all active incursions.
+        ///     Returns a list of all active incursions.
         /// </summary>
         /// <returns>A list of all active incursions.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -491,7 +492,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all alliances.
+        ///     Returns a list of all alliances.
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the response.</param>
         /// <returns>A list of all alliances.</returns>
@@ -502,7 +503,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all alliances.
+        ///     Returns a list of all alliances.
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all alliances.</returns>
@@ -512,7 +513,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns data about a specific alliance.
+        ///     Returns data about a specific alliance.
         /// </summary>
         /// <param name="allianceId">A valid alliance ID</param>
         /// <returns>Data for specified alliance</returns>
@@ -523,7 +524,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns data about a specific alliance.
+        ///     Returns data about a specific alliance.
         /// </summary>
         /// <param name="allianceId">A valid alliance ID</param>
         /// <returns>Data for specified alliance</returns>
@@ -533,7 +534,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns daily price and volume history for a specific region and item type.
+        ///     Returns daily price and volume history for a specific region and item type.
         /// </summary>
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
@@ -545,7 +546,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns daily price and volume history for a specific region and item type.
+        ///     Returns daily price and volume history for a specific region and item type.
         /// </summary>
         /// <param name="regionId">Region ID</param>
         /// <param name="typeId">Type ID</param>
@@ -556,7 +557,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns the average and adjusted values for all items
+        ///     Returns the average and adjusted values for all items
         /// </summary>
         /// <returns>Task&lt;MarketTypePriceCollection&gt;.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -566,7 +567,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns the average and adjusted values for all items
+        ///     Returns the average and adjusted values for all items
         /// </summary>
         /// <returns>MarketTypePriceCollection.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -575,7 +576,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all wars.
+        ///     Returns a list of all wars.
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
@@ -586,7 +587,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all wars.
+        ///     Returns a list of all wars.
         /// </summary>
         /// <param name="page">The 1-indexed page to return. Number of total pages is available in the repsonse.</param>
         /// <returns>A list of all wars.</returns>
@@ -596,7 +597,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns data for a specific war.
+        ///     Returns data for a specific war.
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>Data for the specified war.</returns>
@@ -607,7 +608,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns data for a specific war.
+        ///     Returns data for a specific war.
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>Data for the specified war.</returns>
@@ -617,7 +618,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all killmails related to a specified war.
+        ///     Returns a list of all killmails related to a specified war.
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
@@ -628,7 +629,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of all killmails related to a specified war.
+        ///     Returns a list of all killmails related to a specified war.
         /// </summary>
         /// <param name="warId">War ID</param>
         /// <returns>A list of all killmails related to the specified war.</returns>
@@ -738,7 +739,7 @@ namespace eZet.EveLib.EveCrestModule {
         //}
 
         /// <summary>
-        /// Returns a list of industry systems and prices
+        ///     Returns a list of industry systems and prices
         /// </summary>
         /// <returns>Task&lt;IndustrySystemCollection&gt;.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -748,7 +749,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a list of industry systems and prices
+        ///     Returns a list of industry systems and prices
         /// </summary>
         /// <returns>IndustrySystemCollection.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -757,9 +758,8 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
 
-
         /// <summary>
-        /// Returns a collection of all industry facilities
+        ///     Returns a collection of all industry facilities
         /// </summary>
         /// <returns>Task&lt;IndustryFacilityCollection&gt;.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -769,7 +769,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Returns a collection of all industry facilities
+        ///     Returns a collection of all industry facilities
         /// </summary>
         /// <returns>IndustryFacilityCollection.</returns>
         [Obsolete(ObsoleteMessage)]
@@ -778,7 +778,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Tries the refresh token asynchronous.
+        ///     Tries the refresh token asynchronous.
         /// </summary>
         /// <param name="e">The e.</param>
         /// <returns>System.Threading.Tasks.Task.</returns>
@@ -790,7 +790,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Puts the asynchronous.
+        ///     Puts the asynchronous.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
@@ -807,7 +807,7 @@ namespace eZet.EveLib.EveCrestModule {
 
 
         /// <summary>
-        /// Deletes the asynchronous.
+        ///     Deletes the asynchronous.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
@@ -822,7 +822,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Posts the asynchronous.
+        ///     Posts the asynchronous.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>System.Threading.Tasks.Task&lt;System.String&gt;.</returns>
@@ -838,14 +838,15 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Performs a request using the request handler.
+        /// Gets the asynchronous.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="relPath">The relative path.</param>
-        /// <returns>Task&lt;T&gt;.</returns>
-        private async Task<T> getAsync<T>(string relPath) where T : class, ICrestResource<T> {
-            T response = null;
-            var uri = new Uri(_host + ApiPath + relPath);
+        /// <param name="url">The path.</param>
+        /// <returns>System.Threading.Tasks.Task&lt;T&gt;.</returns>
+        private async Task<T> getAsync<T>(string url) where T : class, ICrestResource<T> {
+            T response;
+            //url = string.IsNullOrEmpty(url) ? Host : url;
+            var uri = new Uri(url);
             if (Mode == CrestMode.Authenticated) {
                 try {
                     response =
@@ -865,7 +866,7 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
-        /// Creates the query string.
+        ///     Creates the query string.
         /// </summary>
         /// <param name="uriBase">The URI base.</param>
         /// <param name="parameters">The parameters.</param>
