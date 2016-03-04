@@ -62,10 +62,6 @@ namespace eZet.EveLib.Test {
             Assert.IsNotNull(first.AcceptType.Name);
         }
 
-        public void GetHead() {
-            
-        }
-
         [TestMethod]
         public async Task AddAutopilotWaypoint() {
             var c = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character);
