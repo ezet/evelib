@@ -235,6 +235,16 @@ namespace eZet.EveLib.EveCrestModule {
             return response;
         }
 
+   
+        public Task<CrestOptions> QueryOptionsAsync(string uri) {
+            return optionsAsync(uri);
+        }
+
+
+        public CrestOptions QueryOptions(string uri) {
+            return QueryOptionsAsync(uri).Result;
+        }
+
         /// <summary>
         /// Queries the options asynchronous.
         /// </summary>
@@ -840,12 +850,12 @@ namespace eZet.EveLib.EveCrestModule {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
                 return
-                    await RequestHandler.PutRequestAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
+                    await RequestHandler.PutAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
             }
             catch (EveCrestException e) {
                 await tryRefreshTokenAsync(e).ConfigureAwait(false);
                 return
-                    await RequestHandler.PutRequestAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
+                    await RequestHandler.PutAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
             }
         }
 
@@ -857,11 +867,11 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
         private async Task<bool> deleteAsync(IEditableEntity entity) {
             try {
-                return await RequestHandler.DeleteRequestAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
+                return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
             }
             catch (EveCrestException e) {
                 await tryRefreshTokenAsync(e).ConfigureAwait(false);
-                return await RequestHandler.DeleteRequestAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
+                return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
             }
         }
 
@@ -874,18 +884,23 @@ namespace eZet.EveLib.EveCrestModule {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
                 return
-                    await RequestHandler.PostRequestAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
+                    await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
             }
             catch (EveCrestException e) {
                 await tryRefreshTokenAsync(e).ConfigureAwait(false);
                 return
-                    await RequestHandler.PostRequestAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
+                    await RequestHandler.PostAsync(new Uri(entity.Href), AccessToken, data).ConfigureAwait(false);
             }
         }
 
         private Task<CrestOptions> optionsAsync(string url) {
             var uri = new Uri(url);
-            return RequestHandler.OptionsRequestAsync(uri);
+            return RequestHandler.OptionsAsync(uri);
+        }
+
+        private Task headAsync(string url) {
+            var uri = new Uri(url);
+            return RequestHandler.HeadAsync(uri, AccessToken);
         }
 
         /// <summary>
@@ -901,16 +916,16 @@ namespace eZet.EveLib.EveCrestModule {
             if (Mode == CrestMode.Authenticated) {
                 try {
                     response =
-                        await RequestHandler.GetRequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.GetAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
                 catch (EveCrestException e) {
                     await tryRefreshTokenAsync(e).ConfigureAwait(false);
                     response =
-                        await RequestHandler.GetRequestAsync<T>(uri, AccessToken).ConfigureAwait(false);
+                        await RequestHandler.GetAsync<T>(uri, AccessToken).ConfigureAwait(false);
                 }
             }
             else {
-                response = await RequestHandler.GetRequestAsync<T>(uri, null).ConfigureAwait(false);
+                response = await RequestHandler.GetAsync<T>(uri, null).ConfigureAwait(false);
             }
             response?.Inject(this);
             return response;

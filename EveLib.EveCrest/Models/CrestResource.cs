@@ -73,7 +73,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// </summary>
         /// <returns>Task&lt;CrestOptions&gt;.</returns>
         public Task<CrestOptions> QueryOptionsAsync() {
-            return EveCrest.GetOptionsAsync(Uri.ToString());
+            return EveCrest.QueryOptionsAsync(Uri.ToString());
         }
 
         /// <summary>

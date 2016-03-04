@@ -136,14 +136,15 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public string Charset { get; set; }
 
 
+
         /// <summary>
-        ///     post as an asynchronous operation.
+        /// post as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
         /// <param name="postData">The post data.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
-        public async Task<string> PostRequestAsync(Uri uri, string accessToken, string postData) {
+        public async Task<string> PostAsync(Uri uri, string accessToken, string postData) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = WebRequestMethods.Http.Post;
             request.ContentType = "application/json";
@@ -159,13 +160,13 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        ///     put as an asynchronous operation.
+        /// put as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
         /// <param name="postData">The post data.</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
-        public async Task<bool> PutRequestAsync(Uri uri, string accessToken, string postData) {
+        public async Task<bool> PutAsync(Uri uri, string accessToken, string postData) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = WebRequestMethods.Http.Put;
             request.ContentType = "application/json";
@@ -176,13 +177,15 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return retval;
         }
 
+
+
         /// <summary>
-        ///     delete as an asynchronous operation.
+        /// delete as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
-        public async Task<bool> DeleteRequestAsync(Uri uri, string accessToken) {
+        public async Task<bool> DeleteAsync(Uri uri, string accessToken) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = "DELETE";
             request.ContentType = "application/json";
@@ -193,11 +196,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
 
         /// <summary>
-        /// options request as an asynchronous operation.
+        /// options as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;CrestOptions&gt;.</returns>
-        public async Task<CrestOptions> OptionsRequestAsync(Uri uri) {
+        public async Task<CrestOptions> OptionsAsync(Uri uri) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = "OPTIONS";
             var response = await requestAsync(request, null).ConfigureAwait(false);
@@ -209,13 +212,27 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        ///     get request as an asynchronous operation.
+        /// head as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task.</returns>
+        public async Task HeadAsync(Uri uri, string accessToken) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.Method = WebRequestMethods.Http.Head;
+            var response = await requestAsync(request, accessToken).ConfigureAwait(false);
+            //var content = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+            //var result = Serializer.Deserialize<CrestOptions>(content);
+        }
+
+        /// <summary>
+        /// get as an asynchronous operation.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
-        /// <returns>T.</returns>
-        public async Task<T> GetRequestAsync<T>(Uri uri, string accessToken)
+        /// <returns>Task&lt;T&gt;.</returns>
+        public async Task<T> GetAsync<T>(Uri uri, string accessToken)
             where T : class, ICrestResource<T> {
             string responseContent = null;
 
