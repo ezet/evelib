@@ -18,7 +18,7 @@ using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
     ///     Base class for all CREST resouces.
     /// </summary>
@@ -35,6 +35,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The response headers.</value>
         public WebHeaderCollection ResponseHeaders { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URI.
+        /// </summary>
+        /// <value>The URI.</value>
+        public Uri Uri { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is from cache.
@@ -60,6 +66,22 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <param name="crest">The crest.</param>
         public virtual void Inject(EveCrest crest) {
             EveCrest = crest;
+        }
+
+        /// <summary>
+        /// Gets the options asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
+        public Task<CrestOptions> QueryOptionsAsync() {
+            return EveCrest.GetOptionsAsync(Uri.ToString());
+        }
+
+        /// <summary>
+        /// Gets the options.
+        /// </summary>
+        /// <returns>CrestOptions.</returns>
+        public CrestOptions QueryOptions() {
+            return QueryOptionsAsync().Result;
         }
 
         /// <summary>

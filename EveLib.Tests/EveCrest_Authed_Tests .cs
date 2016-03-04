@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
+using eZet.EveLib.EveCrestModule.Models.Links;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // ReSharper disable UnusedVariable
@@ -46,8 +47,20 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task GetIncursions_NoErrors() {
-            var incursionCollection = await (await crest.GetRootAsync()).QueryAsync(r => r.Incursions);
+        public async Task GetOptions() {
+            var root = await crest.GetRootAsync();
+            var options = await crest.QueryOptionsAsync(root.Alliances);
+            options = await root.QueryOptionsAsync();
+            options = root.Query(r => r.Alliances).QueryOptions();
+            options = await crest.QueryOptionsAsync(root.Query(r => r.Constellations).Items.First());
+
+            Assert.IsTrue(options.Representations.Any());
+            var first = options.Representations.First();
+            Assert.IsNotNull(first.AcceptType);
+            Assert.IsNotNull(first.Verb);
+            Assert.AreNotEqual(0, first.Version);
+            Assert.IsNotNull(first.AcceptType.jsonDumpOfStructure);
+            Assert.IsNotNull(first.AcceptType.Name);
         }
 
         [TestMethod]

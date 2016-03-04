@@ -69,6 +69,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         }
 
         /// <summary>
+        /// Performs an implicit conversion from <see cref="LinkedEntity{T}"/> to <see cref="Href{T}"/>.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator Href<T>(LinkedEntity<T> s) {
+            return s.Href;
+        }
+
+        /// <summary>
         ///     Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>

@@ -191,6 +191,12 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return retval;
         }
 
+
+        /// <summary>
+        /// options request as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
         public async Task<CrestOptions> OptionsRequestAsync(Uri uri) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = "OPTIONS";
@@ -198,6 +204,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             var content = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
             var result = Serializer.Deserialize<CrestOptions>(content);
             result.ResponseHeaders = response.Headers;
+            result.Uri = uri;
             return result;
         }
 
@@ -238,6 +245,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 await Cache.StoreAsync(uri, getCacheExpirationTime(header), responseContent).ConfigureAwait(false);
             result = Serializer.Deserialize<T>(responseContent);
             result.ResponseHeaders = header;
+            result.Uri = uri;
             return result;
         }
 

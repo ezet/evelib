@@ -16,7 +16,6 @@ using System;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveCrestModule.Models;
-using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// <summary>
@@ -106,4 +105,5 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         Task<bool> DeleteRequestAsync(Uri uri, string accessToken);
 
         Task<CrestOptions> OptionsRequestAsync(Uri uri);
+    }
 }

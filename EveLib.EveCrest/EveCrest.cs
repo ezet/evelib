@@ -236,6 +236,46 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
         /// <summary>
+        /// Queries the options asynchronous.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="href">The href.</param>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
+        public Task<CrestOptions> QueryOptionsAsync<T>(Href<T> href) {
+            return optionsAsync(href.Uri);
+        }
+
+        /// <summary>
+        /// Queries the options.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="href">The href.</param>
+        /// <returns>CrestOptions.</returns>
+        public CrestOptions QueryOptions<T>(Href<T> href) {
+            return QueryOptionsAsync(href).Result;
+        }
+
+        /// <summary>
+        /// Queries the options asynchronous.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
+        public Task<CrestOptions> QueryOptionsAsync<T>(LinkedEntity<T> entity) {
+            return optionsAsync(entity.Href.Uri);
+        }
+
+        /// <summary>
+        /// Queries the options.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <returns>CrestOptions.</returns>
+        public CrestOptions QueryOptions<T>(LinkedEntity<T> entity) {
+            return QueryOptionsAsync(entity).Result;
+        }
+
+        /// <summary>
         ///     Loads the image asynchronous.
         /// </summary>
         /// <param name="link">The image link.</param>

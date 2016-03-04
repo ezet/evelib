@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using eZet.EveLib.EveCrestModule.Models;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule {
