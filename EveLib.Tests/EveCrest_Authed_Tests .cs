@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
-using eZet.EveLib.EveCrestModule.Models.Links;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // ReSharper disable UnusedVariable
@@ -61,6 +60,10 @@ namespace eZet.EveLib.Test {
             Assert.AreNotEqual(0, first.Version);
             Assert.IsNotNull(first.AcceptType.jsonDumpOfStructure);
             Assert.IsNotNull(first.AcceptType.Name);
+        }
+
+        public async Task GetHead() {
+            
         }
 
         [TestMethod]
