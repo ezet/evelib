@@ -31,20 +31,20 @@ namespace eZet.EveLib.Core.Cache {
         /// <param name="cacheRegisterName">Name of the cache register.</param>
         public EveLibFileCache(string cachePath, string cacheRegisterName) {
             CachePath = cachePath;
-            CacheRegister = CachePath + Config.Separator + cacheRegisterName;
+            CacheRegister = Path.Combine(CachePath, cacheRegisterName);
         }
 
         /// <summary>
         ///     Gets the cache path.
         /// </summary>
         /// <value>The cache path.</value>
-        public string CachePath { get; private set; }
+        public string CachePath { get; }
 
         /// <summary>
         ///     Gets the cache register.
         /// </summary>
         /// <value>The cache register.</value>
-        public string CacheRegister { get; private set; }
+        public string CacheRegister { get; }
 
         /// <summary>
         ///     Stores data to the cache
@@ -58,15 +58,15 @@ namespace eZet.EveLib.Core.Cache {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Uri: {0}", uri);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Cache Expiry: {0}", cacheTime);
 
-            string key = getHash(uri);
+            var key = getHash(uri);
             _register[key] = cacheTime;
             if (!Directory.Exists(CachePath)) {
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Creating cache directory");
                 Directory.CreateDirectory(CachePath);
             }
             try {
-                Task cacheTask = writeCacheDataToDiskAsync(uri, data);
-                Task registerTask = writeRegisterToDiskAsync();
+                var cacheTask = writeCacheDataToDiskAsync(uri, data);
+                var registerTask = writeRegisterToDiskAsync();
                 await Task.WhenAll(cacheTask, registerTask).ConfigureAwait(false);
             }
             catch (Exception) {
@@ -85,18 +85,18 @@ namespace eZet.EveLib.Core.Cache {
             await initAsync().ConfigureAwait(false);
             string data = null;
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterLookupUri: {0}", uri);
-            string hash = getHash(uri);
+            var hash = getHash(uri);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterLookupHash: {0}", hash);
             DateTime cacheExpirationTime;
-            bool found = _register.TryGetValue(hash, out cacheExpirationTime);
+            var found = _register.TryGetValue(hash, out cacheExpirationTime);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterHit: {0}", found);
             if (found) {
-                bool validCache = DateTime.UtcNow < cacheExpirationTime;
+                var validCache = DateTime.UtcNow < cacheExpirationTime;
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheIsValid: {0} ({1})", validCache,
                     cacheExpirationTime);
                 if (validCache) {
-                    string filePath = CachePath + Config.Separator + hash;
-                    bool fileExist = File.Exists(filePath);
+                    var filePath = CachePath + Config.Separator + hash;
+                    var fileExist = File.Exists(filePath);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheDataFound: {0}", fileExist);
                     if (File.Exists(filePath)) {
                         try {
@@ -127,7 +127,7 @@ namespace eZet.EveLib.Core.Cache {
         /// <param name="value"></param>
         /// <returns></returns>
         public virtual bool TryGetExpirationDate(Uri uri, out DateTime value) {
-            string key = getHash(uri);
+            var key = getHash(uri);
             return _register.TryGetValue(key, out value);
         }
 
@@ -151,8 +151,8 @@ namespace eZet.EveLib.Core.Cache {
 
         private static string getHash(Uri uri) {
             //return uri.AbsoluteUri;
-            string fileName = uri.AbsoluteUri;
-            byte[] hash = Sha1.ComputeHash(Encoding.Unicode.GetBytes(fileName));
+            var fileName = uri.AbsoluteUri;
+            var hash = Sha1.ComputeHash(Encoding.Unicode.GetBytes(fileName));
             return BitConverter.ToString(hash).Replace("-", "");
         }
 
@@ -171,12 +171,12 @@ namespace eZet.EveLib.Core.Cache {
             }
             try {
                 // read all lines
-                string[] data = await
+                var data = await
                     AsyncFileUtilities.ReadAllLinesAsync(CacheRegister).ConfigureAwait(false);
-                foreach (string entry in data) {
-                    string[] split = entry.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
-                    DateTime cacheValidUntil = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
-                    string fileName = split[0];
+                foreach (var entry in data) {
+                    var split = entry.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                    var cacheValidUntil = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
+                    var fileName = split[0];
                     // if cache is still valid we register it
                     if (cacheValidUntil > DateTime.UtcNow)
                         _register[fileName] = cacheValidUntil;
@@ -188,9 +188,9 @@ namespace eZet.EveLib.Core.Cache {
                     }
                 }
                 // delete all files that aren't listed in the register file
-                IEnumerable<string> files = Directory.EnumerateFiles(CachePath);
+                var files = Directory.EnumerateFiles(CachePath);
                 foreach (
-                    string file in
+                    var file in
                         files.Where(
                             file =>
                                 !_register.ContainsKey(file.Replace(CachePath + Config.Separator, "")) &&
