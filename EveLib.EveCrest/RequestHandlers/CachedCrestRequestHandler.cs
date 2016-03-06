@@ -13,7 +13,6 @@ using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models;
-using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
 
@@ -322,6 +321,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                         response.StatusCode == HttpStatusCode.BadGateway)
                         throw new EveCrestException(responseContent, e);
                     var error = Serializer.Deserialize<CrestError>(responseContent);
+                    if (error == null) throw new EveCrestException("Undefined error", e);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
                         "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
                         error.RefId);

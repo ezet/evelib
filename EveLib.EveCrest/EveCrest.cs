@@ -235,7 +235,16 @@ namespace eZet.EveLib.EveCrestModule {
             return response;
         }
 
-   
+        public Task QueryHeadAsync(string uri) {
+            return headAsync(uri);
+        }
+
+
+        public void QueryHead(string uri) {
+            QueryHeadAsync(uri).Wait();
+        }
+
+
         public Task<CrestOptions> QueryOptionsAsync(string uri) {
             return optionsAsync(uri);
         }
@@ -840,12 +849,11 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
 
-
         /// <summary>
-        ///     Puts the asynchronous.
+        /// put as an asynchronous operation.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
         private async Task<bool> putAsync(IEditableEntity entity) {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
@@ -860,11 +868,12 @@ namespace eZet.EveLib.EveCrestModule {
         }
 
 
+
         /// <summary>
-        ///     Deletes the asynchronous.
+        /// delete as an asynchronous operation.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        /// <returns>System.Threading.Tasks.Task&lt;System.Boolean&gt;.</returns>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
         private async Task<bool> deleteAsync(IEditableEntity entity) {
             try {
                 return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
@@ -875,11 +884,12 @@ namespace eZet.EveLib.EveCrestModule {
             }
         }
 
+
         /// <summary>
-        ///     Posts the asynchronous.
+        /// post as an asynchronous operation.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        /// <returns>System.Threading.Tasks.Task&lt;System.String&gt;.</returns>
+        /// <returns>Task&lt;System.String&gt;.</returns>
         private async Task<string> postAsync(IEditableEntity entity) {
             var data = RequestHandler.Serializer.Serialize(entity);
             try {
@@ -893,14 +903,49 @@ namespace eZet.EveLib.EveCrestModule {
             }
         }
 
-        private Task<CrestOptions> optionsAsync(string url) {
+        /// <summary>
+        /// Optionses the asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
+        private async Task<CrestOptions> optionsAsync(string url) {
             var uri = new Uri(url);
-            return RequestHandler.OptionsAsync(uri);
+            CrestOptions response;
+            if (Mode == CrestMode.Authenticated) {
+                try {
+                    response =
+                        await RequestHandler.OptionsAsync(uri).ConfigureAwait(false);
+                }
+                catch (EveCrestException e) {
+                    await tryRefreshTokenAsync(e).ConfigureAwait(false);
+                    response =
+                        await RequestHandler.OptionsAsync(uri).ConfigureAwait(false);
+                }
+            }
+            else {
+                response = await RequestHandler.OptionsAsync(uri).ConfigureAwait(false);
+            }
+            response?.Inject(this);
+            return response;
         }
 
-        private Task headAsync(string url) {
+        private async Task headAsync(string url) {
             var uri = new Uri(url);
-            return RequestHandler.HeadAsync(uri, AccessToken);
+            if (Mode == CrestMode.Authenticated) {
+                try {
+                    
+                        await RequestHandler.HeadAsync(uri, AccessToken).ConfigureAwait(false);
+                }
+                catch (EveCrestException e) {
+                    await tryRefreshTokenAsync(e).ConfigureAwait(false);
+                    
+                        await RequestHandler.HeadAsync(uri, AccessToken).ConfigureAwait(false);
+                }
+            }
+            else {
+                await RequestHandler.HeadAsync(uri, null).ConfigureAwait(false);
+            }
+            //response?.Inject(this);
         }
 
         /// <summary>

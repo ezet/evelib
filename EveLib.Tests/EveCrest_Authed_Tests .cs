@@ -63,6 +63,12 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetHead() {
+            var root = await crest.GetRootAsync();
+            await crest.QueryHeadAsync(root.Alliances.Uri);
+        }
+
+        [TestMethod]
         public async Task AddAutopilotWaypoint() {
             var c = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character);
             var wp = c.Waypoints.Create();
