@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 
@@ -18,11 +19,11 @@ namespace eZet.EveLib.Core.Cache {
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 
-        private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
+        private readonly TraceSource _trace = new TraceSource("EveLib");
 
-        private object _initLock = new object();
         private bool _isInitialized;
 
+        private readonly ReaderWriterLockSlim _registerLock = new ReaderWriterLockSlim();
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveLibFileCache" /> class.
@@ -95,15 +96,14 @@ namespace eZet.EveLib.Core.Cache {
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheIsValid: {0} ({1})", validCache,
                     cacheExpirationTime);
                 if (validCache) {
-                    var filePath = CachePath + Config.Separator + hash;
+                    var filePath = Path.Combine(CachePath , hash);
                     var fileExist = File.Exists(filePath);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheDataFound: {0}", fileExist);
                     if (File.Exists(filePath)) {
                         try {
                             data =
                                 await
-                                    AsyncFileUtilities.ReadAllTextAsync(CachePath + Config.Separator +
-                                                                        getHash(uri))
+                                    AsyncFileUtilities.ReadAllTextAsync(Path.Combine(CachePath, getHash(uri)))
                                         .ConfigureAwait(false);
                             _trace.TraceEvent(TraceEventType.Verbose, 0,
                                 "EveLibFileCache:Data successfully loaded from cache: {0}",
@@ -131,6 +131,10 @@ namespace eZet.EveLib.Core.Cache {
             return _register.TryGetValue(key, out value);
         }
 
+        /// <summary>
+        /// initialize as an asynchronous operation.
+        /// </summary>
+        /// <returns>Task.</returns>
         private async Task initAsync() {
             if (_isInitialized) return;
             await loadRegisterFromDiskAsync().ConfigureAwait(false);
@@ -139,13 +143,16 @@ namespace eZet.EveLib.Core.Cache {
 
         private Task writeRegisterToDiskAsync() {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache register to disk");
-            return AsyncFileUtilities.WriteAllLinesAsync(CacheRegister,
+            _registerLock.EnterWriteLock();
+            var task = AsyncFileUtilities.WriteAllLinesAsync(CacheRegister,
                 _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
+            _registerLock.ExitWriteLock();
+            return task;
         }
 
         private Task writeCacheDataToDiskAsync(Uri uri, string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache data to disk: {0}", uri);
-            return AsyncFileUtilities.WriteAllTextAsync(CachePath + Config.Separator + getHash(uri),
+            return AsyncFileUtilities.WriteAllTextAsync(Path.Combine(CachePath, getHash(uri)),
                 data);
         }
 
@@ -171,8 +178,10 @@ namespace eZet.EveLib.Core.Cache {
             }
             try {
                 // read all lines
+                _registerLock.EnterReadLock();
                 var data = await
                     AsyncFileUtilities.ReadAllLinesAsync(CacheRegister).ConfigureAwait(false);
+                _registerLock.ExitReadLock();
                 foreach (var entry in data) {
                     var split = entry.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
                     var cacheValidUntil = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
@@ -182,8 +191,9 @@ namespace eZet.EveLib.Core.Cache {
                         _register[fileName] = cacheValidUntil;
                     else {
                         // if cache is out of date we delete the data
-                        if (File.Exists(CachePath + Config.Separator + fileName)) {
-                            File.Delete(CachePath + Config.Separator + fileName);
+                        var file = Path.Combine(CachePath, fileName);
+                        if (File.Exists(file)) {
+                            File.Delete(file);
                         }
                     }
                 }
