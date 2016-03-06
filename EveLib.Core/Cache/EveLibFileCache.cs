@@ -141,13 +141,17 @@ namespace eZet.EveLib.Core.Cache {
             _isInitialized = true;
         }
 
-        private Task writeRegisterToDiskAsync() {
+        private async Task writeRegisterToDiskAsync() {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache register to disk");
             _registerLock.EnterWriteLock();
-            var task = AsyncFileUtilities.WriteAllLinesAsync(CacheRegister,
-                _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)));
-            _registerLock.ExitWriteLock();
-            return task;
+            try {
+                await AsyncFileUtilities.WriteAllLinesAsync(CacheRegister,
+                    _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)))
+                    .ConfigureAwait(false);
+            }
+            finally {
+                if (_registerLock.IsWriteLockHeld) _registerLock.ExitWriteLock();
+            }
         }
 
         private Task writeCacheDataToDiskAsync(Uri uri, string data) {
@@ -176,12 +180,11 @@ namespace eZet.EveLib.Core.Cache {
                     CacheRegister);
                 return;
             }
+            //_registerLock.EnterReadLock();
             try {
                 // read all lines
-                _registerLock.EnterReadLock();
                 var data = await
                     AsyncFileUtilities.ReadAllLinesAsync(CacheRegister).ConfigureAwait(false);
-                _registerLock.ExitReadLock();
                 foreach (var entry in data) {
                     var split = entry.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
                     var cacheValidUntil = DateTime.Parse(split[1], CultureInfo.InvariantCulture);
@@ -210,7 +213,10 @@ namespace eZet.EveLib.Core.Cache {
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheRegisterLoaded");
             }
             catch (Exception) {
-                _trace.TraceEvent(TraceEventType.Error, 0, "EveLibFileCache:Could not load cache register");
+                _trace.TraceEvent(TraceEventType.Warning, 0, "EveLibFileCache:Could not load cache register");
+            }
+            finally {
+                if (_registerLock.IsReadLockHeld) _registerLock.ExitReadLock();
             }
         }
     }

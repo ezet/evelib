@@ -31,12 +31,11 @@ namespace eZet.EveLib.Core {
             }
         }
 
-
         static Config() {
             Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
             if (IsNullOrEmpty(UserAgent))
                 UserAgent = "EveLib";
-            _appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            _appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EveLib");
             SetConfig();
         }
 
