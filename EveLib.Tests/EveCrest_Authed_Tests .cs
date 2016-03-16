@@ -52,7 +52,6 @@ namespace eZet.EveLib.Test {
             options = await root.QueryOptionsAsync();
             options = root.Query(r => r.Alliances).QueryOptions();
             options = await crest.QueryOptionsAsync(root.Query(r => r.Constellations).Items.First());
-
             Assert.IsTrue(options.Representations.Any());
             var first = options.Representations.First();
             Assert.IsNotNull(first.AcceptType);
@@ -60,6 +59,7 @@ namespace eZet.EveLib.Test {
             Assert.AreNotEqual(0, first.Version);
             Assert.IsNotNull(first.AcceptType.jsonDumpOfStructure);
             Assert.IsNotNull(first.AcceptType.Name);
+
         }
 
         [TestMethod]
@@ -163,8 +163,13 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Fittings);
-            var fit = fittings.Items.Single(f => f.Name == "test123123");
-            Console.WriteLine(fit.Name);
+            Assert.IsTrue(fittings.Items.Count > 0);
+            var fit = fittings.Items.First();
+            Assert.IsNotNull(fit.Name);
+            Assert.IsNotNull(fit.Description);
+            Assert.AreNotEqual(0, fit.FittingId);
+            Assert.IsTrue(fit.Items.Count > 0);
+            Assert.IsNotNull(fit.Ship);
         }
 
         [TestMethod]

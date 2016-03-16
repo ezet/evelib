@@ -37,7 +37,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         public WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
-        /// Gets or sets the URI.
+        ///     Gets or sets the URI.
         /// </summary>
         /// <value>The URI.</value>
         public Uri Uri { get; set; }
@@ -69,7 +69,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Gets the options asynchronous.
+        ///     Gets the options asynchronous.
         /// </summary>
         /// <returns>Task&lt;CrestOptions&gt;.</returns>
         public Task<CrestOptions> QueryOptionsAsync() {
@@ -77,7 +77,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Gets the options.
+        ///     Gets the options.
         /// </summary>
         /// <returns>CrestOptions.</returns>
         public CrestOptions QueryOptions() {

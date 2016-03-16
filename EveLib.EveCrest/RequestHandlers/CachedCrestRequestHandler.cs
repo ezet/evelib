@@ -20,7 +20,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
-    public class CachedCrestRequestHandler : ICachedCrestRequestHandler {
+    public class CachedCrestRequestHandler : ICachedCrestRequestHandler, IDisposable {
         /// <summary>
         ///     The default public max concurrent requests
         /// </summary>
@@ -135,9 +135,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         public string Charset { get; set; }
 
 
-
         /// <summary>
-        /// post as an asynchronous operation.
+        ///     post as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
@@ -159,7 +158,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        /// put as an asynchronous operation.
+        ///     put as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
@@ -177,9 +176,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
 
-
         /// <summary>
-        /// delete as an asynchronous operation.
+        ///     delete as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
@@ -195,7 +193,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
 
         /// <summary>
-        /// options as an asynchronous operation.
+        ///     options as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;CrestOptions&gt;.</returns>
@@ -211,21 +209,22 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         }
 
         /// <summary>
-        /// head as an asynchronous operation.
+        ///     head as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
         /// <returns>Task.</returns>
-        public async Task HeadAsync(Uri uri, string accessToken) {
+        public async Task<WebHeaderCollection> HeadAsync(Uri uri, string accessToken) {
             var request = HttpRequestHelper.CreateRequest(uri);
             request.Method = WebRequestMethods.Http.Head;
             var response = await requestAsync(request, accessToken).ConfigureAwait(false);
+            return response.Headers;
             //var content = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
             //var result = Serializer.Deserialize<CrestOptions>(content);
         }
 
         /// <summary>
-        /// get as an asynchronous operation.
+        ///     get as an asynchronous operation.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
@@ -336,6 +335,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return response;
         }
 
+/*
         /// <summary>
         ///     Throws the crest exception.
         /// </summary>
@@ -350,7 +350,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                 error.RefId);
             throw new EveCrestException(error.Message, null, error.Key, error.ExceptionType, error.RefId);
         }
-
+*/
 
         /// <summary>
         ///     Gets the cache expiration time.
@@ -363,6 +363,24 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             var str = cache.Substring(cache.IndexOf('=') + 1);
             var sec = int.Parse(str);
             return DateTime.UtcNow.AddSeconds(sec);
+        }
+
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose() {
+            Dispose(true);
+             GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="finalize"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool finalize) {
+            _authedPool.Dispose();
+            _publicPool.Dispose();
         }
     }
 }

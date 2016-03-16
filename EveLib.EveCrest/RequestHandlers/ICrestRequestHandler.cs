@@ -13,14 +13,14 @@
 // ***********************************************************************
 
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveCrestModule.Models;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
-
     /// <summary>
-    /// Interface ICrestRequestHandler
+    ///     Interface ICrestRequestHandler
     /// </summary>
     public interface ICrestRequestHandler {
         /// <summary>
@@ -36,21 +36,21 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
 
         /// <summary>
-        /// Gets or sets the serializer.
+        ///     Gets or sets the serializer.
         /// </summary>
         /// <value>The serializer.</value>
         ISerializer Serializer { get; set; }
 
 
         /// <summary>
-        /// Gets or sets the public maximum concurrent requests.
+        ///     Gets or sets the public maximum concurrent requests.
         /// </summary>
         /// <value>The public maximum concurrent requests.</value>
         int PublicMaxConcurrentRequests { get; set; }
 
 
         /// <summary>
-        /// Gets or sets the authed maximum concurrent requests.
+        ///     Gets or sets the authed maximum concurrent requests.
         /// </summary>
         /// <value>The authed maximum concurrent requests.</value>
         int AuthedMaxConcurrentRequests { get; set; }
@@ -74,9 +74,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         string Charset { get; set; }
 
 
-
         /// <summary>
-        /// Gets the asynchronous.
+        ///     Gets the asynchronous.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
@@ -85,9 +84,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         Task<T> GetAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
 
 
-
         /// <summary>
-        /// Posts the asynchronous.
+        ///     Posts the asynchronous.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accesstoken">The accesstoken.</param>
@@ -96,9 +94,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         Task<string> PostAsync(Uri uri, string accesstoken, string postData);
 
 
-
         /// <summary>
-        /// Puts the asynchronous.
+        ///     Puts the asynchronous.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accesstoken">The accesstoken.</param>
@@ -107,9 +104,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         Task<bool> PutAsync(Uri uri, string accesstoken, string postData);
 
 
-
         /// <summary>
-        /// Deletes the asynchronous.
+        ///     Deletes the asynchronous.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
@@ -117,9 +113,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         Task<bool> DeleteAsync(Uri uri, string accessToken);
 
 
-
         /// <summary>
-        /// Optionses the asynchronous.
+        ///     Optionses the asynchronous.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>Task&lt;CrestOptions&gt;.</returns>
@@ -127,11 +122,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
 
         /// <summary>
-        /// Heads the asynchronous.
+        ///     Heads the asynchronous.
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <param name="accessToken">The access token.</param>
         /// <returns>Task.</returns>
-        Task HeadAsync(Uri uri, string accessToken);
+        Task<WebHeaderCollection> HeadAsync(Uri uri, string accessToken);
     }
 }

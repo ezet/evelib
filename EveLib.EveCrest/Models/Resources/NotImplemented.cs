@@ -15,7 +15,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         [OnDeserialized]
-        internal void OnDeserializedMethod(StreamingContext context) {
+        private void OnDeserializedMethod(StreamingContext context) {
             throw new ResourceNotSupportedException();
         }
     }
