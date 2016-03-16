@@ -11,7 +11,7 @@
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveXml_v3.0.5</releaseNotes>
+    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveXml_v3.0.6</releaseNotes>
     <tags>EveLib EveXml API EveOnline Eve Online</tags>
   </metadata>
 </package>
