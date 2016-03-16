@@ -69,7 +69,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The contacts.</value>
         [DataMember(Name = "contacts")]
-        public Href<ContactCollection> Contacts { get; set; }
+        public WritableHref<ContactCollection, ContactCollection.ContactItem> Contacts { get; set; }
 
         /// <summary>
         ///     Gets or sets the corporation.
@@ -97,7 +97,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The fittings.</value>
         [DataMember(Name = "fittings")]
-        public Href<FittingCollection> Fittings { get; set; }
+        public WritableHref<FittingCollection, FittingCollection.Fitting> Fittings { get; set; }
 
         /// <summary>
         ///     Gets or sets the gender.
@@ -190,6 +190,18 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The waypoints.</value>
         [DataMember(Name = "waypoints")]
-        public Href<NotImplemented> Waypoints { get; set; }
+        public WritableHref<string, AutopilotWaypoint> Waypoints { get; set; }
+
+
+        /// <summary>
+        ///     Injects the specified instance.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        public override void Inject(EveCrest instance) {
+            base.Inject(instance);
+            Contacts.EveCrest = instance;
+            Fittings.EveCrest = instance;
+            Waypoints.EveCrest = instance;
+        }
     }
 }

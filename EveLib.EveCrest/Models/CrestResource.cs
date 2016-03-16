@@ -4,9 +4,9 @@
 // Created          : 12-16-2014
 //
 // Last Modified By : Lars Kristian
-// Last Modified On : 12-17-2014
+// Last Modified On : 03-01-2016
 // ***********************************************************************
-// <copyright file="CrestResource.cs" company="">
+// <copyright file="CrestResource.cs" company="Lars Kristian Dahl">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -18,7 +18,7 @@ using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
     ///     Base class for all CREST resouces.
     /// </summary>
@@ -37,6 +37,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
+        ///     Gets or sets the URI.
+        /// </summary>
+        /// <value>The URI.</value>
+        public Uri Uri { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether this instance is from cache.
         /// </summary>
         /// <value><c>true</c> if this instance is from cache; otherwise, <c>false</c>.</value>
@@ -53,6 +59,30 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The version.</value>
         public virtual string ContentType { get; protected set; }
+
+        /// <summary>
+        ///     Injects the specified crest.
+        /// </summary>
+        /// <param name="crest">The crest.</param>
+        public virtual void Inject(EveCrest crest) {
+            EveCrest = crest;
+        }
+
+        /// <summary>
+        ///     Gets the options asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
+        public Task<CrestOptions> QueryOptionsAsync() {
+            return EveCrest.QueryOptionsAsync(Uri.ToString());
+        }
+
+        /// <summary>
+        ///     Gets the options.
+        /// </summary>
+        /// <returns>CrestOptions.</returns>
+        public CrestOptions QueryOptions() {
+            return QueryOptionsAsync().Result;
+        }
 
         /// <summary>
         ///     Queries the resource asynchronously.

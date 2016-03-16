@@ -17,5 +17,16 @@ namespace eZet.EveLib.EveMarketDataModule {
             var dict = JsonConvert.DeserializeObject<Dictionary<string, T>>(data);
             return dict.First().Value;
         }
+
+        /// <summary>
+        /// Serializes the specified entity.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public string Serialize<T>(T entity) {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.Util {
@@ -22,12 +23,11 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="uri">URI to create request for</param>
         /// <returns>The HttpWebRequest</returns>
         public static HttpWebRequest CreateRequest(Uri uri) {
-            HttpWebRequest request = WebRequest.CreateHttp(uri);
-            request.Proxy = null;
+            var request = WebRequest.CreateHttp(uri);
             request.UserAgent = Config.UserAgent;
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.GZip;
             request.ContentType = ContentType;
-            return request;
+                return request;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="uri">URI to request</param>
         /// <returns>The response content</returns>
         public static Task<string> RequestAsync(Uri uri) {
-            HttpWebRequest request = CreateRequest(uri);
+            var request = CreateRequest(uri);
             return GetResponseContentAsync(request);
         }
 
@@ -47,7 +47,7 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="postData"></param>
         /// <returns>The response content</returns>
         public static Task<string> PostRequestAsync(Uri uri, string postData) {
-            HttpWebRequest request = CreateRequest(uri);
+            var request = CreateRequest(uri);
             request.Method = "POST";
             AddPostData(request, postData);
             return GetResponseContentAsync(request);
@@ -59,10 +59,15 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="request">The request.</param>
         /// <param name="postData">The post data.</param>
         public static void AddPostData(HttpWebRequest request, string postData) {
-            request.ContentLength = postData.Length;
-            using (var writer = new StreamWriter(request.GetRequestStream())) {
-                writer.Write(postData);
+            if (postData == null) return;
+            var data = Encoding.UTF8.GetBytes(postData);
+            request.ContentLength = data.Length;
+            using (var dataStream = request.GetRequestStream()) {
+                dataStream.Write(data, 0, data.Length);
             }
+            //using (var writer = new StreamWriter(request.GetRequestStream())) {
+            //    writer.Write(postData);
+            //}
         }
 
         /// <summary>
@@ -98,7 +103,7 @@ namespace eZet.EveLib.Core.Util {
         /// <returns></returns>
         public static async Task<string> GetResponseContentAsync(HttpWebResponse response) {
             string data;
-            Stream responseStream = response.GetResponseStream();
+            var responseStream = response.GetResponseStream();
             if (responseStream == null) return null;
             using (var reader = new StreamReader(responseStream)) {
                 data = await reader.ReadToEndAsync().ConfigureAwait(false);
@@ -113,9 +118,9 @@ namespace eZet.EveLib.Core.Util {
         /// <returns></returns>
         public static async Task<string> GetResponseContentAsync(HttpWebRequest request) {
             Trace.TraceEvent(TraceEventType.Start, 0, "Starting request: " + request.RequestUri);
-            string data = "";
+            var data = "";
             using (HttpWebResponse response = await GetResponseAsync(request).ConfigureAwait(false)) {
-                Stream responseStream = response.GetResponseStream();
+                var responseStream = response.GetResponseStream();
                 if (responseStream == null) return data;
                 using (var reader = new StreamReader(responseStream)) {
                     data = await reader.ReadToEndAsync().ConfigureAwait(false);

@@ -1,7 +1,22 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EveLib.EveCrest
+// Author           : larsd
+// Created          : 08-09-2015
+//
+// Last Modified By : larsd
+// Last Modified On : 03-03-2016
+// ***********************************************************************
+// <copyright file="ICrestRequestHandler.cs" company="Lars Kristian Dahl">
+//     Copyright ©  2016
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
+using System.Net;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
-using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// <summary>
@@ -19,22 +34,25 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// </summary>
         bool ThrowOnMissingContentType { get; set; }
 
+
         /// <summary>
-        ///     Gets or sets the serializer used to deserialize CREST errors.
+        ///     Gets or sets the serializer.
         /// </summary>
         /// <value>The serializer.</value>
         ISerializer Serializer { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the size of the public burst.
-        /// </summary>
-        /// <value>The size of the public burst.</value>
-        int PublicMaxConcurrentRequests { get; set; }
 
         /// <summary>
-        ///     Gets or sets the size of the authed burst.
+        ///     Gets or sets the public maximum concurrent requests.
         /// </summary>
-        /// <value>The size of the authed burst.</value>
+        /// <value>The public maximum concurrent requests.</value>
+        int PublicMaxConcurrentRequests { get; set; }
+
+
+        /// <summary>
+        ///     Gets or sets the authed maximum concurrent requests.
+        /// </summary>
+        /// <value>The authed maximum concurrent requests.</value>
         int AuthedMaxConcurrentRequests { get; set; }
 
         /// <summary>
@@ -55,13 +73,60 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <value>The charset.</value>
         string Charset { get; set; }
 
+
         /// <summary>
-        ///     Requests a URI asynchronously, and returns the response content.
+        ///     Gets the asynchronous.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uri">The URI.</param>
-        /// <param name="accessToken">The CREST access accessToken</param>
-        /// <returns>T.</returns>
-        Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;T&gt;.</returns>
+        Task<T> GetAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T>;
+
+
+        /// <summary>
+        ///     Posts the asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accesstoken">The accesstoken.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        Task<string> PostAsync(Uri uri, string accesstoken, string postData);
+
+
+        /// <summary>
+        ///     Puts the asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accesstoken">The accesstoken.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        Task<bool> PutAsync(Uri uri, string accesstoken, string postData);
+
+
+        /// <summary>
+        ///     Deletes the asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        Task<bool> DeleteAsync(Uri uri, string accessToken);
+
+
+        /// <summary>
+        ///     Optionses the asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
+        Task<CrestOptions> OptionsAsync(Uri uri);
+
+
+        /// <summary>
+        ///     Heads the asynchronous.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task.</returns>
+        Task<WebHeaderCollection> HeadAsync(Uri uri, string accessToken);
     }
 }

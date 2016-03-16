@@ -12,7 +12,7 @@ using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveCrestModule.Exceptions;
-using eZet.EveLib.EveCrestModule.Models.Resources;
+using eZet.EveLib.EveCrestModule.Models;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
 
@@ -20,11 +20,11 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// <summary>
     ///     Performs requests on the Eve Online CREST API.
     /// </summary>
-    public class CachedCrestRequestHandler : ICachedCrestRequestHandler {
+    public class CachedCrestRequestHandler : ICachedCrestRequestHandler, IDisposable {
         /// <summary>
         ///     The default public max concurrent requests
         /// </summary>
-        public const int DefaultPublicMaxConcurrentRequests = 20;
+        public const int DefaultPublicMaxConcurrentRequests = 30;
 
         /// <summary>
         ///     The default authed max concurrent requests
@@ -43,9 +43,9 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
 
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
         private int _authedMaxConcurrentRequests;
-        private Semaphore _authedPool;
+        private SemaphoreSlim _authedPool;
         private int _publicMaxConcurrentRequests;
-        private Semaphore _publicPool;
+        private SemaphoreSlim _publicPool;
 
         /// <summary>
         ///     Creates a new CachedCrestRequestHandler
@@ -55,8 +55,8 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             Serializer = serializer;
             PublicMaxConcurrentRequests = DefaultPublicMaxConcurrentRequests;
             AuthedMaxConcurrentRequests = DefaultAuthedMaxConcurrentRequests;
-            _publicPool = new Semaphore(PublicMaxConcurrentRequests, PublicMaxConcurrentRequests);
-            _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
+            _publicPool = new SemaphoreSlim(PublicMaxConcurrentRequests, PublicMaxConcurrentRequests);
+            _authedPool = new SemaphoreSlim(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
             UserAgent = Config.UserAgent;
             Charset = DefaultCharset;
             Cache = Config.CacheFactory("EveCrestCache");
@@ -83,7 +83,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             get { return _publicMaxConcurrentRequests; }
             set {
                 _publicMaxConcurrentRequests = value;
-                _publicPool = new Semaphore(value, value);
+                _publicPool = new SemaphoreSlim(value, value);
             }
         }
 
@@ -95,7 +95,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             get { return _authedMaxConcurrentRequests; }
             set {
                 _authedMaxConcurrentRequests = value;
-                _authedPool = new Semaphore(value, value);
+                _authedPool = new SemaphoreSlim(value, value);
             }
         }
 
@@ -134,53 +134,167 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <value>The charset.</value>
         public string Charset { get; set; }
 
+
         /// <summary>
-        ///     Performs a request, and returns the response content.
+        ///     post as an asynchronous operation.
         /// </summary>
-        /// <typeparam name="T">Response type</typeparam>
-        /// <param name="uri">URI to request</param>
-        /// <param name="accessToken">CREST acces token</param>
-        /// <returns>T.</returns>
-        /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
-        /// <exception cref="EveCrestException">
-        ///     Undefined error
-        /// </exception>
-        public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
-            string data = null;
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        public async Task<string> PostAsync(Uri uri, string accessToken, string postData) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.Method = WebRequestMethods.Http.Post;
+            request.ContentType = "application/json";
+            string retval = null;
+            request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+            HttpRequestHelper.AddPostData(request, postData);
+
+            var response = await requestAsync(request, accessToken);
+            if (response.StatusCode == HttpStatusCode.Created) {
+                retval = response.GetResponseHeader("Location");
+            }
+            return retval;
+        }
+
+        /// <summary>
+        ///     put as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <param name="postData">The post data.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        public async Task<bool> PutAsync(Uri uri, string accessToken, string postData) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.Method = WebRequestMethods.Http.Put;
+            request.ContentType = "application/json";
+            request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+            HttpRequestHelper.AddPostData(request, postData);
+            var response = await requestAsync(request, accessToken);
+            var retval = response.StatusCode == HttpStatusCode.OK;
+            return retval;
+        }
+
+
+        /// <summary>
+        ///     delete as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        public async Task<bool> DeleteAsync(Uri uri, string accessToken) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.Method = "DELETE";
+            request.ContentType = "application/json";
+            var response = await requestAsync(request, accessToken);
+            var retval = response.StatusCode == HttpStatusCode.OK;
+            return retval;
+        }
+
+
+        /// <summary>
+        ///     options as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
+        public async Task<CrestOptions> OptionsAsync(Uri uri) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.Method = "OPTIONS";
+            var response = await requestAsync(request, null).ConfigureAwait(false);
+            var content = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+            var result = Serializer.Deserialize<CrestOptions>(content);
+            result.ResponseHeaders = response.Headers;
+            result.Uri = uri;
+            return result;
+        }
+
+        /// <summary>
+        ///     head as an asynchronous operation.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task.</returns>
+        public async Task<WebHeaderCollection> HeadAsync(Uri uri, string accessToken) {
+            var request = HttpRequestHelper.CreateRequest(uri);
+            request.Method = WebRequestMethods.Http.Head;
+            var response = await requestAsync(request, accessToken).ConfigureAwait(false);
+            return response.Headers;
+            //var content = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+            //var result = Serializer.Deserialize<CrestOptions>(content);
+        }
+
+        /// <summary>
+        ///     get as an asynchronous operation.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri">The URI.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;T&gt;.</returns>
+        public async Task<T> GetAsync<T>(Uri uri, string accessToken)
+            where T : class, ICrestResource<T> {
+            string responseContent = null;
+
             if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
-                data = await Cache.LoadAsync(uri).ConfigureAwait(false);
-            var cached = data != null;
+                responseContent = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            var cached = responseContent != null;
             T result;
             if (cached) {
-                result = Serializer.Deserialize<T>(data);
+                result = Serializer.Deserialize<T>(responseContent);
                 result.IsFromCache = true;
                 return result;
             }
             if (CacheLevel == CacheLevel.CacheOnly) return default(T);
+
             // set up request
-            var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
             var request = HttpRequestHelper.CreateRequest(uri);
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType) + ";";
             request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
+            request.Method = WebRequestMethods.Http.Get;
+            _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
+            var response = await requestAsync(request, accessToken).ConfigureAwait(false);
+
+            // handle response
+            var header = response.Headers;
+            responseContent = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
+                await Cache.StoreAsync(uri, getCacheExpirationTime(header), responseContent).ConfigureAwait(false);
+            result = Serializer.Deserialize<T>(responseContent);
+            result.ResponseHeaders = header;
+            result.Uri = uri;
+            return result;
+        }
+
+        /// <summary>
+        ///     request as an asynchronous operation.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns>Task&lt;HttpWebResponse&gt;.</returns>
+        /// <exception cref="DeprecatedResourceException">The CREST resource is deprecated.</exception>
+        /// <exception cref="EveCrestException">
+        ///     Undefined error
+        ///     or
+        ///     or
+        /// </exception>
+        private async Task<HttpWebResponse> requestAsync(HttpWebRequest request, string accessToken) {
+            var mode = (string.IsNullOrEmpty(accessToken)) ? CrestMode.Public : CrestMode.Authenticated;
+            HttpWebResponse response;
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
             if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
-            if (mode == CrestMode.Authenticated) {
-                request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
-                _authedPool.WaitOne();
-            }
-            else {
-                _publicPool.WaitOne();
-            }
-
-            _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
-            WebHeaderCollection header;
             try {
-                var response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
-                header = response.Headers;
+                if (mode == CrestMode.Authenticated) {
+                    request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+                    await _authedPool.WaitAsync().ConfigureAwait(false);
+                }
+                else {
+                    await _publicPool.WaitAsync().ConfigureAwait(false);
+                }
+                response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
+                //if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.Created && response.StatusCode != HttpStatusCode.Accepted) {
+                //    await throwCrestException(response);
+                //}
                 var deprecated = response.GetResponseHeader("X-Deprecated");
-
                 if (!string.IsNullOrEmpty(deprecated)) {
                     _trace.TraceEvent(TraceEventType.Warning, 0,
                         "This CREST resource is deprecated. Please update to the newest EveLib version or notify the developers.");
@@ -188,43 +302,61 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
                         throw new DeprecatedResourceException("The CREST resource is deprecated.", response);
                     }
                 }
-                data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-                // release semaphores
-                if (mode == CrestMode.Authenticated) _authedPool.Release();
-                else _publicPool.Release();
             }
-            catch (WebException e) {
-                // release semaphores
-                if (mode == CrestMode.Authenticated) _authedPool.Release();
-                else _publicPool.Release();
-
+            catch (Exception exception) {
+                var e = exception as WebException;
+                if (e == null) throw;
                 _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
                 if (e.Response == null) {
                     throw new EveCrestException(e.Message, e);
                 }
-                var response = (HttpWebResponse) e.Response;
+                response = (HttpWebResponse) e.Response;
 
                 var responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveCrestException("Undefined error", e);
                 using (var reader = new StreamReader(responseStream)) {
-                    data = reader.ReadToEnd();
+                    var responseContent = reader.ReadToEnd();
                     if (response.StatusCode == HttpStatusCode.InternalServerError ||
-                        response.StatusCode == HttpStatusCode.BadGateway) throw new EveCrestException(data, e);
-                    var error = Serializer.Deserialize<CrestError>(data);
+                        response.StatusCode == HttpStatusCode.BadGateway)
+                        throw new EveCrestException(responseContent, e);
+                    var error = Serializer.Deserialize<CrestError>(responseContent);
+                    if (error == null) throw new EveCrestException("Undefined error", e);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
                         "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
                         error.RefId);
                     throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
                 }
             }
-            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
-                await Cache.StoreAsync(uri, getCacheExpirationTime(header), data).ConfigureAwait(false);
-            result = Serializer.Deserialize<T>(data);
-            result.ResponseHeaders = header;
-            return result;
+            finally {
+                // release semaphores
+                if (mode == CrestMode.Authenticated) _authedPool.Release();
+                else _publicPool.Release();
+            }
+            return response;
         }
 
+/*
+        /// <summary>
+        ///     Throws the crest exception.
+        /// </summary>
+        /// <param name="response">The response.</param>
+        /// <returns>Task.</returns>
+        /// <exception cref="EveCrestException">null</exception>
+        private async Task throwCrestException(HttpWebResponse response) {
+            var responseContent = await HttpRequestHelper.GetResponseContentAsync(response);
+            var error = Serializer.Deserialize<CrestError>(responseContent);
+            _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
+                "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
+                error.RefId);
+            throw new EveCrestException(error.Message, null, error.Key, error.ExceptionType, error.RefId);
+        }
+*/
 
+        /// <summary>
+        ///     Gets the cache expiration time.
+        /// </summary>
+        /// <param name="header">The header.</param>
+        /// <returns>DateTime.</returns>
         private static DateTime getCacheExpirationTime(NameValueCollection header) {
             var cache = header.Get("Cache-Control");
             if (cache == null) return DateTime.UtcNow;
@@ -233,11 +365,22 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             return DateTime.UtcNow.AddSeconds(sec);
         }
 
-        ///// <summary>
-        ///// Gets or sets a value indicating whether [enable cache].
-        ///// </summary>
-        ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
 
-        //public bool EnableCache { get; set; }
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose() {
+            Dispose(true);
+             GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="finalize"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool finalize) {
+            _authedPool.Dispose();
+            _publicPool.Dispose();
+        }
     }
 }

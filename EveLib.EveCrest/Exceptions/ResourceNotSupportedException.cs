@@ -4,6 +4,7 @@ namespace eZet.EveLib.EveCrestModule.Exceptions {
     /// <summary>
     ///     Class ResourceNotSupportedException.
     /// </summary>
+    [Serializable]
     public class ResourceNotSupportedException : Exception {
         private const string Msg =
             "You have discovered a new CREST resource that is not yet supported by this library. Please notify the developer.";

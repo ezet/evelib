@@ -1,0 +1,15 @@
+HTTP/1.1 201 Created
+Server: nginx/1.2.0
+Content-Type: text/plain; charset=utf-8
+Connection: keep-alive
+Access-Control-Max-Age: 1728000
+Date: Sun, 28 Feb 2016 20:23:24 GMT
+Access-Control-Expose-Header: CONTENT-TYPE
+Access-Control-Allow-Methods: GET, PUT, POST, DELETE, HEAD, OPTIONS
+Access-Control-Allow-Origin: *
+Location: https://crest-tq.eveonline.com/characters/157924121/contacts/99000006/
+Access-Control: allow <*>
+Access-Control-Allow-Headers: AUTHORIZATION, X-REQUESTED-WITH, CONTENT-TYPE, ACCEPT
+X-Cache-Status: BYPASS
+Content-Length: 0
+

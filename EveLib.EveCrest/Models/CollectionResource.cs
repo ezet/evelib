@@ -18,15 +18,16 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
+using eZet.EveLib.EveCrestModule.Models.Resources;
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
     ///     Represents a CREST collection response
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TCollection">The type of items in the collection</typeparam>
     [DataContract]
-    public abstract class CollectionResource<T, TCollection> : CrestResource<T>
+    public abstract class CollectionResource<T, TCollection> : CrestResource<T>, ICollectionResource<T, TCollection>
         where T : CollectionResource<T, TCollection>, ICrestResource<T> {
         /// <summary>
         ///     The total number of items in the collection

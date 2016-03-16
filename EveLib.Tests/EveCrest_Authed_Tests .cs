@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,12 +12,6 @@ namespace eZet.EveLib.Test {
     [TestClass]
     public class EveCrest_Authed_Tests {
         private const int AllianceId = 99000006;
-
-        private const int RegionId = 10000002; // The Forge
-
-        private const int TypeId = 34; // Tritanium
-
-        private const string Killmail = "30290604/787fb3714062f1700560d4a83ce32c67640b1797";
 
         private const string RefreshToken =
             "g92QOVphazTOcNhV9hpq22eoo3cK7oBrLOHdBc71cFl76OHZ-3DRAR6bnAn7orMprjJN05pjgWHvCTIWwQ_hVA2";
@@ -34,21 +29,56 @@ namespace eZet.EveLib.Test {
             crest.RequestHandler.ThrowOnDeprecated = true;
             crest.RequestHandler.ThrowOnMissingContentType = true;
             crest.EnableAutomaticPaging = true;
+            crest.RequestHandler.CacheLevel = CacheLevel.BypassCache;
         }
 
         [TestMethod]
-        public async Task RefreshAccessTokenAsync() {
+        public async Task RefreshAccessToken() {
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
             await crest.RefreshAccessTokenAsync();
         }
 
         [TestMethod]
-        public void GetRoot() {
-            var root = crest.GetRoot();
+        public async Task GetRoot() {
+            var root = await crest.GetRootAsync();
             Assert.AreEqual(EveCrest.DefaultAuthHost, root.CrestEndpoint.Uri);
         }
 
+        [TestMethod]
+        public async Task GetOptions() {
+            var root = await crest.GetRootAsync();
+            var options = await crest.QueryOptionsAsync(root.Alliances);
+            options = await root.QueryOptionsAsync();
+            options = root.Query(r => r.Alliances).QueryOptions();
+            options = await crest.QueryOptionsAsync(root.Query(r => r.Constellations).Items.First());
+            Assert.IsTrue(options.Representations.Any());
+            var first = options.Representations.First();
+            Assert.IsNotNull(first.AcceptType);
+            Assert.IsNotNull(first.Verb);
+            Assert.AreNotEqual(0, first.Version);
+            Assert.IsNotNull(first.AcceptType.jsonDumpOfStructure);
+            Assert.IsNotNull(first.AcceptType.Name);
+
+        }
+
+        [TestMethod]
+        public async Task GetHead() {
+            var root = await crest.GetRootAsync();
+            await crest.QueryHeadAsync(root.Alliances.Uri);
+        }
+
+        [TestMethod]
+        public async Task AddAutopilotWaypoint() {
+            var c = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character);
+            var wp = c.Waypoints.Create();
+            var system = crest.GetRoot().Query(r => r.Systems).Items.Single(s => s.Name == "Jita");
+            wp.SolarSystem = system;
+            wp.First = true;
+            wp.ClearOtherWaypoints = true;
+            Assert.IsTrue(await wp.SaveAsync());
+        }
+            
         [TestMethod]
         public async Task GetContacts() {
             var contacts =
@@ -58,6 +88,73 @@ namespace eZet.EveLib.Test {
             Assert.AreNotEqual(0, contacts.Items.Count);
             var first = contacts.Items.First();
             Console.WriteLine(first.Contact.Name);
+            Console.WriteLine(first.ContactType);
+        }
+
+        [TestMethod]
+        public async Task AddCharacterContact() {
+            var character =
+     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
+            var contact = character.Contacts.Create();
+            contact.Contact.Href = "https://crest-tq.eveonline.com/characters/157924121/";
+            contact.Watched = false;
+            contact.Standing = 0;
+            Assert.IsTrue(await contact.SaveAsync());
+        }
+
+        [TestMethod]
+        public async Task UpdateCharacterContact() {
+            var contacts =
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 157924121);
+            contact.Standing = 10;
+            Assert.IsTrue(await contact.SaveAsync());
+        }
+
+        [TestMethod]
+        public async Task DeleteCharacterContact() {
+            var contacts =
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 157924121);
+            Assert.IsTrue(await contact.DeleteAsync());
+        }
+
+        [TestMethod]
+        public async Task AddCorporationContact() {
+            var character =
+                (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character));
+            var contact = character.Contacts.Create();
+            contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
+            contact.Standing = 10;
+            Assert.IsTrue(await contact.SaveAsync());
+            Assert.AreEqual("https://crest-tq.eveonline.com/characters/157924121/contacts/99000006/", contact.Href);
+        }
+
+
+
+        [TestMethod]
+        public async Task UpdateCorpprationContact() {
+            var contacts =
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
+            contact.Standing = 10;
+            Assert.IsTrue(await contact.SaveAsync());
+        }
+
+        [TestMethod]
+        public async Task DeleteCorporationContact() {
+            var contacts =
+                await
+                    (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                        .QueryAsync(r => r.Contacts);
+            var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
+            Assert.IsTrue(await contact.DeleteAsync());
         }
 
         [TestMethod]
@@ -66,7 +163,50 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Fittings);
-            Console.WriteLine(fittings.Items.First().Name);
+            Assert.IsTrue(fittings.Items.Count > 0);
+            var fit = fittings.Items.First();
+            Assert.IsNotNull(fit.Name);
+            Assert.IsNotNull(fit.Description);
+            Assert.AreNotEqual(0, fit.FittingId);
+            Assert.IsTrue(fit.Items.Count > 0);
+            Assert.IsNotNull(fit.Ship);
+        }
+
+        [TestMethod]
+        public async Task AddFitting() {
+            var fit =
+            (await
+                (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                    .QueryAsync(r => r.Fittings)).Items.First();
+            fit.Name = "test123123";
+            fit.Href = "https://crest-tq.eveonline.com/characters/157924121/fittings/";
+            fit.SaveAsNew = true;
+            Assert.IsTrue(await fit.SaveAsync());
+        }
+
+        [TestMethod]
+        public async Task EditFitting() {
+            var fittings =
+    await
+        (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+            .QueryAsync(r => r.Fittings);
+            var fit = fittings.Items.First();
+            Assert.IsTrue(await fit.DeleteAsync());
+            fit.Name = "Test123123";
+            fit.SaveAsNew = true;
+            var result = await fit.SaveAsync();
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task DeleteFitting() {
+            var fittings =
+           await
+               (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
+                   .QueryAsync(r => r.Fittings);
+            var fit = fittings.Items.Last();
+            var result = await fit.DeleteAsync();
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
@@ -99,5 +239,11 @@ namespace eZet.EveLib.Test {
             var eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
             var dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
         }
+
+        [TestMethod]
+        public async Task Time() {
+            var response = await crest.GetRoot().QueryAsync(r => r.Time);
+        }
+
     }
 }

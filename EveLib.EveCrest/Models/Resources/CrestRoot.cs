@@ -366,9 +366,9 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "systems")]
             public Href<IndustrySystemCollection> Systems { get; set; }
 
-            ///// <summary>
-
             ///// Gets or sets the teams.
+
+            ///// <summary>
             ///// </summary>
             ///// <value>The teams.</value>
             //[DataMember(Name = "teams")]

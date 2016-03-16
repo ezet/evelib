@@ -15,7 +15,6 @@
 using System;
 using System.Linq;
 using System.Runtime.Serialization;
-using eZet.EveLib.EveCrestModule.Models.Resources;
 
 namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <summary>
