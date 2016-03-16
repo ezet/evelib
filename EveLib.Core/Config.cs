@@ -22,9 +22,6 @@ namespace eZet.EveLib.Core {
         /// <value>The application data.</value>
         public static string AppData {
             get {
-                if (IsNullOrWhiteSpace(_appData)) {
-                    _appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Separator;
-                }
                 return _appData;
             }
 
@@ -34,11 +31,11 @@ namespace eZet.EveLib.Core {
             }
         }
 
-
         static Config() {
             Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
             if (IsNullOrEmpty(UserAgent))
                 UserAgent = "EveLib";
+            _appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EveLib");
             SetConfig();
         }
 
