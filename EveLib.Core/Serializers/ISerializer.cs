@@ -12,7 +12,7 @@
         T Deserialize<T>(string data);
 
         /// <summary>
-        /// Serializes the specified entity.
+        ///     Serializes the specified entity.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity">The entity.</param>

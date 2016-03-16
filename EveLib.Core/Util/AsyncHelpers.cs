@@ -24,7 +24,7 @@ namespace eZet.EveLib.Core.Util {
         /// </summary>
         /// <param name="task">The task.</param>
         public static void RunSync(Func<Task> task) {
-            SynchronizationContext oldContext = SynchronizationContext.Current;
+            var oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
             synch.Post(async _ => {
@@ -51,10 +51,10 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="task">The task.</param>
         /// <returns>T.</returns>
         public static T RunSync<T>(Func<Task<T>> task) {
-            SynchronizationContext oldContext = SynchronizationContext.Current;
+            var oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
-            T ret = default(T);
+            var ret = default(T);
             synch.Post(async _ => {
                 try {
                     ret = await task();
@@ -75,7 +75,7 @@ namespace eZet.EveLib.Core.Util {
         /// <summary>
         ///     Class ExclusiveSynchronizationContext.
         /// </summary>
-        private class ExclusiveSynchronizationContext : SynchronizationContext {
+        private class ExclusiveSynchronizationContext : SynchronizationContext, IDisposable {
             private readonly Queue<Tuple<SendOrPostCallback, object>> items =
                 new Queue<Tuple<SendOrPostCallback, object>>();
 
@@ -150,6 +150,11 @@ namespace eZet.EveLib.Core.Util {
             public override SynchronizationContext CreateCopy() {
                 return this;
             }
+
+            public void Dispose() {
+                workItemsWaiting.Dispose();
+            }
+
         }
     }
 }

@@ -101,6 +101,14 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EveLib.Core, Version=3.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\eZet.EveLib.Core.3.0.3.0\lib\net45\EveLib.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EveLib.EveAuth, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\eZet.EveLib.EveAuth.3.0.1.0\lib\net45\EveLib.EveAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -209,16 +217,6 @@
     <Compile Include="RequestHandlers\CrestRequest.cs" />
     <Compile Include="RequestHandlers\ICachedCrestRequestHandler.cs" />
     <Compile Include="RequestHandlers\ICrestRequestHandler.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EveLib.Core\EveLib.Core.csproj">
-      <Project>{AA85978C-2BF5-419F-9F8E-B70162E83F34}</Project>
-      <Name>EveLib.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EveLib.EveAuth\EveLib.EveAuth.csproj">
-      <Project>{66A526C4-AD56-42A1-A680-0D11A524EC40}</Project>
-      <Name>EveLib.EveAuth</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

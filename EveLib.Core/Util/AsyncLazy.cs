@@ -71,7 +71,7 @@ namespace eZet.EveLib.Core.Util {
         ///     Starts the asynchronous initialization, if it has not already started.
         /// </summary>
         public void Start() {
-            Task<T> unused = _instance.Value;
+            var unused = _instance.Value;
         }
     }
 }

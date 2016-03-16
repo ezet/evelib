@@ -14,16 +14,16 @@ namespace eZet.EveLib.Core.Cache {
     /// <summary>
     ///     Simple plain file cache implementation
     /// </summary>
-    public class EveLibFileCache : IEveLibCache {
+    public class EveLibFileCache : IEveLibCache, IDisposable {
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 
+        private readonly ReaderWriterLockSlim _registerLock = new ReaderWriterLockSlim();
+
         private readonly TraceSource _trace = new TraceSource("EveLib");
 
         private bool _isInitialized;
-
-        private readonly ReaderWriterLockSlim _registerLock = new ReaderWriterLockSlim();
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveLibFileCache" /> class.
@@ -96,7 +96,7 @@ namespace eZet.EveLib.Core.Cache {
                 _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheIsValid: {0} ({1})", validCache,
                     cacheExpirationTime);
                 if (validCache) {
-                    var filePath = Path.Combine(CachePath , hash);
+                    var filePath = Path.Combine(CachePath, hash);
                     var fileExist = File.Exists(filePath);
                     _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:CacheDataFound: {0}", fileExist);
                     if (File.Exists(filePath)) {
@@ -132,7 +132,7 @@ namespace eZet.EveLib.Core.Cache {
         }
 
         /// <summary>
-        /// initialize as an asynchronous operation.
+        ///     initialize as an asynchronous operation.
         /// </summary>
         /// <returns>Task.</returns>
         private async Task initAsync() {
@@ -218,6 +218,22 @@ namespace eZet.EveLib.Core.Cache {
             finally {
                 if (_registerLock.IsReadLockHeld) _registerLock.ExitReadLock();
             }
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="finalize"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool finalize) {
+            _registerLock.Dispose();
         }
     }
 }

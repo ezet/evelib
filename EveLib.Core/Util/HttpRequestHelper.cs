@@ -27,7 +27,7 @@ namespace eZet.EveLib.Core.Util {
             request.UserAgent = Config.UserAgent;
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.GZip;
             request.ContentType = ContentType;
-                return request;
+            return request;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace eZet.EveLib.Core.Util {
         public static async Task<string> GetResponseContentAsync(HttpWebRequest request) {
             Trace.TraceEvent(TraceEventType.Start, 0, "Starting request: " + request.RequestUri);
             var data = "";
-            using (HttpWebResponse response = await GetResponseAsync(request).ConfigureAwait(false)) {
+            using (var response = await GetResponseAsync(request).ConfigureAwait(false)) {
                 var responseStream = response.GetResponseStream();
                 if (responseStream == null) return data;
                 using (var reader = new StreamReader(responseStream)) {

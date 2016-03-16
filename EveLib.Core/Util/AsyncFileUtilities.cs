@@ -22,7 +22,7 @@ namespace eZet.EveLib.Core.Util {
                 var buffer = new byte[0x1000];
                 int numRead;
                 while ((numRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false)) != 0) {
-                    string text = Encoding.UTF8.GetString(buffer, 0, numRead);
+                    var text = Encoding.UTF8.GetString(buffer, 0, numRead);
                     sb.Append(text);
                 }
                 return sb.ToString();
@@ -35,7 +35,7 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="filePath"></param>
         /// <returns></returns>
         public static async Task<string[]> ReadAllLinesAsync(string filePath) {
-            string data = await ReadAllTextAsync(filePath).ConfigureAwait(false);
+            var data = await ReadAllTextAsync(filePath).ConfigureAwait(false);
             return data.Split(new[] {"\r\n", "\n"}, StringSplitOptions.RemoveEmptyEntries);
         }
 
@@ -46,7 +46,7 @@ namespace eZet.EveLib.Core.Util {
         /// <param name="text"></param>
         /// <returns></returns>
         public static async Task WriteAllTextAsync(string filePath, string text) {
-            byte[] encodedText = Encoding.UTF8.GetBytes(text);
+            var encodedText = Encoding.UTF8.GetBytes(text);
             using (var sourceStream = new FileStream(filePath,
                 FileMode.Create, FileAccess.Write, FileShare.None, 4096, true)) {
                 await sourceStream.WriteAsync(encodedText, 0, encodedText.Length).ConfigureAwait(false);
@@ -62,7 +62,7 @@ namespace eZet.EveLib.Core.Util {
         public static Task WriteAllLinesAsync(string filePath, IEnumerable<string> lines) {
             Contract.Requires(lines != null);
             var sb = new StringBuilder();
-            foreach (string line in lines) {
+            foreach (var line in lines) {
                 sb.AppendLine(line);
             }
             return WriteAllTextAsync(filePath, sb.ToString());

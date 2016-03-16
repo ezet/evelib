@@ -47,7 +47,6 @@ namespace eZet.EveLib.Core.RequestHandlers {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="postData"></param>
