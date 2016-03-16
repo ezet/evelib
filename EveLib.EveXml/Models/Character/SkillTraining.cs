@@ -46,16 +46,16 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// </summary>
         /// <value>The end time.</value>
         [XmlIgnore]
-        public DateTime EndTime { get; private set; }
+        public DateTime TrainingEndTime { get; private set; }
 
         /// <summary>
         ///     Gets or sets the end time as string.
         /// </summary>
         /// <value>The end time as string.</value>
-        [XmlElement("EndTime")]
-        public string EndTimeAsString {
-            get { return EndTime.ToString(XmlHelper.DateFormat); }
-            set { EndTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+        [XmlElement("trainingEndTime")]
+        public string TrainingEndTimeAsString {
+            get { return TrainingEndTime.ToString(XmlHelper.DateFormat); }
+            set { TrainingEndTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         /// <summary>
@@ -63,16 +63,16 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// </summary>
         /// <value>The start time.</value>
         [XmlIgnore]
-        public DateTime StartTime { get; private set; }
+        public DateTime TrainingStartTime { get; private set; }
 
         /// <summary>
         ///     Gets or sets the start time as string.
         /// </summary>
         /// <value>The start time as string.</value>
-        [XmlElement("StartTime")]
-        public string StartTimeAsString {
-            get { return StartTime.ToString(XmlHelper.DateFormat); }
-            set { StartTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
+        [XmlElement("trainingStartTime")]
+        public string TrainingStartTimeAsString {
+            get { return TrainingStartTime.ToString(XmlHelper.DateFormat); }
+            set { TrainingStartTime = DateTime.ParseExact(value, XmlHelper.DateFormat, null); }
         }
 
         /// <summary>

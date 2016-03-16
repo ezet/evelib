@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.EveXmlModule;
-using eZet.EveLib.Test.Mocks;
+using eZet.EveLib.Test.EveXml.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.Core.Serializers;
 
-namespace eZet.EveLib.Test.Mocks {
+namespace eZet.EveLib.Test.EveXml.Mocks {
     public class StaticXmlRequestHandler : IRequestHandler {
         public StaticXmlRequestHandler(ISerializer serializer) {
             Serializer = serializer;
