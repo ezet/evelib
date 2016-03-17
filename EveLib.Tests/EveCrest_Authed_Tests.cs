@@ -48,10 +48,10 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetOptions() {
             var root = await crest.GetRootAsync();
-            var options = await crest.QueryOptionsAsync(root.Alliances);
-            options = await root.QueryOptionsAsync();
-            options = root.Query(r => r.Alliances).QueryOptions();
-            options = await crest.QueryOptionsAsync(root.Query(r => r.Constellations).Items.First());
+
+            var options = await root.QueryOptionsAsync(r => root.Alliances);
+            root.QueryOptions();
+
             Assert.IsTrue(options.Representations.Any());
             var first = options.Representations.First();
             Assert.IsNotNull(first.AcceptType);
@@ -65,7 +65,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetHead() {
             var root = await crest.GetRootAsync();
-            await crest.QueryHeadAsync(root.Alliances.Uri);
+            await crest.QueryHeadAsync(root.Alliances);
         }
 
         [TestMethod]
