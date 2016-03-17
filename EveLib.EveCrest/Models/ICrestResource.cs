@@ -4,9 +4,9 @@
 // Created          : 12-16-2014
 //
 // Last Modified By : Lars Kristian
-// Last Modified On : 12-17-2014
+// Last Modified On : 03-17-2016
 // ***********************************************************************
-// <copyright file="ICrestResource.cs" company="">
+// <copyright file="ICrestResource.cs" company="Lars Kristian Dahl">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -19,6 +19,10 @@ using System.Threading.Tasks;
 using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models {
+    /// <summary>
+    /// Interface ICrestResource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface ICrestResource<out T> where T : class, ICrestResource<T> {
         /// <summary>
         /// Gets or sets the crest instance used to query resources.

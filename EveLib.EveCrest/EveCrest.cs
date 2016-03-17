@@ -326,10 +326,22 @@ namespace eZet.EveLib.EveCrestModule {
         //    return QueryOptionsAsync(uri).Result;
         //}
 
+        /// <summary>
+        /// Queries the options asynchronous.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="href">The href.</param>
+        /// <returns>Task&lt;CrestOptions&gt;.</returns>
         public Task<CrestOptions> QueryOptionsAsync<T>(ICrestResource<T> href) where T : class, ICrestResource<T> {
             return optionsAsync(href.Uri.ToString());
         }
 
+        /// <summary>
+        /// Queries the options.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="href">The href.</param>
+        /// <returns>CrestOptions.</returns>
         public CrestOptions QueryOptions<T>(ICrestResource<T> href) where T : class, ICrestResource<T> {
             return QueryOptionsAsync(href).Result;
         }
