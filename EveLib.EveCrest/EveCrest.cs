@@ -789,13 +789,16 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="entity">The entity.</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
         private async Task<bool> deleteAsync(IEditableEntity entity) {
+            var ret = false;
             try {
-                return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
+                ret =  await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
             }
             catch (EveCrestException e) {
                 await tryRefreshTokenAsync(e).ConfigureAwait(false);
-                return await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
+                ret =  await RequestHandler.DeleteAsync(new Uri(entity.Href), AccessToken).ConfigureAwait(false);
             }
+            entity.SaveAsNew = true;
+            return ret;
         }
 
 
