@@ -528,11 +528,9 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="entity">The entity.</param>
         /// <param name="forcePostRequest">if set to <c>true</c> [force post request].</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
-        public async Task<bool> SaveEntityAsync(IEditableEntity entity, bool forcePostRequest = false) {
-            if (!forcePostRequest && entity.Href != null) return await UpdateEntityAsync(entity).ConfigureAwait(false);
-            var uri = await postAsync(entity).ConfigureAwait(false);
-            if (uri != null) entity.PostUri = uri;
-            return true;
+        public Task<bool> SaveEntityAsync(IEditableEntity entity, bool forcePostRequest = false) {
+            if (!forcePostRequest && entity.Href != null) return UpdateEntityAsync(entity);
+            return AddEntityAsync(entity);
         }
 
         /// <summary>
