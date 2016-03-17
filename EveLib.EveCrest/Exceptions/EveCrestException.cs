@@ -18,7 +18,7 @@ namespace eZet.EveLib.EveCrestModule.Exceptions {
         /// <param name="refId">the Ref ID returned by CREST</param>
         public EveCrestException(string message, WebException innerException, string key, string exceptionType,
             string refId)
-            : base(message, innerException) {
+            : base(key + ": " + message, innerException) {
             Key = key;
             ExceptionType = exceptionType;
             RefId = refId;

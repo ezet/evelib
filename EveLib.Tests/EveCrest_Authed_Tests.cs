@@ -49,8 +49,7 @@ namespace eZet.EveLib.Test {
         public async Task GetOptions() {
             var root = await crest.GetRootAsync();
 
-            var options = await root.QueryOptionsAsync(r => root.Alliances);
-            root.QueryOptions();
+            var options = crest.QueryOptions(root);
 
             Assert.IsTrue(options.Representations.Any());
             var first = options.Representations.First();
@@ -65,7 +64,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetHead() {
             var root = await crest.GetRootAsync();
-            await crest.QueryHeadAsync(root.Alliances);
+            var head = await crest.QueryHeadAsync(root.Alliances);
         }
 
         [TestMethod]
@@ -131,7 +130,7 @@ namespace eZet.EveLib.Test {
             contact.Contact.Href = "https://crest-tq.eveonline.com/alliances/99000006/";
             contact.Standing = 10;
             Assert.IsTrue(await contact.SaveAsync());
-            Assert.AreEqual("https://crest-tq.eveonline.com/characters/157924121/contacts/99000006/", contact.Href);
+            Assert.AreEqual("https://crest-tq.eveonline.com/characters/157924121/contacts/99000006/", contact.PostUri);
         }
 
 
@@ -179,9 +178,8 @@ namespace eZet.EveLib.Test {
                 (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                     .QueryAsync(r => r.Fittings)).Items.First();
             fit.Name = "test123123";
-            fit.Href = "https://crest-tq.eveonline.com/characters/157924121/fittings/";
-            fit.SaveAsNew = true;
-            Assert.IsTrue(await fit.SaveAsync());
+            //fit.PostUri = "https://crest-tq.eveonline.com/characters/157924121/fittings/";
+            Assert.IsTrue(await fit.SaveAsync(true));
         }
 
         [TestMethod]
@@ -192,9 +190,9 @@ namespace eZet.EveLib.Test {
             .QueryAsync(r => r.Fittings);
             var fit = fittings.Items.First();
             Assert.IsTrue(await fit.DeleteAsync());
+            fit.Delete();
             fit.Name = "Test123123";
-            fit.SaveAsNew = true;
-            var result = await fit.SaveAsync();
+            var result = await fit.SaveAsync(true);
             Assert.IsTrue(result);
         }
 

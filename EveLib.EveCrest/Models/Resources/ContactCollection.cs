@@ -62,8 +62,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
                 Contact = new LinkedEntity<string>();
             }
 
-            //public bool ShouldSerializeWatched() => false;
-
             /// <summary>
             ///     Gets or sets the standing.
             /// </summary>

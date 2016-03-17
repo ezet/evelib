@@ -20,48 +20,48 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
-    /// Base class for all CREST resouces.
+    ///     Base class for all CREST resouces.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class CrestResource<T> : ICrestResource<T> where T : class, ICrestResource<T> {
         /// <summary>
-        /// Gets or sets the crest instance used to query resources.
+        ///     Gets or sets the crest instance used to query resources.
         /// </summary>
         /// <value>The crest instance</value>
         public EveCrest EveCrest { get; set; }
 
         /// <summary>
-        /// Gets or sets the response headers.
+        ///     Gets or sets the response headers.
         /// </summary>
         /// <value>The response headers.</value>
         public WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
-        /// Gets or sets the URI.
+        ///     Gets or sets the URI.
         /// </summary>
         /// <value>The URI.</value>
         public Uri Uri { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is from cache.
+        ///     Gets or sets a value indicating whether this instance is from cache.
         /// </summary>
         /// <value><c>true</c> if this instance is from cache; otherwise, <c>false</c>.</value>
         public bool IsFromCache { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this resource is deprecated.
+        ///     Gets or sets a value indicating whether this resource is deprecated.
         /// </summary>
         /// <value><c>true</c> if this instance is deprecated; otherwise, <c>false</c>.</value>
         public virtual bool IsDeprecated { get; set; }
 
         /// <summary>
-        /// Gets or sets the version.
+        ///     Gets or sets the version.
         /// </summary>
         /// <value>The version.</value>
         public virtual string ContentType { get; protected set; }
 
         /// <summary>
-        /// Injects the specified crest.
+        ///     Injects the specified crest.
         /// </summary>
         /// <param name="crest">The crest.</param>
         public virtual void Inject(EveCrest crest) {
@@ -69,40 +69,40 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
 
-        /// <summary>
-        /// Gets the options asynchronous.
-        /// </summary>
-        /// <returns>Task&lt;CrestOptions&gt;.</returns>
-        public Task<CrestOptions> QueryOptionsAsync() {
-            return EveCrest.QueryOptionsAsync(new Href<string>(Uri.ToString()));
-        }
+        ///// <summary>
+        /////     Gets the options asynchronous.
+        ///// </summary>
+        ///// <returns>Task&lt;CrestOptions&gt;.</returns>
+        //public Task<CrestOptions> QueryOptionsAsync() {
+        //    return EveCrest.QueryOptionsAsync(new Href<string>(Uri.ToString()));
+        //}
+
+        ///// <summary>
+        /////     Gets the options.
+        ///// </summary>
+        ///// <returns>CrestOptions.</returns>
+        //public CrestOptions QueryOptions() {
+        //    return QueryOptionsAsync().Result;
+        //}
+
+        ///// <summary>
+        /////     Queries the head asynchronous.
+        ///// </summary>
+        ///// <returns>Task&lt;WebHeaderCollection&gt;.</returns>
+        //public Task<WebHeaderCollection> QueryHeadAsync() {
+        //    return EveCrest.QueryHeadAsync(new Href<string>(Uri.ToString()));
+        //}
+
+        ///// <summary>
+        /////     Queries the head.
+        ///// </summary>
+        ///// <returns>WebHeaderCollection.</returns>
+        //public WebHeaderCollection QueryHead() {
+        //    return QueryHeadAsync().Result;
+        //}
 
         /// <summary>
-        /// Gets the options.
-        /// </summary>
-        /// <returns>CrestOptions.</returns>
-        public CrestOptions QueryOptions() {
-            return QueryOptionsAsync().Result;
-        }
-
-        /// <summary>
-        /// Queries the head asynchronous.
-        /// </summary>
-        /// <returns>Task&lt;WebHeaderCollection&gt;.</returns>
-        public Task<WebHeaderCollection> QueryHeadAsync() {
-            return EveCrest.QueryHeadAsync(new Href<string>(Uri.ToString()));
-        }
-
-        /// <summary>
-        /// Queries the head.
-        /// </summary>
-        /// <returns>WebHeaderCollection.</returns>
-        public WebHeaderCollection QueryHead() {
-            return QueryHeadAsync().Result;
-        }
-
-        /// <summary>
-        /// Queries the resource asynchronously.
+        ///     Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -114,7 +114,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Queries the resource.
+        ///     Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -126,7 +126,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Queries the resource asynchronously.
+        ///     Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -138,7 +138,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Queries the resource.
+        ///     Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -150,7 +150,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Queries a collection of resources asynchronously.
+        ///     Queries a collection of resources asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -164,7 +164,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Queries a collection of resources.
+        ///     Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -178,7 +178,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Queries a collection of resources asynchronously.
+        ///     Queries a collection of resources asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -192,7 +192,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        /// Queries a collection of resources.
+        ///     Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -205,96 +205,97 @@ namespace eZet.EveLib.EveCrestModule.Models {
             return EveCrest.Load(items, parameters);
         }
 
-        /// <summary>
-        /// Queries the options asynchronous.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;CrestOptions&gt;.</returns>
-        public Task<CrestOptions> QueryOptionsAsync<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryOptionsAsync(objFunc.Invoke(this as T));
-        }
+        //    return EveCrest.QueryOptions(objFunc.Invoke(this as T));
+        //    where TOut : class, ICrestResource<TOut> {
+        //public virtual CrestOptions QueryOptions<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
+        ///// <returns>CrestOptions.</returns>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// </summary>
+        ///// Queries the options.
 
-        /// <summary>
-        /// Queries the options.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>CrestOptions.</returns>
-        public virtual CrestOptions QueryOptions<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryOptions(objFunc.Invoke(this as T));
-        }
+        ///// <summary>
+        //}
+        //    return EveCrest.QueryOptionsAsync(objFunc.Invoke(this as T));
+        //    where TOut : class, ICrestResource<TOut> {
+        //public Task<CrestOptions> QueryOptionsAsync<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
+        ///// <returns>Task&lt;CrestOptions&gt;.</returns>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// </summary>
+        ///// Queries the options asynchronous.
 
-        /// <summary>
-        /// Queries the options asynchronous.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;CrestOptions&gt;.</returns>
-        public Task<CrestOptions> QueryOptionsAsync<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryOptionsAsync(objFunc.Invoke(this as T));
-        }
+        ///// <summary>
+        //}
 
-        /// <summary>
-        /// Queries the options.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>CrestOptions.</returns>
-        public virtual CrestOptions QueryOptions<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryOptions(objFunc.Invoke(this as T));
-        }
+        ///// <summary>
+        ///// Queries the options asynchronous.
+        ///// </summary>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <returns>Task&lt;CrestOptions&gt;.</returns>
+        //public Task<CrestOptions> QueryOptionsAsync<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
+        //    where TOut : class, ICrestResource<TOut> {
+        //    return EveCrest.QueryOptionsAsync(objFunc.Invoke(this as T));
+        //}
 
-
-        /// <summary>
-        /// Queries the head asynchronous.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;WebHeaderCollection&gt;.</returns>
-        public Task<WebHeaderCollection> QueryHeadAsync<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryHeadAsync(objFunc.Invoke(this as T));
-        }
+        ///// <summary>
+        ///// Queries the options.
+        ///// </summary>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <returns>CrestOptions.</returns>
+        //public virtual CrestOptions QueryOptions<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
+        //    where TOut : class, ICrestResource<TOut> {
+        //    return EveCrest.QueryOptions(objFunc.Invoke(this as T));
+        //}
 
 
-        /// <summary>
-        /// Queries the head.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>WebHeaderCollection.</returns>
-        public virtual WebHeaderCollection QueryHead<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryHead(objFunc.Invoke(this as T));
-        }
+        ///// <summary>
+        ///// Queries the head asynchronous.
+        ///// </summary>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <returns>Task&lt;WebHeaderCollection&gt;.</returns>
+        //public Task<WebHeaderCollection> QueryHeadAsync<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
+        //    where TOut : class, ICrestResource<TOut> {
+        //    return EveCrest.QueryHeadAsync(objFunc.Invoke(this as T));
+        //}
 
 
-        /// <summary>
-        /// Queries the head asynchronous.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>Task&lt;WebHeaderCollection&gt;.</returns>
-        public Task<WebHeaderCollection> QueryHeadAsync<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryHeadAsync(objFunc.Invoke(this as T));
-        }
+        ///// <summary>
+        ///// Queries the head.
+        ///// </summary>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <returns>WebHeaderCollection.</returns>
+        //public virtual WebHeaderCollection QueryHead<TOut>(Func<ICrestResource<T>, Href<TOut>> objFunc)
+        //    where TOut : class, ICrestResource<TOut> {
+        //    return EveCrest.QueryHead(objFunc.Invoke(this as T));
+        //}
 
 
-        /// <summary>
-        /// Queries the head.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the t out.</typeparam>
-        /// <param name="objFunc">The object function.</param>
-        /// <returns>WebHeaderCollection.</returns>
-        public virtual WebHeaderCollection QueryHead<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
-            where TOut : class, ICrestResource<TOut> {
-            return EveCrest.QueryHead(objFunc.Invoke(this as T));
-        }
+        ///// <summary>
+        ///// Queries the head asynchronous.
+        ///// </summary>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <returns>Task&lt;WebHeaderCollection&gt;.</returns>
+        //public Task<WebHeaderCollection> QueryHeadAsync<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
+        //    where TOut : class, ICrestResource<TOut> {
+        //    return EveCrest.QueryHeadAsync(objFunc.Invoke(this as T));
+        //}
+
+
+        ///// <summary>
+        ///// Queries the head.
+        ///// </summary>
+        ///// <typeparam name="TOut">The type of the t out.</typeparam>
+        ///// <param name="objFunc">The object function.</param>
+        ///// <returns>WebHeaderCollection.</returns>
+        //public virtual WebHeaderCollection QueryHead<TOut>(Func<ICrestResource<T>, ILinkedEntity<TOut>> objFunc)
+        //    where TOut : class, ICrestResource<TOut> {
+        //    return EveCrest.QueryHead(objFunc.Invoke(this as T));
+        //}
     }
 }

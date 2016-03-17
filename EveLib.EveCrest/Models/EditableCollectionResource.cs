@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace eZet.EveLib.EveCrestModule.Models.Resources {
+namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
     ///     Class EditableCollectionResource.
     /// </summary>
@@ -29,7 +29,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             base.Inject(crestInstance);
             foreach (var item in Items) {
                 item.EveCrest = EveCrest;
-                item.SaveAsNew = false;
+                item.PostUri = Uri.ToString();
             }
         }
     }

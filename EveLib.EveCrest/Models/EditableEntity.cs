@@ -25,7 +25,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         ///     Gets or sets a value indicating whether this instance is new.
         /// </summary>
         /// <value><c>true</c> if this instance is new; otherwise, <c>false</c>.</value>
-        public bool SaveAsNew { get; set; }
+        //public bool SaveAsNew { get; set; }
 
         /// <summary>
         ///     Gets or sets the eve crest.
@@ -33,27 +33,28 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// <value>The eve crest.</value>
         public EveCrest EveCrest { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the href.
-        /// </summary>
-        /// <value>The href.</value>
+        //[DataMember(Name = "href")]
+        public string PostUri { get; set; }
+ 
         [DataMember(Name = "href")]
         public string Href { get; set; }
 
         /// <summary>
-        ///     Saves this instance.
+        /// Saves this instance.
         /// </summary>
+        /// <param name="forcePostRequest">if set to <c>true</c> [force post request].</param>
         /// <returns>Task.</returns>
-        public Task<bool> SaveAsync() {
+        public Task<bool> SaveAsync(bool forcePostRequest = false) {
             return EveCrest.SaveEntityAsync(this);
         }
 
         /// <summary>
-        ///     Saves this instance.
+        /// Saves this instance.
         /// </summary>
+        /// <param name="forcePostRequest">if set to <c>true</c> [force post request].</param>
         /// <returns>System.Boolean.</returns>
-        public bool Save() {
-            return SaveAsync().Result;
+        public bool Save(bool forcePostRequest = false) {
+            return SaveAsync(forcePostRequest).Result;
         }
 
         /// <summary>
@@ -72,10 +73,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
             return DeleteAsync().Result;
         }
 
-        /// <summary>
-        ///     Should the serialize href.
-        /// </summary>
-        /// <returns>System.Boolean.</returns>
         public bool ShouldSerializeHref() => false;
+
     }
 }

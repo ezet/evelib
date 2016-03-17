@@ -197,7 +197,7 @@ namespace eZet.EveLib.Test {
         //    var ec = new EveCrest {EnableRootCache = false};
         //    var allregions = ec.GetRoot().Query(r => r.Regions);
         //    foreach (var item in allregions.AllItems()) {
-        //        var regionHref = item.Href;
+        //        var regionHref = item.PostHref;
         //        new Thread(() => {
         //            Console.WriteLine("Starting Thread");
         //            eZet.EveLib.EveCrestModule.EveCrest ecT = new eZet.EveLib.EveCrestModule.EveCrest();

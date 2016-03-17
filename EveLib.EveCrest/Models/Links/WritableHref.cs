@@ -24,7 +24,7 @@
         /// </summary>
         /// <returns>TCollection.</returns>
         public TEditable Create() {
-            return new TEditable {Href = Uri, SaveAsNew = true, EveCrest = EveCrest};
+            return new TEditable {PostUri = Uri, EveCrest = EveCrest};
         }
     }
 }

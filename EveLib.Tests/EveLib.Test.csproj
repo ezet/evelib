@@ -129,7 +129,7 @@
     <Compile Include="EveXml\Character_StaticDeserializationTests.cs" />
     <Compile Include="EveXml\CorporationKey_Beta.cs" />
     <Compile Include="EveAuth_Tests.cs" />
-    <Compile Include="EveCrest_Authed_Tests .cs" />
+    <Compile Include="EveCrest_Authed_Tests.cs" />
     <Compile Include="EveCrest_Public_Tests.cs" />
     <Compile Include="Element43Legacy_Tests.cs" />
     <Compile Include="EveCrest_Singularity_Tests.cs" />
