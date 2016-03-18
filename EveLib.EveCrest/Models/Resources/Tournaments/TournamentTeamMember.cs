@@ -28,7 +28,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
             ContentType = "application/vnd.ccp.eve.TournamentTeamMember-v1+json";
         }
 
-        // TODO CCP why is the Href encased in Self ?
         /// <summary>
         ///     Gets or sets the self.
         /// </summary>

@@ -139,14 +139,14 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
             /// </summary>
             /// <value>The red team.</value>
             [DataMember(Name = "redTeam")]
-            public int RedTeam { get; set; }
+            public double RedTeam { get; set; }
 
             /// <summary>
             ///     Gets or sets the blue team.
             /// </summary>
             /// <value>The blue team.</value>
             [DataMember(Name = "blueTeam")]
-            public int BlueTeam { get; set; }
+            public double BlueTeam { get; set; }
         }
 
 

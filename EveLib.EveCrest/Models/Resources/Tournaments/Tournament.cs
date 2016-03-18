@@ -41,7 +41,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Tournaments {
         ///     Gets or sets the membership cutoff.
         /// </summary>
         /// <value>The membership cutoff.</value>
-        [DataMember(Name = "membershitCutoff")]
+        [DataMember(Name = "membershipCutoff")]
         public DateTime MembershipCutoff { get; set; }
 
         /// <summary>

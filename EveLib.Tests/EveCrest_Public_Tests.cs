@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Links;
@@ -29,6 +30,7 @@ namespace eZet.EveLib.Test {
         public EveCrest_Public_Tests() {
             _crest.EnableAutomaticTokenRefresh = true;
             _crest.RequestHandler.ThrowOnDeprecated = true;
+            _crest.RequestHandler.CacheLevel =  CacheLevel.BypassCache;
         }
 
         [TestMethod]
@@ -362,6 +364,11 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task Tournaments() {
             var response = await _crest.GetRoot().QueryAsync(r => r.Tournaments);
+            var tournament = _crest.Load(response.Items.Single(r => r.Id == 14));
+            var match = _crest.Load(tournament.Series).Query(r => r.Items.First().Matches).Items.First();
+
+
+
         }
 
         [TestMethod]

@@ -16,7 +16,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
         /// </summary>
         /// <value>The type bans.</value>
         [DataMember(Name = "typeBans")]
-        public IReadOnlyList<LinkedEntity<ItemType>> TypeBans { get; set; }
+        public IReadOnlyList<LinkedIconEntity<ItemType>> TypeBans { get; set; }
 
         /// <summary>
         ///     Gets or sets the banned by.

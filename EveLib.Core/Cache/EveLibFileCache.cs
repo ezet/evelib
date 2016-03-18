@@ -19,7 +19,7 @@ namespace eZet.EveLib.Core.Cache {
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 
-        private readonly ReaderWriterLockSlim _registerLock = new ReaderWriterLockSlim();
+        private ReaderWriterLockSlim _registerLock = new ReaderWriterLockSlim();
 
         private readonly TraceSource _trace = new TraceSource("EveLib");
 
@@ -143,7 +143,8 @@ namespace eZet.EveLib.Core.Cache {
 
         private async Task writeRegisterToDiskAsync() {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache register to disk");
-            _registerLock.EnterWriteLock();
+            //while (!_registerLock.IsWriteLockHeld)
+                _registerLock.EnterWriteLock();
             try {
                 await AsyncFileUtilities.WriteAllLinesAsync(CacheRegister,
                     _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)))
