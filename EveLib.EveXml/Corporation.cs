@@ -558,7 +558,6 @@ namespace eZet.EveLib.EveXmlModule {
         /// </summary>
         /// <returns></returns>
         public Task<EveXmlResponse<OutpostList>> GetOutpostListAsync() {
-            // TODO Link to OutpostServiceDetails
             const string relPath = "/corp/OutpostList.xml.aspx";
             return requestAsync<OutpostList>(relPath, ApiKey);
         }

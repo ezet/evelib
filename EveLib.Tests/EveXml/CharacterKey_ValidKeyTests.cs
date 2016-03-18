@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.Cache;
 using eZet.EveLib.EveXmlModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -105,7 +106,6 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetKillLog() {
-            // BUG Returns 000 OK when exhausted
             var res = _validKey.Characters[0].GetKillLog();
             Assert.IsNotNull(res.Result);
         }

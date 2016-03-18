@@ -23,7 +23,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTraining {
-        // TODO Convert zone
         /// <summary>
         ///     Gets the current tq time.
         /// </summary>
