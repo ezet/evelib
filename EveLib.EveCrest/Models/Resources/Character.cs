@@ -120,7 +120,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
-        // TODO: Implement location
         /// <summary>
         ///     Gets or sets the location.
         /// </summary>
@@ -184,7 +183,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "vivox")]
         public Href<NotImplemented> Vivox { get; set; }
 
-        // TODO Implement waypoints
         /// <summary>
         ///     Gets or sets the waypoints.
         /// </summary>

@@ -10,7 +10,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Shared {
     /// </summary>
     [DataContract]
     public class BanEntry {
-        // TODO Verify type
         /// <summary>
         ///     Gets or sets the type bans.
         /// </summary>

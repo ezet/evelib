@@ -28,7 +28,6 @@ namespace eZet.EveLib.EveCrestModule {
         /// <returns>System.String.</returns>
         /// <exception cref="System.NotImplementedException"></exception>
         public static string Get<T>(bool throwOnMissingContentType) where T : class, ICrestResource<T> {
-            // TODO optional throw on missing version
             var instance = Activator.CreateInstance<T>();
             var implemented = instance as NotImplemented;
             if (string.IsNullOrEmpty(instance.ContentType) && throwOnMissingContentType && implemented == null) {
