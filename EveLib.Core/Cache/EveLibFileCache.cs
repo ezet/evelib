@@ -144,7 +144,7 @@ namespace eZet.EveLib.Core.Cache {
         private async Task writeRegisterToDiskAsync() {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache register to disk");
             //while (!_registerLock.IsWriteLockHeld)
-                _registerLock.EnterWriteLock();
+                //_registerLock.EnterWriteLock();
             try {
                 await AsyncFileUtilities.WriteAllLinesAsync(CacheRegister,
                     _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)))
