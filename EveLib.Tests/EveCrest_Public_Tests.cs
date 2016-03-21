@@ -52,6 +52,14 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
+        public async Task GetAllItems() {
+            var alliances = await (await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances)).AllItemsAsync();
+            //alliances = _crest.GetRoot().Query(r => r.Alliances);
+            //_crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Name == "test"));
+
+        }
+
+        [TestMethod]
         public async Task GetRegions() {
             var root = await _crest.GetRootAsync();
             var regions = await root.QueryAsync(r => r.Regions);
