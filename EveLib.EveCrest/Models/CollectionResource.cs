@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -27,8 +28,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TCollection">The type of items in the collection</typeparam>
     [DataContract]
-    public abstract class CollectionResource<T, TCollection> : CrestResource<T>, ICollectionResource<T, TCollection>
-        where T : CollectionResource<T, TCollection>, ICrestResource<T> {
+    public abstract class CollectionResource<T, TCollection> : CrestResource<T>, ICollectionResource<T, TCollection>, IEnumerable<TCollection> where T : CollectionResource<T, TCollection>, ICrestResource<T> {
         /// <summary>
         ///     The total number of items in the collection
         /// </summary>
@@ -64,12 +64,12 @@ namespace eZet.EveLib.EveCrestModule.Models {
         [DataMember(Name = "previous")]
         public Href<T> Previous { get; set; }
 
-
         /// <summary>
         ///     Gets all items in the collection as an asynchronous operation.
         /// </summary>
         /// <returns>Task&lt;IEnumerable&lt;TCollection&gt;&gt;.</returns>
         public async Task<IEnumerable<TCollection>> AllItemsAsync() {
+            // TODO: Store the items ?
             var collection = this;
             var list = collection.Items.ToList();
             if (EveCrest.EnableAutomaticPaging) {
@@ -80,7 +80,6 @@ namespace eZet.EveLib.EveCrestModule.Models {
             }
             return list;
         }
-
 
         /// <summary>
         ///     Gets all the items in the collection.
@@ -214,6 +213,29 @@ namespace eZet.EveLib.EveCrestModule.Models {
         public TOut Query<TOut>(Func<IEnumerable<TCollection>, ILinkedEntity<TOut>> objFunc)
             where TOut : class, ICrestResource<TOut> {
             return QueryAsync(objFunc).Result;
+        }
+
+        public IEnumerator<TCollection> GetEnumerator() {
+            // TODO: Implement this, store the items and a reference to the next collection
+            var count = 0;
+            var collection = this;
+            while (collection.Next != null && count < TotalCount%PageCount) {
+                if (count%(TotalCount/PageCount) == 0) {
+                    //collection = await EveCrest.LoadAsync(collection.Next).ConfigureAwait(false);
+                    //Items.AddRange(collection.Items);
+                }
+                ++count;
+                yield return Items[count];
+
+            }
+            foreach (var item in Items) {
+                yield return item;
+            }
+
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return ((IEnumerable) Items).GetEnumerator();
         }
     }
 }
