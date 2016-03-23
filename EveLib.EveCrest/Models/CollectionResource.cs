@@ -219,31 +219,38 @@ namespace eZet.EveLib.EveCrestModule.Models {
             return QueryAsync(objFunc).Result;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<TItem> GetEnumerator() {
-            // TODO: Implement this, store the items and a reference to the next collection
             foreach (var item in Items) {
                 yield return item;
             }
+            if (Next == null) yield break;
             if (NextResource == null)
                 NextResource = EveCrest.Load(Next);
-            yield return NextResource.GetEnumerator().Current;
+            var iter = NextResource.GetEnumerator();
+            while (iter.MoveNext())
+                yield return iter.Current;
+
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator() {
             foreach (var item in Items) {
                 yield return item;
             }
+            if (Next == null) yield break;
             if (NextResource == null)
                 NextResource = EveCrest.Load(Next);
-            yield return NextResource.GetEnumerator().Current;
+            var iter = NextResource.GetEnumerator();
+            while (iter.MoveNext())
+                yield return iter.Current;
+
         }
-
-        //public IEnumerator<TCollection> GetEnumerator() {
-        //    return Items.GetEnumerator();
-        //}
-
-        //IEnumerator IEnumerable.GetEnumerator() {
-        //    return ((IEnumerable) Items).GetEnumerator();
-        //}
     }
 }
