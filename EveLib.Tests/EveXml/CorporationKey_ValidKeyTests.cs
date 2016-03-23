@@ -100,8 +100,7 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        [ExpectedException(typeof (AggregateException))]
-        public void GetLocations_InvalidId_InvalidRequestException() {
+        public void GetLocations() {
             _validKey.Corporation.GetLocations(0);
         }
 
