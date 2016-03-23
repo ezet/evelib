@@ -4,7 +4,7 @@
 // Created          : 12-16-2014
 //
 // Last Modified By : Lars Kristian
-// Last Modified On : 03-17-2016
+// Last Modified On : 03-23-2016
 // ***********************************************************************
 // <copyright file="CrestResource.cs" company="Lars Kristian Dahl">
 //     Copyright (c) . All rights reserved.
@@ -20,48 +20,48 @@ using eZet.EveLib.EveCrestModule.Models.Links;
 
 namespace eZet.EveLib.EveCrestModule.Models {
     /// <summary>
-    ///     Base class for all CREST resouces.
+    /// Base class for all CREST resouces.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class CrestResource<T> : ICrestResource<T> where T : class, ICrestResource<T> {
+    public abstract class CrestResource<T> : ICrestResource<T> where T : class {
         /// <summary>
-        ///     Gets or sets the crest instance used to query resources.
+        /// Gets or sets the crest instance used to query resources.
         /// </summary>
         /// <value>The crest instance</value>
         public EveCrest EveCrest { get; set; }
 
         /// <summary>
-        ///     Gets or sets the response headers.
+        /// Gets or sets the response headers.
         /// </summary>
         /// <value>The response headers.</value>
         public WebHeaderCollection ResponseHeaders { get; set; }
 
         /// <summary>
-        ///     Gets or sets the URI.
+        /// Gets or sets the URI.
         /// </summary>
         /// <value>The URI.</value>
         public Uri Uri { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this instance is from cache.
+        /// Gets or sets a value indicating whether this instance is from cache.
         /// </summary>
         /// <value><c>true</c> if this instance is from cache; otherwise, <c>false</c>.</value>
         public bool IsFromCache { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this resource is deprecated.
+        /// Gets or sets a value indicating whether this resource is deprecated.
         /// </summary>
         /// <value><c>true</c> if this instance is deprecated; otherwise, <c>false</c>.</value>
         public virtual bool IsDeprecated { get; set; }
 
         /// <summary>
-        ///     Gets or sets the version.
+        /// Gets or sets the version.
         /// </summary>
         /// <value>The version.</value>
         public virtual string ContentType { get; protected set; }
 
         /// <summary>
-        ///     Injects the specified crest.
+        /// Injects the specified crest.
         /// </summary>
         /// <param name="crest">The crest.</param>
         public virtual void Inject(EveCrest crest) {
@@ -102,7 +102,59 @@ namespace eZet.EveLib.EveCrestModule.Models {
         //}
 
         /// <summary>
-        ///     Queries the resource asynchronously.
+        /// Queries the asynchronous.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <typeparam name="TParam">The type of the t parameter.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <param name="param">The parameter.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        public Task<TOut> QueryAsync<TOut, TParam>(Func<T, Href<TOut>> objFunc, IQueryParameter<TParam> param)
+where TOut : class, ICrestResource<TOut> {
+            return EveCrest.LoadAsync(objFunc.Invoke(this as T), param);
+        }
+
+        /// <summary>
+        /// Queries the specified object function.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <typeparam name="TParam">The type of the t parameter.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <param name="param">The parameter.</param>
+        /// <returns>TOut.</returns>
+        public TOut Query<TOut, TParam>(Func<T, Href<TOut>> objFunc, IQueryParameter<TParam> param)
+where TOut : class, ICrestResource<TOut> {
+            return QueryAsync(objFunc, param).Result;
+        }
+
+        /// <summary>
+        /// Queries the asynchronous.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <typeparam name="TParam">The type of the t parameter.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <param name="param">The parameter.</param>
+        /// <returns>Task&lt;TOut&gt;.</returns>
+        public Task<TOut> QueryAsync<TOut, TParam>(Func<T, Href<TOut>> objFunc, LinkedEntity<TParam> param)
+where TOut : class, ICrestResource<TOut> where TParam : IQueryParameter<TParam> {
+            return EveCrest.LoadAsync(objFunc.Invoke(this as T), param);
+        }
+
+        /// <summary>
+        /// Queries the specified object function.
+        /// </summary>
+        /// <typeparam name="TOut">The type of the t out.</typeparam>
+        /// <typeparam name="TParam">The type of the t parameter.</typeparam>
+        /// <param name="objFunc">The object function.</param>
+        /// <param name="param">The parameter.</param>
+        /// <returns>TOut.</returns>
+        public TOut Query<TOut, TParam>(Func<T, Href<TOut>> objFunc, LinkedEntity<TParam> param)
+where TOut : class, ICrestResource<TOut> where TParam : IQueryParameter<TParam> {
+            return QueryAsync(objFunc, param).Result;
+        }
+
+        /// <summary>
+        /// Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -114,7 +166,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries the resource.
+        /// Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -126,7 +178,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries the resource asynchronously.
+        /// Queries the resource asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -138,7 +190,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries the resource.
+        /// Queries the resource.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -150,7 +202,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries a collection of resources asynchronously.
+        /// Queries a collection of resources asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -164,7 +216,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries a collection of resources.
+        /// Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -178,7 +230,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries a collection of resources asynchronously.
+        /// Queries a collection of resources asynchronously.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -192,7 +244,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries a collection of resources.
+        /// Queries a collection of resources.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
