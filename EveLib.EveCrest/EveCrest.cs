@@ -86,7 +86,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// Initializes a new instance of the <see cref="EveCrest" /> class, in Public mode.
         /// </summary>
         public EveCrest() {
-            RequestHandler = new CachedCrestRequestHandler(new JsonSerializer());
+            RequestHandler = new CachedCrestRequestHandler(new JsonSerializer("yyyy.MM.dd HH:mm:ss"));
             ImageRequestHandler = new ImageRequestHandler();
             ApiPath = "/";
             Host = DefaultPublicHost;

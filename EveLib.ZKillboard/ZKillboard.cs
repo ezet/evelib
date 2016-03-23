@@ -21,7 +21,7 @@ namespace eZet.EveLib.ZKillboardModule {
         ///     Default constructor
         /// </summary>
         public ZKillboard() {
-            RequestHandler = new ZkbRequestHandler(new JsonSerializer(), Config.CacheFactory("ZKillboard"));
+            RequestHandler = new ZkbRequestHandler(new JsonSerializer("yyyy-MM-dd HH:mm:ss"), Config.CacheFactory("ZKillboard"));
             Host = new Uri(DefaultHost);
         }
 

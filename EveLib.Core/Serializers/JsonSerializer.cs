@@ -29,12 +29,20 @@ namespace eZet.EveLib.Core.Serializers {
         /// <summary>
         ///     The date format
         /// </summary>
-        public string DateFormat1 = "yyyy-MM-dd HH:mm:ss";
+        public string DateFormat = "yyyy-MM-dd HH:mm:ss";
 
         /// <summary>
         ///     The date format2
         /// </summary>
         public string DateFormat2 = "yyyy.MM.dd HH:mm:ss";
+
+        public JsonSerializer() {
+            
+        }
+
+        public JsonSerializer(string dateFormat) {
+            DateFormat = dateFormat;
+        }
 
 
         /// <summary>
@@ -45,8 +53,7 @@ namespace eZet.EveLib.Core.Serializers {
         /// <returns>T.</returns>
         T ISerializer.Deserialize<T>(string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Start");
-            var result = JsonConvert.DeserializeObject<T>(data, new IsoDateTimeConverter {DateTimeFormat = DateFormat2},
-                new IsoDateTimeConverter {DateTimeFormat = DateFormat2});
+            var result = JsonConvert.DeserializeObject<T>(data, new IsoDateTimeConverter {DateTimeFormat = DateFormat});
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Complete");
             return result;
         }
@@ -59,7 +66,7 @@ namespace eZet.EveLib.Core.Serializers {
         /// <returns>System.String.</returns>
         public string Serialize<T>(T entity) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Serialize:Start");
-            var data = JsonConvert.SerializeObject(entity, new IsoDateTimeConverter {DateTimeFormat = DateFormat1},
+            var data = JsonConvert.SerializeObject(entity, new IsoDateTimeConverter {DateTimeFormat = DateFormat},
                 new StringEnumConverter());
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Serialize:Complete");
             return data;

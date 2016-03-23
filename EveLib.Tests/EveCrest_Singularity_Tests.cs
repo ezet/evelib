@@ -24,30 +24,6 @@ namespace eZet.EveLib.Test {
 
         public EveCrest Crest { get; set; }
 
-        [TestMethod]
-        public void RefreshToken() {
-            var result = Crest.RefreshAccessToken();
-        }
-
-        [TestMethod]
-        public void GetRoot() {
-            var root = Crest.GetRoot();
-        }
-
-        [TestMethod]
-        public async Task GetFittings() {
-            var fittings =
-                await
-                    (await (await (await Crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
-                        .QueryAsync(r => r.Fittings);
-        }
-
-        [TestMethod]
-        public async Task GetContacts() {
-            var contacts =
-                await
-                    (await (await (await Crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
-                        .QueryAsync(r => r.Contacts);
-        }
+     
     }
 }

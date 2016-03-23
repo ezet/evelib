@@ -37,7 +37,7 @@ namespace eZet.EveLib.EveWhoModule {
         ///     Initializes a new instance of the <see cref="EveWho" /> class.
         /// </summary>
         public EveWho() {
-            RequestHandler = new RequestHandler(new JsonSerializer());
+            RequestHandler = new RequestHandler(new JsonSerializer("yyyy-MM-dd HH:mm:ss"));
             Host = DefaultHost;
             ApiPath = DefaultApiPath;
         }

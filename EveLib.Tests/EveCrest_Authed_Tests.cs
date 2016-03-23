@@ -118,8 +118,9 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
-            var contact = contacts.Items.Single(r => r.Contact.Id == 157924121);
+            var contact = contacts.Items.First();
             Assert.IsTrue(await contact.DeleteAsync());
+            contact.Save(true);
         }
 
         [TestMethod]
@@ -141,7 +142,7 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
-            var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
+            var contact = contacts.Items.First();
             contact.Standing = 10;
             Assert.IsTrue(await contact.SaveAsync());
         }
@@ -152,8 +153,9 @@ namespace eZet.EveLib.Test {
                 await
                     (await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character))
                         .QueryAsync(r => r.Contacts);
-            var contact = contacts.Items.Single(r => r.Contact.Id == 99000006);
+            var contact = contacts.Items.First();
             Assert.IsTrue(await contact.DeleteAsync());
+            contact.Save(true);
         }
 
         [TestMethod]
@@ -205,6 +207,7 @@ namespace eZet.EveLib.Test {
             var fit = fittings.Items.Last();
             var result = await fit.DeleteAsync();
             Assert.IsTrue(result);
+            fit.Save(true);
         }
 
         [TestMethod]
@@ -221,10 +224,10 @@ namespace eZet.EveLib.Test {
         //    var response = await crest.GetRoot().QueryAsync(r => r.CorporationRoles);
         //}
 
-        [TestMethod]
-        public async Task Channels() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Channels);
-        }
+        //[TestMethod]
+        //public async Task Channels() {
+        //    var response = await crest.GetRoot().QueryAsync(r => r.Channels);
+        //}
 
         [TestMethod]
         public async Task Decode() {
