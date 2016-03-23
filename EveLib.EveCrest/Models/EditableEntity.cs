@@ -47,7 +47,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// <param name="forcePostRequest">if set to <c>true</c> [force post request].</param>
         /// <returns>Task.</returns>
         public Task<bool> SaveAsync(bool forcePostRequest = false) {
-            return EveCrest.SaveEntityAsync(this);
+            return EveCrest.SaveEntityAsync(this, forcePostRequest);
         }
 
         /// <summary>
