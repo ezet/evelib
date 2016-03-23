@@ -6,24 +6,26 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
+using Nito.AsyncEx;
 
 namespace eZet.EveLib.Core.Cache {
     /// <summary>
     ///     Simple plain file cache implementation
     /// </summary>
-    public class EveLibFileCache : IEveLibCache, IDisposable {
+    public class EveLibFileCache : IEveLibCache {
         private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 
-        private ReaderWriterLockSlim _registerLock = new ReaderWriterLockSlim();
+        private readonly AsyncReaderWriterLock _registerLock = new AsyncReaderWriterLock();
 
         private readonly TraceSource _trace = new TraceSource("EveLib");
 
         private bool _isInitialized;
+
+        private int _counter;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveLibFileCache" /> class.
@@ -55,6 +57,8 @@ namespace eZet.EveLib.Core.Cache {
         /// <param name="data">The data to cache</param>
         /// <returns></returns>
         public async Task StoreAsync(Uri uri, DateTime cacheTime, string data) {
+            _counter = 0;
+            ++_counter;
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache.StoreAsync:Start");
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Uri: {0}", uri);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Cache Expiry: {0}", cacheTime);
@@ -67,7 +71,11 @@ namespace eZet.EveLib.Core.Cache {
             }
             try {
                 var cacheTask = writeCacheDataToDiskAsync(uri, data);
-                var registerTask = writeRegisterToDiskAsync();
+                Task registerTask = Task.FromResult(0);
+                if (_counter > 10) {
+                    registerTask = writeRegisterToDiskAsync();
+                    _counter = 0;
+                }
                 await Task.WhenAll(cacheTask, registerTask).ConfigureAwait(false);
             }
             catch (Exception) {
@@ -143,15 +151,14 @@ namespace eZet.EveLib.Core.Cache {
 
         private async Task writeRegisterToDiskAsync() {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Writing cache register to disk");
-            while (!_registerLock.IsWriteLockHeld)
-                _registerLock.EnterWriteLock();
+            var lockTask = await _registerLock.WriterLockAsync();
             try {
                 await AsyncFileUtilities.WriteAllLinesAsync(CacheRegister,
                     _register.Select(x => x.Key + "," + x.Value.ToString(CultureInfo.InvariantCulture)))
                     .ConfigureAwait(false);
             }
             finally {
-                if (_registerLock.IsWriteLockHeld) _registerLock.ExitWriteLock();
+                lockTask.Dispose();
             }
         }
 
@@ -181,7 +188,7 @@ namespace eZet.EveLib.Core.Cache {
                     CacheRegister);
                 return;
             }
-            _registerLock.EnterReadLock();
+            var task = await _registerLock.ReaderLockAsync();
             try {
                 // read all lines
                 var data = await
@@ -217,24 +224,9 @@ namespace eZet.EveLib.Core.Cache {
                 _trace.TraceEvent(TraceEventType.Warning, 0, "EveLibFileCache:Could not load cache register");
             }
             finally {
-                if (_registerLock.IsReadLockHeld) _registerLock.ExitReadLock();
+                task.Dispose();
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        /// <param name="finalize"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose(bool finalize) {
-            _registerLock.Dispose();
-        }
     }
 }
