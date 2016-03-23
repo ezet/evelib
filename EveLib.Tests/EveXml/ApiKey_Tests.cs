@@ -33,7 +33,7 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void Properties_LazyLoaded() {
-            Assert.AreEqual(ApiKeyType.Character, _validKey.KeyType);
+            Assert.AreEqual(ApiKeyType.Account, _validKey.KeyType);
             Assert.IsNotNull(_validKey.ExpiryDate);
             Assert.AreEqual(268435455, _validKey.AccessMask);
         }

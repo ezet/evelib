@@ -14,13 +14,10 @@ namespace eZet.EveLib.Test {
 
 
         public CharacterKey_Beta() {
-            _sisiKey.BaseUri = "https://api.testeveonline.com";
-            _sisiKey.Characters.First().BaseUri = "https://api.testeveonline.com";
+            //_sisiKey.BaseUri = "https://api.testeveonline.com";
+            //_sisiKey.Characters.First().BaseUri = "https://api.testeveonline.com";
         }
 
-        [TestMethod]
-        public async Task GetBlueprints() {
-            var result = await _sisiKey.Characters.First().GetBlueprintsAsync();
-        }
+   
     }
 }

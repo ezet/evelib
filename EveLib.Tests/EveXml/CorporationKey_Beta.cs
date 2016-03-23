@@ -13,13 +13,10 @@ namespace eZet.EveLib.Test {
 
 
         public CorporationKey_Beta() {
-            _sisiKey.BaseUri = "https://api.testeveonline.com";
-            _sisiKey.Corporation.BaseUri = "https://api.testeveonline.com";
+            //_sisiKey.BaseUri = "https://api.testeveonline.com";
+            //_sisiKey.Corporation.BaseUri = "https://api.testeveonline.com";
         }
 
-        [TestMethod]
-        public async Task GetBlueprints() {
-            var result = await _sisiKey.Corporation.GetBlueprintsAsync();
-        }
+   
     }
 }

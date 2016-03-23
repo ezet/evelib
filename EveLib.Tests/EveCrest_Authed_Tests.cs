@@ -216,10 +216,10 @@ namespace eZet.EveLib.Test {
             Assert.IsNotNull(location);
         }
 
-        [TestMethod]
-        public async Task CorporationRoles() {
-            var response = await crest.GetRoot().QueryAsync(r => r.CorporationRoles);
-        }
+        //[TestMethod]
+        //public async Task CorporationRoles() {
+        //    var response = await crest.GetRoot().QueryAsync(r => r.CorporationRoles);
+        //}
 
         [TestMethod]
         public async Task Channels() {
@@ -238,10 +238,7 @@ namespace eZet.EveLib.Test {
             var dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
         }
 
-        [TestMethod]
-        public async Task Time() {
-            var response = await crest.GetRoot().QueryAsync(r => r.Time);
-        }
+    
 
     }
 }
