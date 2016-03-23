@@ -134,7 +134,6 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         /// <value>The charset.</value>
         public string Charset { get; set; }
 
-
         /// <summary>
         ///     post as an asynchronous operation.
         /// </summary>

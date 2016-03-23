@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
@@ -53,16 +54,18 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetAllItems() {
-            var alliances = await (await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances)).AllItemsAsync();
-            //alliances = _crest.GetRoot().Query(r => r.Alliances);
-            //_crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Name == "test"));
+            var alliances = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
+            await Task.WhenAll(alliances.Items.Select(a => _crest.LoadAsync(a)));
+            //var list = alliances.Items.Select(alliance => _crest.Load(alliance)).ToList();
+
+            //Assert.AreEqual(alliances.TotalCount, alliances.AllItems().Count());
         }
 
         [TestMethod]
         public void TestIEnumerable() {
             var alliances = _crest.GetRoot().Query(r => r.Alliances);
-            var list = alliances.ToList();
-            Assert.AreEqual(alliances.TotalCount, list.Count);
+            var n = alliances.Query(r => r.First(a => a.ShortName == "MZR"));
+            Assert.AreEqual(alliances.TotalCount, alliances.Count());
         }
 
         [TestMethod]

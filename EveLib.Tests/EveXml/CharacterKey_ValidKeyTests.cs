@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using eZet.EveLib.Core.Cache;
 using eZet.EveLib.EveXmlModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,6 +16,11 @@ namespace eZet.EveLib.Test {
             "wpzj1BPcUMrSGj9L4YmkHLtoRWXCOsIipMECdUDElUiA3GUWvC67cy5xUZltyYoI");
 
         private readonly CharacterKey _validKey = new CharacterKey(KeyId, VCode);
+
+
+        public CharacterKey_ValidKeyTests() {
+            _validKey.CacheType = CacheType.ForceRefresh;
+        }
 
         [TestMethod]
         public void Characters_NoExceptions() {
