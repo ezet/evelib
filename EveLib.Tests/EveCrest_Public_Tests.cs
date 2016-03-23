@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
-using eZet.EveLib.EveCrestModule.Models;
 using eZet.EveLib.EveCrestModule.Models.Links;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -56,17 +56,17 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetAllItems() {
             var alliances = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
-            Assert.AreEqual(alliances.TotalCount, alliances.AllItems().Count());
-            //alliances = _crest.GetRoot().Query(r => r.Alliances);
-            //_crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Name == "test"));
+            await Task.WhenAll(alliances.Items.Select(a => _crest.LoadAsync(a)));
+            //var list = alliances.Items.Select(alliance => _crest.Load(alliance)).ToList();
+
+            //Assert.AreEqual(alliances.TotalCount, alliances.AllItems().Count());
         }
 
         [TestMethod]
         public void TestIEnumerable() {
             var alliances = _crest.GetRoot().Query(r => r.Alliances);
-            var first = alliances.Query(a => a.First());
-            //var list = alliances.ToList();
-            //Assert.AreEqual(alliances.TotalCount, list.Count);
+            var n = alliances.Query(r => r.First(a => a.ShortName == "MZR"));
+            Assert.AreEqual(alliances.TotalCount, alliances.Count());
         }
 
         [TestMethod]

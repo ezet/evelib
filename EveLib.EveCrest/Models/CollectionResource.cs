@@ -252,5 +252,9 @@ namespace eZet.EveLib.EveCrestModule.Models {
                 yield return iter.Current;
 
         }
+
+        public async Task<IList<TItem>> ToListAsync() {
+            return (await AllItemsAsync().ConfigureAwait(false)).ToList();
+        }
     }
 }
