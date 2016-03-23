@@ -21,7 +21,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     ///     Class ItemType. This class cannot be inherited.
     /// </summary>
     [DataContract]
-    public sealed class ItemType : CrestResource<ItemType> {
+    public sealed class ItemType : CrestResource<ItemType>, IQueryParameter<ItemType> {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ItemType" /> class.
         /// </summary>
@@ -167,5 +167,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "isDefault")]
             public bool IsDefault { get; set; }
         }
+
+        public string ParameterName { get; }
     }
 }

@@ -23,7 +23,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
     /// Interface ICrestResource
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICrestResource<out T> where T : class, ICrestResource<T> {
+    public interface ICrestResource<out T> {
         /// <summary>
         /// Gets or sets the crest instance used to query resources.
         /// </summary>

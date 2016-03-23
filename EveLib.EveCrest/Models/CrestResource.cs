@@ -23,7 +23,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
     ///     Base class for all CREST resouces.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class CrestResource<T> : ICrestResource<T> where T : class, ICrestResource<T> {
+    public abstract class CrestResource<T> : ICrestResource<T> where T : class {
         /// <summary>
         ///     Gets or sets the crest instance used to query resources.
         /// </summary>
@@ -100,6 +100,26 @@ namespace eZet.EveLib.EveCrestModule.Models {
         //public WebHeaderCollection QueryHead() {
         //    return QueryHeadAsync().Result;
         //}
+
+        public Task<TOut> QueryAsync<TOut, TParam>(Func<T, Href<TOut>> objFunc, IQueryParameter<TParam> param)
+where TOut : class, ICrestResource<TOut> {
+            return EveCrest.LoadAsync(objFunc.Invoke(this as T), param);
+        }
+
+        public TOut Query<TOut, TParam>(Func<T, Href<TOut>> objFunc, IQueryParameter<TParam> param)
+where TOut : class, ICrestResource<TOut> {
+            return QueryAsync(objFunc, param).Result;
+        }
+
+        public Task<TOut> QueryAsync<TOut, TParam>(Func<T, Href<TOut>> objFunc, LinkedEntity<TParam> param)
+where TOut : class, ICrestResource<TOut> where TParam : IQueryParameter<TParam> {
+            return EveCrest.LoadAsync(objFunc.Invoke(this as T), param);
+        }
+
+        public TOut Query<TOut, TParam>(Func<T, Href<TOut>> objFunc, LinkedEntity<TParam> param)
+where TOut : class, ICrestResource<TOut> where TParam : IQueryParameter<TParam> {
+            return QueryAsync(objFunc, param).Result;
+        }
 
         /// <summary>
         ///     Queries the resource asynchronously.

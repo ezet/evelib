@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
 using eZet.EveLib.EveCrestModule.Exceptions;
+using eZet.EveLib.EveCrestModule.Models;
 using eZet.EveLib.EveCrestModule.Models.Links;
+using eZet.EveLib.EveCrestModule.Models.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
@@ -56,7 +58,31 @@ namespace eZet.EveLib.Test {
             var alliances = await (await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances)).AllItemsAsync();
             //alliances = _crest.GetRoot().Query(r => r.Alliances);
             //_crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Name == "test"));
+        }
 
+        [TestMethod]
+        public void TestIEnumerable() {
+            var alliances = _crest.GetRoot().Query(r => r.Alliances);
+            var list = alliances.ToList();
+            Assert.AreEqual(alliances.TotalCount, list.Count);
+        }
+
+        [TestMethod]
+        public async Task TestLinkedParameter() {
+            var item = _crest.GetRoot().Query(r => r.ItemTypes).First();
+            var orders = await _crest.GetRoot()
+                .Query(r => r.Regions)
+                .Query(r => r.Items.First())
+                .QueryAsync(r => r.MarketBuyOrders, item);
+        }
+
+        [TestMethod]
+        public async Task TestIQueryParameter() {
+            var item = _crest.GetRoot().Query(r => r.ItemTypes).Query(r => r.First());
+            var orders = await _crest.GetRoot()
+                .Query(r => r.Regions)
+                .Query(r => r.Items.First())
+                .QueryAsync(r => r.MarketBuyOrders, item);
         }
 
         [TestMethod]
