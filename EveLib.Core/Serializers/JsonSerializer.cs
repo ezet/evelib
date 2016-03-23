@@ -45,7 +45,7 @@ namespace eZet.EveLib.Core.Serializers {
         /// <returns>T.</returns>
         T ISerializer.Deserialize<T>(string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Start");
-            var result = JsonConvert.DeserializeObject<T>(data, new IsoDateTimeConverter {DateTimeFormat = DateFormat1},
+            var result = JsonConvert.DeserializeObject<T>(data, new IsoDateTimeConverter {DateTimeFormat = DateFormat2},
                 new IsoDateTimeConverter {DateTimeFormat = DateFormat2});
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Complete");
             return result;
