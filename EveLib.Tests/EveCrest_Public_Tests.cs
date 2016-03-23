@@ -55,7 +55,8 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public async Task GetAllItems() {
-            var alliances = await (await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances)).AllItemsAsync();
+            var alliances = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
+            Assert.AreEqual(alliances.TotalCount, alliances.AllItems().Count());
             //alliances = _crest.GetRoot().Query(r => r.Alliances);
             //_crest.GetRoot().Query(r => r.Alliances).Query(r => r.Where(a => a.Name == "test"));
         }
@@ -63,8 +64,9 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void TestIEnumerable() {
             var alliances = _crest.GetRoot().Query(r => r.Alliances);
-            var list = alliances.ToList();
-            Assert.AreEqual(alliances.TotalCount, list.Count);
+            var first = alliances.Query(a => a.First());
+            //var list = alliances.ToList();
+            //Assert.AreEqual(alliances.TotalCount, list.Count);
         }
 
         [TestMethod]
