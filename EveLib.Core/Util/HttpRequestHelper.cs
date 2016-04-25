@@ -23,7 +23,7 @@ namespace eZet.EveLib.Core.Util {
         /// <returns>The HttpWebRequest</returns>
         public static HttpWebRequest CreateRequest(Uri uri) {
             HttpWebRequest request = WebRequest.CreateHttp(uri);
-            request.Proxy = null;
+            //request.Proxy = null;
             request.UserAgent = Config.UserAgent;
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.GZip;
             request.ContentType = ContentType;

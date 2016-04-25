@@ -38,7 +38,7 @@ namespace eZet.EveLib.ZKillboardModule {
         /// <summary>
         ///     Gets or sets the request handler
         /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
+        public ICachedRequestHandler RequestHandler { get; set; }
 
         private ICachedRequestHandler cachedRequestHandler() {
             return RequestHandler as ICachedRequestHandler;

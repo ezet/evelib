@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.ZKillboardModule;
 using eZet.EveLib.ZKillboardModule.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,6 +14,7 @@ namespace eZet.EveLib.Test {
         public ZKillboard_Tests() {
             Options.Limit = 1;
             Options.WSpace = true;
+            Api.RequestHandler.CacheLevel = CacheLevel.BypassCache;
         }
 
         [TestMethod]
@@ -36,6 +38,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetStats() {
             var response = await Api.GetStatsAsync(EntityType.CorporationId, 98330748);
+            Assert.IsNotNull(response);
         }
     }
 }
