@@ -34,15 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveAuth", "EveLib.Ev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveXml", "EveLib.EveXml\EveLib.EveXml.csproj", "{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.CrestClient", "EveLib.CrestClient\EveLib.CrestClient.csproj", "{AB71147C-2135-48F5-9501-F88BDE3360B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveAuthUtility", "EveAuthUtility\EveAuthUtility.csproj", "{76B260AD-310B-4B8E-BFFF-124877BF692C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{40D97368-52D2-40B4-83FB-F1F64DDF7803}"
-	ProjectSection(SolutionItems) = preProject
-		test.runsettings = test.runsettings
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -175,26 +166,6 @@ Global
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|ARM.ActiveCfg = Release|Any CPU
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x64.ActiveCfg = Release|Any CPU
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x86.ActiveCfg = Release|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|ARM.ActiveCfg = Release|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|x64.ActiveCfg = Release|Any CPU
-		{AB71147C-2135-48F5-9501-F88BDE3360B9}.Release|x86.ActiveCfg = Release|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|ARM.ActiveCfg = Release|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|x64.ActiveCfg = Release|Any CPU
-		{76B260AD-310B-4B8E-BFFF-124877BF692C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
