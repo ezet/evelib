@@ -28,9 +28,7 @@ namespace eZet.EveLib.ZKillboardModule {
         /// <summary>
         ///     Returns true if the current request handler supports caching.
         /// </summary>
-        public bool IsCacheHandler {
-            get { return cachedRequestHandler() != null; }
-        }
+        public bool IsCacheHandler => cachedRequestHandler() != null;
 
         /// <summary>
         ///     Gets or sets the default base URI
@@ -40,7 +38,7 @@ namespace eZet.EveLib.ZKillboardModule {
         /// <summary>
         ///     Gets or sets the request handler
         /// </summary>
-        public IRequestHandler RequestHandler { get; set; }
+        public ICachedRequestHandler RequestHandler { get; set; }
 
         private ICachedRequestHandler cachedRequestHandler() {
             return RequestHandler as ICachedRequestHandler;
@@ -65,7 +63,7 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/kills";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(Host, relPath));
+            return requestAsync<ZkbResponse>(new Uri(Host, relPath));
         }
 
         /// <summary>
@@ -87,7 +85,7 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api/losses";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(Host, relPath));
+            return requestAsync<ZkbResponse>(new Uri(Host, relPath));
         }
 
         /// <summary>
@@ -101,6 +99,19 @@ namespace eZet.EveLib.ZKillboardModule {
         }
 
         /// <summary>
+        /// Gets the stats asynchronous.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ZkbStatResponse&gt;.</returns>
+        public Task<ZkbStatResponse> GetStatsAsync(EntityType type, long id) {
+            var relPath = "/api/stats/";
+            var t = type.ToString();
+            relPath += t.Substring(0, 1).ToLower() + t.Substring(1, t.Length - 2) + t.Substring(t.Length - 1).ToUpper() + '/' + id + '/';
+            return requestAsync<ZkbStatResponse>(new Uri(Host, relPath));
+        }
+
+        /// <summary>
         ///     Returns both Kill and loss mails
         /// </summary>
         /// <param name="options">ZKillboard options</param>
@@ -109,11 +120,17 @@ namespace eZet.EveLib.ZKillboardModule {
             Contract.Requires(options != null, "Options cannot be null");
             string relPath = "/api";
             relPath = options.GetQueryString(relPath);
-            return requestAsync(new Uri(Host, relPath));
+            return requestAsync<ZkbResponse>(new Uri(Host, relPath));
         }
 
-        private Task<ZkbResponse> requestAsync(Uri uri) {
-            return RequestHandler.RequestAsync<ZkbResponse>(uri);
+        /// <summary>
+        /// Requests the asynchronous.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri">The URI.</param>
+        /// <returns>Task&lt;T&gt;.</returns>
+        private Task<T> requestAsync<T>(Uri uri) {
+            return RequestHandler.RequestAsync<T>(uri);
         }
     }
 }
