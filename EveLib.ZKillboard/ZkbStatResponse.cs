@@ -4,7 +4,7 @@
 // Created          : 02-16-2016
 //
 // Last Modified By : larsd
-// Last Modified On : 02-16-2016
+// Last Modified On : 04-27-2016
 // ***********************************************************************
 // <copyright file="ZkbStatResponse.cs" company="Lars Kristian Dahl">
 //     Copyright ©  2015
@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
@@ -30,8 +31,13 @@ namespace eZet.EveLib.ZKillboardModule {
         [DataMember(Name = "allTimeSum")]
         public int AllTimeSum { get; set; }
 
-        // TODO: Implement groups
-        //[DataMember(Name = "groups")]
+        // TODO: Implement groups properly
+        /// <summary>
+        /// Gets or sets the groups.
+        /// </summary>
+        /// <value>The groups.</value>
+        [DataMember(Name = "groups")]
+        public Dictionary<string, ZkbGroup> Groups { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance has supers.
@@ -62,7 +68,12 @@ namespace eZet.EveLib.ZKillboardModule {
         public long IskLost { get; set; }
 
         // TODO: Implement months
-        //[DataMember(Name = "months")]
+        /// <summary>
+        /// Gets or sets the months.
+        /// </summary>
+        /// <value>The months.</value>
+        [DataMember(Name = "months")]
+        public Dictionary<string, ZkbMonth> Months { get; set; }
 
         /// <summary>
         /// Gets or sets the points destroyed.
@@ -129,51 +140,331 @@ namespace eZet.EveLib.ZKillboardModule {
         [DataMember(Name = "info")]
         public ZkbStatInfo Info { get; set; }
 
+        /// <summary>
+        /// Class ZkbGroup.
+        /// </summary>
+        [DataContract]
+        public class ZkbGroup {
+            /// <summary>
+            /// Gets or sets the group identifier.
+            /// </summary>
+            /// <value>The group identifier.</value>
+            [DataMember(Name = "groupID")]
+            public int GroupId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the ships destroyed.
+            /// </summary>
+            /// <value>The ships destroyed.</value>
+            [DataMember(Name = "shipsDestroyed")]
+            public int ShipsDestroyed { get; set; }
+
+            /// <summary>
+            /// Gets or sets the points destroyed.
+            /// </summary>
+            /// <value>The points destroyed.</value>
+            [DataMember(Name = "pointsDestroyed")]
+            public int PointsDestroyed { get; set; }
+
+            /// <summary>
+            /// Gets or sets the isk destroyed.
+            /// </summary>
+            /// <value>The isk destroyed.</value>
+            [DataMember(Name = "iskDestroyed")]
+            public long IskDestroyed { get; set; }
+        }
+
+        /// <summary>
+        /// Class ZkbMonth.
+        /// </summary>
+        [DataContract]
+        public class ZkbMonth
+        {
+            /// <summary>
+            /// Gets or sets the year.
+            /// </summary>
+            /// <value>The year.</value>
+            [DataMember(Name = "year")]
+            public int Year { get; set; }
+
+            /// <summary>
+            /// Gets or sets the month.
+            /// </summary>
+            /// <value>The month.</value>
+            [DataMember(Name = "month")]
+            public int Month { get; set; }
+
+            /// <summary>
+            /// Gets or sets the ships destroyed.
+            /// </summary>
+            /// <value>The ships destroyed.</value>
+            [DataMember(Name = "shipsDestroyed")]
+            public int ShipsDestroyed { get; set; }
+
+            /// <summary>
+            /// Gets or sets the points destroyed.
+            /// </summary>
+            /// <value>The points destroyed.</value>
+            [DataMember(Name = "pointsDestroyed")]
+            public int PointsDestroyed { get; set; }
+
+            /// <summary>
+            /// Gets or sets the isk destroyed.
+            /// </summary>
+            /// <value>The isk destroyed.</value>
+            [DataMember(Name = "iskDestroyed")]
+            public long IskDestroyed { get; set; }
+
+        }
+
+        /// <summary>
+        /// Class ZkbTopAllTime.
+        /// </summary>
         [DataContract]
         public class ZkbTopAllTime {
 
+            /// <summary>
+            /// Gets or sets the type.
+            /// </summary>
+            /// <value>The type.</value>
             [DataMember(Name = "type")]
             public string Type { get; set; }
 
+            /// <summary>
+            /// Gets or sets the data.
+            /// </summary>
+            /// <value>The data.</value>
             [DataMember(Name = "data")]
             public Collection<ZkbData> Data { get; set; }
         }
 
+        /// <summary>
+        /// Class ZkbData.
+        /// </summary>
         [DataContract]
         public class ZkbData {
 
+            /// <summary>
+            /// Gets or sets the kills.
+            /// </summary>
+            /// <value>The kills.</value>
             [DataMember(Name = "kills")]
             public int Kills { get; set; }
 
+            /// <summary>
+            /// Gets or sets the character identifier.
+            /// </summary>
+            /// <value>The character identifier.</value>
+            [DataMember(Name = "characterID")]
+            public long CharacterId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the character.
+            /// </summary>
+            /// <value>The name of the character.</value>
+            [DataMember(Name = "characterName")]
+            public string CharacterName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the corporation identifier.
+            /// </summary>
+            /// <value>The corporation identifier.</value>
+            [DataMember(Name = "corporationID")]
+            public long CorporationId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the corporation.
+            /// </summary>
+            /// <value>The name of the corporation.</value>
+            [DataMember(Name = "corporationName")]
+            public string CorporationName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the alliance identifier.
+            /// </summary>
+            /// <value>The alliance identifier.</value>
+            [DataMember(Name = "allianceID")]
+            public long AllianceId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the alliance.
+            /// </summary>
+            /// <value>The name of the alliance.</value>
+            [DataMember(Name = "allianceName")]
+            public string AllianceName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the faction identifier.
+            /// </summary>
+            /// <value>The faction identifier.</value>
+            [DataMember(Name = "factionID")]
+            public long FactionId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the faction.
+            /// </summary>
+            /// <value>The name of the faction.</value>
+            [DataMember(Name = "factionName")]
+            public string FactionName { get; set; }
+
+            #region Ship
+            /// <summary>
+            /// Gets or sets the ship type identifier.
+            /// </summary>
+            /// <value>The ship type identifier.</value>
+            [DataMember(Name = "shipTypeID")]
+            public long ShipTypeId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the ship.
+            /// </summary>
+            /// <value>The name of the ship.</value>
+            [DataMember(Name = "shipName")]
+            public string ShipName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the group identifier.
+            /// </summary>
+            /// <value>The group identifier.</value>
+            [DataMember(Name = "groupID")]
+            public long GroupId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the group.
+            /// </summary>
+            /// <value>The name of the group.</value>
+            [DataMember(Name = "groupName")]
+            public string GroupName { get; set; }
+            #endregion
+
+            #region System
+            /// <summary>
+            /// Gets or sets the solar system identifier.
+            /// </summary>
+            /// <value>The solar system identifier.</value>
+            [DataMember(Name = "solarSystemID")]
+            public long SolarSystemId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the solar system.
+            /// </summary>
+            /// <value>The name of the solar system.</value>
+            [DataMember(Name = "solarSystemName")]
+            public string SolarSystemName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the sun type identifier.
+            /// </summary>
+            /// <value>The sun type identifier.</value>
+            [DataMember(Name = "sunTypeID")]
+            public int SunTypeId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the solar system security.
+            /// </summary>
+            /// <value>The solar system security.</value>
+            [DataMember(Name = "solarSystemSecurity")]
+            public double SolarSystemSecurity { get; set; }
+
+            /// <summary>
+            /// Gets or sets the system color code.
+            /// </summary>
+            /// <value>The system color code.</value>
+            [DataMember(Name = "systemColorCode")]
+            public string SystemColorCode { get; set; }
+
+            /// <summary>
+            /// Gets or sets the region identifier.
+            /// </summary>
+            /// <value>The region identifier.</value>
+            [DataMember(Name = "regionID")]
+            public long RegionId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name of the region.
+            /// </summary>
+            /// <value>The name of the region.</value>
+            [DataMember(Name = "regionName")]
+            public string RegionName { get; set; }
+            #endregion
+
         }
 
 
+        /// <summary>
+        /// Class ZkbActivePvp.
+        /// </summary>
         [DataContract]
         public class ZkbActivePvp {
 
+            /// <summary>
+            /// Gets or sets the characters.
+            /// </summary>
+            /// <value>The characters.</value>
             [DataMember(Name = "characters")]
             public ZkbActivePvpStat Characters { get; set; }
 
+            /// <summary>
+            /// Gets or sets the corporations.
+            /// </summary>
+            /// <value>The corporations.</value>
+            [DataMember(Name = "corporations")]
+            public ZkbActivePvpStat Corporations { get; set; }
+
+            /// <summary>
+            /// Gets or sets the alliances.
+            /// </summary>
+            /// <value>The alliances.</value>
+            [DataMember(Name = "alliances")]
+            public ZkbActivePvpStat Alliances { get; set; }
+
+            /// <summary>
+            /// Gets or sets the ships.
+            /// </summary>
+            /// <value>The ships.</value>
             [DataMember(Name = "ships")]
             public ZkbActivePvpStat Ships { get; set; }
 
+            /// <summary>
+            /// Gets or sets the kills.
+            /// </summary>
+            /// <value>The kills.</value>
+            [DataMember(Name = "kills")]
+            public ZkbActivePvpStat Kills { get; set; }
+
+            /// <summary>
+            /// Gets or sets the systems.
+            /// </summary>
+            /// <value>The systems.</value>
             [DataMember(Name = "systems")]
             public ZkbActivePvpStat Systems { get; set; }
 
+            /// <summary>
+            /// Gets or sets the regions.
+            /// </summary>
+            /// <value>The regions.</value>
             [DataMember(Name = "regions")]
             public ZkbActivePvpStat Regions { get; set; }
-
-            [DataMember(Name = "kills")]
-            public ZkbActivePvpStat Kills { get; set; }
             
         }
 
+        /// <summary>
+        /// Class ZkbActivePvpStat.
+        /// </summary>
         [DataContract]
         public class ZkbActivePvpStat {
-            
+
+            /// <summary>
+            /// Gets or sets the type.
+            /// </summary>
+            /// <value>The type.</value>
             [DataMember(Name = "type")]
             public string Type { get; set; }
 
+            /// <summary>
+            /// Gets or sets the count.
+            /// </summary>
+            /// <value>The count.</value>
             [DataMember(Name = "count")]
             public int Count { get; set; }
 
@@ -227,6 +518,13 @@ namespace eZet.EveLib.ZKillboardModule {
             /// <value>The last API update.</value>
             [DataMember(Name = "lastApiUpdate")]
             public ZkbApiUpdate LastApiUpdate { get; set; }
+
+            /// <summary>
+            /// Gets or sets the last crest update.
+            /// </summary>
+            /// <value>The last crest update.</value>
+            [DataMember(Name = "lastCrestUpdate")]
+            public ZkbApiUpdate LastCrestUpdate { get; set; }
 
             /// <summary>
             /// Gets or sets the member count.
