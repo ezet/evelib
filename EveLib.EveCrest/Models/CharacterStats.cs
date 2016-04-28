@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Runtime.Serialization;
 
 namespace eZet.EveLib.EveCrestModule.Models {
@@ -15,7 +16,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         public string CharacterName { get; set; }
 
         [DataMember(Name = "aggregateYears")]
-        public Dictionary<int, dynamic> AggregateYears {get ; set; }
+        public Dictionary<int, ExpandoObject> AggregateYears {get ; set; }
          
     }
 }

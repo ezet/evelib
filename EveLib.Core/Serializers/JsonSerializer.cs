@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System.Diagnostics;
+using eZet.EveLib.Core.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -42,10 +43,11 @@ namespace eZet.EveLib.Core.Serializers {
         public JsonSerializer() {
             Settings = new JsonSerializerSettings();
             Settings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = DateFormat });
+            Settings.Converters.Add(new CamelCaseToPascalCaseExpandoObjectConverter());
             Settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
 
-        public JsonSerializer(string dateFormat) {
+        public JsonSerializer(string dateFormat) : this() {
             DateFormat = dateFormat;
         }
 

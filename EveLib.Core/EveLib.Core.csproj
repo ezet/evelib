@@ -137,6 +137,7 @@
     <Compile Include="Cache\Enums.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
+    <Compile Include="Converters\CamelCaseToPascalCaseExpandoObjectConverter.cs" />
     <Compile Include="EveLib.cs" />
     <Compile Include="Exceptions\EveLibWebException.cs" />
     <Compile Include="Exceptions\EveLibException.cs" />
