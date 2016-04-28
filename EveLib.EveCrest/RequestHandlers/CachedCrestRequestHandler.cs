@@ -276,7 +276,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         ///     or
         /// </exception>
         private async Task<HttpWebResponse> requestAsync(HttpWebRequest request, string accessToken) {
-            var mode = (string.IsNullOrEmpty(accessToken)) ? CrestMode.Public : CrestMode.Authenticated;
+            var mode = accessToken == null ? CrestMode.Public : CrestMode.Authenticated;
             HttpWebResponse response;
             if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
             if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);

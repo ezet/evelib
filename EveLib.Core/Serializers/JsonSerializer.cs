@@ -15,6 +15,7 @@
 using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace eZet.EveLib.Core.Serializers {
     /// <summary>
@@ -36,14 +37,17 @@ namespace eZet.EveLib.Core.Serializers {
         /// </summary>
         public string DateFormat2 = "yyyy.MM.dd HH:mm:ss";
 
+        private JsonSerializerSettings Settings { get; }
+
         public JsonSerializer() {
-            
+            Settings = new JsonSerializerSettings();
+            Settings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = DateFormat });
+            Settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
 
         public JsonSerializer(string dateFormat) {
             DateFormat = dateFormat;
         }
-
 
         /// <summary>
         ///     Deserializes data.
@@ -53,7 +57,7 @@ namespace eZet.EveLib.Core.Serializers {
         /// <returns>T.</returns>
         T ISerializer.Deserialize<T>(string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Start");
-            var result = JsonConvert.DeserializeObject<T>(data, new IsoDateTimeConverter {DateTimeFormat = DateFormat});
+            var result = JsonConvert.DeserializeObject<T>(data, Settings);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Complete");
             return result;
         }

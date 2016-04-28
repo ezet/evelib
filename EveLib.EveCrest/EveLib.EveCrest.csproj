@@ -117,6 +117,7 @@
     <Compile Include="EveCrest.cs" />
     <Compile Include="Exceptions\DeprecatedResourceException.cs" />
     <Compile Include="Exceptions\ResourceNotSupportedException.cs" />
+    <Compile Include="Models\CharacterStats.cs" />
     <Compile Include="Models\CrestOptions.cs" />
     <Compile Include="Models\EditableEntity.cs" />
     <Compile Include="Models\IEditableEntity.cs" />

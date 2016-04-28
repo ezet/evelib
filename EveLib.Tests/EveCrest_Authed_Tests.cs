@@ -14,7 +14,7 @@ namespace eZet.EveLib.Test {
         private const int AllianceId = 99000006;
 
         private const string RefreshToken =
-            "g92QOVphazTOcNhV9hpq22eoo3cK7oBrLOHdBc71cFl76OHZ-3DRAR6bnAn7orMprjJN05pjgWHvCTIWwQ_hVA2";
+            "w_FqWliGJYDmPBycG2GtwYyizqMK-wQw6yuBfQf2r05bwG-BJgCM3HcdzUDFc2-N23sv-VGmWCgVttWpcOLq6w2";
 
         private const string EncodedKey =
             "NDZkYWEyYjM3OGJkNGJjMTg5ZGY0YzNhNzNhZjIyNmE6SzhHY1dBRGxqZ25MWnlyS0dGZmlxekhWdlZpR2hhcE9ZU0NFeTgzaA==";
@@ -23,7 +23,7 @@ namespace eZet.EveLib.Test {
 
         public EveCrest_Authed_Tests() {
             //crest.AccessToken =
-            //    "UsIcawIKnTkLBknGg6Tjx-zFkU_XK0LOMWucbKXoaWrHjYtrldb8bZPjEEkj9rueXD97lYkInjg0urr7SbJ1UA2";
+            //    "Aa-88YrDtEQiu7_QIqZuDCluw6W-VbeUjvbt4ULYMqZzB4VHUwOh8KCUwMxDchkQVdeiCTCsYtlP2GspTr3xqw2";
             crest.RefreshToken = RefreshToken;
             crest.EncodedKey = EncodedKey;
             crest.RequestHandler.ThrowOnDeprecated = true;
@@ -65,6 +65,12 @@ namespace eZet.EveLib.Test {
         public async Task GetHead() {
             var root = await crest.GetRootAsync();
             var head = await crest.QueryHeadAsync(root.Alliances);
+        }
+
+        [TestMethod]
+        public async Task GetCharacterStats() {
+            var response = await crest.GetCharacterStats(157924121);
+            Assert.IsNotNull(response);
         }
 
         [TestMethod]

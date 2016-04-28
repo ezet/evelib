@@ -116,6 +116,7 @@ namespace eZet.EveLib.EveCrestModule {
         public EveCrest(string refreshToken, string encodedKey)
             : this() {
             RefreshToken = refreshToken;
+            AccessToken = "";
             EncodedKey = encodedKey;
             Host = DefaultAuthHost;
             Mode = CrestMode.Authenticated;
@@ -654,6 +655,8 @@ namespace eZet.EveLib.EveCrestModule {
             return AddEntityAsync(entity).Result;
         }
 
+
+
         /// <summary>
         /// Returns data on the specified killmail.
         /// </summary>
@@ -661,8 +664,8 @@ namespace eZet.EveLib.EveCrestModule {
         /// <param name="hash">Killmail hash</param>
         /// <returns>Returns data for the specified killmail.</returns>
         public Task<Killmail> GetKillmailAsync(long id, string hash) {
-            var relPath = Host + "/killmails/" + id + "/" + hash + "/";
-            return getAsync<Killmail>(relPath);
+            var uri = Host + "/killmails/" + id + "/" + hash + "/";
+            return getAsync<Killmail>(uri);
         }
 
         /// <summary>
@@ -675,6 +678,12 @@ namespace eZet.EveLib.EveCrestModule {
             return GetKillmailAsync(id, hash).Result;
         }
 
+        public Task<CharacterStats> GetCharacterStats(long id) {
+            var uri = "https://characterstats.tech.ccp.is/v1/" + id + "/";
+            return getAsync<CharacterStats>(uri);
+        }
+
+        #region Obsolete
         /// <summary>
         /// Returns a list of all active incursions.
         /// </summary>
@@ -880,6 +889,7 @@ namespace eZet.EveLib.EveCrestModule {
         public IndustryFacilityCollection GetIndustryFacilities() {
             return GetIndustryFacilitiesAsync().Result;
         }
+        #endregion
 
         /// <summary>
         /// Tries the refresh token asynchronous.
