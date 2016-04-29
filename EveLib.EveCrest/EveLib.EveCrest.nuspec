@@ -6,12 +6,13 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
+	<copyright>$copyright$</copyright>
     <licenseUrl>https://raw.githubusercontent.com/ezet/evelib/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ezet/evelib</projectUrl>
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveCrest_v3.4.3</releaseNotes>
+    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveCrest_v3.4.1</releaseNotes>
     <tags>EveLib EveCrest API EveOnline Eve Online Crest</tags>
 	<dependencies>
       <dependency id="Newtonsoft.Json" version="6.0.0" />
