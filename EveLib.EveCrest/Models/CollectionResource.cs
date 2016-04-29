@@ -59,9 +59,13 @@ namespace eZet.EveLib.EveCrestModule.Models {
         [DataMember(Name = "next")]
         public Href<TCollection> Next { get; set; }
 
+        /// <summary>
+        /// Gets the next resource.
+        /// </summary>
+        /// <value>The next resource.</value>
         public CollectionResource<TCollection, TItem> NextResource { get; private set; }
 
-            /// <summary>
+        /// <summary>
         ///     Gets or sets the previous page.
         /// </summary>
         /// <value>The previous.</value>
@@ -253,6 +257,10 @@ namespace eZet.EveLib.EveCrestModule.Models {
 
         }
 
+        /// <summary>
+        /// To the list asynchronous.
+        /// </summary>
+        /// <returns>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;TItem&gt;&gt;.</returns>
         public async Task<IList<TItem>> ToListAsync() {
             return (await AllItemsAsync().ConfigureAwait(false)).ToList();
         }

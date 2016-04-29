@@ -168,6 +168,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             public bool IsDefault { get; set; }
         }
 
+        /// <summary>
+        /// Gets the name of the parameter.
+        /// </summary>
+        /// <value>The name of the parameter.</value>
         public string ParameterName { get; }
     }
 }

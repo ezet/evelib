@@ -6,7 +6,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
     public sealed class CharacterStats : CrestResource<CharacterStats> {
 
         public CharacterStats() {
-            ContentType = "test";
+            ContentType = "default";
         }
 
         [DataMember(Name = "characterID")]

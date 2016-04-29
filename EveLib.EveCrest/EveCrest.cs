@@ -678,6 +678,11 @@ namespace eZet.EveLib.EveCrestModule {
             return GetKillmailAsync(id, hash).Result;
         }
 
+        /// <summary>
+        /// Gets the character stats.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>System.Threading.Tasks.Task&lt;eZet.EveLib.EveCrestModule.Models.CharacterStats&gt;.</returns>
         public Task<CharacterStats> GetCharacterStats(long id) {
             var uri = "https://characterstats.tech.ccp.is/v1/" + id + "/";
             return getAsync<CharacterStats>(uri);
