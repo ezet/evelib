@@ -95,7 +95,7 @@ namespace eZet.EveLib.EveXmlModule {
         ///     Gets the CAK access mask of this key. Note: If this object has not already been initialized, this will send a web
         ///     request to the API.
         /// </summary>
-        public int AccessMask {
+        public long AccessMask {
             get { return ApiKeyInfo.AccessMask; }
         }
 
