@@ -46,7 +46,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
             /// </summary>
             /// <value>The access mask.</value>
             [XmlAttribute("accessMask")]
-            public int AccessMask { get; set; }
+            public long AccessMask { get; set; }
 
             /// <summary>
             ///     Gets or sets the type.
