@@ -6,12 +6,13 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
+	<copyright>$copyright</copyright>
     <licenseUrl>https://raw.githubusercontent.com/ezet/evelib/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ezet/evelib</projectUrl>
       <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveXml_v3.0.7</releaseNotes>
+    <releaseNotes>https://github.com/ezet/evelib/releases/tag/EveXml_v3.0.8</releaseNotes>
     <tags>EveLib EveXml API EveOnline Eve Online</tags>
   </metadata>
 </package>
