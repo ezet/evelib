@@ -54,12 +54,7 @@ namespace eZet.EveLib.EveCrestModule {
         /// <summary>
         /// The default URI used to access the public CREST API. This can be overridded by setting the Host.
         /// </summary>
-        public const string DefaultPublicHost = "https://public-crest.eveonline.com/";
-
-        /// <summary>
-        /// The default URI used to access the authenticated CREST API. This can be overridded by setting the Host.
-        /// </summary>
-        public const string DefaultAuthHost = "https://crest-tq.eveonline.com/";
+        public const string DefaultHost = "https://crest-tq.eveonline.com/";
 
         /// <summary>
         /// The obsolete message
@@ -89,7 +84,7 @@ namespace eZet.EveLib.EveCrestModule {
             RequestHandler = new CachedCrestRequestHandler(new JsonSerializer("yyyy.MM.dd HH:mm:ss"));
             ImageRequestHandler = new ImageRequestHandler();
             ApiPath = "/";
-            Host = DefaultPublicHost;
+            Host = DefaultHost;
             Mode = CrestMode.Public;
             EnableRootCache = true;
             EnableAutomaticPaging = true;
@@ -102,7 +97,7 @@ namespace eZet.EveLib.EveCrestModule {
         public EveCrest(string accessToken)
             : this() {
             AccessToken = accessToken;
-            Host = DefaultAuthHost;
+            Host = DefaultHost;
             Mode = CrestMode.Authenticated;
             EveAuth = new EveAuth();
             EnableAutomaticTokenRefresh = false;
@@ -118,7 +113,7 @@ namespace eZet.EveLib.EveCrestModule {
             RefreshToken = refreshToken;
             AccessToken = "";
             EncodedKey = encodedKey;
-            Host = DefaultAuthHost;
+            Host = DefaultHost;
             Mode = CrestMode.Authenticated;
             EveAuth = new EveAuth();
             EnableAutomaticTokenRefresh = true;

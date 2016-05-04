@@ -42,7 +42,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task GetRoot() {
             var root = await crest.GetRootAsync();
-            Assert.AreEqual(EveCrest.DefaultAuthHost, root.CrestEndpoint.Uri);
+            Assert.AreEqual(EveCrest.DefaultHost, root.CrestEndpoint.Uri);
         }
 
         [TestMethod]
