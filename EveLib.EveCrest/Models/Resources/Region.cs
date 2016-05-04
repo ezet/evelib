@@ -58,6 +58,16 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "marketSellOrders")]
         public Href<MarketOrderCollection> MarketSellOrders { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets the market orders.
+        /// </summary>
+        /// <value>
+        /// The market orders.
+        /// </value>
+        [DataMember(Name = "marketOrders")]
+        public Href<MarketOrderCollection> MarketOrders { get; set; }
+
         /// <summary>
         ///     Gets or sets the name.
         /// </summary>

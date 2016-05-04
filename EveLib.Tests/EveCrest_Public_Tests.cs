@@ -74,7 +74,7 @@ namespace eZet.EveLib.Test {
             var orders = await _crest.GetRoot()
                 .Query(r => r.Regions)
                 .Query(r => r.Items.First())
-                .QueryAsync(r => r.MarketBuyOrders, item);
+                .QueryAsync(r => r.MarketOrders, item);
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace eZet.EveLib.Test {
             var orders = await _crest.GetRoot()
                 .Query(r => r.Regions)
                 .Query(r => r.Items.First())
-                .QueryAsync(r => r.MarketBuyOrders, item);
+                .QueryAsync(r => r.MarketOrders, item);
         }
 
         [TestMethod]
@@ -314,6 +314,18 @@ namespace eZet.EveLib.Test {
                         "https://public-crest.eveonline.com/types/34/");
         }
 
+        [TestMethod]
+        public async Task GetMarketOrders() {
+            var orders =
+                (await
+                    (await
+                        (await _crest.GetRootAsync())
+                            .QueryAsync(r => r.Regions))
+                        .QueryAsync(x => x.Single(r => r.Name == "The Forge")))
+                    .Query(r => r.MarketBuyOrders, "type",
+                        "https://public-crest.eveonline.com/types/34/");
+        }
+
         private static void testLinkedEntity<T>(ILinkedEntity<T> entity) {
             Assert.IsNotNull(entity);
             Assert.AreNotEqual(0, entity.Id);
@@ -368,9 +380,6 @@ namespace eZet.EveLib.Test {
             var response = await _crest.GetRoot().QueryAsync(r => r.Tournaments);
             var tournament = _crest.Load(response.Items.Single(r => r.Id == 14));
             var match = _crest.Load(tournament.Series).Query(r => r.Items.First().Matches).Items.First();
-
-
-
         }
 
         [TestMethod]

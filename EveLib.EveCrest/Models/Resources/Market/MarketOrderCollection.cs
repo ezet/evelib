@@ -20,10 +20,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources.Market {
     /// </summary>
     [DataContract]
     public sealed class MarketOrderCollection : CollectionResource<MarketOrderCollection, MarketOrder> {
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MarketOrderCollection" /> class.
+        /// Initializes a new instance of the <see cref="MarketOrderCollection"/> class.
         /// </summary>
-        /// <exception cref="System.NotImplementedException"></exception>
         public MarketOrderCollection() {
             ContentType = "application/vnd.ccp.eve.MarketOrderCollection-v1+json";
         }
