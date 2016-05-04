@@ -123,17 +123,17 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task GetAlliances_NoErrors() {
+        public async Task GetAllianceCollection() {
             var response = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
-            Console.WriteLine(response);
+            var list = response.ToList();
+            Console.WriteLine(list.Count);
         }
 
         [TestMethod]
         public async Task GetAlliance_NoErrors() {
-            var allianceCollection = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
-            //var all = AllianceCollectionV1.Query(f => f.Single(a => a.Id == AllianceId));
-            //var alliance = AllianceCollectionV1.AllItems().Where(f => f.Id == AllianceId);
-            //Console.WriteLine(alliance.First().Alliance.Name);
+            var allianceCollection = await (await _crest.GetRootAsync()).QueryAsync(list => list.Alliances);
+            var alliance = allianceCollection.Query(r => r.FirstOrDefault(a => a.Id == 99000006));
+            Assert.AreEqual(99000006, alliance.Id);
         }
 
         //[TestMethod]
@@ -188,14 +188,12 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        // TODO Test this properly
         public async Task GetIndustrySystemsAsync() {
             var result = (await (await _crest.GetRootAsync()).QueryAsync(r => r.Industry.Systems));
             Console.Write(result);
         }
 
         [TestMethod]
-        // TODO Test this properly
         public async Task GetIndustryFacilities() {
             var result = (await (await _crest.GetRootAsync()).QueryAsync(r => r.Industry.Facilities));
         }
@@ -227,37 +225,6 @@ namespace eZet.EveLib.Test {
             Assert.AreNotEqual(0, item.MarketGroup.Id);
             Assert.IsNotNull(item.MarketGroup.Href);
         }
-
-
-        //[TestMethod]
-        //public void ThreadTest() {
-        //    var ec = new EveCrest {EnableRootCache = false};
-        //    var allregions = ec.GetRoot().Query(r => r.Regions);
-        //    foreach (var item in allregions.AllItems()) {
-        //        var regionHref = item.PostHref;
-        //        new Thread(() => {
-        //            Console.WriteLine("Starting Thread");
-        //            eZet.EveLib.EveCrestModule.EveCrest ecT = new eZet.EveLib.EveCrestModule.EveCrest();
-        //            ecT.EnableRootCache = false;
-
-        //            //ERROR spawning here
-        //            var region = ecT.Load(regionHref, new string[] {});
-        //            foreach (var cons in region.Constellations) {
-        //                var constellation = ecT.Load<eZet.EveLib.EveCrestModule.Models.Resources.Constellation>(
-        //                    cons.Uri, new string[] {});
-        //                foreach (var sys in constellation.Systems) {
-        //                    var system = ecT.Load<eZet.EveLib.EveCrestModule.Models.Resources.SolarSystem>(sys.Uri,
-        //                        new string[] {});
-        //                    foreach (var pl in system.Planets) {
-        //                        var planet = ecT.Load<eZet.EveLib.EveCrestModule.Models.Resources.Planet>(pl.Uri,
-        //                            new string[] {});
-        //                    }
-        //                }
-        //            }
-        //        }).Start();
-        //    }
-        //}
-
 
         [TestMethod]
         public async Task GetSovereigntyStructures() {

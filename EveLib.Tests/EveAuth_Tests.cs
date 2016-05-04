@@ -11,9 +11,9 @@ namespace eZet.EveLib.Test {
         private const string EncodedKey =
             "NDZkYWEyYjM3OGJkNGJjMTg5ZGY0YzNhNzNhZjIyNmE6SzhHY1dBRGxqZ25MWnlyS0dGZmlxekhWdlZpR2hhcE9ZU0NFeTgzaA==";
 
-        private const string AuthCode = "ty2wPC3x81YD5CzU6tM8p2TnvT4uJ8vjqLoSyQEvuFNV6SzzG70gvkVIptFk-7fe0";
+        private const string AuthCode = "uYwgSc5HI6-qljlloAoK8IbEdBcplEuWaOw1nlOEwY5dgdHyp7H7oRXQyeifN-0s0";
 
-        private const string RefreshToken = "E9nZjXvx_tFu-PdpTC6yT_j4FupJ-84ybEtNsE8iMko1";
+        private const string RefreshToken = "z9-3CmGtYURBgrJmvePMws26ahD8lmGe3ZIEdh4IaZL8ElR8hjFSDsYxxWRy0ygEHiNO_f54cPOj_mS5dFG9qQ2";
         private readonly EveAuth _eveAuth = new EveAuth();
 
         private readonly string encodedKeySingularity =
@@ -29,8 +29,8 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public void Authenticate() {
-            var response = _eveAuth.AuthenticateAsync(EncodedKey, AuthCode).Result;
+        public async Task Authenticate() {
+            var response = await _eveAuth.AuthenticateAsync(EncodedKey, AuthCode);
             Assert.AreEqual("Bearer", response.TokenType);
             Trace.WriteLine("Access Token: " + response.AccessToken);
             Trace.WriteLine("Refresh Token: " + response.RefreshToken);
