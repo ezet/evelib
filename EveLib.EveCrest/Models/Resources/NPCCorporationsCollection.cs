@@ -5,7 +5,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     /// NPC Corporations Collection
     /// </summary>
-    /// <seealso cref="eZet.EveLib.EveCrestModule.Models.CollectionResource{eZet.EveLib.EveCrestModule.Models.Resources.NpcCorporationsCollection, eZet.EveLib.EveCrestModule.Models.Resources.NpcCorporationsCollection.NpcCorporationData}" />
     public sealed class NpcCorporationsCollection : CollectionResource<NpcCorporationsCollection, NpcCorporationsCollection.NpcCorporationData> {
 
         /// <summary>
@@ -14,6 +13,9 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public NpcCorporationsCollection() {
             ContentType = "application/vnd.ccp.eve.NPCCorporationsCollection-v1+json";
         }
+        /// <summary>
+        /// NPC Corporation Data Short
+        /// </summary>
         public class NpcCorporationData : LinkedEntity<NotImplemented> {
 
             /// <summary>

@@ -6,7 +6,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     /// Loyalty Store Offers
     /// </summary>
-    /// <seealso cref="eZet.EveLib.EveCrestModule.Models.CrestResource{eZet.EveLib.EveCrestModule.Models.Resources.LoyaltyStoreOffersCollection}" />
+    /// <seealso cref="LoyaltyStoreOffersCollection" />
     /// <seealso cref="Models.CrestResource{LoyaltyStoreOffersCollection}" />
     public sealed class LoyaltyStoreOffersCollection : CrestResource<LoyaltyStoreOffersCollection> {
 

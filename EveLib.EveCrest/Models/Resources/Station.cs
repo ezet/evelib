@@ -7,7 +7,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     /// Station Resource
     /// </summary>
-    /// <seealso cref="eZet.EveLib.EveCrestModule.Models.CrestResource{eZet.EveLib.EveCrestModule.Models.Resources.Station}" />
     public sealed class Station : CrestResource<Station> {
         /// <summary>
         /// Initializes a new instance of the <see cref="Station" /> class.
