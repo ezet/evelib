@@ -272,6 +272,15 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public ClientLinks Clients { get; set; }
 
         /// <summary>
+        /// Gets or sets the NPC corporations.
+        /// </summary>
+        /// <value>
+        /// The NPC corporations.
+        /// </value>
+        [DataMember(Name = "npcCorporations")]
+        public Href<NpcCorporationsCollection> NpcCorporations { get; set; }
+
+        /// <summary>
         ///     Current Time endpoint
         /// </summary>
         /// <value>The time.</value>

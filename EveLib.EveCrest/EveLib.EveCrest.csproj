@@ -145,6 +145,7 @@
     <Compile Include="Models\Resources\CharacterLocation.cs" />
     <Compile Include="Models\ICollectionResource.cs" />
     <Compile Include="Models\Resources\Market\MarketOrder.cs" />
+    <Compile Include="Models\Resources\NPCCorporationsCollection.cs" />
     <Compile Include="Models\Resources\SystemCollection.cs" />
     <Compile Include="Models\Resources\SovCampaignsCollection.cs" />
     <Compile Include="Models\Resources\SovStructureCollection.cs" />
