@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
@@ -432,5 +433,24 @@ namespace eZet.EveLib.Test {
         public void Motd() {
             Assert.IsNotNull(_crest.GetRoot().Motd.Eve.Uri);
         }
+        
+        [TestMethod]
+        public async Task NpcCorporationCollection() {
+            var response = await (await _crest.GetRootAsync()).QueryAsync(r => r.NpcCorporations);
+
+        }
+
+        [TestMethod]
+        public async Task LoyaltyStoreOffersCollection() {
+            var response = await (await _crest.GetRootAsync()).QueryAsync(r => r.NpcCorporations);
+            var store = await response.QueryAsync(r => r.Skip(1).First().LoyaltyStore);
+        }
+
+        [TestMethod]
+        public async Task Station() {
+            var response = await (await _crest.GetRootAsync()).QueryAsync(r => r.NpcCorporations);
+            var station = await response.QueryAsync(r => r.Skip(1).First().HeadQuarters);
+        }
+
     }
 }

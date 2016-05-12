@@ -58,6 +58,24 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "requiredItems")]
             public IReadOnlyList<RequiredItem> RequiredItems { get; set; }
 
+            /// <summary>
+            /// Gets or sets the item.
+            /// </summary>
+            /// <value>
+            /// The item.
+            /// </value>
+            [DataMember(Name = "item")]
+            public LinkedEntity<ItemType> Item { get; set; }
+
+            /// <summary>
+            /// Gets or sets the quantity.
+            /// </summary>
+            /// <value>
+            /// The quantity.
+            /// </value>
+            [DataMember(Name = "quantity")]
+            public long Quantity { get; set; }
+
         }
 
         /// <summary>

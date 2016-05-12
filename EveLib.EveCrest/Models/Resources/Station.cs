@@ -61,6 +61,21 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "reprocessingStationsTake")]
         public double ReprocessingStationsTake { get; set; }
 
+        /// <summary>
+        /// Gets or sets the system.
+        /// </summary>
+        /// <value>
+        /// The system.
+        /// </value>
+        [DataMember(Name = "system")]
+        public LinkedEntity<SolarSystem> System { get; set; }
+
+        /// <summary>
+        /// Gets or sets the services.
+        /// </summary>
+        /// <value>
+        /// The services.
+        /// </value>
         [DataMember(Name = "services")]
         public IReadOnlyList<Service> Services { get; set; }
 
