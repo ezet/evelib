@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
@@ -31,7 +31,7 @@ namespace eZet.EveLib.Test {
         public EveCrest_Public_Tests() {
             _crest.EnableAutomaticTokenRefresh = true;
             _crest.RequestHandler.ThrowOnDeprecated = true;
-            _crest.RequestHandler.CacheLevel =  CacheLevel.BypassCache;
+            _crest.RequestHandler.CacheLevel = CacheLevel.Refresh;
         }
 
         [TestMethod]
