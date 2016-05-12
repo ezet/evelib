@@ -15,7 +15,7 @@ namespace eZet.EveLib.Core.Cache {
     ///     Simple plain file cache implementation
     /// </summary>
     public class EveLibFileCache : IEveLibCache {
-        private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
+        //private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 
@@ -171,7 +171,8 @@ namespace eZet.EveLib.Core.Cache {
         private static string getHash(Uri uri) {
             //return uri.AbsoluteUri;
             var fileName = uri.AbsoluteUri;
-            var hash = Sha1.ComputeHash(Encoding.Unicode.GetBytes(fileName));
+            var sha1 = new SHA1CryptoServiceProvider();
+            var hash = sha1.ComputeHash(Encoding.Unicode.GetBytes(fileName));
             return BitConverter.ToString(hash).Replace("-", "");
         }
 
