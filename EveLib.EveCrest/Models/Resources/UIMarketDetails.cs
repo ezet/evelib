@@ -34,6 +34,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources
         }
 
         /// <summary>
+        ///     Gets or sets the item type.
         /// </summary>
         /// <value>The solar system.</value>
         [DataMember(Name = "type")]
