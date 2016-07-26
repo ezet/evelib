@@ -248,7 +248,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The service status.</value>
         [DataMember(Name = "serviceStatus")]
-        public ServerStatus ServiceStatus { get; set; }
+        public ServiceStatusType ServiceStatus { get; set; }
 
         /// <summary>
         ///     The number of current users of services
@@ -411,33 +411,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "server")]
             public Href<string> Server { get; set; }
         }
-
-        /// <summary>
-        ///     Represents the service status for all servers
-        /// </summary>
-        public class ServerStatus {
-            /// <summary>
-            ///     The service status for DUST
-            /// </summary>
-            /// <value>The dust.</value>
-            [DataMember(Name = "dust")]
-            public ServiceStatusType Dust { get; set; }
-
-            /// <summary>
-            ///     The service status for EVE Online
-            /// </summary>
-            /// <value>The eve.</value>
-            [DataMember(Name = "eve")]
-            public ServiceStatusType Eve { get; set; }
-
-            /// <summary>
-            ///     The service status for the api server
-            /// </summary>
-            /// <value>The server.</value>
-            [DataMember(Name = "server")]
-            public ServiceStatusType Server { get; set; }
-        }
-
+        
         /// <summary>
         ///     Represents the number of current users of services
         /// </summary>
