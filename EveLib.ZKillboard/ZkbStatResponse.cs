@@ -195,6 +195,27 @@ namespace eZet.EveLib.ZKillboardModule {
             public int Month { get; set; }
 
             /// <summary>
+            /// Gets or sets the ships lost.
+            /// </summary>
+            /// <value>The ships lost.</value>
+            [DataMember(Name = "shipsLost")]
+            public int ShipsLost { get; set; }
+
+            /// <summary>
+            /// Gets or sets the points lost.
+            /// </summary>
+            /// <value>The points lost.</value>
+            [DataMember(Name = "pointsLost")]
+            public int PointsLost { get; set; }
+
+            /// <summary>
+            /// Gets or sets the isk lost.
+            /// </summary>
+            /// <value>The isk lost.</value>
+            [DataMember(Name = "iskLost")]
+            public long IskLost { get; set; }
+
+            /// <summary>
             /// Gets or sets the ships destroyed.
             /// </summary>
             /// <value>The ships destroyed.</value>
