@@ -76,7 +76,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task AddAutopilotWaypoint() {
             var c = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character);
-            var wp = c.Waypoints.Create();
+            var wp = c.UI.SetWaypoints.Create();
             var system = crest.GetRoot().Query(r => r.Systems).Items.Single(s => s.Name == "Jita");
             wp.SolarSystem = system;
             wp.First = true;
@@ -84,6 +84,15 @@ namespace eZet.EveLib.Test {
             Assert.IsTrue(await wp.SaveAsync());
         }
             
+        [TestMethod]
+        public async Task ShowMarketDetails() {
+            var c = await (await (await crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character);
+            var smd = c.UI.ShowMarketDetails.Create();
+            var item = crest.GetRoot().Query(r => r.ItemTypes).Items.Single(s => s.Name == "Veldspar");
+            smd.ItemType = item;
+            Assert.IsTrue(await smd.SaveAsync());
+        }
+
         [TestMethod]
         public async Task GetContacts() {
             var contacts =
