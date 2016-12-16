@@ -72,7 +72,7 @@ namespace eZet.EveLib.ZKillboardModule.RequestHandlers {
             using (
                 HttpWebResponse response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false)) {
                 data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-                cacheTime = DateTime.Parse(response.GetResponseHeader("Expires"));
+                DateTime.TryParse(response.GetResponseHeader("Expires"), out cacheTime);                
                 int.TryParse(response.GetResponseHeader("X-Bin-Request-Count"), out requestCount);
                 int.TryParse(response.GetResponseHeader("X-Bin-Max-Requests"), out maxRequests);
             }
