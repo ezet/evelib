@@ -62,7 +62,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// </summary>
         /// <value>The station identifier.</value>
         [XmlElement("stationID")]
-        public int StationId { get; set; }
+        public long StationId { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the station.

@@ -29,7 +29,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// <summary>
         ///     The _inferred identifier
         /// </summary>
-        private int _inferredId = -1;
+        private long _inferredId = -1;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Href{T}" /> class.
@@ -50,7 +50,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         ///     Gets or sets the inferred identifier.
         /// </summary>
         /// <value>The inferred identifier.</value>
-        public int InferredId {
+        public long InferredId {
             get {
                 if (_inferredId < 0)
                     _inferredId = inferId();

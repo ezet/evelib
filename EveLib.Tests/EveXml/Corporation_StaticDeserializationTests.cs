@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
     [TestClass]
+    [Ignore]
     public class Corporation_StaticDeserializationTests {
         private readonly Corporation _corp;
 

@@ -197,9 +197,9 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <param name="instance">The instance.</param>
         public override void Inject(EveCrest instance) {
             base.Inject(instance);
-            Contacts.EveCrest = instance;
-            Fittings.EveCrest = instance;
-            Waypoints.EveCrest = instance;
+            if (Contacts != null) Contacts.EveCrest = instance;
+            if (Fittings != null) Fittings.EveCrest = instance;
+            if (Waypoints!= null) Waypoints.EveCrest = instance;
         }
     }
 }

@@ -40,12 +40,6 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task GetRoot() {
-            var root = await crest.GetRootAsync();
-            Assert.AreEqual(EveCrest.DefaultHost, root.CrestEndpoint.Uri);
-        }
-
-        [TestMethod]
         public async Task GetOptions() {
             var root = await crest.GetRootAsync();
 
@@ -230,24 +224,11 @@ namespace eZet.EveLib.Test {
         //    var response = await crest.GetRoot().QueryAsync(r => r.CorporationRoles);
         //}
 
-        //[TestMethod]
-        //public async Task Channels() {
-        //    var response = await crest.GetRoot().QueryAsync(r => r.Channels);
-        //}
-
         [TestMethod]
         public async Task Decode() {
             var response = await crest.GetRoot().QueryAsync(r => r.Decode);
             Debug.WriteLine(response.Character);
-        }
-
-        [TestMethod]
-        public async Task Clients() {
-            var eve = await crest.GetRoot().QueryAsync(r => r.Clients.Eve);
-            var dust = await crest.GetRoot().QueryAsync(r => r.Clients.Dust);
-        }
-
-    
+        }    
 
     }
 }

@@ -23,7 +23,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
     /// <typeparam name="T"></typeparam>
     [DataContract]
     public class LinkedResource<T> : CrestResource<T>, ILinkedEntity<T> where T : class, ICrestResource<T> {
-        private int _inferredId;
+        private long _inferredId;
 
         /// <summary>
         ///     The entity href
@@ -37,7 +37,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the identifier.
@@ -50,7 +50,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         ///     Gets or sets the inferred identifier.
         /// </summary>
         /// <value>The inferred identifier.</value>
-        public int InferredId {
+        public long InferredId {
             get {
                 if (_inferredId == 0)
                     _inferredId = inferId();

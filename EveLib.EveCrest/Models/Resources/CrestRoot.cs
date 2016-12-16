@@ -18,6 +18,12 @@ using eZet.EveLib.EveCrestModule.Models.Resources.Industry;
 using eZet.EveLib.EveCrestModule.Models.Resources.Market;
 using eZet.EveLib.EveCrestModule.Models.Resources.Tournaments;
 
+// TODO InsurancePrices
+// TODO time
+// TODO oppurtunities
+// TODO bloodlines
+// TODO races
+
 namespace eZet.EveLib.EveCrestModule.Models.Resources {
     /// <summary>
     ///     Represents the root response for CREST
@@ -31,17 +37,20 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <summary>
             ///     Server is offline
             /// </summary>
-            [EnumMember(Value = "offline")] Offline,
+            [EnumMember(Value = "offline")]
+            Offline,
 
             /// <summary>
             ///     Server is in VIP mode
             /// </summary>
-            [EnumMember(Value = "vip")] Vip,
+            [EnumMember(Value = "vip")]
+            Vip,
 
             /// <summary>
             ///     Server is online
             /// </summary>
-            [EnumMember(Value = "online")] Online
+            [EnumMember(Value = "online")]
+            Online
         }
 
         /// <summary>
@@ -50,29 +59,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public CrestRoot() {
             ContentType = "application/vnd.ccp.eve.Api-v3+json";
         }
-
-        /// <summary>
-        ///     The message of the day for each service
-        /// </summary>
-        /// <value>The motd.</value>
-        [DataMember(Name = "motd")]
-        public MessageOfTheDay Motd { get; set; }
-
-        /// <summary>
-        ///     The uri for CREST base
-        /// </summary>
-        /// <value>The crest endpoint.</value>
-        [DataMember(Name = "crestEndpoint")]
-        public Href<CrestRoot> CrestEndpoint { get; set; }
-
-
-        /// <summary>
-        ///     Gets or sets the corporation roles.
-        /// </summary>
-        /// <value>The corporation roles.</value>
-        [DataMember(Name = "corporationRoles")]
-        public Href<NotImplemented> CorporationRoles { get; set; }
-
 
         /// <summary>
         ///     Gets or sets the constellations.
@@ -87,13 +73,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The item groups.</value>
         [DataMember(Name = "itemGroups")]
         public Href<ItemGroupCollection> ItemGroups { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the channels.
-        /// </summary>
-        /// <value>The channels.</value>
-        [DataMember(Name = "channels")]
-        public Href<NotImplemented> Channels { get; set; }
 
         /// <summary>
         ///     Gets or sets the corporations.
@@ -116,19 +95,22 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         [DataMember(Name = "itemTypes")]
         public Href<ItemTypeCollection> ItemTypes { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets the user count.
+        /// </summary>
+        /// <value>
+        /// The user count.
+        /// </value>
+        [DataMember(Name = "userCount")]
+        public int UserCount { get; set; }
+
         /// <summary>
         ///     Gets or sets the decode.
         /// </summary>
         /// <value>The decode.</value>
         [DataMember(Name = "decode")]
         public Href<TokenDecode> Decode { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the battle theatres.
-        /// </summary>
-        /// <value>The battle theatres.</value>
-        [DataMember(Name = "battleTheatres")]
-        public Href<NotImplemented> BattleTheatres { get; set; }
 
         /// <summary>
         ///     Gets or sets the market prices.
@@ -188,13 +170,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Href<TournamentCollection> Tournaments { get; set; }
 
         /// <summary>
-        ///     Gets or sets the map.
-        /// </summary>
-        /// <value>The map.</value>
-        [DataMember(Name = "map")]
-        public Href<NotImplemented> Map { get; set; }
-
-        /// <summary>
         ///     Gets or sets the virtual good store.
         /// </summary>
         /// <value>The virtual good store.</value>
@@ -248,14 +223,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// </summary>
         /// <value>The service status.</value>
         [DataMember(Name = "serviceStatus")]
-        public ServerStatus ServiceStatus { get; set; }
-
-        /// <summary>
-        ///     The number of current users of services
-        /// </summary>
-        /// <value>The user counts.</value>
-        [DataMember(Name = "userCounts")]
-        public UserCount UserCounts { get; set; }
+        public ServiceStatusType ServiceStatus { get; set; }
 
         /// <summary>
         ///     Current Time endpoint
@@ -263,13 +231,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <value>The industry.</value>
         [DataMember(Name = "industry")]
         public CrestIndustry Industry { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the clients.
-        /// </summary>
-        /// <value>The clients.</value>
-        [DataMember(Name = "clients")]
-        public ClientLinks Clients { get; set; }
 
         /// <summary>
         /// Gets or sets the NPC corporations.
@@ -322,27 +283,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         }
 
         /// <summary>
-        ///     Class ClientLinks.
-        /// </summary>
-        [DataContract]
-        public class ClientLinks {
-            /// <summary>
-            ///     Gets or sets the dust.
-            /// </summary>
-            /// <value>The dust.</value>
-            [DataMember(Name = "dust")]
-            public Href<DustRoot> Dust { get; set; }
-
-            /// <summary>
-            ///     Gets or sets the eve.
-            /// </summary>
-            /// <value>The eve.</value>
-            [DataMember(Name = "eve")]
-            public Href<EveRoot> Eve { get; set; }
-        }
-
-
-        /// <summary>
         ///     Class CrestIndustry.
         /// </summary>
         [DataContract]
@@ -354,20 +294,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "facilities")]
             public Href<IndustryFacilityCollection> Facilities { get; set; }
 
-            ///// <summary>
-            ///// Gets or sets the specialities.
-            ///// </summary>
-            ///// <value>The specialities.</value>
-            //[DataMember(Name = "specialities")]
-            //public Href<IndustrySpecialityCollection> Specialities { get; set; }
-
-            ///// <summary>
-            ///// Gets or sets the teams in auction.
-            ///// </summary>
-            ///// <value>The teams in auction.</value>
-            //[DataMember(Name = "teamsInAuction")]
-            //public Href<IndustryTeamCollection> TeamsInAuction { get; set; }
-
             /// <summary>
             ///     Gets or sets the systems.
             /// </summary>
@@ -375,87 +301,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             [DataMember(Name = "systems")]
             public Href<IndustrySystemCollection> Systems { get; set; }
 
-            ///// Gets or sets the teams.
-
-            ///// <summary>
-            ///// </summary>
-            ///// <value>The teams.</value>
-            //[DataMember(Name = "teams")]
-            //public Href<IndustryTeamCollection> Teams { get; set; }
-        }
-
-
-        /// <summary>
-        ///     Represents a Motd object
-        /// </summary>
-        [DataContract]
-        public class MessageOfTheDay {
-            /// <summary>
-            ///     Gets the MOTD for Dust 514
-            /// </summary>
-            /// <value>The dust.</value>
-            [DataMember(Name = "dust")]
-            public Href<string> Dust { get; set; }
-
-            /// <summary>
-            ///     Gets the MOTD for Eve Online
-            /// </summary>
-            /// <value>The eve.</value>
-            [DataMember(Name = "eve")]
-            public Href<string> Eve { get; set; }
-
-            /// <summary>
-            ///     Gets a url for the MOTD on the server
-            /// </summary>
-            /// <value>The server.</value>
-            [DataMember(Name = "server")]
-            public Href<string> Server { get; set; }
-        }
-
-        /// <summary>
-        ///     Represents the service status for all servers
-        /// </summary>
-        public class ServerStatus {
-            /// <summary>
-            ///     The service status for DUST
-            /// </summary>
-            /// <value>The dust.</value>
-            [DataMember(Name = "dust")]
-            public ServiceStatusType Dust { get; set; }
-
-            /// <summary>
-            ///     The service status for EVE Online
-            /// </summary>
-            /// <value>The eve.</value>
-            [DataMember(Name = "eve")]
-            public ServiceStatusType Eve { get; set; }
-
-            /// <summary>
-            ///     The service status for the api server
-            /// </summary>
-            /// <value>The server.</value>
-            [DataMember(Name = "server")]
-            public ServiceStatusType Server { get; set; }
-        }
-
-        /// <summary>
-        ///     Represents the number of current users of services
-        /// </summary>
-        [DataContract]
-        public class UserCount {
-            /// <summary>
-            ///     Number of currently online users for DUST
-            /// </summary>
-            /// <value>The dust.</value>
-            [DataMember(Name = "dust")]
-            public int Dust { get; set; }
-
-            /// <summary>
-            ///     Number of currently online users for Eve Online
-            /// </summary>
-            /// <value>The eve.</value>
-            [DataMember(Name = "eve")]
-            public int Eve { get; set; }
         }
 
         /// <summary>

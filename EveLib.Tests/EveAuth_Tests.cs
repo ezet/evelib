@@ -13,7 +13,7 @@ namespace eZet.EveLib.Test {
 
         private const string AuthCode = "uYwgSc5HI6-qljlloAoK8IbEdBcplEuWaOw1nlOEwY5dgdHyp7H7oRXQyeifN-0s0";
 
-        private const string RefreshToken = "z9-3CmGtYURBgrJmvePMws26ahD8lmGe3ZIEdh4IaZL8ElR8hjFSDsYxxWRy0ygEHiNO_f54cPOj_mS5dFG9qQ2";
+        private const string RefreshToken = "w_FqWliGJYDmPBycG2GtwYyizqMK-wQw6yuBfQf2r05bwG-BJgCM3HcdzUDFc2-N23sv-VGmWCgVttWpcOLq6w2";
         private readonly EveAuth _eveAuth = new EveAuth();
 
         private readonly string encodedKeySingularity =
@@ -47,7 +47,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task Verify() {
             //_eveAuth.Host = "sisilogin.testeveonline.com";
-            var result = await _eveAuth.RefreshAsync(encodedKeySingularity, refreshTokenSingularity);
+            var result = await _eveAuth.RefreshAsync(EncodedKey, RefreshToken);
             var response = await _eveAuth.VerifyAsync(result.AccessToken);
         }
     }

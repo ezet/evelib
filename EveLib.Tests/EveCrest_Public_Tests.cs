@@ -312,7 +312,7 @@ namespace eZet.EveLib.Test {
                             .QueryAsync(r => r.Regions))
                         .QueryAsync(x => x.Single(r => r.Name == "The Forge")))
                     .Query(r => r.MarketBuyOrders, "type",
-                        "https://public-crest.eveonline.com/types/34/");
+                        "https://crest-tq.eveonline.com/inventory/types/34/");
         }
 
         [TestMethod]
@@ -324,7 +324,7 @@ namespace eZet.EveLib.Test {
                             .QueryAsync(r => r.Regions))
                         .QueryAsync(x => x.Single(r => r.Name == "The Forge")))
                     .Query(r => r.MarketBuyOrders, "type",
-                        "https://public-crest.eveonline.com/types/34/");
+                        "https://crest-tq.eveonline.com/inventory/types/34/");
         }
 
         private static void testLinkedEntity<T>(ILinkedEntity<T> entity) {
@@ -332,13 +332,6 @@ namespace eZet.EveLib.Test {
             Assert.AreNotEqual(0, entity.Id);
             Assert.IsNotNull(entity.Href);
             Assert.IsNotNull(entity.Name);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(EveCrestException))]
-        public async Task Clients() {
-            var eve = await _crest.GetRoot().QueryAsync(r => r.Clients.Eve);
-            var dust = await _crest.GetRoot().QueryAsync(r => r.Clients.Dust);
         }
 
         [TestMethod]
@@ -351,13 +344,6 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public void ServerName() {
             Assert.AreEqual("TRANQUILITY", _crest.GetRoot().ServerName);
-        }
-
-        [TestMethod]
-        public void UserCounts() {
-            var counts = _crest.GetRoot().UserCounts;
-            Assert.AreNotEqual(0, counts.Dust);
-            Assert.AreNotEqual(0, counts.Eve);
         }
 
         [TestMethod]
@@ -394,11 +380,6 @@ namespace eZet.EveLib.Test {
         }
 
         [TestMethod]
-        public async Task CrestEndpoint() {
-            var result = await (await _crest.GetRootAsync()).QueryAsync(r => r.CrestEndpoint);
-        }
-
-        [TestMethod]
         public void ServiceStatus() {
             var status = _crest.GetRoot().ServiceStatus;
             //Assert.AreEqual(CrestRoot.ServiceStatusType.Online, status.Dust);
@@ -415,24 +396,7 @@ namespace eZet.EveLib.Test {
         [TestMethod]
         public async Task ItemCategories() {
             var response = await _crest.GetRoot().QueryAsync(r => r.ItemCategories);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(EveCrestException))]
-        public async Task BattleTheatres() {
-            var response = await _crest.GetRoot().QueryAsync(r => r.BattleTheatres);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(EveCrestException))]
-        public async Task Channels() {
-            var response = await _crest.GetRoot().QueryAsync(r => r.Channels);
-        }
-
-        [TestMethod]
-        public void Motd() {
-            Assert.IsNotNull(_crest.GetRoot().Motd.Eve.Uri);
-        }
+        }  
         
         [TestMethod]
         public async Task NpcCorporationCollection() {

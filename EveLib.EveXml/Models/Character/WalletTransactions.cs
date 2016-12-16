@@ -107,7 +107,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             /// </summary>
             /// <value>The station identifier.</value>
             [XmlAttribute("stationID")]
-            public int StationId { get; set; }
+            public long StationId { get; set; }
 
             /// <summary>
             ///     Gets or sets the name of the station.

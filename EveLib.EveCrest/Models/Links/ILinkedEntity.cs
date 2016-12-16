@@ -28,7 +28,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        int Id { get; set; }
+        long Id { get; set; }
 
 
         /// <summary>

@@ -26,12 +26,12 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// <summary>
         ///     The _id
         /// </summary>
-        private int _id = -1;
+        private long _id = -1;
 
         /// <summary>
         ///     The _inferred identifier
         /// </summary>
-        private int _inferredId = -1;
+        private long _inferredId = -1;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="LinkedEntity{T}" /> class.
@@ -52,7 +52,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         /// </summary>
         /// <value>The identifier.</value>
         [DataMember(Name = "id")]
-        public int Id {
+        public long Id {
             get { return _id >= 0 ? _id : InferredId; }
             set { _id = value; }
         }
@@ -61,7 +61,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Links {
         ///     Gets or sets the inferred identifier.
         /// </summary>
         /// <value>The inferred identifier.</value>
-        public int InferredId {
+        public long InferredId {
             get {
                 if (_inferredId < 0)
                     _inferredId = inferId();

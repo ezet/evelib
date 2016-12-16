@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eZet.EveLib.Test {
     [TestClass]
+    [Ignore]
     public class Character_StaticDeserializationTests {
         private readonly Character _character;
 

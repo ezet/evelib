@@ -14,7 +14,7 @@ namespace eZet.EveLib.Test.EveXml.Mocks {
         public ISerializer Serializer { get; set; }
 
         public async Task<T> RequestAsync<T>(Uri uri) {
-            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
+            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory());
             if (directoryInfo != null) {
                 var baseDir = directoryInfo.FullName;
                 var path = uri.PathAndQuery;
