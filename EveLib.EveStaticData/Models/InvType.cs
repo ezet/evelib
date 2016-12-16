@@ -113,7 +113,7 @@ namespace eZet.EveLib.StaticDataModule.Models {
         /// </summary>
         /// <value>The base price.</value>
         [DataMember(Name = "base_price")]
-        public double BasePrice { get; set; }
+        public double? BasePrice { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is published.
