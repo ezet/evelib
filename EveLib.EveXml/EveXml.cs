@@ -42,7 +42,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
         /// <returns></returns>
-        public static ApiKey CreateApiKey(int keyId, string vCode) {
+        public static ApiKey CreateApiKey(long keyId, string vCode) {
             return new ApiKey(keyId, vCode);
         }
 
@@ -52,7 +52,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
         /// <returns></returns>
-        public static CharacterKey CreateCharacterKey(int keyId, string vCode) {
+        public static CharacterKey CreateCharacterKey(long keyId, string vCode) {
             return new CharacterKey(keyId, vCode);
         }
 
@@ -62,7 +62,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
         /// <returns></returns>
-        public static CorporationKey CreateCorporationKey(int keyId, string vCode) {
+        public static CorporationKey CreateCorporationKey(long keyId, string vCode) {
             return new CorporationKey(keyId, vCode);
         }
 
@@ -73,7 +73,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
         /// <param name="characterId">Eve Online Character ID</param>
         /// <returns></returns>
-        public static Character CreateCharacter(int keyId, string vCode, long characterId) {
+        public static Character CreateCharacter(long keyId, string vCode, long characterId) {
             return new Character(keyId, vCode, characterId);
         }
 
@@ -84,7 +84,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
         /// <param name="corporationId">Eve Online Corporation ID</param>
         /// <returns></returns>
-        public static Corporation CreateCorporation(int keyId, string vCode, long corporationId) {
+        public static Corporation CreateCorporation(long keyId, string vCode, long corporationId) {
             return new Corporation(keyId, vCode, corporationId);
         }
     }

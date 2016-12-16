@@ -14,7 +14,7 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             ContentType = "application/vnd.ccp.eve.NPCCorporationsCollection-v1+json";
         }
         /// <summary>
-        /// NPC Corporation Data Short
+        /// NPC Corporation Data
         /// </summary>
         public class NpcCorporationData : LinkedEntity<NotImplemented> {
 

@@ -181,7 +181,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         }
 
         /// <summary>
-        ///     Queries a collection resource for a single item, async.
+        ///     Queries a collection resource for a single item.
         /// </summary>
         /// <typeparam name="TOut">The type of the t out.</typeparam>
         /// <param name="objFunc">The object function.</param>
@@ -245,16 +245,7 @@ namespace eZet.EveLib.EveCrestModule.Models {
         /// </summary>
         /// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator() {
-            foreach (var item in Items) {
-                yield return item;
-            }
-            if (Next == null || !EveCrest.EnableAutomaticPaging) yield break;
-            if (NextResource == null)
-                NextResource = EveCrest.Load(Next);
-            var iter = NextResource.GetEnumerator();
-            while (iter.MoveNext())
-                yield return iter.Current;
-
+            return GetEnumerator();
         }
 
         /// <summary>

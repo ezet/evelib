@@ -57,7 +57,7 @@ namespace eZet.EveLib.Test {
         public async Task GetAllItems() {
             var alliances = await (await _crest.GetRootAsync()).QueryAsync(r => r.Alliances);
             await Task.WhenAll(alliances.Items.Select(a => _crest.LoadAsync(a)));
-            //var list = alliances.Items.Select(alliance => _crest.Load(alliance)).ToList();
+            //var list = alliances.Items.Select(alliance => _crest.QueryAsync(alliance)).ToList();
 
             //Assert.AreEqual(alliances.TotalCount, alliances.AllItems().Count());
         }
@@ -139,15 +139,15 @@ namespace eZet.EveLib.Test {
 
         //[TestMethod]
         //public void CollectionPaging_Manual() {
-        //    AllianceCollectionV1 allianceLinks = crest.GetRoot().Query(r => r.Alliances);
+        //    AllianceCollectionV1 allianceLinks = crest.GetRoot().QueryAsync(r => r.Alliances);
         //    AllianceCollectionV1.Alliance alliance =
         //        allianceLinks.Items.SingleOrDefault(f => f.Alliance.Id == AllianceId).Alliance;
         //    while (alliance == null && allianceLinks.Next != null) {
-        //        allianceLinks = allianceLinks.Query(f => f.Next);
+        //        allianceLinks = allianceLinks.QueryAsync(f => f.Next);
         //        alliance =
         //        allianceLinks.Items.SingleOrDefault(f => f.Alliance.Id == AllianceId).Alliance;
         //    }
-        //    Debug.WriteLine(allianceLinks.Query(f => alliance).Name);
+        //    Debug.WriteLine(allianceLinks.QueryAsync(f => alliance).Name);
         //}
 
 

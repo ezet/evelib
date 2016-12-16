@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{18AE4A9C-45ED-4743-A239-31D248FE51E1}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveAuth", "EveLib.EveAuth\EveLib.EveAuth.csproj", "{66A526C4-AD56-42A1-A680-0D11A524EC40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.EveXml", "EveLib.EveXml\EveLib.EveXml.csproj", "{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveLib.DynamicCrest", "EveLib.DynamicCrest\EveLib.DynamicCrest.csproj", "{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -166,6 +168,22 @@ Global
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|ARM.ActiveCfg = Release|Any CPU
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x64.ActiveCfg = Release|Any CPU
 		{655CA737-CD94-4128-B2B5-DCE37EA6E7F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|x64.Build.0 = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|ARM.Build.0 = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|x64.ActiveCfg = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|x64.Build.0 = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE63DBBB-60D1-4C3F-B3A0-8734A1B7F90F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

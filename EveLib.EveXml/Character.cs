@@ -50,7 +50,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="keyId">Eve API Key ID</param>
         /// <param name="vCode">Eve API Verification Code (vCode)</param>
         /// <param name="characterId">Eve Character ID</param>
-        public Character(int keyId, string vCode, long characterId) {
+        public Character(long keyId, string vCode, long characterId) {
             ApiKey = new CharacterKey(keyId, vCode);
             CharacterId = characterId;
         }

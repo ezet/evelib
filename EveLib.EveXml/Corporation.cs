@@ -63,7 +63,7 @@ namespace eZet.EveLib.EveXmlModule {
         /// <param name="keyId"></param>
         /// <param name="vCode"></param>
         /// <param name="corporationId"></param>
-        public Corporation(int keyId, string vCode, long corporationId) {
+        public Corporation(long keyId, string vCode, long corporationId) {
             ApiKey = new CorporationKey(keyId, vCode);
             CorporationId = corporationId;
         }

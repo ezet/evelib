@@ -68,7 +68,7 @@ namespace eZet.EveLib.Core.Serializers {
         /// <typeparam name="T">Type to deserialize to.</typeparam>
         /// <param name="data">String of data to deserialize.</param>
         /// <returns>T.</returns>
-        T ISerializer.Deserialize<T>(string data) {
+        public T Deserialize<T>(string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Start");
             var result = JsonConvert.DeserializeObject<T>(data, Settings);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Complete");
