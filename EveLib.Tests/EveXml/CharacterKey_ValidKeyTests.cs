@@ -59,8 +59,12 @@ namespace eZet.EveLib.Test {
 
         [TestMethod]
         public void GetCharacterSheet_ValidRequest_HasResult() {
-            var res = _validKey.Characters[0].GetCharacterSheet();
+            var res = _validKey.Characters[0].GetCharacterSheet();            
             Assert.IsNotNull(res.Result);
+            Assert.IsNotNull(res.Result.JumpCloneImplants);
+            Assert.AreEqual(true,  res.Result.JumpCloneImplants.Count > 0);
+            Assert.IsNotNull(res.Result.JumpClones);
+            Assert.AreEqual(true, res.Result.JumpClones.Count > 0);
         }
 
         [TestMethod]
@@ -257,5 +261,6 @@ namespace eZet.EveLib.Test {
             var res = await _validKey.Characters[0].GetBookmarksAsync();
             Assert.IsNotNull(res.Result);
         }
+
     }
 }

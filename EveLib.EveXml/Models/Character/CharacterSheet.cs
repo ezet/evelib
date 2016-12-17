@@ -384,8 +384,8 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             AllianceName = xml.getString("allianceName");
             AllianceId = xml.getLong("allianceID");
             Balance = xml.getDecimal("balance");
-            //JumpClones = xml.deserializeRowSet<JumpClone>("jumpClones");
-            //JumpCloneImplants = xml.deserializeRowSet<JumpCloneImplant>("jumpCloneImplants");
+            JumpClones = xml.deserializeRowSet<JumpClone>("jumpClones");
+            JumpCloneImplants = xml.deserializeRowSet<JumpCloneImplant>("jumpCloneImplants");
             Implants = xml.deserializeRowSet<Implant>("implants");
             Attributes = xml.deserialize<Attributes>("attributes");
             Skills = xml.deserializeRowSet<Skill>("skills");
