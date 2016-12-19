@@ -300,7 +300,6 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
             /// <value>The systems.</value>
             [DataMember(Name = "systems")]
             public Href<IndustrySystemCollection> Systems { get; set; }
-
         }
 
         /// <summary>

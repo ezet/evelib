@@ -184,12 +184,10 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         public Href<NotImplemented> Vivox { get; set; }
 
         /// <summary>
-        ///     Gets or sets the waypoints.
+        ///     Gets or sets the UI.
         /// </summary>
-        /// <value>The waypoints.</value>
-        [DataMember(Name = "waypoints")]
-        public WritableHref<string, AutopilotWaypoint> Waypoints { get; set; }
-
+        [DataMember(Name = "ui")]
+        public UIRoot UI { get; set; }
 
         /// <summary>
         ///     Injects the specified instance.
@@ -197,9 +195,40 @@ namespace eZet.EveLib.EveCrestModule.Models.Resources {
         /// <param name="instance">The instance.</param>
         public override void Inject(EveCrest instance) {
             base.Inject(instance);
-            if (Contacts != null) Contacts.EveCrest = instance;
-            if (Fittings != null) Fittings.EveCrest = instance;
-            if (Waypoints!= null) Waypoints.EveCrest = instance;
+            Contacts.EveCrest = instance;
+            Fittings.EveCrest = instance;
+            UI.SetWaypoints.EveCrest = instance;
+            UI.ShowMarketDetails.EveCrest = instance;
+            UI.ShowContact.EveCrest = instance;
+        }
+
+
+        /// <summary>
+        ///     Class UIRoot.
+        /// </summary>
+        [DataContract]
+        public class UIRoot {
+            /// <summary>
+            ///     Gets or sets the setWaypoints.
+            /// </summary>
+            /// <value>The setWaypoints.</value>
+            [DataMember(Name = "setWaypoints")]
+            public WritableHref<string, AutopilotWaypoint> SetWaypoints { get; set; }
+
+            /// <summary>
+            ///     Gets or sets the showContract.
+            /// </summary>
+            /// <value>The showContracts.</value>
+            [DataMember(Name = "showContract")]
+            public WritableHref<string, UIContract> ShowContact { get; set; }
+
+            /// <summary>
+            ///     Gets or sets the showMarketDetails.
+            /// </summary>
+            /// <value>The showMarketDetails.</value>
+            [DataMember(Name = "showMarketDetails")]
+            public WritableHref<string, UIMarketDetails> ShowMarketDetails { get; set; }
+
         }
     }
 }

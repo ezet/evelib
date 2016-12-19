@@ -93,11 +93,23 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         public long AllianceId { get; set; }
 
         /// <summary>
+        ///     Gets or sets the alliance name.
+        /// </summary>
+        [XmlElement("allianceName")]
+        public string AllianceName { get; set; }
+
+        /// <summary>
         ///     Gets or sets the faction identifier.
         /// </summary>
         /// <value>The faction identifier.</value>
         [XmlElement("factionID")]
         public long FactionId { get; set; }
+        
+        /// <summary>
+        ///     Gets or sets the faction name.
+        /// </summary>
+        [XmlElement("factionName")]
+        public string FactionName { get; set; }
 
         /// <summary>
         ///     Gets or sets the tax rate.
