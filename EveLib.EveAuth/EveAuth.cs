@@ -22,11 +22,13 @@ using System.Threading.Tasks;
 using eZet.EveLib.Core.Util;
 using Newtonsoft.Json;
 
-namespace eZet.EveLib.EveAuthModule {
+namespace eZet.EveLib.EveAuthModule
+{
     /// <summary>
     /// Enum CrestScope
     /// </summary>
-    public enum CrestScope {
+    public enum CrestScope
+    {
         /// <summary>
         ///     The publicData scope
         /// </summary>
@@ -60,19 +62,107 @@ namespace eZet.EveLib.EveAuthModule {
         /// <summary>
         /// The character navigation write
         /// </summary>
-        CharacterNavigationWrite
+        CharacterNavigationWrite,
+
+        /// <summary>
+        /// Allows an application to read your character’s account information.
+        /// </summary>
+        CharacterAccountRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s assets.
+        /// </summary>
+        CharacterAssetsRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s bookmarks.
+        /// </summary>
+        CharacterBookmarksRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s calendar.
+        /// </summary>
+        CharacterCalendarRead,
+
+        /// <summary>
+        /// Allows an application to read a list of the chat channels your character is in.
+        /// </summary>
+        CharacterChatChannelsRead,
+
+        /// <summary>
+        /// Allows an application to read a list of your character’s clones.
+        /// </summary>
+        CharacterClonesRead,
+
+        /// <summary>
+        /// Allows access to create and update your character’s contacts.
+        /// </summary>
+        CharacterContactsWrite,
+
+        /// <summary>
+        /// Allows an application to read your character’s FW information.
+        /// </summary>
+        CharacterFactionalWarfareRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s industry jobs.
+        /// </summary>
+        CharacterIndustryJobsRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s killmails. Only killmail that the character is the victim or the finalBlow will be returned with this scope.
+        /// </summary>
+        CharacterKillsRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s mail.
+        /// </summary>
+        CharacterMailRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s market orders.
+        /// </summary>
+        CharacterMarketOrdersRead,
+
+        /// <summary>
+        /// CharacterMedalsRead
+        /// </summary>
+        CharacterMedalsRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s notifications.
+        /// </summary>
+        CharacterNotificationsRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s research information.
+        /// </summary>
+        CharacterResearchRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s skills.
+        /// </summary>
+        CharacterSkillsRead,
+
+        /// <summary>
+        /// Allows an application to read your character’s wallet.
+        /// </summary>
+        CharacterWalletRead
+
     }
 
     /// <summary>
     ///     Class EveAuth. A helper class for Eve Online SSO authentication
     /// </summary>
-    public class EveAuth : IEveAuth {
+    public class EveAuth : IEveAuth
+    {
         private readonly TraceSource _trace = new TraceSource("EveLib", SourceLevels.All);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EveAuth" /> class.
         /// </summary>
-        public EveAuth() {
+        public EveAuth()
+        {
             Host = "login.eveonline.com";
             Protocol = "https://";
         }
@@ -80,8 +170,9 @@ namespace eZet.EveLib.EveAuthModule {
         /// <summary>
         /// Initializes static members of the <see cref="EveAuth"/> class.
         /// </summary>
-        static EveAuth() {
-            AllCrestScopes = Enum.GetValues(typeof (CrestScope)).Cast<CrestScope>().ToArray();
+        static EveAuth()
+        {
+            AllCrestScopes = Enum.GetValues(typeof(CrestScope)).Cast<CrestScope>().ToArray();
         }
 
         /// <summary>
@@ -108,7 +199,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="authCode">The authentication code.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        public async Task<AuthResponse> AuthenticateAsync(string encodedKey, string authCode) {
+        public async Task<AuthResponse> AuthenticateAsync(string encodedKey, string authCode)
+        {
             HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(Protocol + Host + "/oauth/token"));
             request.Host = Host;
             request.Headers.Add("Authorization", "Basic " + encodedKey);
@@ -125,7 +217,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="encodedKey">The encoded key.</param>
         /// <param name="refreshToken">The refresh token.</param>
         /// <returns>Task&lt;AuthResponse&gt;.</returns>
-        public async Task<AuthResponse> RefreshAsync(string encodedKey, string refreshToken) {
+        public async Task<AuthResponse> RefreshAsync(string encodedKey, string refreshToken)
+        {
             HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(Protocol + Host + "/oauth/token"));
             request.Host = Host;
             request.Headers.Add("Authorization", "Basic " + encodedKey);
@@ -141,7 +234,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// </summary>
         /// <param name="accessToken">The access token.</param>
         /// <returns>Task&lt;VerifyResponse&gt;.</returns>
-        public async Task<VerifyResponse> VerifyAsync(string accessToken) {
+        public async Task<VerifyResponse> VerifyAsync(string accessToken)
+        {
             HttpWebRequest request = HttpRequestHelper.CreateRequest(new Uri(Protocol + Host + "/oauth/verify"));
             request.Host = Host;
             request.Headers.Add("Authorization", "Bearer " + accessToken);
@@ -151,10 +245,13 @@ namespace eZet.EveLib.EveAuthModule {
             return result;
         }
 
-        private static string resolveScope(params CrestScope[] crestScopes) {
+        private static string resolveScope(params CrestScope[] crestScopes)
+        {
             var scope = "";
-            foreach (var crestScope in crestScopes) {
-                switch (crestScope) {
+            foreach (var crestScope in crestScopes)
+            {
+                switch (crestScope)
+                {
                     case CrestScope.PublicData:
                         scope += "publicData";
                         break;
@@ -176,6 +273,57 @@ namespace eZet.EveLib.EveAuthModule {
                     case CrestScope.CharacterNavigationWrite:
                         scope += "characterNavigationWrite";
                         break;
+                    case CrestScope.CharacterAssetsRead:
+                        scope += "characterAssetsRead";
+                        break;
+                    case CrestScope.CharacterBookmarksRead:
+                        scope += "characterBookmarksRead";
+                        break;
+                    case CrestScope.CharacterAccountRead:
+                        scope += "characterAccountRead";
+                        break;
+                    case CrestScope.CharacterCalendarRead:
+                        scope += "characterCalendarRead";
+                        break;
+                    case CrestScope.CharacterChatChannelsRead:
+                        scope += "characterChatChannelsRead";
+                        break;
+                    case CrestScope.CharacterClonesRead:
+                        scope += "characterClonesRead";
+                        break;
+                    case CrestScope.CharacterContactsWrite:
+                        scope += "characterContactsWrite";
+                        break;
+                    case CrestScope.CharacterFactionalWarfareRead:
+                        scope += "characterFactionalWarfareRead";
+                        break;
+                    case CrestScope.CharacterIndustryJobsRead:
+                        scope += "characterIndustryJobsRead";
+                        break;
+                    case CrestScope.CharacterSkillsRead:
+                        scope += "characterSkillsRead";
+                        break;
+                    case CrestScope.CharacterWalletRead:
+                        scope += "characterWalletRead";
+                        break;
+                    case CrestScope.CharacterResearchRead:
+                        scope += "characterResearchRead";
+                        break;
+                    case CrestScope.CharacterNotificationsRead:
+                        scope += "characterNotificationsRead";
+                        break;
+                    case CrestScope.CharacterMedalsRead:
+                        scope += "characterMedalsRead";
+                        break;
+                    case CrestScope.CharacterMarketOrdersRead:
+                        scope += "characterMarketOrdersRead";
+                        break;
+                    case CrestScope.CharacterMailRead:
+                        scope += "characterMailRead";
+                        break;
+                    case CrestScope.CharacterKillsRead:
+                        scope += "characterKillsRead";
+                        break;
                     default:
                         break;
                 }
@@ -193,7 +341,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="crestScope">The crest scope.</param>
         /// <param name="state"></param>
         /// <returns>System.String.</returns>
-        public string CreateAuthLink(string clientId, string redirectUri, string state, params CrestScope[] crestScope) {
+        public string CreateAuthLink(string clientId, string redirectUri, string state, params CrestScope[] crestScope)
+        {
             string url = Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + resolveScope(crestScope) + "&state=" + state;
             return url;
         }
@@ -207,7 +356,8 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="state">The state.</param>
         /// <param name="scopes">The scopes.</param>
         /// <returns>System.String.</returns>
-        public string CreateAuthLink(string clientId, string redirectUri, string state, string scopes) {
+        public string CreateAuthLink(string clientId, string redirectUri, string state, string scopes)
+        {
             string url = Protocol + Host + "/oauth/authorize/?response_type=code&redirect_uri=" + redirectUri + "&client_id=" + clientId + "&scope=" + scopes + "&state=" + state;
             return url;
         }
@@ -218,22 +368,27 @@ namespace eZet.EveLib.EveAuthModule {
         /// <param name="clientId">The client identifier.</param>
         /// <param name="clientSecret">The client secret.</param>
         /// <returns>System.String.</returns>
-        public static string Encode(string clientId, string clientSecret) {
+        public static string Encode(string clientId, string clientSecret)
+        {
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(clientId + ":" + clientSecret);
             return Convert.ToBase64String(plainTextBytes);
         }
 
-        private async Task<string> requestAsync(HttpWebRequest request) {
-            try {
+        private async Task<string> requestAsync(HttpWebRequest request)
+        {
+            try
+            {
                 return await HttpRequestHelper.GetResponseContentAsync(request).ConfigureAwait(false);
             }
-            catch (WebException e) {
+            catch (WebException e)
+            {
                 _trace.TraceEvent(TraceEventType.Error, 0, "Auth failed.");
                 var response = (HttpWebResponse)e.Response;
 
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) throw new EveAuthException("Undefined error", e);
-                using (var reader = new StreamReader(responseStream)) {
+                using (var reader = new StreamReader(responseStream))
+                {
                     string data = reader.ReadToEnd();
                     if (response.StatusCode == HttpStatusCode.InternalServerError) throw new EveAuthException(data, e);
                     var error = JsonConvert.DeserializeObject<AuthError>(data);
