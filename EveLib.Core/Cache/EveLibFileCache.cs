@@ -57,7 +57,6 @@ namespace eZet.EveLib.Core.Cache {
         /// <param name="data">The data to cache</param>
         /// <returns></returns>
         public async Task StoreAsync(Uri uri, DateTime cacheTime, string data) {
-            _counter = 0;
             ++_counter;
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache.StoreAsync:Start");
             _trace.TraceEvent(TraceEventType.Verbose, 0, "EveLibFileCache:Uri: {0}", uri);
