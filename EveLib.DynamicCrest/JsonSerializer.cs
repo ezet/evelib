@@ -70,7 +70,6 @@ namespace eZet.EveLib.DynamicCrest {
         public T Deserialize<T>(string data) {
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Start");
             dynamic result = JsonConvert.DeserializeObject<T>(data, Settings);
-            var res = JsonConvert.DeserializeObject(data, Settings);
             _trace.TraceEvent(TraceEventType.Verbose, 0, "JsonSerializer.Deserialize:Complete");
             return result;
         }
